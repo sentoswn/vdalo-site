@@ -370,6 +370,13 @@ def stats(lst):
         c = max(set(n[3] for n in nets), key=lambda c: sum(1 for n in nets if n[3] == c))
         allv = [x for n in nets if n[3] == c for x in (n[0], n[1])]
         s["net"] = (pct(allv, .1), pct(allv, .9), c)
+    us = [v["_uah"] for v in lst if v.get("_uah") and v["_uah"]["unit"] == "міс"]
+    nus = [u for u in us if u["net"]]
+    pick = nus if len(nus) >= max(3, len(us) // 3) else us
+    if pick:
+        lo = r_uah(pct([u["min"] for u in pick], .1), "міс")
+        hi = r_uah(pct([u["max"] for u in pick], .9), "міс")
+        s["uah"] = (lo, hi, pick is nus)
     s["housing"] = sum(1 for v in lst if v["_h"] and v["_h"][0] != "no")
     s["free_housing"] = sum(1 for v in lst if v["_h"] and v["_h"][1] == "Житло безкоштовне")
     s["labor"] = sum(1 for v in lst if v["_c"] and v["_c"]["ok"])
@@ -405,22 +412,35 @@ def rng(t):
 
 
 def facts_html(s):
-    f = [(str(s["n"]), plural(s["n"], "вакансія зараз", "вакансії зараз", "вакансій зараз"))]
-    if s.get("rate"):
-        f.append((rng(s["rate"]), "за годину брутто — типова ставка"))
-    if s.get("net"):
-        f.append((rng(s["net"]), "за годину на руки"))
+    t = []
+    if s.get("uah"):
+        lo, hi, net = s["uah"]
+        t.append(("main", "i-piggy", f"≈ {fmt(lo)}–{fmt(hi)} грн" if hi != lo else f"≈ {fmt(lo)} грн",
+                  "на місяць " + ("на руки" if net else "до сплати податків") + " — так зазвичай виходить у наших вакансіях"))
     if s["n"]:
-        f.append((f"{s['housing']} з {s['n']}", "вакансій із житлом"))
+        t.append(("", "i-bld", nvac(s["n"]), f"у {len(s['countries'])} {plural(len(s['countries']), 'країні', 'країнах', 'країнах')} · оновлюємо щодня"))
+        t.append(("", "i-home", f"{s['housing']} з {s['n']}", "вакансій із житлом" + (f", у {s['free_housing']} — безкоштовне" if s["free_housing"] else "")))
     if s["next"]:
-        f.append((dd(s["next"]), "найближчий заїзд"))
-    return '<div class="facts">' + "".join(f"<div><b>{esc(a)}</b><span>{esc(b)}</span></div>" for a, b in f) + "</div>"
+        t.append(("", "i-cal", dd(s["next"]), "найближчий заїзд"))
+    if s["labor"] or s["zlec"]:
+        t.append(("", "i-doc", f"{s['labor']} / {s['zlec']}", "трудовий договір / договір доручення"))
+    if not t:
+        return ""
+    return '<div class="facts">' + "".join(
+        f'<div class="ft{" ft-main" if k else ""}"><span class="ft-ic"><svg class="i"><use href="#{ic}"/></svg></span><b class="num">{esc(a)}</b><span>{esc(b)}</span></div>'
+        for k, ic, a, b in t) + "</div>"
 
 
 def common_par(s):
     """Абзац із живими цифрами — робить кожну сторінку унікальною й актуальною."""
     p = []
-    if s.get("rate"):
+    if s.get("uah"):
+        lo, hi, net = s["uah"]
+        d = f" на {RATES['date']}" if RATES.get("date") else ""
+        p.append(f"Зазвичай {'на руки' if net else 'до сплати податків'} виходить ≈ {fmt(lo)}–{fmt(hi)} грн на місяць (за курсом НБУ{d}; зарплату виплачують у валюті країни)"
+                 + (f" — це {rng(s['rate'])} за годину брутто" if s.get("rate") else "")
+                 + (f", {rng(s['net'])} за годину на руки" if s.get("net") else "") + ".")
+    elif s.get("rate"):
         p.append(f"Типова ставка — {rng(s['rate'])} за годину брутто" + (f", на руки зазвичай {rng(s['net'])} за годину" if s.get("net") else "") + ".")
     if s["n"]:
         p.append(f"Житло пропонують у {s['housing']} {plural(s['housing'], 'вакансії', 'вакансіях', 'вакансіях')} з {s['n']}"
@@ -428,10 +448,10 @@ def common_par(s):
     if s["labor"] or s["zlec"]:
         p.append(f"Тип договору вказаний у кожній вакансії: трудовий договір — {s['labor']}, договір доручення (umowa zlecenie) — {s['zlec']}.")
     if s["cities"]:
-        p.append("Міста й селища, де зараз є робота: " + ", ".join(s["cities"]) + ".")
+        p.append("\n\nМіста й селища, де зараз є робота: " + ", ".join(s["cities"]) + ".")
     if s["companies"]:
         p.append("Серед роботодавців — " + ", ".join(s["companies"]) + ".")
-    return " ".join(p)
+    return " ".join(p).replace(" \n\n", "\n\n").strip()
 
 
 # ---------- Семантичне ядро: посадкові сторінки ----------
@@ -605,10 +625,10 @@ def links_html(live, current=None):
 
 
 def text_section(h2, paras, s, live, current):
-    body = "".join(f"<p>{esc(p)}</p>" for p in paras if p)
+    body = "".join(f"<p>{esc(q.strip())}</p>" for p in paras if p for q in p.split("\n\n") if q.strip())
+    fx = facts_html(s) if s else ""
     return ('\n  <section aria-labelledby="seo-h"><div class="seo">'
-            f'<h2 id="seo-h">{esc(h2)}</h2>{body}'
-            + (facts_html(s) if s else "")
+            f'<div class="seo-grid{" has-f" if fx else ""}"><div class="seo-txt"><h2 id="seo-h">{esc(h2)}</h2>{body}</div>{fx}</div>'
             + f'<h3 style="margin-top:26px">Інші напрямки</h3>{links_html(live, current)}'
             "</div></section>\n  ")
 
