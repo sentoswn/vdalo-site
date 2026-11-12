@@ -623,6 +623,7 @@ def h1_block(h1, lead):
 
 ORG = {"@context": "https://schema.org", "@type": "EmploymentAgency", "name": "Вдало", "url": SITE + "/",
        "image": SITE + "/og.png", "telephone": "+380736067700", "areaServed": "UA",
+       "address": {"@type": "PostalAddress", "streetAddress": "вул. Джона Маккейна, 7, офіс 169", "addressLocality": "Київ", "addressCountry": "UA"},
        "description": "Підбір роботи для українців у Польщі, Литві, Чехії та Словаччині. Безкоштовно для кандидатів."}
 
 

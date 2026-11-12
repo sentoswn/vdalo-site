@@ -382,6 +382,80 @@ section.vpage{padding-top:14px}
 .flinks{max-width:1160px;margin:0 auto 22px;padding:0 20px}
 .flinks b{display:block;font-size:14px;margin-bottom:4px}
 @media (max-width:860px){.vpage{grid-template-columns:1fr}.vpage .side{position:static}}
+/* анімації */
+@keyframes gradmove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes marq{to{transform:translateX(-50%)}}
+@keyframes wiggle{0%,60%,100%{transform:rotate(0)}10%{transform:rotate(-12deg)}20%{transform:rotate(10deg)}30%{transform:rotate(-6deg)}40%{transform:rotate(4deg)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 30%,transparent)}50%{box-shadow:0 0 0 8px color-mix(in srgb,var(--ok) 0%,transparent)}}
+@media (prefers-reduced-motion:no-preference){
+  .hero{background-size:220% 220%;animation:gradmove 16s ease-in-out infinite}
+  .live{animation:pulse 1.8s ease-in-out infinite}
+  .rv{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  .marq-track{animation:marq 40s linear infinite}
+  .marq:hover .marq-track{animation-play-state:paused}
+  .gift-ic{animation:wiggle 2.8s ease-in-out infinite;transform-origin:50% 80%}
+}
+.marq{overflow:hidden;margin-top:14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);padding:12px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.marq-track{display:flex;width:max-content}
+.marq-grp{display:flex}
+.marq-grp span{display:inline-flex;align-items:center;gap:8px;padding:0 20px;font-weight:700;font-size:15px;white-space:nowrap}
+.marq-grp svg{color:var(--ok)}
+@media (prefers-reduced-motion:reduce){.marq-track{width:auto}.marq-grp{flex-wrap:wrap;row-gap:8px}.marq-grp[aria-hidden]{display:none}}
+.story{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;margin-top:20px}
+.story-box{background:var(--surface);border:1px solid var(--line);border-radius:32px;padding:clamp(22px,4vw,40px)}
+.story-head{display:flex;gap:14px;align-items:center}
+.ava{width:56px;height:56px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font:700 22px var(--font-display);flex:0 0 56px}
+.when-l,.tl .when{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.story-head h3{font-size:20px;font-weight:700;margin-top:2px}
+.tl{list-style:none;margin:22px 0 0;padding:0;display:grid}
+.tl li{display:grid;grid-template-columns:44px 1fr;gap:14px;padding-bottom:18px;position:relative}
+.tl li::before{content:"";position:absolute;left:21px;top:48px;bottom:4px;width:2px;background:var(--line)}
+.tl li:last-child::before{display:none}
+.tl .ic{width:44px;height:44px;border-radius:14px;background:var(--grad);display:grid;place-items:center}
+.tl b{display:block;font-size:16px;margin-top:2px}
+.tl .t{display:block;color:var(--muted);font-size:15px;margin-top:2px}
+.note{font-size:13px;color:var(--muted);padding:10px 12px;background:var(--soft);border-radius:12px}
+.calc{background:var(--grad);border-radius:32px;padding:clamp(22px,4vw,40px);display:grid;gap:16px;align-content:start}
+.calc h3{font-size:20px;font-weight:700}
+.calc .sub2{font-size:14px;margin-top:6px;opacity:.75;font-weight:600}
+.calc .row{display:grid;gap:4px}
+.calc .row label{display:flex;justify-content:space-between;gap:10px;font-weight:700;font-size:14px}
+.calc output{font-variant-numeric:tabular-nums;font-weight:800}
+.calc input[type=range]{padding:0;border:0;background:none;accent-color:var(--ink);height:28px;cursor:pointer}
+.res{background:var(--surface);border-radius:20px;padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.res span{display:block;font-size:13px;color:var(--muted);font-weight:700}
+.res b{font-family:var(--font-display);font-size:clamp(22px,3vw,30px);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;display:block}
+.res small{display:block;font-size:13px;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums}
+.ref{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;background:var(--surface);border:1px solid var(--line);border-radius:32px;padding:clamp(22px,4vw,44px);position:relative;overflow:hidden}
+.ref::after{content:"";position:absolute;width:340px;height:340px;right:-130px;top:-150px;border-radius:50%;background:var(--grad);opacity:.8;z-index:0;pointer-events:none}
+.ref>*{position:relative;z-index:1}
+.gift-ic{width:56px;height:56px;border-radius:18px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;margin-bottom:16px}
+.gift-ic svg{width:28px;height:28px}
+.ref .lead{margin-top:12px;font-size:17px}
+.ref-steps{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:r}
+.ref-steps li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;font-weight:600}
+.ref-steps li::before{counter-increment:r;content:counter(r);width:30px;height:30px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font:700 13px var(--font-display)}
+.ref-card{background:var(--bg);align-self:center;display:grid;gap:14px}
+.ref-card form{display:grid;gap:12px}
+.ref-link{display:flex;gap:8px}
+.ref-link input{flex:1;min-width:0;font-size:14px}
+.ref-out{display:grid;gap:12px}
+.contact{transition:transform .15s,box-shadow .15s}
+.contact:hover{transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(0,0,0,.35)}
+.contact .ic{width:44px;height:44px;flex-basis:44px;border-radius:14px}
+.contact .ic svg{width:22px;height:22px;stroke-width:1.9}
+.contact .go{margin-left:auto;color:var(--muted);width:20px;height:20px;flex-basis:20px}
+.contact .ic.of{background:var(--ink);color:var(--bg)}
+.fab-menu .mi{width:34px;height:34px;flex:0 0 34px;border-radius:11px;display:grid;place-items:center;color:#fff}
+.fab-menu .mi svg{width:18px;height:18px;stroke-width:1.9}
+.fab-menu .mi.ph{color:var(--bg)}
+.sheet.doc{width:min(820px,100%)}
+.doc-body{margin-top:8px;font-size:15px}
+.doc-body h3{font-family:var(--font-body);font-weight:800;font-size:16px;margin:20px 0 6px}
+.doc-body p{color:var(--muted);margin:6px 0}
+@media (max-width:960px){.story,.ref{grid-template-columns:1fr}}
+@media (max-width:640px){.res{grid-template-columns:1fr}.marq-grp span{font-size:14px;padding:0 14px}}
 </style>
 </head>
 <body>
@@ -395,6 +469,17 @@ section.vpage{padding-top:14px}
   <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
   <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.3-4.6L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.3 4.6L20 16"/><path d="M20 21v-5h-5"/></symbol>
   <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="5" rx="1"/><path d="M5 13v8h14v-8M12 8v13"/><path d="M12 8C10 4 6.5 4.5 7 7c.3 1.3 3 1 5 1zM12 8c2-4 5.5-3.5 5-1-.3 1.3-3 1-5 1z"/></symbol>
+  <symbol id="i-piggy" viewBox="0 0 24 24"><path d="M19 10.5c0-3.3-3.1-5.5-7-5.5s-8 2.2-8 5.5c0 1.9 1 3.5 2.5 4.5V19h3v-2h4v2h3v-4c.9-.6 1.6-1.4 2-2.5h1.5v-3H19"/><path d="M10 7.5h4M8 10.5h.01"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3M14 9l2 2"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v9h14v-9M10 21v-5h4v5"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M2 16l20-8-7 13-3-6z"/><path d="M12 15l10-7"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21.5 3.5 2.5 11l6.5 2.5L18 7l-7 8 .5 6 3-4.5 4.5 3.5z"/></symbol>
+  <symbol id="i-bubble" viewBox="0 0 24 24"><path d="M12 3.5c-4.7 0-8.5 3.3-8.5 7.6 0 2.4 1.2 4.5 3.1 5.9V21l3.6-2.3c.6.1 1.2.2 1.8.2 4.7 0 8.5-3.4 8.5-7.7S16.7 3.5 12 3.5z"/><path d="M9.2 8.6c.3-.3.8-.3 1 .1l.6 1.1c.2.3.1.7-.1.9l-.4.4c.4.9 1.1 1.6 2 2l.4-.4c.2-.2.6-.3.9-.1l1.1.6c.4.2.4.7.1 1l-.6.6c-.5.5-1.3.6-2 .2a8 8 0 0 1-3.6-3.6c-.4-.7-.3-1.5.2-2z"/></symbol>
+  <symbol id="i-round" viewBox="0 0 24 24"><path d="M3.5 20.5 5 16a8.5 8.5 0 1 1 3.2 3.2z"/><path d="M9.3 8.3c.3-.3.8-.3 1 .1l.7 1.2c.2.3.1.7-.1.9l-.5.5c.5 1 1.3 1.8 2.3 2.3l.5-.5c.2-.2.6-.3.9-.1l1.2.7c.4.2.4.7.1 1l-.5.5c-.6.6-1.5.7-2.3.3a9 9 0 0 1-4-4c-.4-.8-.3-1.7.3-2.3z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 7 7l1.5-2 4 1.5v3a2 2 0 0 1-2 2A17 17 0 0 1 3.5 5.5a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
   <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
@@ -417,6 +502,7 @@ section.vpage{padding-top:14px}
     <nav class="nav" aria-label="Розділи">
       <a href="#vacancies">Вакансії</a>
       <a href="#how">Як це працює</a>
+      <a href="#friend">Приведи друга</a>
       <a href="#faq">Питання</a>
       <a href="#apply">Контакти</a>
     </nav>
@@ -432,6 +518,11 @@ section.vpage{padding-top:14px}
   <nav class="crumbs" aria-label="Навігація"><a href="/">Головна</a><span aria-hidden="true">›</span><a href="/robota-v-lytvi/">Робота в Литві для українців</a><span aria-hidden="true">›</span><span>Виробництво корпусів для вітрових турбін</span></nav>
   <section class="vpage" id="hero"><article class="vbox"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Литва · Tauragė</span></div><h1>Виробництво корпусів для вітрових турбін — Tauragė</h1><p class="co-line" style="margin-top:10px"><svg class="i"><use href="#i-bld"/></svg>Jupiter Bach</p><div class="m-pay"><div class="money"><p class="uah num">≈ 55 500–100 500 <span class="u">грн/міс</span></p><p class="uah-sub"><b>на руки</b> · 1 400–2 300 EUR/міс брутто</p></div><div class="m-break"><p class="pay num">1 400–2 300 EUR<span class="u">/міс</span></p><p class="gross">до сплати податків (брутто)</p><p class="net num">На руки ≈ 1 100–2 000 EUR/міс</p></div><p class="rate-note">Перераховано за курсом НБУ на 13.11.2026: 1 EUR = 50,34 грн. Зарплату виплачують у EUR.</p><p class="m-note">Точна сума на руки залежить від вашого податкового статусу — менеджер пояснить.</p></div><div style="margin-top:14px"><ul class="tags"><li class="tag "><svg class="i"><use href="#i-home"/></svg>Житло 75 EUR/міс</li><li class="tag"><svg class="i"><use href="#i-users"/></svg>Жінки та чоловіки</li><li class="tag ok"><svg class="i"><use href="#i-doc"/></svg>Трудовий договір</li><li class="tag date"><svg class="i"><use href="#i-cal"/></svg>Заїзд 16.11</li></ul></div><p class="m-desc">Виробництво компонентів вітрогенераторів, контроль якості, розкрій тканини.</p><div class="m-about"><b><svg class="i"><use href="#i-bld"/></svg>Про компанію Jupiter Bach</b><p>Виробництво корпусів для вітрових турбін зі склопластику.</p></div><dl class="m-dl"><dt>Для кого</dt><dd>Жінки та чоловіки</dd><dt>Житло</dt><dd>75 EUR на місяць</dd><dt>Харчування</dt><dd>За власний рахунок, безкоштовні кава та закуски</dd><dt>Договір</dt><dd>Тимчасовий трудовий договір<small>Повноцінний трудовий договір: оплачувана відпустка, лікарняні та повне соціальне страхування.</small></dd><dt>Дати заїзду</dt><dd>Виїзд зі Львова (квиток 100 €): 16.11</dd></dl><div class="m-foot"><span>Вакансія №596 · актуальна на 12.11.2026</span><button class="linkbtn" type="button" data-share="596">Скопіювати посилання</button></div></article><aside class="side"><h2>Відгукнутися на вакансію</h2><p style="color:var(--muted)">Безкоштовно для кандидатів. Залиште заявку або напишіть нам — текст повідомлення вже готовий.</p><button class="btn wide" type="button" data-apply="596">Залишити заявку</button><div class="send-row"><a class="msgr" href="https://wa.me/380736067700?text=%D0%92%D1%96%D1%82%D0%B0%D1%8E%21%20%D0%9C%D0%B5%D0%BD%D0%B5%20%D1%86%D1%96%D0%BA%D0%B0%D0%B2%D0%B8%D1%82%D1%8C%20%D0%B2%D0%B0%D0%BA%D0%B0%D0%BD%D1%81%D1%96%D1%8F%20%E2%84%96596%20%C2%AB%D0%92%D0%B8%D1%80%D0%BE%D0%B1%D0%BD%D0%B8%D1%86%D1%82%D0%B2%D0%BE%20%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81%D1%96%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%96%D1%82%D1%80%D0%BE%D0%B2%D0%B8%D1%85%20%D1%82%D1%83%D1%80%D0%B1%D1%96%D0%BD%C2%BB%20%D1%83%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D1%96%D1%97%20Jupiter%20Bach%20%28%D0%9B%D0%B8%D1%82%D0%B2%D0%B0%2C%20Taurag%C4%97%29.%20%D0%9F%D1%96%D0%B4%D0%BA%D0%B0%D0%B6%D1%96%D1%82%D1%8C%2C%20%D0%B1%D1%83%D0%B4%D1%8C%20%D0%BB%D0%B0%D1%81%D0%BA%D0%B0%2C%20%D0%B4%D0%B5%D1%82%D0%B0%D0%BB%D1%96." data-ch="whatsapp"><span class="dot wa"></span>WhatsApp</a><a class="msgr" href="https://t.me/+380736067700" data-ch="telegram" data-copytext="Вітаю! Мене цікавить вакансія №596 «Виробництво корпусів для вітрових турбін» у компанії Jupiter Bach (Литва, Tauragė). Підкажіть, будь ласка, деталі."><span class="dot tg"></span>Telegram</a><a class="msgr" href="viber://chat?number=%2B380736067700" data-ch="viber" data-copytext="Вітаю! Мене цікавить вакансія №596 «Виробництво корпусів для вітрових турбін» у компанії Jupiter Bach (Литва, Tauragė). Підкажіть, будь ласка, деталі."><span class="dot vb"></span>Viber</a></div><a class="btn ghost wide" href="tel:+380736067700" data-ch="phone">Подзвонити: 073 606 77 00</a></aside></section>
   <!--/seo:hero-->
+
+  <div class="marq" aria-label="Коротко про переваги"><div class="marq-track">
+    <div class="marq-grp"><span><svg class="i"><use href="#i-check"/></svg>Житло від роботодавця</span><span><svg class="i"><use href="#i-check"/></svg>Без знання мови</span><span><svg class="i"><use href="#i-check"/></svg>Без досвіду — навчать на місці</span><span><svg class="i"><use href="#i-check"/></svg>Можна парою або з другом</span><span><svg class="i"><use href="#i-check"/></svg>Офіційний договір</span><span><svg class="i"><use href="#i-check"/></svg>Безкоштовно для кандидатів</span><span><svg class="i"><use href="#i-check"/></svg>Офіс у Києві</span></div>
+    <div class="marq-grp" aria-hidden="true"><span><svg class="i"><use href="#i-check"/></svg>Житло від роботодавця</span><span><svg class="i"><use href="#i-check"/></svg>Без знання мови</span><span><svg class="i"><use href="#i-check"/></svg>Без досвіду — навчать на місці</span><span><svg class="i"><use href="#i-check"/></svg>Можна парою або з другом</span><span><svg class="i"><use href="#i-check"/></svg>Офіційний договір</span><span><svg class="i"><use href="#i-check"/></svg>Безкоштовно для кандидатів</span><span><svg class="i"><use href="#i-check"/></svg>Офіс у Києві</span></div>
+  </div></div>
 
   <div class="countries" id="countries" role="group" aria-label="Вакансії за країнами"></div>
 
@@ -471,6 +562,38 @@ section.vpage{padding-top:14px}
     </div>
   </section>
 
+  <section id="village" aria-labelledby="vil-h">
+    <div class="sec-head"><div><h2 id="vil-h">Вперше їдете працювати за кордон? Ми поруч на кожному кроці</h2><p>Не потрібно самому шукати житло, знати мову чи мати особливий досвід. Усе підкажемо й пояснимо — від заявки до першої зарплати.</p></div><a class="btn" href="#apply">Хочу так само</a></div>
+    <div class="cards4">
+      <div class="card"><div class="ic"><svg class="i"><use href="#i-home"/></svg></div><h3>Житло вже чекає</h3><p>У багатьох вакансіях житло дає роботодавець — часто безкоштовно. Не треба шукати квартиру й платити наперед.</p></div>
+      <div class="card"><div class="ic"><svg class="i"><use href="#i-chat"/></svg></div><h3>Без мови й досвіду</h3><p>Для більшості вакансій не потрібні ні мова, ні досвід — усьому навчать на місці.</p></div>
+      <div class="card"><div class="ic"><svg class="i"><use href="#i-piggy"/></svg></div><h3>Більше залишається вам</h3><p>Коли житло й доїзд до роботи вже організовані, більша частина заробітку йде у ваші заощадження.</p></div>
+      <div class="card"><div class="ic"><svg class="i"><use href="#i-users"/></svg></div><h3>Можна не самому</h3><p>Їдьте з кумою, сусідкою, чоловіком чи дружиною. А ми завжди на зв'язку українською.</p></div>
+    </div>
+    <div class="story">
+      <div class="story-box">
+        <div class="story-head"><span class="ava">О</span><div><p class="when-l">Приклад шляху</p><h3>Оксана, 41 рік, село на Житомирщині</h3></div></div>
+        <ol class="tl">
+          <li><span class="ic"><svg class="i"><use href="#i-plane"/></svg></span><div><span class="when">Старт</span><b>Один дзвінок — і є план</b><span class="t">Удома працювала продавчинею, грошей вистачало лише на найнеобхідніше. Написала у Viber — менеджер підібрав пакування на складі в Польщі з житлом, і за два тижні вона поїхала разом із кумою.</span></div></li>
+          <li><span class="ic"><svg class="i"><use href="#i-home"/></svg></span><div><span class="when">Перший місяць</span><b>Страшно було тільки першого дня</b><span class="t">Кімната на двох, до роботи возить автобус. Мова не знадобилася — усьому навчили на місці за кілька днів. Бере додаткові години, коли є.</span></div></li>
+          <li><span class="ic"><svg class="i"><use href="#i-key"/></svg></span><div><span class="when">Пів року</span><b>Новий дах і навчання доньки</b><span class="t">Щомісяця надсилає гроші додому: перекрили дах, донька вступила до коледжу — і все без кредитів.</span></div></li>
+          <li><span class="ic"><svg class="i"><use href="#i-store"/></svg></span><div><span class="when">Через рік</span><b>Заощадження й вибір</b><span class="t">Має відкладені гроші й вирішує сама: продовжити контракт ще на сезон чи відкрити вдома невеликий магазин.</span></div></li>
+        </ol>
+        <p class="note">Це умовний приклад для наочності, а не історія конкретної людини. Реальний заробіток залежить від вакансії, кількості годин і ваших витрат.</p>
+      </div>
+      <div class="calc" id="calc">
+        <div><h3>Порахуйте, скільки можна відкласти</h3><p class="sub2">Орієнтовний розрахунок для роботи в Польщі.</p></div>
+        <div class="row"><label for="c-rate">Ставка на руки за годину <output id="c-rate-o" for="c-rate"></output></label><input type="range" id="c-rate" min="20" max="35" step="1" value="24"></div>
+        <div class="row"><label for="c-hours">Годин на місяць <output id="c-hours-o" for="c-hours"></output></label><input type="range" id="c-hours" min="160" max="280" step="10" value="200"></div>
+        <div class="row"><label for="c-spend">Їжа, зв'язок, дрібниці на місяць <output id="c-spend-o" for="c-spend"></output></label><input type="range" id="c-spend" min="400" max="2000" step="50" value="900"></div>
+        <label class="switch"><input type="checkbox" id="c-free" checked> Житло безкоштовне від роботодавця</label>
+        <div class="res" aria-live="polite"><div><span>Відкладаєте за місяць</span><b id="c-month">—</b><small id="c-month-u"></small></div><div><span>За рік</span><b id="c-year">—</b><small id="c-year-u"></small></div></div>
+        <p class="sub2">Якщо житло платне, віднімаємо 700 зл на місяць. Точні умови — у кожній вакансії.</p>
+        <a class="btn wide" href="#vacancies">Підібрати вакансію</a>
+      </div>
+    </div>
+  </section>
+
   <section id="how" aria-labelledby="how-h">
     <div class="sec-head"><div><h2 id="how-h">Як це працює</h2></div></div>
     <div class="cards4 steps">
@@ -497,16 +620,51 @@ section.vpage{padding-top:14px}
     </div>
   </section>
 
+  <section id="friend" aria-labelledby="friend-h">
+    <div class="ref">
+      <div>
+        <div class="gift-ic" aria-hidden="true"><svg class="i"><use href="#i-gift"/></svg></div>
+        <h2 id="friend-h">Приведи друга — отримай бонус</h2>
+        <p class="lead">Порекомендуйте нас другові, кумі чи сусідові. Коли друг вийде на роботу — ви отримаєте <b id="ref-amt">бонус</b>.</p>
+        <ol class="ref-steps">
+          <li>Вкажіть свій номер телефону — отримаєте особисте посилання.</li>
+          <li>Надішліть його другові у Viber, Telegram чи WhatsApp.</li>
+          <li>Друг залишає заявку й виходить на роботу — ми зв'язуємося з вами щодо бонусу.</li>
+        </ol>
+        <p class="hint" id="ref-terms" style="margin-top:14px">Розмір бонусу та умови виплати уточнюйте в менеджера.</p>
+      </div>
+      <div class="form-card ref-card">
+        <form id="ref-form" novalidate>
+          <div><label class="lbl" for="ref-phone">Ваш номер телефону</label><input id="ref-phone" type="tel" autocomplete="tel" placeholder="+380 __ ___ __ __"></div>
+          <p class="err" id="ref-err" role="alert"></p>
+          <button class="btn wide" type="submit">Отримати моє посилання</button>
+        </form>
+        <div class="ref-out" id="ref-out" hidden>
+          <span class="lbl">Ваше посилання для друзів</span>
+          <div class="ref-link"><input id="ref-url" readonly aria-label="Ваше посилання"><button class="btn sm" type="button" id="ref-copy">Копіювати</button></div>
+          <div class="send-row">
+            <a class="msgr" id="ref-vb" href="#"><span class="dot vb"></span>Viber</a>
+            <a class="msgr" id="ref-tg" href="#" target="_blank" rel="noopener"><span class="dot tg"></span>Telegram</a>
+            <a class="msgr" id="ref-wa" href="#" target="_blank" rel="noopener"><span class="dot wa"></span>WhatsApp</a>
+            <button class="msgr" type="button" id="ref-share" hidden><svg class="i"><use href="#i-share"/></svg>Інше</button>
+          </div>
+          <p class="hint">Коли друг залишить заявку за цим посиланням, ми побачимо, що це від вас.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="apply" aria-labelledby="apply-h">
     <div class="apply">
       <div>
         <h2 id="apply-h">Залиште заявку — підберемо роботу</h2>
         <p class="lead">Оберіть, як вам зручніше: ми зателефонуємо або напишемо. Або напишіть нам самі.</p>
         <div class="contacts">
-          <a class="contact" href="https://t.me/+380736067700" data-ch="telegram"><span class="ic tg">TG</span><span>Telegram<small>+380 73 606 77 00</small></span></a>
-          <a class="contact" href="viber://chat?number=%2B380736067700" data-ch="viber"><span class="ic vb">Vb</span><span>Viber<small>+380 73 606 77 00</small></span></a>
-          <a class="contact" href="https://wa.me/380736067700" data-ch="whatsapp"><span class="ic wa">WA</span><span>WhatsApp<small>+380 73 606 77 00</small></span></a>
-          <a class="contact" href="tel:+380736067700" data-ch="phone"><span class="ic ph" style="color:var(--bg)">☎</span><span>Подзвонити<small>073 606 77 00</small></span></a>
+          <a class="contact" href="https://t.me/+380736067700" data-ch="telegram"><span class="ic tg"><svg class="i"><use href="#i-send"/></svg></span><span>Telegram<small>Відкрити чат</small></span><svg class="i go"><use href="#i-chev"/></svg></a>
+          <a class="contact" href="viber://chat?number=%2B380736067700" data-ch="viber"><span class="ic vb"><svg class="i"><use href="#i-bubble"/></svg></span><span>Viber<small>Відкрити чат</small></span><svg class="i go"><use href="#i-chev"/></svg></a>
+          <a class="contact" href="https://wa.me/380736067700" data-ch="whatsapp"><span class="ic wa"><svg class="i"><use href="#i-round"/></svg></span><span>WhatsApp<small>Відкрити чат</small></span><svg class="i go"><use href="#i-chev"/></svg></a>
+          <a class="contact" href="tel:+380736067700" data-ch="phone"><span class="ic ph" style="color:var(--bg)"><svg class="i"><use href="#i-phone"/></svg></span><span>Подзвонити<small>Дзвінок в один дотик</small></span><svg class="i go"><use href="#i-chev"/></svg></a>
+          <a class="contact" href="https://www.google.com/maps/search/?api=1&amp;query=Київ,+вулиця+Джона+Маккейна,+7" target="_blank" rel="noopener"><span class="ic of"><svg class="i"><use href="#i-pin"/></svg></span><span>Офіс у Києві<small>вул. Джона Маккейна, 7, офіс 169</small></span><svg class="i go"><use href="#i-chev"/></svg></a>
         </div>
       </div>
 
@@ -529,7 +687,7 @@ section.vpage{padding-top:14px}
           <div class="hp" aria-hidden="true"><label for="f-website">Сайт</label><input id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
           <p class="err" id="f-err" role="alert"></p>
           <button class="btn wide" type="submit" id="f-submit">Надіслати заявку</button>
-          <p class="hint">Надсилаючи заявку, ви погоджуєтеся на обробку ваших даних для підбору вакансії.</p>
+          <p class="hint">Надсилаючи заявку, ви приймаєте умови <a href="#oferta">публічної оферти</a> й погоджуєтеся на обробку ваших даних для підбору вакансії.</p>
         </form>
 
         <div class="done" id="done" aria-live="polite">
@@ -587,15 +745,16 @@ section.vpage{padding-top:14px}
   <div class="wrap">
     <span>© 2026 Вдало · Підбір роботи в Європі</span>
     <span><a href="tel:+380736067700" data-ch="phone">073 606 77 00</a> · Telegram · Viber · WhatsApp</span>
+    <span>Офіс: м. Київ, вул. Джона Маккейна, 7, офіс 169 · <a href="#oferta" style="text-decoration:underline">Публічна оферта</a></span>
   </div>
 </footer>
 
 <div class="fab" id="fab">
   <div class="fab-menu" id="fab-menu" hidden role="menu" aria-label="Як з нами зв'язатися">
-    <a role="menuitem" href="https://t.me/+380736067700" data-ch="telegram"><span class="dot tg"></span><span>Telegram<small>+380 73 606 77 00</small></span></a>
-    <a role="menuitem" href="viber://chat?number=%2B380736067700" data-ch="viber"><span class="dot vb"></span><span>Viber<small>+380 73 606 77 00</small></span></a>
-    <a role="menuitem" href="https://wa.me/380736067700" data-ch="whatsapp"><span class="dot wa"></span><span>WhatsApp<small>+380 73 606 77 00</small></span></a>
-    <a role="menuitem" href="tel:+380736067700" data-ch="phone"><span class="dot ph"></span><span>Подзвонити<small>073 606 77 00</small></span></a>
+    <a role="menuitem" href="https://t.me/+380736067700" data-ch="telegram"><span class="mi tg"><svg class="i"><use href="#i-send"/></svg></span><span>Telegram</span></a>
+    <a role="menuitem" href="viber://chat?number=%2B380736067700" data-ch="viber"><span class="mi vb"><svg class="i"><use href="#i-bubble"/></svg></span><span>Viber</span></a>
+    <a role="menuitem" href="https://wa.me/380736067700" data-ch="whatsapp"><span class="mi wa"><svg class="i"><use href="#i-round"/></svg></span><span>WhatsApp</span></a>
+    <a role="menuitem" href="tel:+380736067700" data-ch="phone"><span class="mi ph"><svg class="i"><use href="#i-phone"/></svg></span><span>Подзвонити</span></a>
   </div>
   <button class="fab-btn" type="button" id="fab-btn" aria-expanded="false" aria-controls="fab-menu"><svg class="i"><use href="#i-chat"/></svg>Написати нам</button>
 </div>
@@ -618,6 +777,45 @@ section.vpage{padding-top:14px}
 </div>
 <div class="toast" id="toast" role="status"></div>
 
+<div class="modal" id="offer" hidden role="dialog" aria-modal="true" aria-labelledby="of-title">
+  <div class="sheet doc">
+    <button class="x" type="button" data-close-of aria-label="Закрити"><svg class="i"><use href="#i-x"/></svg></button>
+    <h2 id="of-title">Публічна оферта</h2>
+    <p class="hint" style="margin-top:6px">про надання безоплатних інформаційно-консультаційних послуг з підбору вакансій · редакція від 12 листопада 2026 року</p>
+    <div class="doc-body">
+      <h3>1. Загальні положення</h3>
+      <p>1.1. Цей документ є публічною офертою відповідно до статей 633 і 641 Цивільного кодексу України. <span class="req"><span data-cf="name"></span>, код <span data-cf="code"></span> (далі — «Вдало», «Виконавець»)</span><span class="noreq">Сервіс підбору роботи «Вдало» (далі — «Виконавець»)</span>, пропонує будь-якій фізичній особі (далі — «Кандидат») отримати послуги на умовах, викладених нижче.</p>
+      <p>1.2. Акцептом оферти є подання заявки на сайті vdalo-robota.com.ua або звернення до Виконавця в Telegram, Viber, WhatsApp чи телефоном. З моменту акцепту договір вважається укладеним.</p>
+      <h3>2. Предмет</h3>
+      <p>2.1. Виконавець безоплатно надає Кандидату інформаційно-консультаційні послуги: інформує про вакансії роботодавців і партнерів Виконавця в країнах Європи, консультує щодо умов роботи, житла, документів і дат заїзду, а також за згодою Кандидата передає його контактні дані роботодавцю або його кадровому агентству для розгляду кандидатури.</p>
+      <p>2.2. Виконавець не є роботодавцем Кандидата. Трудовий або цивільно-правовий договір Кандидат укладає безпосередньо з роботодавцем чи його кадровим агентством у країні працевлаштування.</p>
+      <h3>3. Вартість</h3>
+      <p>3.1. Послуги для Кандидата безкоштовні. Виконавець не бере з Кандидата плату за підбір вакансії чи працевлаштування.</p>
+      <p>3.2. Витрати на дорогу, оформлення документів, проживання та харчування Кандидат несе самостійно, якщо інше не передбачено умовами конкретної вакансії.</p>
+      <h3>4. Права та обов'язки сторін</h3>
+      <p>4.1. Виконавець зобов'язується: надавати інформацію про вакансії в тому вигляді, в якому її надав роботодавець; відповідати на звернення Кандидата; не вимагати від Кандидата оплати за працевлаштування; не вимагати передати йому оригінали документів.</p>
+      <p>4.2. Кандидат зобов'язується: надавати правдиву інформацію про себе; уважно перевіряти умови договору з роботодавцем перед підписанням; дотримуватися законодавства України та країни перебування, зокрема правил перетину державного кордону.</p>
+      <p>4.3. Кандидат має право будь-коли відмовитися від послуг, повідомивши про це Виконавця.</p>
+      <h3>5. Відповідальність</h3>
+      <p>5.1. Умови вакансій (ставку, години, житло, тип договору, дати заїзду) визначає роботодавець і може їх змінювати. Виконавець оновлює інформацію на сайті, але остаточні умови фіксуються в договорі, який підписує Кандидат.</p>
+      <p>5.2. Виконавець не відповідає за рішення роботодавця щодо прийняття Кандидата на роботу та за виконання роботодавцем договору, укладеного з Кандидатом.</p>
+      <p>5.3. Розрахунки й приклади заробітку на сайті є орієнтовними й не є гарантією доходу.</p>
+      <h3>6. Персональні дані</h3>
+      <p>6.1. Акцептуючи оферту, Кандидат дає згоду на обробку своїх персональних даних (ім'я, номер телефону, відомості із заявки) відповідно до Закону України «Про захист персональних даних» з метою підбору вакансії та зв'язку з ним.</p>
+      <p>6.2. Дані можуть передаватися роботодавцям і кадровим агентствам-партнерам лише для розгляду кандидатури Кандидата.</p>
+      <p>6.3. Кандидат має право дізнатися, які його дані обробляються, вимагати їх виправлення або видалення, звернувшись до Виконавця за будь-яким із контактів, указаних нижче.</p>
+      <h3>7. Програма «Приведи друга»</h3>
+      <p>7.1. Учасник, за особистим посиланням якого новий Кандидат залишив заявку й вийшов на роботу, може отримати бонус. Розмір бонусу, умови та строки виплати Виконавець повідомляє учаснику. Виконавець може змінити умови програми або припинити її, опублікувавши повідомлення на сайті.</p>
+      <h3>8. Інші умови</h3>
+      <p>8.1. Виконавець може змінювати умови оферти, публікуючи нову редакцію на сайті. Нова редакція діє з моменту публікації.</p>
+      <p>8.2. Питання, не врегульовані цією офертою, вирішуються відповідно до законодавства України.</p>
+      <h3>9. Контакти</h3>
+      <p><span class="req"><span data-cf="name"></span>, код <span data-cf="code"></span><br></span>«Вдало»<br>Адреса офісу: м. Київ, вул. Джона Маккейна, 7, офіс 169<br>Телефон, Telegram, Viber, WhatsApp: +380 73 606 77 00<span class="req-mail"><br>E-mail: <span data-cf="email"></span></span></p>
+    </div>
+  </div>
+</div>
+
+
 <script>
 (function(){
   /* ---------- Налаштування ---------- */
@@ -629,6 +827,10 @@ section.vpage{padding-top:14px}
     ga4Id: "",         // ID Google Analytics 4, наприклад G-XXXXXXX
     leadsUrl: "https://script.google.com/macros/s/AKfycbzt87VLFDpZYR13V56RsBHyjLm0q_P1teyIWZAHMQvc8WinxwyTUi4N0Bx27t2kUTGS9Q/exec"       // URL веб-додатку Google Apps Script — заявки йдуть у Google-таблицю
   };
+  // «Приведи друга»: розмір бонусу й умови (якщо порожньо — «уточнюйте в менеджера»)
+  var REF = { bonus: "", terms: "" };
+  // Реквізити для публічної оферти (коли буде ФОП)
+  var COMPANY = { name: "", code: "", email: "" };
   // Відомі компанії — показуються першими в блоці «Вакансії в компаніях» (якщо зараз є їхні вакансії)
   var FEATURED = ["SHEIN","Jeronimo Martins (Biedronka)","ALDI","LG Energy Solution","Valeo","Dr. Oetker","BorgWarner","Saint-Gobain (Glassolutions)","FORVIA (Faurecia)","TechniSat","Rhenus","Sunreef Yachts","Sokołów","Animex Foods","TRUMPF","Plastic Omnium"];
   var CO_SHOW = 14;
@@ -673,6 +875,7 @@ section.vpage{padding-top:14px}
     ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(k){ if (sp.get(k)) parts.push(k.replace("utm_","")+"="+sp.get(k)); });
     if (sp.get("fbclid")) parts.push("facebook/instagram");
     if (sp.get("gclid")) parts.push("google ads");
+    if (sp.get("ref")) parts.unshift("рекомендація від "+sp.get("ref").replace(/[^\d+]/g,""));
     if (!parts.length && document.referrer) { try { var rh=new URL(document.referrer).hostname; if (rh && rh!==location.hostname) parts.push("перехід з "+rh); } catch(e){} }
     if (parts.length) { SOURCE = parts.join("; "); try { sessionStorage.setItem("vdalo_src", SOURCE); } catch(e){} }
     else { try { SOURCE = sessionStorage.getItem("vdalo_src") || ""; } catch(e){} }
@@ -941,7 +1144,7 @@ section.vpage{padding-top:14px}
     if (/^#v\d+$/.test(location.hash)) clearHash();
     if (lastFocus&&lastFocus.focus) lastFocus.focus();
   }
-  function route(){ var m=location.hash.match(/^#v(\d+)$/); if (m&&items.length) openVac(m[1]); else closeVac(); }
+  function route(){ if (location.hash==="#oferta"){ openOffer(); return; } closeOffer(); var m=location.hash.match(/^#v(\d+)$/); if (m&&items.length) openVac(m[1]); else closeVac(); }
 
   /* ---------- Заявка ---------- */
   function apply(id){
@@ -1062,6 +1265,96 @@ section.vpage{padding-top:14px}
   document.addEventListener("click",function(e){ if (!e.target.closest("#fab")) fab(false); });
   var topEl=$("top"); window.addEventListener("scroll",function(){ topEl.classList.toggle("scrolled", window.scrollY>8); },{passive:true});
 
+  /* ---------- Анімації ---------- */
+  var RM = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+  function countUp(el){
+    var n=parseInt(el.textContent,10); if (RM||isNaN(n)||n<2) return;
+    var t0=null; el.textContent="0";
+    function f(t){ if(!t0)t0=t; var p=Math.min(1,(t-t0)/1000); el.textContent=Math.round(n*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(f); }
+    requestAnimationFrame(f);
+  }
+  function tween(el,to,suf){
+    var from=el._v||0; el._v=to;
+    if (RM){ el.textContent=fmt(to)+suf; return; }
+    var t0=null; if (el._raf) cancelAnimationFrame(el._raf);
+    function f(t){ if(!t0)t0=t; var p=Math.min(1,(t-t0)/450), e=1-Math.pow(1-p,3); el.textContent=fmt(from+(to-from)*e)+suf; if(p<1) el._raf=requestAnimationFrame(f); }
+    el._raf=requestAnimationFrame(f);
+  }
+  if (!RM && "IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); },{rootMargin:"0px 0px -6% 0px",threshold:0.06});
+    document.querySelectorAll(".sec-head,.card,.safety,.apply,.faq details,.tl li,.calc,.ref,.marq,.story-box .note").forEach(function(el){
+      var i=el.parentNode?Array.prototype.indexOf.call(el.parentNode.children,el):0;
+      el.classList.add("rv"); el.style.transitionDelay=(Math.min(i,5)*90)+"ms"; io.observe(el);
+    });
+  }
+
+  /* ---------- Калькулятор заощаджень ---------- */
+  var HOUSING_COST=700;
+  function calc(){
+    if (!$("c-rate")) return;
+    var r=+$("c-rate").value, h=+$("c-hours").value, sp=+$("c-spend").value, free=$("c-free").checked;
+    $("c-rate-o").textContent=r+" зл"; $("c-hours-o").textContent=h+" год"; $("c-spend-o").textContent=fmt(sp)+" зл";
+    var m=Math.round(Math.max(0, r*h - sp - (free?0:HOUSING_COST))/10)*10, y=Math.round(m*12/100)*100;
+    tween($("c-month"), m, " зл"); tween($("c-year"), y, " зл");
+    var R=RATES&&RATES.PLN;
+    $("c-month-u").textContent=R?"≈ "+fmt(Math.round(m*R/500)*500)+" грн":"";
+    $("c-year-u").textContent=R?"≈ "+fmt(Math.round(y*R/1000)*1000)+" грн":"";
+  }
+  if ($("c-rate")){
+    ["c-rate","c-hours","c-spend"].forEach(function(id){ $(id).addEventListener("input",calc); });
+    $("c-free").addEventListener("change",calc);
+    calc();
+  }
+
+  /* ---------- Приведи друга ---------- */
+  if ($("ref-form")){
+    if (REF.bonus) $("ref-amt").textContent="бонус "+REF.bonus;
+    if (REF.terms) $("ref-terms").textContent=REF.terms;
+    var refBase="https://vdalo-robota.com.ua/", refLink="";
+    var refMsg="Привіт! Подивись вакансії в Польщі, Литві, Чехії та Словаччині — є з житлом, для кандидатів безкоштовно:";
+    $("ref-form").addEventListener("submit",function(e){
+      e.preventDefault();
+      var d=$("ref-phone").value.replace(/\D/g,"");
+      if (d.length<9){ $("ref-err").textContent="Вкажіть ваш номер телефону."; $("ref-phone").focus(); return; }
+      $("ref-err").textContent="";
+      if (d.length===10 && d[0]==="0") d="38"+d;
+      refLink=refBase+"?ref="+d;
+      $("ref-url").value=refLink;
+      var full=refMsg+" "+refLink;
+      $("ref-wa").href="https://wa.me/?text="+encodeURIComponent(full);
+      $("ref-tg").href="https://t.me/share/url?url="+encodeURIComponent(refLink)+"&text="+encodeURIComponent(refMsg);
+      $("ref-vb").href="viber://forward?text="+encodeURIComponent(full);
+      $("ref-share").hidden=!navigator.share;
+      $("ref-out").hidden=false;
+      track("Contact",{channel:"referral"});
+    });
+    $("ref-copy").addEventListener("click",function(){ copy(refMsg+" "+refLink,"Посилання скопійовано — надішліть другові"); });
+    $("ref-share").addEventListener("click",function(){ try { navigator.share({title:"Вдало — робота в Європі", text:refMsg, url:refLink}).catch(function(){}); } catch(e){} });
+  }
+
+  /* ---------- Публічна оферта ---------- */
+  document.querySelectorAll("[data-cf]").forEach(function(el){ el.textContent=COMPANY[el.getAttribute("data-cf")]||""; });
+  var hasReq=!!(COMPANY.name&&COMPANY.code);
+  document.querySelectorAll("#offer .req").forEach(function(el){ el.hidden=!hasReq; });
+  document.querySelectorAll("#offer .noreq").forEach(function(el){ el.hidden=hasReq; });
+  if (!COMPANY.email) document.querySelectorAll("#offer .req-mail").forEach(function(el){ el.hidden=true; });
+  var ofLast=null;
+  function openOffer(){
+    var m=$("offer"); if (!m||!m.hidden) return;
+    ofLast=document.activeElement; m.hidden=false; document.body.style.overflow="hidden";
+    var x=m.querySelector("[data-close-of]"); if (x) x.focus();
+  }
+  function closeOffer(){
+    var m=$("offer"); if (!m||m.hidden) return;
+    m.hidden=true; document.body.style.overflow="";
+    if (location.hash==="#oferta") clearHash();
+    if (ofLast&&ofLast.focus) ofLast.focus();
+  }
+  $("offer").addEventListener("click",function(e){ if (e.target===$("offer") || e.target.closest("[data-close-of]")) closeOffer(); });
+  document.addEventListener("keydown",function(e){ if (e.key==="Escape") closeOffer(); });
+  window.addEventListener("hashchange",function(){ if (location.hash==="#oferta") openOffer(); });
+  if (location.hash==="#oferta") openOffer();
+
   /* ---------- Старт ---------- */
   function boot(d){
     data=d||{}; RATES=data.rates||{}; items=(data.items||[]).filter(function(v){ return v&&v.title&&v.salary; }).map(enrich);
@@ -1098,6 +1391,7 @@ section.vpage{padding-top:14px}
     render();
     renderCos();
     route();
+    countUp($("st-count")); countUp($("st-housing")); calc();
   }
   fetch("/vacancies.json",{cache:"no-store"}).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(boot).catch(function(){
     $("grid").innerHTML='<div class="empty">Не вдалося завантажити вакансії. Напишіть нам у месенджер — розповімо про актуальні.</div>';
