@@ -970,6 +970,31 @@ section.vpage{padding-top:14px}
     else { try { SOURCE = sessionStorage.getItem("vdalo_src") || ""; } catch(e){} }
   } catch(e) {}
 
+  /* ---------- Рекомендація друга (пам'ятаємо 30 днів) ---------- */
+  var REFBY = "";
+  try {
+    var rq = (new URLSearchParams(location.search).get("ref") || "").replace(/\D/g,"");
+    if (rq.length >= 9) { REFBY = rq; localStorage.setItem("vdalo_ref", JSON.stringify({p:rq, t:Date.now()})); }
+    else { var rs = JSON.parse(localStorage.getItem("vdalo_ref") || "null"); if (rs && rs.p && Date.now()-rs.t < 30*864e5) REFBY = rs.p; }
+  } catch(e) {}
+  if (REFBY && SOURCE.indexOf("рекомендація") < 0) SOURCE = "рекомендація від "+REFBY+(SOURCE ? "; "+SOURCE : "");
+  function refPhone(){ var d=REFBY; return d.length===12 && d.indexOf("380")===0 ? "+380 "+d.slice(3,5)+" "+d.slice(5,8)+" "+d.slice(8,10)+" "+d.slice(10) : d; }
+  var REFLINE = REFBY ? "Я за рекомендацією друга: "+refPhone() : "";
+  function withRef(t){ return REFLINE && t.indexOf(REFLINE) < 0 ? (t ? t+"\n" : "")+REFLINE : t; }
+  // кнопки месенджерів: додаємо рядок про рекомендацію до тексту повідомлення
+  if (REFLINE) document.addEventListener("click", function(e){
+    var ch = e.target.closest && e.target.closest("[data-ch]"); if (!ch) return;
+    var k = ch.getAttribute("data-ch");
+    if (k === "whatsapp") {
+      var h = ch.getAttribute("href") || "", base = h.split("?")[0], m = h.match(/[?&]text=([^&]*)/), old = "";
+      try { old = m ? decodeURIComponent(m[1].replace(/\+/g," ")) : ""; } catch(err) {}
+      ch.setAttribute("href", base+"?text="+encodeURIComponent(withRef(old || "Вітаю! Цікавлять вакансії.")));
+    } else if (k === "telegram" || k === "viber") {
+      if (ch.hasAttribute("data-copytext")) ch.setAttribute("data-copytext", withRef(ch.getAttribute("data-copytext")));
+      else if (!ch.hasAttribute("data-copy")) ch.setAttribute("data-copytext", "Вітаю! Цікавлять вакансії.\n"+REFLINE);
+    }
+  }, true);
+
   /* ---------- Допоміжні ---------- */
   function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
   function fmt(n){ return Math.round(n).toLocaleString("uk-UA"); }
@@ -1269,7 +1294,7 @@ section.vpage{padding-top:14px}
       "\nВакансія: "+(sel.value?vacTitle+" (№"+sel.value+")":"порадьте мені")+
       "\nХто їде: "+segVal("who")+"\nКоли: "+segVal("when")+
       "\nЗв'язок: "+(mode==="Дзвінок"?"зателефонуйте мені":"напишіть мені в "+channel)+
-      (f.note.value.trim()?"\nКоментар: "+f.note.value.trim():"");
+      (f.note.value.trim()?"\nКоментар: "+f.note.value.trim():"")+(REFLINE?"\n"+REFLINE:"");
     var waHref="https://wa.me/"+CONFIG.wa+"?text="+encodeURIComponent(leadMsg);
     $("done-msg").textContent=leadMsg; $("send-wa").href=waHref; $("sent-wa").href=waHref;
     var lead={content_name: sel.value?("vacancy_"+sel.value):"general"};
