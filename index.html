@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Вдало — робота в Європі з житлом</title>
-<meta name="description" content="Актуальні вакансії в Польщі, Литві, Чехії та Словаччині: ставка, житло, тип договору й дати заїзду в кожній вакансії. Для кандидатів безкоштовно. Telegram, Viber, WhatsApp: 073 606 77 00.">
+<meta name="description" content="Актуальні вакансії в Польщі, Литві, Чехії та Словаччині: підприємство, ставка, житло, тип договору й дати заїзду в кожній вакансії. Для кандидатів безкоштовно. Telegram, Viber, WhatsApp: 073 606 77 00.">
 <link rel="canonical" href="https://vdalo-robota.com.ua/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="uk_UA">
@@ -139,6 +139,17 @@ section{padding:64px 0 0}
 .country b{display:block;font-size:16px}
 .country span{font-size:13px;color:var(--muted);font-weight:600}
 
+/* companies */
+.cos{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.cos-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:12px}
+.cos-head b{font-family:var(--font-display);font-size:17px;font-weight:500}
+.cos-head span{color:var(--muted);font-size:14px;font-weight:600}
+.cos-list{display:flex;flex-wrap:wrap;gap:8px}
+.co-chip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:8px 12px;font:800 14px var(--font-body);cursor:pointer;letter-spacing:.01em}
+.co-chip:hover,.co-chip[aria-pressed="true"]{border-color:var(--ink)}
+.co-chip .n{opacity:.55;font-weight:600}
+.co-more{background:none;border:0;font:700 14px var(--font-body);color:var(--ink);text-decoration:underline;cursor:pointer;padding:8px 6px}
+
 /* toolbar */
 .toolbar{display:grid;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:18px}
 .tb-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -169,6 +180,11 @@ section{padding:64px 0 0}
 .tag.no{background:var(--no-bg);color:var(--no)}
 .tag.date{background:var(--warm-bg);color:var(--warm)}
 .vac .desc{color:var(--muted);font-size:14px}
+.co-line{display:flex;align-items:center;gap:7px;font-weight:800;font-size:15px;margin-top:-4px}
+.co-line svg{width:17px;height:17px;flex-basis:17px;color:var(--muted)}
+.m-about{margin-top:16px;padding:14px 16px;border-radius:16px;background:var(--soft)}
+.m-about b{display:flex;align-items:center;gap:8px}
+.m-about p{margin-top:6px;color:var(--muted);font-size:15px}
 .vac-actions{display:flex;gap:8px;margin-top:auto;position:relative;z-index:1}
 .vac-actions .btn{flex:1}
 .empty{padding:28px;background:var(--surface);border-radius:var(--r);color:var(--muted);border:1px dashed var(--line)}
@@ -296,6 +312,7 @@ footer a{text-decoration:none}
   <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-bld" viewBox="0 0 24 24"><path d="M4 21V5l8-2v18"/><path d="M12 9h8v12"/><path d="M2 21h20M7 8h2M7 12h2M7 16h2M15 13h2M15 17h2"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
 </svg>
 
@@ -320,7 +337,7 @@ footer a{text-decoration:none}
     <div class="hero-text">
       <p class="eyebrow"><span class="live" aria-hidden="true"></span><span id="eyebrow-txt">Вакансії оновлюються щодня</span></p>
       <h1>Робота в Польщі, Литві, Чехії та&nbsp;Словаччині</h1>
-      <p class="lead">Підбираємо роботу в перевірених роботодавців Європи. У кожній вакансії — ставка, години, житло, тип договору й найближчі дати заїзду.</p>
+      <p class="lead">Підбираємо роботу в перевірених роботодавців Європи. У кожній вакансії — підприємство, ставка, години, житло, тип договору й найближчі дати заїзду.</p>
       <div class="ticks">
         <span><svg class="i"><use href="#i-check"/></svg>Безкоштовно для кандидатів</span>
         <span><svg class="i"><use href="#i-check"/></svg>Офіційний договір</span>
@@ -358,6 +375,11 @@ footer a{text-decoration:none}
   </section>
 
   <div class="countries" id="countries" role="group" aria-label="Вакансії за країнами"></div>
+
+  <div class="cos" id="cos" hidden>
+    <div class="cos-head"><b>Вакансії в компаніях</b><span id="cos-count"></span></div>
+    <div class="cos-list" id="cos-list" role="group" aria-label="Компанії"></div>
+  </div>
 
   <section id="vacancies" aria-labelledby="vac-h">
     <div class="sec-head">
@@ -498,7 +520,7 @@ footer a{text-decoration:none}
       <details><summary>Які документи потрібні?</summary><p>Зазвичай — закордонний біометричний паспорт. Для окремих країн і вакансій можуть знадобитися інші документи: менеджер підкаже точний перелік до виїзду.</p></details>
       <details><summary>Чи можна поїхати парою або з другом?</summary><p>Так. Скористайтеся фільтром «Для пар» — там вакансії, куди беруть і жінок, і чоловіків. Про спільне житло уточнюйте в менеджера.</p></details>
       <details><summary>Хто може виїхати під час воєнного стану?</summary><p>Жінки — без обмежень. Чоловіки 18–60 років — лише за наявності законних підстав для перетину кордону. Менеджер підкаже, які вакансії вам підходять.</p></details>
-      <details><summary>З ким я підписую договір?</summary><p>З роботодавцем або його кадровою агенцією в країні працевлаштування. Тип договору вказаний у кожній вакансії.</p></details>
+      <details><summary>З ким я підписую договір?</summary><p>З роботодавцем або його кадровою агенцією в країні працевлаштування. У вакансії вказано підприємство, де ви працюватимете, і тип договору.</p></details>
       <details><summary>Як швидко можна виїхати?</summary><p>Найближчі дати заїзду вказані у вакансіях. Після того як ви оберете вакансію, менеджер погодить із вами конкретну дату.</p></details>
     </div>
   </section>
@@ -534,6 +556,9 @@ footer a{text-decoration:none}
     ga4Id: "",         // ID Google Analytics 4, наприклад G-XXXXXXX
     leadsUrl: "https://script.google.com/macros/s/AKfycbzt87VLFDpZYR13V56RsBHyjLm0q_P1teyIWZAHMQvc8WinxwyTUi4N0Bx27t2kUTGS9Q/exec"       // URL веб-додатку Google Apps Script — заявки йдуть у Google-таблицю
   };
+  // Відомі компанії — показуються першими в блоці «Вакансії в компаніях» (якщо зараз є їхні вакансії)
+  var FEATURED = ["SHEIN","Jeronimo Martins (Biedronka)","ALDI","LG Energy Solution","Valeo","Dr. Oetker","BorgWarner","Saint-Gobain (Glassolutions)","FORVIA (Faurecia)","TechniSat","Rhenus","Sunreef Yachts","Sokołów","Animex Foods","TRUMPF","Plastic Omnium"];
+  var CO_SHOW = 14;
   var PAGE = 12;
   var CC = {"Польща":"PL","Литва":"LT","Чехія":"CZ","Словаччина":"SK","Німеччина":"DE","Нідерланди":"NL","Україна":"UA"};
   var WHO = [["all","Усі"],["w","Жінкам"],["m","Чоловікам"],["pair","Парам"]];
@@ -639,7 +664,7 @@ footer a{text-decoration:none}
     v._g=gOf(v); v._h=house(v); v._est=est(v); v._rate=rate(v); v._cc=CC[v.country]||(v.country||"").slice(0,2).toUpperCase();
     var ds=dates(v.trips).filter(function(d){return d>=today;}).sort(function(a,b){return a-b;});
     v._next=ds[0]||null;
-    v._text=norm(v.title+" "+(v.city||"")+" "+v.country+" "+(v.desc||""));
+    v._text=norm(v.title+" "+(v.company||"")+" "+(v.city||"")+" "+v.country+" "+(v.desc||"")+" "+(v.about||""));
     return v;
   }
 
@@ -669,6 +694,7 @@ footer a{text-decoration:none}
     return '<article class="vac">'+
       '<div class="vac-top"><span class="cc">'+esc(v._cc)+'</span><span class="loc">'+esc(v.country)+(v.city?" · "+esc(v.city):"")+'</span>'+(v.hot?'<span class="badge">Гаряча</span>':'')+'</div>'+
       '<h3><a href="#v'+esc(v.id)+'">'+esc(v.title)+'</a></h3>'+
+      (v.company?'<p class="co-line"><svg class="i"><use href="#i-bld"/></svg>'+esc(v.company)+'</p>':'')+
       '<div><p class="pay">'+esc(v.salary)+'</p>'+estHtml(v)+'</div>'+
       tagsHtml(v)+
       (v.desc?'<p class="desc">'+esc(v.desc)+'</p>':'')+
@@ -700,9 +726,31 @@ footer a{text-decoration:none}
   }
   function set(patch){ for (var k in patch) st[k]=patch[k]; st.shown=PAGE; render(); }
 
+  /* ---------- Компанії ---------- */
+  var coAll=false;
+  function companies(){
+    var cnt={}; items.forEach(function(v){ if (v.company) cnt[v.company]=(cnt[v.company]||0)+1; });
+    var names=Object.keys(cnt);
+    names.sort(function(a,b){
+      var fa=FEATURED.indexOf(a), fb=FEATURED.indexOf(b);
+      if (fa>=0||fb>=0) return (fa<0?999:fa)-(fb<0?999:fb);
+      return (cnt[b]-cnt[a]) || a.localeCompare(b);
+    });
+    return names.map(function(n){ return [n,cnt[n]]; });
+  }
+  function renderCos(){
+    var cs=companies(); if (!cs.length){ $("cos").hidden=true; return; }
+    $("cos").hidden=false;
+    $("cos-count").textContent=cs.length+" "+plural(cs.length,"компанія","компанії","компаній")+" · натисніть, щоб побачити вакансії";
+    var shown=coAll?cs:cs.slice(0,CO_SHOW);
+    $("cos-list").innerHTML=shown.map(function(c){
+      return '<button type="button" class="co-chip" data-co="'+esc(c[0])+'" aria-pressed="'+(st.q===c[0])+'">'+esc(c[0])+(c[1]>1?' <span class="n">'+c[1]+'</span>':'')+'</button>';
+    }).join("")+(cs.length>CO_SHOW?'<button type="button" class="co-more" id="co-more">'+(coAll?"Згорнути":"Усі компанії ("+cs.length+")")+'</button>':'');
+  }
+
   /* ---------- Модальне вікно вакансії ---------- */
   var lastFocus=null;
-  function vacMsg(v){ return "Вітаю! Мене цікавить вакансія №"+v.id+" «"+v.title+"» ("+v.country+(v.city?", "+v.city:"")+"). Підкажіть, будь ласка, деталі."; }
+  function vacMsg(v){ return "Вітаю! Мене цікавить вакансія №"+v.id+" «"+v.title+"»"+(v.company?" у компанії "+v.company:"")+" ("+v.country+(v.city?", "+v.city:"")+"). Підкажіть, будь ласка, деталі."; }
   function openVac(id){
     var v=items.filter(function(x){return String(x.id)===String(id);})[0];
     if (!v){ toast("Цієї вакансії вже немає — подивіться інші"); clearHash(); return; }
@@ -712,9 +760,11 @@ footer a{text-decoration:none}
       '<button class="x" type="button" data-close aria-label="Закрити"><svg class="i"><use href="#i-x"/></svg></button>'+
       '<div class="vac-top"><span class="cc">'+esc(v._cc)+'</span><span class="loc">'+esc(v.country)+(v.city?" · "+esc(v.city):"")+'</span>'+(v.hot?'<span class="badge">Гаряча</span>':'')+'</div>'+
       '<h2 id="m-title">'+esc(v.title)+'</h2>'+
+      (v.company?'<p class="co-line" style="margin-top:10px"><svg class="i"><use href="#i-bld"/></svg>'+esc(v.company)+'</p>':'')+
       '<div class="m-pay"><p class="pay">'+esc(v.salary)+'</p>'+estHtml(v)+'</div>'+
       '<div style="margin-top:14px">'+tagsHtml(v)+'</div>'+
       (v.desc?'<p class="m-desc">'+esc(v.desc)+'</p>':'')+
+      (v.about?'<div class="m-about"><b><svg class="i"><use href="#i-bld"/></svg>'+(v.company?"Про компанію "+esc(v.company):"Про компанію")+'</b><p>'+esc(v.about)+'</p></div>':'')+
       '<dl class="m-dl">'+rows.map(function(r){return '<dt>'+r[0]+'</dt><dd>'+esc(r[1])+'</dd>';}).join("")+'</dl>'+
       '<div class="m-actions">'+
         '<button class="btn wide" type="button" data-apply="'+esc(v.id)+'">Залишити заявку на цю вакансію</button>'+
@@ -818,6 +868,9 @@ footer a{text-decoration:none}
       if (c.closest("#countries")) $("vacancies").scrollIntoView({behavior:"smooth"});
       return;
     }
+    var co=t.closest("[data-co]");
+    if (co){ var cn=co.getAttribute("data-co"); var nq=st.q===cn?"":cn; $("q").value=nq; set({q:nq, country:"all"}); renderCos(); if (nq) $("vacancies").scrollIntoView({behavior:"smooth"}); return; }
+    if (t.closest("#co-more")){ coAll=!coAll; renderCos(); return; }
     var w=t.closest("[data-who]");
     if (w && (w.closest("#tb-who")||w.closest("#pick-who"))){ var wv=w.getAttribute("data-who"); set({who: w.closest("#pick-who")&&st.who===wv?"all":wv}); return; }
     var ch=t.closest("[data-ch]");
@@ -829,14 +882,14 @@ footer a{text-decoration:none}
   });
   document.addEventListener("keydown",function(e){ if (e.key==="Escape") closeVac(); });
   window.addEventListener("hashchange",route);
-  $("q").addEventListener("input",function(e){ st.q=e.target.value; st.shown=PAGE; render(); });
+  $("q").addEventListener("input",function(e){ st.q=e.target.value; st.shown=PAGE; render(); renderCos(); });
   $("sort").addEventListener("change",function(e){ set({sort:e.target.value}); });
   $("tb-housing").addEventListener("change",function(e){ set({housing:e.target.checked}); });
   $("pick-housing").addEventListener("change",function(e){ set({housing:e.target.checked}); });
   $("pick-country").addEventListener("change",function(e){ set({country:e.target.value}); });
   $("picker").addEventListener("submit",function(e){ e.preventDefault(); $("vacancies").scrollIntoView({behavior:"smooth"}); });
   $("more").addEventListener("click",function(){ st.shown+=PAGE; render(); });
-  $("reset").addEventListener("click",function(){ $("q").value=""; set({country:"all",who:"all",housing:false,q:""}); });
+  $("reset").addEventListener("click",function(){ $("q").value=""; set({country:"all",who:"all",housing:false,q:""}); renderCos(); });
   var topEl=$("top"); window.addEventListener("scroll",function(){ topEl.classList.toggle("scrolled", window.scrollY>8); },{passive:true});
 
   /* ---------- Старт ---------- */
@@ -871,8 +924,9 @@ footer a{text-decoration:none}
       return '<button type="button" class="country" data-country="'+esc(c)+'" aria-pressed="false"><span class="cc">'+esc(CC[c]||c.slice(0,2))+'</span><span><b>'+esc(c)+'</b><span>'+vs.length+" "+plural(vs.length,"вакансія","вакансії","вакансій")+(line?" · "+line:"")+'</span></span></button>';
     }).join("");
     $("f-vac").innerHTML='<option value="">Будь-яка / порадьте мені</option>'+items.map(function(v){
-      return '<option value="'+esc(v.id)+'">'+esc(v.title+" — "+v.country+(v.city?", "+v.city:""))+'</option>'; }).join("");
+      return '<option value="'+esc(v.id)+'">'+esc(v.title+(v.company?" ("+v.company+")":"")+" — "+v.country+(v.city?", "+v.city:""))+'</option>'; }).join("");
     render();
+    renderCos();
     route();
   }
   fetch("vacancies.json",{cache:"no-store"}).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(boot).catch(function(){
