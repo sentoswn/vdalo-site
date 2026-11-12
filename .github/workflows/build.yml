@@ -1,0 +1,25 @@
+name: SEO-сторінки
+on:
+  push:
+    branches: [main]
+    paths: [vacancies.json, build.py, index.html]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python3 build.py
+        env: {TZ: Europe/Kyiv}
+      - name: Commit
+        run: |
+          git config user.name "vdalo-bot"
+          git config user.email "vdalo-bot@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "Оновлення SEO-сторінок"
+          git push
