@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://vdalo-robota.com.ua/sitemap.xml
