@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вдало — робота в Європі</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: світла сторінка в дусі «Дії» — чорний текст, білі картки, пастельний градієнт; зверху героїчний блок, далі вакансії, форма, питання. */
+:root{
+  --bg:#f4f6f8;
+  --surface:#ffffff;
+  --ink:#000000;
+  --muted:#5d6670;
+  --line:#e2e6ea;
+  --accent:#000000;
+  --grad:linear-gradient(120deg,#c5e3f6 0%,#d7f0e0 45%,#f6dfe9 100%);
+  --ok:#1f8a4c;
+  --font-display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --font-body:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --r:20px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1013;--surface:#181b20;--ink:#f3f5f7;--muted:#9aa3ad;--line:#2a2f36;--accent:#ffffff;
+    --grad:linear-gradient(120deg,#22384a 0%,#1f3a2c 45%,#43293a 100%);--ok:#5fd394;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1013;--surface:#181b20;--ink:#f3f5f7;--muted:#9aa3ad;--line:#2a2f36;--accent:#ffffff;
+  --grad:linear-gradient(120deg,#22384a 0%,#1f3a2c 45%,#43293a 100%);--ok:#5fd394;color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.55}
+a{color:inherit}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(32px,6vw,58px);font-weight:700}
+h2{font-size:clamp(24px,3.6vw,34px);font-weight:700}
+h3{font-size:18px;font-weight:500}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px;border-radius:6px}
+
+/* header */
+header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:22px;text-decoration:none}
+.logo-mark{width:38px;height:38px;border-radius:12px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-size:18px}
+.top-phone{font-weight:700;text-decoration:none;white-space:nowrap}
+
+/* hero */
+.hero{background:var(--grad);border-radius:32px;padding:clamp(28px,5vw,56px);display:grid;gap:28px;grid-template-columns:1.4fr 1fr;align-items:end}
+.hero p.lead{font-size:19px;max-width:34ch;margin:18px 0 0}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 22px;border-radius:999px;font:600 16px var(--font-body);border:2px solid var(--ink);background:var(--ink);color:var(--bg);text-decoration:none;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:hover{opacity:.88}
+.facts{display:grid;gap:10px}
+.fact{background:var(--surface);border-radius:var(--r);padding:16px 18px}
+.fact b{display:block;font-family:var(--font-display);font-size:24px;font-variant-numeric:tabular-nums}
+.fact span{color:var(--muted);font-size:15px}
+
+section{padding:64px 0 0}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:24px}
+.sec-head p{margin:8px 0 0;color:var(--muted)}
+
+/* filters */
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:9px 16px;font:600 15px var(--font-body);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* vacancies */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.vac{background:var(--surface);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:14px;border:1px solid var(--line)}
+.vac-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.flag{font-size:14px;font-weight:600;color:var(--muted)}
+.badge{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:4px 9px;border-radius:999px;background:var(--grad);white-space:nowrap}
+.salary{font-family:var(--font-display);font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.salary small{font-family:var(--font-body);font-size:14px;font-weight:500;color:var(--muted)}
+.vac ul{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:15px}
+.vac li{display:flex;gap:8px}
+.vac li::before{content:"";flex:0 0 7px;height:7px;margin-top:8px;border-radius:50%;background:var(--ok)}
+.vac .desc{color:var(--muted);font-size:15px;margin:0}
+.vac .btn{margin-top:auto;width:100%}
+.empty{padding:28px;background:var(--surface);border-radius:var(--r);color:var(--muted)}
+.updated{font-size:14px;color:var(--muted)}
+
+.toolbar{display:grid;gap:12px;margin-bottom:20px}
+.search{max-width:420px}
+.vac dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:15px}
+.vac dt{color:var(--muted)}
+.vac dd{margin:0}
+.trips{font-size:14px;font-weight:600;padding:10px 12px;border-radius:12px;background:var(--bg)}
+.more{display:flex;justify-content:center;margin-top:20px}
+.count{font-weight:600}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
+.step{background:var(--surface);border-radius:var(--r);padding:22px;border:1px solid var(--line)}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--bg);font:700 16px var(--font-display);margin-bottom:14px}
+.step p{margin:8px 0 0;color:var(--muted);font-size:15px}
+
+/* form */
+.form-box{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;background:var(--surface);border-radius:32px;padding:clamp(22px,4vw,44px);border:1px solid var(--line)}
+.contacts{display:grid;gap:10px;margin-top:22px}
+.contact{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:16px;background:var(--bg);text-decoration:none;font-weight:600}
+.contact .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff;font-size:15px;font-weight:700}
+.contact small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+form{display:grid;gap:16px}
+label{font-weight:600;font-size:15px;display:block;margin-bottom:6px}
+input,select,textarea{width:100%;padding:13px 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:500 16px var(--font-body)}
+textarea{min-height:84px;resize:vertical}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg label{margin:0;padding:10px 16px;border-radius:999px;border:1.5px solid var(--line);cursor:pointer;font-weight:600}
+.seg input:checked + label{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.seg input:focus-visible + label{outline:3px solid var(--ink);outline-offset:2px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.err{color:#c0392b;font-size:14px;min-height:1em;margin:0}
+.done{display:none;border-radius:20px;padding:20px;background:var(--grad)}
+.done.show{display:grid;gap:12px}
+.done p{margin:0}
+.send-row{display:flex;flex-wrap:wrap;gap:8px}
+.hint{font-size:14px;color:var(--muted)}
+
+/* faq */
+details{background:var(--surface);border-radius:16px;padding:18px 20px;border:1px solid var(--line)}
+details + details{margin-top:10px}
+summary{font-weight:700;cursor:pointer}
+details p{margin:10px 0 0;color:var(--muted)}
+
+footer{padding:56px 0 40px;color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+@media (max-width:860px){
+  .hero,.form-box{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+}
+@media (max-width:480px){
+  .steps,.row2{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+  .top-phone{display:none}
+}
+@media (prefers-reduced-motion:no-preference){ .btn,.chip{transition:opacity .15s,background .15s} }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="#top" aria-label="Вдало — на початок"><span class="logo-mark">В</span>Вдало</a>
+    <a class="top-phone" href="tel:+380736067700">073 606 77 00</a>
+  </header>
+
+  <div class="hero" id="top">
+    <div>
+      <h1>Робота в Європі, яка складеться вдало</h1>
+      <p class="lead">Підбираємо вакансії в перевірених роботодавців Польщі, Литви, Чехії та Словаччини. Допомагаємо з документами, дорогою та житлом.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#vacancies">Дивитися вакансії</a>
+        <a class="btn ghost" href="#apply">Залишити заявку</a>
+      </div>
+    </div>
+    <div class="facts" aria-label="Коротко про нас">
+      <div class="fact"><b id="fact-count">100+</b><span>актуальних вакансій зараз</span></div>
+      <div class="fact"><b id="fact-countries">4</b><span>країн Європи</span></div>
+      <div class="fact"><b>24 год</b><span>відповідаємо на кожну заявку</span></div>
+    </div>
+  </div>
+
+  <section id="vacancies" aria-labelledby="vac-h">
+    <div class="sec-head">
+      <div>
+        <h2 id="vac-h">Актуальні вакансії</h2>
+        <p class="updated" id="updated"></p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <div class="filters" id="filters" role="group" aria-label="Фільтр за країною"></div>
+      <div class="filters" id="gfilters" role="group" aria-label="Фільтр для кого"></div>
+      <div class="search"><label for="q">Пошук за професією або містом</label><input id="q" type="search" placeholder="Наприклад: склад, Gdańsk, навантажувач"></div>
+      <p class="count" id="count" aria-live="polite"></p>
+    </div>
+    <div class="grid" id="vac-grid"><div class="empty">Завантажуємо вакансії…</div></div>
+    <div class="more"><button class="btn ghost" type="button" id="more" hidden>Показати ще</button></div>
+  </section>
+
+  <section aria-labelledby="how-h">
+    <div class="sec-head"><h2 id="how-h">Як ми працюємо</h2></div>
+    <div class="steps">
+      <div class="step"><h3>Заявка</h3><p>Ви залишаєте заявку або пишете нам у месенджер.</p></div>
+      <div class="step"><h3>Підбір</h3><p>Менеджер уточнює досвід і пропонує вакансії, що вам підходять.</p></div>
+      <div class="step"><h3>Документи</h3><p>Допомагаємо зібрати документи й домовитися про дату виїзду.</p></div>
+      <div class="step"><h3>Робота</h3><p>Ви приїжджаєте на місце, ми на зв'язку й після працевлаштування.</p></div>
+    </div>
+  </section>
+
+  <section id="apply" aria-labelledby="apply-h">
+    <div class="form-box">
+      <div>
+        <h2 id="apply-h">Залишіть заявку</h2>
+        <p class="hint" style="font-size:16px;margin-top:12px">Оберіть, як вам зручніше: ми зателефонуємо або напишемо. Або напишіть нам самі.</p>
+        <div class="contacts">
+          <a class="contact" href="https://t.me/+380736067700"><span class="ic" style="background:#2aabee">TG</span><span>Telegram<small>+380 73 606 77 00</small></span></a>
+          <a class="contact" href="viber://chat?number=%2B380736067700"><span class="ic" style="background:#7360f2">Vb</span><span>Viber<small>+380 73 606 77 00</small></span></a>
+          <a class="contact" href="https://wa.me/380736067700"><span class="ic" style="background:#25d366">WA</span><span>WhatsApp<small>+380 73 606 77 00</small></span></a>
+          <a class="contact" href="tel:+380736067700"><span class="ic" style="background:#000">☎</span><span>Подзвонити<small>073 606 77 00</small></span></a>
+        </div>
+      </div>
+
+      <div>
+        <form id="lead-form" novalidate>
+          <div class="row2">
+            <div><label for="f-name">Ім'я</label><input id="f-name" name="name" autocomplete="given-name" placeholder="Олена"></div>
+            <div><label for="f-phone">Телефон</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+380 __ ___ __ __"></div>
+          </div>
+          <div>
+            <label for="f-vac">Вакансія</label>
+            <select id="f-vac" name="vacancy"></select>
+          </div>
+          <div>
+            <span id="mode-lbl" style="font-weight:600;font-size:15px;display:block;margin-bottom:6px">Як з вами зв'язатися?</span>
+            <div class="seg" role="radiogroup" aria-labelledby="mode-lbl">
+              <input type="radio" name="mode" id="m-call" value="Дзвінок" checked><label for="m-call">Зателефонуйте мені</label>
+              <input type="radio" name="mode" id="m-chat" value="Переписка"><label for="m-chat">Напишіть мені</label>
+            </div>
+          </div>
+          <div id="chat-wrap" hidden>
+            <span id="ch-lbl" style="font-weight:600;font-size:15px;display:block;margin-bottom:6px">Куди написати?</span>
+            <div class="seg" role="radiogroup" aria-labelledby="ch-lbl">
+              <input type="radio" name="channel" id="c-tg" value="Telegram" checked><label for="c-tg">Telegram</label>
+              <input type="radio" name="channel" id="c-vb" value="Viber"><label for="c-vb">Viber</label>
+              <input type="radio" name="channel" id="c-wa" value="WhatsApp"><label for="c-wa">WhatsApp</label>
+            </div>
+          </div>
+          <div><label for="f-note">Коментар (необов'язково)</label><textarea id="f-note" name="note" placeholder="Досвід, з ким плануєте їхати, коли готові виїхати"></textarea></div>
+          <p class="err" id="f-err" role="alert"></p>
+          <button class="btn" type="submit">Надіслати заявку</button>
+        </form>
+
+        <div class="done" id="done" aria-live="polite">
+          <p><b>Залишився один крок.</b> Надішліть заявку нам у месенджер, текст уже готовий:</p>
+          <div class="send-row">
+            <a class="btn" id="send-wa" href="#">Надіслати у WhatsApp</a>
+            <a class="btn ghost" id="send-tg" href="https://t.me/+380736067700">Telegram</a>
+            <a class="btn ghost" id="send-vb" href="viber://chat?number=%2B380736067700">Viber</a>
+          </div>
+          <p class="hint" id="copy-hint">Для Telegram і Viber текст заявки скопіюється автоматично — просто вставте його в чат.</p>
+          <button class="btn ghost" type="button" id="again">Заповнити ще раз</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="faq-h">
+    <div class="sec-head"><h2 id="faq-h">Часті питання</h2></div>
+    <details><summary>Чи потрібно платити за працевлаштування?</summary><p>Ні. Для кандидатів наші послуги безкоштовні.</p></details>
+    <details><summary>Чи потрібне знання мови?</summary><p>Для більшості вакансій — ні. Якщо мова потрібна, це вказано в описі вакансії.</p></details>
+    <details><summary>Хто оформлює документи?</summary><p>Ми підкажемо, які документи потрібні для конкретної країни, і допоможемо їх підготувати. Договір ви підписуєте з роботодавцем.</p></details>
+    <details><summary>Хто може виїхати під час воєнного стану?</summary><p>Жінки — без обмежень. Чоловіки 18–60 років — лише за наявності законних підстав для перетину кордону. Менеджер підкаже, які вакансії вам підходять.</p></details>
+  </section>
+
+  <footer>
+    <span>© 2026 Вдало · Підбір роботи в Європі</span>
+    <a href="tel:+380736067700">073 606 77 00</a>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var PHONE_WA = "380736067700", PAGE = 24;
+  var items = [], data = {}, country = "Усі", gender = "Усі", q = "", shown = PAGE;
+  var grid = document.getElementById("vac-grid"), filters = document.getElementById("filters"),
+      gfilters = document.getElementById("gfilters"), select = document.getElementById("f-vac"),
+      more = document.getElementById("more"), countEl = document.getElementById("count");
+
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function plural(n){ var a=n%10,b=n%100; return a===1&&b!==11?"вакансія":a>=2&&a<=4&&(b<10||b>=20)?"вакансії":"вакансій"; }
+  function gOf(v){ var w=v.who||""; return /^Жінки та чоловіки/.test(w)?"both":/^Жінки/.test(w)?"w":/^Чоловіки/.test(w)?"m":"both"; }
+
+  function chips(el, list, cur, set){
+    el.innerHTML = "";
+    list.forEach(function(c){
+      var b=document.createElement("button"); b.type="button"; b.className="chip"; b.textContent=c;
+      b.setAttribute("aria-pressed", c===cur?"true":"false");
+      b.addEventListener("click", function(){ set(c); shown=PAGE; render(); });
+      el.appendChild(b);
+    });
+  }
+
+  function filtered(){
+    var qq=q.toLowerCase();
+    return items.filter(function(v){
+      if (country!=="Усі" && v.country!==country) return false;
+      var g=gOf(v);
+      if (gender==="Для жінок" && g==="m") return false;
+      if (gender==="Для чоловіків" && g==="w") return false;
+      if (gender==="Для пар" && g!=="both") return false;
+      if (qq && (v.title+" "+(v.city||"")+" "+(v.desc||"")).toLowerCase().indexOf(qq)<0) return false;
+      return true;
+    }).sort(function(a,b){ return (b.hot?1:0)-(a.hot?1:0); });
+  }
+
+  function row(k,v){ return v ? "<dt>"+k+"</dt><dd>"+esc(v)+"</dd>" : ""; }
+
+  function render(){
+    var countries=[]; items.forEach(function(v){ if(countries.indexOf(v.country)<0) countries.push(v.country); });
+    chips(filters, ["Усі"].concat(countries), country, function(c){ country=c; });
+    chips(gfilters, ["Усі","Для жінок","Для чоловіків","Для пар"], gender, function(c){ gender=c; });
+    var list=filtered();
+    countEl.textContent = "Знайдено " + list.length + " " + plural(list.length);
+    if (!list.length){ grid.innerHTML='<div class="empty">За цими умовами вакансій зараз немає. Залиште заявку — підберемо інший варіант.</div>'; more.hidden=true; return; }
+    grid.innerHTML = list.slice(0,shown).map(function(v){
+      return '<article class="vac">' +
+        '<div class="vac-top"><div><div class="flag">'+esc(v.country)+(v.city?" · "+esc(v.city):"")+'</div><h3 style="margin-top:6px">'+esc(v.title)+'</h3></div>'+
+        (v.hot?'<span class="badge">Гаряча</span>':'')+'</div>'+
+        '<div class="salary">'+esc(v.salary)+'</div>'+
+        '<dl>'+row("Кому",v.who)+row("Годин/міс.",v.hours)+row("Житло",v.housing)+row("Харчування",v.food)+row("Договір",v.contract)+'</dl>'+
+        (v.desc?'<p class="desc">'+esc(v.desc)+'</p>':'')+
+        (v.trips?'<div class="trips">🗓 '+esc(v.trips)+'</div>':'')+
+        '<a class="btn" href="#apply" data-vac="'+esc(v.id)+'">Відгукнутися</a></article>';
+    }).join("");
+    more.hidden = list.length<=shown;
+  }
+
+  more.addEventListener("click", function(){ shown+=PAGE; render(); });
+  document.getElementById("q").addEventListener("input", function(e){ q=e.target.value.trim(); shown=PAGE; render(); });
+
+  function boot(d){
+    data=d||{}; items=(data.items||[]).filter(function(v){ return v && v.title && v.salary; });
+    var cs={}; items.forEach(function(v){ cs[v.country]=1; });
+    document.getElementById("fact-count").textContent = items.length;
+    document.getElementById("fact-countries").textContent = Object.keys(cs).length;
+    if (data.updated){ var dt=new Date(data.updated+"T12:00:00");
+      document.getElementById("updated").textContent="Оновлено "+dt.toLocaleDateString("uk-UA",{day:"numeric",month:"long",year:"numeric"}); }
+    select.innerHTML='<option value="">Будь-яка / порадьте мені</option>'+items.map(function(v){
+      return '<option value="'+esc(v.id)+'">'+esc(v.title+" — "+v.country+(v.city?", "+v.city:""))+'</option>'; }).join("");
+    render();
+  }
+  fetch("vacancies.json",{cache:"no-store"}).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(boot).catch(function(){
+    grid.innerHTML='<div class="empty">Не вдалося завантажити вакансії. Напишіть нам у месенджер — розповімо про актуальні.</div>';
+  });
+
+  grid.addEventListener("click", function(e){ var a=e.target.closest("[data-vac]"); if(a) select.value=a.getAttribute("data-vac"); });
+
+  var form=document.getElementById("lead-form"), chatWrap=document.getElementById("chat-wrap");
+  form.addEventListener("change", function(){ chatWrap.hidden = form.querySelector('input[name="mode"]:checked').value!=="Переписка"; });
+  var msg="";
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var err=document.getElementById("f-err"), name=form.name.value.trim(), phone=form.phone.value.trim();
+    if(!name){ err.textContent="Вкажіть, будь ласка, ваше ім'я."; form.name.focus(); return; }
+    if(phone.replace(/\D/g,"").length<9){ err.textContent="Вкажіть номер телефону, щоб ми могли з вами зв'язатися."; form.phone.focus(); return; }
+    err.textContent="";
+    var mode=form.querySelector('input[name="mode"]:checked').value;
+    var ch=mode==="Переписка"?form.querySelector('input[name="channel"]:checked').value:"";
+    var opt=select.options[select.selectedIndex];
+    msg="Заявка з сайту «Вдало»\nІм'я: "+name+"\nТелефон: "+phone+
+      "\nВакансія: "+(select.value?opt.textContent+" (№"+select.value+")":"порадьте мені")+
+      "\nЗв'язок: "+(mode==="Дзвінок"?"зателефонуйте мені":"напишіть мені в "+ch)+
+      (form.note.value.trim()?"\nКоментар: "+form.note.value.trim():"");
+    document.getElementById("send-wa").href="https://wa.me/"+PHONE_WA+"?text="+encodeURIComponent(msg);
+    form.hidden=true; document.getElementById("done").classList.add("show");
+  });
+  function copyMsg(){ try{ navigator.clipboard.writeText(msg).catch(function(){ document.getElementById("copy-hint").textContent="Не вдалося скопіювати автоматично. Напишіть нам ім'я, телефон і вакансію."; }); }catch(e){} }
+  document.getElementById("send-tg").addEventListener("click", copyMsg);
+  document.getElementById("send-vb").addEventListener("click", copyMsg);
+  document.getElementById("again").addEventListener("click", function(){ form.hidden=false; document.getElementById("done").classList.remove("show"); });
+})();
+</script>
+</body>
+</html>
