@@ -55,6 +55,7 @@
   --ok:#6ad59b;--ok-bg:#183326;--warm:#ffb36b;--warm-bg:#3a2714;--no:#9aa3ad;--no-bg:#23272d;color-scheme:dark;
 }
 *{box-sizing:border-box}
+[hidden]{display:none !important}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 html,body{margin:0}
@@ -205,6 +206,10 @@ form.lead-form{display:grid;gap:16px}
 .done .msg{background:var(--soft);border-radius:14px;padding:14px;font-size:14px;white-space:pre-wrap}
 .send-row{display:flex;flex-wrap:wrap;gap:8px}
 .hint{font-size:13px;color:var(--muted)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.sent-ic{width:48px;height:48px;border-radius:50%;background:var(--ok-bg);color:var(--ok);display:grid;place-items:center}
+.sent-ic svg{width:26px;height:26px}
+.btn[disabled]{opacity:.6;cursor:wait}
 
 /* faq */
 .faq{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -450,20 +455,35 @@ footer a{text-decoration:none}
           <div id="chan-wrap" hidden><span class="lbl" id="f-ch-lbl">Куди написати?</span><div class="seg" role="group" aria-labelledby="f-ch-lbl" data-field="channel">
             <button type="button" aria-pressed="true" data-v="Telegram">Telegram</button><button type="button" aria-pressed="false" data-v="Viber">Viber</button><button type="button" aria-pressed="false" data-v="WhatsApp">WhatsApp</button></div></div>
           <div><label class="lbl" for="f-note">Коментар (необов'язково)</label><textarea id="f-note" name="note" placeholder="Досвід роботи, побажання щодо міста чи графіка"></textarea></div>
+          <div class="hp" aria-hidden="true"><label for="f-website">Сайт</label><input id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
           <p class="err" id="f-err" role="alert"></p>
-          <button class="btn wide" type="submit">Надіслати заявку</button>
+          <button class="btn wide" type="submit" id="f-submit">Надіслати заявку</button>
+          <p class="hint">Надсилаючи заявку, ви погоджуєтеся на обробку ваших даних для підбору вакансії.</p>
         </form>
 
         <div class="done" id="done" aria-live="polite">
-          <p><b>Залишився один крок.</b> Надішліть заявку нам у месенджер — текст уже готовий:</p>
+          <p id="done-lead"><b>Залишився один крок.</b> Надішліть заявку нам у месенджер — текст уже готовий:</p>
           <div class="msg" id="done-msg"></div>
           <div class="send-row">
-            <a class="msgr" id="send-wa" href="https://wa.me/380736067700" data-ch="whatsapp" data-lead="1"><span class="dot wa"></span>Надіслати у WhatsApp</a>
-            <a class="msgr" id="send-tg" href="https://t.me/+380736067700" data-ch="telegram" data-lead="1" data-copy="1"><span class="dot tg"></span>Telegram</a>
-            <a class="msgr" id="send-vb" href="viber://chat?number=%2B380736067700" data-ch="viber" data-lead="1" data-copy="1"><span class="dot vb"></span>Viber</a>
+            <a class="msgr" id="send-wa" href="https://wa.me/380736067700" data-ch="whatsapp"><span class="dot wa"></span>Надіслати у WhatsApp</a>
+            <a class="msgr" id="send-tg" href="https://t.me/+380736067700" data-ch="telegram" data-copy="1"><span class="dot tg"></span>Telegram</a>
+            <a class="msgr" id="send-vb" href="viber://chat?number=%2B380736067700" data-ch="viber" data-copy="1"><span class="dot vb"></span>Viber</a>
           </div>
           <p class="hint">У WhatsApp текст підставиться сам. Для Telegram і Viber ми скопіюємо його — просто вставте в чат.</p>
-          <button class="btn ghost" type="button" id="again">Заповнити ще раз</button>
+          <button class="btn ghost" type="button" data-again>Заповнити ще раз</button>
+        </div>
+
+        <div class="done" id="sent" aria-live="polite">
+          <div class="sent-ic"><svg class="i"><use href="#i-check"/></svg></div>
+          <p><b id="sent-title">Дякуємо! Заявку отримано.</b></p>
+          <p id="sent-text">Менеджер зв'яжеться з вами найближчим часом.</p>
+          <p class="hint">Хочете швидше? Напишіть нам самі — текст заявки вже готовий:</p>
+          <div class="send-row">
+            <a class="msgr" id="sent-wa" href="https://wa.me/380736067700" data-ch="whatsapp"><span class="dot wa"></span>WhatsApp</a>
+            <a class="msgr" href="https://t.me/+380736067700" data-ch="telegram" data-copy="1"><span class="dot tg"></span>Telegram</a>
+            <a class="msgr" href="viber://chat?number=%2B380736067700" data-ch="viber" data-copy="1"><span class="dot vb"></span>Viber</a>
+          </div>
+          <button class="btn ghost" type="button" data-again>Надіслати ще одну заявку</button>
         </div>
       </div>
     </div>
@@ -511,7 +531,8 @@ footer a{text-decoration:none}
     tg: "https://t.me/+380736067700",
     viber: "viber://chat?number=%2B380736067700",
     metaPixelId: "",   // ID пікселя Meta (Facebook/Instagram) — вставити, коли буде
-    ga4Id: ""          // ID Google Analytics 4, наприклад G-XXXXXXX
+    ga4Id: "",         // ID Google Analytics 4, наприклад G-XXXXXXX
+    leadsUrl: ""       // URL веб-додатку Google Apps Script — заявки йдуть у Google-таблицю
   };
   var PAGE = 12;
   var CC = {"Польща":"PL","Литва":"LT","Чехія":"CZ","Словаччина":"SK","Німеччина":"DE","Нідерланди":"NL","Україна":"UA"};
@@ -544,6 +565,18 @@ footer a{text-decoration:none}
     } catch(e) {}
   }
   loadAnalytics();
+
+  /* ---------- Джерело відвідування (UTM-мітки реклами) ---------- */
+  var SOURCE = "";
+  try {
+    var sp = new URLSearchParams(location.search), parts = [];
+    ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(k){ if (sp.get(k)) parts.push(k.replace("utm_","")+"="+sp.get(k)); });
+    if (sp.get("fbclid")) parts.push("facebook/instagram");
+    if (sp.get("gclid")) parts.push("google ads");
+    if (!parts.length && document.referrer) { try { var rh=new URL(document.referrer).hostname; if (rh && rh!==location.hostname) parts.push("перехід з "+rh); } catch(e){} }
+    if (parts.length) { SOURCE = parts.join("; "); try { sessionStorage.setItem("vdalo_src", SOURCE); } catch(e){} }
+    else { try { SOURCE = sessionStorage.getItem("vdalo_src") || ""; } catch(e){} }
+  } catch(e) {}
 
   /* ---------- Допоміжні ---------- */
   function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
@@ -721,24 +754,56 @@ footer a{text-decoration:none}
     });
   });
   var leadMsg="";
+  function showPanel(id){
+    $("lead-form").hidden = !!id;
+    $("done").classList.toggle("show", id==="done");
+    $("sent").classList.toggle("show", id==="sent");
+    if (id) $(id).scrollIntoView({behavior:"smooth", block:"center"});
+  }
   $("lead-form").addEventListener("submit",function(e){
     e.preventDefault();
     var f=e.target, err=$("f-err"), name=f.name.value.trim(), phone=f.phone.value.trim();
     if (!name){ err.textContent="Вкажіть, будь ласка, ваше ім'я."; f.name.focus(); return; }
     if (phone.replace(/\D/g,"").length<9){ err.textContent="Вкажіть номер телефону, щоб ми могли з вами зв'язатися."; f.phone.focus(); return; }
     err.textContent="";
-    var sel=$("f-vac"), opt=sel.options[sel.selectedIndex], mode=segVal("mode");
+    var sel=$("f-vac"), opt=sel.options[sel.selectedIndex], mode=segVal("mode"), channel=mode==="Переписка"?segVal("channel"):"";
+    var vacTitle=sel.value?opt.textContent:"";
     leadMsg="Заявка з сайту «Вдало»\nІм'я: "+name+"\nТелефон: "+phone+
-      "\nВакансія: "+(sel.value?opt.textContent+" (№"+sel.value+")":"порадьте мені")+
+      "\nВакансія: "+(sel.value?vacTitle+" (№"+sel.value+")":"порадьте мені")+
       "\nХто їде: "+segVal("who")+"\nКоли: "+segVal("when")+
-      "\nЗв'язок: "+(mode==="Дзвінок"?"зателефонуйте мені":"напишіть мені в "+segVal("channel"))+
+      "\nЗв'язок: "+(mode==="Дзвінок"?"зателефонуйте мені":"напишіть мені в "+channel)+
       (f.note.value.trim()?"\nКоментар: "+f.note.value.trim():"");
-    $("done-msg").textContent=leadMsg;
-    $("send-wa").href="https://wa.me/"+CONFIG.wa+"?text="+encodeURIComponent(leadMsg);
-    f.hidden=true; $("done").classList.add("show");
-    track("Lead",{content_name: sel.value?("vacancy_"+sel.value):"general"});
+    var waHref="https://wa.me/"+CONFIG.wa+"?text="+encodeURIComponent(leadMsg);
+    $("done-msg").textContent=leadMsg; $("send-wa").href=waHref; $("sent-wa").href=waHref;
+    var lead={content_name: sel.value?("vacancy_"+sel.value):"general"};
+
+    function fallback(failed){
+      $("done-lead").innerHTML = failed
+        ? "<b>Не вдалося надіслати заявку автоматично.</b> Надішліть її, будь ласка, нам у месенджер — текст уже готовий:"
+        : "<b>Залишився один крок.</b> Надішліть заявку нам у месенджер — текст уже готовий:";
+      showPanel("done");
+    }
+    if (f.website.value) { showPanel("sent"); return; }            // бот — тихо ігноруємо
+    if (!CONFIG.leadsUrl) { fallback(false); track("Lead",lead); return; }
+
+    var btn=$("f-submit"); btn.disabled=true; btn.textContent="Надсилаємо…";
+    var payload={ name:name, phone:phone, vacancyId:sel.value, vacancyTitle:vacTitle, who:segVal("who"), when:segVal("when"),
+      mode:mode, channel:channel, note:f.note.value.trim(), source:SOURCE, page:location.href, website:f.website.value };
+    var done=false, timer=setTimeout(function(){ if(!done){ done=true; finish(false); } }, 15000);
+    function finish(ok){
+      btn.disabled=false; btn.textContent="Надіслати заявку";
+      if (ok) {
+        $("sent-title").textContent="Дякуємо, "+name+"! Заявку отримано.";
+        $("sent-text").textContent = mode==="Дзвінок" ? "Менеджер зателефонує вам найближчим часом на номер "+phone+"." : "Менеджер напише вам у "+channel+" найближчим часом.";
+        showPanel("sent"); track("Lead",lead);
+      } else fallback(true);
+    }
+    fetch(CONFIG.leadsUrl,{method:"POST", body:JSON.stringify(payload)})
+      .then(function(r){ return r.json(); })
+      .then(function(j){ if(!done){ done=true; clearTimeout(timer); finish(!!(j&&j.ok)); } })
+      .catch(function(){ if(!done){ done=true; clearTimeout(timer); finish(false); } });
   });
-  $("again").addEventListener("click",function(){ $("lead-form").hidden=false; $("done").classList.remove("show"); });
+  document.querySelectorAll("[data-again]").forEach(function(b){ b.addEventListener("click",function(){ showPanel(""); $("lead-form").reset(); }); });
 
   /* ---------- Події ---------- */
   document.addEventListener("click",function(e){
