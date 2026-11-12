@@ -22,7 +22,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f3f5f7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0f1114" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0f1114" media="(prefers-color-scheme: dark) and (max-width: 1024px)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Ctext x='32' y='44' font-family='Arial Black,Arial' font-weight='900' font-size='36' text-anchor='middle' fill='%23fff'%3EВ%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +48,8 @@
   --r:20px;
   color-scheme:light;
 }
-@media (prefers-color-scheme: dark){
+/* Темна тема — лише на телефонах і планшетах; на комп'ютері завжди світла */
+@media (prefers-color-scheme: dark) and (max-width: 1024px){
   :root:not([data-theme="light"]){
     --bg:#0f1114;--surface:#181b20;--ink:#f2f4f6;--muted:#9aa3ad;--line:#2a2f36;--accent:#f2f4f6;--on-accent:#0f1114;
     --grad:linear-gradient(115deg,#1f3547 0%,#1d3a2b 50%,#45293a 100%);--soft:#20242a;
@@ -1500,7 +1501,7 @@ section.vpage{padding-top:14px}
     }).join("");
     var dots=S.map(function(_,k){ return '<button type="button" data-k="'+k+'" aria-label="Історія '+(k+1)+'"'+(k?'':' aria-current="true"')+'></button>'; }).join("");
     box.innerHTML='<div class="st-stage" aria-live="off">'+slides+'</div>'
-      +'<div class="st-nav"><div class="st-dots">'+dots+'</div><span class="st-count" id="st-count">1 / '+S.length+'</span>'
+      +'<div class="st-nav"><div class="st-dots">'+dots+'</div><span class="st-count" id="story-count">1 / '+S.length+'</span>'
       +'<button class="st-arr prev" type="button" aria-label="Попередня історія">'+ic("chev")+'</button>'
       +'<button class="st-arr next" type="button" aria-label="Наступна історія">'+ic("chev")+'</button></div>'
       +'<p class="note">Це умовні приклади для наочності, а не історії конкретних людей. Реальний заробіток залежить від вакансії, кількості годин і ваших витрат.</p>';
@@ -1509,7 +1510,7 @@ section.vpage{padding-top:14px}
       k=(k+S.length)%S.length; if(k===cur) return;
       sl[cur].classList.remove("on"); sl[cur].setAttribute("aria-hidden","true"); db[cur].removeAttribute("aria-current");
       cur=k; sl[cur].classList.add("on"); sl[cur].removeAttribute("aria-hidden"); db[cur].setAttribute("aria-current","true");
-      document.getElementById("st-count").textContent=(cur+1)+" / "+S.length;
+      document.getElementById("story-count").textContent=(cur+1)+" / "+S.length;
     }
     function stop(){ if(timer){ clearInterval(timer); timer=null; } }
     function start(){ stop(); if(RM||hold||!seen||document.hidden) return; timer=setInterval(function(){ go(cur+1); },9000); }
