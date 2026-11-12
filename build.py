@@ -169,6 +169,81 @@ def contract_info(c):
     return {"short": c, "full": c, "note": "", "ok": False}
 
 
+RATES = {}
+FLAG_CC = {"PL", "LT", "CZ", "SK", "DE", "NL", "UA"}
+
+
+def uah_info(v):
+    n, h = v.get("net"), hours(v)
+    if n and RATES.get(n[3]):
+        R = RATES[n[3]]
+        if n[2] == "міс":
+            return {"min": n[0] * R, "max": n[1] * R, "unit": "міс", "net": True, "pre": n[4] or "", "cur": n[3]}
+        if h:
+            return {"min": n[0] * h[0] * R, "max": n[1] * h[1] * R, "unit": "міс", "net": True, "pre": "", "cur": n[3]}
+        return {"min": n[0] * R, "max": n[1] * R, "unit": "год", "net": True, "pre": n[4] or "", "cur": n[3]}
+    g = v["_rate"]
+    if not g or not RATES.get(g["cur"]):
+        return None
+    R = RATES[g["cur"]]
+    if g["unit"] == "міс":
+        return {"min": g["min"] * R, "max": g["max"] * R, "unit": "міс", "net": False, "pre": "", "cur": g["cur"]}
+    if v["_est"]:
+        return {"min": v["_est"]["min"] * R, "max": v["_est"]["max"] * R, "unit": "міс", "net": False, "pre": "", "cur": g["cur"]}
+    return {"min": g["min"] * R, "max": g["max"] * R, "unit": "год", "net": False, "pre": "", "cur": g["cur"]}
+
+
+def r_uah(x, unit):
+    return int(x / 500 + 0.5) * 500 if unit == "міс" else int(x + 0.5)
+
+
+def uah_range(u):
+    a, b = r_uah(u["min"], u["unit"]), r_uah(u["max"], u["unit"])
+    return (u["pre"] + " " if u["pre"] else "≈ ") + fmt(a) + ("–" + fmt(b) if b != a else "")
+
+
+def orig_short(v):
+    g = v["_rate"]
+    if not g:
+        return v.get("salary") or ""
+    return fmt_r(g["min"]) + ("–" + fmt_r(g["max"]) if g["max"] != g["min"] else "") + f' {g["cur"]}{"/год" if g["unit"] == "год" else "/міс"} брутто'
+
+
+def money_html(v):
+    u = v.get("_uah")
+    if not u:
+        return f'<div class="money">{pay_html(v)}</div>'
+    return (f'<div class="money"><p class="uah num">{uah_range(u)} <span class="u">грн/{u["unit"]}</span></p>'
+            f'<p class="uah-sub">{"<b>на руки</b>" if u["net"] else "до сплати податків"} · {esc(orig_short(v))}</p></div>')
+
+
+def rate_note(v):
+    u = v.get("_uah")
+    if not u or not RATES.get(u["cur"]):
+        return ""
+    d = f' на {esc(RATES["date"])}' if RATES.get("date") else ""
+    return f'<p class="rate-note">Перераховано за курсом НБУ{d}: 1 {u["cur"]} = {RATES[u["cur"]]:.2f} грн. Зарплату виплачують у {u["cur"]}.</p>'.replace(f'{RATES[u["cur"]]:.2f}', f'{RATES[u["cur"]]:.2f}'.replace(".", ","))
+
+
+def flag(cc):
+    return f'<svg class="flag" aria-hidden="true"><use href="#f-{cc}"/></svg>' if cc in FLAG_CC else f'<span class="cc">{esc(cc)}</span>'
+
+
+def card_facts(v):
+    t = []
+    if v["_h"]:
+        k, txt = v["_h"]
+        t.append(f'<li class="{"ok" if k == "ok" else ""}"><svg class="i"><use href="#i-home"/></svg>{esc(txt)}</li>')
+    if v["_c"]:
+        t.append(f'<li class="{"ok" if v["_c"]["ok"] else ""}"><svg class="i"><use href="#i-doc"/></svg>{esc(v["_c"]["short"])}</li>')
+    if v["_next"]:
+        r = rel(v["_next"])
+        t.append(f'<li class="date"><svg class="i"><use href="#i-cal"/></svg>Заїзд {dd(v["_next"])}{" (" + r + ")" if r else ""}</li>')
+    if v["_g"] in ("w", "m"):
+        t.append(f'<li><svg class="i"><use href="#i-users"/></svg>{"Жінкам" if v["_g"] == "w" else "Чоловікам"}</li>')
+    return '<ul class="facts">' + "".join(t) + "</ul>"
+
+
 def enrich(v):
     v["id"] = str(v["id"])
     v["_g"] = g_of(v)
@@ -179,6 +254,7 @@ def enrich(v):
     v["_cc"] = CC.get(v.get("country"), (v.get("country") or "")[:2].upper())
     ds = sorted(d for d in dates(v.get("trips")) if d >= TODAY)
     v["_next"] = ds[0] if ds else None
+    v["_uah"] = uah_info(v)
     v["_txt"] = " ".join(str(v.get(k) or "") for k in ("title", "desc", "about", "company")).lower()
     return v
 
@@ -252,12 +328,11 @@ def loc(v):
 def card(v):
     u = vurl(v)
     return ('<article class="vac">'
-            f'<div class="vac-top"><span class="cc">{esc(v["_cc"])}</span><span class="loc">{loc(v)}</span>{"<span class=\"badge\">Гаряча</span>" if v.get("hot") else ""}</div>'
+            f'<div class="vac-top">{flag(v["_cc"])}<span class="loc">{loc(v)}</span>{"<span class=\"badge\">Гаряча</span>" if v.get("hot") else ""}</div>'
             f'<h3><a href="{u}" data-vid="{esc(v["id"])}">{esc(v["title"])}</a></h3>'
             + (f'<p class="co-line"><svg class="i"><use href="#i-bld"/></svg>{esc(v["company"])}</p>' if v.get("company") else "")
-            + f'<div>{pay_html(v)}{net_html(v) if v.get("net") else est_html(v)}</div>'
-            + tags_html(v)
-            + (f'<p class="desc">{esc(v["desc"])}</p>' if v.get("desc") else "")
+            + money_html(v)
+            + card_facts(v)
             + f'<div class="vac-actions"><a class="btn sm ghost" href="{u}" data-vid="{esc(v["id"])}">Детальніше</a><button class="btn sm" type="button" data-apply="{esc(v["id"])}">Відгукнутися</button></div>'
             "</article>")
 
@@ -576,10 +651,10 @@ def vac_detail(v, back):
     return (crumbs([("Головна", "/"), (back[0], back[1]), (v["title"], "")])
             + '\n  <section class="vpage" id="hero">'
             '<article class="vbox">'
-            f'<div class="vac-top"><span class="cc">{esc(v["_cc"])}</span><span class="loc">{loc(v)}</span>{"<span class=\"badge\">Гаряча</span>" if v.get("hot") else ""}</div>'
+            f'<div class="vac-top">{flag(v["_cc"])}<span class="loc">{loc(v)}</span>{"<span class=\"badge\">Гаряча</span>" if v.get("hot") else ""}</div>'
             f'<h1>{esc(v["title"])}' + (f" — {esc(v['city'])}" if v.get("city") and len(v["city"]) < 30 else "") + "</h1>"
             + (f'<p class="co-line" style="margin-top:10px"><svg class="i"><use href="#i-bld"/></svg>{esc(v["company"])}</p>' if v.get("company") else "")
-            + f'<div class="m-pay">{pay_html(v)}{est_html(v)}{net_html(v)}{stud}<p class="m-note">{note}</p></div>'
+            + f'<div class="m-pay">{(money_html(v) + "<div class=\"m-break\">") if v.get("_uah") else "<div>"}{pay_html(v)}{est_html(v)}{net_html(v)}</div>{rate_note(v)}{stud}<p class="m-note">{note}</p></div>'
             + f'<div style="margin-top:14px">{tags_html(v)}</div>'
             + (f'<p class="m-desc">{esc(v["desc"])}</p>' if v.get("desc") else "")
             + (f'<div class="m-about"><b><svg class="i"><use href="#i-bld"/></svg>{"Про компанію " + esc(v["company"]) if v.get("company") else "Про компанію"}</b><p>{esc(v["about"])}</p></div>' if v.get("about") else "")
@@ -660,9 +735,35 @@ def write(path, text):
         f.write(text)
 
 
+def fetch_rates():
+    """Курс НБУ (грн за 1 PLN/EUR/CZK). Повертає None, якщо сайт НБУ недоступний."""
+    import urllib.request
+    try:
+        req = urllib.request.Request("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json", headers={"User-Agent": "vdalo-build"})
+        rows = json.load(urllib.request.urlopen(req, timeout=20))
+        r = {x["cc"]: round(float(x["rate"]), 4) for x in rows if x.get("cc") in ("PLN", "EUR", "CZK")}
+        if len(r) == 3:
+            r["date"] = next(x["exchangedate"] for x in rows if x.get("cc") == "PLN")
+            return r
+    except Exception as e:  # noqa: BLE001
+        print("NBU rates unavailable:", e)
+    return None
+
+
 def main():
     tpl = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
-    data = json.load(open(os.path.join(ROOT, "vacancies.json"), encoding="utf-8"))
+    vp = os.path.join(ROOT, "vacancies.json")
+    data = json.load(open(vp, encoding="utf-8"))
+    # курс гривні: свіжий з НБУ, інакше — останній збережений (rates.json)
+    rp = os.path.join(ROOT, "rates.json")
+    rates = fetch_rates() or data.get("rates") or (json.load(open(rp, encoding="utf-8")) if os.path.exists(rp) else None)
+    if rates:
+        json.dump(rates, open(rp, "w", encoding="utf-8"), ensure_ascii=False)
+        if data.get("rates") != rates:
+            data["rates"] = rates
+            json.dump(data, open(vp, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    RATES.clear()
+    RATES.update(data.get("rates") or {})
     items = [enrich(v) for v in data.get("items", []) if v and v.get("title") and v.get("salary")]
     by_id = {v["id"]: v for v in items}
 

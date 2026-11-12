@@ -3,6 +3,9 @@ on:
   push:
     branches: [main]
     paths: [vacancies.json, build.py, index.html]
+  schedule:
+    - cron: "23 5 * * *"   # щодня ~07:23 за Києвом — свіжий курс НБУ
+    - cron: "47 13 * * *"  # і після денного оновлення вакансій
   workflow_dispatch:
 permissions:
   contents: write
