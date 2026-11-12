@@ -465,6 +465,20 @@ section.vpage{padding-top:14px}
 .fab-btn::before,.fab-btn::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--ok);opacity:0;z-index:-1;pointer-events:none}
 .top{padding-top:env(safe-area-inset-top)}
 @media (hover:none) and (pointer:coarse){.fab{right:calc(16px + env(safe-area-inset-right));bottom:auto;top:calc(100svh - 80px - env(safe-area-inset-bottom))}.fab-btn{width:56px;height:56px}.fab-btn svg{width:26px;height:26px;flex-basis:26px}footer{padding-bottom:calc(170px + env(safe-area-inset-bottom))}}
+.fab-btn{background:#16a34a;color:#fff}
+.fab-lbl{display:none;font:800 16px var(--font-body);white-space:nowrap}
+@keyframes fabring2{0%{transform:scale(1);opacity:.45}100%{transform:scale(1.12,1.5);opacity:0}}
+@media (hover:hover) and (min-width:900px){
+  .fab{right:28px;bottom:28px}
+  .fab-btn{width:auto;height:60px;padding:0 26px 0 20px;border-radius:999px;gap:10px}
+  .fab-btn svg{width:24px;height:24px;flex-basis:24px}
+  .fab-lbl{display:inline}
+  .fab-btn[aria-expanded="true"]{width:60px;padding:0;border-radius:50%}
+  .fab-btn[aria-expanded="true"] .fab-lbl{display:none}
+  .fab-btn::before,.fab-btn::after{border-radius:999px;animation-name:fabring2!important}
+  .fab-menu{min-width:260px}
+}
+@media (min-width:1500px){.wrap{max-width:min(88vw,1560px)}}
 @keyframes fabring{0%{transform:scale(1);opacity:.45}100%{transform:scale(1.55);opacity:0}}
 @media (prefers-reduced-motion:no-preference){.fab-btn::before{animation:fabring 2.2s ease-out infinite}.fab-btn::after{animation:fabring 2.2s ease-out 1.1s infinite}.fab-btn[aria-expanded="true"]::before,.fab-btn[aria-expanded="true"]::after{animation:none}}
 .fab-menu .mi{width:34px;height:34px;flex:0 0 34px;border-radius:11px;display:grid;place-items:center;color:#fff}
@@ -818,7 +832,7 @@ section.vpage{padding-top:14px}
     <a role="menuitem" href="https://wa.me/380736067700" data-ch="whatsapp"><span class="mi wa"><svg class="i"><use href="#i-round"/></svg></span><span>WhatsApp</span></a>
     <a role="menuitem" href="tel:+380736067700" data-ch="phone"><span class="mi ph"><svg class="i"><use href="#i-phone"/></svg></span><span>Подзвонити</span></a>
   </div>
-  <button class="fab-btn" type="button" id="fab-btn" aria-expanded="false" aria-controls="fab-menu" aria-label="Написати нам"><svg class="i fi-open"><use href="#i-msg"/></svg><svg class="i fi-close"><use href="#i-x"/></svg></button>
+  <button class="fab-btn" type="button" id="fab-btn" aria-expanded="false" aria-controls="fab-menu" aria-label="Написати нам"><svg class="i fi-open"><use href="#i-msg"/></svg><svg class="i fi-close"><use href="#i-x"/></svg><span class="fab-lbl">Написати нам</span></button>
 </div>
 
 <div class="modal" id="fmodal" hidden role="dialog" aria-modal="true" aria-labelledby="f-title">
