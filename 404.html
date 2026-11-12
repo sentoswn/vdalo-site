@@ -444,6 +444,12 @@ section.vpage{padding-top:14px}
 .contact .ic svg{width:22px;height:22px;stroke-width:1.9}
 .contact .go{margin-left:auto;color:var(--muted);width:20px;height:20px;flex-basis:20px}
 .contact .ic.of{background:var(--ink);color:var(--bg)}
+.fab{right:18px;bottom:calc(18px + env(safe-area-inset-bottom))}
+.fab-btn{width:62px;height:62px;padding:0;justify-content:center;border-radius:50%;gap:0}
+.fab-btn svg{width:27px;height:27px}
+.fab-btn .fi-close{display:none}
+.fab-btn[aria-expanded="true"] .fi-open{display:none}
+.fab-btn[aria-expanded="true"] .fi-close{display:block}
 @keyframes fabpulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 60%,transparent),0 10px 28px -10px rgba(0,0,0,.5)}70%{box-shadow:0 0 0 18px color-mix(in srgb,var(--ok) 0%,transparent),0 10px 28px -10px rgba(0,0,0,.5)}100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 0%,transparent),0 10px 28px -10px rgba(0,0,0,.5)}}
 @media (prefers-reduced-motion:no-preference){.fab-btn{animation:fabpulse 2s ease-out infinite}.fab-btn[aria-expanded="true"]{animation:none}}
 .fab-menu .mi{width:34px;height:34px;flex:0 0 34px;border-radius:11px;display:grid;place-items:center;color:#fff}
@@ -795,7 +801,7 @@ section.vpage{padding-top:14px}
     <a role="menuitem" href="https://wa.me/380736067700" data-ch="whatsapp"><span class="mi wa"><svg class="i"><use href="#i-round"/></svg></span><span>WhatsApp</span></a>
     <a role="menuitem" href="tel:+380736067700" data-ch="phone"><span class="mi ph"><svg class="i"><use href="#i-phone"/></svg></span><span>Подзвонити</span></a>
   </div>
-  <button class="fab-btn" type="button" id="fab-btn" aria-expanded="false" aria-controls="fab-menu"><svg class="i"><use href="#i-chat"/></svg>Написати нам</button>
+  <button class="fab-btn" type="button" id="fab-btn" aria-expanded="false" aria-controls="fab-menu" aria-label="Написати нам"><svg class="i fi-open"><use href="#i-chat"/></svg><svg class="i fi-close"><use href="#i-x"/></svg></button>
 </div>
 
 <div class="modal" id="fmodal" hidden role="dialog" aria-modal="true" aria-labelledby="f-title">
