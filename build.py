@@ -327,6 +327,23 @@ def loc(v):
     return esc(v.get("country")) + (" · " + esc(v["city"]) if v.get("city") else "")
 
 
+def stud_html(v, long=False):
+    if not v.get("stud") or v.get("country") != "Польща":
+        return ""
+    g, h = v["_rate"], hours(v)
+    R = RATES.get(g["cur"]) if g else None
+    amt = ""
+    if g and R:
+        if g["unit"] == "міс":
+            a, b2 = r_uah(g["min"] * R, "міс"), r_uah(g["max"] * R, "міс")
+            amt = "≈ " + fmt(a) + ("–" + fmt(b2) if b2 != a else "") + " грн/міс"
+        elif h:
+            amt = "≈ " + fmt(r_uah(g["min"] * h[0] * R, "міс")) + "–" + fmt(r_uah(g["max"] * h[1] * R, "міс")) + " грн/міс"
+    tail = ". Потрібен чинний студентський квиток; працює для договору доручення (umowa zlecenie)." if long else ""
+    return (f'<p class="stud"><svg class="i"><use href="#i-grad"/></svg><span>Студентам до 26 — вся ставка на руки, без податків'
+            f'{": " + amt if amt else ""}{tail}</span></p>')
+
+
 def card(v):
     u = vurl(v)
     return ('<article class="vac">'
@@ -334,6 +351,7 @@ def card(v):
             f'<h3><a href="{u}" data-vid="{esc(v["id"])}">{esc(v["title"])}</a></h3>'
             + (f'<p class="co-line"><svg class="i"><use href="#i-bld"/></svg>{esc(v["company"])}</p>' if v.get("company") else "")
             + money_html(v)
+            + stud_html(v)
             + card_facts(v)
             + f'<div class="vac-actions"><a class="btn sm ghost" href="{u}" data-vid="{esc(v["id"])}">Детальніше</a><button class="btn sm" type="button" data-apply="{esc(v["id"])}">Відгукнутися</button></div>'
             "</article>")
@@ -672,7 +690,7 @@ def vac_detail(v, back):
     dl = "".join(f"<dt>{k}</dt><dd>{x['html'] if isinstance(x, dict) else esc(x)}</dd>" for k, x in vac_rows(v))
     note = ("Точна сума на руки залежить від вашого податкового статусу — менеджер пояснить." if v.get("net")
             else "Брутто — це сума до сплати податків. На руки зазвичай приблизно на 15–30% менше — точну суму підкаже менеджер.")
-    stud = '<p class="m-note"><b>Студентам до 26 років</b> — на руки вся ставка, без податку.</p>' if v.get("stud") and v.get("country") == "Польща" else ""
+    stud = stud_html(v, True)
     return (crumbs([("Головна", "/"), (back[0], back[1]), (v["title"], "")])
             + '\n  <section class="vpage" id="hero">'
             '<article class="vbox">'
