@@ -377,6 +377,36 @@ section.vpage{padding-top:14px}
 .seo .facts div{background:var(--soft);border-radius:16px;padding:12px 14px}
 .seo .facts b{display:block;font:700 18px var(--font-display)}
 .seo .facts span{font-size:14px;color:var(--muted)}
+.road-more{margin-top:14px;color:var(--muted);font-weight:600}
+.road-more a{color:var(--ink)}
+.art .art-meta{display:flex;flex-wrap:wrap;gap:6px 14px;color:var(--muted);font-size:14px;font-weight:600;margin-top:10px}
+.art .lead{font-size:18px;margin-top:14px;color:var(--ink)}
+.art h2{font-size:clamp(20px,2.4vw,26px);margin:30px 0 10px}
+.art p,.art li{line-height:1.7;max-width:74ch}
+.art p{margin:10px 0}
+.art ul,.art ol{padding-left:22px;margin:8px 0;display:grid;gap:6px}
+.art a{color:var(--ink);text-decoration:underline}
+.art .callout{background:var(--grad);border-radius:20px;padding:16px 20px;margin-top:20px;line-height:1.6}
+.art .callout.warn{background:var(--warm-bg);color:var(--ink)}
+.art .tbl{overflow-x:auto;margin:12px 0}
+.art table{border-collapse:collapse;width:100%;min-width:480px;font-size:15px}
+.art th,.art td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.art th{font-weight:800;background:var(--soft)}
+.art ul.check{list-style:none;padding-left:0}
+.art ul.check li{position:relative;padding-left:30px}
+.art ul.check li::before{content:"";position:absolute;left:0;top:5px;width:18px;height:18px;border-radius:6px;border:2px solid var(--ok)}
+.art .src{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+.art .src a{color:var(--muted)}
+.alist{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:20px}
+.acard{display:grid;gap:8px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:22px;text-decoration:none;color:var(--ink)}
+.acard:hover{border-color:var(--ink)}
+.acard h2,.acard h3{font-size:19px;font-weight:700;margin:0}
+.acard p{color:var(--muted);font-size:15px}
+.acard span{font-size:13px;color:var(--muted);font-weight:700}
+.statti-head{background:var(--grad);border-radius:32px;padding:clamp(24px,4.5vw,52px);margin-top:8px}
+.statti-head h1{font-size:clamp(28px,4.5vw,48px)}
+.statti-head p{margin-top:12px;font-size:18px;max-width:60ch}
+@media (max-width:960px){.vpage{grid-template-columns:1fr}.vpage .side{position:static}}
 .seo-grid.has-f{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:start}
 .seo .seo-txt p{max-width:68ch}
 .seo .facts{grid-template-columns:1fr 1fr;margin-top:0;gap:10px}
@@ -568,6 +598,7 @@ section.vpage{padding-top:14px}
       <a href="#how">Як це працює</a>
       <a href="#friend">Приведи друга</a>
       <a href="#faq">Питання</a>
+      <a href="/statti/">Статті</a>
       <a href="#apply">Контакти</a>
     </nav>
     <div class="top-cta">
@@ -656,6 +687,17 @@ section.vpage{padding-top:14px}
         <a class="btn wide" href="#vacancies">Підібрати вакансію</a>
       </div>
     </div>
+  </section>
+
+  <section id="doroha" aria-labelledby="road-h">
+    <div class="sec-head"><div><h2 id="road-h">Дорога і перший день — допоможемо</h2><p>Найбільше хвилюються не через роботу, а через дорогу: куди їхати, де пересісти, хто зустріне. Тому цю частину беремо на себе.</p></div></div>
+    <div class="cards4 road">
+      <div class="card"><div class="ic"><svg class="i"><use href="#i-doc"/></svg></div><h3>Маршрутний лист</h3><p>Покроково: звідки й коли виїжджати, де пересісти, адреса житла й роботи, телефони координатора. Усе в одному повідомленні.</p></div>
+      <div class="card"><div class="ic"><svg class="i"><use href="#i-plane"/></svg></div><h3>Перевізник-партнер</h3><p>Підкажемо перевіреного перевізника, яким уже їздять наші кандидати, — без пошуків випадкових оголошень.</p></div>
+      <div class="card"><div class="ic"><svg class="i"><use href="#i-cal"/></svg></div><h3>Допомога з квитками</h3><p>Допоможемо обрати рейс під дату заїзду й купити квиток. Вартість дороги вказана заздалегідь — без сюрпризів.</p></div>
+      <div class="card"><div class="ic"><svg class="i"><use href="#i-users"/></svg></div><h3>Координатор на місці</h3><p>Після приїзду ви не самі: координатор допоможе із заселенням, документами й першим робочим днем.</p></div>
+    </div>
+    <p class="road-more">Що взяти з собою — у нашому <a href="/statti/shcho-vziaty-v-dorohu/">чеклісті для поїздки</a>.</p>
   </section>
 
   <section id="how" aria-labelledby="how-h">
@@ -808,13 +850,14 @@ section.vpage{padding-top:14px}
       <details><summary>Хто може виїхати під час воєнного стану?</summary><p>Жінки — без обмежень. Чоловіки 18–60 років — лише за наявності законних підстав для перетину кордону. Менеджер підкаже, які вакансії вам підходять.</p></details>
       <details><summary>З ким я підписую договір?</summary><p>З роботодавцем або його кадровою агенцією в країні працевлаштування. У вакансії вказано підприємство, де ви працюватимете, і тип договору.</p></details>
       <details><summary>Як швидко можна виїхати?</summary><p>Найближчі дати заїзду вказані у вакансіях. Після того як ви оберете вакансію, менеджер погодить із вами конкретну дату.</p></details>
+      <details><summary>Чи допомагаєте з дорогою?</summary><p>Так. Складаємо маршрутний лист, підказуємо перевізника-партнера й допомагаємо купити квиток, а на місці на зв'язку координатор. Квиток оплачуєте ви — вартість ми повідомимо заздалегідь.</p></details>
     </div>
   </section>
 </main>
 
 <footer>
   <!--seo:foot-->
-  <div class="flinks"><b>Робота за кордоном</b><div class="links" style="margin-top:6px"><a href="/">Усі вакансії</a><a href="/robota-v-polshchi/">Робота в Польщі · 85</a><a href="/robota-v-lytvi/">Робота в Литві · 10</a><a href="/robota-v-chekhii/">Робота в Чехії · 5</a><a href="/robota-na-skladi/">Робота на складі · 47</a><a href="/robota-na-vyrobnytstvi/">Робота на заводі · 77</a><a href="/robota-na-kharchovomu-vyrobnytstvi/">М’ясне й рибне виробництво · 18</a><a href="/vodii-navantazhuvacha/">Водій навантажувача · 8</a><a href="/robota-dlia-zhinok/">Для жінок · 71</a><a href="/robota-dlia-cholovikiv/">Для чоловіків · 86</a><a href="/robota-dlia-par/">Для пар · 55</a><a href="/robota-v-polshchi-dlia-studentiv/">Для студентів · 60</a></div></div>
+  <div class="flinks"><b>Робота за кордоном</b><div class="links" style="margin-top:6px"><a href="/">Усі вакансії</a><a href="/robota-v-polshchi/">Робота в Польщі · 85</a><a href="/robota-v-lytvi/">Робота в Литві · 10</a><a href="/robota-v-chekhii/">Робота в Чехії · 5</a><a href="/robota-na-skladi/">Робота на складі · 47</a><a href="/robota-na-vyrobnytstvi/">Робота на заводі · 77</a><a href="/robota-na-kharchovomu-vyrobnytstvi/">М’ясне й рибне виробництво · 18</a><a href="/vodii-navantazhuvacha/">Водій навантажувача · 8</a><a href="/robota-dlia-zhinok/">Для жінок · 71</a><a href="/robota-dlia-cholovikiv/">Для чоловіків · 86</a><a href="/robota-dlia-par/">Для пар · 55</a><a href="/robota-v-polshchi-dlia-studentiv/">Для студентів · 60</a></div><b style="display:block;margin-top:16px">Корисні статті</b><div class="links" style="margin-top:6px"><a href="/statti/">Усі статті</a><a href="/statti/dokumenty-dlia-roboty-v-polshchi/">Документи для роботи в Польщі у 2026 році</a><a href="/statti/dohovir-doruchennia-chy-trudovyi/">Договір доручення чи трудовий договір: у чому різниця</a><a href="/statti/yak-ne-potrapyty-do-shakhraiv/">Як не потрапити до шахраїв, шукаючи роботу за кордоном</a><a href="/statti/shcho-vziaty-v-dorohu/">Що взяти з собою на роботу за кордон: чекліст</a></div></div>
   <!--/seo:foot-->
   <div class="wrap">
     <span>© 2026 Вдало · Підбір роботи в Європі</span>

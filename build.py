@@ -20,6 +20,8 @@ import re
 import shutil
 from zoneinfo import ZoneInfo
 
+from articles import ARTICLES
+
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = "https://vdalo-robota.com.ua"
 PHONE_WA = "380736067700"
@@ -634,7 +636,9 @@ def text_section(h2, paras, s, live, current):
 
 
 def foot_links(live):
-    return ('\n  <div class="flinks"><b>Робота за кордоном</b>' + links_html(live).replace('class="links"', 'class="links" style="margin-top:6px"') + "</div>\n  ")
+    arts = '<div class="links" style="margin-top:6px"><a href="/statti/">Усі статті</a>' + "".join(f'<a href="/statti/{a["slug"]}/">{esc(a["h1"])}</a>' for a in ARTICLES) + "</div>"
+    return ('\n  <div class="flinks"><b>Робота за кордоном</b>' + links_html(live).replace('class="links"', 'class="links" style="margin-top:6px"')
+            + '<b style="display:block;margin-top:16px">Корисні статті</b>' + arts + "</div>\n  ")
 
 
 def h1_block(h1, lead):
@@ -771,6 +775,50 @@ def fetch_rates():
     return None
 
 
+def article_card(a, tag="h3"):
+    return (f'<a class="acard" href="/statti/{a["slug"]}/"><{tag}>{esc(a["h1"])}</{tag}>'
+            f'<p>{esc(a["lead"])}</p><span>Читати · {esc(a["read"])}</span></a>')
+
+
+def article_page(a):
+    from urllib.parse import quote
+    src = ""
+    if a.get("sources"):
+        src = ('<div class="src"><b>Джерела</b> (станом на ' + esc(a["updated"]) + "):<br>"
+               + "<br>".join(f'<a href="{esc(u)}" target="_blank" rel="noopener nofollow">{esc(t)}</a>' for t, u in a["sources"]) + "</div>")
+    msg = "Вітаю! Прочитав(ла) статтю «" + a["h1"] + "» на сайті. Хочу підібрати роботу."
+    others = [x for x in ARTICLES if x["slug"] != a["slug"]][:3]
+    return (crumbs([("Головна", "/"), ("Статті", "/statti/"), (a["h1"], "")])
+            + '\n  <section class="vpage" id="hero">'
+            '<article class="vbox art">'
+            f'<h1>{esc(a["h1"])}</h1>'
+            f'<div class="art-meta"><span>Оновлено {esc(a["updated"])}</span><span>Читати {esc(a["read"])}</span></div>'
+            f'<p class="lead">{esc(a["lead"])}</p>'
+            + a["body"] + src +
+            "</article>"
+            '<aside class="side">'
+            "<h2>Підберемо роботу безкоштовно</h2>"
+            '<p style="color:var(--muted)">Залиште заявку або напишіть нам — менеджер відповість і пояснить усе щодо документів і дороги.</p>'
+            '<button class="btn wide" type="button" data-apply="">Залишити заявку</button>'
+            '<div class="send-row">'
+            f'<a class="msgr" href="https://wa.me/{PHONE_WA}?text={quote(msg)}" data-ch="whatsapp"><span class="dot wa"></span>WhatsApp</a>'
+            f'<a class="msgr" href="{TG}" data-ch="telegram" data-copytext="{esc(msg)}"><span class="dot tg"></span>Telegram</a>'
+            f'<a class="msgr" href="{VIBER}" data-ch="viber" data-copytext="{esc(msg)}"><span class="dot vb"></span>Viber</a>'
+            "</div>"
+            '<a class="btn ghost wide" href="/#vacancies">Переглянути вакансії</a>'
+            + ("<h3 style=\"margin-top:10px\">Інші статті</h3>" + "".join(f'<a href="/statti/{x["slug"]}/" style="font-weight:700">{esc(x["h1"])}</a>' for x in others) if others else "")
+            + "</aside>"
+            "</section>\n  ")
+
+
+def article_ld(a, path):
+    d = "-".join(reversed(a["updated"].split(".")))
+    return {"@context": "https://schema.org", "@type": "Article", "headline": a["h1"], "description": a["desc"],
+            "inLanguage": "uk", "dateModified": d, "mainEntityOfPage": SITE + path,
+            "author": {"@type": "Organization", "name": "Вдало", "url": SITE + "/"},
+            "publisher": {"@type": "Organization", "name": "Вдало", "url": SITE + "/"}}
+
+
 def main():
     tpl = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
     vp = os.path.join(ROOT, "vacancies.json")
@@ -858,6 +906,35 @@ def main():
         t = region(t, "text", text_section("Шукаєте інші варіанти?", [], None, live, None))
         write(path, t)
         sitemap.append((path, st_["mod"], "daily", "0.7"))
+
+    # статті
+    hot = sort_list(items)[:12]
+    sdir = os.path.join(ROOT, "statti")
+    if os.path.isdir(sdir):
+        shutil.rmtree(sdir)
+    for a in ARTICLES:
+        path = f"/statti/{a['slug']}/"
+        cr = [("Головна", "/"), ("Статті", "/statti/"), (a["h1"], path)]
+        t = region(tpl, "head", head(a["title"], a["desc"], path, [article_ld(a, path), crumbs_ld(cr)], {"ids": [v["id"] for v in hot]}))
+        t = region(t, "hero", "\n  " + article_page(a))
+        t = region(t, "vach", "Вакансії, відкриті зараз")
+        t = region(t, "grid", grid_html(hot))
+        t = region(t, "text", text_section("Напрямки", [], None, live, None))
+        write(path, t)
+        sitemap.append((path, "-".join(reversed(a["updated"].split("."))), "monthly", "0.6"))
+    path = "/statti/"
+    cr = [("Головна", "/"), ("Статті", path)]
+    t = region(tpl, "head", head("Статті про роботу за кордоном для українців | Вдало",
+                                 "Корисні гайди: документи для роботи в Польщі, договір доручення чи трудовий, як не потрапити до шахраїв, що взяти в дорогу.",
+                                 path, [crumbs_ld(cr)], {"ids": [v["id"] for v in hot]}))
+    t = region(t, "hero", "\n  " + crumbs([("Головна", "/"), ("Статті", "")])
+               + '\n  <section id="hero"><div class="statti-head"><h1>Статті про роботу за кордоном</h1><p>Простими словами про документи, договори, дорогу й безпеку — щоб ви їхали підготовленими.</p></div>'
+               + '<div class="alist">' + "".join(article_card(a, "h2") for a in ARTICLES) + "</div></section>\n  ")
+    t = region(t, "vach", "Вакансії, відкриті зараз")
+    t = region(t, "grid", grid_html(hot))
+    t = region(t, "text", text_section("Напрямки", [], None, live, None))
+    write(path, t)
+    sitemap.append((path, TODAY.isoformat(), "weekly", "0.6"))
 
     # 404 — для закритих вакансій і старих посилань
     t = region(tpl, "head", head("Сторінку не знайдено | Вдало", "Можливо, вакансію вже закрито. Перегляньте актуальні вакансії.", "/404.html", (), None, robots="noindex"))
