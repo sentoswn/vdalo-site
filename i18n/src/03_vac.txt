@@ -1,0 +1,233 @@
+# Поля вакансій: назви посад, житло, харчування, графік, дати
+# ---- Назви посад
+Працівник складу ¦ Работник склада ¦ Warehouse worker ¦ Pracownik magazynu
+Помічник працівника виробництва ¦ Помощник работника производства ¦ Production assistant ¦ Pomocnik pracownika produkcji
+Молодший оператор виробництва ¦ Младший оператор производства ¦ Junior production operator ¦ Młodszy operator produkcji
+Складський працівник ¦ Складской работник ¦ Warehouse worker ¦ Pracownik magazynowy
+Пакувальник ¦ Упаковщик ¦ Packer ¦ Pakowacz
+Працівник продукції ¦ Работник производства ¦ Production worker ¦ Pracownik produkcji
+Комплектувальник одягу ¦ Комплектовщик одежды ¦ Clothing order picker ¦ Kompletujący odzież
+Працівник виробництва пластикових елементів ¦ Работник производства пластиковых элементов ¦ Plastic parts production worker ¦ Pracownik produkcji elementów z tworzyw
+Оператор складських процесів ¦ Оператор складских процессов ¦ Warehouse process operator ¦ Operator procesów magazynowych
+Монтажник енергоелектронних пристроїв ¦ Монтажник энергоэлектронных устройств ¦ Power electronics assembler ¦ Monter urządzeń energoelektronicznych
+Працівник виробництва ¦ Работник производства ¦ Production worker ¦ Pracownik produkcji
+Виробничий працівник ¦ Производственный работник ¦ Production worker ¦ Pracownik produkcyjny
+Помічник оператора прядильних верстатів ¦ Помощник оператора прядильных станков ¦ Spinning machine operator assistant ¦ Pomocnik operatora maszyn przędzalniczych
+Пакувальник бритв для гоління ¦ Упаковщик бритв ¦ Razor packer ¦ Pakowacz maszynek do golenia
+Оператор вилкового навантажувача ¦ Оператор вилочного погрузчика ¦ Forklift operator ¦ Operator wózka widłowego
+Пакувальник (без проживання) ¦ Упаковщик (без проживания) ¦ Packer (no housing) ¦ Pakowacz (bez zakwaterowania)
+Робітник на м’ясному виробництві ¦ Рабочий на мясном производстве ¦ Meat processing worker ¦ Pracownik w zakładzie mięsnym
+Працівник на виробництві пластикових деталей ¦ Работник на производстве пластиковых деталей ¦ Plastic parts production worker ¦ Pracownik produkcji części z tworzyw
+Пекар ¦ Пекарь ¦ Baker ¦ Piekarz
+Оператор виробництва ¦ Оператор производства ¦ Production operator ¦ Operator produkcji
+Монтер електронного обладнання ¦ Монтёр электронного оборудования ¦ Electronic equipment fitter ¦ Monter urządzeń elektronicznych
+Оператор автоматизованої виробничої лінії ¦ Оператор автоматизированной производственной линии ¦ Automated production line operator ¦ Operator zautomatyzowanej linii produkcyjnej
+Водій навантажувача ¦ Водитель погрузчика ¦ Forklift driver ¦ Operator wózka widłowego
+Працівник обслуговування складу ¦ Работник обслуживания склада ¦ Warehouse service worker ¦ Pracownik obsługi magazynu
+Виробництво картонної упаковки, дрібні складські роботи ¦ Производство картонной упаковки, мелкие складские работы ¦ Cardboard packaging production, light warehouse work ¦ Produkcja opakowań kartonowych, lekkie prace magazynowe
+Працівник м’ясного виробництва ¦ Работник мясного производства ¦ Meat processing worker ¦ Pracownik zakładu mięsnego
+Працівник складу навушників ¦ Работник склада наушников ¦ Headphone warehouse worker ¦ Pracownik magazynu słuchawek
+Лікар первинної медичної допомоги, телемедицина ¦ Врач первичной медицинской помощи, телемедицина ¦ Primary care doctor, telemedicine ¦ Lekarz podstawowej opieki zdrowotnej, telemedycyna
+Лікар загальної практики, клініка лікування болю ¦ Врач общей практики, клиника лечения боли ¦ General practitioner, pain clinic ¦ Lekarz rodzinny, klinika leczenia bólu
+Працівник на виробництві ¦ Работник на производстве ¦ Production worker ¦ Pracownik produkcji
+Працівник складу шкіряних виробів ¦ Работник склада кожаных изделий ¦ Leather goods warehouse worker ¦ Pracownik magazynu wyrobów skórzanych
+Виробничий робітник у рибопереробці ¦ Рабочий на рыбопереработке ¦ Fish processing worker ¦ Pracownik przetwórstwa ryb
+Робота в рибопереробці ¦ Работа на рыбопереработке ¦ Fish processing job ¦ Praca w przetwórstwie ryb
+Оператор ламінувальної та шліфувальної лінії ¦ Оператор ламинирующей и шлифовальной линии ¦ Laminating and grinding line operator ¦ Operator linii laminowania i szlifowania
+Електромонтер ¦ Электромонтёр ¦ Electrician ¦ Elektromonter
+Оператор ЧПУ ¦ Оператор ЧПУ ¦ CNC operator ¦ Operator CNC
+Гідротехнік ¦ Гидротехник ¦ Hydraulic technician ¦ Hydrotechnik
+Помічник електромонтера ¦ Помощник электромонтёра ¦ Electrician's assistant ¦ Pomocnik elektromontera
+Робітник ¦ Рабочий ¦ Worker ¦ Pracownik
+Працівник виробництва та складу ¦ Работник производства и склада ¦ Production and warehouse worker ¦ Pracownik produkcji i magazynu
+Спеціалізований оператор-дистриб’ютор ¦ Специализированный оператор-дистрибьютор ¦ Specialised distribution operator ¦ Wyspecjalizowany operator dystrybucji
+Працівник складу з вилковим навантажувачем ¦ Работник склада с вилочным погрузчиком ¦ Warehouse worker with forklift ¦ Pracownik magazynu z wózkiem widłowym
+Оператор виробництва акумуляторів ¦ Оператор производства аккумуляторов ¦ Battery production operator ¦ Operator produkcji akumulatorów
+Шпаклювальник-шліфувальник ¦ Шпаклёвщик-шлифовщик ¦ Filler and sander ¦ Szpachlarz-szlifierz
+Працівник виробництва порцеляни ¦ Работник производства фарфора ¦ Porcelain production worker ¦ Pracownik produkcji porcelany
+Оператор ливарної машини ¦ Оператор литейной машины ¦ Casting machine operator ¦ Operator maszyny odlewniczej
+Працівник виробництва (збірка, мийка, формування) ¦ Работник производства (сборка, мойка, формовка) ¦ Production worker (assembly, washing, moulding) ¦ Pracownik produkcji (montaż, mycie, formowanie)
+Працівник виробництва (контроль якості) ¦ Работник производства (контроль качества) ¦ Production worker (quality control) ¦ Pracownik produkcji (kontrola jakości)
+Обробка та пакування лосося ¦ Обработка и упаковка лосося ¦ Salmon processing and packing ¦ Obróbka i pakowanie łososia
+Філетування риби ¦ Филетирование рыбы ¦ Fish filleting ¦ Filetowanie ryb
+Виробництво корпусів для вітрових турбін ¦ Производство корпусов для ветровых турбин ¦ Wind turbine housing production ¦ Produkcja obudów turbin wiatrowych
+Зважування, пакування та фасування оселедця ¦ Взвешивание, упаковка и фасовка сельди ¦ Herring weighing, packing and portioning ¦ Ważenie, pakowanie i porcjowanie śledzia
+Працівник на виробництві упаковки та етикеток ¦ Работник на производстве упаковки и этикеток ¦ Packaging and label production worker ¦ Pracownik produkcji opakowań i etykiet
+Зважування та маркування м’ясної продукції ¦ Взвешивание и маркировка мясной продукции ¦ Weighing and labelling meat products ¦ Ważenie i znakowanie wyrobów mięsnych
+Пакування сирних паличок ¦ Упаковка сырных палочек ¦ Cheese stick packing ¦ Pakowanie paluszków serowych
+Покоївка ¦ Горничная ¦ Housekeeper ¦ Pokojówka
+Працівник на виробництві автомобільних джгутів ¦ Работник на производстве автомобильных жгутов ¦ Automotive wiring harness worker ¦ Pracownik produkcji wiązek samochodowych
+Оператор логістичного складу ¦ Оператор логистического склада ¦ Logistics warehouse operator ¦ Operator magazynu logistycznego
+Складський працівник логістичного складу ¦ Складской работник логистического склада ¦ Logistics warehouse worker ¦ Pracownik magazynu logistycznego
+Складський працівник / водій навантажувача ¦ Складской работник / водитель погрузчика ¦ Warehouse worker / forklift driver ¦ Pracownik magazynu / operator wózka widłowego
+Складський оператор із правами на ретрак ¦ Складской оператор с правами на ричтрак ¦ Warehouse operator with reach truck licence ¦ Operator magazynu z uprawnieniami na reach truck
+Комплектувальник ¦ Комплектовщик ¦ Order picker ¦ Kompletujący
+Працівник ¦ Работник ¦ Worker ¦ Pracownik
+# ---- Для кого
+Жінки та чоловіки, ¦ Женщины и мужчины, ¦ Women and men, ¦ Kobiety i mężczyźni,
+Жінки, ¦ Женщины, ¦ Women, ¦ Kobiety,
+Чоловіки, ¦ Мужчины, ¦ Men, ¦ Mężczyźni,
+# ---- Зарплата
+брутто/година ¦ брутто/час ¦ gross/hour ¦ brutto/godz.
+брутто/год ¦ брутто/ч ¦ gross/h ¦ brutto/godz.
+брутто/місяць ¦ брутто/месяц ¦ gross/month ¦ brutto/mies.
++ премія ¦ + премия ¦ + bonus ¦ + premia
+з навантажувачем ¦ с погрузчиком ¦ with forklift ¦ z wózkiem widłowym
+до 39 PLN з навантажувачем ¦ до 39 PLN с погрузчиком ¦ up to 39 PLN with forklift ¦ do 39 PLN z wózkiem widłowym
+# ---- Дати
+Приїзд ¦ Приезд ¦ Arrival ¦ Przyjazd
+Виїзд зі Львова ¦ Выезд из Львова ¦ Departure from Lviv ¦ Wyjazd ze Lwowa
+Виїзд з Києва ¦ Выезд из Киева ¦ Departure from Kyiv ¦ Wyjazd z Kijowa
+квиток ¦ билет ¦ ticket ¦ bilet
+безкоштовно ¦ бесплатно ¦ free ¦ bezpłatnie
+# ---- Житло (повні значення)
+Будинки або квартири, кімнати на 2–4 людини, постіль надається ¦ Дома или квартиры, комнаты на 2–4 человека, постельное бельё предоставляется ¦ Houses or flats, rooms for 2–4 people, bedding provided ¦ Domy lub mieszkania, pokoje 2–4-osobowe, pościel zapewniona
+Кімнати для 4 осіб, ковдри й подушки є в кожному помешканні ¦ Комнаты на 4 человека, одеяла и подушки есть в каждом жилье ¦ Rooms for 4, blankets and pillows in every flat ¦ Pokoje 4-osobowe, kołdry i poduszki w każdym mieszkaniu
+Кімнати для 4 осіб, ковдри, подушки, постіль є в кожному помешканні ¦ Комнаты на 4 человека, одеяла, подушки, постельное бельё есть в каждом жилье ¦ Rooms for 4, blankets, pillows and bedding in every flat ¦ Pokoje 4-osobowe, kołdry, poduszki i pościel w każdym mieszkaniu
+Хостели, будинки та квартири, кімнати на 2–5 осіб, обладнані кухні, пральні ¦ Хостелы, дома и квартиры, комнаты на 2–5 человек, оборудованные кухни, прачечные ¦ Hostels, houses and flats, rooms for 2–5, equipped kitchens, laundry ¦ Hostele, domy i mieszkania, pokoje 2–5-osobowe, wyposażone kuchnie, pralnie
+Хостели, будинки, квартири, 2–4 особи в кімнаті. Для пар — окрема кімната ¦ Хостелы, дома, квартиры, 2–4 человека в комнате. Для пар — отдельная комната ¦ Hostels, houses, flats, 2–4 per room. Separate rooms for couples ¦ Hostele, domy, mieszkania, 2–4 osoby w pokoju. Dla par — osobny pokój
+Кімнати по 2–5 осіб у хостелах, будинках, квартирах; постіль, кухні ¦ Комнаты на 2–5 человек в хостелах, домах, квартирах; постельное бельё, кухни ¦ Rooms for 2–5 in hostels, houses and flats; bedding, kitchens ¦ Pokoje 2–5-osobowe w hostelach, domach, mieszkaniach; pościel, kuchnie
+Квартири та будинки в Опочно і Томашові Мазовецькому, кімнати по 3–4 людини ¦ Квартиры и дома в Опочно и Томашуве-Мазовецком, комнаты на 3–4 человека ¦ Flats and houses in Opoczno and Tomaszów Mazowiecki, rooms for 3–4 ¦ Mieszkania i domy w Opocznie i Tomaszowie Mazowieckim, pokoje 3–4-osobowe
+Кімнати на 2–5 осіб, хостели та квартири, кухні, пральні, Wi-Fi, постіль ¦ Комнаты на 2–5 человек, хостелы и квартиры, кухни, прачечные, Wi-Fi, постельное бельё ¦ Rooms for 2–5, hostels and flats, kitchens, laundry, Wi-Fi, bedding ¦ Pokoje 2–5-osobowe, hostele i mieszkania, kuchnie, pralnie, Wi-Fi, pościel
+Кімнати для 3–4 осіб, ковдри й подушки, обладнані кухні ¦ Комнаты на 3–4 человека, одеяла и подушки, оборудованные кухни ¦ Rooms for 3–4, blankets and pillows, equipped kitchens ¦ Pokoje 3–4-osobowe, kołdry i poduszki, wyposażone kuchnie
+Будинки або квартири, кімнати по 2–4 особи, постіль, кухні, пральні машини ¦ Дома или квартиры, комнаты на 2–4 человека, постельное бельё, кухни, стиральные машины ¦ Houses or flats, rooms for 2–4, bedding, kitchens, washing machines ¦ Domy lub mieszkania, pokoje 2–4-osobowe, pościel, kuchnie, pralki
+Приватні квартири, 2–4 особи в кімнаті, кухня, пральні машини, Wi-Fi ¦ Частные квартиры, 2–4 человека в комнате, кухня, стиральные машины, Wi-Fi ¦ Private flats, 2–4 per room, kitchen, washing machines, Wi-Fi ¦ Prywatne mieszkania, 2–4 osoby w pokoju, kuchnia, pralki, Wi-Fi
+Хостели або квартири в Радзиміні, по 4 людини в кімнаті ¦ Хостелы или квартиры в Радзымине, по 4 человека в комнате ¦ Hostels or flats in Radzymin, 4 per room ¦ Hostele lub mieszkania w Radzyminie, po 4 osoby w pokoju
+Квартири/хостел, 2–3 особи в кімнаті ¦ Квартиры/хостел, 2–3 человека в комнате ¦ Flats/hostel, 2–3 per room ¦ Mieszkania/hostel, 2–3 osoby w pokoju
+Кімнати по 3–4 особи, постіль, обладнана кухня, пральна машина ¦ Комнаты на 3–4 человека, постельное бельё, оборудованная кухня, стиральная машина ¦ Rooms for 3–4, bedding, equipped kitchen, washing machine ¦ Pokoje 3–4-osobowe, pościel, wyposażona kuchnia, pralka
+2–4-місні кімнати, кухні, безкоштовне прання, Wi-Fi ¦ 2–4-местные комнаты, кухни, бесплатная стирка, Wi-Fi ¦ 2–4-person rooms, kitchens, free laundry, Wi-Fi ¦ Pokoje 2–4-osobowe, kuchnie, darmowe pranie, Wi-Fi
+Будинки або квартири, кімнати на 3–4 особи, постіль, кухні ¦ Дома или квартиры, комнаты на 3–4 человека, постельное бельё, кухни ¦ Houses or flats, rooms for 3–4, bedding, kitchens ¦ Domy lub mieszkania, pokoje 3–4-osobowe, pościel, kuchnie
+Хостели, квартири та будинки, кімнати на 3–6 осіб, постіль ¦ Хостелы, квартиры и дома, комнаты на 3–6 человек, постельное бельё ¦ Hostels, flats and houses, rooms for 3–6, bedding ¦ Hostele, mieszkania i domy, pokoje 3–6-osobowe, pościel
+Квартири або хостели, кімнати на 2–5 осіб, постіль, кухні ¦ Квартиры или хостелы, комнаты на 2–5 человек, постельное бельё, кухни ¦ Flats or hostels, rooms for 2–5, bedding, kitchens ¦ Mieszkania lub hostele, pokoje 2–5-osobowe, pościel, kuchnie
+Квартири або хостели, кімнати на 2–4 особи, постіль ¦ Квартиры или хостелы, комнаты на 2–4 человека, постельное бельё ¦ Flats or hostels, rooms for 2–4, bedding ¦ Mieszkania lub hostele, pokoje 2–4-osobowe, pościel
+Кімнати для 3–4 осіб, ковдри й подушки є, душові на кожному поверсі ¦ Комнаты на 3–4 человека, одеяла и подушки есть, душевые на каждом этаже ¦ Rooms for 3–4, blankets and pillows provided, showers on every floor ¦ Pokoje 3–4-osobowe, kołdry i poduszki są, prysznice na każdym piętrze
+У Лодзі ¦ В Лодзи ¦ In Łódź ¦ W Łodzi
+Кімнати для 2–4 осіб ¦ Комнаты на 2–4 человека ¦ Rooms for 2–4 ¦ Pokoje 2–4-osobowe
+Так ¦ Да ¦ Yes ¦ Tak
+Ні ¦ Нет ¦ No ¦ Nie
+Різні варіанти, кімнати на 2–4 особи ¦ Разные варианты, комнаты на 2–4 человека ¦ Various options, rooms for 2–4 ¦ Różne opcje, pokoje 2–4-osobowe
+Гуртожитки або будинки, кімнати на 2–5 осіб, кухня, Wi-Fi ¦ Общежития или дома, комнаты на 2–5 человек, кухня, Wi-Fi ¦ Dorms or houses, rooms for 2–5, kitchen, Wi-Fi ¦ Hotele pracownicze lub domy, pokoje 2–5-osobowe, kuchnia, Wi-Fi
+Кімнати на 4 особи, постіль, безкоштовні пральні машини та Wi-Fi ¦ Комнаты на 4 человека, постельное бельё, бесплатные стиральные машины и Wi-Fi ¦ Rooms for 4, bedding, free washing machines and Wi-Fi ¦ Pokoje 4-osobowe, pościel, darmowe pralki i Wi-Fi
+Кімнати на 2–4 особи, кухня, постіль, пральна машина, Wi-Fi ¦ Комнаты на 2–4 человека, кухня, постельное бельё, стиральная машина, Wi-Fi ¦ Rooms for 2–4, kitchen, bedding, washing machine, Wi-Fi ¦ Pokoje 2–4-osobowe, kuchnia, pościel, pralka, Wi-Fi
+Хостел, кімнати на 2–3 особи, повністю обладнані ¦ Хостел, комнаты на 2–3 человека, полностью оборудованные ¦ Hostel, rooms for 2–3, fully equipped ¦ Hostel, pokoje 2–3-osobowe, w pełni wyposażone
+Безкоштовне житло ¦ Бесплатное жильё ¦ Free housing ¦ Darmowe zakwaterowanie
+Апартаменти або будинки у Слупську, кімнати на 2–4 особи, окремі кімнати для пар ¦ Апартаменты или дома в Слупске, комнаты на 2–4 человека, отдельные комнаты для пар ¦ Apartments or houses in Słupsk, rooms for 2–4, separate rooms for couples ¦ Apartamenty lub domy w Słupsku, pokoje 2–4-osobowe, osobne pokoje dla par
+Кімнати на 4–5 осіб, ковдри, подушки, кухні ¦ Комнаты на 4–5 человек, одеяла, подушки, кухни ¦ Rooms for 4–5, blankets, pillows, kitchens ¦ Pokoje 4–5-osobowe, kołdry, poduszki, kuchnie
+Хостели в Гданську, 3–4 особи в кімнаті, кухня, пральна машина, інтернет ¦ Хостелы в Гданьске, 3–4 человека в комнате, кухня, стиральная машина, интернет ¦ Hostels in Gdańsk, 3–4 per room, kitchen, washing machine, internet ¦ Hostele w Gdańsku, 3–4 osoby w pokoju, kuchnia, pralka, internet
+570 PLN, утримується із зарплати ¦ 570 PLN, удерживается из зарплаты ¦ 570 PLN, deducted from pay ¦ 570 PLN, potrącane z wynagrodzenia
+утримується із зарплати ¦ удерживается из зарплаты ¦ deducted from pay ¦ potrącane z wynagrodzenia
+вираховується із зарплати ¦ вычитается из зарплаты ¦ deducted from pay ¦ potrącane z wynagrodzenia
+Будинки або квартири ¦ Дома или квартиры ¦ Houses or flats ¦ Domy lub mieszkania
+Недалеко від роботи; +2 зл нетто/год при власному житлі ¦ Недалеко от работы; +2 зл нетто/ч при собственном жилье ¦ Close to work; +2 PLN net/h if you have your own housing ¦ Blisko pracy; +2 zł netto/godz. przy własnym mieszkaniu
+Платно ¦ Платно ¦ Paid ¦ Płatne
+4-місні кімнати, ковдри, подушки, обладнані кухні ¦ 4-местные комнаты, одеяла, подушки, оборудованные кухни ¦ 4-person rooms, blankets, pillows, equipped kitchens ¦ Pokoje 4-osobowe, kołdry, poduszki, wyposażone kuchnie
+Платне, поруч із роботою ¦ Платное, рядом с работой ¦ Paid, next to work ¦ Płatne, blisko pracy
+2–3-місні кімнати до 2 км від роботи, 650 зл. ¦ 2–3-местные комнаты до 2 км от работы, 650 зл. ¦ 2–3-person rooms within 2 km of work, 650 PLN ¦ Pokoje 2–3-osobowe do 2 km od pracy, 650 zł
+30 хвилин пішки від роботи, по 4 особи в кімнаті ¦ 30 минут пешком от работы, по 4 человека в комнате ¦ 30 minutes' walk from work, 4 per room ¦ 30 minut pieszo od pracy, po 4 osoby w pokoju
+Кімнати по 4–5 осіб, ковдри, подушки, кухні ¦ Комнаты на 4–5 человек, одеяла, подушки, кухни ¦ Rooms for 4–5, blankets, pillows, kitchens ¦ Pokoje 4–5-osobowe, kołdry, poduszki, kuchnie
+Будинки або квартири, кімнати на 2–4 особи, кухня, Wi-Fi ¦ Дома или квартиры, комнаты на 2–4 человека, кухня, Wi-Fi ¦ Houses or flats, rooms for 2–4, kitchen, Wi-Fi ¦ Domy lub mieszkania, pokoje 2–4-osobowe, kuchnia, Wi-Fi
+Хостели в Гданську ¦ Хостелы в Гданьске ¦ Hostels in Gdańsk ¦ Hostele w Gdańsku
+Кімнати 2–4 особи, Wi-Fi, безкоштовне прання ¦ Комнаты на 2–4 человека, Wi-Fi, бесплатная стирка ¦ Rooms for 2–4, Wi-Fi, free laundry ¦ Pokoje 2–4-osobowe, Wi-Fi, darmowe pranie
+Кімнати по 3–4 особи, пральна машина, сушарка, холодильник ¦ Комнаты на 3–4 человека, стиральная машина, сушилка, холодильник ¦ Rooms for 3–4, washing machine, dryer, fridge ¦ Pokoje 3–4-osobowe, pralka, suszarka, lodówka
+Безкоштовне, кімнати на 2–3 особи ¦ Бесплатное, комнаты на 2–3 человека ¦ Free, rooms for 2–3 ¦ Darmowe, pokoje 2–3-osobowe
+Безкоштовне, є все необхідне ¦ Бесплатное, есть всё необходимое ¦ Free, fully equipped ¦ Darmowe, jest wszystko, co potrzebne
+75 EUR на місяць ¦ 75 EUR в месяц ¦ 75 EUR a month ¦ 75 EUR miesięcznie
+75 EUR з людини, кімнати на 3 особи ¦ 75 EUR с человека, комнаты на 3 человека ¦ 75 EUR per person, rooms for 3 ¦ 75 EUR od osoby, pokoje 3-osobowe
+Безкоштовне, 2–3 особи в кімнаті ¦ Бесплатное, 2–3 человека в комнате ¦ Free, 2–3 per room ¦ Darmowe, 2–3 osoby w pokoju
+Безкоштовне, 300 м від роботи або в готелі ¦ Бесплатное, 300 м от работы или в отеле ¦ Free, 300 m from work or in a hotel ¦ Darmowe, 300 m od pracy lub w hotelu
+Кімнати 3–4-місні, є все необхідне ¦ Комнаты 3–4-местные, есть всё необходимое ¦ Rooms for 3–4, fully equipped ¦ Pokoje 3–4-osobowe, jest wszystko, co potrzebne
+Брно та околиці, кімнати на 2–3 особи, часткова оплата ¦ Брно и окрестности, комнаты на 2–3 человека, частичная оплата ¦ Brno and surroundings, rooms for 2–3, partly paid ¦ Brno i okolice, pokoje 2–3-osobowe, częściowo płatne
+Безкоштовне, 2–3 особи в кімнаті, для пар — окремі кімнати ¦ Бесплатное, 2–3 человека в комнате, для пар — отдельные комнаты ¦ Free, 2–3 per room, separate rooms for couples ¦ Darmowe, 2–3 osoby w pokoju, dla par — osobne pokoje
+Двомісні кімнати в будинку, спільна кухня ¦ Двухместные комнаты в доме, общая кухня ¦ Double rooms in a house, shared kitchen ¦ Pokoje dwuosobowe w domu, wspólna kuchnia
+Не надається; оренда квартири ~300–400 €/міс. ¦ Не предоставляется; аренда квартиры ~300–400 €/мес. ¦ Not provided; renting a flat ~€300–400/month ¦ Nie zapewnione; wynajem mieszkania ~300–400 €/mies.
+Не надається; допомога з орендою ~300–400 €/міс. ¦ Не предоставляется; помощь с арендой ~300–400 €/мес. ¦ Not provided; help with renting ~€300–400/month ¦ Nie zapewnione; pomoc w wynajmie ~300–400 €/mies.
+# ---- Харчування
+Субсидія на обід, компанія надає обід ¦ Субсидия на обед, компания предоставляет обед ¦ Lunch subsidy, the company provides lunch ¦ Dopłata do obiadu, firma zapewnia obiad
+Безкоштовні вода, чай, кава й борщ у їдальні ¦ Бесплатные вода, чай, кофе и борщ в столовой ¦ Free water, tea, coffee and borscht in the canteen ¦ Darmowa woda, herbata, kawa i barszcz w stołówce
+За власний рахунок ¦ За свой счёт ¦ At your own expense ¦ Na własny koszt
+Їдальня з мікрохвильовками на підприємстві ¦ Столовая с микроволновками на предприятии ¦ On-site canteen with microwaves ¦ Stołówka z mikrofalówkami w zakładzie
+За власний рахунок, на кухні є автомати ¦ За свой счёт, на кухне есть автоматы ¦ At your own expense, vending machines in the kitchen ¦ Na własny koszt, w kuchni są automaty
+На зміні видають суп, 3,50 PLN за день ¦ На смене выдают суп, 3,50 PLN в день ¦ Soup served on shift, 3.50 PLN a day ¦ Na zmianie wydawana jest zupa, 3,50 PLN dziennie
+Треба мати власне ¦ Нужно иметь своё ¦ Bring your own ¦ Trzeba mieć własne
+Самостійно ¦ Самостоятельно ¦ On your own ¦ We własnym zakresie
+Їдальня з буфетом, мікрохвильовки, автомати ¦ Столовая с буфетом, микроволновки, автоматы ¦ Canteen with buffet, microwaves, vending machines ¦ Stołówka z bufetem, mikrofalówki, automaty
+Безкоштовні кава та чай ¦ Бесплатные кофе и чай ¦ Free coffee and tea ¦ Darmowa kawa i herbata
+Обід у їдальні за 1 PLN, безкоштовна вода ¦ Обед в столовой за 1 PLN, бесплатная вода ¦ Canteen lunch for 1 PLN, free water ¦ Obiad w stołówce za 1 PLN, darmowa woda
+Безкоштовний обід ¦ Бесплатный обед ¦ Free lunch ¦ Darmowy obiad
+Безкоштовний гарячий обід + напої ¦ Бесплатный горячий обед + напитки ¦ Free hot lunch + drinks ¦ Darmowy ciepły obiad + napoje
+Автомати з напоями та фастфудом ¦ Автоматы с напитками и фастфудом ¦ Drink and snack vending machines ¦ Automaty z napojami i przekąskami
+Їдальня, безкоштовні кава та чай ¦ Столовая, бесплатные кофе и чай ¦ Canteen, free coffee and tea ¦ Stołówka, darmowa kawa i herbata
+Безкоштовний суп, повний обід — 8 PLN ¦ Бесплатный суп, полный обед — 8 PLN ¦ Free soup, full lunch 8 PLN ¦ Darmowa zupa, pełny obiad — 8 PLN
+Безкоштовний суп ¦ Бесплатный суп ¦ Free soup ¦ Darmowa zupa
+Їдальня з мікрохвильовими печами ¦ Столовая с микроволновыми печами ¦ Canteen with microwaves ¦ Stołówka z kuchenkami mikrofalowymi
+Щодня безкоштовна гаряча їжа: суп, бутерброд, чай або кава ¦ Ежедневно бесплатная горячая еда: суп, бутерброд, чай или кофе ¦ Free hot food daily: soup, sandwich, tea or coffee ¦ Codziennie darmowy ciepły posiłek: zupa, kanapka, herbata lub kawa
+Обід у їдальні компанії раз на день ¦ Обед в столовой компании раз в день ¦ Lunch in the company canteen once a day ¦ Obiad w stołówce firmy raz dziennie
+За свій рахунок ¦ За свой счёт ¦ At your own expense ¦ Na własny koszt
+За рахунок працівника ¦ За счёт работника ¦ Paid by the worker ¦ Na koszt pracownika
+Безкоштовні пончики в їдальні ¦ Бесплатные пончики в столовой ¦ Free doughnuts in the canteen ¦ Darmowe pączki w stołówce
+Власне ¦ Своё ¦ Own ¦ Własne
+19,90 PLN на день на харчування ¦ 19,90 PLN в день на питание ¦ 19.90 PLN a day for meals ¦ 19,90 PLN dziennie na wyżywienie
+Безкоштовне (перша та друга страви) ¦ Бесплатное (первое и второе) ¦ Free (soup and main course) ¦ Darmowe (pierwsze i drugie danie)
++10 зл на харчування за кожен робочий день ¦ +10 зл на питание за каждый рабочий день ¦ +10 PLN for meals per working day ¦ +10 zł na wyżywienie za każdy dzień pracy
+Гарячі страви ¦ Горячие блюда ¦ Hot meals ¦ Ciepłe posiłki
+Безкоштовно: перша + друга страва ¦ Бесплатно: первое + второе ¦ Free: soup + main course ¦ Bezpłatnie: pierwsze + drugie danie
+Безкоштовний обід (перша і друга страва) ¦ Бесплатный обед (первое и второе) ¦ Free lunch (soup and main course) ¦ Darmowy obiad (pierwsze i drugie danie)
+Власне, є їдальня ¦ Своё, есть столовая ¦ Own, there's a canteen ¦ Własne, jest stołówka
+Є їдальня ¦ Есть столовая ¦ There's a canteen ¦ Jest stołówka
+Безкоштовне при відпрацюванні 8 годин ¦ Бесплатное при отработке 8 часов ¦ Free after an 8-hour shift ¦ Darmowe po przepracowaniu 8 godzin
+Кава, чай, фрукти від компанії ¦ Кофе, чай, фрукты от компании ¦ Coffee, tea and fruit from the company ¦ Kawa, herbata, owoce od firmy
+Їдальня ¦ Столовая ¦ Canteen ¦ Stołówka
+Велика їдальня, мікрохвильовки, холодильники, автомати з обідами ¦ Большая столовая, микроволновки, холодильники, автоматы с обедами ¦ Large canteen, microwaves, fridges, meal vending machines ¦ Duża stołówka, mikrofalówki, lodówki, automaty z obiadami
+Безкоштовне під час зміни ¦ Бесплатное во время смены ¦ Free during the shift ¦ Darmowe w trakcie zmiany
+За власний рахунок, безкоштовні кава та закуски ¦ За свой счёт, бесплатные кофе и закуски ¦ At your own expense, free coffee and snacks ¦ Na własny koszt, darmowa kawa i przekąski
+Обід і вечеря на зміні — 1.6–2 € ¦ Обед и ужин на смене — 1.6–2 € ¦ Lunch and dinner on shift — €1.6–2 ¦ Obiad i kolacja na zmianie — 1,6–2 €
+Талони на харчування — 80 CZK за день ¦ Талоны на питание — 80 CZK в день ¦ Meal vouchers — 80 CZK a day ¦ Bony żywieniowe — 80 CZK dziennie
+Їдальня, обід — 105 CZK ¦ Столовая, обед — 105 CZK ¦ Canteen, lunch 105 CZK ¦ Stołówka, obiad — 105 CZK
+Харчові талони — 123 CZK на день ¦ Талоны на питание — 123 CZK в день ¦ Meal vouchers — 123 CZK a day ¦ Bony żywieniowe — 123 CZK dziennie
+Ваучери на обід — 90 Kč за зміну ¦ Ваучеры на обед — 90 Kč за смену ¦ Lunch vouchers — 90 Kč per shift ¦ Bony obiadowe — 90 Kč za zmianę
+Доплата 6,98 € за зміну ¦ Доплата 6,98 € за смену ¦ €6.98 allowance per shift ¦ Dopłata 6,98 € za zmianę
+# ---- Доїзд, графік, вимоги, бонуси
+Від житла агенції — 15 хв пішки ¦ От жилья агентства — 15 мин пешком ¦ 15 min walk from agency housing ¦ 15 min pieszo od mieszkania agencji
+Дотація на транспорт 300 PLN на місяць ¦ Дотация на транспорт 300 PLN в месяц ¦ Transport allowance 300 PLN a month ¦ Dopłata do transportu 300 PLN miesięcznie
+Транспорт від фірми ¦ Транспорт от фирмы ¦ Company transport ¦ Transport firmowy
+Автобус з будь-якої частини міста ¦ Автобус из любой части города ¦ Bus from any part of town ¦ Autobus z każdej części miasta
+Безкоштовний транспорт від роботодавця ¦ Бесплатный транспорт от работодателя ¦ Free transport from the employer ¦ Darmowy transport od pracodawcy
+Завод у межах міста, проїзд громадським транспортом — за власний рахунок ¦ Завод в черте города, проезд общественным транспортом — за свой счёт ¦ Factory within the city; public transport at your own expense ¦ Zakład w granicach miasta, dojazd komunikacją miejską na własny koszt
+Зазвичай денні зміни: ¦ Обычно дневные смены: ¦ Usually day shifts: ¦ Zwykle zmiany dzienne:
+Пн–Сб, 8–10 годин на день, 2 зміни ¦ Пн–Сб, 8–10 часов в день, 2 смены ¦ Mon–Sat, 8–10 hours a day, 2 shifts ¦ Pon.–sob., 8–10 godzin dziennie, 2 zmiany
+Готовність до фізичної праці, змінної роботи та роботи в холоді ¦ Готовность к физическому труду, сменной работе и работе в холоде ¦ Ready for physical work, shifts and working in the cold ¦ Gotowość do pracy fizycznej, zmianowej i w chłodzie
+Робота в команді, ручні навички, фізична підготовка, знання польської мови ¦ Работа в команде, ручные навыки, физическая подготовка, знание польского языка ¦ Teamwork, manual skills, physical fitness, Polish language ¦ Praca w zespole, zdolności manualne, sprawność fizyczna, znajomość języka polskiego
+Досвід роботи з комп’ютером і сканером, фізична витривалість, точність ¦ Опыт работы с компьютером и сканером, физическая выносливость, точность ¦ Computer and scanner experience, stamina, accuracy ¦ Doświadczenie z komputerem i skanerem, wytrzymałość, dokładność
+Фізично здоровий, готовність до позмінної роботи ¦ Физически здоров, готовность к сменной работе ¦ Physically fit, ready for shift work ¦ Sprawność fizyczna, gotowość do pracy zmianowej
+Ручна спритність, хороший зір, відповідальність ¦ Ловкость рук, хорошее зрение, ответственность ¦ Manual dexterity, good eyesight, responsibility ¦ Zręczność manualna, dobry wzrok, odpowiedzialność
+Посвідчення UDT на навантажувач, польська на рівні розуміння інструкцій, робота зі сканером ¦ Удостоверение UDT на погрузчик, польский на уровне понимания инструкций, работа со сканером ¦ UDT forklift licence, Polish enough to follow instructions, scanner use ¦ Uprawnienia UDT na wózek, polski na poziomie rozumienia instrukcji, praca ze skanerem
+Фізично здорові, з мануальними здібностями, готові до змінної роботи ¦ Физически здоровые, с мануальными навыками, готовые к сменной работе ¦ Physically fit, good with hands, ready for shifts ¦ Sprawni fizycznie, ze zdolnościami manualnymi, gotowi do pracy zmianowej
+Можливі премії 200–300 PLN нетто залежно від ефективності ¦ Возможны премии 200–300 PLN нетто в зависимости от эффективности ¦ Possible bonuses of 200–300 PLN net depending on performance ¦ Możliwe premie 200–300 PLN netto w zależności od wydajności
+Премія до 6% на місяць, доплата за проїзд для тих, хто живе за межами Лодзі, надгодини +50% або +100% ¦ Премия до 6% в месяц, доплата за проезд для тех, кто живёт за пределами Лодзи, сверхурочные +50% или +100% ¦ Bonus up to 6% a month, travel allowance for those living outside Łódź, overtime +50% or +100% ¦ Premia do 6% miesięcznie, dopłata do dojazdu dla mieszkających poza Łodzią, nadgodziny +50% lub +100%
+# ---- Ключові слова (підписи)
+Українською ¦ Украинский ¦ Ukrainian ¦ Ukraiński
+Російською ¦ Русский ¦ Russian ¦ Rosyjski
+# міста в родовому відмінку («15 км від …»)
+Брно ¦ Брно ¦ Brno ¦ Brna
+Вроцлава ¦ Вроцлава ¦ Wrocław ¦ Wrocławia
+Гданська ¦ Гданьска ¦ Gdańsk ¦ Gdańska
+Лодзі ¦ Лодзи ¦ Łódź ¦ Łodzi
+Любіна ¦ Любина ¦ Lubin ¦ Lubina
+Острави ¦ Остравы ¦ Ostrava ¦ Ostrawy
+Пльзеня ¦ Пльзеня ¦ Plzeň ¦ Pilzna
+Познані ¦ Познани ¦ Poznań ¦ Poznania
+# ініціали в історіях
+І ¦ И ¦ I ¦ I
+О ¦ О ¦ O ¦ O
+Н ¦ Н ¦ N ¦ N
+Л ¦ Л ¦ L ¦ L
+Т ¦ Т ¦ T ¦ T
+М ¦ М ¦ M ¦ M
+В ¦ В ¦ V ¦ W
+Ю ¦ Ю ¦ Yu ¦ J
+Г ¦ Г ¦ H ¦ H
+НП ¦ НП ¦ NP ¦ NP
+А ¦ А ¦ A ¦ A
+С ¦ С ¦ S ¦ S
+К ¦ К ¦ K ¦ K
+Р ¦ Р ¦ R ¦ R

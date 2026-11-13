@@ -22,6 +22,7 @@ from zoneinfo import ZoneInfo
 
 from articles import ARTICLES
 from keywords import vac_keywords, LANGS as KW_LANGS
+import i18n
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = "https://vdalo-robota.com.ua"
@@ -771,7 +772,11 @@ def vac_desc(v):
 
 
 # ---------- Збирання ----------
+WRITTEN = []
+
+
 def write(path, text):
+    WRITTEN.append(path)
     full = os.path.join(ROOT, path.strip("/"), "index.html") if path.endswith("/") and path != "/" else os.path.join(ROOT, path.strip("/") or "index.html")
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:
@@ -971,6 +976,51 @@ def main():
             d = os.path.join(ROOT, p["slug"])
             if os.path.isdir(d):
                 shutil.rmtree(d)
+
+    # ---------- мовні версії /ru/ /en/ /pl/ ----------
+    def page_file(p):
+        return os.path.join(ROOT, p.strip("/"), "index.html") if p.endswith("/") and p != "/" else os.path.join(ROOT, p.strip("/") or "index.html")
+    uk_pages = ["/" if p == "index.html" else p for p in dict.fromkeys(WRITTEN)]
+    segs = set(i18n.vacancy_segments(items))
+    js = set()
+    for p in uk_pages:
+        h = open(page_file(p), encoding="utf-8").read()
+        segs |= i18n.segments_from_html(h)
+        if p == "/":
+            js = i18n.js_literals(h)
+    segs |= js
+    months = ["січня", "лютого", "березня", "квітня", "травня", "червня", "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"]
+    os.makedirs(i18n.DICT_DIR, exist_ok=True)
+    json.dump(sorted(segs), open(os.path.join(i18n.DICT_DIR, "_segments.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=0)
+    rt_keys = js | set(i18n.vacancy_segments(items)) | set(months) | {"Заїзд", "І", "О", "Н", "Л", "Т", "М", "В", "Ю", "Г", "НП", "А", "С", "К", "Р", "Брно", "Вроцлава", "Гданська", "Лодзі", "Любіна", "Острави", "Пльзеня", "Познані"}
+    for p in uk_pages:  # hreflang і на українських сторінках
+        if p == "404.html":
+            continue
+        f = page_file(p)
+        h = open(f, encoding="utf-8").read()
+        h = re.sub(r'\n<link rel="alternate" hreflang="[^"]*" href="[^"]*">', "", h)
+        h = re.sub(r'(<link rel="canonical" href="[^"]*">)', lambda m: m.group(1) + "\n" + i18n.alternates(p, SITE), h, count=1)
+        open(f, "w", encoding="utf-8").write(h)
+    for lang in i18n.LANGS:
+        d = i18n.load(lang)
+        tr = i18n.Tr(d, lang)
+        ldir = os.path.join(ROOT, lang)
+        if os.path.isdir(ldir):
+            shutil.rmtree(ldir)
+        os.makedirs(ldir)
+        json.dump({"d": i18n.runtime_dict(d, rt_keys), "r": [[rx, rep.replace("\\", "$"), i in i18n.PRE] for i, (rx, rep) in enumerate((r, x[lang]) for r, x in i18n.RULES if lang in x)]},
+                  open(os.path.join(ldir, "i18n.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+        for p in uk_pages:
+            if p == "404.html":
+                continue
+            h = open(page_file(p), encoding="utf-8").read()
+            out = i18n.translate_html(h, lang, p, SITE, tr)
+            f = os.path.join(ldir, p.strip("/"), "index.html") if p != "/" else os.path.join(ldir, "index.html")
+            os.makedirs(os.path.dirname(f), exist_ok=True)
+            open(f, "w", encoding="utf-8").write(out)
+    for path, lm, cf, pr in list(sitemap):
+        for lang in i18n.LANGS:
+            sitemap.append(("/" + lang + path, lm, cf, pr))
 
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for path, lm, cf, pr in sitemap:

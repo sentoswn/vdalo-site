@@ -1,0 +1,456 @@
+# Формат: українська ¦ російська ¦ англійська ¦ польська  (рядки з # — коментарі)
+# ---- Бренд, навігація, шапка
+Вдало ¦ Вдало ¦ Vdalo ¦ Vdalo
+«Вдало» ¦ «Вдало» ¦ Vdalo ¦ Vdalo
+Вдало — на початок ¦ Вдало — на главную ¦ Vdalo — home ¦ Vdalo — strona główna
+Розділи ¦ Разделы ¦ Sections ¦ Sekcje
+Мова сайту ¦ Язык сайта ¦ Site language ¦ Język strony
+Вакансії ¦ Вакансии ¦ Jobs ¦ Oferty pracy
+Як це працює ¦ Как это работает ¦ How it works ¦ Jak to działa
+Приведи друга ¦ Приведи друга ¦ Refer a friend ¦ Poleć znajomego
+Питання ¦ Вопросы ¦ FAQ ¦ Pytania
+Статті ¦ Статьи ¦ Articles ¦ Artykuły
+Контакти ¦ Контакты ¦ Contacts ¦ Kontakt
+Залишити заявку ¦ Оставить заявку ¦ Apply now ¦ Złóż zgłoszenie
+Навігація ¦ Навигация ¦ Breadcrumbs ¦ Nawigacja
+Головна ¦ Главная ¦ Home ¦ Strona główna
+# ---- Герой
+Вакансії оновлюються щодня ¦ Вакансии обновляются ежедневно ¦ Jobs updated daily ¦ Oferty aktualizowane codziennie
+оновлено ¦ обновлено ¦ updated ¦ aktualizacja
+Оновлено ¦ Обновлено ¦ Updated ¦ Zaktualizowano
+сьогодні ¦ сегодня ¦ today ¦ dziś
+вчора ¦ вчера ¦ yesterday ¦ wczoraj
+завтра ¦ завтра ¦ tomorrow ¦ jutro
+післязавтра ¦ послезавтра ¦ the day after tomorrow ¦ pojutrze
+Робота в Польщі, Литві, Чехії та Словаччині ¦ Работа в Польше, Литве, Чехии и Словакии ¦ Jobs in Poland, Lithuania, Czechia and Slovakia ¦ Praca w Polsce, na Litwie, w Czechach i na Słowacji
+Підбираємо роботу в перевірених роботодавців Європи. У кожній вакансії — підприємство, ставка, години, житло, тип договору й найближчі дати заїзду. ¦ Подбираем работу у проверенных работодателей Европы. В каждой вакансии — предприятие, ставка, часы, жильё, тип договора и ближайшие даты заезда. ¦ We find jobs with trusted European employers. Every listing shows the company, pay rate, hours, housing, contract type and the nearest start dates. ¦ Pomagamy znaleźć pracę u sprawdzonych pracodawców w Europie. W każdej ofercie: firma, stawka, godziny, zakwaterowanie, rodzaj umowy i najbliższe terminy przyjazdu.
+Безкоштовно для кандидатів ¦ Бесплатно для кандидатов ¦ Free for candidates ¦ Bezpłatnie dla kandydatów
+Офіційний договір ¦ Официальный договор ¦ Official contract ¦ Oficjalna umowa
+Відповідаємо в месенджерах ¦ Отвечаем в мессенджерах ¦ We reply on messengers ¦ Odpowiadamy w komunikatorach
+Підберіть вакансію ¦ Подберите вакансию ¦ Find your job ¦ Dobierz ofertę
+Три питання — і побачите, що вам підходить. ¦ Три вопроса — и вы увидите, что вам подходит. ¦ Three questions and you'll see what suits you. ¦ Trzy pytania i zobaczysz, co do Ciebie pasuje.
+Хто їде? ¦ Кто едет? ¦ Who is going? ¦ Kto jedzie?
+Жінка ¦ Женщина ¦ Woman ¦ Kobieta
+Чоловік ¦ Мужчина ¦ Man ¦ Mężczyzna
+Пара ¦ Пара ¦ Couple ¦ Para
+Країна ¦ Страна ¦ Country ¦ Kraj
+Будь-яка країна ¦ Любая страна ¦ Any country ¦ Dowolny kraj
+Тільки з житлом ¦ Только с жильём ¦ With housing only ¦ Tylko z zakwaterowaniem
+Показати вакансії ¦ Показать вакансии ¦ Show jobs ¦ Pokaż oferty
+Показати ¦ Показать ¦ Show ¦ Pokaż
+Немає вакансій ¦ Нет вакансий ¦ No jobs ¦ Brak ofert
+змініть умови ¦ измените условия ¦ change the filters ¦ zmień warunki
+Або одразу напишіть нам: ¦ Или сразу напишите нам: ¦ Or message us right away: ¦ Albo napisz do nas od razu:
+Коротко про вакансії ¦ Коротко о вакансиях ¦ Jobs at a glance ¦ Oferty w skrócie
+вакансій зараз ¦ вакансий сейчас ¦ jobs now ¦ ofert teraz
+країни ¦ страны ¦ countries ¦ kraje
+з житлом ¦ с жильём ¦ with housing ¦ z zakwaterowaniem
+найближчий заїзд ¦ ближайший заезд ¦ next start date ¦ najbliższy przyjazd
+Найближчий заїзд ¦ Ближайший заезд ¦ Next start date ¦ Najbliższy przyjazd
+Коротко про переваги ¦ Коротко о преимуществах ¦ Our advantages ¦ Nasze zalety
+Житло від роботодавця ¦ Жильё от работодателя ¦ Housing from the employer ¦ Zakwaterowanie od pracodawcy
+Без знання мови ¦ Без знания языка ¦ No language required ¦ Bez znajomości języka
+Без досвіду — навчать на місці ¦ Без опыта — обучат на месте ¦ No experience — on-site training ¦ Bez doświadczenia — przeszkolenie na miejscu
+Можна парою або з другом ¦ Можно парой или с другом ¦ Couples and friends welcome ¦ Można w parze lub ze znajomym
+Офіс у Києві ¦ Офис в Киеве ¦ Office in Kyiv ¦ Biuro w Kijowie
+Вакансії за країнами ¦ Вакансии по странам ¦ Jobs by country ¦ Oferty według krajów
+Польща ¦ Польша ¦ Poland ¦ Polska
+Литва ¦ Литва ¦ Lithuania ¦ Litwa
+Чехія ¦ Чехия ¦ Czechia ¦ Czechy
+Словаччина ¦ Словакия ¦ Slovakia ¦ Słowacja
+Німеччина ¦ Германия ¦ Germany ¦ Niemcy
+Нідерланди ¦ Нидерланды ¦ Netherlands ¦ Holandia
+Україна ¦ Украина ¦ Ukraine ¦ Ukraina
+# ---- Компанії, пошук, фільтри
+Вакансії в компаніях ¦ Вакансии в компаниях ¦ Jobs by company ¦ Oferty według firm
+натисніть, щоб побачити вакансії ¦ нажмите, чтобы увидеть вакансии ¦ tap to see jobs ¦ kliknij, aby zobaczyć oferty
+Компанії ¦ Компании ¦ Companies ¦ Firmy
+Компанія ¦ Компания ¦ Company ¦ Firma
+компанія ¦ компания ¦ company ¦ firma
+компанії ¦ компании ¦ companies ¦ firmy
+компаній ¦ компаний ¦ companies ¦ firm
+Усі компанії ¦ Все компании ¦ All companies ¦ Wszystkie firmy
+Згорнути ¦ Свернуть ¦ Collapse ¦ Zwiń
+Будь-яка компанія ¦ Любая компания ¦ Any company ¦ Dowolna firma
+Актуальні вакансії ¦ Актуальные вакансии ¦ Current jobs ¦ Aktualne oferty
+Завантажуємо… ¦ Загружаем… ¦ Loading… ¦ Ładujemy…
+Пошук вакансій ¦ Поиск вакансий ¦ Job search ¦ Wyszukiwanie ofert
+Професія, місто або компанія: склад, погрузчик, magazyn… ¦ Профессия, город или компания: склад, погрузчик, magazyn… ¦ Job, city or company: warehouse, forklift, magazyn… ¦ Zawód, miasto lub firma: magazyn, wózek widłowy, produkcja…
+Спочатку гарячі ¦ Сначала горячие ¦ Hot jobs first ¦ Najpierw pilne
+Найближчий заїзд ¦ Ближайший заезд ¦ Nearest start date ¦ Najbliższy przyjazd
+Найбільша зарплата ¦ Самая высокая зарплата ¦ Highest pay ¦ Najwyższe wynagrodzenie
+Фільтри ¦ Фильтры ¦ Filters ¦ Filtry
+Усі країни ¦ Все страны ¦ All countries ¦ Wszystkie kraje
+Для кого ¦ Для кого ¦ For whom ¦ Dla kogo
+Усі ¦ Все ¦ All ¦ Wszyscy
+Жінкам ¦ Женщинам ¦ Women ¦ Kobiety
+Чоловікам ¦ Мужчинам ¦ Men ¦ Mężczyźni
+Парам ¦ Парам ¦ Couples ¦ Pary
+Знайдено ¦ Найдено ¦ Found ¦ Znaleziono
+Скинути фільтри ¦ Сбросить фильтры ¦ Reset filters ¦ Wyczyść filtry
+Скинути ¦ Сбросить ¦ Reset ¦ Wyczyść
+Показати ще ¦ Показать ещё ¦ Show more ¦ Pokaż więcej
+За цими умовами вакансій зараз немає. Змініть фільтри або залиште заявку — підберемо інший варіант. ¦ По этим условиям вакансий сейчас нет. Измените фильтры или оставьте заявку — подберём другой вариант. ¦ No jobs match these filters right now. Change the filters or apply — we'll find another option. ¦ Brak ofert spełniających te warunki. Zmień filtry lub złóż zgłoszenie — dobierzemy inną opcję.
+Не вдалося завантажити вакансії. Напишіть нам у месенджер — розповімо про актуальні. ¦ Не удалось загрузить вакансии. Напишите нам в мессенджер — расскажем об актуальных. ¦ Couldn't load jobs. Message us — we'll tell you about current openings. ¦ Nie udało się wczytać ofert. Napisz do nas — opowiemy o aktualnych.
+Список тимчасово недоступний ¦ Список временно недоступен ¦ List temporarily unavailable ¦ Lista chwilowo niedostępna
+вакансія ¦ вакансия ¦ job ¦ oferta
+вакансії ¦ вакансии ¦ jobs ¦ oferty
+вакансій ¦ вакансий ¦ jobs ¦ ofert
+вакансію ¦ вакансию ¦ job ¦ ofertę
+Вакансія ¦ Вакансия ¦ Job ¦ Oferta
+# ---- Картка вакансії
+Гаряча ¦ Горячая ¦ Hot ¦ Pilna
+Детальніше ¦ Подробнее ¦ Details ¦ Szczegóły
+Відгукнутися ¦ Откликнуться ¦ Apply ¦ Aplikuj
+Житло надається ¦ Жильё предоставляется ¦ Housing provided ¦ Zakwaterowanie zapewnione
+Житло безкоштовне ¦ Жильё бесплатное ¦ Free housing ¦ Darmowe zakwaterowanie
+Житло платне ¦ Жильё платное ¦ Paid housing ¦ Płatne zakwaterowanie
+Без житла ¦ Без жилья ¦ No housing ¦ Bez zakwaterowania
+Житло ¦ Жильё ¦ Housing ¦ Zakwaterowanie
+житло ¦ жильё ¦ housing ¦ zakwaterowanie
+Жінки та чоловіки ¦ Женщины и мужчины ¦ Women and men ¦ Kobiety i mężczyźni
+Жінки ¦ Женщины ¦ Women ¦ Kobiety
+Чоловіки ¦ Мужчины ¦ Men ¦ Mężczyźni
+Договір доручення ¦ Договор поручения ¦ Civil-law contract ¦ Umowa zlecenie
+договір доручення ¦ договор поручения ¦ civil-law contract ¦ umowa zlecenie
+Трудовий договір ¦ Трудовой договор ¦ Employment contract ¦ Umowa o pracę
+трудовий договір ¦ трудовой договор ¦ employment contract ¦ umowa o pracę
+Тимчасовий трудовий договір ¦ Временный трудовой договор ¦ Temporary employment contract ¦ Umowa o pracę tymczasową
+Заїзд ¦ Заезд ¦ Start ¦ Przyjazd
+заїзд ¦ заезд ¦ start ¦ przyjazd
+до сплати податків (брутто) ¦ до уплаты налогов (брутто) ¦ before tax (gross) ¦ przed opodatkowaniem (brutto)
+до сплати податків ¦ до уплаты налогов ¦ before tax ¦ przed opodatkowaniem
+до податків ¦ до налогов ¦ before tax ¦ brutto
+брутто ¦ брутто ¦ gross ¦ brutto
+Брутто ¦ Брутто ¦ Gross ¦ Brutto
+На руки ¦ На руки ¦ Take-home ¦ Na rękę
+на руки ¦ на руки ¦ take-home ¦ na rękę
+за місяць ¦ в месяц ¦ per month ¦ miesięcznie
+за місяць до податків ¦ в месяц до налогов ¦ per month before tax ¦ miesięcznie brutto
+/год ¦ /ч ¦ /h ¦ /godz.
+/міс ¦ /мес ¦ /mo ¦ /mies.
+/доба ¦ /сутки ¦ /day ¦ /doba
+/тиж ¦ /нед ¦ /wk ¦ /tydz.
+год/міс ¦ ч/мес ¦ h/mo ¦ godz./mies.
+грн/год ¦ грн/ч ¦ UAH/h ¦ UAH/godz.
+грн/міс ¦ грн/мес ¦ UAH/mo ¦ UAH/mies.
+грн ¦ грн ¦ UAH ¦ UAH
+зл ¦ зл ¦ PLN ¦ zł
+євро ¦ евро ¦ euro ¦ euro
+міс ¦ мес ¦ mo ¦ mies.
++ бонус ¦ + бонус ¦ + bonus ¦ + premia
+бонус ¦ бонус ¦ bonus ¦ premia
+Про компанію ¦ О компании ¦ About the company ¦ O firmie
+у компанії ¦ в компании ¦ at ¦ w firmie
+Вакансія № ¦ Вакансия № ¦ Job # ¦ Oferta nr
+актуальна на ¦ актуальна на ¦ valid as of ¦ aktualna na
+Скопіювати посилання на вакансію ¦ Скопировать ссылку на вакансию ¦ Copy job link ¦ Skopiuj link do oferty
+Скопіювати посилання ¦ Скопировать ссылку ¦ Copy link ¦ Skopiuj link
+Залишити заявку на цю вакансію ¦ Оставить заявку на эту вакансию ¦ Apply for this job ¦ Złóż zgłoszenie na tę ofertę
+Відгукнутися на вакансію ¦ Откликнуться на вакансию ¦ Apply for the job ¦ Aplikuj na ofertę
+Безкоштовно для кандидатів. Залиште заявку або напишіть нам — текст повідомлення вже готовий. ¦ Бесплатно для кандидатов. Оставьте заявку или напишите нам — текст сообщения уже готов. ¦ Free for candidates. Apply or message us — the message text is ready. ¦ Bezpłatnie dla kandydatów. Złóż zgłoszenie lub napisz do nas — treść wiadomości jest gotowa.
+Подзвонити: ¦ Позвонить: ¦ Call: ¦ Zadzwoń:
+Цієї вакансії вже немає ¦ Этой вакансии уже нет ¦ This job is no longer available ¦ Ta oferta jest już nieaktualna
+подивіться інші ¦ посмотрите другие ¦ see other jobs ¦ zobacz inne
+Для кого ¦ Для кого ¦ Who can apply ¦ Dla kogo
+Годин на місяць ¦ Часов в месяц ¦ Hours per month ¦ Godzin miesięcznie
+Графік ¦ График ¦ Schedule ¦ Grafik
+Нічні зміни ¦ Ночные смены ¦ Night shifts ¦ Nocne zmiany
+Харчування ¦ Питание ¦ Meals ¦ Wyżywienie
+Доїзд до роботи ¦ Дорога до работы ¦ Commute ¦ Dojazd do pracy
+Договір ¦ Договор ¦ Contract ¦ Umowa
+Вимоги ¦ Требования ¦ Requirements ¦ Wymagania
+Бонуси ¦ Бонусы ¦ Bonuses ¦ Premie
+Дати заїзду ¦ Даты заезда ¦ Start dates ¦ Terminy przyjazdu
+Ключові слова ¦ Ключевые слова ¦ Keywords ¦ Słowa kluczowe
+Точна сума на руки залежить від вашого податкового статусу ¦ Точная сумма на руки зависит от вашего налогового статуса ¦ The exact take-home pay depends on your tax status ¦ Dokładna kwota na rękę zależy od Twojej sytuacji podatkowej
+менеджер пояснить ¦ менеджер объяснит ¦ the manager will explain ¦ menedżer wyjaśni
+це сума до сплати податків. На руки зазвичай приблизно на 15–30% менше ¦ это сумма до уплаты налогов. На руки обычно примерно на 15–30% меньше ¦ this is the amount before tax. Take-home is usually about 15–30% less ¦ to kwota przed opodatkowaniem. Na rękę zwykle około 15–30% mniej
+точну суму підкаже менеджер ¦ точную сумму подскажет менеджер ¦ the manager will tell you the exact amount ¦ dokładną kwotę poda menedżer
+Повноцінний трудовий договір: оплачувана відпустка, лікарняні та повне соціальне страхування ¦ Полноценный трудовой договор: оплачиваемый отпуск, больничные и полное социальное страхование ¦ Full employment contract: paid leave, sick pay and full social insurance ¦ Pełna umowa o pracę: płatny urlop, zwolnienia lekarskie i pełne ubezpieczenie społeczne
+Цивільно-правовий договір з оплатою за відпрацьовані години. Є медичне страхування ¦ Гражданско-правовой договор с оплатой за отработанные часы. Есть медицинская страховка ¦ Civil-law contract paid per hour worked. Health insurance included ¦ Umowa cywilnoprawna z wynagrodzeniem za przepracowane godziny. Jest ubezpieczenie zdrowotne
+можна звертатися до лікаря. Оплачуваної відпустки й лікарняних немає ¦ можно обращаться к врачу. Оплачиваемого отпуска и больничных нет ¦ you can see a doctor. No paid leave or sick pay ¦ można korzystać z lekarza. Brak płatnego urlopu i zwolnień lekarskich
+Цивільно-правовий договір з оплатою за відпрацьовані години. Сплачуються медичні й пенсійні внески. Оплачуваної відпустки за законом немає ¦ Гражданско-правовой договор с оплатой за отработанные часы. Уплачиваются медицинские и пенсионные взносы. Оплачиваемого отпуска по закону нет ¦ Civil-law contract paid per hour worked. Health and pension contributions are paid. No statutory paid leave ¦ Umowa cywilnoprawna z wynagrodzeniem za przepracowane godziny. Opłacane są składki zdrowotne i emerytalne. Brak ustawowego płatnego urlopu
+Цивільно-правовий договір з оплатою за відпрацьовані години. Оплачуваної відпустки за законом немає; які внески сплачуються ¦ Гражданско-правовой договор с оплатой за отработанные часы. Оплачиваемого отпуска по закону нет; какие взносы уплачиваются ¦ Civil-law contract paid per hour worked. No statutory paid leave; which contributions are paid ¦ Umowa cywilnoprawna z wynagrodzeniem za przepracowane godziny. Brak ustawowego płatnego urlopu; jakie składki są opłacane
+уточнить менеджер ¦ уточнит менеджер ¦ the manager will confirm ¦ potwierdzi menedżer
+з повним соцстрахуванням (ZUS ¦ с полным соцстрахованием (ZUS ¦ with full social insurance (ZUS ¦ z pełnym ZUS (ZUS
+лише медичне страхування ¦ только медицинская страховка ¦ health insurance only ¦ tylko ubezpieczenie zdrowotne
+Договір доручення (umowa zlecenie ¦ Договор поручения (umowa zlecenie ¦ Civil-law contract (umowa zlecenie ¦ Umowa zlecenie (umowa zlecenie
+Студент до 26 років ¦ Студент до 26 лет ¦ Student under 26 ¦ Student do 26 lat
+Студентам до 26: можливе звільнення від внесків ZUS — умови уточнюйте в менеджера ¦ Студентам до 26: возможно освобождение от взносов ZUS — условия уточняйте у менеджера ¦ Students under 26: may be exempt from ZUS contributions — ask the manager for details ¦ Studenci do 26 lat: możliwe zwolnienie ze składek ZUS — warunki u menedżera
+Студентам до 26: можливе звільнення від внесків ZUS ¦ Студентам до 26: возможно освобождение от взносов ZUS ¦ Students under 26: may be exempt from ZUS contributions ¦ Studenci do 26 lat: możliwe zwolnienie ze składek ZUS
+Студентам до 26 років: можливе звільнення від внесків ZUS за umowa zlecenie після підтвердження статусу студента. Для осіб до 26 років може застосовуватися пільга PIT. Умови та орієнтовну суму «на руки» уточнюйте в менеджера ¦ Студентам до 26 лет: возможно освобождение от взносов ZUS по umowa zlecenie после подтверждения статуса студента. Для лиц до 26 лет может применяться льгота PIT. Условия и ориентировочную сумму «на руки» уточняйте у менеджера ¦ Students under 26: may be exempt from ZUS contributions on umowa zlecenie once student status is confirmed. People under 26 may also get the PIT relief. Ask the manager for conditions and the estimated take-home pay ¦ Studenci do 26 lat: możliwe zwolnienie ze składek ZUS na umowie zlecenie po potwierdzeniu statusu studenta. Osoby do 26 lat mogą korzystać z ulgi PIT. Warunki i orientacyjną kwotę na rękę poda menedżer
+умови уточнюйте в менеджера ¦ условия уточняйте у менеджера ¦ ask the manager for details ¦ warunki u menedżera
+Ставка вища за середню ¦ Ставка выше средней ¦ Above-average pay ¦ Stawka powyżej średniej
+Вітаю! Мене цікавить вакансія № ¦ Здравствуйте! Меня интересует вакансия № ¦ Hello! I'm interested in job # ¦ Dzień dobry! Interesuje mnie oferta nr
+Підкажіть, будь ласка, деталі ¦ Подскажите, пожалуйста, детали ¦ Could you share the details, please ¦ Proszę o szczegóły
+Вітаю! Цікавлять вакансії ¦ Здравствуйте! Интересуют вакансии ¦ Hello! I'm interested in jobs ¦ Dzień dobry! Interesują mnie oferty
+Посилання скопійовано ¦ Ссылка скопирована ¦ Link copied ¦ Link skopiowany
+Скопійовано ¦ Скопировано ¦ Copied ¦ Skopiowano
+Не вдалося скопіювати ¦ Не удалось скопировать ¦ Couldn't copy ¦ Nie udało się skopiować
+Текст скопійовано ¦ Текст скопирован ¦ Text copied ¦ Tekst skopiowany
+вставте його в чат ¦ вставьте его в чат ¦ paste it into the chat ¦ wklej go do czatu
+Закрити ¦ Закрыть ¦ Close ¦ Zamknij
+# ---- Блоки головної
+Чому з «Вдало» простіше ¦ Почему с «Вдало» проще ¦ Why Vdalo makes it easier ¦ Dlaczego z Vdalo jest prościej
+Ми показуємо умови так, щоб їх можна було чесно порівняти ще до виїзду. ¦ Мы показываем условия так, чтобы их можно было честно сравнить ещё до выезда. ¦ We show the conditions so you can compare them honestly before you leave. ¦ Pokazujemy warunki tak, by można je było uczciwie porównać jeszcze przed wyjazdem.
+Прозорі умови ¦ Прозрачные условия ¦ Transparent conditions ¦ Przejrzyste warunki
+Ставка, години на місяць, вартість житла, тип договору й дати заїзду — у кожній вакансії. ¦ Ставка, часы в месяц, стоимость жилья, тип договора и даты заезда — в каждой вакансии. ¦ Pay rate, monthly hours, housing cost, contract type and start dates — in every listing. ¦ Stawka, godziny w miesiącu, koszt zakwaterowania, rodzaj umowy i terminy przyjazdu — w każdej ofercie.
+Актуальні вакансії ¦ Актуальные вакансии ¦ Current jobs ¦ Aktualne oferty
+Список оновлюється щодня. Закриті вакансії зникають із сайту автоматично. ¦ Список обновляется ежедневно. Закрытые вакансии исчезают с сайта автоматически. ¦ The list is updated daily. Closed jobs disappear from the site automatically. ¦ Lista jest aktualizowana codziennie. Zamknięte oferty znikają ze strony automatycznie.
+Безкоштовно для вас ¦ Бесплатно для вас ¦ Free for you ¦ Bezpłatnie dla Ciebie
+Ми не беремо з кандидатів гроші за працевлаштування. ¦ Мы не берём с кандидатов деньги за трудоустройство. ¦ We don't charge candidates for job placement. ¦ Nie pobieramy od kandydatów opłat za pośrednictwo pracy.
+Завжди на зв'язку ¦ Всегда на связи ¦ Always in touch ¦ Zawsze w kontakcie
+Telegram, Viber, WhatsApp або дзвінок — пишіть, як вам зручніше. ¦ Telegram, Viber, WhatsApp или звонок — пишите, как вам удобнее. ¦ Telegram, Viber, WhatsApp or a call — whatever suits you. ¦ Telegram, Viber, WhatsApp lub telefon — jak Ci wygodniej.
+Вперше їдете працювати за кордон? Ми поруч на кожному кроці ¦ Впервые едете работать за границу? Мы рядом на каждом шагу ¦ Going to work abroad for the first time? We're with you every step ¦ Pierwszy raz jedziesz do pracy za granicę? Jesteśmy z Tobą na każdym kroku
+Не потрібно самому шукати житло, знати мову чи мати особливий досвід. Усе підкажемо й пояснимо — від заявки до першої зарплати. ¦ Не нужно самому искать жильё, знать язык или иметь особый опыт. Всё подскажем и объясним — от заявки до первой зарплаты. ¦ No need to find housing yourself, speak the language or have special experience. We'll explain everything — from application to your first pay. ¦ Nie musisz sam szukać mieszkania, znać języka ani mieć szczególnego doświadczenia. Wszystko wyjaśnimy — od zgłoszenia do pierwszej wypłaty.
+Хочу так само ¦ Хочу так же ¦ I want the same ¦ Chcę tak samo
+Житло вже чекає ¦ Жильё уже ждёт ¦ Housing is ready ¦ Zakwaterowanie czeka
+У багатьох вакансіях житло дає роботодавець — часто безкоштовно. Не треба шукати квартиру й платити наперед. ¦ Во многих вакансиях жильё даёт работодатель — часто бесплатно. Не нужно искать квартиру и платить наперёд. ¦ In many jobs the employer provides housing — often free. No need to search for a flat or pay upfront. ¦ W wielu ofertach zakwaterowanie zapewnia pracodawca — często za darmo. Nie trzeba szukać mieszkania ani płacić z góry.
+Без мови й досвіду ¦ Без языка и опыта ¦ No language or experience ¦ Bez języka i doświadczenia
+Для більшості вакансій не потрібні ні мова, ні досвід — усьому навчать на місці. ¦ Для большинства вакансий не нужны ни язык, ни опыт — всему обучат на месте. ¦ Most jobs need neither language nor experience — you'll be trained on site. ¦ W większości ofert nie trzeba znać języka ani mieć doświadczenia — wszystkiego nauczą na miejscu.
+Більше залишається вам ¦ Больше остаётся вам ¦ You keep more ¦ Więcej zostaje dla Ciebie
+Коли житло й доїзд до роботи вже організовані, більша частина заробітку йде у ваші заощадження. ¦ Когда жильё и дорога до работы уже организованы, большая часть заработка идёт в ваши сбережения. ¦ When housing and commuting are arranged, most of your earnings go to savings. ¦ Gdy zakwaterowanie i dojazd są zorganizowane, większa część zarobków trafia do Twoich oszczędności.
+Можна не самому ¦ Можно не одному ¦ You don't have to go alone ¦ Nie musisz jechać sam
+Їдьте з кумою, сусідкою, чоловіком чи дружиною. А ми завжди на зв'язку українською. ¦ Езжайте с кумой, соседкой, мужем или женой. А мы всегда на связи по-украински и по-русски. ¦ Go with a friend, neighbour, husband or wife. And we're always reachable in Ukrainian. ¦ Jedź z przyjaciółką, sąsiadką, mężem lub żoną. A my zawsze jesteśmy w kontakcie po ukraińsku.
+Приклад шляху ¦ Пример пути ¦ An example journey ¦ Przykładowa droga
+Оксана, 41 рік, село на Житомирщині ¦ Оксана, 41 год, село в Житомирской области ¦ Oksana, 41, a village in Zhytomyr region ¦ Oksana, 41 lat, wieś w obwodzie żytomierskim
+Старт ¦ Старт ¦ Start ¦ Start
+Один дзвінок — і є план ¦ Один звонок — и есть план ¦ One call — and there's a plan ¦ Jeden telefon — i jest plan
+Один дзвінок ¦ Один звонок ¦ One call ¦ Jeden telefon
+і є план ¦ и есть план ¦ and there's a plan ¦ i jest plan
+Удома працювала продавчинею, грошей вистачало лише на найнеобхідніше. Написала у Viber — менеджер підібрав пакування на складі в Польщі з житлом, і за два тижні вона поїхала разом із кумою. ¦ Дома работала продавщицей, денег хватало только на самое необходимое. Написала в Viber — менеджер подобрал упаковку на складе в Польше с жильём, и через две недели она уехала вместе с кумой. ¦ At home she worked as a shop assistant and barely made ends meet. She wrote on Viber — the manager found a packing job at a warehouse in Poland with housing, and two weeks later she left with a friend. ¦ W domu pracowała jako sprzedawczyni, pieniędzy starczało tylko na najpotrzebniejsze. Napisała na Viberze — menedżer dobrał pakowanie w magazynie w Polsce z zakwaterowaniem i po dwóch tygodniach wyjechała z przyjaciółką.
+Удома працювала продавчинею, грошей вистачало лише на найнеобхідніше. Написала у Viber ¦ Дома работала продавщицей, денег хватало только на самое необходимое. Написала в Viber ¦ At home she worked as a shop assistant and barely made ends meet. She wrote on Viber ¦ W domu pracowała jako sprzedawczyni, pieniędzy starczało tylko na najpotrzebniejsze. Napisała na Viberze
+менеджер підібрав пакування на складі в Польщі з житлом, і за два тижні вона поїхала разом із кумою ¦ менеджер подобрал упаковку на складе в Польше с жильём, и через две недели она уехала вместе с кумой ¦ the manager found a packing job at a warehouse in Poland with housing, and two weeks later she left with a friend ¦ menedżer dobrał pakowanie w magazynie w Polsce z zakwaterowaniem i po dwóch tygodniach wyjechała z przyjaciółką
+Перший місяць ¦ Первый месяц ¦ First month ¦ Pierwszy miesiąc
+Страшно було тільки першого дня ¦ Страшно было только в первый день ¦ Only the first day was scary ¦ Strach był tylko pierwszego dnia
+Кімната на двох, до роботи возить автобус. Мова не знадобилася — усьому навчили на місці за кілька днів. Бере додаткові години, коли є. ¦ Комната на двоих, на работу возит автобус. Язык не понадобился — всему научили на месте за несколько дней. Берёт дополнительные часы, когда есть. ¦ A shared room for two, a bus to work. She didn't need the language — she was trained on site in a few days. She takes extra hours when available. ¦ Pokój dwuosobowy, do pracy dowozi autobus. Język nie był potrzebny — wszystkiego nauczyli na miejscu w kilka dni. Bierze dodatkowe godziny, gdy są.
+Кімната на двох, до роботи возить автобус. Мова не знадобилася ¦ Комната на двоих, на работу возит автобус. Язык не понадобился ¦ A shared room for two, a bus to work. She didn't need the language ¦ Pokój dwuosobowy, do pracy dowozi autobus. Język nie był potrzebny
+усьому навчили на місці за кілька днів. Бере додаткові години, коли є ¦ всему научили на месте за несколько дней. Берёт дополнительные часы, когда есть ¦ she was trained on site in a few days. She takes extra hours when available ¦ wszystkiego nauczyli na miejscu w kilka dni. Bierze dodatkowe godziny, gdy są
+Пів року ¦ Полгода ¦ Six months ¦ Pół roku
+Новий дах і навчання доньки ¦ Новая крыша и учёба дочери ¦ A new roof and her daughter's studies ¦ Nowy dach i studia córki
+Щомісяця надсилає гроші додому: перекрили дах, донька вступила до коледжу — і все без кредитів. ¦ Каждый месяц отправляет деньги домой: перекрыли крышу, дочь поступила в колледж — и всё без кредитов. ¦ She sends money home every month: the roof is replaced, her daughter got into college — all without loans. ¦ Co miesiąc wysyła pieniądze do domu: wymienili dach, córka dostała się do szkoły — i wszystko bez kredytów.
+Щомісяця надсилає гроші додому: перекрили дах, донька вступила до коледжу ¦ Каждый месяц отправляет деньги домой: перекрыли крышу, дочь поступила в колледж ¦ She sends money home every month: the roof is replaced, her daughter got into college ¦ Co miesiąc wysyła pieniądze do domu: wymienili dach, córka dostała się do szkoły
+і все без кредитів ¦ и всё без кредитов ¦ all without loans ¦ i wszystko bez kredytów
+Через рік ¦ Через год ¦ After a year ¦ Po roku
+Заощадження й вибір ¦ Сбережения и выбор ¦ Savings and a choice ¦ Oszczędności i wybór
+Має відкладені гроші й вирішує сама: продовжити контракт ще на сезон чи відкрити вдома невеликий магазин. ¦ Есть отложенные деньги, и она решает сама: продлить контракт ещё на сезон или открыть дома небольшой магазин. ¦ She has savings and decides for herself: extend the contract for another season or open a small shop back home. ¦ Ma odłożone pieniądze i sama decyduje: przedłużyć umowę o kolejny sezon czy otworzyć w domu mały sklep.
+Має відкладені гроші й вирішує сама: продовжити контракт ще на сезон чи відкрити вдома невеликий магазин ¦ Есть отложенные деньги, и она решает сама: продлить контракт ещё на сезон или открыть дома небольшой магазин ¦ She has savings and decides for herself: extend the contract for another season or open a small shop back home ¦ Ma odłożone pieniądze i sama decyduje: przedłużyć umowę o kolejny sezon czy otworzyć w domu mały sklep
+Це умовний приклад для наочності, а не історія конкретної людини. Реальний заробіток залежить від вакансії, кількості годин і ваших витрат. ¦ Это условный пример для наглядности, а не история конкретного человека. Реальный заработок зависит от вакансии, количества часов и ваших расходов. ¦ This is an illustrative example, not a real person's story. Actual earnings depend on the job, the hours and your expenses. ¦ To przykład poglądowy, a nie historia konkretnej osoby. Rzeczywiste zarobki zależą od oferty, liczby godzin i Twoich wydatków.
+Це умовні приклади для наочності, а не історії конкретних людей. Реальний заробіток залежить від вакансії, кількості годин і ваших витрат. ¦ Это условные примеры для наглядности, а не истории конкретных людей. Реальный заработок зависит от вакансии, количества часов и ваших расходов. ¦ These are illustrative examples, not real people's stories. Actual earnings depend on the job, the hours and your expenses. ¦ To przykłady poglądowe, a nie historie konkretnych osób. Rzeczywiste zarobki zależą od oferty, liczby godzin i Twoich wydatków.
+# ---- Калькулятор
+Порахуйте, скільки можна відкласти ¦ Посчитайте, сколько можно отложить ¦ Work out how much you can save ¦ Policz, ile możesz odłożyć
+Орієнтовний розрахунок для роботи в Польщі. ¦ Ориентировочный расчёт для работы в Польше. ¦ An estimate for working in Poland. ¦ Orientacyjne wyliczenie dla pracy w Polsce.
+Ставка на руки за годину ¦ Ставка на руки за час ¦ Take-home rate per hour ¦ Stawka na rękę za godzinę
+Їжа, зв'язок, дрібниці на місяць ¦ Еда, связь, мелочи в месяц ¦ Food, phone and extras per month ¦ Jedzenie, telefon, drobne wydatki miesięcznie
+Житло безкоштовне від роботодавця ¦ Жильё бесплатное от работодателя ¦ Free housing from the employer ¦ Darmowe zakwaterowanie od pracodawcy
+Відкладаєте за місяць ¦ Откладываете в месяц ¦ You save per month ¦ Odkładasz miesięcznie
+За рік ¦ За 12 месяцев ¦ Per year ¦ Rocznie
+Якщо житло платне, віднімаємо 700 зл на місяць. Точні умови — у кожній вакансії. ¦ Если жильё платное, вычитаем 700 зл в месяц. Точные условия — в каждой вакансии. ¦ If housing is paid, we subtract 700 PLN per month. Exact terms are in each listing. ¦ Jeśli zakwaterowanie jest płatne, odejmujemy 700 zł miesięcznie. Dokładne warunki — w każdej ofercie.
+Підібрати вакансію ¦ Подобрать вакансию ¦ Find a job ¦ Dobierz ofertę
+# ---- Дорога
+Дорога і перший день — допоможемо ¦ Дорога и первый день — поможем ¦ The journey and your first day — we'll help ¦ Podróż i pierwszy dzień — pomożemy
+Найбільше хвилюються не через роботу, а через дорогу: куди їхати, де пересісти, хто зустріне. Тому цю частину беремо на себе. ¦ Больше всего волнуются не из-за работы, а из-за дороги: куда ехать, где пересесть, кто встретит. Поэтому эту часть берём на себя. ¦ People worry most not about the job but about the journey: where to go, where to change, who will meet them. So we take care of that part. ¦ Najbardziej martwi nie praca, lecz podróż: dokąd jechać, gdzie się przesiąść, kto odbierze. Dlatego tę część bierzemy na siebie.
+Маршрутний лист ¦ Маршрутный лист ¦ Route sheet ¦ Plan podróży
+Покроково: звідки й коли виїжджати, де пересісти, адреса житла й роботи, телефони координатора. Усе в одному повідомленні. ¦ Пошагово: откуда и когда выезжать, где пересесть, адрес жилья и работы, телефоны координатора. Всё в одном сообщении. ¦ Step by step: where and when to depart, where to change, the housing and work address, the coordinator's phone. All in one message. ¦ Krok po kroku: skąd i kiedy wyjechać, gdzie się przesiąść, adres zakwaterowania i pracy, telefony koordynatora. Wszystko w jednej wiadomości.
+Перевізник-партнер ¦ Перевозчик-партнёр ¦ Partner carrier ¦ Przewoźnik partnerski
+Підкажемо перевіреного перевізника, яким уже їздять наші кандидати, — без пошуків випадкових оголошень. ¦ Подскажем проверенного перевозчика, с которым уже ездят наши кандидаты, — без поиска случайных объявлений. ¦ We'll recommend a trusted carrier our candidates already use — no searching random ads. ¦ Polecimy sprawdzonego przewoźnika, z którego korzystają nasi kandydaci — bez szukania przypadkowych ogłoszeń.
+Допомога з квитками ¦ Помощь с билетами ¦ Help with tickets ¦ Pomoc z biletami
+Допоможемо обрати рейс під дату заїзду й купити квиток. Вартість дороги вказана заздалегідь — без сюрпризів. ¦ Поможем выбрать рейс под дату заезда и купить билет. Стоимость дороги указана заранее — без сюрпризов. ¦ We'll help you pick a trip that matches your start date and buy a ticket. The travel cost is known in advance — no surprises. ¦ Pomożemy wybrać kurs pod termin przyjazdu i kupić bilet. Koszt podróży znasz z góry — bez niespodzianek.
+Координатор на місці ¦ Координатор на месте ¦ On-site coordinator ¦ Koordynator na miejscu
+Після приїзду ви не самі: координатор допоможе із заселенням, документами й першим робочим днем. ¦ После приезда вы не одни: координатор поможет с заселением, документами и первым рабочим днём. ¦ You're not alone after arrival: the coordinator helps with check-in, documents and your first working day. ¦ Po przyjeździe nie jesteś sam: koordynator pomoże z zakwaterowaniem, dokumentami i pierwszym dniem pracy.
+Що взяти з собою — у нашому ¦ Что взять с собой — в нашем ¦ What to pack — see our ¦ Co zabrać — w naszej
+чеклісті для поїздки ¦ чек-листе для поездки ¦ travel checklist ¦ liście kontrolnej na podróż
+# ---- Як це працює
+Заявка ¦ Заявка ¦ Application ¦ Zgłoszenie
+Залишаєте заявку на сайті або пишете нам у месенджер. ¦ Оставляете заявку на сайте или пишете нам в мессенджер. ¦ You apply on the site or message us. ¦ Zostawiasz zgłoszenie na stronie lub piszesz do nas na komunikatorze.
+Підбір ¦ Подбор ¦ Matching ¦ Dobór
+Менеджер уточнює ваш досвід і пропонує вакансії, що вам підходять. ¦ Менеджер уточняет ваш опыт и предлагает подходящие вакансии. ¦ The manager checks your experience and offers suitable jobs. ¦ Menedżer pyta o Twoje doświadczenie i proponuje pasujące oferty.
+Документи й дата ¦ Документы и дата ¦ Documents and date ¦ Dokumenty i termin
+Підказуємо, які документи потрібні, і погоджуємо найближчу дату заїзду. ¦ Подсказываем, какие документы нужны, и согласовываем ближайшую дату заезда. ¦ We tell you which documents you need and agree on the nearest start date. ¦ Podpowiadamy, jakie dokumenty są potrzebne, i ustalamy najbliższy termin przyjazdu.
+Робота ¦ Работа ¦ Work ¦ Praca
+Ви приїжджаєте на місце, а ми залишаємося на зв'язку. ¦ Вы приезжаете на место, а мы остаёмся на связи. ¦ You arrive at the job and we stay in touch. ¦ Przyjeżdżasz na miejsce, a my pozostajemy w kontakcie.
+# ---- Чесна вакансія
+Як вибрати чесну вакансію ¦ Как выбрать честную вакансию ¦ How to choose an honest job offer ¦ Jak wybrać uczciwą ofertę
+П'ять простих перевірок, які варто зробити перед виїздом — з нами чи без нас. ¦ Пять простых проверок, которые стоит сделать перед выездом — с нами или без нас. ¦ Five simple checks worth doing before you leave — with us or without us. ¦ Pięć prostych kontroli przed wyjazdem — z nami lub bez nas.
+Рахуйте суму на місяць, а не лише ставку ¦ Считайте сумму в месяц, а не только ставку ¦ Count the monthly total, not just the rate ¦ Licz kwotę miesięczną, nie tylko stawkę
+Помножте ставку на кількість годин і відніміть житло та інші вирахування. ¦ Умножьте ставку на количество часов и вычтите жильё и другие удержания. ¦ Multiply the rate by the hours and subtract housing and other deductions. ¦ Pomnóż stawkę przez liczbę godzin i odejmij zakwaterowanie oraz inne potrącenia.
+Уточніть тип договору ¦ Уточните тип договора ¦ Check the contract type ¦ Sprawdź rodzaj umowy
+Від нього залежать відпустка, лікарняні й сума на руки. Тип договору вказаний у кожній нашій вакансії. ¦ От него зависят отпуск, больничные и сумма на руки. Тип договора указан в каждой нашей вакансии. ¦ It determines your leave, sick pay and take-home pay. The contract type is shown in each of our listings. ¦ Od niego zależą urlop, zwolnienia lekarskie i kwota na rękę. Rodzaj umowy jest podany w każdej naszej ofercie.
+Не платіть за саме працевлаштування ¦ Не платите за само трудоустройство ¦ Don't pay for the placement itself ¦ Nie płać za samo pośrednictwo
+Посередник не має права брати гроші з кандидата за пошук роботи. ¦ Посредник не имеет права брать деньги с кандидата за поиск работы. ¦ An agency has no right to charge candidates for finding a job. ¦ Pośrednik nie ma prawa pobierać od kandydata pieniędzy za znalezienie pracy.
+Попросіть деталі житла ¦ Попросите детали жилья ¦ Ask for housing details ¦ Zapytaj o szczegóły zakwaterowania
+Скільки людей у кімнаті, скільки коштує і як далеко до роботи. ¦ Сколько человек в комнате, сколько стоит и как далеко до работы. ¦ How many people per room, how much it costs and how far it is from work. ¦ Ile osób w pokoju, ile kosztuje i jak daleko do pracy.
+Тримайте документи при собі ¦ Держите документы при себе ¦ Keep your documents with you ¦ Trzymaj dokumenty przy sobie
+Не віддавайте паспорт «на зберігання» нікому — ні роботодавцю, ні координатору. ¦ Не отдавайте паспорт «на хранение» никому — ни работодателю, ни координатору. ¦ Never hand over your passport "for safekeeping" — not to the employer, not to the coordinator. ¦ Nie oddawaj nikomu paszportu „na przechowanie” — ani pracodawcy, ani koordynatorowi.
+# ---- Приведи друга
+Приведи друга — отримай бонус ¦ Приведи друга — получи бонус ¦ Refer a friend — get a bonus ¦ Poleć znajomego — odbierz premię
+Порекомендуйте нас другові, кумі чи сусідові. Коли друг вийде на роботу — ви отримаєте ¦ Порекомендуйте нас другу, куме или соседу. Когда друг выйдет на работу — вы получите ¦ Recommend us to a friend, relative or neighbour. When your friend starts work, you'll get a ¦ Poleć nas znajomemu, krewnemu lub sąsiadowi. Gdy znajomy zacznie pracę — otrzymasz
+Вкажіть свій номер телефону — отримаєте особисте посилання. ¦ Укажите свой номер телефона — получите личную ссылку. ¦ Enter your phone number to get a personal link. ¦ Podaj swój numer telefonu — otrzymasz osobisty link.
+Надішліть його другові у Viber, Telegram чи WhatsApp. ¦ Отправьте её другу в Viber, Telegram или WhatsApp. ¦ Send it to your friend on Viber, Telegram or WhatsApp. ¦ Wyślij go znajomemu na Viberze, Telegramie lub WhatsAppie.
+Друг залишає заявку й виходить на роботу — ми зв'язуємося з вами щодо бонусу. ¦ Друг оставляет заявку и выходит на работу — мы связываемся с вами насчёт бонуса. ¦ Your friend applies and starts work — we contact you about the bonus. ¦ Znajomy składa zgłoszenie i zaczyna pracę — kontaktujemy się z Tobą w sprawie premii.
+Розмір бонусу та умови виплати уточнюйте в менеджера. ¦ Размер бонуса и условия выплаты уточняйте у менеджера. ¦ Ask the manager about the bonus amount and payment terms. ¦ Wysokość premii i warunki wypłaty uzgodnij z menedżerem.
+Ваш номер телефону ¦ Ваш номер телефона ¦ Your phone number ¦ Twój numer telefonu
+Отримати моє посилання ¦ Получить мою ссылку ¦ Get my link ¦ Pobierz mój link
+Ваше посилання для друзів ¦ Ваша ссылка для друзей ¦ Your link for friends ¦ Twój link dla znajomych
+Ваше посилання ¦ Ваша ссылка ¦ Your link ¦ Twój link
+Копіювати ¦ Копировать ¦ Copy ¦ Kopiuj
+Інше ¦ Другое ¦ Other ¦ Inne
+Коли друг залишить заявку за цим посиланням, ми побачимо, що це від вас. ¦ Когда друг оставит заявку по этой ссылке, мы увидим, что это от вас. ¦ When your friend applies via this link, we'll see they came from you. ¦ Gdy znajomy złoży zgłoszenie z tego linku, zobaczymy, że jest od Ciebie.
+Або напишіть чи зателефонуйте нам ¦ Или напишите либо позвоните нам ¦ Or message or call us ¦ Albo napisz lub zadzwoń do nas
+Повідомлення «Хочу порекомендувати друга…» вже готове: у WhatsApp воно підставиться саме, для Telegram і Viber — скопіюється, просто вставте в чат. ¦ Сообщение «Хочу порекомендовать друга…» уже готово: в WhatsApp оно подставится само, для Telegram и Viber — скопируется, просто вставьте в чат. ¦ The message "I'd like to recommend a friend…" is ready: in WhatsApp it's filled in automatically, for Telegram and Viber it's copied — just paste it into the chat. ¦ Wiadomość „Chcę polecić znajomego…” jest gotowa: w WhatsAppie wstawi się sama, w Telegramie i Viberze zostanie skopiowana — wklej ją do czatu.
+Номер потрібен, щоб зв’язатися з вами щодо бонусу. Ми не передаємо його третім особам. Деталі — у ¦ Номер нужен, чтобы связаться с вами насчёт бонуса. Мы не передаём его третьим лицам. Подробности — в ¦ We need the number to contact you about the bonus. We don't share it with third parties. Details are in the ¦ Numer jest potrzebny, by skontaktować się z Tobą w sprawie premii. Nie przekazujemy go osobom trzecim. Szczegóły — w
+політиці конфіденційності ¦ политике конфиденциальности ¦ privacy policy ¦ polityce prywatności
+Вкажіть ваш номер телефону ¦ Укажите ваш номер телефона ¦ Enter your phone number ¦ Podaj swój numer telefonu
+Привіт! Подивись вакансії в Польщі, Литві, Чехії та Словаччині ¦ Привет! Посмотри вакансии в Польше, Литве, Чехии и Словакии ¦ Hi! Check out jobs in Poland, Lithuania, Czechia and Slovakia ¦ Cześć! Zobacz oferty pracy w Polsce, na Litwie, w Czechach i na Słowacji
+є з житлом, для кандидатів безкоштовно ¦ есть с жильём, для кандидатов бесплатно ¦ some with housing, free for candidates ¦ są z zakwaterowaniem, bezpłatnie dla kandydatów
+надішліть другові ¦ отправьте другу ¦ send it to a friend ¦ wyślij znajomemu
+Я за рекомендацією друга ¦ Я по рекомендации друга ¦ I was referred by a friend ¦ Jestem z polecenia znajomego
+рекомендація від ¦ рекомендация от ¦ referred by ¦ polecenie od
+рекомендація ¦ рекомендация ¦ referral ¦ polecenie
+перехід з ¦ переход с ¦ came from ¦ przejście z
+# ---- Заявка
+Залиште заявку — підберемо роботу ¦ Оставьте заявку — подберём работу ¦ Apply — we'll find you a job ¦ Złóż zgłoszenie — dobierzemy pracę
+Оберіть, як вам зручніше: ми зателефонуємо або напишемо. Або напишіть нам самі. ¦ Выберите, как вам удобнее: мы позвоним или напишем. Или напишите нам сами. ¦ Choose what suits you: we'll call or message you. Or message us yourself. ¦ Wybierz, jak Ci wygodniej: zadzwonimy lub napiszemy. Albo napisz do nas sam.
+Відкрити чат ¦ Открыть чат ¦ Open chat ¦ Otwórz czat
+Дзвінок в один дотик ¦ Звонок в одно касание ¦ One-tap call ¦ Połączenie jednym dotknięciem
+Подзвонити ¦ Позвонить ¦ Call ¦ Zadzwoń
+Дзвінок ¦ Звонок ¦ Call ¦ Telefon
+вул. Джона Маккейна, 7, офіс 169 ¦ ул. Джона Маккейна, 7, офис 169 ¦ 7 John McCain St, office 169 ¦ ul. Johna McCaina 7, biuro 169
+Ім'я ¦ Имя ¦ Name ¦ Imię
+Олена ¦ Елена ¦ Olena ¦ Olena
+Телефон ¦ Телефон ¦ Phone ¦ Telefon
+Вакансія ¦ Вакансия ¦ Job ¦ Oferta
+Будь-яка / порадьте мені ¦ Любая / посоветуйте мне ¦ Any / advise me ¦ Dowolna / doradźcie mi
+порадьте мені ¦ посоветуйте мне ¦ advise me ¦ doradźcie mi
+Сам / сама ¦ Сам / сама ¦ On my own ¦ Sam / sama
+З другом / подругою ¦ С другом / подругой ¦ With a friend ¦ Ze znajomym / znajomą
+Коли готові виїхати? ¦ Когда готовы выехать? ¦ When can you leave? ¦ Kiedy możesz wyjechać?
+Найближчим часом ¦ В ближайшее время ¦ As soon as possible ¦ Jak najszybciej
+найближчим часом ¦ в ближайшее время ¦ shortly ¦ wkrótce
+Протягом місяця ¦ В течение месяца ¦ Within a month ¦ W ciągu miesiąca
+Пізніше ¦ Позже ¦ Later ¦ Później
+Як з вами зв'язатися? ¦ Как с вами связаться? ¦ How should we contact you? ¦ Jak się z Tobą skontaktować?
+Зателефонуйте мені ¦ Позвоните мне ¦ Call me ¦ Zadzwońcie do mnie
+зателефонуйте мені ¦ позвоните мне ¦ call me ¦ zadzwońcie do mnie
+Напишіть мені ¦ Напишите мне ¦ Message me ¦ Napiszcie do mnie
+напишіть мені в ¦ напишите мне в ¦ message me on ¦ napiszcie do mnie na
+Куди написати? ¦ Куда написать? ¦ Where should we write? ¦ Gdzie napisać?
+Коментар (необов'язково) ¦ Комментарий (необязательно) ¦ Comment (optional) ¦ Komentarz (opcjonalnie)
+Досвід роботи, побажання щодо міста чи графіка ¦ Опыт работы, пожелания по городу или графику ¦ Work experience, preferred city or schedule ¦ Doświadczenie, preferowane miasto lub grafik
+Сайт ¦ Сайт ¦ Website ¦ Strona
+Надіслати заявку ¦ Отправить заявку ¦ Send application ¦ Wyślij zgłoszenie
+Надсилаємо… ¦ Отправляем… ¦ Sending… ¦ Wysyłamy…
+Надсилаючи заявку, ви приймаєте умови ¦ Отправляя заявку, вы принимаете условия ¦ By sending the application you accept the terms of the ¦ Wysyłając zgłoszenie, akceptujesz warunki
+публічної оферти ¦ публичной оферты ¦ public offer ¦ oferty publicznej
+й погоджуєтеся на обробку ваших даних відповідно до ¦ и соглашаетесь на обработку ваших данных в соответствии с ¦ and agree to the processing of your data under the ¦ i zgadzasz się na przetwarzanie danych zgodnie z
+політики конфіденційності ¦ политикой конфиденциальности ¦ privacy policy ¦ polityką prywatności
+Вкажіть, будь ласка, ваше ім'я ¦ Укажите, пожалуйста, ваше имя ¦ Please enter your name ¦ Podaj, proszę, swoje imię
+Вкажіть номер телефону, щоб ми могли з вами зв'язатися ¦ Укажите номер телефона, чтобы мы могли с вами связаться ¦ Enter your phone number so we can contact you ¦ Podaj numer telefonu, abyśmy mogli się z Tobą skontaktować
+Залишився один крок. ¦ Остался один шаг. ¦ One step left. ¦ Został jeden krok.
+Надішліть заявку нам у месенджер — текст уже готовий: ¦ Отправьте заявку нам в мессенджер — текст уже готов: ¦ Send your application to us on a messenger — the text is ready: ¦ Wyślij zgłoszenie na komunikatorze — tekst jest gotowy:
+Надіслати у WhatsApp ¦ Отправить в WhatsApp ¦ Send via WhatsApp ¦ Wyślij przez WhatsApp
+У WhatsApp текст підставиться сам. Для Telegram і Viber ми скопіюємо його — просто вставте в чат. ¦ В WhatsApp текст подставится сам. Для Telegram и Viber мы скопируем его — просто вставьте в чат. ¦ In WhatsApp the text fills in automatically. For Telegram and Viber we copy it — just paste it into the chat. ¦ W WhatsAppie tekst wstawi się sam. Dla Telegrama i Vibera skopiujemy go — wklej go do czatu.
+Заповнити ще раз ¦ Заполнить ещё раз ¦ Fill in again ¦ Wypełnij ponownie
+Не вдалося надіслати заявку автоматично. ¦ Не удалось отправить заявку автоматически. ¦ Couldn't send the application automatically. ¦ Nie udało się wysłać zgłoszenia automatycznie.
+Дякуємо! Заявку отримано. ¦ Спасибо! Заявка получена. ¦ Thank you! Application received. ¦ Dziękujemy! Zgłoszenie otrzymane.
+Дякуємо ¦ Спасибо ¦ Thank you ¦ Dziękujemy
+Заявку отримано ¦ Заявка получена ¦ Application received ¦ Zgłoszenie otrzymane
+Менеджер зв'яжеться з вами найближчим часом. ¦ Менеджер свяжется с вами в ближайшее время. ¦ A manager will contact you shortly. ¦ Menedżer wkrótce się z Tobą skontaktuje.
+Менеджер зателефонує вам найближчим часом на номер ¦ Менеджер позвонит вам в ближайшее время на номер ¦ A manager will call you shortly at ¦ Menedżer wkrótce zadzwoni pod numer
+Менеджер напише вам у ¦ Менеджер напишет вам в ¦ A manager will message you on ¦ Menedżer napisze do Ciebie na
+Хочете швидше? Напишіть нам самі — текст заявки вже готовий: ¦ Хотите быстрее? Напишите нам сами — текст заявки уже готов: ¦ Want it faster? Message us yourself — your application text is ready: ¦ Chcesz szybciej? Napisz do nas sam — tekst zgłoszenia jest gotowy:
+Надіслати ще одну заявку ¦ Отправить ещё одну заявку ¦ Send another application ¦ Wyślij kolejne zgłoszenie
+Переписка ¦ Переписка ¦ Messages ¦ Wiadomości
+Написати нам ¦ Написать нам ¦ Message us ¦ Napisz do nas
+# ---- FAQ
+Часті питання ¦ Частые вопросы ¦ FAQ ¦ Częste pytania
+Чи потрібно платити за працевлаштування? ¦ Нужно ли платить за трудоустройство? ¦ Do I have to pay for placement? ¦ Czy trzeba płacić za pośrednictwo?
+Ні, для кандидатів наші послуги безкоштовні. Окремо можуть оплачуватися лише дорога та житло — їхня вартість указана у вакансії. ¦ Нет, для кандидатов наши услуги бесплатны. Отдельно могут оплачиваться только дорога и жильё — их стоимость указана в вакансии. ¦ No, our services are free for candidates. Only travel and housing may be paid separately — their cost is shown in the listing. ¦ Nie, nasze usługi są bezpłatne dla kandydatów. Osobno płatne mogą być tylko podróż i zakwaterowanie — ich koszt podano w ofercie.
+Що означає «брутто» і скільки я отримаю на руки? ¦ Что означает «брутто» и сколько я получу на руки? ¦ What does "gross" mean and how much will I take home? ¦ Co oznacza „brutto” i ile dostanę na rękę?
+Брутто — це сума до сплати податків і внесків. «На руки» (нетто) — те, що ви фактично отримаєте. У більшості вакансій ми показуємо обидві суми: різниця залежить від країни, виду договору й вашої податкової ситуації. Точну суму «на руки» менеджер повідомить після перевірки умов конкретної вакансії. ¦ Брутто — это сумма до уплаты налогов и взносов. «На руки» (нетто) — то, что вы фактически получите. В большинстве вакансий мы показываем обе суммы: разница зависит от страны, вида договора и вашей налоговой ситуации. Точную сумму «на руки» менеджер сообщит после проверки условий конкретной вакансии. ¦ Gross is the amount before tax and contributions. Take-home (net) is what you actually receive. Most listings show both: the difference depends on the country, contract type and your tax situation. The manager will confirm the exact take-home pay after checking the specific job. ¦ Brutto to kwota przed opodatkowaniem i składkami. „Na rękę” (netto) to to, co faktycznie otrzymasz. W większości ofert pokazujemy obie kwoty: różnica zależy od kraju, rodzaju umowy i Twojej sytuacji podatkowej. Dokładną kwotę na rękę menedżer poda po sprawdzeniu warunków konkretnej oferty.
+Які бувають договори? ¦ Какие бывают договоры? ¦ What types of contract are there? ¦ Jakie są rodzaje umów?
+(umowa o pracę) — оплачувана відпустка, лікарняні, повне соціальне страхування. ¦ (umowa o pracę) — оплачиваемый отпуск, больничные, полное социальное страхование. ¦ (umowa o pracę) — paid leave, sick pay, full social insurance. ¦ (umowa o pracę) — płatny urlop, zwolnienia lekarskie, pełne ubezpieczenie społeczne.
+(umowa zlecenie) — оплата за відпрацьовані години, без оплачуваної відпустки; які страхування входять, указано у вакансії. Тип договору є в кожній вакансії. ¦ (umowa zlecenie) — оплата за отработанные часы, без оплачиваемого отпуска; какие страховки входят, указано в вакансии. Тип договора есть в каждой вакансии. ¦ (umowa zlecenie) — paid per hour worked, no paid leave; the insurance included is stated in the listing. Every listing shows the contract type. ¦ (umowa zlecenie) — wynagrodzenie za przepracowane godziny, bez płatnego urlopu; jakie ubezpieczenia obejmuje, podano w ofercie. Rodzaj umowy jest w każdej ofercie.
+Чи потрібне знання мови? ¦ Нужно ли знание языка? ¦ Do I need to speak the language? ¦ Czy potrzebna jest znajomość języka?
+Для більшості вакансій — ні. Якщо мова потрібна, це вказано в описі вакансії. ¦ Для большинства вакансий — нет. Если язык нужен, это указано в описании вакансии. ¦ For most jobs, no. If a language is required, the listing says so. ¦ W większości ofert — nie. Jeśli język jest potrzebny, jest to podane w opisie oferty.
+Які документи потрібні? ¦ Какие документы нужны? ¦ What documents do I need? ¦ Jakie dokumenty są potrzebne?
+Зазвичай — закордонний біометричний паспорт. Для окремих країн і вакансій можуть знадобитися інші документи: менеджер підкаже точний перелік до виїзду. ¦ Обычно — заграничный биометрический паспорт. Для отдельных стран и вакансий могут понадобиться другие документы: менеджер подскажет точный перечень до выезда. ¦ Usually a biometric passport. Some countries and jobs may need other documents: the manager will give you the exact list before departure. ¦ Zwykle biometryczny paszport. Dla niektórych krajów i ofert mogą być potrzebne inne dokumenty: menedżer poda dokładną listę przed wyjazdem.
+Чи можна поїхати парою або з другом? ¦ Можно ли поехать парой или с другом? ¦ Can I go as a couple or with a friend? ¦ Czy można pojechać w parze lub ze znajomym?
+Так. Скористайтеся фільтром «Для пар» — там вакансії, куди беруть і жінок, і чоловіків. Про спільне житло уточнюйте в менеджера. ¦ Да. Воспользуйтесь фильтром «Для пар» — там вакансии, куда берут и женщин, и мужчин. О совместном жилье уточняйте у менеджера. ¦ Yes. Use the "Couples" filter — it shows jobs open to both women and men. Ask the manager about shared housing. ¦ Tak. Skorzystaj z filtra „Pary” — są tam oferty dla kobiet i mężczyzn. O wspólne zakwaterowanie zapytaj menedżera.
+Хто може виїхати під час воєнного стану? ¦ Кто может выехать во время военного положения? ¦ Who can leave Ukraine under martial law? ¦ Kto może wyjechać w czasie stanu wojennego?
+Жінки — без обмежень. Чоловіки 18–60 років — лише за наявності законних підстав для перетину кордону. Менеджер підкаже, які вакансії вам підходять. ¦ Женщины — без ограничений. Мужчины 18–60 лет — только при наличии законных оснований для пересечения границы. Менеджер подскажет, какие вакансии вам подходят. ¦ Women — without restrictions. Men aged 18–60 — only with legal grounds to cross the border. The manager will suggest suitable jobs. ¦ Kobiety — bez ograniczeń. Mężczyźni w wieku 18–60 lat — tylko z prawną podstawą do przekroczenia granicy. Menedżer podpowie, które oferty Ci odpowiadają.
+З ким я підписую договір? ¦ С кем я подписываю договор? ¦ Who do I sign the contract with? ¦ Z kim podpisuję umowę?
+З роботодавцем або його кадровою агенцією в країні працевлаштування — саме ця юридична особа буде стороною вашого договору. Підприємство, де ви фактично працюватимете, вказане у вакансії; воно може відрізнятися від сторони договору, якщо вас оформлює агенція. Точну назву сторони договору менеджер повідомить до виїзду. ¦ С работодателем или его кадровым агентством в стране трудоустройства — именно это юрлицо будет стороной вашего договора. Предприятие, где вы фактически будете работать, указано в вакансии; оно может отличаться от стороны договора, если вас оформляет агентство. Точное название стороны договора менеджер сообщит до выезда. ¦ With the employer or its staffing agency in the country of employment — that legal entity will be the party to your contract. The company where you'll actually work is named in the listing; it may differ from the contracting party if an agency employs you. The manager will tell you the exact contracting party before departure. ¦ Z pracodawcą lub jego agencją pracy w kraju zatrudnienia — to ten podmiot będzie stroną Twojej umowy. Zakład, w którym faktycznie będziesz pracować, jest podany w ofercie; może się różnić od strony umowy, jeśli zatrudnia Cię agencja. Dokładną nazwę strony umowy menedżer poda przed wyjazdem.
+Як швидко можна виїхати? ¦ Как быстро можно выехать? ¦ How soon can I leave? ¦ Jak szybko można wyjechać?
+Найближчі дати заїзду вказані у вакансіях. Після того як ви оберете вакансію, менеджер погодить із вами конкретну дату. ¦ Ближайшие даты заезда указаны в вакансиях. После того как вы выберете вакансию, менеджер согласует с вами конкретную дату. ¦ The nearest start dates are shown in the listings. Once you choose a job, the manager will agree a specific date with you. ¦ Najbliższe terminy przyjazdu są podane w ofertach. Gdy wybierzesz ofertę, menedżer ustali z Tobą konkretną datę.
+Чи допомагаєте з дорогою? ¦ Помогаете ли с дорогой? ¦ Do you help with travel? ¦ Czy pomagacie w podróży?
+Так. Складаємо маршрутний лист, підказуємо перевізника-партнера й допомагаємо купити квиток, а на місці на зв'язку координатор. Квиток оплачуєте ви — вартість ми повідомимо заздалегідь. ¦ Да. Составляем маршрутный лист, подсказываем перевозчика-партнёра и помогаем купить билет, а на месте на связи координатор. Билет оплачиваете вы — стоимость мы сообщим заранее. ¦ Yes. We prepare a route sheet, recommend a partner carrier and help you buy a ticket, and a coordinator is in touch on site. You pay for the ticket — we'll tell you the cost in advance. ¦ Tak. Przygotowujemy plan podróży, polecamy przewoźnika partnerskiego i pomagamy kupić bilet, a na miejscu w kontakcie jest koordynator. Bilet opłacasz Ty — koszt podamy z góry.
+Коли і як виплачують першу зарплату? ¦ Когда и как выплачивают первую зарплату? ¦ When and how is the first pay made? ¦ Kiedy i jak wypłacana jest pierwsza pensja?
+Зазвичай зарплату виплачують раз на місяць на банківську картку, за попередній місяць. Тому перша виплата може надійти через кілька тижнів після початку роботи — візьміть із собою гроші на перші витрати. Графік виплат і можливість авансу для вашої вакансії уточнить менеджер. ¦ Обычно зарплату выплачивают раз в месяц на банковскую карту, за предыдущий месяц. Поэтому первая выплата может прийти через несколько недель после начала работы — возьмите с собой деньги на первые расходы. График выплат и возможность аванса для вашей вакансии уточнит менеджер. ¦ Pay is usually made once a month to a bank card, for the previous month. So the first payment may arrive a few weeks after you start — bring money for initial expenses. The manager will confirm the pay schedule and any advance for your job. ¦ Zwykle wynagrodzenie wypłacane jest raz w miesiącu na kartę bankową, za poprzedni miesiąc. Dlatego pierwsza wypłata może przyjść kilka tygodni po rozpoczęciu pracy — weź pieniądze na pierwsze wydatki. Harmonogram wypłat i możliwość zaliczki menedżer potwierdzi dla Twojej oferty.
+Що саме утримують із зарплати? ¦ Что именно удерживают из зарплаты? ¦ What is deducted from the pay? ¦ Co dokładnie jest potrącane z wynagrodzenia?
+Податок і соціальні внески — їхній розмір залежить від країни, виду договору, віку та податкового резидентства. Крім того, якщо це передбачено вакансією, із зарплати можуть утримувати вартість житла, доїзду до роботи чи харчування. Перед виїздом менеджер окремо назве кожне утримання для вашої вакансії. ¦ Налог и социальные взносы — их размер зависит от страны, вида договора, возраста и налогового резидентства. Кроме того, если это предусмотрено вакансией, из зарплаты могут удерживать стоимость жилья, дороги до работы или питания. Перед выездом менеджер отдельно назовёт каждое удержание для вашей вакансии. ¦ Tax and social contributions — the amount depends on the country, contract type, age and tax residency. If the job provides for it, housing, commuting or meals may also be deducted. Before you leave, the manager will list each deduction for your job. ¦ Podatek i składki społeczne — ich wysokość zależy od kraju, rodzaju umowy, wieku i rezydencji podatkowej. Ponadto, jeśli przewiduje to oferta, z wynagrodzenia mogą być potrącane koszty zakwaterowania, dojazdu lub wyżywienia. Przed wyjazdem menedżer wymieni każde potrącenie dla Twojej oferty.
+Скільки годин на місяць гарантовано? ¦ Сколько часов в месяц гарантировано? ¦ How many hours a month are guaranteed? ¦ Ile godzin miesięcznie jest gwarantowanych?
+У кожній вакансії вказано кількість годин на місяць і графік змін. Надгодини можливі не завжди, тому розраховуйте заробіток за основними годинами, а не за максимальними. Чи є понаднормова робота, уточнюйте в менеджера. ¦ В каждой вакансии указано количество часов в месяц и график смен. Сверхурочные возможны не всегда, поэтому рассчитывайте заработок по основным часам, а не по максимальным. Есть ли сверхурочная работа, уточняйте у менеджера. ¦ Each listing shows the monthly hours and shift schedule. Overtime isn't always available, so calculate earnings on the base hours, not the maximum. Ask the manager about overtime. ¦ W każdej ofercie podano liczbę godzin miesięcznie i grafik zmian. Nadgodziny nie zawsze są możliwe, więc licz zarobki według podstawowych godzin, a nie maksymalnych. O nadgodziny zapytaj menedżera.
+Що входить у вартість житла? ¦ Что входит в стоимость жилья? ¦ What does the housing cost include? ¦ Co obejmuje koszt zakwaterowania?
+Перед виїздом запитайте в менеджера: скільки людей живе в кімнаті, чи входять комунальні послуги, чи потрібна застава, яка відстань до роботи й скільки коштує доїзд. Ми уточнимо це в роботодавця. ¦ Перед выездом спросите у менеджера: сколько человек живёт в комнате, входят ли коммунальные услуги, нужен ли залог, какое расстояние до работы и сколько стоит дорога. Мы уточним это у работодателя. ¦ Before you leave, ask the manager: how many people share a room, whether utilities are included, whether a deposit is needed, how far it is to work and what the commute costs. We'll check with the employer. ¦ Przed wyjazdem zapytaj menedżera: ile osób mieszka w pokoju, czy media są wliczone, czy potrzebna jest kaucja, jaka jest odległość do pracy i ile kosztuje dojazd. Sprawdzimy to u pracodawcy.
+Чи потрібно щось платити до виїзду? ¦ Нужно ли что-то платить до выезда? ¦ Do I need to pay anything before leaving? ¦ Czy trzeba coś płacić przed wyjazdem?
+Підбір вакансії безкоштовний. Усі інші можливі витрати — квиток, житло, медогляд, транспорт чи документи — менеджер назве окремо ще до виїзду. ¦ Подбор вакансии бесплатный. Все остальные возможные расходы — билет, жильё, медосмотр, транспорт или документы — менеджер назовёт отдельно ещё до выезда. ¦ Job matching is free. Any other possible costs — ticket, housing, medical check, transport or documents — the manager will list separately before departure. ¦ Dobór oferty jest bezpłatny. Wszystkie inne możliwe koszty — bilet, zakwaterowanie, badania lekarskie, transport czy dokumenty — menedżer wymieni osobno przed wyjazdem.
+Що робити, якщо після приїзду умови відрізняються від вакансії? ¦ Что делать, если после приезда условия отличаются от вакансии? ¦ What if the conditions differ from the listing after I arrive? ¦ Co zrobić, jeśli po przyjeździe warunki różnią się od oferty?
+До підписання договору перевірте ставку, кількість годин, житло й утримання. Якщо щось не збігається з вакансією, не підписуйте й одразу напишіть або зателефонуйте нам: +380 73 606 77 00 (Telegram, Viber, WhatsApp). Ми з’ясуємо ситуацію з роботодавцем. ¦ До подписания договора проверьте ставку, количество часов, жильё и удержания. Если что-то не совпадает с вакансией, не подписывайте и сразу напишите или позвоните нам: +380 73 606 77 00 (Telegram, Viber, WhatsApp). Мы выясним ситуацию с работодателем. ¦ Before signing, check the rate, hours, housing and deductions. If anything doesn't match the listing, don't sign — message or call us right away: +380 73 606 77 00 (Telegram, Viber, WhatsApp). We'll sort it out with the employer. ¦ Przed podpisaniem umowy sprawdź stawkę, liczbę godzin, zakwaterowanie i potrącenia. Jeśli coś nie zgadza się z ofertą, nie podpisuj i od razu napisz lub zadzwoń do nas: +380 73 606 77 00 (Telegram, Viber, WhatsApp). Wyjaśnimy sytuację z pracodawcą.
+Чи сплачують особи до 26 років податки та внески в Польщі? ¦ Платят ли лица до 26 лет налоги и взносы в Польше? ¦ Do people under 26 pay tax and contributions in Poland? ¦ Czy osoby do 26 lat płacą podatki i składki w Polsce?
+Це залежить від віку, виду договору та статусу працівника. Для окремих доходів осіб до 26 років може застосовуватися пільга з податку PIT — у межах річного ліміту 85 528 zł. Бути студентом для цієї пільги не обов’язково. ¦ Это зависит от возраста, вида договора и статуса работника. Для отдельных доходов лиц до 26 лет может применяться льгота по налогу PIT — в пределах годового лимита 85 528 zł. Быть студентом для этой льготы не обязательно. ¦ It depends on age, contract type and worker status. People under 26 may get the PIT relief on certain income — up to the annual limit of 85,528 zł. You don't have to be a student for this relief. ¦ To zależy od wieku, rodzaju umowy i statusu pracownika. Do niektórych dochodów osób do 26 lat może mieć zastosowanie ulga w PIT — do rocznego limitu 85 528 zł. Nie trzeba być studentem, aby z niej skorzystać.
+Окремо: студент до 26 років може не сплачувати внески ZUS за договором доручення (umowa zlecenie), якщо його статус студента підтверджено та виконані інші умови. Навчання в Україні саме по собі не виключає такої можливості. Для umowa o pracę діють інші правила. ¦ Отдельно: студент до 26 лет может не платить взносы ZUS по договору поручения (umowa zlecenie), если его статус студента подтверждён и выполнены другие условия. Учёба в Украине сама по себе не исключает такой возможности. Для umowa o pracę действуют другие правила. ¦ Separately: a student under 26 may not pay ZUS contributions on a civil-law contract (umowa zlecenie) if their student status is confirmed and other conditions are met. Studying in Ukraine does not by itself rule this out. Different rules apply to umowa o pracę. ¦ Osobno: student do 26 lat może nie płacić składek ZUS na umowie zlecenie, jeśli jego status studenta jest potwierdzony i spełnione są inne warunki. Studia na Ukrainie same w sobie tego nie wykluczają. Dla umowy o pracę obowiązują inne zasady.
+Майте на увазі: без внесків за цим договором не нараховується пенсійне й медичне страхування. ¦ Имейте в виду: без взносов по этому договору не начисляется пенсионное и медицинское страхование. ¦ Note: without contributions this contract gives no pension or health insurance. ¦ Pamiętaj: bez składek na tej umowie nie przysługuje ubezpieczenie emerytalne ani zdrowotne.
+Точну суму «на руки» повідомимо після перевірки виду договору, документів і податкової ситуації кандидата. ¦ Точную сумму «на руки» сообщим после проверки вида договора, документов и налоговой ситуации кандидата. ¦ We'll confirm the exact take-home pay after checking the contract type, documents and the candidate's tax situation. ¦ Dokładną kwotę na rękę podamy po sprawdzeniu rodzaju umowy, dokumentów i sytuacji podatkowej kandydata.
+# ---- Підвал, статті, різне
+© 2026 Вдало · Підбір роботи в Європі ¦ © 2026 Вдало · Подбор работы в Европе ¦ © 2026 Vdalo · Jobs in Europe ¦ © 2026 Vdalo · Praca w Europie
+Офіс: м. Київ, вул. Джона Маккейна, 7, офіс 169 · ¦ Офис: г. Киев, ул. Джона Маккейна, 7, офис 169 · ¦ Office: 7 John McCain St, office 169, Kyiv · ¦ Biuro: Kijów, ul. Johna McCaina 7, biuro 169 ·
+Публічна оферта ¦ Публичная оферта ¦ Public offer ¦ Oferta publiczna
+Політика конфіденційності ¦ Политика конфиденциальности ¦ Privacy policy ¦ Polityka prywatności
+Робота за кордоном ¦ Работа за границей ¦ Jobs abroad ¦ Praca za granicą
+Корисні статті ¦ Полезные статьи ¦ Useful articles ¦ Przydatne artykuły
+Усі статті ¦ Все статьи ¦ All articles ¦ Wszystkie artykuły
+Усі вакансії ¦ Все вакансии ¦ All jobs ¦ Wszystkie oferty
+Інші напрямки ¦ Другие направления ¦ Other categories ¦ Inne kierunki
+Напрямки ¦ Направления ¦ Categories ¦ Kierunki
+Робота в Польщі ¦ Работа в Польше ¦ Jobs in Poland ¦ Praca w Polsce
+Робота в Литві ¦ Работа в Литве ¦ Jobs in Lithuania ¦ Praca na Litwie
+Робота в Чехії ¦ Работа в Чехии ¦ Jobs in Czechia ¦ Praca w Czechach
+Робота в Словаччині ¦ Работа в Словакии ¦ Jobs in Slovakia ¦ Praca na Słowacji
+Робота на складі ¦ Работа на складе ¦ Warehouse jobs ¦ Praca w magazynie
+Робота на заводі ¦ Работа на заводе ¦ Factory jobs ¦ Praca w fabryce
+М’ясне й рибне виробництво ¦ Мясное и рыбное производство ¦ Meat and fish processing ¦ Przetwórstwo mięsa i ryb
+Водій навантажувача ¦ Водитель погрузчика ¦ Forklift driver ¦ Operator wózka widłowego
+Для жінок ¦ Для женщин ¦ For women ¦ Dla kobiet
+Для чоловіків ¦ Для мужчин ¦ For men ¦ Dla mężczyzn
+Для пар ¦ Для пар ¦ For couples ¦ Dla par
+Для студентів ¦ Для студентов ¦ For students ¦ Dla studentów
+Робота за кордоном для українців ¦ Работа за границей для украинцев ¦ Jobs abroad for Ukrainians ¦ Praca za granicą dla Ukraińców
+«Вдало» допомагає українцям знайти роботу за кордоном: на складах, заводах і харчових виробництвах Польщі, Литви, Чехії та Словаччини. Для кандидатів підбір безкоштовний. ¦ «Вдало» помогает украинцам найти работу за границей: на складах, заводах и пищевых производствах Польши, Литвы, Чехии и Словакии. Для кандидатов подбор бесплатный. ¦ Vdalo helps Ukrainians find work abroad: in warehouses, factories and food plants in Poland, Lithuania, Czechia and Slovakia. Matching is free for candidates. ¦ Vdalo pomaga Ukraińcom znaleźć pracę za granicą: w magazynach, fabrykach i zakładach spożywczych w Polsce, na Litwie, w Czechach i na Słowacji. Dla kandydatów dobór jest bezpłatny.
+Ми показуємо умови так, щоб їх можна було порівняти ще до виїзду: ставку брутто й приблизну суму на руки, кількість годин, житло, тип договору та найближчі дати заїзду. Список вакансій оновлюється щодня. ¦ Мы показываем условия так, чтобы их можно было сравнить ещё до выезда: ставку брутто и примерную сумму на руки, количество часов, жильё, тип договора и ближайшие даты заезда. Список вакансий обновляется ежедневно. ¦ We present the conditions so you can compare them before you leave: the gross rate and approximate take-home pay, hours, housing, contract type and nearest start dates. The job list is updated daily. ¦ Pokazujemy warunki tak, aby można je było porównać przed wyjazdem: stawkę brutto i przybliżoną kwotę na rękę, liczbę godzin, zakwaterowanie, rodzaj umowy i najbliższe terminy przyjazdu. Lista ofert jest aktualizowana codziennie.
+# фрагменти динамічних SEO-абзаців
+Зазвичай на руки виходить ¦ Обычно на руки выходит ¦ Typical take-home pay is ¦ Zwykle na rękę wychodzi
+Зазвичай до сплати податків виходить ¦ Обычно до уплаты налогов выходит ¦ Typical pay before tax is ¦ Zwykle brutto wychodzi
+грн на місяць (за курсом НБУ на ¦ грн в месяц (по курсу НБУ на ¦ UAH a month (at the NBU rate of ¦ UAH miesięcznie (według kursu NBU z
+зарплату виплачують у валюті країни) ¦ зарплату выплачивают в валюте страны) ¦ pay is in the local currency) ¦ wynagrodzenie wypłacane w walucie kraju)
+за годину брутто ¦ за час брутто ¦ per hour gross ¦ za godzinę brutto
+за годину на руки ¦ за час на руки ¦ per hour take-home ¦ za godzinę na rękę
+Житло пропонують у ¦ Жильё предлагают в ¦ Housing is offered in ¦ Zakwaterowanie oferowane jest w
+вакансіях з ¦ вакансиях из ¦ jobs out of ¦ ofertach z
+вакансії з ¦ вакансии из ¦ jobs out of ¦ ofertach z
+з них безкоштовне — у ¦ из них бесплатное — в ¦ free in ¦ w tym darmowe w
+Тип договору вказаний у кожній вакансії: ¦ Тип договора указан в каждой вакансии: ¦ Every listing shows the contract type: ¦ Rodzaj umowy jest podany w każdej ofercie:
+Міста й селища, де зараз є робота: ¦ Города и посёлки, где сейчас есть работа: ¦ Towns with jobs right now: ¦ Miejscowości, w których jest teraz praca:
+Серед роботодавців ¦ Среди работодателей ¦ Employers include ¦ Wśród pracodawców
+на місяць на руки — так зазвичай виходить у наших вакансіях ¦ в месяц на руки — так обычно выходит в наших вакансиях ¦ a month take-home — typical for our jobs ¦ miesięcznie na rękę — tyle zwykle wychodzi w naszych ofertach
+на місяць до сплати податків — так зазвичай виходить у наших вакансіях ¦ в месяц до уплаты налогов — так обычно выходит в наших вакансиях ¦ a month before tax — typical for our jobs ¦ miesięcznie brutto — tyle zwykle wychodzi w naszych ofertach
+вакансій із житлом ¦ вакансий с жильём ¦ jobs with housing ¦ ofert z zakwaterowaniem
+у 4 країнах ¦ в 4 странах ¦ in 4 countries ¦ w 4 krajach
+у 3 країнах ¦ в 3 странах ¦ in 3 countries ¦ w 3 krajach
+у 2 країнах ¦ в 2 странах ¦ in 2 countries ¦ w 2 krajach
+у 1 країні ¦ в 1 стране ¦ in 1 country ¦ w 1 kraju
+оновлюємо щодня ¦ обновляем ежедневно ¦ updated daily ¦ aktualizujemy codziennie
+трудовий договір / договір доручення ¦ трудовой договор / договор поручения ¦ employment / civil-law contract ¦ umowa o pracę / umowa zlecenie
+Читати ¦ Читать ¦ Read ¦ Czytaj
+хв ¦ мин ¦ min ¦ min
