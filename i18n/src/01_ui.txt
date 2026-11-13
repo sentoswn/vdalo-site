@@ -454,3 +454,8 @@ Telegram, Viber, WhatsApp або дзвінок — пишіть, як вам з
 трудовий договір / договір доручення ¦ трудовой договор / договор поручения ¦ employment / civil-law contract ¦ umowa o pracę / umowa zlecenie
 Читати ¦ Читать ¦ Read ¦ Czytaj
 хв ¦ мин ¦ min ¦ min
+# ---- Код країни в полі телефону
+Код країни ¦ Код страны ¦ Country code ¦ Kod kraju
+Інший код ¦ Другой код ¦ Other code ¦ Inny kod
+код і номер ¦ код и номер ¦ code and number ¦ kod i numer
+Вкажіть номер телефону повністю. Якщо у вас інший код країни, оберіть його зі списку ¦ Укажите номер телефона полностью. Если у вас другой код страны, выберите его из списка ¦ Please enter your full phone number. If your country code is different, choose it from the list ¦ Podaj pełny numer telefonu. Jeśli masz inny kod kraju, wybierz go z listy
