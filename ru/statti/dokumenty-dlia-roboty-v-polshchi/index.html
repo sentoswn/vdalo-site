@@ -144,6 +144,9 @@ svg.i{width:18px;height:18px;flex:0 0 18px;stroke:currentColor;fill:none;stroke-
 .chip .n{opacity:.6;font-weight:600;margin-left:4px}
 select,input,textarea{width:100%;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:600 15px var(--font-body)}
 textarea{min-height:80px;resize:vertical}
+.phone-in{display:flex;gap:6px}
+.phone-in select{flex:0 0 auto;width:auto;padding-left:10px;padding-right:6px}
+.phone-in input{flex:1 1 auto;min-width:0}
 .switch{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;cursor:pointer;user-select:none}
 .switch input{appearance:none;-webkit-appearance:none;width:42px;height:24px;border-radius:999px;background:var(--line);position:relative;cursor:pointer;flex:0 0 42px;padding:0;border:0;transition:background .15s}
 .switch input::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .15s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
@@ -795,7 +798,7 @@ body.mnav-open .fab{display:none}
         <form class="lead-form" id="lead-form" method="post" action="#" novalidate>
           <div class="row2">
             <div><label class="lbl" for="f-name">Имя</label><input id="f-name" name="name" autocomplete="given-name" required placeholder="Елена"></div>
-            <div><label class="lbl" for="f-phone">Телефон</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required placeholder="+380 __ ___ __ __"></div>
+            <div><label class="lbl" for="f-phone">Телефон</label><div class="phone-in"><select id="f-phone-cc" aria-label="Код страны"><option value="380" selected>🇺🇦 +380</option><option value="48">🇵🇱 +48</option><option value="370">🇱🇹 +370</option><option value="420">🇨🇿 +420</option><option value="421">🇸🇰 +421</option><option value="49">🇩🇪 +49</option><option value="31">🇳🇱 +31</option><option value="373">🇲🇩 +373</option><option value="40">🇷🇴 +40</option><option value="36">🇭🇺 +36</option><option value="">Другой код</option></select><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" required placeholder="67 123 45 67"></div></div>
           </div>
           <div><label class="lbl" for="f-vac">Вакансия</label><select id="f-vac" name="vacancy"><option value="">Любая / посоветуйте мне</option></select></div>
           <div><span class="lbl" id="f-who-lbl">Кто едет?</span><div class="seg" role="group" aria-labelledby="f-who-lbl" data-field="who">
@@ -1025,7 +1028,30 @@ body.mnav-open .fab{display:none}
     else { var rs = JSON.parse(localStorage.getItem("vdalo_ref") || "null"); if (rs && rs.p && Date.now()-rs.t < 30*864e5) REFBY = rs.p; }
   } catch(e) {}
   if (REFBY && SOURCE.indexOf("рекомендація") < 0) SOURCE = "рекомендація від "+REFBY+(SOURCE ? "; "+SOURCE : "");
-  function refPhone(){ var d=REFBY; return d.length===12 && d.indexOf("380")===0 ? "+380 "+d.slice(3,5)+" "+d.slice(5,8)+" "+d.slice(8,10)+" "+d.slice(10) : d; }
+  function refPhone(){ var d=REFBY; return d.length===12 && d.indexOf("380")===0 ? "+380 "+d.slice(3,5)+" "+d.slice(5,8)+" "+d.slice(8,10)+" "+d.slice(10) : "+"+d; }
+  /* Номер у міжнародному форматі: код країни зі списку + номер; якщо номер починається з "+" або "00" — беремо як є */
+  var PH_HINT={"380":"67 123 45 67","48":"512 345 678","370":"612 34567","420":"601 234 567","421":"901 234 567","49":"151 2345 6789","31":"6 12345678","373":"621 23 456","40":"712 345 678","36":"20 123 4567","":"+44 7700 900123"};
+  function intlPhone(id){
+    var el=document.getElementById(id), cc=(document.getElementById(id+"-cc")||{}).value, raw=(el?el.value:"").trim(), d=raw.replace(/\D/g,"");
+    if (/^\s*(\+|00)/.test(raw)) d=d.replace(/^00/,"");
+    else if (cc){
+      if (cc==="380" && d.indexOf("380")===0 && d.length===12) {}
+      else if (cc==="380" && d.length===10 && d[0]==="0") d="38"+d;
+      else if (d.indexOf(cc)===0 && d.length>=cc.length+8) {}
+      else d=cc+d.replace(/^0+/,"");
+    }
+    var ok=d.length>=10 && d.length<=15 && (cc!=="380" || d.indexOf("380")!==0 || d.length===12);
+    var nice=d.indexOf("380")===0 && d.length===12 ? "+380 "+d.slice(3,5)+" "+d.slice(5,8)+" "+d.slice(8,10)+" "+d.slice(10) : "+"+d;
+    return {ok:ok, digits:d, text:nice};
+  }
+  ["ref-phone","f-phone"].forEach(function(id){
+    var sel=document.getElementById(id+"-cc"), inp=document.getElementById(id); if(!sel||!inp) return;
+    try { var saved=localStorage.getItem("vdalo_cc"); if (saved!==null && sel.querySelector('option[value="'+saved+'"]')) sel.value=saved; } catch(e) {}
+    function upd(){ inp.placeholder=PH_HINT[sel.value]||""; }
+    sel.addEventListener("change",function(){ upd(); try{ localStorage.setItem("vdalo_cc",sel.value); }catch(e){} inp.focus(); });
+    inp.addEventListener("input",function(){ if (/^\s*(\+|00)/.test(inp.value) && sel.value!=="") { var d=inp.value.replace(/\D/g,"").replace(/^00/,""); var o=[].slice.call(sel.options).filter(function(x){ return x.value && d.indexOf(x.value)===0; }).sort(function(a,b){ return b.value.length-a.value.length; })[0]; sel.value=o?o.value:""; upd(); } });
+    upd();
+  });
   var REFLINE = REFBY ? "Я за рекомендацією друга: "+refPhone() : "";
   function withRef(t){ return REFLINE && t.indexOf(REFLINE) < 0 ? (t ? t+"\n" : "")+REFLINE : t; }
   // кнопки месенджерів: додаємо рядок про рекомендацію до тексту повідомлення
@@ -1339,9 +1365,9 @@ body.mnav-open .fab{display:none}
   }
   $("lead-form").addEventListener("submit",function(e){
     e.preventDefault();
-    var f=e.target, err=$("f-err"), name=f.name.value.trim(), phone=f.phone.value.trim();
+    var f=e.target, err=$("f-err"), name=f.name.value.trim(), PH=intlPhone("f-phone"), phone=PH.text;
     if (!name){ err.textContent="Вкажіть, будь ласка, ваше ім'я."; f.name.focus(); return; }
-    if (phone.replace(/\D/g,"").length<9){ err.textContent="Вкажіть номер телефону, щоб ми могли з вами зв'язатися."; f.phone.focus(); return; }
+    if (!PH.ok){ err.textContent="Вкажіть номер телефону, щоб ми могли з вами зв'язатися."; f.phone.focus(); return; }
     err.textContent="";
     var sel=$("f-vac"), opt=sel.options[sel.selectedIndex], mode=segVal("mode"), channel=mode==="Переписка"?segVal("channel"):"";
     var vacTitle=sel.value?opt.textContent:"";
@@ -1544,10 +1570,9 @@ body.mnav-open .fab{display:none}
     var refMsg="Привіт! Подивись вакансії в Польщі, Литві, Чехії та Словаччині — є з житлом, для кандидатів безкоштовно:";
     $("ref-form").addEventListener("submit",function(e){
       e.preventDefault();
-      var d=$("ref-phone").value.replace(/\D/g,"");
-      if (d.length<9){ $("ref-err").textContent="Вкажіть ваш номер телефону."; $("ref-phone").focus(); return; }
+      var PH=intlPhone("ref-phone"), d=PH.digits;
+      if (!PH.ok){ $("ref-err").textContent="Вкажіть номер телефону повністю. Якщо у вас інший код країни, оберіть його зі списку."; $("ref-phone").focus(); return; }
       $("ref-err").textContent="";
-      if (d.length===10 && d[0]==="0") d="38"+d;
       refLink=refBase+"?ref="+d;
       $("ref-url").value=refLink;
       var full=refMsg+" "+refLink;
