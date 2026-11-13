@@ -116,7 +116,7 @@ svg.i{width:18px;height:18px;flex:0 0 18px;stroke:currentColor;fill:none;stroke-
 .lang-menu[hidden]{display:none}
 .lang-menu a{padding:10px 12px;border-radius:10px;text-decoration:none;font-weight:700;color:var(--ink)}
 .lang-menu a:hover,.lang-menu a[aria-current="true"]{background:var(--soft)}
-@media (max-width:1100px){.lang-seg{display:none}.lang-btn{display:inline-flex}}
+@media (max-width:1500px){.lang-seg{display:none}.lang-btn{display:inline-flex}}
 .top-phone{font-weight:800;text-decoration:none;white-space:nowrap}
 
 /* hero */
@@ -573,6 +573,60 @@ section.vpage{padding-top:14px}
 .doc-body p{color:var(--muted);margin:6px 0}
 @media (max-width:960px){.story,.ref{grid-template-columns:1fr}}
 @media (max-width:640px){.res{grid-template-columns:1fr}.marq-grp span{font-size:14px;padding:0 14px}}
+
+/* меню: «Вакансії» з підменю, бургер, сторінки розділів */
+.nav{align-items:center}
+.nav a[aria-current="page"],.nav .dd-btn[aria-current="page"]{color:var(--ink)}
+.dd{position:relative}
+.dd-btn{display:inline-flex;align-items:center;gap:4px;background:none;border:0;padding:0;font:inherit;font-weight:600;color:var(--muted);cursor:pointer}
+.dd-btn:hover,.dd.open .dd-btn{color:var(--ink)}
+.dd-btn svg{width:14px;height:14px;transform:rotate(90deg);transition:transform .15s}
+.dd.open .dd-btn svg{transform:rotate(-90deg)}
+.dd-menu{position:absolute;left:-18px;top:100%;padding-top:14px;display:none;z-index:30}
+.dd.open .dd-menu{display:block}
+@media (hover:hover){.dd:hover .dd-menu{display:block}.dd:hover .dd-btn{color:var(--ink)}}
+.dd-box{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 22px 50px -20px rgba(0,0,0,.35);display:grid;grid-template-columns:repeat(2,minmax(190px,auto));gap:6px 22px;min-width:440px}
+.dd-box b,.mnav b{display:block;font:800 12px var(--font-body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:2px 0 6px}
+.dd-box a{display:flex;justify-content:space-between;gap:12px;padding:7px 10px;margin:0 -10px;border-radius:10px;color:var(--ink)!important;font-weight:600;text-decoration:none}
+.dd-box a:hover{background:var(--soft)}
+.dd-box a small{color:var(--muted);font-weight:700}
+.dd-box .dd-all{grid-column:1/-1;margin-top:8px;border-top:1px solid var(--line);border-radius:0;padding-top:12px;justify-content:flex-start;gap:6px;color:var(--accent,var(--ink))!important;font-weight:800}
+.burger{display:none;width:42px;height:42px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:0}
+.burger span{display:block;width:18px;height:2px;border-radius:2px;background:var(--ink);transition:transform .2s,opacity .2s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mnav{position:fixed;left:0;right:0;top:calc(64px + env(safe-area-inset-top));bottom:0;z-index:19;background:var(--bg);overflow:auto;padding:12px 0 40px;border-top:1px solid var(--line)}
+.mnav[hidden]{display:none}
+.mnav .mn-main{display:grid;gap:2px;margin-bottom:18px}
+.mnav .mn-main a{padding:13px 4px;font:800 20px var(--font-body);text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)}
+.mnav .mn-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.mnav .mn-chips a{padding:9px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:700;text-decoration:none;color:var(--ink);font-size:15px}
+.mnav .mn-chips a small{color:var(--muted);margin-left:4px}
+.mnav .mn-cta{display:grid;gap:10px;margin-top:6px}
+body.mnav-open{overflow:hidden}
+.nav a,.dd-btn{white-space:nowrap}
+body.mnav-open .fab{display:none}
+@media (max-width:1400px){.nav{gap:18px}.top-cta .top-phone{display:none}}
+@media (max-width:1180px){.nav{display:none}.burger{display:inline-flex}}
+@media (max-width:640px){.top-cta .btn.sm{display:none}}
+.sec-more{display:inline-flex;align-items:center;gap:4px;font-weight:800;text-decoration:none;color:var(--ink);white-space:nowrap}
+.sec-more svg{width:16px;height:16px}
+.sec-more:hover{text-decoration:underline}
+.page-head{background:var(--grad);border-radius:32px;padding:clamp(24px,4.5vw,52px);margin-top:8px}
+.page-head h1{font-size:clamp(28px,4.5vw,48px)}
+.page-head .lead{margin-top:12px;font-size:18px;max-width:62ch}
+.page-head .ph-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.prose{max-width:760px}
+.prose p{margin-top:12px}
+.prose h2{margin-top:26px}
+.steps6{counter-reset:st;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.steps6 .card{position:relative;padding-top:58px}
+.steps6 .card::before{counter-increment:st;content:counter(st);position:absolute;left:22px;top:18px;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-weight:800;font-size:15px}
+@media (max-width:960px){.steps6{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.steps6{grid-template-columns:1fr}}
+.kgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media (max-width:760px){.kgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -619,14 +673,15 @@ section.vpage{padding-top:14px}
 <header class="top" id="top">
   <div class="wrap">
     <a class="logo" href="/" aria-label="Вдало — на початок"><span class="logo-mark">В</span>Вдало</a>
-    <nav class="nav" aria-label="Розділи">
-      <a href="#vacancies">Вакансії</a>
-      <a href="#how">Як це працює</a>
-      <a href="#friend">Приведи друга</a>
-      <a href="#faq">Питання</a>
-      <a href="/statti/">Статті</a>
-      <a href="#apply">Контакти</a>
-    </nav>
+    <nav class="nav" aria-label="Розділи"><!--seo:nav-->
+      <div class="dd"><button class="dd-btn" type="button" aria-expanded="false" aria-haspopup="true">Вакансії<svg class="i"><use href="#i-chev"/></svg></button><div class="dd-menu"><div class="dd-box"><div><b>За країною</b><a href="/robota-v-polshchi/">Польща<small>85</small></a><a href="/robota-v-lytvi/">Литва<small>10</small></a><a href="/robota-v-chekhii/">Чехія<small>5</small></a></div><div><b>За видом роботи</b><a href="/robota-na-skladi/">Робота на складі<small>47</small></a><a href="/robota-na-vyrobnytstvi/">Робота на заводі<small>77</small></a><a href="/robota-na-kharchovomu-vyrobnytstvi/">М’ясне й рибне виробництво<small>18</small></a><a href="/vodii-navantazhuvacha/">Водій навантажувача<small>8</small></a><a href="/robota-dlia-zhinok/">Для жінок<small>71</small></a><a href="/robota-dlia-cholovikiv/">Для чоловіків<small>86</small></a><a href="/robota-dlia-par/">Для пар<small>55</small></a><a href="/robota-v-polshchi-dlia-studentiv/">Для студентів<small>60</small></a></div><a class="dd-all" href="/#vacancies">Усі вакансії<svg class="i"><use href="#i-chev"/></svg></a></div></div></div>
+      <a href="/yak-tse-pratsiuie/">Як це працює</a>
+      <a href="/pryvedy-druha/">Приведи друга</a>
+      <a href="/pytannia/">Питання</a>
+      <a href="/statti/" aria-current="page">Статті</a>
+      <a href="/pro-nas/">Про нас</a>
+      <a href="/kontakty/">Контакти</a>
+    <!--/seo:nav--></nav>
     <div class="lang" id="lang">
       <nav class="lang-seg" aria-label="Мова сайту"><a data-l="uk" translate="no">UA</a><a data-l="ru" translate="no">RU</a><a data-l="en" translate="no">EN</a><a data-l="pl" translate="no">PL</a></nav>
       <button class="lang-btn" type="button" id="lang-btn" aria-expanded="false" aria-controls="lang-menu" translate="no"><svg class="i"><use href="#i-globe"/></svg><span id="lang-cur">UA</span></button>
@@ -635,9 +690,11 @@ section.vpage{padding-top:14px}
     <div class="top-cta">
       <a class="top-phone" href="tel:+380736067700" data-ch="phone">073 606 77 00</a>
       <a class="btn sm" href="#apply">Залишити заявку</a>
+      <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="Меню"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
+<div class="mnav" id="mnav" hidden><div class="wrap"><!--seo:mnav--><div class="mn-main"><a href="/#vacancies">Усі вакансії</a><a href="/yak-tse-pratsiuie/">Як це працює</a><a href="/pryvedy-druha/">Приведи друга</a><a href="/pytannia/">Питання</a><a href="/statti/">Статті</a><a href="/pro-nas/">Про нас</a><a href="/kontakty/">Контакти</a></div><b>Вакансії за країною</b><div class="mn-chips"><a href="/robota-v-polshchi/">Польща<small>85</small></a><a href="/robota-v-lytvi/">Литва<small>10</small></a><a href="/robota-v-chekhii/">Чехія<small>5</small></a></div><b>За видом роботи</b><div class="mn-chips"><a href="/robota-na-skladi/">Робота на складі<small>47</small></a><a href="/robota-na-vyrobnytstvi/">Робота на заводі<small>77</small></a><a href="/robota-na-kharchovomu-vyrobnytstvi/">М’ясне й рибне виробництво<small>18</small></a><a href="/vodii-navantazhuvacha/">Водій навантажувача<small>8</small></a><a href="/robota-dlia-zhinok/">Для жінок<small>71</small></a><a href="/robota-dlia-cholovikiv/">Для чоловіків<small>86</small></a><a href="/robota-dlia-par/">Для пар<small>55</small></a><a href="/robota-v-polshchi-dlia-studentiv/">Для студентів<small>60</small></a></div><div class="mn-cta"><a class="btn wide" href="#apply">Залишити заявку</a><a class="btn ghost wide" href="tel:+380736067700" data-ch="phone">Подзвонити: 073 606 77 00</a></div><!--/seo:mnav--></div></div>
 
 <main class="wrap">
   <!--seo:hero-->
@@ -715,129 +772,10 @@ section.vpage{padding-top:14px}
     <div class="more"><button class="btn ghost" type="button" id="more" hidden>Показати ще</button></div>
   </section>
 
-  <section aria-labelledby="why-h">
-    <div class="sec-head"><div><h2 id="why-h">Чому з «Вдало» простіше</h2><p>Ми показуємо умови так, щоб їх можна було чесно порівняти ще до виїзду.</p></div></div>
-    <div class="cards4">
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-eye"/></svg></div><h3>Прозорі умови</h3><p>Ставка, години на місяць, вартість житла, тип договору й дати заїзду — у кожній вакансії.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-refresh"/></svg></div><h3>Актуальні вакансії</h3><p>Список оновлюється щодня. Закриті вакансії зникають із сайту автоматично.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-gift"/></svg></div><h3>Безкоштовно для вас</h3><p>Ми не беремо з кандидатів гроші за працевлаштування.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-chat"/></svg></div><h3>Завжди на зв'язку</h3><p>Telegram, Viber, WhatsApp або дзвінок — пишіть, як вам зручніше.</p></div>
-    </div>
-  </section>
+  <!--seo:blocks-->
+<!--/seo:blocks-->
 
-  <section id="village" aria-labelledby="vil-h">
-    <div class="sec-head"><div><h2 id="vil-h">Вперше їдете працювати за кордон? Ми поруч на кожному кроці</h2><p>Не потрібно самому шукати житло, знати мову чи мати особливий досвід. Усе підкажемо й пояснимо — від заявки до першої зарплати.</p></div><a class="btn" href="#apply">Хочу так само</a></div>
-    <div class="cards4">
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-home"/></svg></div><h3>Житло вже чекає</h3><p>У багатьох вакансіях житло дає роботодавець — часто безкоштовно. Не треба шукати квартиру й платити наперед.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-chat"/></svg></div><h3>Без мови й досвіду</h3><p>Для більшості вакансій не потрібні ні мова, ні досвід — усьому навчать на місці.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-piggy"/></svg></div><h3>Більше залишається вам</h3><p>Коли житло й доїзд до роботи вже організовані, більша частина заробітку йде у ваші заощадження.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-users"/></svg></div><h3>Можна не самому</h3><p>Їдьте з кумою, сусідкою, чоловіком чи дружиною. А ми завжди на зв'язку українською.</p></div>
-    </div>
-    <div class="story">
-      <div class="story-box" id="stories">
-        <div class="story-head"><span class="ava">О</span><div><p class="when-l">Приклад шляху</p><h3>Оксана, 41 рік, село на Житомирщині</h3></div></div>
-        <ol class="tl">
-          <li><span class="ic"><svg class="i"><use href="#i-plane"/></svg></span><div><span class="when">Старт</span><b>Один дзвінок — і є план</b><span class="t">Удома працювала продавчинею, грошей вистачало лише на найнеобхідніше. Написала у Viber — менеджер підібрав пакування на складі в Польщі з житлом, і за два тижні вона поїхала разом із кумою.</span></div></li>
-          <li><span class="ic"><svg class="i"><use href="#i-home"/></svg></span><div><span class="when">Перший місяць</span><b>Страшно було тільки першого дня</b><span class="t">Кімната на двох, до роботи возить автобус. Мова не знадобилася — усьому навчили на місці за кілька днів. Бере додаткові години, коли є.</span></div></li>
-          <li><span class="ic"><svg class="i"><use href="#i-key"/></svg></span><div><span class="when">Пів року</span><b>Новий дах і навчання доньки</b><span class="t">Щомісяця надсилає гроші додому: перекрили дах, донька вступила до коледжу — і все без кредитів.</span></div></li>
-          <li><span class="ic"><svg class="i"><use href="#i-store"/></svg></span><div><span class="when">Через рік</span><b>Заощадження й вибір</b><span class="t">Має відкладені гроші й вирішує сама: продовжити контракт ще на сезон чи відкрити вдома невеликий магазин.</span></div></li>
-        </ol>
-        <p class="note">Це умовний приклад для наочності, а не історія конкретної людини. Реальний заробіток залежить від вакансії, кількості годин і ваших витрат.</p>
-      </div>
-      <div class="calc" id="calc">
-        <div><h3>Порахуйте, скільки можна відкласти</h3><p class="sub2">Орієнтовний розрахунок для роботи в Польщі.</p></div>
-        <div class="row"><label for="c-rate">Ставка на руки за годину <output id="c-rate-o" for="c-rate"></output></label><input type="range" id="c-rate" min="20" max="35" step="1" value="24"></div>
-        <div class="row"><label for="c-hours">Годин на місяць <output id="c-hours-o" for="c-hours"></output></label><input type="range" id="c-hours" min="160" max="280" step="10" value="200"></div>
-        <div class="row"><label for="c-spend">Їжа, зв'язок, дрібниці на місяць <output id="c-spend-o" for="c-spend"></output></label><input type="range" id="c-spend" min="400" max="2000" step="50" value="900"></div>
-        <label class="switch"><input type="checkbox" id="c-free" checked> Житло безкоштовне від роботодавця</label>
-        <div class="res" aria-live="polite"><div><span>Відкладаєте за місяць</span><b id="c-month">—</b><small id="c-month-u"></small></div><div><span>За рік</span><b id="c-year">—</b><small id="c-year-u"></small></div></div>
-        <p class="sub2">Якщо житло платне, віднімаємо 700 зл на місяць. Точні умови — у кожній вакансії.</p>
-        <a class="btn wide" href="#vacancies">Підібрати вакансію</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="doroha" aria-labelledby="road-h">
-    <div class="sec-head"><div><h2 id="road-h">Дорога і перший день — допоможемо</h2><p>Найбільше хвилюються не через роботу, а через дорогу: куди їхати, де пересісти, хто зустріне. Тому цю частину беремо на себе.</p></div></div>
-    <div class="cards4 road">
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-doc"/></svg></div><h3>Маршрутний лист</h3><p>Покроково: звідки й коли виїжджати, де пересісти, адреса житла й роботи, телефони координатора. Усе в одному повідомленні.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-plane"/></svg></div><h3>Перевізник-партнер</h3><p>Підкажемо перевіреного перевізника, яким уже їздять наші кандидати, — без пошуків випадкових оголошень.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-cal"/></svg></div><h3>Допомога з квитками</h3><p>Допоможемо обрати рейс під дату заїзду й купити квиток. Вартість дороги вказана заздалегідь — без сюрпризів.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-users"/></svg></div><h3>Координатор на місці</h3><p>Після приїзду ви не самі: координатор допоможе із заселенням, документами й першим робочим днем.</p></div>
-    </div>
-    <p class="road-more">Що взяти з собою — у нашому <a href="/statti/shcho-vziaty-v-dorohu/">чеклісті для поїздки</a>.</p>
-  </section>
-
-  <section id="how" aria-labelledby="how-h">
-    <div class="sec-head"><div><h2 id="how-h">Як це працює</h2></div></div>
-    <div class="cards4 steps">
-      <div class="card"><h3>Заявка</h3><p>Залишаєте заявку на сайті або пишете нам у месенджер.</p></div>
-      <div class="card"><h3>Підбір</h3><p>Менеджер уточнює ваш досвід і пропонує вакансії, що вам підходять.</p></div>
-      <div class="card"><h3>Документи й дата</h3><p>Підказуємо, які документи потрібні, і погоджуємо найближчу дату заїзду.</p></div>
-      <div class="card"><h3>Робота</h3><p>Ви приїжджаєте на місце, а ми залишаємося на зв'язку.</p></div>
-    </div>
-  </section>
-
-  <section aria-labelledby="safe-h">
-    <div class="safety">
-      <div>
-        <h2 id="safe-h">Як вибрати чесну вакансію</h2>
-        <p style="margin-top:12px;color:var(--muted)">П'ять простих перевірок, які варто зробити перед виїздом — з нами чи без нас.</p>
-      </div>
-      <ol>
-        <li><div><b>Рахуйте суму на місяць, а не лише ставку</b><span>Помножте ставку на кількість годин і відніміть житло та інші вирахування.</span></div></li>
-        <li><div><b>Уточніть тип договору</b><span>Від нього залежать відпустка, лікарняні й сума на руки. Тип договору вказаний у кожній нашій вакансії.</span></div></li>
-        <li><div><b>Не платіть за саме працевлаштування</b><span>Посередник не має права брати гроші з кандидата за пошук роботи.</span></div></li>
-        <li><div><b>Попросіть деталі житла</b><span>Скільки людей у кімнаті, скільки коштує і як далеко до роботи.</span></div></li>
-        <li><div><b>Тримайте документи при собі</b><span>Не віддавайте паспорт «на зберігання» нікому — ні роботодавцю, ні координатору.</span></div></li>
-      </ol>
-    </div>
-  </section>
-
-  <section id="friend" aria-labelledby="friend-h">
-    <div class="ref">
-      <div>
-        <div class="gift-ic" aria-hidden="true"><svg class="i"><use href="#i-gift"/></svg></div>
-        <h2 id="friend-h">Приведи друга — отримай бонус</h2>
-        <p class="lead">Порекомендуйте нас другові, кумі чи сусідові. Коли друг вийде на роботу — ви отримаєте <b id="ref-amt">бонус</b>.</p>
-        <ol class="ref-steps">
-          <li>Вкажіть свій номер телефону — отримаєте особисте посилання.</li>
-          <li>Надішліть його другові у Viber, Telegram чи WhatsApp.</li>
-          <li>Друг залишає заявку й виходить на роботу — ми зв'язуємося з вами щодо бонусу.</li>
-        </ol>
-        <p class="hint" id="ref-terms" style="margin-top:14px">Розмір бонусу та умови виплати уточнюйте в менеджера.</p>
-      </div>
-      <div class="form-card ref-card">
-        <form id="ref-form" method="post" action="#" novalidate>
-          <div><label class="lbl" for="ref-phone">Ваш номер телефону</label><input id="ref-phone" name="phone" type="tel" autocomplete="tel" required placeholder="+380 __ ___ __ __"><p class="hint" style="margin-top:6px">Номер потрібен, щоб зв’язатися з вами щодо бонусу. Ми не передаємо його третім особам. Деталі — у <a href="#privacy">політиці конфіденційності</a>.</p></div>
-          <p class="err" id="ref-err" role="alert"></p>
-          <button class="btn wide" type="submit">Отримати моє посилання</button>
-        </form>
-        <div class="ref-out" id="ref-out" hidden>
-          <span class="lbl">Ваше посилання для друзів</span>
-          <div class="ref-link"><input id="ref-url" readonly aria-label="Ваше посилання"><button class="btn sm" type="button" id="ref-copy">Копіювати</button></div>
-          <div class="send-row">
-            <a class="msgr" id="ref-vb" href="#"><span class="dot vb"></span>Viber</a>
-            <a class="msgr" id="ref-tg" href="#" target="_blank" rel="noopener"><span class="dot tg"></span>Telegram</a>
-            <a class="msgr" id="ref-wa" href="#" target="_blank" rel="noopener"><span class="dot wa"></span>WhatsApp</a>
-            <button class="msgr" type="button" id="ref-share" hidden><svg class="i"><use href="#i-share"/></svg>Інше</button>
-          </div>
-          <p class="hint">Коли друг залишить заявку за цим посиланням, ми побачимо, що це від вас.</p>
-        </div>
-        <div class="ref-direct">
-          <span class="lbl">Або напишіть чи зателефонуйте нам</span>
-          <div class="send-row">
-            <a class="msgr" href="https://t.me/+380736067700" data-ch="telegram" data-copytext="Вітаю! Хочу порекомендувати друга, який шукає роботу за кордоном. Підкажіть, як нам це зробити?"><span class="dot tg"></span>Telegram</a>
-            <a class="msgr" href="viber://chat?number=%2B380736067700" data-ch="viber" data-copytext="Вітаю! Хочу порекомендувати друга, який шукає роботу за кордоном. Підкажіть, як нам це зробити?"><span class="dot vb"></span>Viber</a>
-            <a class="msgr" href="https://wa.me/380736067700?text=%D0%92%D1%96%D1%82%D0%B0%D1%8E%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BF%D0%BE%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D1%83%D0%B2%D0%B0%D1%82%D0%B8%20%D0%B4%D1%80%D1%83%D0%B3%D0%B0%2C%20%D1%8F%D0%BA%D0%B8%D0%B9%20%D1%88%D1%83%D0%BA%D0%B0%D1%94%20%D1%80%D0%BE%D0%B1%D0%BE%D1%82%D1%83%20%D0%B7%D0%B0%20%D0%BA%D0%BE%D1%80%D0%B4%D0%BE%D0%BD%D0%BE%D0%BC.%20%D0%9F%D1%96%D0%B4%D0%BA%D0%B0%D0%B6%D1%96%D1%82%D1%8C%2C%20%D1%8F%D0%BA%20%D0%BD%D0%B0%D0%BC%20%D1%86%D0%B5%20%D0%B7%D1%80%D0%BE%D0%B1%D0%B8%D1%82%D0%B8%3F" data-ch="whatsapp"><span class="dot wa"></span>WhatsApp</a>
-            <a class="msgr" href="tel:+380736067700" data-ch="phone"><svg class="i"><use href="#i-phone"/></svg>Подзвонити</a>
-          </div>
-          <p class="hint">Повідомлення «Хочу порекомендувати друга…» вже готове: у WhatsApp воно підставиться саме, для Telegram і Viber — скопіюється, просто вставте в чат.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!--seo:apply-->
   <section id="apply" aria-labelledby="apply-h">
     <div class="apply">
       <div>
@@ -902,37 +840,18 @@ section.vpage{padding-top:14px}
     </div>
   </section>
 
+  <!--/seo:apply-->
+
   <!--seo:text-->
   <section aria-labelledby="seo-h"><div class="seo"><div class="seo-grid"><div class="seo-txt"><h2 id="seo-h">Напрямки</h2></div></div><h3 style="margin-top:26px">Інші напрямки</h3><div class="links"><a href="/">Усі вакансії</a><a href="/robota-v-polshchi/">Робота в Польщі · 85</a><a href="/robota-v-lytvi/">Робота в Литві · 10</a><a href="/robota-v-chekhii/">Робота в Чехії · 5</a><a href="/robota-na-skladi/">Робота на складі · 47</a><a href="/robota-na-vyrobnytstvi/">Робота на заводі · 77</a><a href="/robota-na-kharchovomu-vyrobnytstvi/">М’ясне й рибне виробництво · 18</a><a href="/vodii-navantazhuvacha/">Водій навантажувача · 8</a><a href="/robota-dlia-zhinok/">Для жінок · 71</a><a href="/robota-dlia-cholovikiv/">Для чоловіків · 86</a><a href="/robota-dlia-par/">Для пар · 55</a><a href="/robota-v-polshchi-dlia-studentiv/">Для студентів · 60</a></div></div></section>
   <!--/seo:text-->
 
-  <section id="faq" aria-labelledby="faq-h">
-    <div class="sec-head"><div><h2 id="faq-h">Часті питання</h2></div></div>
-    <div class="faq">
-      <details><summary>Чи потрібно платити за працевлаштування?</summary><p>Ні, для кандидатів наші послуги безкоштовні. Окремо можуть оплачуватися лише дорога та житло — їхня вартість указана у вакансії.</p></details>
-      <details><summary>Що означає «брутто» і скільки я отримаю на руки?</summary><p>Брутто — це сума до сплати податків і внесків. «На руки» (нетто) — те, що ви фактично отримаєте. У більшості вакансій ми показуємо обидві суми: різниця залежить від країни, виду договору й вашої податкової ситуації. Точну суму «на руки» менеджер повідомить після перевірки умов конкретної вакансії.</p></details>
-      <details><summary>Чи сплачують особи до 26 років податки та внески в Польщі?</summary><p>Це залежить від віку, виду договору та статусу працівника. Для окремих доходів осіб до 26 років може застосовуватися пільга з податку PIT — у межах річного ліміту 85 528 zł. Бути студентом для цієї пільги не обов’язково.</p><p>Окремо: студент до 26 років може не сплачувати внески ZUS за договором доручення (umowa zlecenie), якщо його статус студента підтверджено та виконані інші умови. Навчання в Україні саме по собі не виключає такої можливості. Для umowa o pracę діють інші правила. Майте на увазі: без внесків за цим договором не нараховується пенсійне й медичне страхування.</p><p>Точну суму «на руки» повідомимо після перевірки виду договору, документів і податкової ситуації кандидата.</p></details>
-      <details><summary>Що саме утримують із зарплати?</summary><p>Податок і соціальні внески — їхній розмір залежить від країни, виду договору, віку та податкового резидентства. Крім того, якщо це передбачено вакансією, із зарплати можуть утримувати вартість житла, доїзду до роботи чи харчування. Перед виїздом менеджер окремо назве кожне утримання для вашої вакансії.</p></details>
-      <details><summary>Чи потрібно щось платити до виїзду?</summary><p>Підбір вакансії безкоштовний. Усі інші можливі витрати — квиток, житло, медогляд, транспорт чи документи — менеджер назве окремо ще до виїзду.</p></details>
-      <details><summary>Скільки годин на місяць гарантовано?</summary><p>У кожній вакансії вказано кількість годин на місяць і графік змін. Надгодини можливі не завжди, тому розраховуйте заробіток за основними годинами, а не за максимальними. Чи є понаднормова робота, уточнюйте в менеджера.</p></details>
-      <details><summary>Що входить у вартість житла?</summary><p>Перед виїздом запитайте в менеджера: скільки людей живе в кімнаті, чи входять комунальні послуги, чи потрібна застава, яка відстань до роботи й скільки коштує доїзд. Ми уточнимо це в роботодавця.</p></details>
-      <details><summary>Коли і як виплачують першу зарплату?</summary><p>Зазвичай зарплату виплачують раз на місяць на банківську картку, за попередній місяць. Тому перша виплата може надійти через кілька тижнів після початку роботи — візьміть із собою гроші на перші витрати. Графік виплат і можливість авансу для вашої вакансії уточнить менеджер.</p></details>
-      <details><summary>Що робити, якщо після приїзду умови відрізняються від вакансії?</summary><p>До підписання договору перевірте ставку, кількість годин, житло й утримання. Якщо щось не збігається з вакансією, не підписуйте й одразу напишіть або зателефонуйте нам: +380 73 606 77 00 (Telegram, Viber, WhatsApp). Ми з’ясуємо ситуацію з роботодавцем.</p></details>
-      <details><summary>Які бувають договори?</summary><p><b>Трудовий договір</b> (umowa o pracę) — оплачувана відпустка, лікарняні, повне соціальне страхування. <b>Договір доручення</b> (umowa zlecenie) — оплата за відпрацьовані години, без оплачуваної відпустки; які страхування входять, указано у вакансії. Тип договору є в кожній вакансії.</p></details>
-      <details><summary>Чи потрібне знання мови?</summary><p>Для більшості вакансій — ні. Якщо мова потрібна, це вказано в описі вакансії.</p></details>
-      <details><summary>Які документи потрібні?</summary><p>Зазвичай — закордонний біометричний паспорт. Для окремих країн і вакансій можуть знадобитися інші документи: менеджер підкаже точний перелік до виїзду.</p></details>
-      <details><summary>Чи можна поїхати парою або з другом?</summary><p>Так. Скористайтеся фільтром «Для пар» — там вакансії, куди беруть і жінок, і чоловіків. Про спільне житло уточнюйте в менеджера.</p></details>
-      <details><summary>Хто може виїхати під час воєнного стану?</summary><p>Жінки — без обмежень. Чоловіки 18–60 років — лише за наявності законних підстав для перетину кордону. Менеджер підкаже, які вакансії вам підходять.</p></details>
-      <details><summary>З ким я підписую договір?</summary><p>З роботодавцем або його кадровою агенцією в країні працевлаштування — саме ця юридична особа буде стороною вашого договору. Підприємство, де ви фактично працюватимете, вказане у вакансії; воно може відрізнятися від сторони договору, якщо вас оформлює агенція. Точну назву сторони договору менеджер повідомить до виїзду.</p></details>
-      <details><summary>Як швидко можна виїхати?</summary><p>Найближчі дати заїзду вказані у вакансіях. Після того як ви оберете вакансію, менеджер погодить із вами конкретну дату.</p></details>
-      <details><summary>Чи допомагаєте з дорогою?</summary><p>Так. Складаємо маршрутний лист, підказуємо перевізника-партнера й допомагаємо купити квиток, а на місці на зв'язку координатор. Квиток оплачуєте ви — вартість ми повідомимо заздалегідь.</p></details>
-    </div>
-  </section>
+<!--seo:faq--><!--/seo:faq-->
 </main>
 
 <footer>
   <!--seo:foot-->
-  <div class="flinks"><b>Робота за кордоном</b><div class="links" style="margin-top:6px"><a href="/">Усі вакансії</a><a href="/robota-v-polshchi/">Робота в Польщі · 85</a><a href="/robota-v-lytvi/">Робота в Литві · 10</a><a href="/robota-v-chekhii/">Робота в Чехії · 5</a><a href="/robota-na-skladi/">Робота на складі · 47</a><a href="/robota-na-vyrobnytstvi/">Робота на заводі · 77</a><a href="/robota-na-kharchovomu-vyrobnytstvi/">М’ясне й рибне виробництво · 18</a><a href="/vodii-navantazhuvacha/">Водій навантажувача · 8</a><a href="/robota-dlia-zhinok/">Для жінок · 71</a><a href="/robota-dlia-cholovikiv/">Для чоловіків · 86</a><a href="/robota-dlia-par/">Для пар · 55</a><a href="/robota-v-polshchi-dlia-studentiv/">Для студентів · 60</a></div><b style="display:block;margin-top:16px">Корисні статті</b><div class="links" style="margin-top:6px"><a href="/statti/">Усі статті</a><a href="/statti/dokumenty-dlia-roboty-v-polshchi/">Документи для роботи в Польщі у 2026 році</a><a href="/statti/dohovir-doruchennia-chy-trudovyi/">Договір доручення чи трудовий договір: у чому різниця</a><a href="/statti/yak-ne-potrapyty-do-shakhraiv/">Як не потрапити до шахраїв, шукаючи роботу за кордоном</a><a href="/statti/shcho-vziaty-v-dorohu/">Що взяти з собою на роботу за кордон: чекліст</a></div></div>
+  <div class="flinks"><b>Робота за кордоном</b><div class="links" style="margin-top:6px"><a href="/">Усі вакансії</a><a href="/robota-v-polshchi/">Робота в Польщі · 85</a><a href="/robota-v-lytvi/">Робота в Литві · 10</a><a href="/robota-v-chekhii/">Робота в Чехії · 5</a><a href="/robota-na-skladi/">Робота на складі · 47</a><a href="/robota-na-vyrobnytstvi/">Робота на заводі · 77</a><a href="/robota-na-kharchovomu-vyrobnytstvi/">М’ясне й рибне виробництво · 18</a><a href="/vodii-navantazhuvacha/">Водій навантажувача · 8</a><a href="/robota-dlia-zhinok/">Для жінок · 71</a><a href="/robota-dlia-cholovikiv/">Для чоловіків · 86</a><a href="/robota-dlia-par/">Для пар · 55</a><a href="/robota-v-polshchi-dlia-studentiv/">Для студентів · 60</a></div><b style="display:block;margin-top:16px">Корисні статті</b><div class="links" style="margin-top:6px"><a href="/statti/">Усі статті</a><a href="/statti/dokumenty-dlia-roboty-v-polshchi/">Документи для роботи в Польщі у 2026 році</a><a href="/statti/dohovir-doruchennia-chy-trudovyi/">Договір доручення чи трудовий договір: у чому різниця</a><a href="/statti/yak-ne-potrapyty-do-shakhraiv/">Як не потрапити до шахраїв, шукаючи роботу за кордоном</a><a href="/statti/shcho-vziaty-v-dorohu/">Що взяти з собою на роботу за кордон: чекліст</a></div><b style="display:block;margin-top:16px">Про компанію</b><div class="links" style="margin-top:6px"><a href="/yak-tse-pratsiuie/">Як це працює</a><a href="/pryvedy-druha/">Приведи друга</a><a href="/pytannia/">Питання</a><a href="/pro-nas/">Про нас</a><a href="/kontakty/">Контакти</a></div></div>
   <!--/seo:foot-->
   <div class="wrap">
     <span>© 2026 Вдало · Підбір роботи в Європі</span>
@@ -1776,6 +1695,24 @@ section.vpage{padding-top:14px}
     new MutationObserver(function(ms){ ms.forEach(function(m){ if (m.type === "characterData") walk(m.target); else m.addedNodes.forEach(walk); }); })
       .observe(document.body, {childList: true, subtree: true, characterData: true});
   }).catch(function(){});
+})();
+</script>
+
+<script>
+(function(){
+  var dd=document.querySelector(".nav .dd");
+  if(dd){ var b=dd.querySelector(".dd-btn");
+    b.addEventListener("click",function(e){ e.stopPropagation(); var o=dd.classList.toggle("open"); b.setAttribute("aria-expanded",o); });
+    document.addEventListener("click",function(e){ if(!dd.contains(e.target)){ dd.classList.remove("open"); b.setAttribute("aria-expanded","false"); } });
+    document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ dd.classList.remove("open"); b.setAttribute("aria-expanded","false"); } });
+  }
+  var bg=document.getElementById("burger"), mn=document.getElementById("mnav");
+  if(bg&&mn){
+    function set(o){ mn.hidden=!o; bg.setAttribute("aria-expanded",o); document.body.classList.toggle("mnav-open",o); }
+    bg.addEventListener("click",function(){ set(mn.hidden); });
+    mn.addEventListener("click",function(e){ if(e.target.closest("a")) set(false); });
+    window.addEventListener("resize",function(){ if(window.innerWidth>960) set(false); });
+  }
 })();
 </script>
 </body>

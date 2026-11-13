@@ -21,6 +21,7 @@ import shutil
 from zoneinfo import ZoneInfo
 
 from articles import ARTICLES
+import sections as SEC
 from keywords import vac_keywords, LANGS as KW_LANGS
 import i18n
 
@@ -649,8 +650,9 @@ def text_section(h2, paras, s, live, current):
 
 def foot_links(live):
     arts = '<div class="links" style="margin-top:6px"><a href="/statti/">Усі статті</a>' + "".join(f'<a href="/statti/{a["slug"]}/">{esc(a["h1"])}</a>' for a in ARTICLES) + "</div>"
+    sec = '<b style="display:block;margin-top:16px">Про компанію</b><div class="links" style="margin-top:6px">' + "".join(f'<a href="{SEC.PAGES[k]["path"]}">{esc(SEC.PAGES[k]["label"])}</a>' for k in SEC.ORDER) + "</div>"
     return ('\n  <div class="flinks"><b>Робота за кордоном</b>' + links_html(live).replace('class="links"', 'class="links" style="margin-top:6px"')
-            + '<b style="display:block;margin-top:16px">Корисні статті</b>' + arts + "</div>\n  ")
+            + '<b style="display:block;margin-top:16px">Корисні статті</b>' + arts + sec + "</div>\n  ")
 
 
 def h1_block(h1, lead):
@@ -775,8 +777,36 @@ def vac_desc(v):
 WRITTEN = []
 
 
+NAV_LIVE = []
+
+
+def nav_html(path):
+    """Верхнє меню: «Вакансії» з підменю (країни / вид роботи) + сторінки розділів."""
+    ch = '<svg class="i"><use href="#i-chev"/></svg>'
+    cur = lambda c: ' aria-current="page"' if c else ""
+    land = {f"/{p['slug']}/" for p, _ in NAV_LIVE}
+    vcur = path.startswith("/vakansii/") or path in land
+    col = lambda lst, lab: f"<div><b>{lab}</b>" + "".join(
+        f'<a href="/{p["slug"]}/"{cur(path == "/" + p["slug"] + "/")}>{esc(p["country"] if p.get("country") else p["label"])}<small>{len(l)}</small></a>' for p, l in lst) + "</div>"
+    cs = [x for x in NAV_LIVE if x[0].get("country")]
+    ks = [x for x in NAV_LIVE if not x[0].get("country")]
+    dd = (f'<div class="dd"><button class="dd-btn" type="button" aria-expanded="false" aria-haspopup="true"{cur(vcur)}>Вакансії{ch}</button>'
+          f'<div class="dd-menu"><div class="dd-box">{col(cs, "За країною")}{col(ks, "За видом роботи")}'
+          f'<a class="dd-all" href="/#vacancies">Усі вакансії{ch}</a></div></div></div>')
+    links = [(SEC.PAGES[k]["path"], SEC.PAGES[k]["label"]) for k in ("how", "friend", "faq")] + [("/statti/", "Статті")] + [(SEC.PAGES[k]["path"], SEC.PAGES[k]["label"]) for k in ("about", "contacts")]
+    nav = "\n      " + dd + "".join(f'\n      <a href="{h}"{cur(path == h or (h == "/statti/" and path.startswith("/statti/")))}>{esc(t)}</a>' for h, t in links) + "\n    "
+    chips = lambda lst: '<div class="mn-chips">' + "".join(f'<a href="/{p["slug"]}/">{esc(p["country"] if p.get("country") else p["label"])}<small>{len(l)}</small></a>' for p, l in lst) + "</div>"
+    mn = ('<div class="mn-main"><a href="/#vacancies">Усі вакансії</a>' + "".join(f'<a href="{h}">{esc(t)}</a>' for h, t in links) + "</div>"
+          + "<b>Вакансії за країною</b>" + chips(cs) + "<b>За видом роботи</b>" + chips(ks)
+          + '<div class="mn-cta"><a class="btn wide" href="#apply">Залишити заявку</a><a class="btn ghost wide" href="tel:+380736067700" data-ch="phone">Подзвонити: 073 606 77 00</a></div>')
+    return nav, mn
+
+
 def write(path, text):
     WRITTEN.append(path)
+    if NAV_LIVE and "<!--seo:nav-->" in text:
+        nav, mn = nav_html(path if path != "index.html" else "/")
+        text = region(region(text, "nav", nav), "mnav", mn)
     full = os.path.join(ROOT, path.strip("/"), "index.html") if path.endswith("/") and path != "/" else os.path.join(ROOT, path.strip("/") or "index.html")
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:
@@ -881,6 +911,15 @@ def main():
     # спільний підвал зі списком напрямків
     tpl = region(tpl, "foot", foot_links(live))
     hero_tpl = get_region(tpl, "hero")
+    NAV_LIVE[:] = live
+    BLK, FAQ, APPLY = get_region(tpl, "blocks"), get_region(tpl, "faq"), get_region(tpl, "apply")
+
+    def sec(i, here=None):
+        h = re.search(r'  <section id="%s".*?</section>' % i, BLK, re.S).group(0) + "\n\n"
+        return re.sub(r'<a class="sec-more" href="%s">.*?</a>' % re.escape(here), "", h) if here else h
+
+    def inner(t, blocks="", faq=""):
+        return region(region(t, "blocks", "\n" + blocks), "faq", faq)
 
     # головна
     s = stats(items)
@@ -908,6 +947,7 @@ def main():
         t = region(t, "vach", f"Вакансії: {p['label'].lower() if not p.get('country') else p['h1'].lower()}")
         t = region(t, "grid", grid_html(lst))
         t = region(t, "text", text_section(p["h1"], p["text"] + [common_par(s)], s, live, p["slug"]))
+        t = inner(t, sec("why") + sec("how"))
         write(path, t)
         sitemap.append((path, TODAY.isoformat(), "daily", "0.9"))
 
@@ -930,6 +970,7 @@ def main():
         t = region(t, "vach", f"Схожі вакансії — {COUNTRY_IN.get(v['country'], v['country'])}" if v["country"] in COUNTRY_IN else "Схожі вакансії")
         t = region(t, "grid", grid_html(similar))
         t = region(t, "text", text_section("Шукаєте інші варіанти?", [], None, live, None))
+        t = inner(t)
         write(path, t)
         sitemap.append((path, st_["mod"], "daily", "0.7"))
 
@@ -946,6 +987,7 @@ def main():
         t = region(t, "vach", "Вакансії, відкриті зараз")
         t = region(t, "grid", grid_html(hot))
         t = region(t, "text", text_section("Напрямки", [], None, live, None))
+        t = inner(t)
         write(path, t)
         sitemap.append((path, "-".join(reversed(a["updated"].split("."))), "monthly", "0.6"))
     path = "/statti/"
@@ -959,8 +1001,70 @@ def main():
     t = region(t, "vach", "Вакансії, відкриті зараз")
     t = region(t, "grid", grid_html(hot))
     t = region(t, "text", text_section("Напрямки", [], None, live, None))
+    t = inner(t)
     write(path, t)
     sitemap.append((path, TODAY.isoformat(), "weekly", "0.6"))
+
+    # сторінки розділів: Як це працює, Приведи друга, Питання, Контакти, Про нас
+    ch = '<svg class="i"><use href="#i-chev"/></svg>'
+    cta = '<div class="ph-cta"><a class="btn" href="#apply">Залишити заявку</a><a class="btn ghost" href="/#vacancies">Переглянути вакансії</a></div>'
+
+    def phead(P, with_cta=True):
+        return (crumbs([("Головна", "/"), (P["h1"], "")])
+                + f'\n  <section id="hero"><div class="page-head"><h1>{esc(P["h1"])}</h1><p class="lead">{esc(P["lead"])}</p>{cta if with_cta else ""}</div></section>\n')
+
+    def cards(lst, cls="kgrid"):
+        return f'<div class="{cls}">' + "".join(f'<div class="card"><h3>{esc(a)}</h3><p>{esc(b)}</p></div>' for a, b in lst) + "</div>"
+
+    faq_qa = [(re.sub(r"<[^>]+>", "", q), re.sub(r"<[^>]+>", "", a)) for q, a in re.findall(r"<details><summary>(.*?)</summary><p>(.*?)</p></details>", FAQ, re.S)]
+    for key in SEC.ORDER:
+        P = SEC.PAGES[key]
+        path = P["path"]
+        cr = [("Головна", "/"), (P["h1"], path)]
+        ld = [crumbs_ld(cr)]
+        blocks, faq, apply_ = "", "", APPLY
+        if key == "how":
+            hero = phead(P) + ('\n  <section id="steps" aria-labelledby="steps-h"><div class="sec-head"><div><h2 id="steps-h">Шість кроків до роботи</h2></div></div>'
+                               + cards(SEC.STEPS, "steps6") + "</section>\n")
+            blocks = sec("doroha", path) + sec("safe") + sec("village")
+            faq = FAQ
+        elif key == "friend":
+            fr = sec("friend").replace('<h2 id="friend-h">Приведи друга — отримай бонус</h2>', '<h2 id="friend-h">Отримайте особисте посилання</h2>')
+            hero = (phead(P, False) + "\n" + fr
+                    + '  <section aria-labelledby="rc-h"><div class="sec-head"><div><h2 id="rc-h">Як це працює</h2></div></div>' + cards(SEC.REF_CARDS) + "</section>\n"
+                    + '  <section aria-labelledby="rq-h"><div class="sec-head"><div><h2 id="rq-h">Питання про бонус</h2></div></div><div class="faq">'
+                    + "".join(f"<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>" for q, a in SEC.REF_QA) + "</div></section>\n")
+            blocks = sec("how")
+        elif key == "faq":
+            f = re.sub(r'<a class="sec-more" href="/pytannia/">.*?</a>', "", FAQ).replace('>Часті питання</h2>', '>Відповіді на питання</h2>')
+            hero = phead(P, False) + "\n" + f + "\n"
+            blocks = sec("safe")
+            ld.append({"@context": "https://schema.org", "@type": "FAQPage",
+                       "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq_qa]})
+        elif key == "contacts":
+            office = ('\n  <section id="office" aria-labelledby="off-h"><h2 id="off-h" class="sr-only" style="position:absolute;left:-9999px">Офіс і телефон</h2><div class="kgrid">'
+                      '<div class="card"><h3>Офіс у Києві</h3><p>вул. Джона Маккейна, 7, офіс 169</p><p style="color:var(--muted)">Перед візитом радимо зателефонувати й домовитися про час.</p>'
+                      f'<p style="margin-top:14px"><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Київ,+вулиця+Джона+Маккейна,+7" target="_blank" rel="noopener">Відкрити на мапі</a></p></div>'
+                      '<div class="card"><h3>Телефон і месенджери</h3><p><a href="tel:+380736067700" data-ch="phone" style="font-weight:800;font-size:22px">073 606 77 00</a></p>'
+                      '<p style="color:var(--muted)">Telegram, Viber і WhatsApp — за цим самим номером. Пишіть, як вам зручніше.</p></div>'
+                      "</div></section>\n")
+            hero = phead(P, False) + office + "\n" + APPLY
+            apply_ = ""
+            ld.append(ORG)
+        else:  # about
+            prose = "".join(f"<h2>{esc(h)}</h2>" + "".join(f"<p>{esc(x)}</p>" for x in ps) for h, ps in SEC.ABOUT)
+            hero = phead(P) + f'\n  <section id="about" aria-label="Про компанію"><div class="prose">{prose}</div></section>\n'
+            blocks = sec("why", path) + sec("village") + sec("doroha")
+            ld.append(ORG)
+        t = region(tpl, "head", head(P["title"], P["desc"], path, ld, {"ids": [v["id"] for v in hot]}))
+        t = region(t, "hero", "\n  " + hero + "  ")
+        t = region(t, "vach", "Вакансії, відкриті зараз")
+        t = region(t, "grid", grid_html(hot))
+        t = region(t, "apply", apply_)
+        t = region(t, "text", text_section("Напрямки", [], None, live, None))
+        t = inner(t, blocks, faq)
+        write(path, t)
+        sitemap.append((path, TODAY.isoformat(), "monthly", "0.7"))
 
     # 404 — для закритих вакансій і старих посилань
     t = region(tpl, "head", head("Сторінку не знайдено | Вдало", "Можливо, вакансію вже закрито. Перегляньте актуальні вакансії.", "/404.html", (), None, robots="noindex"))
@@ -968,6 +1072,7 @@ def main():
     t = region(t, "vach", "Актуальні вакансії")
     t = region(t, "grid", grid_html(items))
     t = region(t, "text", text_section("Напрямки", [], None, live, None))
+    t = inner(t)
     write("404.html", t)
 
     # видалити посадкові сторінки, які зараз порожні

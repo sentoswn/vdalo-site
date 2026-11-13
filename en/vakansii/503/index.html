@@ -116,7 +116,7 @@ svg.i{width:18px;height:18px;flex:0 0 18px;stroke:currentColor;fill:none;stroke-
 .lang-menu[hidden]{display:none}
 .lang-menu a{padding:10px 12px;border-radius:10px;text-decoration:none;font-weight:700;color:var(--ink)}
 .lang-menu a:hover,.lang-menu a[aria-current="true"]{background:var(--soft)}
-@media (max-width:1100px){.lang-seg{display:none}.lang-btn{display:inline-flex}}
+@media (max-width:1500px){.lang-seg{display:none}.lang-btn{display:inline-flex}}
 .top-phone{font-weight:800;text-decoration:none;white-space:nowrap}
 
 /* hero */
@@ -573,6 +573,60 @@ section.vpage{padding-top:14px}
 .doc-body p{color:var(--muted);margin:6px 0}
 @media (max-width:960px){.story,.ref{grid-template-columns:1fr}}
 @media (max-width:640px){.res{grid-template-columns:1fr}.marq-grp span{font-size:14px;padding:0 14px}}
+
+/* меню: «Вакансії» з підменю, бургер, сторінки розділів */
+.nav{align-items:center}
+.nav a[aria-current="page"],.nav .dd-btn[aria-current="page"]{color:var(--ink)}
+.dd{position:relative}
+.dd-btn{display:inline-flex;align-items:center;gap:4px;background:none;border:0;padding:0;font:inherit;font-weight:600;color:var(--muted);cursor:pointer}
+.dd-btn:hover,.dd.open .dd-btn{color:var(--ink)}
+.dd-btn svg{width:14px;height:14px;transform:rotate(90deg);transition:transform .15s}
+.dd.open .dd-btn svg{transform:rotate(-90deg)}
+.dd-menu{position:absolute;left:-18px;top:100%;padding-top:14px;display:none;z-index:30}
+.dd.open .dd-menu{display:block}
+@media (hover:hover){.dd:hover .dd-menu{display:block}.dd:hover .dd-btn{color:var(--ink)}}
+.dd-box{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 22px 50px -20px rgba(0,0,0,.35);display:grid;grid-template-columns:repeat(2,minmax(190px,auto));gap:6px 22px;min-width:440px}
+.dd-box b,.mnav b{display:block;font:800 12px var(--font-body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:2px 0 6px}
+.dd-box a{display:flex;justify-content:space-between;gap:12px;padding:7px 10px;margin:0 -10px;border-radius:10px;color:var(--ink)!important;font-weight:600;text-decoration:none}
+.dd-box a:hover{background:var(--soft)}
+.dd-box a small{color:var(--muted);font-weight:700}
+.dd-box .dd-all{grid-column:1/-1;margin-top:8px;border-top:1px solid var(--line);border-radius:0;padding-top:12px;justify-content:flex-start;gap:6px;color:var(--accent,var(--ink))!important;font-weight:800}
+.burger{display:none;width:42px;height:42px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:0}
+.burger span{display:block;width:18px;height:2px;border-radius:2px;background:var(--ink);transition:transform .2s,opacity .2s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mnav{position:fixed;left:0;right:0;top:calc(64px + env(safe-area-inset-top));bottom:0;z-index:19;background:var(--bg);overflow:auto;padding:12px 0 40px;border-top:1px solid var(--line)}
+.mnav[hidden]{display:none}
+.mnav .mn-main{display:grid;gap:2px;margin-bottom:18px}
+.mnav .mn-main a{padding:13px 4px;font:800 20px var(--font-body);text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)}
+.mnav .mn-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.mnav .mn-chips a{padding:9px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:700;text-decoration:none;color:var(--ink);font-size:15px}
+.mnav .mn-chips a small{color:var(--muted);margin-left:4px}
+.mnav .mn-cta{display:grid;gap:10px;margin-top:6px}
+body.mnav-open{overflow:hidden}
+.nav a,.dd-btn{white-space:nowrap}
+body.mnav-open .fab{display:none}
+@media (max-width:1400px){.nav{gap:18px}.top-cta .top-phone{display:none}}
+@media (max-width:1180px){.nav{display:none}.burger{display:inline-flex}}
+@media (max-width:640px){.top-cta .btn.sm{display:none}}
+.sec-more{display:inline-flex;align-items:center;gap:4px;font-weight:800;text-decoration:none;color:var(--ink);white-space:nowrap}
+.sec-more svg{width:16px;height:16px}
+.sec-more:hover{text-decoration:underline}
+.page-head{background:var(--grad);border-radius:32px;padding:clamp(24px,4.5vw,52px);margin-top:8px}
+.page-head h1{font-size:clamp(28px,4.5vw,48px)}
+.page-head .lead{margin-top:12px;font-size:18px;max-width:62ch}
+.page-head .ph-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.prose{max-width:760px}
+.prose p{margin-top:12px}
+.prose h2{margin-top:26px}
+.steps6{counter-reset:st;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.steps6 .card{position:relative;padding-top:58px}
+.steps6 .card::before{counter-increment:st;content:counter(st);position:absolute;left:22px;top:18px;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-weight:800;font-size:15px}
+@media (max-width:960px){.steps6{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.steps6{grid-template-columns:1fr}}
+.kgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media (max-width:760px){.kgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -619,14 +673,15 @@ section.vpage{padding-top:14px}
 <header class="top" id="top">
   <div class="wrap">
     <a class="logo" href="/en/" aria-label="Vdalo — home"><span class="logo-mark">V</span>Vdalo</a>
-    <nav class="nav" aria-label="Sections">
-      <a href="#vacancies">Jobs</a>
-      <a href="#how">How it works</a>
-      <a href="#friend">Refer a friend</a>
-      <a href="#faq">FAQ</a>
+    <nav class="nav" aria-label="Sections"><!--seo:nav-->
+      <div class="dd"><button class="dd-btn" type="button" aria-expanded="false" aria-haspopup="true" aria-current="page">Jobs<svg class="i"><use href="#i-chev"/></svg></button><div class="dd-menu"><div class="dd-box"><div><b>By country</b><a href="/en/robota-v-polshchi/">Poland<small>85</small></a><a href="/en/robota-v-lytvi/">Lithuania<small>10</small></a><a href="/en/robota-v-chekhii/">Czechia<small>5</small></a></div><div><b>By job type</b><a href="/en/robota-na-skladi/">Warehouse jobs<small>47</small></a><a href="/en/robota-na-vyrobnytstvi/">Factory jobs<small>77</small></a><a href="/en/robota-na-kharchovomu-vyrobnytstvi/">Meat and fish processing<small>18</small></a><a href="/en/vodii-navantazhuvacha/">Forklift driver<small>8</small></a><a href="/en/robota-dlia-zhinok/">For women<small>71</small></a><a href="/en/robota-dlia-cholovikiv/">For men<small>86</small></a><a href="/en/robota-dlia-par/">For couples<small>55</small></a><a href="/en/robota-v-polshchi-dlia-studentiv/">For students<small>60</small></a></div><a class="dd-all" href="/en/#vacancies">All jobs<svg class="i"><use href="#i-chev"/></svg></a></div></div></div>
+      <a href="/en/yak-tse-pratsiuie/">How it works</a>
+      <a href="/en/pryvedy-druha/">Refer a friend</a>
+      <a href="/en/pytannia/">FAQ</a>
       <a href="/en/statti/">Articles</a>
-      <a href="#apply">Contacts</a>
-    </nav>
+      <a href="/en/pro-nas/">About us</a>
+      <a href="/en/kontakty/">Contacts</a>
+    <!--/seo:nav--></nav>
     <div class="lang" id="lang">
       <nav class="lang-seg" aria-label="Site language"><a data-l="uk" translate="no">UA</a><a data-l="ru" translate="no">RU</a><a data-l="en" translate="no">EN</a><a data-l="pl" translate="no">PL</a></nav>
       <button class="lang-btn" type="button" id="lang-btn" aria-expanded="false" aria-controls="lang-menu" translate="no"><svg class="i"><use href="#i-globe"/></svg><span id="lang-cur">UA</span></button>
@@ -635,9 +690,11 @@ section.vpage{padding-top:14px}
     <div class="top-cta">
       <a class="top-phone" href="tel:+380736067700" data-ch="phone">073 606 77 00</a>
       <a class="btn sm" href="#apply">Apply now</a>
+      <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
+<div class="mnav" id="mnav" hidden><div class="wrap"><!--seo:mnav--><div class="mn-main"><a href="/en/#vacancies">All jobs</a><a href="/en/yak-tse-pratsiuie/">How it works</a><a href="/en/pryvedy-druha/">Refer a friend</a><a href="/en/pytannia/">FAQ</a><a href="/en/statti/">Articles</a><a href="/en/pro-nas/">About us</a><a href="/en/kontakty/">Contacts</a></div><b>Jobs by country</b><div class="mn-chips"><a href="/en/robota-v-polshchi/">Poland<small>85</small></a><a href="/en/robota-v-lytvi/">Lithuania<small>10</small></a><a href="/en/robota-v-chekhii/">Czechia<small>5</small></a></div><b>By job type</b><div class="mn-chips"><a href="/en/robota-na-skladi/">Warehouse jobs<small>47</small></a><a href="/en/robota-na-vyrobnytstvi/">Factory jobs<small>77</small></a><a href="/en/robota-na-kharchovomu-vyrobnytstvi/">Meat and fish processing<small>18</small></a><a href="/en/vodii-navantazhuvacha/">Forklift driver<small>8</small></a><a href="/en/robota-dlia-zhinok/">For women<small>71</small></a><a href="/en/robota-dlia-cholovikiv/">For men<small>86</small></a><a href="/en/robota-dlia-par/">For couples<small>55</small></a><a href="/en/robota-v-polshchi-dlia-studentiv/">For students<small>60</small></a></div><div class="mn-cta"><a class="btn wide" href="#apply">Apply now</a><a class="btn ghost wide" href="tel:+380736067700" data-ch="phone">Call: 073 606 77 00</a></div><!--/seo:mnav--></div></div>
 
 <main class="wrap">
   <!--seo:hero-->
@@ -674,133 +731,14 @@ section.vpage{padding-top:14px}
       <button class="reset" type="button" id="reset" hidden>Reset filters</button>
     </div>
 
-    <div class="grid" id="grid"><!--seo:grid--><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-CZ"/></svg><span class="loc">Czechia · Rajhrad (15 km from Brno)</span></div><h3><a href="/en/vakansii/545/" data-vid="545">Logistics warehouse operator</a></h3><div class="money"><p class="uah num">≈ 51 500–75 500 <span class="u">UAH/mo</span></p><p class="uah-sub">before tax · 25 000–36 500 CZK/mo gross</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Housing provided</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Employment contract</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Start 18.11</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/en/vakansii/545/" data-vid="545">Details</a><button class="btn sm" type="button" data-apply="545">Apply</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-CZ"/></svg><span class="loc">Czechia · Šenov u Nového Jičína</span></div><h3><a href="/en/vakansii/543/" data-vid="543">Production operator</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Plastic Omnium</p><div class="money"><p class="uah num">≈ 53 500 <span class="u">UAH/mo</span></p><p class="uah-sub"><b>take-home</b> · 27 723–32 000 CZK/mo gross</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Housing provided</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Employment contract</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Start 19.11</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/en/vakansii/543/" data-vid="543">Details</a><button class="btn sm" type="button" data-apply="543">Apply</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-CZ"/></svg><span class="loc">Czechia · Bor u Tachova (45 km from Plzeň)</span></div><h3><a href="/en/vakansii/513/" data-vid="513">Warehouse operator with reach truck licence</a></h3><div class="money"><p class="uah num">≈ 71 000–89 000 <span class="u">UAH/mo</span></p><p class="uah-sub">before tax · 215 CZK/h gross</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Free housing</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Employment contract</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Start 26.11</li><li><svg class="i"><use href="#i-users"/></svg>Men</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/en/vakansii/513/" data-vid="513">Details</a><button class="btn sm" type="button" data-apply="513">Apply</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-CZ"/></svg><span class="loc">Czechia · Mošnov (15 km from Ostrava)</span></div><h3><a href="/en/vakansii/600/" data-vid="600">Warehouse worker / forklift driver</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Rhenus</p><div class="money"><p class="uah num">≈ 51 000–69 000 <span class="u">UAH/mo</span></p><p class="uah-sub">before tax · 24 717–33 400 CZK/mo gross</p></div><ul class="facts"><li class=""><svg class="i"><use href="#i-home"/></svg>Housing 4 500 CZK</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Employment contract</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Start 27.11</li><li><svg class="i"><use href="#i-users"/></svg>Men</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/en/vakansii/600/" data-vid="600">Details</a><button class="btn sm" type="button" data-apply="600">Apply</button></div></article><!--/seo:grid--></div>
+    <div class="grid" id="grid"><!--seo:grid--><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-CZ"/></svg><span class="loc">Czechia · Rajhrad (15 km from Brno)</span></div><h3><a href="/en/vakansii/545/" data-vid="545">Logistics warehouse operator</a></h3><div class="money"><p class="uah num">≈ 51 500–75 500 <span class="u">UAH/mo</span></p><p class="uah-sub">before tax · 25 000–36 500 CZK/mo gross</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Housing provided</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Employment contract</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Start 18.11</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/en/vakansii/545/" data-vid="545">Learn more</a><button class="btn sm" type="button" data-apply="545">Apply</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-CZ"/></svg><span class="loc">Czechia · Šenov u Nového Jičína</span></div><h3><a href="/en/vakansii/543/" data-vid="543">Production operator</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Plastic Omnium</p><div class="money"><p class="uah num">≈ 53 500 <span class="u">UAH/mo</span></p><p class="uah-sub"><b>take-home</b> · 27 723–32 000 CZK/mo gross</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Housing provided</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Employment contract</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Start 19.11</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/en/vakansii/543/" data-vid="543">Learn more</a><button class="btn sm" type="button" data-apply="543">Apply</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-CZ"/></svg><span class="loc">Czechia · Bor u Tachova (45 km from Plzeň)</span></div><h3><a href="/en/vakansii/513/" data-vid="513">Warehouse operator with reach truck licence</a></h3><div class="money"><p class="uah num">≈ 71 000–89 000 <span class="u">UAH/mo</span></p><p class="uah-sub">before tax · 215 CZK/h gross</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Free housing</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Employment contract</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Start 26.11</li><li><svg class="i"><use href="#i-users"/></svg>Men</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/en/vakansii/513/" data-vid="513">Learn more</a><button class="btn sm" type="button" data-apply="513">Apply</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-CZ"/></svg><span class="loc">Czechia · Mošnov (15 km from Ostrava)</span></div><h3><a href="/en/vakansii/600/" data-vid="600">Warehouse worker / forklift driver</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Rhenus</p><div class="money"><p class="uah num">≈ 51 000–69 000 <span class="u">UAH/mo</span></p><p class="uah-sub">before tax · 24 717–33 400 CZK/mo gross</p></div><ul class="facts"><li class=""><svg class="i"><use href="#i-home"/></svg>Housing 4 500 CZK</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Employment contract</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Start 27.11</li><li><svg class="i"><use href="#i-users"/></svg>Men</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/en/vakansii/600/" data-vid="600">Learn more</a><button class="btn sm" type="button" data-apply="600">Apply</button></div></article><!--/seo:grid--></div>
     <div class="more"><button class="btn ghost" type="button" id="more" hidden>Show more</button></div>
   </section>
 
-  <section aria-labelledby="why-h">
-    <div class="sec-head"><div><h2 id="why-h">Why Vdalo makes it easier</h2><p>We show the conditions so you can compare them honestly before you leave.</p></div></div>
-    <div class="cards4">
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-eye"/></svg></div><h3>Transparent conditions</h3><p>Pay rate, monthly hours, housing cost, contract type and start dates — in every listing.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-refresh"/></svg></div><h3>Current jobs</h3><p>The list is updated daily. Closed jobs disappear from the site automatically.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-gift"/></svg></div><h3>Free for you</h3><p>We don't charge candidates for job placement.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-chat"/></svg></div><h3>Always in touch</h3><p>Telegram, Viber, WhatsApp or a call — whatever suits you.</p></div>
-    </div>
-  </section>
+  <!--seo:blocks-->
+<!--/seo:blocks-->
 
-  <section id="village" aria-labelledby="vil-h">
-    <div class="sec-head"><div><h2 id="vil-h">Going to work abroad for the first time? We're with you every step</h2><p>No need to find housing yourself, speak the language or have special experience. We'll explain everything — from application to your first pay.</p></div><a class="btn" href="#apply">I want the same</a></div>
-    <div class="cards4">
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-home"/></svg></div><h3>Housing is ready</h3><p>In many jobs the employer provides housing — often free. No need to search for a flat or pay upfront.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-chat"/></svg></div><h3>No language or experience</h3><p>Most jobs need neither language nor experience — you'll be trained on site.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-piggy"/></svg></div><h3>You keep more</h3><p>When housing and commuting are arranged, most of your earnings go to savings.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-users"/></svg></div><h3>You don't have to go alone</h3><p>Go with a friend, neighbour, husband or wife. And we're always reachable in Ukrainian.</p></div>
-    </div>
-    <div class="story">
-      <div class="story-box" id="stories">
-        <div class="story-head"><span class="ava">O</span><div><p class="when-l">An example journey</p><h3>Oksana, 41, a village in Zhytomyr region</h3></div></div>
-        <ol class="tl">
-          <li><span class="ic"><svg class="i"><use href="#i-plane"/></svg></span><div><span class="when">Start</span><b>One call — and there's a plan</b><span class="t">At home she worked as a shop assistant and barely made ends meet. She wrote on Viber — the manager found a packing job at a warehouse in Poland with housing, and two weeks later she left with a friend.</span></div></li>
-          <li><span class="ic"><svg class="i"><use href="#i-home"/></svg></span><div><span class="when">First month</span><b>Only the first day was scary</b><span class="t">A shared room for two, a bus to work. She didn't need the language — she was trained on site in a few days. She takes extra hours when available.</span></div></li>
-          <li><span class="ic"><svg class="i"><use href="#i-key"/></svg></span><div><span class="when">Six months</span><b>A new roof and her daughter's studies</b><span class="t">She sends money home every month: the roof is replaced, her daughter got into college — all without loans.</span></div></li>
-          <li><span class="ic"><svg class="i"><use href="#i-store"/></svg></span><div><span class="when">After a year</span><b>Savings and a choice</b><span class="t">She has savings and decides for herself: extend the contract for another season or open a small shop back home.</span></div></li>
-        </ol>
-        <p class="note">This is an illustrative example, not a real person's story. Actual earnings depend on the job, the hours and your expenses.</p>
-      </div>
-      <div class="calc" id="calc">
-        <div><h3>Work out how much you can save</h3><p class="sub2">An estimate for working in Poland.</p></div>
-        <div class="row"><label for="c-rate">Take-home rate per hour <output id="c-rate-o" for="c-rate"></output></label><input type="range" id="c-rate" min="20" max="35" step="1" value="24"></div>
-        <div class="row"><label for="c-hours">Hours per month <output id="c-hours-o" for="c-hours"></output></label><input type="range" id="c-hours" min="160" max="280" step="10" value="200"></div>
-        <div class="row"><label for="c-spend">Food, phone and extras per month <output id="c-spend-o" for="c-spend"></output></label><input type="range" id="c-spend" min="400" max="2000" step="50" value="900"></div>
-        <label class="switch"><input type="checkbox" id="c-free" checked> Free housing from the employer</label>
-        <div class="res" aria-live="polite"><div><span>You save per month</span><b id="c-month">—</b><small id="c-month-u"></small></div><div><span>Per year</span><b id="c-year">—</b><small id="c-year-u"></small></div></div>
-        <p class="sub2">If housing is paid, we subtract 700 PLN per month. Exact terms are in each listing.</p>
-        <a class="btn wide" href="#vacancies">Find a job</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="doroha" aria-labelledby="road-h">
-    <div class="sec-head"><div><h2 id="road-h">The journey and your first day — we'll help</h2><p>People worry most not about the job but about the journey: where to go, where to change, who will meet them. So we take care of that part.</p></div></div>
-    <div class="cards4 road">
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-doc"/></svg></div><h3>Route sheet</h3><p>Step by step: where and when to depart, where to change, the housing and work address, the coordinator's phone. All in one message.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-plane"/></svg></div><h3>Partner carrier</h3><p>We'll recommend a trusted carrier our candidates already use — no searching random ads.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-cal"/></svg></div><h3>Help with tickets</h3><p>We'll help you pick a trip that matches your start date and buy a ticket. The travel cost is known in advance — no surprises.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-users"/></svg></div><h3>On-site coordinator</h3><p>You're not alone after arrival: the coordinator helps with check-in, documents and your first working day.</p></div>
-    </div>
-    <p class="road-more">What to pack — see our <a href="/en/statti/shcho-vziaty-v-dorohu/">travel checklist</a>.</p>
-  </section>
-
-  <section id="how" aria-labelledby="how-h">
-    <div class="sec-head"><div><h2 id="how-h">How it works</h2></div></div>
-    <div class="cards4 steps">
-      <div class="card"><h3>Application</h3><p>You apply on the site or message us.</p></div>
-      <div class="card"><h3>Matching</h3><p>The manager checks your experience and offers suitable jobs.</p></div>
-      <div class="card"><h3>Documents and date</h3><p>We tell you which documents you need and agree on the nearest start date.</p></div>
-      <div class="card"><h3>Work</h3><p>You arrive at the job and we stay in touch.</p></div>
-    </div>
-  </section>
-
-  <section aria-labelledby="safe-h">
-    <div class="safety">
-      <div>
-        <h2 id="safe-h">How to choose an honest job offer</h2>
-        <p style="margin-top:12px;color:var(--muted)">Five simple checks worth doing before you leave — with us or without us.</p>
-      </div>
-      <ol>
-        <li><div><b>Count the monthly total, not just the rate</b><span>Multiply the rate by the hours and subtract housing and other deductions.</span></div></li>
-        <li><div><b>Check the contract type</b><span>It determines your leave, sick pay and take-home pay. The contract type is shown in each of our listings.</span></div></li>
-        <li><div><b>Don't pay for the placement itself</b><span>An agency has no right to charge candidates for finding a job.</span></div></li>
-        <li><div><b>Ask for housing details</b><span>How many people per room, how much it costs and how far it is from work.</span></div></li>
-        <li><div><b>Keep your documents with you</b><span>Never hand over your passport "for safekeeping" — not to the employer, not to the coordinator.</span></div></li>
-      </ol>
-    </div>
-  </section>
-
-  <section id="friend" aria-labelledby="friend-h">
-    <div class="ref">
-      <div>
-        <div class="gift-ic" aria-hidden="true"><svg class="i"><use href="#i-gift"/></svg></div>
-        <h2 id="friend-h">Refer a friend — get a bonus</h2>
-        <p class="lead">Recommend us to a friend, relative or neighbour. When your friend starts work, you'll get a <b id="ref-amt">bonus</b>.</p>
-        <ol class="ref-steps">
-          <li>Enter your phone number to get a personal link.</li>
-          <li>Send it to your friend on Viber, Telegram or WhatsApp.</li>
-          <li>Your friend applies and starts work — we contact you about the bonus.</li>
-        </ol>
-        <p class="hint" id="ref-terms" style="margin-top:14px">Ask the manager about the bonus amount and payment terms.</p>
-      </div>
-      <div class="form-card ref-card">
-        <form id="ref-form" method="post" action="#" novalidate>
-          <div><label class="lbl" for="ref-phone">Your phone number</label><input id="ref-phone" name="phone" type="tel" autocomplete="tel" required placeholder="+380 __ ___ __ __"><p class="hint" style="margin-top:6px">We need the number to contact you about the bonus. We don't share it with third parties. Details are in the <a href="#privacy">privacy policy</a>.</p></div>
-          <p class="err" id="ref-err" role="alert"></p>
-          <button class="btn wide" type="submit">Get my link</button>
-        </form>
-        <div class="ref-out" id="ref-out" hidden>
-          <span class="lbl">Your link for friends</span>
-          <div class="ref-link"><input id="ref-url" readonly aria-label="Your link"><button class="btn sm" type="button" id="ref-copy">Copy</button></div>
-          <div class="send-row">
-            <a class="msgr" id="ref-vb" href="#"><span class="dot vb"></span>Viber</a>
-            <a class="msgr" id="ref-tg" href="#" target="_blank" rel="noopener"><span class="dot tg"></span>Telegram</a>
-            <a class="msgr" id="ref-wa" href="#" target="_blank" rel="noopener"><span class="dot wa"></span>WhatsApp</a>
-            <button class="msgr" type="button" id="ref-share" hidden><svg class="i"><use href="#i-share"/></svg>Other</button>
-          </div>
-          <p class="hint">When your friend applies via this link, we'll see they came from you.</p>
-        </div>
-        <div class="ref-direct">
-          <span class="lbl">Or message or call us</span>
-          <div class="send-row">
-            <a class="msgr" href="https://t.me/+380736067700" data-ch="telegram" data-copytext="Вітаю! Хочу порекомендувати друга, який шукає роботу за кордоном. Підкажіть, як нам це зробити?"><span class="dot tg"></span>Telegram</a>
-            <a class="msgr" href="viber://chat?number=%2B380736067700" data-ch="viber" data-copytext="Вітаю! Хочу порекомендувати друга, який шукає роботу за кордоном. Підкажіть, як нам це зробити?"><span class="dot vb"></span>Viber</a>
-            <a class="msgr" href="https://wa.me/380736067700?text=%D0%92%D1%96%D1%82%D0%B0%D1%8E%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BF%D0%BE%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D1%83%D0%B2%D0%B0%D1%82%D0%B8%20%D0%B4%D1%80%D1%83%D0%B3%D0%B0%2C%20%D1%8F%D0%BA%D0%B8%D0%B9%20%D1%88%D1%83%D0%BA%D0%B0%D1%94%20%D1%80%D0%BE%D0%B1%D0%BE%D1%82%D1%83%20%D0%B7%D0%B0%20%D0%BA%D0%BE%D1%80%D0%B4%D0%BE%D0%BD%D0%BE%D0%BC.%20%D0%9F%D1%96%D0%B4%D0%BA%D0%B0%D0%B6%D1%96%D1%82%D1%8C%2C%20%D1%8F%D0%BA%20%D0%BD%D0%B0%D0%BC%20%D1%86%D0%B5%20%D0%B7%D1%80%D0%BE%D0%B1%D0%B8%D1%82%D0%B8%3F" data-ch="whatsapp"><span class="dot wa"></span>WhatsApp</a>
-            <a class="msgr" href="tel:+380736067700" data-ch="phone"><svg class="i"><use href="#i-phone"/></svg>Call</a>
-          </div>
-          <p class="hint">The message "I'd like to recommend a friend…" is ready: in WhatsApp it's filled in automatically, for Telegram and Viber it's copied — just paste it into the chat.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!--seo:apply-->
   <section id="apply" aria-labelledby="apply-h">
     <div class="apply">
       <div>
@@ -865,37 +803,18 @@ section.vpage{padding-top:14px}
     </div>
   </section>
 
+  <!--/seo:apply-->
+
   <!--seo:text-->
   <section aria-labelledby="seo-h"><div class="seo"><div class="seo-grid"><div class="seo-txt"><h2 id="seo-h">Looking for other options?</h2></div></div><h3 style="margin-top:26px">Other categories</h3><div class="links"><a href="/en/">All jobs</a><a href="/en/robota-v-polshchi/">Jobs in Poland · 85</a><a href="/en/robota-v-lytvi/">Jobs in Lithuania · 10</a><a href="/en/robota-v-chekhii/">Jobs in Czechia · 5</a><a href="/en/robota-na-skladi/">Warehouse jobs · 47</a><a href="/en/robota-na-vyrobnytstvi/">Factory jobs · 77</a><a href="/en/robota-na-kharchovomu-vyrobnytstvi/">Meat and fish processing · 18</a><a href="/en/vodii-navantazhuvacha/">Forklift driver · 8</a><a href="/en/robota-dlia-zhinok/">For women · 71</a><a href="/en/robota-dlia-cholovikiv/">For men · 86</a><a href="/en/robota-dlia-par/">For couples · 55</a><a href="/en/robota-v-polshchi-dlia-studentiv/">For students · 60</a></div></div></section>
   <!--/seo:text-->
 
-  <section id="faq" aria-labelledby="faq-h">
-    <div class="sec-head"><div><h2 id="faq-h">FAQ</h2></div></div>
-    <div class="faq">
-      <details><summary>Do I have to pay for placement?</summary><p>No, our services are free for candidates. Only travel and housing may be paid separately — their cost is shown in the listing.</p></details>
-      <details><summary>What does "gross" mean and how much will I take home?</summary><p>Gross is the amount before tax and contributions. Take-home (net) is what you actually receive. Most listings show both: the difference depends on the country, contract type and your tax situation. The manager will confirm the exact take-home pay after checking the specific job.</p></details>
-      <details><summary>Do people under 26 pay tax and contributions in Poland?</summary><p>It depends on age, contract type and worker status. People under 26 may get the PIT relief on certain income — up to the annual limit of 85,528 zł. You don't have to be a student for this relief.</p><p>Separately: a student under 26 may not pay ZUS contributions on a civil-law contract (umowa zlecenie) if their student status is confirmed and other conditions are met. Studying in Ukraine does not by itself rule this out. Different rules apply to umowa o pracę. Note: without contributions this contract gives no pension or health insurance.</p><p>We'll confirm the exact take-home pay after checking the contract type, documents and the candidate's tax situation.</p></details>
-      <details><summary>What is deducted from the pay?</summary><p>Tax and social contributions — the amount depends on the country, contract type, age and tax residency. If the job provides for it, housing, commuting or meals may also be deducted. Before you leave, the manager will list each deduction for your job.</p></details>
-      <details><summary>Do I need to pay anything before leaving?</summary><p>Job matching is free. Any other possible costs — ticket, housing, medical check, transport or documents — the manager will list separately before departure.</p></details>
-      <details><summary>How many hours a month are guaranteed?</summary><p>Each listing shows the monthly hours and shift schedule. Overtime isn't always available, so calculate earnings on the base hours, not the maximum. Ask the manager about overtime.</p></details>
-      <details><summary>What does the housing cost include?</summary><p>Before you leave, ask the manager: how many people share a room, whether utilities are included, whether a deposit is needed, how far it is to work and what the commute costs. We'll check with the employer.</p></details>
-      <details><summary>When and how is the first pay made?</summary><p>Pay is usually made once a month to a bank card, for the previous month. So the first payment may arrive a few weeks after you start — bring money for initial expenses. The manager will confirm the pay schedule and any advance for your job.</p></details>
-      <details><summary>What if the conditions differ from the listing after I arrive?</summary><p>Before signing, check the rate, hours, housing and deductions. If anything doesn't match the listing, don't sign — message or call us right away: +380 73 606 77 00 (Telegram, Viber, WhatsApp). We'll sort it out with the employer.</p></details>
-      <details><summary>What types of contract are there?</summary><p><b>Employment contract</b> (umowa o pracę) — paid leave, sick pay, full social insurance. <b>Civil-law contract</b> (umowa zlecenie) — paid per hour worked, no paid leave; the insurance included is stated in the listing. Every listing shows the contract type.</p></details>
-      <details><summary>Do I need to speak the language?</summary><p>For most jobs, no. If a language is required, the listing says so.</p></details>
-      <details><summary>What documents do I need?</summary><p>Usually a biometric passport. Some countries and jobs may need other documents: the manager will give you the exact list before departure.</p></details>
-      <details><summary>Can I go as a couple or with a friend?</summary><p>Yes. Use the "Couples" filter — it shows jobs open to both women and men. Ask the manager about shared housing.</p></details>
-      <details><summary>Who can leave Ukraine under martial law?</summary><p>Women — without restrictions. Men aged 18–60 — only with legal grounds to cross the border. The manager will suggest suitable jobs.</p></details>
-      <details><summary>Who do I sign the contract with?</summary><p>With the employer or its staffing agency in the country of employment — that legal entity will be the party to your contract. The company where you'll actually work is named in the listing; it may differ from the contracting party if an agency employs you. The manager will tell you the exact contracting party before departure.</p></details>
-      <details><summary>How soon can I leave?</summary><p>The nearest start dates are shown in the listings. Once you choose a job, the manager will agree a specific date with you.</p></details>
-      <details><summary>Do you help with travel?</summary><p>Yes. We prepare a route sheet, recommend a partner carrier and help you buy a ticket, and a coordinator is in touch on site. You pay for the ticket — we'll tell you the cost in advance.</p></details>
-    </div>
-  </section>
+<!--seo:faq--><!--/seo:faq-->
 </main>
 
 <footer>
   <!--seo:foot-->
-  <div class="flinks"><b>Jobs abroad</b><div class="links" style="margin-top:6px"><a href="/en/">All jobs</a><a href="/en/robota-v-polshchi/">Jobs in Poland · 85</a><a href="/en/robota-v-lytvi/">Jobs in Lithuania · 10</a><a href="/en/robota-v-chekhii/">Jobs in Czechia · 5</a><a href="/en/robota-na-skladi/">Warehouse jobs · 47</a><a href="/en/robota-na-vyrobnytstvi/">Factory jobs · 77</a><a href="/en/robota-na-kharchovomu-vyrobnytstvi/">Meat and fish processing · 18</a><a href="/en/vodii-navantazhuvacha/">Forklift driver · 8</a><a href="/en/robota-dlia-zhinok/">For women · 71</a><a href="/en/robota-dlia-cholovikiv/">For men · 86</a><a href="/en/robota-dlia-par/">For couples · 55</a><a href="/en/robota-v-polshchi-dlia-studentiv/">For students · 60</a></div><b style="display:block;margin-top:16px">Useful articles</b><div class="links" style="margin-top:6px"><a href="/en/statti/">All articles</a><a href="/en/statti/dokumenty-dlia-roboty-v-polshchi/">Documents for working in Poland in 2026</a><a href="/en/statti/dohovir-doruchennia-chy-trudovyi/">Civil-law contract or employment contract: what's the difference</a><a href="/en/statti/yak-ne-potrapyty-do-shakhraiv/">How to avoid scams when looking for work abroad</a><a href="/en/statti/shcho-vziaty-v-dorohu/">What to take when working abroad: a checklist</a></div></div>
+  <div class="flinks"><b>Jobs abroad</b><div class="links" style="margin-top:6px"><a href="/en/">All jobs</a><a href="/en/robota-v-polshchi/">Jobs in Poland · 85</a><a href="/en/robota-v-lytvi/">Jobs in Lithuania · 10</a><a href="/en/robota-v-chekhii/">Jobs in Czechia · 5</a><a href="/en/robota-na-skladi/">Warehouse jobs · 47</a><a href="/en/robota-na-vyrobnytstvi/">Factory jobs · 77</a><a href="/en/robota-na-kharchovomu-vyrobnytstvi/">Meat and fish processing · 18</a><a href="/en/vodii-navantazhuvacha/">Forklift driver · 8</a><a href="/en/robota-dlia-zhinok/">For women · 71</a><a href="/en/robota-dlia-cholovikiv/">For men · 86</a><a href="/en/robota-dlia-par/">For couples · 55</a><a href="/en/robota-v-polshchi-dlia-studentiv/">For students · 60</a></div><b style="display:block;margin-top:16px">Useful articles</b><div class="links" style="margin-top:6px"><a href="/en/statti/">All articles</a><a href="/en/statti/dokumenty-dlia-roboty-v-polshchi/">Documents for working in Poland in 2026</a><a href="/en/statti/dohovir-doruchennia-chy-trudovyi/">Civil-law contract or employment contract: what's the difference</a><a href="/en/statti/yak-ne-potrapyty-do-shakhraiv/">How to avoid scams when looking for work abroad</a><a href="/en/statti/shcho-vziaty-v-dorohu/">What to take when working abroad: a checklist</a></div><b style="display:block;margin-top:16px">About the company</b><div class="links" style="margin-top:6px"><a href="/en/yak-tse-pratsiuie/">How it works</a><a href="/en/pryvedy-druha/">Refer a friend</a><a href="/en/pytannia/">FAQ</a><a href="/en/pro-nas/">About us</a><a href="/en/kontakty/">Contacts</a></div></div>
   <!--/seo:foot-->
   <div class="wrap">
     <span>© 2026 Vdalo · Jobs in Europe</span>
@@ -1739,6 +1658,24 @@ section.vpage{padding-top:14px}
     new MutationObserver(function(ms){ ms.forEach(function(m){ if (m.type === "characterData") walk(m.target); else m.addedNodes.forEach(walk); }); })
       .observe(document.body, {childList: true, subtree: true, characterData: true});
   }).catch(function(){});
+})();
+</script>
+
+<script>
+(function(){
+  var dd=document.querySelector(".nav .dd");
+  if(dd){ var b=dd.querySelector(".dd-btn");
+    b.addEventListener("click",function(e){ e.stopPropagation(); var o=dd.classList.toggle("open"); b.setAttribute("aria-expanded",o); });
+    document.addEventListener("click",function(e){ if(!dd.contains(e.target)){ dd.classList.remove("open"); b.setAttribute("aria-expanded","false"); } });
+    document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ dd.classList.remove("open"); b.setAttribute("aria-expanded","false"); } });
+  }
+  var bg=document.getElementById("burger"), mn=document.getElementById("mnav");
+  if(bg&&mn){
+    function set(o){ mn.hidden=!o; bg.setAttribute("aria-expanded",o); document.body.classList.toggle("mnav-open",o); }
+    bg.addEventListener("click",function(){ set(mn.hidden); });
+    mn.addEventListener("click",function(e){ if(e.target.closest("a")) set(false); });
+    window.addEventListener("resize",function(){ if(window.innerWidth>960) set(false); });
+  }
 })();
 </script>
 </body>

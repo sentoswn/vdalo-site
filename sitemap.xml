@@ -119,6 +119,11 @@
   <url><loc>https://vdalo-robota.com.ua/statti/yak-ne-potrapyty-do-shakhraiv/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://vdalo-robota.com.ua/statti/shcho-vziaty-v-dorohu/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://vdalo-robota.com.ua/statti/</loc><lastmod>2026-11-13</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/yak-tse-pratsiuie/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/pryvedy-druha/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/pytannia/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/pro-nas/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/kontakty/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://vdalo-robota.com.ua/ru/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
   <url><loc>https://vdalo-robota.com.ua/en/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
   <url><loc>https://vdalo-robota.com.ua/pl/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
@@ -476,4 +481,19 @@
   <url><loc>https://vdalo-robota.com.ua/ru/statti/</loc><lastmod>2026-11-13</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://vdalo-robota.com.ua/en/statti/</loc><lastmod>2026-11-13</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://vdalo-robota.com.ua/pl/statti/</loc><lastmod>2026-11-13</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/ru/yak-tse-pratsiuie/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/en/yak-tse-pratsiuie/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/pl/yak-tse-pratsiuie/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/ru/pryvedy-druha/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/en/pryvedy-druha/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/pl/pryvedy-druha/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/ru/pytannia/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/en/pytannia/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/pl/pytannia/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/ru/pro-nas/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/en/pro-nas/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/pl/pro-nas/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/ru/kontakty/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/en/kontakty/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/pl/kontakty/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

@@ -116,7 +116,7 @@ svg.i{width:18px;height:18px;flex:0 0 18px;stroke:currentColor;fill:none;stroke-
 .lang-menu[hidden]{display:none}
 .lang-menu a{padding:10px 12px;border-radius:10px;text-decoration:none;font-weight:700;color:var(--ink)}
 .lang-menu a:hover,.lang-menu a[aria-current="true"]{background:var(--soft)}
-@media (max-width:1100px){.lang-seg{display:none}.lang-btn{display:inline-flex}}
+@media (max-width:1500px){.lang-seg{display:none}.lang-btn{display:inline-flex}}
 .top-phone{font-weight:800;text-decoration:none;white-space:nowrap}
 
 /* hero */
@@ -573,6 +573,60 @@ section.vpage{padding-top:14px}
 .doc-body p{color:var(--muted);margin:6px 0}
 @media (max-width:960px){.story,.ref{grid-template-columns:1fr}}
 @media (max-width:640px){.res{grid-template-columns:1fr}.marq-grp span{font-size:14px;padding:0 14px}}
+
+/* меню: «Вакансії» з підменю, бургер, сторінки розділів */
+.nav{align-items:center}
+.nav a[aria-current="page"],.nav .dd-btn[aria-current="page"]{color:var(--ink)}
+.dd{position:relative}
+.dd-btn{display:inline-flex;align-items:center;gap:4px;background:none;border:0;padding:0;font:inherit;font-weight:600;color:var(--muted);cursor:pointer}
+.dd-btn:hover,.dd.open .dd-btn{color:var(--ink)}
+.dd-btn svg{width:14px;height:14px;transform:rotate(90deg);transition:transform .15s}
+.dd.open .dd-btn svg{transform:rotate(-90deg)}
+.dd-menu{position:absolute;left:-18px;top:100%;padding-top:14px;display:none;z-index:30}
+.dd.open .dd-menu{display:block}
+@media (hover:hover){.dd:hover .dd-menu{display:block}.dd:hover .dd-btn{color:var(--ink)}}
+.dd-box{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 22px 50px -20px rgba(0,0,0,.35);display:grid;grid-template-columns:repeat(2,minmax(190px,auto));gap:6px 22px;min-width:440px}
+.dd-box b,.mnav b{display:block;font:800 12px var(--font-body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:2px 0 6px}
+.dd-box a{display:flex;justify-content:space-between;gap:12px;padding:7px 10px;margin:0 -10px;border-radius:10px;color:var(--ink)!important;font-weight:600;text-decoration:none}
+.dd-box a:hover{background:var(--soft)}
+.dd-box a small{color:var(--muted);font-weight:700}
+.dd-box .dd-all{grid-column:1/-1;margin-top:8px;border-top:1px solid var(--line);border-radius:0;padding-top:12px;justify-content:flex-start;gap:6px;color:var(--accent,var(--ink))!important;font-weight:800}
+.burger{display:none;width:42px;height:42px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:0}
+.burger span{display:block;width:18px;height:2px;border-radius:2px;background:var(--ink);transition:transform .2s,opacity .2s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mnav{position:fixed;left:0;right:0;top:calc(64px + env(safe-area-inset-top));bottom:0;z-index:19;background:var(--bg);overflow:auto;padding:12px 0 40px;border-top:1px solid var(--line)}
+.mnav[hidden]{display:none}
+.mnav .mn-main{display:grid;gap:2px;margin-bottom:18px}
+.mnav .mn-main a{padding:13px 4px;font:800 20px var(--font-body);text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)}
+.mnav .mn-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.mnav .mn-chips a{padding:9px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:700;text-decoration:none;color:var(--ink);font-size:15px}
+.mnav .mn-chips a small{color:var(--muted);margin-left:4px}
+.mnav .mn-cta{display:grid;gap:10px;margin-top:6px}
+body.mnav-open{overflow:hidden}
+.nav a,.dd-btn{white-space:nowrap}
+body.mnav-open .fab{display:none}
+@media (max-width:1400px){.nav{gap:18px}.top-cta .top-phone{display:none}}
+@media (max-width:1180px){.nav{display:none}.burger{display:inline-flex}}
+@media (max-width:640px){.top-cta .btn.sm{display:none}}
+.sec-more{display:inline-flex;align-items:center;gap:4px;font-weight:800;text-decoration:none;color:var(--ink);white-space:nowrap}
+.sec-more svg{width:16px;height:16px}
+.sec-more:hover{text-decoration:underline}
+.page-head{background:var(--grad);border-radius:32px;padding:clamp(24px,4.5vw,52px);margin-top:8px}
+.page-head h1{font-size:clamp(28px,4.5vw,48px)}
+.page-head .lead{margin-top:12px;font-size:18px;max-width:62ch}
+.page-head .ph-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.prose{max-width:760px}
+.prose p{margin-top:12px}
+.prose h2{margin-top:26px}
+.steps6{counter-reset:st;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.steps6 .card{position:relative;padding-top:58px}
+.steps6 .card::before{counter-increment:st;content:counter(st);position:absolute;left:22px;top:18px;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-weight:800;font-size:15px}
+@media (max-width:960px){.steps6{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.steps6{grid-template-columns:1fr}}
+.kgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media (max-width:760px){.kgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -619,14 +673,15 @@ section.vpage{padding-top:14px}
 <header class="top" id="top">
   <div class="wrap">
     <a class="logo" href="/pl/" aria-label="Vdalo — strona główna"><span class="logo-mark">V</span>Vdalo</a>
-    <nav class="nav" aria-label="Sekcje">
-      <a href="#vacancies">Oferty pracy</a>
-      <a href="#how">Jak to działa</a>
-      <a href="#friend">Poleć znajomego</a>
-      <a href="#faq">Pytania</a>
+    <nav class="nav" aria-label="Sekcje"><!--seo:nav-->
+      <div class="dd"><button class="dd-btn" type="button" aria-expanded="false" aria-haspopup="true" aria-current="page">Oferty pracy<svg class="i"><use href="#i-chev"/></svg></button><div class="dd-menu"><div class="dd-box"><div><b>Według kraju</b><a href="/pl/robota-v-polshchi/">Polska<small>85</small></a><a href="/pl/robota-v-lytvi/">Litwa<small>10</small></a><a href="/pl/robota-v-chekhii/">Czechy<small>5</small></a></div><div><b>Według rodzaju pracy</b><a href="/pl/robota-na-skladi/">Praca w magazynie<small>47</small></a><a href="/pl/robota-na-vyrobnytstvi/">Praca w fabryce<small>77</small></a><a href="/pl/robota-na-kharchovomu-vyrobnytstvi/">Przetwórstwo mięsa i ryb<small>18</small></a><a href="/pl/vodii-navantazhuvacha/">Operator wózka widłowego<small>8</small></a><a href="/pl/robota-dlia-zhinok/">Dla kobiet<small>71</small></a><a href="/pl/robota-dlia-cholovikiv/">Dla mężczyzn<small>86</small></a><a href="/pl/robota-dlia-par/">Dla par<small>55</small></a><a href="/pl/robota-v-polshchi-dlia-studentiv/">Dla studentów<small>60</small></a></div><a class="dd-all" href="/pl/#vacancies">Wszystkie oferty<svg class="i"><use href="#i-chev"/></svg></a></div></div></div>
+      <a href="/pl/yak-tse-pratsiuie/">Jak to działa</a>
+      <a href="/pl/pryvedy-druha/">Poleć znajomego</a>
+      <a href="/pl/pytannia/">Pytania</a>
       <a href="/pl/statti/">Artykuły</a>
-      <a href="#apply">Kontakt</a>
-    </nav>
+      <a href="/pl/pro-nas/">O nas</a>
+      <a href="/pl/kontakty/">Kontakt</a>
+    <!--/seo:nav--></nav>
     <div class="lang" id="lang">
       <nav class="lang-seg" aria-label="Język strony"><a data-l="uk" translate="no">UA</a><a data-l="ru" translate="no">RU</a><a data-l="en" translate="no">EN</a><a data-l="pl" translate="no">PL</a></nav>
       <button class="lang-btn" type="button" id="lang-btn" aria-expanded="false" aria-controls="lang-menu" translate="no"><svg class="i"><use href="#i-globe"/></svg><span id="lang-cur">UA</span></button>
@@ -635,9 +690,11 @@ section.vpage{padding-top:14px}
     <div class="top-cta">
       <a class="top-phone" href="tel:+380736067700" data-ch="phone">073 606 77 00</a>
       <a class="btn sm" href="#apply">Złóż zgłoszenie</a>
+      <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
+<div class="mnav" id="mnav" hidden><div class="wrap"><!--seo:mnav--><div class="mn-main"><a href="/pl/#vacancies">Wszystkie oferty</a><a href="/pl/yak-tse-pratsiuie/">Jak to działa</a><a href="/pl/pryvedy-druha/">Poleć znajomego</a><a href="/pl/pytannia/">Pytania</a><a href="/pl/statti/">Artykuły</a><a href="/pl/pro-nas/">O nas</a><a href="/pl/kontakty/">Kontakt</a></div><b>Oferty według kraju</b><div class="mn-chips"><a href="/pl/robota-v-polshchi/">Polska<small>85</small></a><a href="/pl/robota-v-lytvi/">Litwa<small>10</small></a><a href="/pl/robota-v-chekhii/">Czechy<small>5</small></a></div><b>Według rodzaju pracy</b><div class="mn-chips"><a href="/pl/robota-na-skladi/">Praca w magazynie<small>47</small></a><a href="/pl/robota-na-vyrobnytstvi/">Praca w fabryce<small>77</small></a><a href="/pl/robota-na-kharchovomu-vyrobnytstvi/">Przetwórstwo mięsa i ryb<small>18</small></a><a href="/pl/vodii-navantazhuvacha/">Operator wózka widłowego<small>8</small></a><a href="/pl/robota-dlia-zhinok/">Dla kobiet<small>71</small></a><a href="/pl/robota-dlia-cholovikiv/">Dla mężczyzn<small>86</small></a><a href="/pl/robota-dlia-par/">Dla par<small>55</small></a><a href="/pl/robota-v-polshchi-dlia-studentiv/">Dla studentów<small>60</small></a></div><div class="mn-cta"><a class="btn wide" href="#apply">Złóż zgłoszenie</a><a class="btn ghost wide" href="tel:+380736067700" data-ch="phone">Zadzwoń: 073 606 77 00</a></div><!--/seo:mnav--></div></div>
 
 <main class="wrap">
   <!--seo:hero-->
@@ -674,133 +731,14 @@ section.vpage{padding-top:14px}
       <button class="reset" type="button" id="reset" hidden>Wyczyść filtry</button>
     </div>
 
-    <div class="grid" id="grid"><!--seo:grid--><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa</span></div><h3><a href="/pl/vakansii/136/" data-vid="136">Pracownik produkcji (kontrola jakości)</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Vilniaus Paukštynas</p><div class="money"><p class="uah num">≈ 45 500–58 000 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 200–1 300 EUR/mies. brutto</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Zakwaterowanie zapewnione</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/136/" data-vid="136">Szczegóły</a><button class="btn sm" type="button" data-apply="136">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa</span></div><h3><a href="/pl/vakansii/1/" data-vid="1">Obróbka i pakowanie łososia</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Vici</p><div class="money"><p class="uah num">≈ 45 500–60 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 400–1 600 EUR/mies. brutto</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Darmowe zakwaterowanie</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li><li><svg class="i"><use href="#i-users"/></svg>Kobiety</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/1/" data-vid="1">Szczegóły</a><button class="btn sm" type="button" data-apply="1">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa</span></div><h3><a href="/pl/vakansii/179/" data-vid="179">Filetowanie ryb</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Baltic Fish Export</p><div class="money"><p class="uah num">≈ 50 500–65 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 400–1 600 EUR/mies. brutto</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Darmowe zakwaterowanie</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li><li><svg class="i"><use href="#i-users"/></svg>Kobiety</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/179/" data-vid="179">Szczegóły</a><button class="btn sm" type="button" data-apply="179">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa · Tauragė</span></div><h3><a href="/pl/vakansii/596/" data-vid="596">Produkcja obudów turbin wiatrowych</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Jupiter Bach</p><div class="money"><p class="uah num">≈ 55 500–100 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 400–2 300 EUR/mies. brutto</p></div><ul class="facts"><li class=""><svg class="i"><use href="#i-home"/></svg>Zakwaterowanie 75 EUR/mies.</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/596/" data-vid="596">Szczegóły</a><button class="btn sm" type="button" data-apply="596">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa</span></div><h3><a href="/pl/vakansii/278/" data-vid="278">Ważenie, pakowanie i porcjowanie śledzia</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Baltic Food Partners</p><div class="money"><p class="uah num">≈ 45 500–60 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 200–1 300 EUR/mies. brutto</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Darmowe zakwaterowanie</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li><li><svg class="i"><use href="#i-users"/></svg>Kobiety</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/278/" data-vid="278">Szczegóły</a><button class="btn sm" type="button" data-apply="278">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa · Kaunas</span></div><h3><a href="/pl/vakansii/501/" data-vid="501">Pracownik produkcji opakowań i etykiet</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Aurika</p><div class="money"><p class="uah num">≈ 50 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 200–1 300 EUR/mies. brutto</p></div><ul class="facts"><li class=""><svg class="i"><use href="#i-home"/></svg>Zakwaterowanie 75 EUR</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li><li><svg class="i"><use href="#i-users"/></svg>Mężczyźni</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/501/" data-vid="501">Szczegóły</a><button class="btn sm" type="button" data-apply="501">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa</span></div><h3><a href="/pl/vakansii/295/" data-vid="295">Ważenie i znakowanie wyrobów mięsnych</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Vilniaus Paukštynas</p><div class="money"><p class="uah num">≈ 45 500–60 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 300–1 500 EUR/mies. brutto</p></div><ul class="facts"><li class=""><svg class="i"><use href="#i-home"/></svg>Zakwaterowanie 75 EUR</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/295/" data-vid="295">Szczegóły</a><button class="btn sm" type="button" data-apply="295">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa</span></div><h3><a href="/pl/vakansii/25/" data-vid="25">Pokojówka</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>SPA Vilnius</p><div class="money"><p class="uah num">≈ 43 000–55 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 180–1 200 EUR/mies. brutto</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Darmowe zakwaterowanie</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li><li><svg class="i"><use href="#i-users"/></svg>Kobiety</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/25/" data-vid="25">Szczegóły</a><button class="btn sm" type="button" data-apply="25">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa · Panevėžys</span></div><h3><a href="/pl/vakansii/364/" data-vid="364">Pracownik produkcji wiązek samochodowych</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>AQ Wiring</p><div class="money"><p class="uah num">≈ 43 500–55 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 300–1 400 EUR/mies. brutto</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Zakwaterowanie zapewnione</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 23.11</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/364/" data-vid="364">Szczegóły</a><button class="btn sm" type="button" data-apply="364">Aplikuj</button></div></article><!--/seo:grid--></div>
+    <div class="grid" id="grid"><!--seo:grid--><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa</span></div><h3><a href="/pl/vakansii/136/" data-vid="136">Pracownik produkcji (kontrola jakości)</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Vilniaus Paukštynas</p><div class="money"><p class="uah num">≈ 45 500–58 000 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 200–1 300 EUR/mies. brutto</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Zakwaterowanie zapewnione</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/136/" data-vid="136">Więcej</a><button class="btn sm" type="button" data-apply="136">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa</span></div><h3><a href="/pl/vakansii/1/" data-vid="1">Obróbka i pakowanie łososia</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Vici</p><div class="money"><p class="uah num">≈ 45 500–60 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 400–1 600 EUR/mies. brutto</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Darmowe zakwaterowanie</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li><li><svg class="i"><use href="#i-users"/></svg>Kobiety</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/1/" data-vid="1">Więcej</a><button class="btn sm" type="button" data-apply="1">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa</span></div><h3><a href="/pl/vakansii/179/" data-vid="179">Filetowanie ryb</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Baltic Fish Export</p><div class="money"><p class="uah num">≈ 50 500–65 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 400–1 600 EUR/mies. brutto</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Darmowe zakwaterowanie</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li><li><svg class="i"><use href="#i-users"/></svg>Kobiety</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/179/" data-vid="179">Więcej</a><button class="btn sm" type="button" data-apply="179">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa · Tauragė</span></div><h3><a href="/pl/vakansii/596/" data-vid="596">Produkcja obudów turbin wiatrowych</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Jupiter Bach</p><div class="money"><p class="uah num">≈ 55 500–100 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 400–2 300 EUR/mies. brutto</p></div><ul class="facts"><li class=""><svg class="i"><use href="#i-home"/></svg>Zakwaterowanie 75 EUR/mies.</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/596/" data-vid="596">Więcej</a><button class="btn sm" type="button" data-apply="596">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa</span></div><h3><a href="/pl/vakansii/278/" data-vid="278">Ważenie, pakowanie i porcjowanie śledzia</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Baltic Food Partners</p><div class="money"><p class="uah num">≈ 45 500–60 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 200–1 300 EUR/mies. brutto</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Darmowe zakwaterowanie</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li><li><svg class="i"><use href="#i-users"/></svg>Kobiety</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/278/" data-vid="278">Więcej</a><button class="btn sm" type="button" data-apply="278">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa · Kaunas</span></div><h3><a href="/pl/vakansii/501/" data-vid="501">Pracownik produkcji opakowań i etykiet</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Aurika</p><div class="money"><p class="uah num">≈ 50 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 200–1 300 EUR/mies. brutto</p></div><ul class="facts"><li class=""><svg class="i"><use href="#i-home"/></svg>Zakwaterowanie 75 EUR</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li><li><svg class="i"><use href="#i-users"/></svg>Mężczyźni</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/501/" data-vid="501">Więcej</a><button class="btn sm" type="button" data-apply="501">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa</span></div><h3><a href="/pl/vakansii/295/" data-vid="295">Ważenie i znakowanie wyrobów mięsnych</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Vilniaus Paukštynas</p><div class="money"><p class="uah num">≈ 45 500–60 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 300–1 500 EUR/mies. brutto</p></div><ul class="facts"><li class=""><svg class="i"><use href="#i-home"/></svg>Zakwaterowanie 75 EUR</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/295/" data-vid="295">Więcej</a><button class="btn sm" type="button" data-apply="295">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa</span></div><h3><a href="/pl/vakansii/25/" data-vid="25">Pokojówka</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>SPA Vilnius</p><div class="money"><p class="uah num">≈ 43 000–55 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 180–1 200 EUR/mies. brutto</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Darmowe zakwaterowanie</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 16.11</li><li><svg class="i"><use href="#i-users"/></svg>Kobiety</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/25/" data-vid="25">Więcej</a><button class="btn sm" type="button" data-apply="25">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-LT"/></svg><span class="loc">Litwa · Panevėžys</span></div><h3><a href="/pl/vakansii/364/" data-vid="364">Pracownik produkcji wiązek samochodowych</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>AQ Wiring</p><div class="money"><p class="uah num">≈ 43 500–55 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 1 300–1 400 EUR/mies. brutto</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Zakwaterowanie zapewnione</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 23.11</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/364/" data-vid="364">Więcej</a><button class="btn sm" type="button" data-apply="364">Aplikuj</button></div></article><!--/seo:grid--></div>
     <div class="more"><button class="btn ghost" type="button" id="more" hidden>Pokaż więcej</button></div>
   </section>
 
-  <section aria-labelledby="why-h">
-    <div class="sec-head"><div><h2 id="why-h">Dlaczego z Vdalo jest prościej</h2><p>Pokazujemy warunki tak, by można je było uczciwie porównać jeszcze przed wyjazdem.</p></div></div>
-    <div class="cards4">
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-eye"/></svg></div><h3>Przejrzyste warunki</h3><p>Stawka, godziny w miesiącu, koszt zakwaterowania, rodzaj umowy i terminy przyjazdu — w każdej ofercie.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-refresh"/></svg></div><h3>Aktualne oferty</h3><p>Lista jest aktualizowana codziennie. Zamknięte oferty znikają ze strony automatycznie.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-gift"/></svg></div><h3>Bezpłatnie dla Ciebie</h3><p>Nie pobieramy od kandydatów opłat za pośrednictwo pracy.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-chat"/></svg></div><h3>Zawsze w kontakcie</h3><p>Telegram, Viber, WhatsApp lub telefon — jak Ci wygodniej.</p></div>
-    </div>
-  </section>
+  <!--seo:blocks-->
+<!--/seo:blocks-->
 
-  <section id="village" aria-labelledby="vil-h">
-    <div class="sec-head"><div><h2 id="vil-h">Pierwszy raz jedziesz do pracy za granicę? Jesteśmy z Tobą na każdym kroku</h2><p>Nie musisz sam szukać mieszkania, znać języka ani mieć szczególnego doświadczenia. Wszystko wyjaśnimy — od zgłoszenia do pierwszej wypłaty.</p></div><a class="btn" href="#apply">Chcę tak samo</a></div>
-    <div class="cards4">
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-home"/></svg></div><h3>Zakwaterowanie czeka</h3><p>W wielu ofertach zakwaterowanie zapewnia pracodawca — często za darmo. Nie trzeba szukać mieszkania ani płacić z góry.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-chat"/></svg></div><h3>Bez języka i doświadczenia</h3><p>W większości ofert nie trzeba znać języka ani mieć doświadczenia — wszystkiego nauczą na miejscu.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-piggy"/></svg></div><h3>Więcej zostaje dla Ciebie</h3><p>Gdy zakwaterowanie i dojazd są zorganizowane, większa część zarobków trafia do Twoich oszczędności.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-users"/></svg></div><h3>Nie musisz jechać sam</h3><p>Jedź z przyjaciółką, sąsiadką, mężem lub żoną. A my zawsze jesteśmy w kontakcie po ukraińsku.</p></div>
-    </div>
-    <div class="story">
-      <div class="story-box" id="stories">
-        <div class="story-head"><span class="ava">O</span><div><p class="when-l">Przykładowa droga</p><h3>Oksana, 41 lat, wieś w obwodzie żytomierskim</h3></div></div>
-        <ol class="tl">
-          <li><span class="ic"><svg class="i"><use href="#i-plane"/></svg></span><div><span class="when">Start</span><b>Jeden telefon — i jest plan</b><span class="t">W domu pracowała jako sprzedawczyni, pieniędzy starczało tylko na najpotrzebniejsze. Napisała na Viberze — menedżer dobrał pakowanie w magazynie w Polsce z zakwaterowaniem i po dwóch tygodniach wyjechała z przyjaciółką.</span></div></li>
-          <li><span class="ic"><svg class="i"><use href="#i-home"/></svg></span><div><span class="when">Pierwszy miesiąc</span><b>Strach był tylko pierwszego dnia</b><span class="t">Pokój dwuosobowy, do pracy dowozi autobus. Język nie był potrzebny — wszystkiego nauczyli na miejscu w kilka dni. Bierze dodatkowe godziny, gdy są.</span></div></li>
-          <li><span class="ic"><svg class="i"><use href="#i-key"/></svg></span><div><span class="when">Pół roku</span><b>Nowy dach i studia córki</b><span class="t">Co miesiąc wysyła pieniądze do domu: wymienili dach, córka dostała się do szkoły — i wszystko bez kredytów.</span></div></li>
-          <li><span class="ic"><svg class="i"><use href="#i-store"/></svg></span><div><span class="when">Po roku</span><b>Oszczędności i wybór</b><span class="t">Ma odłożone pieniądze i sama decyduje: przedłużyć umowę o kolejny sezon czy otworzyć w domu mały sklep.</span></div></li>
-        </ol>
-        <p class="note">To przykład poglądowy, a nie historia konkretnej osoby. Rzeczywiste zarobki zależą od oferty, liczby godzin i Twoich wydatków.</p>
-      </div>
-      <div class="calc" id="calc">
-        <div><h3>Policz, ile możesz odłożyć</h3><p class="sub2">Orientacyjne wyliczenie dla pracy w Polsce.</p></div>
-        <div class="row"><label for="c-rate">Stawka na rękę za godzinę <output id="c-rate-o" for="c-rate"></output></label><input type="range" id="c-rate" min="20" max="35" step="1" value="24"></div>
-        <div class="row"><label for="c-hours">Godzin miesięcznie <output id="c-hours-o" for="c-hours"></output></label><input type="range" id="c-hours" min="160" max="280" step="10" value="200"></div>
-        <div class="row"><label for="c-spend">Jedzenie, telefon, drobne wydatki miesięcznie <output id="c-spend-o" for="c-spend"></output></label><input type="range" id="c-spend" min="400" max="2000" step="50" value="900"></div>
-        <label class="switch"><input type="checkbox" id="c-free" checked> Darmowe zakwaterowanie od pracodawcy</label>
-        <div class="res" aria-live="polite"><div><span>Odkładasz miesięcznie</span><b id="c-month">—</b><small id="c-month-u"></small></div><div><span>Rocznie</span><b id="c-year">—</b><small id="c-year-u"></small></div></div>
-        <p class="sub2">Jeśli zakwaterowanie jest płatne, odejmujemy 700 zł miesięcznie. Dokładne warunki — w każdej ofercie.</p>
-        <a class="btn wide" href="#vacancies">Dobierz ofertę</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="doroha" aria-labelledby="road-h">
-    <div class="sec-head"><div><h2 id="road-h">Podróż i pierwszy dzień — pomożemy</h2><p>Najbardziej martwi nie praca, lecz podróż: dokąd jechać, gdzie się przesiąść, kto odbierze. Dlatego tę część bierzemy na siebie.</p></div></div>
-    <div class="cards4 road">
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-doc"/></svg></div><h3>Plan podróży</h3><p>Krok po kroku: skąd i kiedy wyjechać, gdzie się przesiąść, adres zakwaterowania i pracy, telefony koordynatora. Wszystko w jednej wiadomości.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-plane"/></svg></div><h3>Przewoźnik partnerski</h3><p>Polecimy sprawdzonego przewoźnika, z którego korzystają nasi kandydaci — bez szukania przypadkowych ogłoszeń.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-cal"/></svg></div><h3>Pomoc z biletami</h3><p>Pomożemy wybrać kurs pod termin przyjazdu i kupić bilet. Koszt podróży znasz z góry — bez niespodzianek.</p></div>
-      <div class="card"><div class="ic"><svg class="i"><use href="#i-users"/></svg></div><h3>Koordynator na miejscu</h3><p>Po przyjeździe nie jesteś sam: koordynator pomoże z zakwaterowaniem, dokumentami i pierwszym dniem pracy.</p></div>
-    </div>
-    <p class="road-more">Co zabrać — w naszej <a href="/pl/statti/shcho-vziaty-v-dorohu/">liście kontrolnej na podróż</a>.</p>
-  </section>
-
-  <section id="how" aria-labelledby="how-h">
-    <div class="sec-head"><div><h2 id="how-h">Jak to działa</h2></div></div>
-    <div class="cards4 steps">
-      <div class="card"><h3>Zgłoszenie</h3><p>Zostawiasz zgłoszenie na stronie lub piszesz do nas na komunikatorze.</p></div>
-      <div class="card"><h3>Dobór</h3><p>Menedżer pyta o Twoje doświadczenie i proponuje pasujące oferty.</p></div>
-      <div class="card"><h3>Dokumenty i termin</h3><p>Podpowiadamy, jakie dokumenty są potrzebne, i ustalamy najbliższy termin przyjazdu.</p></div>
-      <div class="card"><h3>Praca</h3><p>Przyjeżdżasz na miejsce, a my pozostajemy w kontakcie.</p></div>
-    </div>
-  </section>
-
-  <section aria-labelledby="safe-h">
-    <div class="safety">
-      <div>
-        <h2 id="safe-h">Jak wybrać uczciwą ofertę</h2>
-        <p style="margin-top:12px;color:var(--muted)">Pięć prostych kontroli przed wyjazdem — z nami lub bez nas.</p>
-      </div>
-      <ol>
-        <li><div><b>Licz kwotę miesięczną, nie tylko stawkę</b><span>Pomnóż stawkę przez liczbę godzin i odejmij zakwaterowanie oraz inne potrącenia.</span></div></li>
-        <li><div><b>Sprawdź rodzaj umowy</b><span>Od niego zależą urlop, zwolnienia lekarskie i kwota na rękę. Rodzaj umowy jest podany w każdej naszej ofercie.</span></div></li>
-        <li><div><b>Nie płać za samo pośrednictwo</b><span>Pośrednik nie ma prawa pobierać od kandydata pieniędzy za znalezienie pracy.</span></div></li>
-        <li><div><b>Zapytaj o szczegóły zakwaterowania</b><span>Ile osób w pokoju, ile kosztuje i jak daleko do pracy.</span></div></li>
-        <li><div><b>Trzymaj dokumenty przy sobie</b><span>Nie oddawaj nikomu paszportu „na przechowanie” — ani pracodawcy, ani koordynatorowi.</span></div></li>
-      </ol>
-    </div>
-  </section>
-
-  <section id="friend" aria-labelledby="friend-h">
-    <div class="ref">
-      <div>
-        <div class="gift-ic" aria-hidden="true"><svg class="i"><use href="#i-gift"/></svg></div>
-        <h2 id="friend-h">Poleć znajomego — odbierz premię</h2>
-        <p class="lead">Poleć nas znajomemu, krewnemu lub sąsiadowi. Gdy znajomy zacznie pracę — otrzymasz <b id="ref-amt">premia</b>.</p>
-        <ol class="ref-steps">
-          <li>Podaj swój numer telefonu — otrzymasz osobisty link.</li>
-          <li>Wyślij go znajomemu na Viberze, Telegramie lub WhatsAppie.</li>
-          <li>Znajomy składa zgłoszenie i zaczyna pracę — kontaktujemy się z Tobą w sprawie premii.</li>
-        </ol>
-        <p class="hint" id="ref-terms" style="margin-top:14px">Wysokość premii i warunki wypłaty uzgodnij z menedżerem.</p>
-      </div>
-      <div class="form-card ref-card">
-        <form id="ref-form" method="post" action="#" novalidate>
-          <div><label class="lbl" for="ref-phone">Twój numer telefonu</label><input id="ref-phone" name="phone" type="tel" autocomplete="tel" required placeholder="+380 __ ___ __ __"><p class="hint" style="margin-top:6px">Numer jest potrzebny, by skontaktować się z Tobą w sprawie premii. Nie przekazujemy go osobom trzecim. Szczegóły — w <a href="#privacy">polityce prywatności</a>.</p></div>
-          <p class="err" id="ref-err" role="alert"></p>
-          <button class="btn wide" type="submit">Pobierz mój link</button>
-        </form>
-        <div class="ref-out" id="ref-out" hidden>
-          <span class="lbl">Twój link dla znajomych</span>
-          <div class="ref-link"><input id="ref-url" readonly aria-label="Twój link"><button class="btn sm" type="button" id="ref-copy">Kopiuj</button></div>
-          <div class="send-row">
-            <a class="msgr" id="ref-vb" href="#"><span class="dot vb"></span>Viber</a>
-            <a class="msgr" id="ref-tg" href="#" target="_blank" rel="noopener"><span class="dot tg"></span>Telegram</a>
-            <a class="msgr" id="ref-wa" href="#" target="_blank" rel="noopener"><span class="dot wa"></span>WhatsApp</a>
-            <button class="msgr" type="button" id="ref-share" hidden><svg class="i"><use href="#i-share"/></svg>Inne</button>
-          </div>
-          <p class="hint">Gdy znajomy złoży zgłoszenie z tego linku, zobaczymy, że jest od Ciebie.</p>
-        </div>
-        <div class="ref-direct">
-          <span class="lbl">Albo napisz lub zadzwoń do nas</span>
-          <div class="send-row">
-            <a class="msgr" href="https://t.me/+380736067700" data-ch="telegram" data-copytext="Вітаю! Хочу порекомендувати друга, який шукає роботу за кордоном. Підкажіть, як нам це зробити?"><span class="dot tg"></span>Telegram</a>
-            <a class="msgr" href="viber://chat?number=%2B380736067700" data-ch="viber" data-copytext="Вітаю! Хочу порекомендувати друга, який шукає роботу за кордоном. Підкажіть, як нам це зробити?"><span class="dot vb"></span>Viber</a>
-            <a class="msgr" href="https://wa.me/380736067700?text=%D0%92%D1%96%D1%82%D0%B0%D1%8E%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BF%D0%BE%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D1%83%D0%B2%D0%B0%D1%82%D0%B8%20%D0%B4%D1%80%D1%83%D0%B3%D0%B0%2C%20%D1%8F%D0%BA%D0%B8%D0%B9%20%D1%88%D1%83%D0%BA%D0%B0%D1%94%20%D1%80%D0%BE%D0%B1%D0%BE%D1%82%D1%83%20%D0%B7%D0%B0%20%D0%BA%D0%BE%D1%80%D0%B4%D0%BE%D0%BD%D0%BE%D0%BC.%20%D0%9F%D1%96%D0%B4%D0%BA%D0%B0%D0%B6%D1%96%D1%82%D1%8C%2C%20%D1%8F%D0%BA%20%D0%BD%D0%B0%D0%BC%20%D1%86%D0%B5%20%D0%B7%D1%80%D0%BE%D0%B1%D0%B8%D1%82%D0%B8%3F" data-ch="whatsapp"><span class="dot wa"></span>WhatsApp</a>
-            <a class="msgr" href="tel:+380736067700" data-ch="phone"><svg class="i"><use href="#i-phone"/></svg>Zadzwoń</a>
-          </div>
-          <p class="hint">Wiadomość „Chcę polecić znajomego…” jest gotowa: w WhatsAppie wstawi się sama, w Telegramie i Viberze zostanie skopiowana — wklej ją do czatu.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!--seo:apply-->
   <section id="apply" aria-labelledby="apply-h">
     <div class="apply">
       <div>
@@ -865,37 +803,18 @@ section.vpage{padding-top:14px}
     </div>
   </section>
 
+  <!--/seo:apply-->
+
   <!--seo:text-->
   <section aria-labelledby="seo-h"><div class="seo"><div class="seo-grid"><div class="seo-txt"><h2 id="seo-h">Szukasz innych opcji?</h2></div></div><h3 style="margin-top:26px">Inne kierunki</h3><div class="links"><a href="/pl/">Wszystkie oferty</a><a href="/pl/robota-v-polshchi/">Praca w Polsce · 85</a><a href="/pl/robota-v-lytvi/">Praca na Litwie · 10</a><a href="/pl/robota-v-chekhii/">Praca w Czechach · 5</a><a href="/pl/robota-na-skladi/">Praca w magazynie · 47</a><a href="/pl/robota-na-vyrobnytstvi/">Praca w fabryce · 77</a><a href="/pl/robota-na-kharchovomu-vyrobnytstvi/">Przetwórstwo mięsa i ryb · 18</a><a href="/pl/vodii-navantazhuvacha/">Operator wózka widłowego · 8</a><a href="/pl/robota-dlia-zhinok/">Dla kobiet · 71</a><a href="/pl/robota-dlia-cholovikiv/">Dla mężczyzn · 86</a><a href="/pl/robota-dlia-par/">Dla par · 55</a><a href="/pl/robota-v-polshchi-dlia-studentiv/">Dla studentów · 60</a></div></div></section>
   <!--/seo:text-->
 
-  <section id="faq" aria-labelledby="faq-h">
-    <div class="sec-head"><div><h2 id="faq-h">Częste pytania</h2></div></div>
-    <div class="faq">
-      <details><summary>Czy trzeba płacić za pośrednictwo?</summary><p>Nie, nasze usługi są bezpłatne dla kandydatów. Osobno płatne mogą być tylko podróż i zakwaterowanie — ich koszt podano w ofercie.</p></details>
-      <details><summary>Co oznacza „brutto” i ile dostanę na rękę?</summary><p>Brutto to kwota przed opodatkowaniem i składkami. „Na rękę” (netto) to to, co faktycznie otrzymasz. W większości ofert pokazujemy obie kwoty: różnica zależy od kraju, rodzaju umowy i Twojej sytuacji podatkowej. Dokładną kwotę na rękę menedżer poda po sprawdzeniu warunków konkretnej oferty.</p></details>
-      <details><summary>Czy osoby do 26 lat płacą podatki i składki w Polsce?</summary><p>To zależy od wieku, rodzaju umowy i statusu pracownika. Do niektórych dochodów osób do 26 lat może mieć zastosowanie ulga w PIT — do rocznego limitu 85 528 zł. Nie trzeba być studentem, aby z niej skorzystać.</p><p>Osobno: student do 26 lat może nie płacić składek ZUS na umowie zlecenie, jeśli jego status studenta jest potwierdzony i spełnione są inne warunki. Studia na Ukrainie same w sobie tego nie wykluczają. Dla umowy o pracę obowiązują inne zasady. Pamiętaj: bez składek na tej umowie nie przysługuje ubezpieczenie emerytalne ani zdrowotne.</p><p>Dokładną kwotę na rękę podamy po sprawdzeniu rodzaju umowy, dokumentów i sytuacji podatkowej kandydata.</p></details>
-      <details><summary>Co dokładnie jest potrącane z wynagrodzenia?</summary><p>Podatek i składki społeczne — ich wysokość zależy od kraju, rodzaju umowy, wieku i rezydencji podatkowej. Ponadto, jeśli przewiduje to oferta, z wynagrodzenia mogą być potrącane koszty zakwaterowania, dojazdu lub wyżywienia. Przed wyjazdem menedżer wymieni każde potrącenie dla Twojej oferty.</p></details>
-      <details><summary>Czy trzeba coś płacić przed wyjazdem?</summary><p>Dobór oferty jest bezpłatny. Wszystkie inne możliwe koszty — bilet, zakwaterowanie, badania lekarskie, transport czy dokumenty — menedżer wymieni osobno przed wyjazdem.</p></details>
-      <details><summary>Ile godzin miesięcznie jest gwarantowanych?</summary><p>W każdej ofercie podano liczbę godzin miesięcznie i grafik zmian. Nadgodziny nie zawsze są możliwe, więc licz zarobki według podstawowych godzin, a nie maksymalnych. O nadgodziny zapytaj menedżera.</p></details>
-      <details><summary>Co obejmuje koszt zakwaterowania?</summary><p>Przed wyjazdem zapytaj menedżera: ile osób mieszka w pokoju, czy media są wliczone, czy potrzebna jest kaucja, jaka jest odległość do pracy i ile kosztuje dojazd. Sprawdzimy to u pracodawcy.</p></details>
-      <details><summary>Kiedy i jak wypłacana jest pierwsza pensja?</summary><p>Zwykle wynagrodzenie wypłacane jest raz w miesiącu na kartę bankową, za poprzedni miesiąc. Dlatego pierwsza wypłata może przyjść kilka tygodni po rozpoczęciu pracy — weź pieniądze na pierwsze wydatki. Harmonogram wypłat i możliwość zaliczki menedżer potwierdzi dla Twojej oferty.</p></details>
-      <details><summary>Co zrobić, jeśli po przyjeździe warunki różnią się od oferty?</summary><p>Przed podpisaniem umowy sprawdź stawkę, liczbę godzin, zakwaterowanie i potrącenia. Jeśli coś nie zgadza się z ofertą, nie podpisuj i od razu napisz lub zadzwoń do nas: +380 73 606 77 00 (Telegram, Viber, WhatsApp). Wyjaśnimy sytuację z pracodawcą.</p></details>
-      <details><summary>Jakie są rodzaje umów?</summary><p><b>Umowa o pracę</b> (umowa o pracę) — płatny urlop, zwolnienia lekarskie, pełne ubezpieczenie społeczne. <b>Umowa zlecenie</b> (umowa zlecenie) — wynagrodzenie za przepracowane godziny, bez płatnego urlopu; jakie ubezpieczenia obejmuje, podano w ofercie. Rodzaj umowy jest w każdej ofercie.</p></details>
-      <details><summary>Czy potrzebna jest znajomość języka?</summary><p>W większości ofert — nie. Jeśli język jest potrzebny, jest to podane w opisie oferty.</p></details>
-      <details><summary>Jakie dokumenty są potrzebne?</summary><p>Zwykle biometryczny paszport. Dla niektórych krajów i ofert mogą być potrzebne inne dokumenty: menedżer poda dokładną listę przed wyjazdem.</p></details>
-      <details><summary>Czy można pojechać w parze lub ze znajomym?</summary><p>Tak. Skorzystaj z filtra „Pary” — są tam oferty dla kobiet i mężczyzn. O wspólne zakwaterowanie zapytaj menedżera.</p></details>
-      <details><summary>Kto może wyjechać w czasie stanu wojennego?</summary><p>Kobiety — bez ograniczeń. Mężczyźni w wieku 18–60 lat — tylko z prawną podstawą do przekroczenia granicy. Menedżer podpowie, które oferty Ci odpowiadają.</p></details>
-      <details><summary>Z kim podpisuję umowę?</summary><p>Z pracodawcą lub jego agencją pracy w kraju zatrudnienia — to ten podmiot będzie stroną Twojej umowy. Zakład, w którym faktycznie będziesz pracować, jest podany w ofercie; może się różnić od strony umowy, jeśli zatrudnia Cię agencja. Dokładną nazwę strony umowy menedżer poda przed wyjazdem.</p></details>
-      <details><summary>Jak szybko można wyjechać?</summary><p>Najbliższe terminy przyjazdu są podane w ofertach. Gdy wybierzesz ofertę, menedżer ustali z Tobą konkretną datę.</p></details>
-      <details><summary>Czy pomagacie w podróży?</summary><p>Tak. Przygotowujemy plan podróży, polecamy przewoźnika partnerskiego i pomagamy kupić bilet, a na miejscu w kontakcie jest koordynator. Bilet opłacasz Ty — koszt podamy z góry.</p></details>
-    </div>
-  </section>
+<!--seo:faq--><!--/seo:faq-->
 </main>
 
 <footer>
   <!--seo:foot-->
-  <div class="flinks"><b>Praca za granicą</b><div class="links" style="margin-top:6px"><a href="/pl/">Wszystkie oferty</a><a href="/pl/robota-v-polshchi/">Praca w Polsce · 85</a><a href="/pl/robota-v-lytvi/">Praca na Litwie · 10</a><a href="/pl/robota-v-chekhii/">Praca w Czechach · 5</a><a href="/pl/robota-na-skladi/">Praca w magazynie · 47</a><a href="/pl/robota-na-vyrobnytstvi/">Praca w fabryce · 77</a><a href="/pl/robota-na-kharchovomu-vyrobnytstvi/">Przetwórstwo mięsa i ryb · 18</a><a href="/pl/vodii-navantazhuvacha/">Operator wózka widłowego · 8</a><a href="/pl/robota-dlia-zhinok/">Dla kobiet · 71</a><a href="/pl/robota-dlia-cholovikiv/">Dla mężczyzn · 86</a><a href="/pl/robota-dlia-par/">Dla par · 55</a><a href="/pl/robota-v-polshchi-dlia-studentiv/">Dla studentów · 60</a></div><b style="display:block;margin-top:16px">Przydatne artykuły</b><div class="links" style="margin-top:6px"><a href="/pl/statti/">Wszystkie artykuły</a><a href="/pl/statti/dokumenty-dlia-roboty-v-polshchi/">Dokumenty do pracy w Polsce w 2026 roku</a><a href="/pl/statti/dohovir-doruchennia-chy-trudovyi/">Umowa zlecenie czy umowa o pracę: jaka jest różnica</a><a href="/pl/statti/yak-ne-potrapyty-do-shakhraiv/">Jak nie trafić na oszustów, szukając pracy za granicą</a><a href="/pl/statti/shcho-vziaty-v-dorohu/">Co zabrać do pracy za granicą: lista kontrolna</a></div></div>
+  <div class="flinks"><b>Praca za granicą</b><div class="links" style="margin-top:6px"><a href="/pl/">Wszystkie oferty</a><a href="/pl/robota-v-polshchi/">Praca w Polsce · 85</a><a href="/pl/robota-v-lytvi/">Praca na Litwie · 10</a><a href="/pl/robota-v-chekhii/">Praca w Czechach · 5</a><a href="/pl/robota-na-skladi/">Praca w magazynie · 47</a><a href="/pl/robota-na-vyrobnytstvi/">Praca w fabryce · 77</a><a href="/pl/robota-na-kharchovomu-vyrobnytstvi/">Przetwórstwo mięsa i ryb · 18</a><a href="/pl/vodii-navantazhuvacha/">Operator wózka widłowego · 8</a><a href="/pl/robota-dlia-zhinok/">Dla kobiet · 71</a><a href="/pl/robota-dlia-cholovikiv/">Dla mężczyzn · 86</a><a href="/pl/robota-dlia-par/">Dla par · 55</a><a href="/pl/robota-v-polshchi-dlia-studentiv/">Dla studentów · 60</a></div><b style="display:block;margin-top:16px">Przydatne artykuły</b><div class="links" style="margin-top:6px"><a href="/pl/statti/">Wszystkie artykuły</a><a href="/pl/statti/dokumenty-dlia-roboty-v-polshchi/">Dokumenty do pracy w Polsce w 2026 roku</a><a href="/pl/statti/dohovir-doruchennia-chy-trudovyi/">Umowa zlecenie czy umowa o pracę: jaka jest różnica</a><a href="/pl/statti/yak-ne-potrapyty-do-shakhraiv/">Jak nie trafić na oszustów, szukając pracy za granicą</a><a href="/pl/statti/shcho-vziaty-v-dorohu/">Co zabrać do pracy za granicą: lista kontrolna</a></div><b style="display:block;margin-top:16px">O firmie</b><div class="links" style="margin-top:6px"><a href="/pl/yak-tse-pratsiuie/">Jak to działa</a><a href="/pl/pryvedy-druha/">Poleć znajomego</a><a href="/pl/pytannia/">Pytania</a><a href="/pl/pro-nas/">O nas</a><a href="/pl/kontakty/">Kontakt</a></div></div>
   <!--/seo:foot-->
   <div class="wrap">
     <span>© 2026 Vdalo · Praca w Europie</span>
@@ -1739,6 +1658,24 @@ section.vpage{padding-top:14px}
     new MutationObserver(function(ms){ ms.forEach(function(m){ if (m.type === "characterData") walk(m.target); else m.addedNodes.forEach(walk); }); })
       .observe(document.body, {childList: true, subtree: true, characterData: true});
   }).catch(function(){});
+})();
+</script>
+
+<script>
+(function(){
+  var dd=document.querySelector(".nav .dd");
+  if(dd){ var b=dd.querySelector(".dd-btn");
+    b.addEventListener("click",function(e){ e.stopPropagation(); var o=dd.classList.toggle("open"); b.setAttribute("aria-expanded",o); });
+    document.addEventListener("click",function(e){ if(!dd.contains(e.target)){ dd.classList.remove("open"); b.setAttribute("aria-expanded","false"); } });
+    document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ dd.classList.remove("open"); b.setAttribute("aria-expanded","false"); } });
+  }
+  var bg=document.getElementById("burger"), mn=document.getElementById("mnav");
+  if(bg&&mn){
+    function set(o){ mn.hidden=!o; bg.setAttribute("aria-expanded",o); document.body.classList.toggle("mnav-open",o); }
+    bg.addEventListener("click",function(){ set(mn.hidden); });
+    mn.addEventListener("click",function(e){ if(e.target.closest("a")) set(false); });
+    window.addEventListener("resize",function(){ if(window.innerWidth>960) set(false); });
+  }
 })();
 </script>
 </body>

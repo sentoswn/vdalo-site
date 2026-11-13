@@ -116,7 +116,7 @@ svg.i{width:18px;height:18px;flex:0 0 18px;stroke:currentColor;fill:none;stroke-
 .lang-menu[hidden]{display:none}
 .lang-menu a{padding:10px 12px;border-radius:10px;text-decoration:none;font-weight:700;color:var(--ink)}
 .lang-menu a:hover,.lang-menu a[aria-current="true"]{background:var(--soft)}
-@media (max-width:1100px){.lang-seg{display:none}.lang-btn{display:inline-flex}}
+@media (max-width:1500px){.lang-seg{display:none}.lang-btn{display:inline-flex}}
 .top-phone{font-weight:800;text-decoration:none;white-space:nowrap}
 
 /* hero */
@@ -573,6 +573,60 @@ section.vpage{padding-top:14px}
 .doc-body p{color:var(--muted);margin:6px 0}
 @media (max-width:960px){.story,.ref{grid-template-columns:1fr}}
 @media (max-width:640px){.res{grid-template-columns:1fr}.marq-grp span{font-size:14px;padding:0 14px}}
+
+/* меню: «Вакансії» з підменю, бургер, сторінки розділів */
+.nav{align-items:center}
+.nav a[aria-current="page"],.nav .dd-btn[aria-current="page"]{color:var(--ink)}
+.dd{position:relative}
+.dd-btn{display:inline-flex;align-items:center;gap:4px;background:none;border:0;padding:0;font:inherit;font-weight:600;color:var(--muted);cursor:pointer}
+.dd-btn:hover,.dd.open .dd-btn{color:var(--ink)}
+.dd-btn svg{width:14px;height:14px;transform:rotate(90deg);transition:transform .15s}
+.dd.open .dd-btn svg{transform:rotate(-90deg)}
+.dd-menu{position:absolute;left:-18px;top:100%;padding-top:14px;display:none;z-index:30}
+.dd.open .dd-menu{display:block}
+@media (hover:hover){.dd:hover .dd-menu{display:block}.dd:hover .dd-btn{color:var(--ink)}}
+.dd-box{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 22px 50px -20px rgba(0,0,0,.35);display:grid;grid-template-columns:repeat(2,minmax(190px,auto));gap:6px 22px;min-width:440px}
+.dd-box b,.mnav b{display:block;font:800 12px var(--font-body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:2px 0 6px}
+.dd-box a{display:flex;justify-content:space-between;gap:12px;padding:7px 10px;margin:0 -10px;border-radius:10px;color:var(--ink)!important;font-weight:600;text-decoration:none}
+.dd-box a:hover{background:var(--soft)}
+.dd-box a small{color:var(--muted);font-weight:700}
+.dd-box .dd-all{grid-column:1/-1;margin-top:8px;border-top:1px solid var(--line);border-radius:0;padding-top:12px;justify-content:flex-start;gap:6px;color:var(--accent,var(--ink))!important;font-weight:800}
+.burger{display:none;width:42px;height:42px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:0}
+.burger span{display:block;width:18px;height:2px;border-radius:2px;background:var(--ink);transition:transform .2s,opacity .2s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mnav{position:fixed;left:0;right:0;top:calc(64px + env(safe-area-inset-top));bottom:0;z-index:19;background:var(--bg);overflow:auto;padding:12px 0 40px;border-top:1px solid var(--line)}
+.mnav[hidden]{display:none}
+.mnav .mn-main{display:grid;gap:2px;margin-bottom:18px}
+.mnav .mn-main a{padding:13px 4px;font:800 20px var(--font-body);text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)}
+.mnav .mn-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.mnav .mn-chips a{padding:9px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:700;text-decoration:none;color:var(--ink);font-size:15px}
+.mnav .mn-chips a small{color:var(--muted);margin-left:4px}
+.mnav .mn-cta{display:grid;gap:10px;margin-top:6px}
+body.mnav-open{overflow:hidden}
+.nav a,.dd-btn{white-space:nowrap}
+body.mnav-open .fab{display:none}
+@media (max-width:1400px){.nav{gap:18px}.top-cta .top-phone{display:none}}
+@media (max-width:1180px){.nav{display:none}.burger{display:inline-flex}}
+@media (max-width:640px){.top-cta .btn.sm{display:none}}
+.sec-more{display:inline-flex;align-items:center;gap:4px;font-weight:800;text-decoration:none;color:var(--ink);white-space:nowrap}
+.sec-more svg{width:16px;height:16px}
+.sec-more:hover{text-decoration:underline}
+.page-head{background:var(--grad);border-radius:32px;padding:clamp(24px,4.5vw,52px);margin-top:8px}
+.page-head h1{font-size:clamp(28px,4.5vw,48px)}
+.page-head .lead{margin-top:12px;font-size:18px;max-width:62ch}
+.page-head .ph-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.prose{max-width:760px}
+.prose p{margin-top:12px}
+.prose h2{margin-top:26px}
+.steps6{counter-reset:st;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.steps6 .card{position:relative;padding-top:58px}
+.steps6 .card::before{counter-increment:st;content:counter(st);position:absolute;left:22px;top:18px;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-weight:800;font-size:15px}
+@media (max-width:960px){.steps6{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.steps6{grid-template-columns:1fr}}
+.kgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media (max-width:760px){.kgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -619,14 +673,15 @@ section.vpage{padding-top:14px}
 <header class="top" id="top">
   <div class="wrap">
     <a class="logo" href="/ru/" aria-label="Вдало — на главную"><span class="logo-mark">В</span>Вдало</a>
-    <nav class="nav" aria-label="Разделы">
-      <a href="#vacancies">Вакансии</a>
-      <a href="#how">Как это работает</a>
-      <a href="#friend">Приведи друга</a>
-      <a href="#faq">Вопросы</a>
+    <nav class="nav" aria-label="Разделы"><!--seo:nav-->
+      <div class="dd"><button class="dd-btn" type="button" aria-expanded="false" aria-haspopup="true">Вакансии<svg class="i"><use href="#i-chev"/></svg></button><div class="dd-menu"><div class="dd-box"><div><b>По стране</b><a href="/ru/robota-v-polshchi/">Польша<small>85</small></a><a href="/ru/robota-v-lytvi/">Литва<small>10</small></a><a href="/ru/robota-v-chekhii/">Чехия<small>5</small></a></div><div><b>По виду работы</b><a href="/ru/robota-na-skladi/">Работа на складе<small>47</small></a><a href="/ru/robota-na-vyrobnytstvi/">Работа на заводе<small>77</small></a><a href="/ru/robota-na-kharchovomu-vyrobnytstvi/">Мясное и рыбное производство<small>18</small></a><a href="/ru/vodii-navantazhuvacha/">Водитель погрузчика<small>8</small></a><a href="/ru/robota-dlia-zhinok/">Для женщин<small>71</small></a><a href="/ru/robota-dlia-cholovikiv/">Для мужчин<small>86</small></a><a href="/ru/robota-dlia-par/">Для пар<small>55</small></a><a href="/ru/robota-v-polshchi-dlia-studentiv/">Для студентов<small>60</small></a></div><a class="dd-all" href="/ru/#vacancies">Все вакансии<svg class="i"><use href="#i-chev"/></svg></a></div></div></div>
+      <a href="/ru/yak-tse-pratsiuie/">Как это работает</a>
+      <a href="/ru/pryvedy-druha/">Приведи друга</a>
+      <a href="/ru/pytannia/">Вопросы</a>
       <a href="/ru/statti/">Статьи</a>
-      <a href="#apply">Контакты</a>
-    </nav>
+      <a href="/ru/pro-nas/">О нас</a>
+      <a href="/ru/kontakty/">Контакты</a>
+    <!--/seo:nav--></nav>
     <div class="lang" id="lang">
       <nav class="lang-seg" aria-label="Язык сайта"><a data-l="uk" translate="no">UA</a><a data-l="ru" translate="no">RU</a><a data-l="en" translate="no">EN</a><a data-l="pl" translate="no">PL</a></nav>
       <button class="lang-btn" type="button" id="lang-btn" aria-expanded="false" aria-controls="lang-menu" translate="no"><svg class="i"><use href="#i-globe"/></svg><span id="lang-cur">UA</span></button>
@@ -635,9 +690,11 @@ section.vpage{padding-top:14px}
     <div class="top-cta">
       <a class="top-phone" href="tel:+380736067700" data-ch="phone">073 606 77 00</a>
       <a class="btn sm" href="#apply">Оставить заявку</a>
+      <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="Меню"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
+<div class="mnav" id="mnav" hidden><div class="wrap"><!--seo:mnav--><div class="mn-main"><a href="/ru/#vacancies">Все вакансии</a><a href="/ru/yak-tse-pratsiuie/">Как это работает</a><a href="/ru/pryvedy-druha/">Приведи друга</a><a href="/ru/pytannia/">Вопросы</a><a href="/ru/statti/">Статьи</a><a href="/ru/pro-nas/">О нас</a><a href="/ru/kontakty/">Контакты</a></div><b>Вакансии по странам</b><div class="mn-chips"><a href="/ru/robota-v-polshchi/">Польша<small>85</small></a><a href="/ru/robota-v-lytvi/">Литва<small>10</small></a><a href="/ru/robota-v-chekhii/">Чехия<small>5</small></a></div><b>По виду работы</b><div class="mn-chips"><a href="/ru/robota-na-skladi/">Работа на складе<small>47</small></a><a href="/ru/robota-na-vyrobnytstvi/">Работа на заводе<small>77</small></a><a href="/ru/robota-na-kharchovomu-vyrobnytstvi/">Мясное и рыбное производство<small>18</small></a><a href="/ru/vodii-navantazhuvacha/">Водитель погрузчика<small>8</small></a><a href="/ru/robota-dlia-zhinok/">Для женщин<small>71</small></a><a href="/ru/robota-dlia-cholovikiv/">Для мужчин<small>86</small></a><a href="/ru/robota-dlia-par/">Для пар<small>55</small></a><a href="/ru/robota-v-polshchi-dlia-studentiv/">Для студентов<small>60</small></a></div><div class="mn-cta"><a class="btn wide" href="#apply">Оставить заявку</a><a class="btn ghost wide" href="tel:+380736067700" data-ch="phone">Позвонить: 073 606 77 00</a></div><!--/seo:mnav--></div></div>
 
 <main class="wrap">
   <!--seo:hero-->
@@ -718,8 +775,9 @@ section.vpage{padding-top:14px}
     <div class="more"><button class="btn ghost" type="button" id="more" hidden>Показать ещё</button></div>
   </section>
 
-  <section aria-labelledby="why-h">
-    <div class="sec-head"><div><h2 id="why-h">Почему с «Вдало» проще</h2><p>Мы показываем условия так, чтобы их можно было честно сравнить ещё до выезда.</p></div></div>
+  <!--seo:blocks-->
+  <section id="why" aria-labelledby="why-h">
+    <div class="sec-head"><div><h2 id="why-h">Почему с «Вдало» проще</h2><p>Мы показываем условия так, чтобы их можно было честно сравнить ещё до выезда.</p></div><a class="sec-more" href="/ru/pro-nas/">О нас<svg class="i"><use href="#i-chev"/></svg></a></div>
     <div class="cards4">
       <div class="card"><div class="ic"><svg class="i"><use href="#i-eye"/></svg></div><h3>Прозрачные условия</h3><p>Ставка, часы в месяц, стоимость жилья, тип договора и даты заезда — в каждой вакансии.</p></div>
       <div class="card"><div class="ic"><svg class="i"><use href="#i-refresh"/></svg></div><h3>Актуальные вакансии</h3><p>Список обновляется ежедневно. Закрытые вакансии исчезают с сайта автоматически.</p></div>
@@ -761,7 +819,7 @@ section.vpage{padding-top:14px}
   </section>
 
   <section id="doroha" aria-labelledby="road-h">
-    <div class="sec-head"><div><h2 id="road-h">Дорога и первый день — поможем</h2><p>Больше всего волнуются не из-за работы, а из-за дороги: куда ехать, где пересесть, кто встретит. Поэтому эту часть берём на себя.</p></div></div>
+    <div class="sec-head"><div><h2 id="road-h">Дорога и первый день — поможем</h2><p>Больше всего волнуются не из-за работы, а из-за дороги: куда ехать, где пересесть, кто встретит. Поэтому эту часть берём на себя.</p></div><a class="sec-more" href="/ru/yak-tse-pratsiuie/">Подробнее<svg class="i"><use href="#i-chev"/></svg></a></div>
     <div class="cards4 road">
       <div class="card"><div class="ic"><svg class="i"><use href="#i-doc"/></svg></div><h3>Маршрутный лист</h3><p>Пошагово: откуда и когда выезжать, где пересесть, адрес жилья и работы, телефоны координатора. Всё в одном сообщении.</p></div>
       <div class="card"><div class="ic"><svg class="i"><use href="#i-plane"/></svg></div><h3>Перевозчик-партнёр</h3><p>Подскажем проверенного перевозчика, с которым уже ездят наши кандидаты, — без поиска случайных объявлений.</p></div>
@@ -772,7 +830,7 @@ section.vpage{padding-top:14px}
   </section>
 
   <section id="how" aria-labelledby="how-h">
-    <div class="sec-head"><div><h2 id="how-h">Как это работает</h2></div></div>
+    <div class="sec-head"><div><h2 id="how-h">Как это работает</h2></div><a class="sec-more" href="/ru/yak-tse-pratsiuie/">Подробнее<svg class="i"><use href="#i-chev"/></svg></a></div>
     <div class="cards4 steps">
       <div class="card"><h3>Заявка</h3><p>Оставляете заявку на сайте или пишете нам в мессенджер.</p></div>
       <div class="card"><h3>Подбор</h3><p>Менеджер уточняет ваш опыт и предлагает подходящие вакансии.</p></div>
@@ -781,7 +839,7 @@ section.vpage{padding-top:14px}
     </div>
   </section>
 
-  <section aria-labelledby="safe-h">
+  <section id="safe" aria-labelledby="safe-h">
     <div class="safety">
       <div>
         <h2 id="safe-h">Как выбрать честную вакансию</h2>
@@ -841,6 +899,9 @@ section.vpage{padding-top:14px}
     </div>
   </section>
 
+  <!--/seo:blocks-->
+
+  <!--seo:apply-->
   <section id="apply" aria-labelledby="apply-h">
     <div class="apply">
       <div>
@@ -905,12 +966,15 @@ section.vpage{padding-top:14px}
     </div>
   </section>
 
+  <!--/seo:apply-->
+
   <!--seo:text-->
   <section aria-labelledby="seo-h"><div class="seo"><div class="seo-grid has-f"><div class="seo-txt"><h2 id="seo-h">Работа за границей для украинцев</h2><p>«Вдало» помогает украинцам найти работу за границей: на складах, заводах и пищевых производствах Польши, Литвы, Чехии и Словакии. Для кандидатов подбор бесплатный.</p><p>Мы показываем условия так, чтобы их можно было сравнить ещё до выезда: ставку брутто и примерную сумму на руки, количество часов, жильё, тип договора и ближайшие даты заезда. Список вакансий обновляется ежедневно.</p><p>Обычно на руки выходит ≈ 41 500–81 000 грн в месяц (по курсу НБУ на 13.11.2026; зарплату выплачивают в валюте страны) — это 31,40–37 PLN за час брутто, 22,69–28,18 PLN за час на руки. Жильё предлагают в 82 вакансиях из 102, из них бесплатное — в 10. Тип договора указан в каждой вакансии: трудовой договор — 30, договор поручения (umowa zlecenie) — 72.</p><p>Города и посёлки, где сейчас есть работа: Gdańsk, Łódź, Bielany Wrocławskie, Jelcz-Laskowice, Pruszcz Gdański, Radzymin. Среди работодателей — Sunreef Yachts, Fresh Logistics, Jeronimo Martins (Biedronka), AIC, ALDI, ARVATO, AURORA, Animex Foods.</p></div><div class="facts"><div class="ft ft-main"><span class="ft-ic"><svg class="i"><use href="#i-piggy"/></svg></span><b class="num">≈ 41 500–81 000 грн</b><span>в месяц на руки — так обычно выходит в наших вакансиях</span></div><div class="ft"><span class="ft-ic"><svg class="i"><use href="#i-bld"/></svg></span><b class="num">102 вакансии</b><span>в 4 странах · обновляем ежедневно</span></div><div class="ft"><span class="ft-ic"><svg class="i"><use href="#i-home"/></svg></span><b class="num">82 из 102</b><span>вакансий с жильём, в 10 — бесплатное</span></div><div class="ft"><span class="ft-ic"><svg class="i"><use href="#i-cal"/></svg></span><b class="num">13.11</b><span>ближайший заезд</span></div><div class="ft"><span class="ft-ic"><svg class="i"><use href="#i-doc"/></svg></span><b class="num">30 / 72</b><span>трудовой договор / договор поручения</span></div></div></div><h3 style="margin-top:26px">Другие направления</h3><div class="links"><a href="/ru/" aria-current="page">Все вакансии</a><a href="/ru/robota-v-polshchi/">Работа в Польше · 85</a><a href="/ru/robota-v-lytvi/">Работа в Литве · 10</a><a href="/ru/robota-v-chekhii/">Работа в Чехии · 5</a><a href="/ru/robota-na-skladi/">Работа на складе · 47</a><a href="/ru/robota-na-vyrobnytstvi/">Работа на заводе · 77</a><a href="/ru/robota-na-kharchovomu-vyrobnytstvi/">Мясное и рыбное производство · 18</a><a href="/ru/vodii-navantazhuvacha/">Водитель погрузчика · 8</a><a href="/ru/robota-dlia-zhinok/">Для женщин · 71</a><a href="/ru/robota-dlia-cholovikiv/">Для мужчин · 86</a><a href="/ru/robota-dlia-par/">Для пар · 55</a><a href="/ru/robota-v-polshchi-dlia-studentiv/">Для студентов · 60</a></div></div></section>
   <!--/seo:text-->
 
+<!--seo:faq-->
   <section id="faq" aria-labelledby="faq-h">
-    <div class="sec-head"><div><h2 id="faq-h">Частые вопросы</h2></div></div>
+    <div class="sec-head"><div><h2 id="faq-h">Частые вопросы</h2></div><a class="sec-more" href="/ru/pytannia/">Все вопросы<svg class="i"><use href="#i-chev"/></svg></a></div>
     <div class="faq">
       <details><summary>Нужно ли платить за трудоустройство?</summary><p>Нет, для кандидатов наши услуги бесплатны. Отдельно могут оплачиваться только дорога и жильё — их стоимость указана в вакансии.</p></details>
       <details><summary>Что означает «брутто» и сколько я получу на руки?</summary><p>Брутто — это сумма до уплаты налогов и взносов. «На руки» (нетто) — то, что вы фактически получите. В большинстве вакансий мы показываем обе суммы: разница зависит от страны, вида договора и вашей налоговой ситуации. Точную сумму «на руки» менеджер сообщит после проверки условий конкретной вакансии.</p></details>
@@ -931,11 +995,12 @@ section.vpage{padding-top:14px}
       <details><summary>Помогаете ли с дорогой?</summary><p>Да. Составляем маршрутный лист, подсказываем перевозчика-партнёра и помогаем купить билет, а на месте на связи координатор. Билет оплачиваете вы — стоимость мы сообщим заранее.</p></details>
     </div>
   </section>
+  <!--/seo:faq-->
 </main>
 
 <footer>
   <!--seo:foot-->
-  <div class="flinks"><b>Работа за границей</b><div class="links" style="margin-top:6px"><a href="/ru/">Все вакансии</a><a href="/ru/robota-v-polshchi/">Работа в Польше · 85</a><a href="/ru/robota-v-lytvi/">Работа в Литве · 10</a><a href="/ru/robota-v-chekhii/">Работа в Чехии · 5</a><a href="/ru/robota-na-skladi/">Работа на складе · 47</a><a href="/ru/robota-na-vyrobnytstvi/">Работа на заводе · 77</a><a href="/ru/robota-na-kharchovomu-vyrobnytstvi/">Мясное и рыбное производство · 18</a><a href="/ru/vodii-navantazhuvacha/">Водитель погрузчика · 8</a><a href="/ru/robota-dlia-zhinok/">Для женщин · 71</a><a href="/ru/robota-dlia-cholovikiv/">Для мужчин · 86</a><a href="/ru/robota-dlia-par/">Для пар · 55</a><a href="/ru/robota-v-polshchi-dlia-studentiv/">Для студентов · 60</a></div><b style="display:block;margin-top:16px">Полезные статьи</b><div class="links" style="margin-top:6px"><a href="/ru/statti/">Все статьи</a><a href="/ru/statti/dokumenty-dlia-roboty-v-polshchi/">Документы для работы в Польше в 2026 году</a><a href="/ru/statti/dohovir-doruchennia-chy-trudovyi/">Договор поручения или трудовой договор: в чём разница</a><a href="/ru/statti/yak-ne-potrapyty-do-shakhraiv/">Как не попасть к мошенникам, ища работу за границей</a><a href="/ru/statti/shcho-vziaty-v-dorohu/">Что взять с собой на работу за границу: чек-лист</a></div></div>
+  <div class="flinks"><b>Работа за границей</b><div class="links" style="margin-top:6px"><a href="/ru/">Все вакансии</a><a href="/ru/robota-v-polshchi/">Работа в Польше · 85</a><a href="/ru/robota-v-lytvi/">Работа в Литве · 10</a><a href="/ru/robota-v-chekhii/">Работа в Чехии · 5</a><a href="/ru/robota-na-skladi/">Работа на складе · 47</a><a href="/ru/robota-na-vyrobnytstvi/">Работа на заводе · 77</a><a href="/ru/robota-na-kharchovomu-vyrobnytstvi/">Мясное и рыбное производство · 18</a><a href="/ru/vodii-navantazhuvacha/">Водитель погрузчика · 8</a><a href="/ru/robota-dlia-zhinok/">Для женщин · 71</a><a href="/ru/robota-dlia-cholovikiv/">Для мужчин · 86</a><a href="/ru/robota-dlia-par/">Для пар · 55</a><a href="/ru/robota-v-polshchi-dlia-studentiv/">Для студентов · 60</a></div><b style="display:block;margin-top:16px">Полезные статьи</b><div class="links" style="margin-top:6px"><a href="/ru/statti/">Все статьи</a><a href="/ru/statti/dokumenty-dlia-roboty-v-polshchi/">Документы для работы в Польше в 2026 году</a><a href="/ru/statti/dohovir-doruchennia-chy-trudovyi/">Договор поручения или трудовой договор: в чём разница</a><a href="/ru/statti/yak-ne-potrapyty-do-shakhraiv/">Как не попасть к мошенникам, ища работу за границей</a><a href="/ru/statti/shcho-vziaty-v-dorohu/">Что взять с собой на работу за границу: чек-лист</a></div><b style="display:block;margin-top:16px">О компании</b><div class="links" style="margin-top:6px"><a href="/ru/yak-tse-pratsiuie/">Как это работает</a><a href="/ru/pryvedy-druha/">Приведи друга</a><a href="/ru/pytannia/">Вопросы</a><a href="/ru/pro-nas/">О нас</a><a href="/ru/kontakty/">Контакты</a></div></div>
   <!--/seo:foot-->
   <div class="wrap">
     <span>© 2026 Вдало · Подбор работы в Европе</span>
@@ -1779,6 +1844,24 @@ section.vpage{padding-top:14px}
     new MutationObserver(function(ms){ ms.forEach(function(m){ if (m.type === "characterData") walk(m.target); else m.addedNodes.forEach(walk); }); })
       .observe(document.body, {childList: true, subtree: true, characterData: true});
   }).catch(function(){});
+})();
+</script>
+
+<script>
+(function(){
+  var dd=document.querySelector(".nav .dd");
+  if(dd){ var b=dd.querySelector(".dd-btn");
+    b.addEventListener("click",function(e){ e.stopPropagation(); var o=dd.classList.toggle("open"); b.setAttribute("aria-expanded",o); });
+    document.addEventListener("click",function(e){ if(!dd.contains(e.target)){ dd.classList.remove("open"); b.setAttribute("aria-expanded","false"); } });
+    document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ dd.classList.remove("open"); b.setAttribute("aria-expanded","false"); } });
+  }
+  var bg=document.getElementById("burger"), mn=document.getElementById("mnav");
+  if(bg&&mn){
+    function set(o){ mn.hidden=!o; bg.setAttribute("aria-expanded",o); document.body.classList.toggle("mnav-open",o); }
+    bg.addEventListener("click",function(){ set(mn.hidden); });
+    mn.addEventListener("click",function(e){ if(e.target.closest("a")) set(false); });
+    window.addEventListener("resize",function(){ if(window.innerWidth>960) set(false); });
+  }
 })();
 </script>
 </body>
