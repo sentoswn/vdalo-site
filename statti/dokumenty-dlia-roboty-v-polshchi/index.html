@@ -379,6 +379,11 @@ section.vpage{padding-top:14px}
 .seo .facts div{background:var(--soft);border-radius:16px;padding:12px 14px}
 .seo .facts b{display:block;font:700 18px var(--font-display)}
 .seo .facts span{font-size:14px;color:var(--muted)}
+.kw{margin-top:18px;padding:14px 16px;border-radius:16px;background:var(--soft);display:grid;gap:6px;font-size:14px}
+.kw-row{display:grid;grid-template-columns:120px 1fr;gap:10px}
+.kw-l{color:var(--muted);font-weight:700}
+.kw-w{color:var(--ink)}
+@media (max-width:640px){.kw-row{grid-template-columns:1fr;gap:0}}
 .road-more{margin-top:14px;color:var(--muted);font-weight:600}
 .road-more a{color:var(--ink)}
 .art .art-meta{display:flex;flex-wrap:wrap;gap:6px 14px;color:var(--muted);font-size:14px;font-weight:600;margin-top:10px}
@@ -675,7 +680,7 @@ section.vpage{padding-top:14px}
     </div>
 
     <div class="fbar" id="fbar">
-      <div class="search"><svg class="i"><use href="#i-search"/></svg><input id="q" type="search" placeholder="Професія, місто або компанія" aria-label="Пошук вакансій"></div>
+      <div class="search"><svg class="i"><use href="#i-search"/></svg><input id="q" type="search" placeholder="Професія, місто або компанія: склад, погрузчик, magazyn…" aria-label="Пошук вакансій"></div>
       <button class="btn ghost fbtn" type="button" id="fopen" aria-haspopup="dialog"><svg class="i"><use href="#i-filter"/></svg><span class="t">Фільтри</span><span class="fcount" id="fcount" hidden></span></button>
     </div>
     <div class="fmeta">
@@ -1021,13 +1026,13 @@ section.vpage{padding-top:14px}
   // Відомі компанії — показуються першими в блоці «Вакансії в компаніях» (якщо зараз є їхні вакансії)
   var FEATURED = ["SHEIN","Jeronimo Martins (Biedronka)","ALDI","LG Energy Solution","Valeo","Dr. Oetker","BorgWarner","Saint-Gobain (Glassolutions)","FORVIA (Faurecia)","TechniSat","Rhenus","Sunreef Yachts","Sokołów","Animex Foods","TRUMPF","Plastic Omnium"];
   var CO_SHOW = 14;
-  var PAGE = 12;
+  var PAGE = (window.matchMedia && matchMedia("(max-width: 640px)").matches) ? 6 : 12;
   var CC = {"Польща":"PL","Литва":"LT","Чехія":"CZ","Словаччина":"SK","Німеччина":"DE","Нідерланди":"NL","Україна":"UA"};
   var WHO = [["all","Усі"],["w","Жінкам"],["m","Чоловікам"],["pair","Парам"]];
   var PICK_WHO = [["w","Жінка"],["m","Чоловік"],["pair","Пара"]];
 
   var P = window.VDALO_PAGE || {};
-  var items = [], data = {};
+  var items = [], data = {}, KW = {};
   var st = {country:P.country||"all", who:P.who||"all", housing:false, q:"", co:"", sort:"rec", shown:PAGE, ids:P.ids||null};
   var RATES = {};
   var today = new Date(); today.setHours(0,0,0,0);
@@ -1226,7 +1231,7 @@ section.vpage{padding-top:14px}
     var ds=dates(v.trips).filter(function(d){return d>=today;}).sort(function(a,b){return a-b;});
     v._next=ds[0]||null;
     v._uah=uahInfo(v);
-    v._text=norm(v.title+" "+(v._c?v._c.short:"")+" "+(v.company||"")+" "+(v.city||"")+" "+v.country+" "+(v.desc||"")+" "+(v.about||""));
+    v._text=norm(v.title+" "+(v._c?v._c.short:"")+" "+(v.company||"")+" "+(v.city||"")+" "+v.country+" "+(v.desc||"")+" "+(v.about||"")+" "+(KW[String(v.id)]||""));
     return v;
   }
 
@@ -1234,9 +1239,9 @@ section.vpage{padding-top:14px}
   function passWho(v,w){ return w==="all"||(w==="w"&&v._g!=="m")||(w==="m"&&v._g!=="w")||(w==="pair"&&v._g==="both"); }
   function passHouse(v){ return !st.housing||(v._h&&v._h.k!=="no"); }
   function filtered(o){
-    o=o||st; var q=norm(o.q||"").trim();
+    o=o||st; var q=norm(o.q||"").trim(), qw=q.split(/\s+/).filter(Boolean);
     var list=items.filter(function(v){
-      return (!o.ids||o.ids.indexOf(String(v.id))>=0) && (o.country==="all"||v.country===o.country) && passWho(v,o.who) && (!o.housing||(v._h&&v._h.k!=="no")) && (!o.co||v.company===o.co) && (!q||v._text.indexOf(q)>=0);
+      return (!o.ids||o.ids.indexOf(String(v.id))>=0) && (o.country==="all"||v.country===o.country) && passWho(v,o.who) && (!o.housing||(v._h&&v._h.k!=="no")) && (!o.co||v.company===o.co) && (!q||v._text.indexOf(q)>=0||qw.every(function(w){ return v._text.indexOf(w)>=0; }));
     });
     var byDate=function(a,b){ return (a._next?a._next.getTime():9e15)-(b._next?b._next.getTime():9e15); };
     var pay=function(v){ var u=v._uah; return u?(u.unit==="міс"?u.max:u.max*170):0; };
@@ -1687,7 +1692,9 @@ section.vpage{padding-top:14px}
     route();
     countUp($("st-count")); countUp($("st-housing")); calc();
   }
-  fetch("/vacancies.json",{cache:"no-store"}).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(boot).catch(function(){
+  var kwP = fetch("/keywords.json",{cache:"no-store"}).then(function(r){ return r.ok ? r.json() : {}; }).catch(function(){ return {}; });
+  fetch("/vacancies.json",{cache:"no-store"}).then(function(r){ if(!r.ok) throw 0; return r.json(); })
+    .then(function(d){ return kwP.then(function(k){ KW = k || {}; return d; }); }).then(boot).catch(function(){
     $("grid").innerHTML='<div class="empty">Не вдалося завантажити вакансії. Напишіть нам у месенджер — розповімо про актуальні.</div>';
     $("updated").querySelector("span").textContent="Список тимчасово недоступний";
   });

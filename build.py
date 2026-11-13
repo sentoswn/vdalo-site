@@ -21,6 +21,7 @@ import shutil
 from zoneinfo import ZoneInfo
 
 from articles import ARTICLES
+from keywords import vac_keywords, LANGS as KW_LANGS
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = "https://vdalo-robota.com.ua"
@@ -676,6 +677,12 @@ def vac_msg(v):
             + f" ({v['country']}" + (f", {v['city']}" if v.get("city") else "") + "). Підкажіть, будь ласка, деталі.")
 
 
+def kw_html(v):
+    kw = vac_keywords(v)
+    rows = "".join(f'<div class="kw-row"><span class="kw-l">{lab}</span><span class="kw-w">{esc(", ".join(kw[l]))}</span></div>' for l, lab in KW_LANGS if kw[l])
+    return f'<div class="kw"><b>Ключові слова</b>{rows}</div>' if rows else ""
+
+
 def vac_detail(v, back):
     from urllib.parse import quote
     msg = vac_msg(v)
@@ -694,6 +701,7 @@ def vac_detail(v, back):
             + (f'<p class="m-desc">{esc(v["desc"])}</p>' if v.get("desc") else "")
             + (f'<div class="m-about"><b><svg class="i"><use href="#i-bld"/></svg>{"Про компанію " + esc(v["company"]) if v.get("company") else "Про компанію"}</b><p>{esc(v["about"])}</p></div>' if v.get("about") else "")
             + f'<dl class="m-dl">{dl}</dl>'
+            + kw_html(v)
             + f'<div class="m-foot"><span>Вакансія №{esc(v["id"])} · актуальна на {TODAY.strftime("%d.%m.%Y")}</span><button class="linkbtn" type="button" data-share="{esc(v["id"])}">Скопіювати посилання</button></div>'
             "</article>"
             '<aside class="side">'
@@ -845,6 +853,9 @@ def main():
     RATES.update(data.get("rates") or {})
     items = [enrich(v) for v in data.get("items", []) if v and v.get("title") and v.get("salary")]
     by_id = {v["id"]: v for v in items}
+    # ключові слова 4 мовами для пошуку на сайті
+    json.dump({str(v["id"]): " ".join(w for ws in vac_keywords(v).values() for w in ws) for v in items},
+              open(os.path.join(ROOT, "keywords.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 
     # стан: дата першої появи / зміни кожної вакансії
     sp = os.path.join(ROOT, "seo-state.json")
