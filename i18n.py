@@ -29,7 +29,7 @@ CYR = re.compile(r"[А-Яа-яІіЇїЄєҐґ]")
 TR_ATTRS = ("placeholder", "aria-label", "title", "alt")
 META_NAMES = ("description", "og:title", "og:description", "twitter:title", "twitter:description")
 # блоки, які не перекладаємо (опис вакансії та компанії)
-KEEP_RX = re.compile(r'(<p class="(?:m-desc|desc)"[^>]*>.*?</p>|<div class="m-about">.*?</div>|<span class="kw-w">.*?</span>|<span class="logo-mark">.*?</span>)', re.S)
+KEEP_RX = re.compile(r'(<span class="kw-w">.*?</span>|<span class="logo-mark">.*?</span>)', re.S)
 LETTER = r"[^\W\d_]"
 
 
@@ -83,7 +83,9 @@ def guard(k):
 
 
 class Tr:
-    def __init__(self, d, lang=None):
+    def __init__(self, d, lang=None, exact=None, frozen=None):
+        self.exact = exact or {}    # цілі тексти (описи вакансій) — лише точний збіг
+        self.frozen = frozen or set()  # тексти без перекладу: лишаємо як є, а не перекладаємо шматками
         self.d = {k: v for k, v in d.items() if k and v and k != v}
         keys = sorted(self.d, key=len, reverse=True)
         self.rx = re.compile("|".join(guard(k) for k in keys)) if keys else None
@@ -95,6 +97,10 @@ class Tr:
             return s
         s = s.replace("\xa0", " ")
         st = s.strip()
+        if st in self.exact:
+            return s.replace(st, self.exact[st])
+        if st in self.frozen:
+            return s
         if st in self.d:
             return s.replace(st, self.d[st])
         for rx, rep in self.pre:
@@ -169,6 +175,76 @@ def translate_html(h, lang, path, site, tr):
     if lang in ("en", "pl"):
         h = h.replace('<span class="logo-mark">В</span>', '<span class="logo-mark">V</span>')
     return h
+
+
+# ---------- описи вакансій: переклад цілими текстами ----------
+DESC_FILE = os.path.join(DICT_DIR, "desc.txt")
+AUTO_FILE = os.path.join(DICT_DIR, "desc_auto.json")
+
+
+def load_desc(lang):
+    """Переклади цілих текстів: вручну (i18n/desc.txt) + автоматичні (i18n/desc_auto.json)."""
+    d = {}
+    if os.path.exists(AUTO_FILE):
+        for k, v in json.load(open(AUTO_FILE, encoding="utf-8")).items():
+            if v.get(lang):
+                d[k] = v[lang]
+    if os.path.exists(DESC_FILE):
+        for line in open(DESC_FILE, encoding="utf-8"):
+            line = line.rstrip("\n")
+            if not line.strip() or line.lstrip().startswith("#"):
+                continue
+            cols = [c.strip() for c in line.split(" ¦ ")]
+            if len(cols) == 4 and cols[0] and cols[COL[lang]]:
+                d[cols[0]] = cols[COL[lang]]
+    return d
+
+
+def desc_texts(items):
+    out = []
+    for v in items:
+        for k in ("desc", "about"):
+            x = v.get(k)
+            if isinstance(x, str) and CYR.search(x) and x.strip() not in out:
+                out.append(x.strip())
+    return out
+
+
+def _gtx(text, lang):
+    import urllib.parse
+    import urllib.request
+    url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=uk&tl=" + lang + "&dt=t&q=" + urllib.parse.quote(text)
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    data = json.loads(urllib.request.urlopen(req, timeout=15).read().decode("utf-8"))
+    res = "".join(seg[0] for seg in data[0] if seg and seg[0])
+    if not res.strip():
+        raise ValueError("empty")
+    return res
+
+
+def auto_translate(texts, limit=400):
+    """Перекладає машинно ті тексти, яких немає у словниках; зберігає в i18n/desc_auto.json.
+    Без інтернету тихо нічого не робить — такі тексти лишаються українською."""
+    auto = json.load(open(AUTO_FILE, encoding="utf-8")) if os.path.exists(AUTO_FILE) else {}
+    have = {l: load_desc(l) for l in LANGS}
+    todo = [t for t in texts if any(t not in have[l] for l in LANGS)][:limit]
+    done = 0
+    for t in todo:
+        rec = auto.get(t, {})
+        try:
+            for l in LANGS:
+                if t not in have[l] and not rec.get(l):
+                    rec[l] = _gtx(t, l)
+        except Exception as e:  # немає мережі / ліміт — спробуємо наступного разу
+            print("автопереклад зупинено:", type(e).__name__)
+            if rec:
+                auto[t] = rec
+            break
+        auto[t] = rec
+        done += 1
+    if done or todo:
+        json.dump(auto, open(AUTO_FILE, "w", encoding="utf-8"), ensure_ascii=False, indent=0, sort_keys=True)
+    return done
 
 
 def runtime_dict(d, keys):

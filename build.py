@@ -1001,14 +1001,23 @@ def main():
         h = re.sub(r'\n<link rel="alternate" hreflang="[^"]*" href="[^"]*">', "", h)
         h = re.sub(r'(<link rel="canonical" href="[^"]*">)', lambda m: m.group(1) + "\n" + i18n.alternates(p, SITE), h, count=1)
         open(f, "w", encoding="utf-8").write(h)
+    # описи вакансій і компаній + поля вакансій, яких немає в словнику, — цілими текстами
+    whole = i18n.desc_texts(items)
+    for lang in i18n.LANGS:
+        _t = i18n.Tr(i18n.load(lang), lang)
+        whole += [x for x in sorted(i18n.vacancy_segments(items)) if x not in whole and i18n.CYR.search(_t.text(x)) and (lang != "ru" or _t.text(x) == x)]
+    i18n.auto_translate(whole)
     for lang in i18n.LANGS:
         d = i18n.load(lang)
-        tr = i18n.Tr(d, lang)
+        ex = i18n.load_desc(lang)
+        ex = {k: v for k, v in ex.items() if k in whole}
+        frozen = set(x for x in i18n.desc_texts(items) if x not in ex)
+        tr = i18n.Tr(d, lang, ex, frozen)
         ldir = os.path.join(ROOT, lang)
         if os.path.isdir(ldir):
             shutil.rmtree(ldir)
         os.makedirs(ldir)
-        json.dump({"d": i18n.runtime_dict(d, rt_keys), "r": [[rx, rep.replace("\\", "$"), i in i18n.PRE] for i, (rx, rep) in enumerate((r, x[lang]) for r, x in i18n.RULES if lang in x)]},
+        json.dump({"d": i18n.runtime_dict(d, rt_keys), "x": ex, "k": sorted(frozen), "r": [[rx, rep.replace("\\", "$"), i in i18n.PRE] for i, (rx, rep) in enumerate((r, x[lang]) for r, x in i18n.RULES if lang in x)]},
                   open(os.path.join(ldir, "i18n.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
         for p in uk_pages:
             if p == "404.html":

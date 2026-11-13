@@ -1733,12 +1733,12 @@ section.vpage{padding-top:14px}
     document.addEventListener("click", function(e){ if (!lm.hidden && !e.target.closest("#lang")) { lm.hidden = true; lb.setAttribute("aria-expanded", "false"); } });
   }
   if (L === "uk") return;
-  var D = null, RX = null, RULES = [], SKIP = ".desc,.m-desc,.m-about,.kw-w,.logo-mark,script,style,textarea,[translate=no]", seen = new WeakMap();
+  var D = null, X = {}, K = {}, RX = null, RULES = [], SKIP = ".kw-w,.logo-mark,script,style,textarea,[translate=no]", seen = new WeakMap();
   var CY = /[А-Яа-яІіЇїЄєҐґ]/, LET = /\p{L}/u;
   function tr(s){
     if (!s || !CY.test(s)) return s;
     s = s.replace(/\u00a0/g, " ");
-    var t = s.trim(); if (D[t]) return s.replace(t, D[t]);
+    var t = s.trim(); if (X[t]) return s.replace(t, X[t]); if (K[t]) return s; if (D[t]) return s.replace(t, D[t]);
     RULES.forEach(function(r){ if (r[2]) s = s.replace(r[0], r[1]); });
     if (RX) s = s.replace(RX, function(m){ return D[m] || m; });
     RULES.forEach(function(r){ if (!r[2]) s = s.replace(r[0], r[1]); });
@@ -1755,7 +1755,7 @@ section.vpage{padding-top:14px}
     for (var c = n.firstChild; c; c = c.nextSibling) walk(c);
   }
   fetch("/" + L + "/i18n.json").then(function(r){ return r.json(); }).then(function(j){
-    D = j.d || {};
+    D = j.d || {}; X = j.x || {}; (j.k || []).forEach(function(t){ K[t] = 1; });
     try { RULES = (j.r || []).map(function(x){ return [new RegExp(x[0], "g"), x[1], x[2]]; }); } catch(e) { RULES = []; }
     var ks = Object.keys(D).sort(function(a, b){ return b.length - a.length; }).map(function(k){
       var e = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
