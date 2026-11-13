@@ -926,6 +926,7 @@ body.mnav-open .fab{display:none}
     viber: "viber://chat?number=%2B380736067700",
     metaPixelId: "",   // ID пікселя Meta (Facebook/Instagram) — вставити, коли буде
     ga4Id: "",         // ID Google Analytics 4, наприклад G-XXXXXXX
+    clarityId: "",     // ID проєкту Microsoft Clarity (записи сесій і теплові карти)
     leadsUrl: "https://script.google.com/macros/s/AKfycbzt87VLFDpZYR13V56RsBHyjLm0q_P1teyIWZAHMQvc8WinxwyTUi4N0Bx27t2kUTGS9Q/exec"       // URL веб-додатку Google Apps Script — заявки йдуть у Google-таблицю
   };
   // «Приведи друга»: розмір бонусу й умови (якщо порожньо — «уточнюйте в менеджера»)
@@ -954,6 +955,9 @@ body.mnav-open .fab{display:none}
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
         window.fbq('init', CONFIG.metaPixelId); window.fbq('track','PageView');
       }
+      if (CONFIG.clarityId) {
+        (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",CONFIG.clarityId);
+      }
       if (CONFIG.ga4Id) {
         var s=document.createElement("script"); s.async=true; s.src="https://www.googletagmanager.com/gtag/js?id="+CONFIG.ga4Id; document.head.appendChild(s);
         window.dataLayer=window.dataLayer||[]; window.gtag=function(){ window.dataLayer.push(arguments); };
@@ -965,9 +969,24 @@ body.mnav-open .fab{display:none}
     try {
       if (window.fbq) window.fbq("track", kind, params||{});
       if (window.gtag) window.gtag("event", kind==="Lead"?"generate_lead":"contact", params||{});
+      if (window.clarity) window.clarity("event", kind==="Lead"?"lead":"contact");
+    } catch(e) {}
+  }
+  /* Кроки воронки: перегляд вакансії → «Відгукнутися» → почав заповнювати форму → помилка/заявка */
+  var evDone={};
+  function ev(name, params, once){
+    if (once){ if (evDone[name]) return; evDone[name]=1; }
+    try {
+      if (window.gtag) window.gtag("event", name, params||{});
+      if (window.clarity) window.clarity("event", name);
+      if (window.fbq && name==="view_vacancy") window.fbq("track","ViewContent",params||{});
     } catch(e) {}
   }
   loadAnalytics();
+  try {
+    var apEl=document.getElementById("apply");
+    if (apEl && "IntersectionObserver" in window) new IntersectionObserver(function(es,o){ es.forEach(function(x){ if (x.isIntersecting){ ev("form_view",{},true); o.disconnect(); } }); },{threshold:0.3}).observe(apEl);
+  } catch(e) {}
 
   /* ---------- Джерело відвідування (UTM-мітки реклами) ---------- */
   var SOURCE = "";
@@ -1265,6 +1284,7 @@ body.mnav-open .fab{display:none}
   function openVac(id){
     var v=items.filter(function(x){return String(x.id)===String(id);})[0];
     if (!v){ toast("Цієї вакансії вже немає — подивіться інші"); clearHash(); return; }
+    ev("view_vacancy",{vacancy_id:String(v.id),country:v.country||"",company:v.company||""});
     var rows=[["Для кого",v.who],["Годин на місяць",v.hours],["Графік",v.schedule],["Нічні зміни",v.night],["Житло",v.housing],["Харчування",v.food],["Доїзд до роботи",v.transport],["Договір",v._c?{html:esc(v._c.full)+(v._c.note?'<small>'+esc(v._c.note)+'</small>':'')}:null],["Вимоги",v.req],["Бонуси",v.perks],["Дати заїзду",v.trips]].filter(function(r){return r[1];});
     var msg=vacMsg(v);
     $("sheet").innerHTML=
@@ -1305,6 +1325,7 @@ body.mnav-open .fab{display:none}
 
   /* ---------- Заявка ---------- */
   function apply(id){
+    ev("apply_click",{vacancy_id:String(id||"")});
     closeVac();
     if (id) $("f-vac").value=String(id);
     var el=$("apply"); el.scrollIntoView({behavior:"smooth"});
@@ -1325,11 +1346,12 @@ body.mnav-open .fab{display:none}
     $("sent").classList.toggle("show", id==="sent");
     if (id) $(id).scrollIntoView({behavior:"smooth", block:"center"});
   }
+  $("lead-form").addEventListener("focusin",function(){ ev("form_start",{},true); });
   $("lead-form").addEventListener("submit",function(e){
     e.preventDefault();
     var f=e.target, err=$("f-err"), name=f.name.value.trim(), PH=intlPhone("f-phone"), phone=PH.text;
-    if (!name){ err.textContent="Вкажіть, будь ласка, ваше ім'я."; f.name.focus(); return; }
-    if (!PH.ok){ err.textContent="Вкажіть номер телефону, щоб ми могли з вами зв'язатися."; f.phone.focus(); return; }
+    if (!name){ ev("form_error",{field:"name"}); err.textContent="Вкажіть, будь ласка, ваше ім'я."; f.name.focus(); return; }
+    if (!PH.ok){ ev("form_error",{field:"phone"}); err.textContent="Вкажіть номер телефону, щоб ми могли з вами зв'язатися."; f.phone.focus(); return; }
     err.textContent="";
     var sel=$("f-vac"), opt=sel.options[sel.selectedIndex], mode=segVal("mode"), channel=mode==="Переписка"?segVal("channel"):"";
     var vacTitle=sel.value?opt.textContent:"";
@@ -1411,7 +1433,7 @@ body.mnav-open .fab{display:none}
   $("f-co").addEventListener("change",function(e){ set({co:e.target.value}); renderCos(); });
   /* ---------- Вікно фільтрів ---------- */
   var fLast=null;
-  function openF(){ fLast=document.activeElement; $("fmodal").hidden=false; document.body.style.overflow="hidden"; var x=$("fmodal").querySelector("[data-fclose]"); if (x) x.focus(); }
+  function openF(){ ev("filter_open"); fLast=document.activeElement; $("fmodal").hidden=false; document.body.style.overflow="hidden"; var x=$("fmodal").querySelector("[data-fclose]"); if (x) x.focus(); }
   function closeF(scroll){ if ($("fmodal").hidden) return; $("fmodal").hidden=true; document.body.style.overflow=""; if (scroll) $("vacancies").scrollIntoView({behavior:"smooth"}); else if (fLast&&fLast.focus) fLast.focus(); }
   $("fopen").addEventListener("click",openF);
   $("f-apply").addEventListener("click",function(){ closeF(true); });
