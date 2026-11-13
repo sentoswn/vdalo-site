@@ -2,7 +2,7 @@ name: SEO-сторінки
 on:
   push:
     branches: [main]
-    paths: [vacancies.json, build.py, index.html, i18n.py, sections.py, articles.py, "i18n/src/**", i18n/desc.txt]
+    paths: [vacancies.json, build.py, index.html, ai.py, i18n.py, sections.py, articles.py, "i18n/src/**", i18n/desc.txt]
   schedule:
     - cron: "23 5 * * *"   # щодня ~07:23 за Києвом — свіжий курс НБУ
     - cron: "47 13 * * *"  # і після денного оновлення вакансій
@@ -18,6 +18,8 @@ jobs:
         with: {python-version: "3.12"}
       - run: python3 build.py
         env: {TZ: Europe/Kyiv}
+      - run: python3 ai.py
+        env: {TZ: Europe/Kyiv}
       - name: Commit
         run: |
           git config user.name "vdalo-bot"
@@ -26,3 +28,9 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "Оновлення SEO-сторінок"
           git push
+          echo "changed=1" >> "$GITHUB_OUTPUT"
+        id: commit
+      - name: IndexNow (Bing, ChatGPT search, Copilot, Yandex, Seznam)
+        if: steps.commit.outputs.changed == '1'
+        run: sleep 90 && python3 indexnow.py
+        env: {TZ: Europe/Kyiv}
