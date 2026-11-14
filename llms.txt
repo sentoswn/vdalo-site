@@ -1,6 +1,6 @@
 # Вдало (Vdalo) — робота за кордоном для українців
 
-> «Вдало» (vdalo-robota.com.ua) — сервіс підбору роботи для українців у Польщі, Литві, Чехії та Словаччині: склади, заводи, харчові виробництва. Зараз 102 вакансії, список оновлюється щодня (останнє оновлення 13.11.2026). Для кандидатів підбір безкоштовний.
+> «Вдало» (vdalo-robota.com.ua) — сервіс підбору роботи для українців у Польщі, Литві, Чехії та Словаччині: склади, заводи, харчові виробництва. Зараз 102 вакансії, список оновлюється щодня (останнє оновлення 14.11.2026). Для кандидатів підбір безкоштовний.
 
 English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians find work in Poland, Lithuania, the Czech Republic and Slovakia (warehouses, factories, food production). Free for candidates. Each listing shows the employer, hourly/monthly pay (gross and estimated net), hours, housing, contract type and next start dates. Site languages: Ukrainian (main), Russian (/ru/), English (/en/), Polish (/pl/).
 
