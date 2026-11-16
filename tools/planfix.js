@@ -34,7 +34,7 @@
     let title = (t0 && t0.length < 70 && !/[:]/.test(t0) && !/^робота до/i.test(t0)) ? t0 : (o['Назва вакансії'] || o.title.replace(/^\d+\s*-\s*/, ''));
     title = title.replace(/\budt\b/gi, 'UDT').replace(/\s*\([^)]*\)\s*/g, ' ').replace(/\s{2,}/g, ' ').replace(/[.\s]+$/, '').trim();
     if (title === title.toUpperCase()) title = title.toLowerCase();
-    title = title.charAt(0).toUpperCase() + title.slice(1);
+    title = (title.charAt(0).toUpperCase() + title.slice(1)).replace(/\budt\b/gi, 'UDT').replace(/\bcnc\b/gi, 'CNC');
     const br = num(o['Ставка брутто']);
     const nets = [];
     if (br && br < 200) ri.split('\n').forEach(l => { if (!/net+o|нетто/i.test(l) || /студент/i.test(l)) return;
@@ -50,7 +50,7 @@
       if (/вартість|житл|zł|зл/i.test(line)) continue; const m = line.match(HR); if (m && okH(m[1], m[2])) { hours = m[2] ? m[1] + '–' + m[2] : m[1]; break; } }
     if (!hours) { const hm = ua.match(/(\d{2,3})\s*[–-]\s*(\d{2,3})\s*(?:год|робочих)/i); if (hm && okH(hm[1], hm[2])) hours = hm[1] + '–' + hm[2]; }
     const vh = o['Вартість житла'] || '';
-    let housing = join(S['проживання'], 120, '. ');
+    let housing = join(S['проживання'], 120, '. ').replace(/^(Та|І) доїзд[.:]?\s*/i, '');
     if (!housing) housing = /своим жиль|своїм житл|власн/i.test(vh) ? 'Лише зі своїм житлом' : (o['Є місця на нашому житлі'] === 'Так' && /\d/.test(vh) ? 'Житло від роботодавця: ' + vh.replace(/zł|зл\.?/i, '').trim() + ' zł/міс' : '');
     const night = o['Нічна зміна'];
     const r = { id: String(o.gid), src: 'planfix', title, company, country: 'Польща', city: (o['Місто виконання роботи'] || '').trim(),
