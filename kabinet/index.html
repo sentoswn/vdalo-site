@@ -885,7 +885,11 @@ body.mnav-open .fab{display:none}
   }
 
   function refresh(api){
-    return api.load().then(function(d){ dash(api, d); }).catch(function(e){
+    return api.load().then(function(d){
+      // менеджери й адміни одразу потрапляють у CRM
+      if (d.profile && (d.profile.role === "manager" || d.profile.role === "admin")) { location.replace("/crm/"); return; }
+      dash(api, d);
+    }).catch(function(e){
       console.warn(e); root.innerHTML = '<div class="card cab-box"><h2>Не вдалося завантажити кабінет</h2><p>Оновіть сторінку або напишіть менеджеру.</p></div>';
     });
   }
