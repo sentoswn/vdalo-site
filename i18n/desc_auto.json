@@ -1078,5 +1078,18 @@
 "en": "physically healthy, ready to work, able to work in a team, punctuality, desire to learn",
 "pl": "zdrowy fizycznie, gotowy do pracy, potrafiący pracować w zespole, punktualność, chęć nauki",
 "ru": "физически здоровые готовы к работе посменно способны работать в команде аккуратность, желание учиться"
+},
+"фізично підготовлений готовий до позмінної роботи вміння працювати в команді точність, бажання навчатися": {
+"en": "physically fit, ready for shift work, ability to work in a team, accuracy, desire to learn",
+"pl": "sprawna fizycznie, gotowa do pracy zmianowej, umiejętność pracy w zespole, dokładność, chęć nauki",
+"ru": "физически подготовлен готовый к посменной работе умение работать в команде точность, желание учиться"
+},
+"фіксований, але 2-а і 3-я зміни активуються при великих замовленнях; перерва:…": {
+"en": "fixed, but the 2nd and 3rd shifts are activated for large orders; break:…",
+"pl": "naprawiono, ale przy dużych zamówieniach aktywowana jest 2. i 3. zmiana; przerwa:…",
+"ru": "фиксированный, но 2-я и 3-я смены активируются при больших заказах; перерыв:…"
+},
+"хороший зір хороша фізична форма готовність працювати в холоді": {
+"ru": "хорошее зрение хорошая физическая форма готовность работать в холоде"
 }
 }
