@@ -24,12 +24,15 @@ window.VdaloSources = function(app, h){
     if (st.per === "custom") {
       from = st.from ? new Date(st.from + "T00:00:00") : new Date(Date.now() - 30 * 864e5);
       to = st.to ? new Date(new Date(st.to + "T00:00:00").getTime() + 864e5) : to;
+    } else if (st.per === "today" || st.per === "yest") {
+      from = new Date(); from.setHours(0, 0, 0, 0); if (st.per === "yest") from.setDate(from.getDate() - 1);
+      to = new Date(from.getTime()); to.setDate(to.getDate() + 1);
     } else if (st.per === "all") from = new Date("2020-01-01T00:00:00");
     else { from = new Date(); from.setHours(0, 0, 0, 0); from.setDate(from.getDate() - st.per + 1); }
     return [from.toISOString(), to.toISOString()];
   }
   function perLabel(){
-    if (st.per === "all") return "увесь час"; if (st.per !== "custom") return "останні " + st.per + " дн.";
+    if (st.per === "all") return "увесь час"; if (st.per === "today") return "сьогодні"; if (st.per === "yest") return "вчора"; if (st.per !== "custom") return "останні " + st.per + " дн.";
     return (st.from || "…") + " — " + (st.to || "сьогодні");
   }
   /* латиниця для мітки: «Робота Польща» → robota_polshcha */
@@ -62,7 +65,7 @@ window.VdaloSources = function(app, h){
     var tlTracked = rows.filter(function(r){ return r.src !== "unknown" && r.src !== "manual"; }).reduce(function(a, r){ return a + (+r.leads || 0); }, 0);
     var th = rows.reduce(function(a, r){ return a + (+r.hired || 0); }, 0);
     var maxC = Math.max.apply(null, list.map(function(r){ return +r.conversion || 0; }).concat([1]));
-    var per = [[7, "7 днів"], [30, "30 днів"], [90, "90 днів"], ["all", "Увесь час"], ["custom", "Свої дати"]];
+    var per = [["today", "Сьогодні"], ["yest", "Вчора"], [7, "7 днів"], [30, "30 днів"], [90, "90 днів"], ["all", "Увесь час"], ["custom", "Свої дати"]];
     var col = function(k, t){ return '<th data-sort="' + k + '" style="cursor:pointer;white-space:nowrap">' + t + (st.sort === k ? (st.dir < 0 ? " ↓" : " ↑") : "") + '</th>'; };
 
     app.innerHTML =
