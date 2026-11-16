@@ -1,6 +1,6 @@
 # Вдало (Vdalo) — робота за кордоном для українців
 
-> «Вдало» (vdalo-robota.com.ua) — сервіс підбору роботи для українців у Польщі, Литві, Чехії та Словаччині: склади, заводи, харчові виробництва. Зараз 102 вакансії, список оновлюється щодня (останнє оновлення 15.11.2026). Для кандидатів підбір безкоштовний.
+> «Вдало» (vdalo-robota.com.ua) — сервіс підбору роботи для українців у Польщі, Литві, Чехії та Словаччині: склади, заводи, харчові виробництва. Зараз 102 вакансії, список оновлюється щодня (останнє оновлення 16.11.2026). Для кандидатів підбір безкоштовний.
 
 English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians find work in Poland, Lithuania, the Czech Republic and Slovakia (warehouses, factories, food production). Free for candidates. Each listing shows the employer, hourly/monthly pay (gross and estimated net), hours, housing, contract type and next start dates. Site languages: Ukrainian (main), Russian (/ru/), English (/en/), Polish (/pl/).
 
@@ -14,7 +14,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Серед роботодавців: Sunreef Yachts, Fresh Logistics, Jeronimo Martins (Biedronka), AIC, ALDI, ARVATO, AURORA, Animex Foods.
 - Дані вакансій у машиночитаному вигляді: https://vdalo-robota.com.ua/vacancies.json. Кожна сторінка вакансії має розмітку schema.org/JobPosting.
 
-## Актуальні вакансії (102 вакансії, станом на 15.11.2026)
+## Актуальні вакансії (102 вакансії, станом на 16.11.2026)
 
 ## Польща — 85 вакансій
 
@@ -296,19 +296,6 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Дати заїзду: Приїзд 13.11
 - Обов'язки: Монтаж електричних систем на виробництві яхт.
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/422/
-
-### Складський працівник — SHEIN
-- Країна / місто: Польща, Kąty Wrocławskie
-- Оплата: 35 PLN/год брутто; на руки ≈ 25,30–28,27 PLN/год; ≈ 5 060–7 630 PLN за місяць
-- Житло: Житло 300 PLN
-- Для кого: Жінки та чоловіки
-- Годин на місяць: 200–270
-- Харчування: Безкоштовні вода, чай, кава й борщ у їдальні
-- Договір: Договір доручення (umowa zlecenie)
-- Студентам до 26 років: вся ставка на руки, без податку
-- Дати заїзду: Приїзд 15.11
-- Обов'язки: Робота на складі з приймання, розміщення, комплектування, сортування та пакування замовлень.
-- Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/540/
 
 ### Працівник продукції — PERLA
 - Країна / місто: Польща, Głobino
@@ -774,6 +761,19 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Дати заїзду: Приїзд 31.12
 - Обов'язки: Лікар у клініці з лікування болю. Потрібні PWZ і польська мова від B1.
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/301/
+
+### Складський працівник — SHEIN
+- Країна / місто: Польща, Kąty Wrocławskie
+- Оплата: 35 PLN/год брутто; на руки ≈ 25,30–28,27 PLN/год; ≈ 5 060–7 630 PLN за місяць
+- Житло: Житло 300 PLN
+- Для кого: Жінки та чоловіки
+- Годин на місяць: 200–270
+- Харчування: Безкоштовні вода, чай, кава й борщ у їдальні
+- Договір: Договір доручення (umowa zlecenie)
+- Студентам до 26 років: вся ставка на руки, без податку
+- Дати заїзду: Приїзд 15.11
+- Обов'язки: Робота на складі з приймання, розміщення, комплектування, сортування та пакування замовлень.
+- Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/540/
 
 ### Працівник виробництва пластикових елементів — MEGATECH
 - Країна / місто: Польща, Tomaszów Mazowiecki
