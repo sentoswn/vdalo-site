@@ -648,3 +648,12 @@ alter table public.vacancy_pay enable row level security;
 drop policy if exists vp_admin on public.vacancy_pay;
 create policy vp_admin on public.vacancy_pay for all using (public.is_admin()) with check (public.is_admin());
 grant select, insert, update, delete on public.vacancy_pay to authenticated;
+-- Менеджерам — лише порядок вакансій за вигідністю, без сум.
+create or replace function public.vacancy_pay_rank() returns table(id text, rnk integer)
+language sql stable security definer set search_path = public as $$
+  select v.id, (row_number() over (order by coalesce(v.pay_manual, v.pay_auto) desc))::int
+  from public.vacancy_pay v
+  where public.is_staff() and coalesce(v.pay_manual, v.pay_auto) is not null
+$$;
+revoke all on function public.vacancy_pay_rank() from public, anon;
+grant execute on function public.vacancy_pay_rank() to authenticated;

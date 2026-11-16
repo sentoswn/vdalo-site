@@ -184,7 +184,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     <button role="tab" data-tab="tasks"><svg class="ic"><use href="#ic-check"/></svg>Задачі<span class="n" id="n-tasks" hidden></span></button>
     <button role="tab" data-tab="analytics" data-own><svg class="ic"><use href="#ic-chart"/></svg>Аналітика</button>
     <button role="tab" data-tab="sources" data-own><svg class="ic"><use href="#ic-target"/></svg>Джерела</button>
-    <button role="tab" data-tab="pay" data-own><svg class="ic"><use href="#ic-trophy"/></svg>Оплата за кандидата</button>
+    <button role="tab" data-tab="pay"><svg class="ic"><use href="#ic-trophy"/></svg><span id="t-pay">Оплата за кандидата</span></button>
     <button role="tab" data-tab="employers" data-own><svg class="ic"><use href="#ic-building"/></svg>Роботодавці<span class="n" id="n-employers" hidden></span></button>
     <button role="tab" data-tab="people" data-own><svg class="ic"><use href="#ic-gift"/></svg>Реферали</button>
     <button role="tab" data-tab="payouts" data-own><svg class="ic"><use href="#ic-wallet"/></svg>Виплати<span class="n" id="n-payouts" hidden></span></button>
@@ -277,6 +277,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       findRef: function(code){ return s.from("profiles").select("id,first_name,last_name,tg_username,ref_code").eq("ref_code", code.toLowerCase()).maybeSingle().then(ok); },
       saveMe: function(patch){ return s.from("profiles").update(patch).eq("id", uid).then(ok); },
       pay: function(){ return s.from("vacancy_pay").select("*").limit(5000).then(ok); },
+      payRank: function(){ return s.rpc("vacancy_pay_rank").then(ok); },
       savePay: function(rows){ return s.from("vacancy_pay").upsert(rows, {onConflict: "id"}).then(ok); },
       staff: function(){ return s.from("profiles").select("id,first_name,last_name,full_name,tg_username,role,ref_code,last_seen_at").in("role", ["manager", "admin"]).then(ok); },
       tasks: function(){ return s.from("tasks").select("*").order("due_at", {ascending: true, nullsFirst: false}).limit(2000).then(ok); },
@@ -318,6 +319,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       if (!S.own && !me.onboarded_at) { managerForm(true); return; }
       document.querySelectorAll("#tabs [data-own]").forEach(function(b){ b.hidden = !S.own; });
       document.getElementById("t-leads").textContent = S.own ? "Кандидати" : "Мої кандидати";
+      document.getElementById("t-pay").textContent = S.own ? "Оплата за кандидата" : "Пріоритетні вакансії";
       API.staff().then(function(st){ S.staff = st; }).catch(function(){});
       API.settings().then(function(st){ S.st = st; }).catch(function(){});
       document.getElementById("me").innerHTML = E(me.full_name || pname(me)) + ' · ' + E(ROLES[me.role]) + (S.own ? "" : ' <button class="btn ghost sm" id="my-form">Моя анкета</button>') + ' <button class="btn ghost sm" id="out">Вийти</button>';
@@ -376,7 +378,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
  ["Анкета заповнена", p.onboarded_at ? dt(p.onboarded_at, true) : "ні"]];
     return '<b>Анкета</b><dl class="kv">' + rows.filter(function(r){ return r[1]; }).map(function(r){ return '<dt>' + E(r[0]) + '</dt><dd>' + E(r[1]) + '</dd>'; }).join("") + '</dl>';
   }
-  function tabsAllowed(){ return S.own ? ["leads", "tasks", "analytics", "sources", "pay", "employers", "people", "payouts", "mylink", "guide", "settings"] : ["leads", "tasks", "mylink", "guide"]; }
+  function tabsAllowed(){ return S.own ? ["leads", "tasks", "analytics", "sources", "pay", "employers", "people", "payouts", "mylink", "guide", "settings"] : ["leads", "tasks", "pay", "mylink", "guide"]; }
   function ic(n, cls){ return '<svg class="ic' + (cls ? " " + cls : "") + '"><use href="#ic-' + n + '"/></svg>'; }
   function mgrsOf(l){ var a = (l.managers && l.managers.length) ? l.managers.slice() : []; if (l.manager_id && a.indexOf(l.manager_id) < 0) a.unshift(l.manager_id); return a; }
   function hasMgr(l, id){ return mgrsOf(l).indexOf(id) >= 0; }
@@ -914,6 +916,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   }
   function vacList(){ return S.vac && S.vac.length ? Promise.resolve(S.vac) : fetch("/vacancies.json", {cache: "no-store"}).then(function(r){ return r.json(); }).then(function(j){ S.vac = j.items || []; return S.vac; }); }
   function rPay(){
+    if (!S.own) return rPayMgr();
     Promise.all([API.pay(), vacList(), S.leads ? Promise.resolve(S.leads) : API.leads()]).then(function(r){
       var pm = {}; r[0].forEach(function(x){ pm[x.id] = x; });
       var nLeads = {}; (r[2] || []).forEach(function(l){ if (l.vacancy_id) nLeads[l.vacancy_id] = (nLeads[l.vacancy_id] || 0) + 1; });
@@ -947,6 +950,28 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       pq.oninput = function(){ S.payq = pq.value; S.payPos = pq.selectionStart; rPay(); };
       document.querySelectorAll("[data-pf]").forEach(function(b){ b.onclick = function(){ S.payf = b.getAttribute("data-pf"); rPay(); }; });
       document.querySelectorAll("tr[data-pid]").forEach(function(tr){ tr.onclick = function(){ var id = tr.getAttribute("data-pid"); openPay(all.filter(function(x){ return String(x.v.id) === id; })[0]); }; });
+    }).catch(fail);
+  }
+  // Менеджери бачать той самий порядок (від найвигіднішої вакансії), але без сум.
+  function rPayMgr(){
+    Promise.all([API.payRank(), vacList()]).then(function(r){
+      var rk = {}; (r[0] || []).forEach(function(x){ rk[x.id] = x.rnk; });
+      var q = (S.payq || "").toLowerCase(), f = S.payf || "all";
+      var rows = r[1].filter(function(v){ return (f === "all" || (f === "hot" ? v.hot : (v.src || "trello") === f)) && (!q || [v.title, v.company, v.city, v.id].join(" ").toLowerCase().indexOf(q) >= 0); });
+      rows.sort(function(a, b){ return (rk[a.id] || 9e9) - (rk[b.id] || 9e9) || ((b.hot ? 1 : 0) - (a.hot ? 1 : 0)); });
+      var chip = function(k, t){ return '<button class="chip" data-pf="' + k + '" aria-pressed="' + (f === k) + '">' + t + '</button>'; };
+      app.innerHTML = '<div class="bar"><input type="search" id="pq" placeholder="Пошук: посада, компанія, місто, №" value="' + E(S.payq || "") + '">' +
+        chip("all", "Усі") + chip("hot", "Гарячі") + chip("trello", "Trello (EWL)") + chip("planfix", "Planfix (Gremi)") + '</div>' +
+        '<p class="note" style="margin:-4px 0 12px">Вакансії в порядку пріоритету: зверху ті, на які кандидатів шукаємо в першу чергу. Пропонуйте їх кандидатам насамперед.</p>' +
+        '<div class="card"><table class="tbl"><thead><tr><th>Пріоритет</th><th>Вакансія</th><th>Оператор</th></tr></thead><tbody>' +
+        (rows.length ? rows.map(function(v, i){
+          return '<tr class="row" data-vurl="/vakansii/' + E(v.id) + '/"><td>' + (rk[v.id] ? (i + 1) : "—") + '</td><td><b>' + E(v.title) + '</b>' + (v.hot ? ' <span class="st st-new">Гаряча</span>' : '') +
+            '<small>' + E([v.company, v.city, v.country].filter(Boolean).join(" · ")) + '</small></td><td class="hide-m">' + (v.src === "planfix" ? "Planfix (Gremi)" : "Trello (EWL)") + '<small>№' + E(v.id) + '</small></td></tr>';
+        }).join("") : '<tr><td colspan="3" class="empty">Нічого не знайдено</td></tr>') + '</tbody></table></div>';
+      var pq = document.getElementById("pq"); if (S.payPos != null) { pq.focus(); pq.setSelectionRange(S.payPos, S.payPos); S.payPos = null; }
+      pq.oninput = function(){ S.payq = pq.value; S.payPos = pq.selectionStart; rPayMgr(); };
+      document.querySelectorAll("[data-pf]").forEach(function(b){ b.onclick = function(){ S.payf = b.getAttribute("data-pf"); rPayMgr(); }; });
+      document.querySelectorAll("tr[data-vurl]").forEach(function(tr){ tr.onclick = function(){ window.open(tr.getAttribute("data-vurl"), "_blank"); }; });
     }).catch(fail);
   }
   function openPay(x){
