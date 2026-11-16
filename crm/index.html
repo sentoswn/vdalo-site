@@ -971,7 +971,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       var rows = all.filter(function(x){ var v = x.v;
         return (f === "all" || (f === "hot" ? v.hot : f === "none" ? x.pay == null : (v.src || "trello") === f)) &&
           (!q || [v.title, v.company, v.city, v.id].join(" ").toLowerCase().indexOf(q) >= 0); });
-      rows.sort(function(a, b){ return (b.pay == null ? -1 : b.pay) - (a.pay == null ? -1 : a.pay) || ((b.v.hot ? 1 : 0) - (a.v.hot ? 1 : 0)); });
+      rows.sort(function(a, b){ var x = String(a.v.id), y = String(b.v.id); return (b.pay == null ? -1 : b.pay) - (a.pay == null ? -1 : a.pay) || ((b.v.hot ? 1 : 0) - (a.v.hot ? 1 : 0)) || (x.length - y.length) || (x < y ? -1 : x > y ? 1 : 0); });
       var withPay = all.filter(function(x){ return x.pay != null; }), top = withPay.reduce(function(m, x){ return Math.max(m, x.pay); }, 0);
       var avg = withPay.length ? Math.round(withPay.reduce(function(s, x){ return s + x.pay; }, 0) / withPay.length) : 0;
       var last = r[0].reduce(function(m, x){ return x.updated_at > m ? x.updated_at : m; }, "");
@@ -1001,19 +1001,19 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   // Менеджери бачать той самий порядок (від найвигіднішої вакансії), але без сум.
   function rPayMgr(){
     Promise.all([API.payRank(), vacList()]).then(function(r){
-      var rk = {}; (r[0] || []).forEach(function(x){ rk[x.id] = x.rnk; });
+      var rk = {}, bn = {}; (r[0] || []).forEach(function(x){ rk[x.id] = x.rnk; bn[x.id] = x.bonus; });
       var q = (S.payq || "").toLowerCase(), f = S.payf || "all";
       var rows = r[1].filter(function(v){ return (f === "all" || (f === "hot" ? v.hot : (v.src || "trello") === f)) && (!q || [v.title, v.company, v.city, v.id].join(" ").toLowerCase().indexOf(q) >= 0); });
       rows.sort(function(a, b){ return (rk[a.id] || 9e9) - (rk[b.id] || 9e9) || ((b.hot ? 1 : 0) - (a.hot ? 1 : 0)); });
       var chip = function(k, t){ return '<button class="chip" data-pf="' + k + '" aria-pressed="' + (f === k) + '">' + t + '</button>'; };
       app.innerHTML = '<div class="bar"><input type="search" id="pq" placeholder="Пошук: посада, компанія, місто, №" value="' + E(S.payq || "") + '">' +
         chip("all", "Усі") + chip("hot", "Гарячі") + chip("trello", "Trello (EWL)") + chip("planfix", "Planfix (Gremi)") + '</div>' +
-        '<p class="note" style="margin:-4px 0 12px">Вакансії в порядку пріоритету: зверху ті, на які кандидатів шукаємо в першу чергу. Пропонуйте їх кандидатам насамперед.</p>' +
-        '<div class="card"><table class="tbl"><thead><tr><th>Пріоритет</th><th>Вакансія</th><th>Оператор</th></tr></thead><tbody>' +
+        '<p class="note" style="margin:-4px 0 12px">Вакансії в порядку пріоритету: зверху ті, на які кандидатів шукаємо в першу чергу. «Ваш бонус» — скільки ви отримаєте за кандидата, який вийде на цю вакансію й відпрацює мінімальний термін.</p>' +
+        '<div class="card"><table class="tbl"><thead><tr><th>Пріоритет</th><th>Вакансія</th><th>Оператор</th><th style="text-align:right">Ваш бонус</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(v, i){
           return '<tr class="row" data-vurl="/vakansii/' + E(v.id) + '/"><td>' + (rk[v.id] ? (i + 1) : "—") + '</td><td><b>' + E(v.title) + '</b>' + (v.hot ? ' <span class="st st-new">Гаряча</span>' : '') +
-            '<small>' + E([v.company, v.city, v.country].filter(Boolean).join(" · ")) + '</small></td><td class="hide-m">' + (v.src === "planfix" ? "Planfix (Gremi)" : "Trello (EWL)") + '<small>№' + E(v.id) + '</small></td></tr>';
-        }).join("") : '<tr><td colspan="3" class="empty">Нічого не знайдено</td></tr>') + '</tbody></table></div>';
+            '<small>' + E([v.company, v.city, v.country].filter(Boolean).join(" · ")) + '</small></td><td class="hide-m">' + (v.src === "planfix" ? "Planfix (Gremi)" : "Trello (EWL)") + '<small>№' + E(v.id) + '</small></td><td style="text-align:right;white-space:nowrap"><b>' + (bn[v.id] ? bn[v.id].toLocaleString("uk-UA") + ' zł' : '—') + '</b></td></tr>';
+        }).join("") : '<tr><td colspan="4" class="empty">Нічого не знайдено</td></tr>') + '</tbody></table></div>';
       var pq = document.getElementById("pq"); if (S.payPos != null) { pq.focus(); pq.setSelectionRange(S.payPos, S.payPos); S.payPos = null; }
       pq.oninput = function(){ S.payq = pq.value; S.payPos = pq.selectionStart; rPayMgr(); };
       document.querySelectorAll("[data-pf]").forEach(function(b){ b.onclick = function(){ S.payf = b.getAttribute("data-pf"); rPayMgr(); }; });

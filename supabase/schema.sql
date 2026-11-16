@@ -663,9 +663,11 @@ create or replace function public.vacancy_pay_eff(v public.vacancy_pay) returns 
 $$;
 -- Менеджерам — лише порядок вакансій за вигідністю, без сум.
 drop function if exists public.vacancy_pay_rank();
-create or replace function public.vacancy_pay_rank() returns table(id text, rnk integer)
+-- Менеджерам: порядок і їхній бонус — 5% від нашої суми, округлено до 5 zł (саму нашу суму не видно).
+create or replace function public.vacancy_pay_rank() returns table(id text, rnk integer, bonus integer)
 language sql stable security definer set search_path = public as $$
-  select v.id, (row_number() over (order by public.vacancy_pay_eff(v) desc))::int
+  select v.id, (row_number() over (order by public.vacancy_pay_eff(v) desc, length(v.id), v.id))::int,
+         (round(public.vacancy_pay_eff(v) * 0.05 / 5) * 5)::int
   from public.vacancy_pay v
   where public.is_staff() and public.vacancy_pay_eff(v) is not null
 $$;
@@ -674,7 +676,7 @@ grant execute on function public.vacancy_pay_rank() to authenticated;
 -- Сайту — лише порядок (без сум), щоб гарячі вакансії йшли від найвигіднішої. Хто відкриє — бачить тільки номери й місця.
 create or replace function public.hot_order() returns table(id text, rnk integer)
 language sql stable security definer set search_path = public as $$
-  select v.id, (row_number() over (order by public.vacancy_pay_eff(v) desc))::int
+  select v.id, (row_number() over (order by public.vacancy_pay_eff(v) desc, length(v.id), v.id))::int
   from public.vacancy_pay v where public.vacancy_pay_eff(v) is not null
 $$;
 grant execute on function public.hot_order() to anon, authenticated;

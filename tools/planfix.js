@@ -31,6 +31,8 @@
     if (/^(rozmowa|gremi|apt\b|adera|debs|raxton|ważne|важно|приезд|выход)/i.test(company)) company = '';
     if (company === company.toUpperCase() && company.length > 4) company = company.split(' ').map(w => w.length > 3 ? w.charAt(0) + w.slice(1).toLowerCase() : w).join(' ');
     const t0 = (top[0] || '').split(/\s*Місце роботи/)[0];
+    const brand = ((o['Назва вакансії'] || '') + ' ' + o.title).match(/\b(Temu|Sinsay|Allegro|Zalando|Shein|Inter Cars|Euro RTV AGD)\b/i);
+    if (!company && brand) company = brand[1].length <= 6 ? brand[1].toUpperCase() : brand[1];
     let title = (t0 && t0.length < 70 && !/[:]/.test(t0) && !/^робота до/i.test(t0)) ? t0 : (o['Назва вакансії'] || o.title.replace(/^\d+\s*-\s*/, ''));
     title = title.replace(/\budt\b/gi, 'UDT').replace(/\s*\([^)]*\)\s*/g, ' ').replace(/\s{2,}/g, ' ').replace(/[.\s]+$/, '').trim();
     if (title === title.toUpperCase()) title = title.toLowerCase();
