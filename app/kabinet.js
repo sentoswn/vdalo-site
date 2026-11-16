@@ -1,7 +1,6 @@
 (function(){
   var root = document.getElementById("cab"); if (!root) return;
   var E = Vdalo.esc, M = Vdalo.money;
-  var DEMO = /[?&]demo=1/.test(location.search);
   var LANG = window.VDALO_LANG || "uk", LP = LANG === "uk" ? "" : "/" + LANG;
   var ST = {
     "new": "Заявка отримана", "contacted": "На зв’язку з менеджером", "matched": "Підібрано вакансію",
@@ -12,31 +11,6 @@
   function date(d){ try { return new Date(d).toLocaleDateString(LOC, {day: "numeric", month: "short", year: "numeric"}); } catch(e){ return ""; } }
 
   /* ---------- дані: справжні або демо ---------- */
-  function demoApi(){
-    var now = Date.now(), day = 864e5;
-    var st = {
-      profile: {first_name: "Олена", tg_username: "olena_demo", phone: "", ref_code: "demo42"},
-      refs: [
-        {created_at: new Date(now - 40*day), name: "Іван К.", status: "paid", bonus: 2000},
-        {created_at: new Date(now - 12*day), name: "Марія С.", status: "working", bonus: null},
-        {created_at: new Date(now - 3*day), name: "Петро", status: "contacted", bonus: null}
-      ],
-      ledger: [{created_at: new Date(now - 5*day), kind: "bonus", amount: 2000, note: "Бонус за Іван К."}],
-      requests: [], bonus: 2000
-    };
-    function bal(){ var b = st.ledger.reduce(function(a, x){ return a + x.amount; }, 0);
-      return {balance: b, earned: st.ledger.filter(function(x){ return x.kind === "bonus"; }).reduce(function(a, x){ return a + x.amount; }, 0),
-        paid: -st.ledger.filter(function(x){ return x.kind === "payout"; }).reduce(function(a, x){ return a + x.amount; }, 0),
-        pending: st.requests.filter(function(x){ return x.status === "new"; }).reduce(function(a, x){ return a + x.amount; }, 0)}; }
-    return {
-      demo: true,
-      session: function(){ return Promise.resolve(true); },
-      load: function(){ return Promise.resolve({profile: st.profile, refs: st.refs, ledger: st.ledger, requests: st.requests, bal: bal(), bonus: st.bonus}); },
-      requestPayout: function(a, c){ if (a > bal().balance - bal().pending) return Promise.reject(new Error("amount")); st.requests.unshift({created_at: new Date(), amount: a, contact: c, status: "new"}); return Promise.resolve(); },
-      savePhone: function(p){ st.profile.phone = p; return Promise.resolve(); },
-      logout: function(){ location.href = LP + "/kabinet/"; return Promise.resolve(); }
-    };
-  }
   function realApi(s){
     var uid = null;
     function ok(r){ if (r.error) throw r.error; return r.data; }
@@ -64,7 +38,7 @@
   function notReady(){
     root.innerHTML = '<div class="card cab-box"><h2>Кабінет запрацює найближчим часом</h2>' +
       '<p>Поки що отримати посилання для друга можна за номером телефону — бонус ми все одно врахуємо.</p>' +
-      '<div class="ph-cta"><a class="btn" href="' + LP + '/pryvedy-druha/">Отримати посилання</a><a class="btn ghost" href="?demo=1">Подивитися демо кабінету</a></div></div>';
+      '<div class="ph-cta"><a class="btn" href="' + LP + '/pryvedy-druha/">Отримати посилання</a></div></div>';
   }
   function login(){
     root.innerHTML = '<div class="card cab-box cab-login"><h2>Увійдіть через Telegram</h2>' +
@@ -89,7 +63,6 @@
     var bonusTxt = "2 000 грн за першого друга, який відпрацює 2 тижні, далі на 200 грн більше за кожного наступного в місяці, до 4 000 грн за друга.";
 
     root.innerHTML =
-      (api.demo ? '<p class="cab-demo">Це демо: дані вигадані, кнопки працюють лише на цій сторінці.</p>' : "") +
       '<div class="cab-head">' + (p.photo_url ? '<img src="' + E(p.photo_url) + '" alt="" width="48" height="48">' : '<span class="cab-ava">' + E((p.first_name || "?").charAt(0)) + '</span>') +
         '<div><b>Вітаємо, ' + E(p.first_name || "друже") + '!</b><small>' + (p.tg_username ? "@" + E(p.tg_username) : "") + '</small></div>' +
         '<button class="btn ghost sm" type="button" id="cab-out">Вийти</button></div>' +
@@ -142,7 +115,6 @@
     });
   }
   function start(){
-    if (DEMO) return refresh(demoApi());
     Vdalo.sb().then(function(s){
       if (!s) return notReady();
       var api = realApi(s);
