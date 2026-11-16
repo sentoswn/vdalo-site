@@ -81,7 +81,5 @@ Allow: /
 
 User-agent: *
 Allow: /
-Disallow: /crm/
-Disallow: /kabinet/
 
 Sitemap: https://vdalo-robota.com.ua/sitemap.xml
