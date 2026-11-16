@@ -1513,7 +1513,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
   }
   function rateNote(v){
     var u=v._uah; if (!u||!RATES[u.cur]) return "";
-    return '<p class="rate-note">Перераховано за курсом НБУ'+(RATES.date?" на "+esc(RATES.date):"")+': 1 '+u.cur+' = '+RATES[u.cur].toFixed(2).replace(".",",")+' грн. Зарплату виплачують у '+u.cur+'.</p>';
+    return '<p class="rate-note">Перераховано за '+(RATES.src==="bank"?"середнім банківським курсом":"курсом НБУ")+(RATES.date?" на "+esc(RATES.date):"")+': 1 '+u.cur+' = '+RATES[u.cur].toFixed(2).replace(".",",")+' грн. Зарплату виплачують у '+u.cur+'.</p>';
   }
   function flag(cc){ return /^(PL|LT|CZ|SK|DE|NL|UA)$/.test(cc) ? '<svg class="flag" aria-hidden="true"><use href="#f-'+cc+'"/></svg>' : '<span class="cc">'+esc(cc)+'</span>'; }
   function factsHtml(v){

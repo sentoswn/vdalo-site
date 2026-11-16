@@ -227,7 +227,7 @@ def rate_note(v):
     if not u or not RATES.get(u["cur"]):
         return ""
     d = f' на {esc(RATES["date"])}' if RATES.get("date") else ""
-    return f'<p class="rate-note">Перераховано за курсом НБУ{d}: 1 {u["cur"]} = {RATES[u["cur"]]:.2f} грн. Зарплату виплачують у {u["cur"]}.</p>'.replace(f'{RATES[u["cur"]]:.2f}', f'{RATES[u["cur"]]:.2f}'.replace(".", ","))
+    return f'<p class="rate-note">Перераховано за {rate_label()}{d}: 1 {u["cur"]} = {RATES[u["cur"]]:.2f} грн. Зарплату виплачують у {u["cur"]}.</p>'.replace(f'{RATES[u["cur"]]:.2f}', f'{RATES[u["cur"]]:.2f}'.replace(".", ","))
 
 
 def flag(cc):
@@ -452,7 +452,7 @@ def common_par(s):
     if s.get("uah"):
         lo, hi, net = s["uah"]
         d = f" на {RATES['date']}" if RATES.get("date") else ""
-        p.append(f"Зазвичай {'на руки' if net else 'до сплати податків'} виходить ≈ {fmt(lo)}–{fmt(hi)} грн на місяць (за курсом НБУ{d}; зарплату виплачують у валюті країни)"
+        p.append(f"Зазвичай {'на руки' if net else 'до сплати податків'} виходить ≈ {fmt(lo)}–{fmt(hi)} грн на місяць (за {rate_label()}{d}; зарплату виплачують у валюті країни)"
                  + (f" — це {rng(s['rate'])} за годину брутто" if s.get("rate") else "")
                  + (f", {rng(s['net'])} за годину на руки" if s.get("net") else "") + ".")
     elif s.get("rate"):
@@ -816,19 +816,61 @@ def write(path, text):
         f.write(text)
 
 
-def fetch_rates():
-    """Курс НБУ (грн за 1 PLN/EUR/CZK). Повертає None, якщо сайт НБУ недоступний."""
+def _get_json(url):
     import urllib.request
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 vdalo-build"})
+    return json.load(urllib.request.urlopen(req, timeout=20))
+
+
+def bank_rates():
+    """Середній банківський курс (грн за 1 PLN/EUR/CZK): середнє між купівлею й продажем у банках.
+    Monobank — EUR, PLN, CZK; ПриватБанк (безготівковий) — EUR. Якщо банки недоступні — None."""
+    iso = {978: "EUR", 985: "PLN", 203: "CZK"}
+    got = {"EUR": [], "PLN": [], "CZK": []}
     try:
-        req = urllib.request.Request("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json", headers={"User-Agent": "vdalo-build"})
-        rows = json.load(urllib.request.urlopen(req, timeout=20))
+        for x in _get_json("https://api.monobank.ua/bank/currency"):
+            c = iso.get(x.get("currencyCodeA"))
+            if c and x.get("currencyCodeB") == 980:
+                if x.get("rateBuy") and x.get("rateSell"):
+                    got[c].append((float(x["rateBuy"]) + float(x["rateSell"])) / 2)
+                elif x.get("rateCross"):
+                    got[c].append(float(x["rateCross"]))
+    except Exception as e:  # noqa: BLE001
+        print("Monobank rates unavailable:", e)
+    try:
+        for x in _get_json("https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=11"):
+            c = x.get("ccy")
+            if c in got and x.get("base_ccy") == "UAH" and x.get("buy") and x.get("sale"):
+                got[c].append((float(x["buy"]) + float(x["sale"])) / 2)
+    except Exception as e:  # noqa: BLE001
+        print("PrivatBank rates unavailable:", e)
+    if not all(got[c] for c in got):
+        return None
+    r = {c: round(sum(v) / len(v), 4) for c, v in got.items()}
+    r["date"] = TODAY.strftime("%d.%m.%Y")
+    r["src"] = "bank"
+    return r
+
+
+def fetch_rates():
+    """Курс для перерахунку в гривні: середній банківський; якщо банки недоступні — НБУ."""
+    r = bank_rates()
+    if r:
+        return r
+    try:
+        rows = _get_json("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json")
         r = {x["cc"]: round(float(x["rate"]), 4) for x in rows if x.get("cc") in ("PLN", "EUR", "CZK")}
         if len(r) == 3:
             r["date"] = next(x["exchangedate"] for x in rows if x.get("cc") == "PLN")
+            r["src"] = "nbu"
             return r
     except Exception as e:  # noqa: BLE001
         print("NBU rates unavailable:", e)
     return None
+
+
+def rate_label():
+    return "середнім банківським курсом" if RATES.get("src") == "bank" else "курсом НБУ"
 
 
 def article_card(a, tag="h3"):
@@ -879,7 +921,7 @@ def main():
     tpl = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
     vp = os.path.join(ROOT, "vacancies.json")
     data = json.load(open(vp, encoding="utf-8"))
-    # курс гривні: свіжий з НБУ, інакше — останній збережений (rates.json)
+    # курс гривні: середній банківський (або НБУ), інакше — останній збережений (rates.json)
     rp = os.path.join(ROOT, "rates.json")
     rates = fetch_rates() or data.get("rates") or (json.load(open(rp, encoding="utf-8")) if os.path.exists(rp) else None)
     if rates:
