@@ -1652,6 +1652,8 @@ window.VdaloTrack = window.VdaloTrack || (function(){
     err.textContent="";
     var sel=$("f-vac"), opt=sel.options[sel.selectedIndex], mode=segVal("mode"), channel=mode==="Переписка"?segVal("channel"):"";
     var vacTitle=sel.value?opt.textContent:"";
+    var vObj=sel.value?items.filter(function(x){ return String(x.id)===String(sel.value); })[0]:null;
+    var opTag=vObj?(vObj.src==="planfix"?"Planfix (Gremi)":"Trello (EWL)")+" №"+vObj.id:"";
     leadMsg="Заявка з сайту «Вдало»\nІм'я: "+name+"\nТелефон: "+phone+
       "\nВакансія: "+(sel.value?vacTitle+" (№"+sel.value+")":"порадьте мені")+
       "\nХто їде: "+segVal("who")+"\nКоли: "+segVal("when")+
@@ -1671,7 +1673,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
     if (!CONFIG.leadsUrl) { fallback(false); track("Lead",lead); return; }
 
     var btn=$("f-submit"); btn.disabled=true; btn.textContent="Надсилаємо…";
-    var payload={ name:name, phone:phone, vacancyId:sel.value, vacancyTitle:vacTitle, who:segVal("who"), when:segVal("when"),
+    var payload={ name:name, phone:phone, vacancyId:sel.value, vacancyTitle:vacTitle+(opTag?" · Оператор: "+opTag:""), operator:opTag, who:segVal("who"), when:segVal("when"),
       mode:mode, channel:channel, note:f.note.value.trim(), source:SOURCE, page:location.href, website:f.website.value };
     var done=false, timer=setTimeout(function(){ if(!done){ done=true; finish(false); } }, 15000);
     function finish(ok){
@@ -1682,7 +1684,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
         showPanel("sent"); track("Lead",lead);
       } else fallback(true);
     }
-    if (window.Vdalo) Vdalo.sb().then(function(sbc){ if (!sbc) return; var row={name:name, phone:phone, vacancy_id:sel.value||null, vacancy_title:vacTitle||null,
+    if (window.Vdalo) Vdalo.sb().then(function(sbc){ if (!sbc) return; var row={name:name, phone:phone, vacancy_id:sel.value||null, vacancy_title:(vacTitle?vacTitle+(opTag?" · Оператор: "+opTag:""):null),
       who:segVal("who"), when_go:segVal("when"), contact_mode:mode, channel:channel||null, note:f.note.value.trim()||null, source:SOURCE||null, page:location.href, lang:LANG, ref_raw:REFBY||null, traffic:TRAFFIC};
       var trk=window.VdaloTrack ? VdaloTrack.lead() : null;
       return sbc.from("leads").insert(trk ? Object.assign({}, row, trk) : row).then(function(r){ if (r && r.error && trk) return sbc.from("leads").insert(row); }); }).catch(function(){});
