@@ -62,12 +62,18 @@ Deno.serve(async (req) => {
   const admins = (Deno.env.get("ADMIN_TG") || "").split(",").map((s) => s.trim().replace(/^@/, "").toLowerCase()).filter(Boolean);
   const isAdmin = admins.includes(String(tgId)) || (!!data.username && admins.includes(data.username.toLowerCase()));
 
+  // менеджери, яких адмін додав за ніком у CRM (Налаштування → Менеджери)
+  const { data: mset } = await sb.from("settings").select("value").eq("key", "manager_tg").maybeSingle();
+  const managers = String(mset?.value || "").split(/[\s,]+/).map((s) => s.trim().replace(/^@/, "").toLowerCase()).filter(Boolean);
+  const isManager = managers.includes(String(tgId)) || (!!data.username && managers.includes(data.username.toLowerCase()));
+
   const { data: existing } = await sb.from("profiles").select("id, role").eq("id", uid).maybeSingle();
   const row: Record<string, unknown> = {
     id: uid, tg_id: tgId, tg_username: data.username || null,
     first_name: data.first_name || null, last_name: data.last_name || null, photo_url: data.photo_url || null,
   };
   if (isAdmin) row.role = "admin";
+  else if (isManager && (!existing || existing.role === "user")) row.role = "manager";
   const { error: upErr } = existing
     ? await sb.from("profiles").update(row).eq("id", uid)
     : await sb.from("profiles").insert(row);

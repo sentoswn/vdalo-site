@@ -143,6 +143,10 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       makePayout: function(u, a, note, req){ return s.rpc("make_payout", {p_user: u, p_amount: a, p_note: note, p_request: req || null}).then(ok); },
       rejectPayout: function(req){ return s.from("payout_requests").update({status: "rejected"}).eq("id", req).then(ok); },
       setRole: function(u, role){ return s.from("profiles").update({role: role}).eq("id", u).then(ok); },
+      promoteManagers: function(list){ if (!list.length) return Promise.resolve();
+        return s.from("profiles").select("id,tg_username,role").eq("role", "user").then(ok).then(function(ps){
+          var ids = ps.filter(function(p){ return p.tg_username && list.indexOf(p.tg_username.toLowerCase()) >= 0; }).map(function(p){ return p.id; });
+          return ids.length ? s.from("profiles").update({role: "manager"}).in("id", ids).then(ok) : null; }); },
       settings: function(){ return s.from("settings").select("*").then(ok).then(function(r){ var o = {}; r.forEach(function(x){ o[x.key] = x.value; }); return o; }); },
       setSetting: function(k, v){ return s.from("settings").upsert({key: k, value: String(v)}).then(ok); },
       findRef: function(code){ return s.from("profiles").select("id,first_name,last_name,tg_username,ref_code").eq("ref_code", code.toLowerCase()).maybeSingle().then(ok); },
@@ -423,7 +427,16 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         '<p class="note">Зараз: ' + E(ex.join(" · ")) + ' … і так до максимуму ' + E(M(mx)) + '. Щомісяця (за київським часом) відлік починається знову.</p>' +
         '<p class="note">Бонус нараховується автоматично, коли кандидату, який прийшов за посиланням, ставлять статус «Відпрацював 2 тижні, оплату отримано».</p>' +
         (isAdmin ? '<button class="btn" id="s-save" style="justify-self:start">Зберегти</button>' : '<p class="note">Змінювати може лише адміністратор.</p>') + '</div>' +
-        '<div class="card" style="padding:20px;max-width:620px;margin-top:16px;display:grid;gap:8px"><h3 style="margin:0">Менеджери</h3><p class="note">Щоб додати менеджера: людина входить у <a href="/kabinet/">особистий кабінет</a> через Telegram, після чого адмін у вкладці «Реферали й баланси» змінює їй роль на «Менеджер».</p></div>';
+        '<div class="card" style="padding:20px;max-width:620px;margin-top:16px;display:grid;gap:10px"><h3 style="margin:0">Менеджери</h3>' +
+        '<div class="fld"><label>Telegram-ніки менеджерів (через кому, без @)</label><textarea id="s-mgr" placeholder="ivan_manager, olena_vdalo"' + dis + '>' + E(st.manager_tg || "") + '</textarea></div>' +
+        '<p class="note">Людина з цим ніком, увійшовши на сайті через Telegram (значок кабінету або /crm/), одразу потрапить у CRM як менеджер. Прибрати доступ — змініть роль на «Користувач» у вкладці «Реферали й баланси».</p>' +
+        (isAdmin ? '<button class="btn" id="s-mgr-save" style="justify-self:start">Зберегти менеджерів</button>' : '') + '</div>';
+      var ms = document.getElementById("s-mgr-save");
+      if (ms) ms.onclick = function(){
+        var list = document.getElementById("s-mgr").value.split(/[\s,]+/).map(function(x){ return x.trim().replace(/^@/, "").toLowerCase(); }).filter(Boolean);
+        API.setSetting("manager_tg", list.join(", ")).then(function(){ return API.promoteManagers(list); })
+          .then(function(){ toast("Менеджерів збережено"); rSettings(); }).catch(fail);
+      };
       var sv = document.getElementById("s-save");
       if (sv) sv.onclick = function(){
         var v = function(id){ return Math.max(0, parseInt(document.getElementById(id).value, 10) || 0); };
