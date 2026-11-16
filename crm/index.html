@@ -155,6 +155,10 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   function toast(t){ var el = document.getElementById("toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(function(){ el.classList.remove("show"); }, 2200); }
   function dt(d, time){ if (!d) return ""; var x = new Date(d); return x.toLocaleDateString("uk-UA", {day: "2-digit", month: "2-digit", year: "2-digit"}) + (time ? " " + x.toLocaleTimeString("uk-UA", {hour: "2-digit", minute: "2-digit"}) : ""); }
   function pname(p){ if (!p) return ""; return p.full_name || [p.first_name, p.last_name].filter(Boolean).join(" ") || (p.tg_username ? "@" + p.tg_username : "—"); }
+  function waitStart(l){ return Math.max(new Date(l.created_at).getTime(), l.assigned_at ? new Date(l.assigned_at).getTime() : 0); }
+  function mins(ms){ var m = Math.max(0, Math.round(ms / 6e4)); if (m < 60) return m + " хв"; var h = Math.floor(m / 60); if (h < 24) return h + " год " + (m % 60) + " хв"; return Math.floor(h / 24) + " д " + (h % 24) + " год"; }
+  function respMs(l){ return l.first_contact_at ? new Date(l.first_contact_at).getTime() - waitStart(l) : null; }
+  function median(a){ if (!a.length) return null; a = a.slice().sort(function(x, y){ return x - y; }); var m = Math.floor(a.length / 2); return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2; }
   function bonusRange(){ var st = S.st || {}; return M(+st.bonus_base || 2000) + " – " + M(+st.bonus_max || 4000); }
   function opts(list, v){ return list.map(function(x){ return '<option value="' + x[0] + '"' + (x[0] === v ? " selected" : "") + ">" + E(x[1]) + "</option>"; }).join(""); }
 
@@ -287,6 +291,8 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     Promise.all(jobs).then(function(r){
       S.leads = r[0]; S.tasks = r[1];
       badge("n-leads", r[0].filter(function(x){ return x.status === "new" && (S.own ? !x.manager_id : true); }).length);
+      var late = r[0].filter(function(x){ return x.status === "new" && (x.manager_id === S.me.id || (S.own && !x.manager_id)) && Date.now() - waitStart(x) > 15 * 6e4; }).length;
+      var nb = document.getElementById("n-leads"); if (late) { nb.hidden = false; nb.style.background = "var(--red)"; nb.title = late + " чекають понад 15 хв"; } else nb.style.background = "";
       var eod = new Date(); eod.setHours(23, 59, 59, 999);
       badge("n-tasks", r[1].filter(function(t){ return !t.done_at && t.due_at && new Date(t.due_at) <= eod && t.assignee_id === S.me.id; }).length);
       if (S.own) { S.employers = r[2]; S.payouts = r[3];
@@ -303,6 +309,11 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   function fail(e){ console.warn(e); toast("Помилка: " + (e && e.message || "не вдалося зберегти")); }
 
   /* ================= Кандидати ================= */
+  function waitBadge(l){
+    if (l.status !== "new" || (S.own && !l.manager_id && false)) return "";
+    var w = Date.now() - waitStart(l), late = w > 15 * 6e4;
+    return '<small style="color:' + (late ? "var(--red)" : "var(--muted)") + ';font-weight:700">' + (late ? "⏰ " : "") + 'чекає ' + E(mins(w)) + '</small>';
+  }
   function rLeads(){
     API.leads().then(function(list){
       S.leads = list;
@@ -333,7 +344,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
             '<td class="hide-m">' + E(l.vacancy_title || "Будь-яка") + (l.employer ? '<small>' + E(l.employer) + '</small>' : "") + '</td>' +
             '<td class="hide-m">' + (l.referrer ? E(pname(l.referrer)) : '<span class="note">' + E(l.ref_raw ? "ref: " + l.ref_raw : (l.source || "—")) + '</span>') + '</td>' +
             (S.own ? '<td class="hide-m">' + (l.manager_id ? E(staffName(l.manager_id)) : '<span class="st st-new">Не призначено</span>') + '</td>' : '') +
-            '<td><span class="st st-' + l.status + '">' + E(LSN[l.status] || l.status) + '</span></td></tr>';
+            '<td><span class="st st-' + l.status + '">' + E(LSN[l.status] || l.status) + '</span>' + waitBadge(l) + '</td></tr>';
         }).join("") : '<tr><td colspan="6" class="empty">' + (S.own ? "Нічого не знайдено" : "Поки немає кандидатів. Діліться своїм посиланням (вкладка «Моє посилання») — кандидати з нього потраплять сюди.") + '</td></tr>') + '</tbody></table></div>';
       var ms = document.getElementById("mgr"); if (ms) ms.onchange = function(){ S.mgr = ms.value; rLeads(); };
       var qi = document.getElementById("q");
@@ -480,8 +491,9 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     app.innerHTML = '<div class="guide">' +
       '<div class="card"><h3>Як шукати кандидатів безкоштовно</h3><p>Ваше головне знаряддя — <b>особисте посилання</b>. Кожен, хто залишить заявку за ним, автоматично стає вашим кандидатом у CRM.</p>' +
       '<div class="g2" style="grid-template-columns:1fr auto"><input id="g-link" readonly value="' + E(link) + '" style="padding:9px 11px;border:1px solid var(--line);border-radius:10px"><button class="btn" data-copy="link">Копіювати посилання</button></div>' +
+      '<div class="bar" style="margin:0"><a class="btn ghost sm" target="_blank" rel="noopener" href="https://api.qrserver.com/v1/create-qr-code/?size=600x600&margin=20&data=' + encodeURIComponent(link) + '">QR-код посилання (для друку й сторіз)</a></div>' +
       '<p class="note">Посилання на конкретну вакансію: відкрийте вакансію на сайті й допишіть у кінці адреси <code>?ref=' + E(code) + '</code>. Посилання на сторінку країни, напр. Польщі: <code>' + E(location.origin) + '/robota-v-polshchi/?ref=' + E(code) + '</code></p>' +
-      '<nav><a href="#g1">Де шукати</a><a href="#g2">Шаблони оголошень</a><a href="#g3">Перша розмова</a><a href="#g4">Робота в CRM</a><a href="#g5">Правила</a><a href="#g6">План на день</a></nav></div>' +
+      '<nav><a href="#g1">Де шукати</a><a href="#g7">Як сховати посилання під текст</a><a href="#g2">Шаблони оголошень</a><a href="#g3">Перша розмова</a><a href="#g4">Робота в CRM</a><a href="#g5">Правила</a><a href="#g6">План на день</a></nav></div>' +
 
       '<div class="card" id="g1"><h3>1. Де шукати — безкоштовні канали</h3>' +
       '<h4>Telegram</h4><ul><li>Знайдіть через пошук Telegram групи й канали: «робота в Польщі», «робота за кордоном», «заробітки», «вакансії Польща», а також міські й районні чати (напр. «Біла Церква чат», «Житомир оголошення»).</li><li>Читайте правила групи: у багатьох оголошення дозволені лише в певні дні або з позначкою #вакансія.</li><li>Публікуйте 1 раз на 2–3 дні в одній групі, міняйте текст і фото. Відповідайте на коментарі швидко.</li><li>Ведіть власний канал «Робота за кордоном від [ваше ім’я]» — 1–2 вакансії на день із посиланням.</li></ul>' +
@@ -490,6 +502,18 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       '<h4>TikTok та Instagram (Reels)</h4><ul><li>Короткі відео 15–40 секунд: «3 вакансії тижня з житлом», «Скільки реально заробляють на складі в Польщі», «Що взяти в дорогу», відповіді на запитання.</li><li>Посилання — у профілі (шапці), у відео кажіть «посилання в профілі».</li><li>Знімайте регулярно: 3–5 відео на тиждень дають більше, ніж одне «ідеальне».</li></ul>' +
       '<h4>OLX та сайти оголошень</h4><ul><li>Розміщення вакансій на OLX і job-сайтах часто платне або з обмеженнями — уточнюйте актуальні умови перед публікацією.</li><li>Безкоштовно можна відповідати людям, які самі розмістили оголошення «шукаю роботу» / резюме.</li></ul>' +
       '<h4>Знайомі й «сарафанне радіо»</h4><ul><li>Розкажіть родичам, сусідам, колишнім колегам — найнадійніші кандидати приходять за рекомендацією.</li><li>Кандидатам, які вже поїхали, розкажіть про програму «Приведи друга» (бонус до 4 000 грн) — вони приводитимуть знайомих.</li><li>Оголошення на дошках у селах і містечках (магазин, зупинка, пошта) з QR-кодом на ваше посилання.</li></ul></div>' +
+
+      '<div class="card" id="g7"><h3>Як сховати посилання під текст</h3>' +
+      '<p>Довге посилання з <code>?ref=</code> виглядає як реклама. Краще зробити клікабельний текст, напр. <b>«👉 Дивитися вакансії з житлом»</b> — людина бачить лише текст, а ваш код спрацює.</p>' +
+      '<h4>Telegram — з комп’ютера</h4><ol><li>Напишіть текст повідомлення, напр. «Дивитися вакансії».</li><li>Виділіть ці слова мишкою.</li><li>Натисніть <b>Ctrl + K</b> (на Mac — <b>⌘ + K</b>) або правою кнопкою → «Форматування» → «Додати посилання».</li><li>Вставте своє посилання → «Готово». Слова стануть синіми й клікабельними.</li></ol>' +
+      '<h4>Telegram — з телефону</h4><ol><li>Напишіть текст і виділіть потрібні слова (довге натискання).</li><li>Android: у меню над текстом натисніть <b>⋮</b> → «Додати посилання». iPhone: «Формат» (або <b>BIU</b>) → «Посилання».</li><li>Вставте посилання → «Готово».</li></ol>' +
+      '<p class="note">У своєму Telegram-каналі можна додати під пост кнопку «Дивитися вакансії» через ботів-публікаторів (напр. Controller Bot) — кнопка веде на ваше посилання.</p>' +
+      '<h4>Viber</h4><ul><li>Сховати посилання під текст у звичайних повідомленнях Viber не можна. Ставте посилання <b>окремим рядком у кінці</b> — Viber сам покаже картку сайту з назвою й картинкою, це виглядає охайно.</li><li>Перед посиланням напишіть заклик: «Усі вакансії з житлом тут 👇».</li></ul>' +
+      '<h4>Facebook</h4><ul><li>У постах і групах посилання не ховається під текст, але Facebook показує велику картку сайту. Ставте посилання в кінці поста.</li><li>У деяких групах посилання в постах заборонені або зменшують охоплення — тоді пишіть «Посилання в коментарі 👇» і додайте його першим коментарем.</li></ul>' +
+      '<h4>Instagram</h4><ul><li>Посилання в підписах до постів не клікабельні. Додайте його в <b>профіль</b> (Редагувати профіль → Посилання) і пишіть «посилання в профілі».</li><li>У сторіз — наклейка <b>«Посилання»</b>: вставте адресу, а в полі тексту напишіть «Вакансії з житлом».</li></ul>' +
+      '<h4>TikTok</h4><ul><li>Посилання в описі відео не клікабельне. Додайте його в профіль, якщо TikTok дозволяє (залежить від типу акаунта), і кажіть у відео «посилання в профілі».</li><li>Або вкажіть у профілі свій Telegram — і там давайте посилання.</li></ul>' +
+      '<h4>Друк і офлайн</h4><ul><li>Для оголошень на дошках, зупинках, у магазинах — <b>QR-код</b> (кнопка вище). Людина наводить камеру — і відкривається сайт із вашим кодом.</li></ul>' +
+      '<div class="warn">Перевіряйте посилання перед публікацією: відкрийте його самі — має відкритися сайт «Вдало». Не скорочуйте посилання сторонніми сервісами (bit.ly тощо): люди менше довіряють, а деякі групи такі посилання блокують.</div></div>' +
 
       '<div class="card" id="g2"><h3>2. Шаблони оголошень</h3><p class="note">Ваше посилання вже вставлене. Міняйте текст під конкретну вакансію: місто, ставка, житло, дата заїзду.</p>' +
       tpl("ad", "Оголошення для груп") + tpl("short", "Короткий текст / коментар") + tpl("story", "Сторіз або пост у соцмережах") + '</div>' +
@@ -572,7 +596,10 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         var od = tasks.filter(function(t){ return t.assignee_id === p.id && !t.done_at && t.due_at && new Date(t.due_at) < now; }).length;
         return {p: p, n: m.length, act: m.filter(function(l){ return ["new", "contacted", "matched"].indexOf(l.status) >= 0; }).length,
           dep: m.filter(reached).length, w: m.filter(workedF).length, paid: m.filter(function(l){ return l.status === "paid"; }).length,
-          rej: m.filter(function(l){ return l.status === "rejected"; }).length, od: od};
+          rej: m.filter(function(l){ return l.status === "rejected"; }).length, od: od,
+          med: median(m.map(respMs).filter(function(x){ return x !== null; })),
+          fast: (function(){ var a = m.map(respMs).filter(function(x){ return x !== null; }); return a.length ? Math.round(a.filter(function(x){ return x <= 15 * 6e4; }).length / a.length * 100) + "%" : "—"; })(),
+          waiting: m.filter(function(l){ return l.status === "new" && Date.now() - waitStart(l) > 15 * 6e4; }).length};
       }).sort(function(a, b){ return b.w - a.w || b.n - a.n; });
       var un = L.filter(function(l){ return !l.manager_id; }).length;
       var bonusAcc = ledger.filter(function(g){ return g.kind === "bonus" && new Date(g.created_at).getTime() >= from; }).reduce(function(a, g){ return a + g.amount; }, 0);
@@ -583,12 +610,14 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         '<div class="stats">' +
         '<div class="card stat"><span>Заявок</span><b>' + L.length + '</b></div>' +
         '<div class="card stat"><span>Без менеджера</span><b>' + un + '</b></div>' +
+        (function(){ var a = L.map(respMs).filter(function(x){ return x !== null; }), md = median(a);
+          return '<div class="card stat"><span>Час відповіді (медіана)</span><b style="color:' + (md !== null && md > 15 * 6e4 ? "var(--red)" : "inherit") + '">' + (md === null ? "—" : E(mins(md))) + '</b></div>'; })() +
         '<div class="card stat"><span>Виїхали</span><b>' + L.filter(reached).length + '</b></div>' +
         '<div class="card stat hl"><span>Вийшли на роботу</span><b>' + nW + ' <small style="font-size:14px">(' + pct(nW, L.length) + ')</small></b></div>' +
         '<div class="card stat"><span>Оплачено роботодавцем</span><b>' + (cnt.paid || 0) + '</b></div>' +
         '<div class="card stat"><span>Запитів роботодавців</span><b>' + emps.filter(function(e){ return new Date(e.created_at).getTime() >= from; }).length + '</b></div></div>' +
-        '<div class="card pad" style="margin-bottom:16px"><h3>Менеджери</h3><div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Менеджер</th><th>Кандидатів</th><th>В роботі</th><th>Виїхали</th><th>Працюють</th><th>Оплачено</th><th>Відмови</th><th>Конверсія</th><th>Прострочені задачі</th></tr></thead><tbody>' +
-        (rows.length ? rows.map(function(x){ return '<tr><td><b>' + E(pname(x.p)) + '</b><small>' + E(ROLES[x.p.role]) + (x.p.tg_username ? " · @" + E(x.p.tg_username) : "") + '</small></td><td>' + x.n + '</td><td>' + x.act + '</td><td>' + x.dep + '</td><td>' + x.w + '</td><td>' + x.paid + '</td><td>' + x.rej + '</td><td><b>' + pct(x.w, x.n) + '</b></td><td>' + (x.od ? '<span class="st st-rejected">' + x.od + '</span>' : "0") + '</td></tr>'; }).join("") : '<tr><td colspan="9" class="empty">Менеджерів ще немає</td></tr>') +
+        '<div class="card pad" style="margin-bottom:16px"><h3>Менеджери</h3><div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Менеджер</th><th>Кандидатів</th><th>В роботі</th><th>Виїхали</th><th>Працюють</th><th>Оплачено</th><th>Відмови</th><th>Конверсія</th><th>Відповідь (медіана)</th><th>Відповіли ≤15 хв</th><th>Чекають зараз</th><th>Прострочені задачі</th></tr></thead><tbody>' +
+        (rows.length ? rows.map(function(x){ return '<tr><td><b>' + E(pname(x.p)) + '</b><small>' + E(ROLES[x.p.role]) + (x.p.tg_username ? " · @" + E(x.p.tg_username) : "") + '</small></td><td>' + x.n + '</td><td>' + x.act + '</td><td>' + x.dep + '</td><td>' + x.w + '</td><td>' + x.paid + '</td><td>' + x.rej + '</td><td><b>' + pct(x.w, x.n) + '</b></td><td>' + (x.med === null ? "—" : '<span style="color:' + (x.med > 15 * 6e4 ? "var(--red)" : "var(--green)") + ';font-weight:700">' + E(mins(x.med)) + '</span>') + '</td><td>' + x.fast + '</td><td>' + (x.waiting ? '<span class="st st-rejected">' + x.waiting + '</span>' : "0") + '</td><td>' + (x.od ? '<span class="st st-rejected">' + x.od + '</span>' : "0") + '</td></tr>'; }).join("") : '<tr><td colspan="12" class="empty">Менеджерів ще немає</td></tr>') +
         '</tbody></table></div></div>' +
         '<div class="grid2"><div class="card pad"><h3>Воронка</h3><div class="bars">' + LS.map(function(x){ var n = cnt[x[0]] || 0; return '<div class="b"><span>' + E(x[1]) + '</span><div class="t"><i style="width:' + (L.length ? Math.round(n / L.length * 100) : 0) + '%"></i></div><b>' + n + '</b></div>'; }).join("") + '</div></div>' +
         '<div class="card pad"><h3>Звідки кандидати</h3><div class="bars">' + Object.keys(src).map(function(k){ return '<div class="b"><span>' + E(k) + '</span><div class="t"><i style="width:' + Math.round(src[k] / maxSrc * 100) + '%"></i></div><b>' + src[k] + '</b></div>'; }).join("") + '</div></div>' +
@@ -742,6 +771,11 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     }).catch(fail);
   }
 
+  setInterval(function(){
+    if (!S.me || drawer.classList.contains("open")) return;
+    var a = document.activeElement; if (a && (a.tagName === "INPUT" || a.tagName === "TEXTAREA" || a.tagName === "SELECT")) return;
+    counts(); if (S.tab === "leads") rLeads();
+  }, 60000);
   boot();
 })();
 </script>

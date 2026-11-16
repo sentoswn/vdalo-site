@@ -88,6 +88,8 @@ create table if not exists public.leads (
   manager_id    uuid references public.profiles(id) on delete set null,
   bonus_paid    boolean not null default false
 );
+alter table public.leads add column if not exists assigned_at      timestamptz;  -- коли закріпили за менеджером
+alter table public.leads add column if not exists first_contact_at timestamptz;  -- коли вперше змінили статус із «Нова заявка»
 create index if not exists leads_status on public.leads(status);
 create index if not exists leads_referrer on public.leads(referrer_id);
 
@@ -174,6 +176,8 @@ begin
     if new.manager_id is null then new.manager_id := new.referrer_id; end if;
     new.referrer_id := null;
   end if;
+  new.first_contact_at := case when new.status <> 'new' then now() end;
+  new.assigned_at := case when new.manager_id is not null then now() end;
   return new;
 end $$;
 drop trigger if exists leads_before_insert on public.leads;
@@ -212,6 +216,9 @@ begin
   if auth.uid() is not null and not public.is_admin() then
     new.manager_id := old.manager_id;          -- перепризначати може лише власник
   end if;
+  -- час реакції: рахує база, підробити не можна
+  new.assigned_at := case when new.manager_id is distinct from old.manager_id then (case when new.manager_id is not null then now() end) else old.assigned_at end;
+  new.first_contact_at := coalesce(old.first_contact_at, case when old.status = 'new' and new.status <> 'new' then now() end);
   return new;
 end $$;
 drop trigger if exists leads_guard on public.leads;
