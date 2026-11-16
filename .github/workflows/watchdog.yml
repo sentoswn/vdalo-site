@@ -1,0 +1,33 @@
+# Кожні 10 хв у робочий час перевіряє, чи працюють менеджери, і надсилає власникам
+# сповіщення від бота (@vdalo_robota_bot): хто не з’явився, хто довго неактивний, підсумок дня.
+# Робочі години, дні й поріг простою — у CRM → Налаштування. Нових секретів не потрібно.
+name: Watchdog
+
+on:
+  schedule:
+    - cron: "*/10 6-17 * * *"   # UTC; точний робочий час (Київ) перевіряє сама база
+  workflow_dispatch:
+
+concurrency: watchdog
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check & notify
+        env:
+          DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          BOT: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: |
+          if [ -z "$DB_URL" ] || [ -z "$BOT" ]; then echo "Секрети не задано — пропускаю."; exit 0; fi
+          command -v psql >/dev/null || sudo apt-get install -y -qq postgresql-client >/dev/null
+          psql "$DB_URL" -X -q -A -t -v ON_ERROR_STOP=1 \
+            -c "select json_build_object('chat_id', chat, 'text', msg, 'disable_web_page_preview', true) from public.work_alerts()" > /tmp/out.jsonl
+          n=0
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            curl -s -o /dev/null -X POST "https://api.telegram.org/bot${BOT}/sendMessage" -H 'Content-Type: application/json' -d "$line" || true
+            n=$((n+1))
+          done < /tmp/out.jsonl
+          echo "Надіслано повідомлень: $n"

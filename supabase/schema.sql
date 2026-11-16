@@ -537,3 +537,99 @@ grant select, insert, update, delete on public.traffic_sources to authenticated;
 grant execute on function public.track_visit(text, text, jsonb, text, text, text) to anon, authenticated;
 grant execute on function public.source_stats(timestamptz, timestamptz), public.source_daily(timestamptz, timestamptz),
                           public.src_auto_name(text) to authenticated;
+
+-- ============ Робочий час команди (присутність у CRM, сповіщення власникам) ============
+alter table public.profiles add column if not exists last_seen_at timestamptz;
+create table if not exists public.work_log (
+  user_id       uuid not null references public.profiles(id) on delete cascade,
+  day           date not null,                 -- київська дата
+  first_seen    timestamptz,
+  last_seen     timestamptz,
+  active_min    int not null default 0,        -- хвилини активної роботи в CRM
+  late_alert_at timestamptz,
+  idle_alert_at timestamptz,
+  idle_alerts   int not null default 0,
+  primary key (user_id, day)
+);
+insert into public.settings(key, value) values ('work_start', '10:00'), ('work_end', '17:00'), ('work_days', '1,2,3,4,5'),
+  ('idle_min', '45'), ('late_min', '30') on conflict do nothing;
+
+-- Пінг із CRM раз на хвилину, поки менеджер активний на сторінці
+create or replace function public.crm_ping() returns void language plpgsql security definer set search_path = public as $$
+declare u uuid := auth.uid(); d date := (now() at time zone 'Europe/Kyiv')::date;
+begin
+  if u is null or not public.is_staff() then return; end if;
+  insert into public.work_log as w (user_id, day, first_seen, last_seen, active_min) values (u, d, now(), now(), 1)
+  on conflict (user_id, day) do update set
+    first_seen    = coalesce(w.first_seen, now()),
+    active_min    = w.active_min + case when w.last_seen is null or w.last_seen < now() - interval '50 seconds' then 1 else 0 end,
+    last_seen     = case when w.last_seen is null or w.last_seen < now() - interval '50 seconds' then now() else w.last_seen end,
+    idle_alert_at = null;
+  update public.profiles set last_seen_at = now() where id = u and (last_seen_at is null or last_seen_at < now() - interval '50 seconds');
+end $$;
+
+-- Перевірка для сповіщень (викликає лише сервер — GitHub Actions через SUPABASE_DB_URL)
+create or replace function public.work_alerts() returns table(chat bigint, msg text)
+language plpgsql security definer set search_path = public as $$
+declare
+  t timestamp := now() at time zone 'Europe/Kyiv'; d date := t::date;
+  ws time; we time; idle int; late int; days text; txt text := ''; r record; sent text;
+  tz text := 'Europe/Kyiv';
+begin
+  select coalesce((select value from settings where key = 'work_start'), '10:00')::time into ws;
+  select coalesce((select value from settings where key = 'work_end'), '17:00')::time into we;
+  select coalesce((select nullif(value, '')::int from settings where key = 'idle_min'), 45) into idle;
+  select coalesce((select nullif(value, '')::int from settings where key = 'late_min'), 30) into late;
+  select coalesce((select value from settings where key = 'work_days'), '1,2,3,4,5') into days;
+  if not (extract(isodow from d)::text = any(string_to_array(replace(days, ' ', ''), ','))) then return; end if;
+
+  if t::time >= ws and t::time < we then
+    -- не почав роботу
+    for r in select p.id, coalesce(nullif(p.full_name, ''), nullif(trim(coalesce(p.first_name, '') || ' ' || coalesce(p.last_name, '')), ''), '@' || p.tg_username) as nm
+             from profiles p left join work_log w on w.user_id = p.id and w.day = d
+             where p.role = 'manager' and w.first_seen is null and w.late_alert_at is null and t::time >= ws + make_interval(mins => late) loop
+      insert into work_log as w (user_id, day, late_alert_at) values (r.id, d, now())
+        on conflict (user_id, day) do update set late_alert_at = now();
+      txt := txt || '• ' || r.nm || ' — досі не з’явився(лась) у CRM (робочий день з ' || to_char(ws, 'HH24:MI') || ')' || chr(10);
+    end loop;
+    -- довго неактивний
+    for r in select p.id, coalesce(nullif(p.full_name, ''), nullif(trim(coalesce(p.first_name, '') || ' ' || coalesce(p.last_name, '')), ''), '@' || p.tg_username) as nm, w.last_seen
+             from profiles p join work_log w on w.user_id = p.id and w.day = d
+             where p.role = 'manager' and w.first_seen is not null and w.idle_alert_at is null
+               and w.last_seen < now() - make_interval(mins => idle) loop
+      update work_log set idle_alert_at = now(), idle_alerts = idle_alerts + 1 where user_id = r.id and day = d;
+      txt := txt || '• ' || r.nm || ' — не працює в CRM уже ' || floor(extract(epoch from now() - r.last_seen) / 60)::int || ' хв (востаннє о '
+             || to_char(r.last_seen at time zone tz, 'HH24:MI') || ')' || chr(10);
+    end loop;
+    if txt <> '' then txt := 'Увага, команда «Вдало»:' || chr(10) || txt; end if;
+  elsif t::time >= we and t::time < we + interval '3 hours' then
+    select value into sent from settings where key = 'work_summary_day';
+    if sent is distinct from d::text then
+      insert into settings(key, value) values ('work_summary_day', d::text) on conflict (key) do update set value = excluded.value;
+      for r in select coalesce(nullif(p.full_name, ''), nullif(trim(coalesce(p.first_name, '') || ' ' || coalesce(p.last_name, '')), ''), '@' || p.tg_username) as nm,
+                      w.first_seen, w.last_seen, coalesce(w.active_min, 0) as am, coalesce(w.idle_alerts, 0) as ia,
+                      (select count(*) from lead_events e where e.actor_id = p.id and (e.created_at at time zone tz)::date = d) as ev,
+                      (select count(*) from tasks k where k.assignee_id = p.id and (k.done_at at time zone tz)::date = d) as tk
+               from profiles p left join work_log w on w.user_id = p.id and w.day = d
+               where p.role = 'manager' order by 1 loop
+        txt := txt || '• ' || r.nm || ': ' || case when r.first_seen is null then 'не заходив(ла) у CRM'
+          else to_char(r.first_seen at time zone tz, 'HH24:MI') || '–' || to_char(r.last_seen at time zone tz, 'HH24:MI')
+               || ', активно ' || (r.am / 60) || ' год ' || (r.am % 60) || ' хв, змін статусів: ' || r.ev || ', задач виконано: ' || r.tk
+               || case when r.ia > 0 then ', простоїв: ' || r.ia else '' end end || chr(10);
+      end loop;
+      if txt <> '' then txt := 'Підсумок робочого дня ' || to_char(d, 'DD.MM') || ':' || chr(10) || txt; end if;
+    end if;
+  end if;
+
+  if txt = '' then return; end if;
+  return query select p.tg_id, txt from profiles p where p.role = 'admin' and p.tg_id is not null;
+end $$;
+
+alter table public.work_log enable row level security;
+drop policy if exists wl_read on public.work_log;
+create policy wl_read on public.work_log for select using (public.is_admin() or user_id = auth.uid());
+revoke all on public.work_log from anon;
+grant select on public.work_log to authenticated;
+revoke all on function public.crm_ping() from public, anon;
+grant execute on function public.crm_ping() to authenticated;
+revoke all on function public.work_alerts() from public, anon, authenticated;

@@ -28,6 +28,9 @@ main{padding:20px;max-width:1500px;margin:0 auto}
 .btn.ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
 .btn.sm{padding:6px 10px;font-size:13px}
 .btn.green{background:var(--green)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#98a2b3;margin-right:6px;vertical-align:1px}.dot.on{background:#16a34a;box-shadow:0 0 0 3px #16a34a33;animation:pulse 2s infinite}.dot.off{background:#d0d5dd}
+@keyframes pulse{50%{box-shadow:0 0 0 6px #16a34a11}}
+.warnline{background:#fff1f1;border:1px solid #f5c2c2;color:var(--red);border-radius:10px;padding:8px 12px;margin-bottom:8px;display:flex;gap:6px;align-items:center}
 .btn:disabled{opacity:.5;cursor:default}
 .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
 .bar input[type=search]{flex:1;min-width:200px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
@@ -272,12 +275,15 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       setSetting: function(k, v){ return s.from("settings").upsert({key: k, value: String(v)}).then(ok); },
       findRef: function(code){ return s.from("profiles").select("id,first_name,last_name,tg_username,ref_code").eq("ref_code", code.toLowerCase()).maybeSingle().then(ok); },
       saveMe: function(patch){ return s.from("profiles").update(patch).eq("id", uid).then(ok); },
-      staff: function(){ return s.from("profiles").select("id,first_name,last_name,full_name,tg_username,role,ref_code").in("role", ["manager", "admin"]).then(ok); },
+      staff: function(){ return s.from("profiles").select("id,first_name,last_name,full_name,tg_username,role,ref_code,last_seen_at").in("role", ["manager", "admin"]).then(ok); },
       tasks: function(){ return s.from("tasks").select("*").order("due_at", {ascending: true, nullsFirst: false}).limit(2000).then(ok); },
       addTask: function(row){ return s.from("tasks").insert(row).then(ok); },
       saveTask: function(tid, patch){ return s.from("tasks").update(patch).eq("id", tid).then(ok); },
       deleteTask: function(tid){ return s.from("tasks").delete().eq("id", tid).then(ok); },
       ledgerAll: function(){ return s.from("ledger").select("kind,amount,created_at").limit(10000).then(ok); },
+      ping: function(){ return s.rpc("crm_ping").then(ok); },
+      workLog: function(d1, d2){ return s.from("work_log").select("*").gte("day", d1).lte("day", d2).then(ok); },
+      eventsSince: function(t){ return s.from("lead_events").select("actor_id,created_at,new_status").gte("created_at", t).limit(20000).then(ok); },
       logout: function(){ s.auth.signOut().then(function(){ location.reload(); }); }
     };
   }
@@ -317,8 +323,16 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       document.getElementById("tabs").hidden = false;
       document.querySelectorAll("#tabs button").forEach(function(b){ b.onclick = function(){ go(b.getAttribute("data-tab")); }; });
       var h = location.hash.replace("#", ""); go(tabsAllowed().indexOf(h) >= 0 ? h : "leads");
-      counts();
+      counts(); heartbeat();
     });
+  }
+  /* ---------- Присутність: пінг раз на хвилину, коли вкладка відкрита й людина щось робила за 5 хв ---------- */
+  var lastAct = Date.now();
+  ["mousemove", "keydown", "click", "scroll", "touchstart"].forEach(function(ev){ document.addEventListener(ev, function(){ lastAct = Date.now(); }, {passive: true, capture: true}); });
+  function heartbeat(){
+    var beat = function(){ if (document.visibilityState === "visible" && Date.now() - lastAct < 5 * 6e4) API.ping().catch(function(){}); };
+    beat(); setInterval(beat, 60000);
+    document.addEventListener("visibilitychange", function(){ if (document.visibilityState === "visible") { lastAct = Date.now(); beat(); } });
   }
   /* ---------- Анкета менеджера ---------- */
   function managerForm(first){
@@ -754,8 +768,9 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   function rAnalytics(){
     Promise.all([API.leads(), API.tasks(), API.employers(), API.ledgerAll(), API.staff()]).then(function(r){
       var all = r[0], tasks = r[1], emps = r[2], ledger = r[3]; S.staff = r[4];
-      var days = S.period || 30, from = days === "all" ? 0 : Date.now() - days * 864e5;
-      var L = all.filter(function(l){ return new Date(l.created_at).getTime() >= from; });
+      var days = S.period || 30, R = perRange(days), from = R[0], to = R[1];
+      var inR = function(x){ var t = new Date(x).getTime(); return t >= from && t < to; };
+      var L = all.filter(function(l){ return inR(l.created_at); });
       var reached = function(l){ return ["departed", "working", "paid"].indexOf(l.status) >= 0; };
       var workedF = function(l){ return l.status === "working" || l.status === "paid"; };
       var pct = function(a, b){ return b ? Math.round(a / b * 100) + "%" : "—"; };
@@ -781,11 +796,12 @@ main{padding:20px;max-width:1500px;margin:0 auto}
           waiting: m.filter(function(l){ return l.status === "new" && Date.now() - waitStart(l) > 15 * 6e4; }).length};
       }).sort(function(a, b){ return b.w - a.w || b.n - a.n; });
       var un = L.filter(function(l){ return !mgrsOf(l).length; }).length;
-      var bonusAcc = ledger.filter(function(g){ return g.kind === "bonus" && new Date(g.created_at).getTime() >= from; }).reduce(function(a, g){ return a + g.amount; }, 0);
-      var bonusPaid = -ledger.filter(function(g){ return g.kind === "payout" && new Date(g.created_at).getTime() >= from; }).reduce(function(a, g){ return a + g.amount; }, 0);
+      var bonusAcc = ledger.filter(function(g){ return g.kind === "bonus" && inR(g.created_at); }).reduce(function(a, g){ return a + g.amount; }, 0);
+      var bonusPaid = -ledger.filter(function(g){ return g.kind === "payout" && inR(g.created_at); }).reduce(function(a, g){ return a + g.amount; }, 0);
       var bonusDue = ledger.reduce(function(a, g){ return a + g.amount; }, 0);
-      var per = [[7, "7 днів"], [30, "30 днів"], [90, "90 днів"], ["all", "Увесь час"]];
+      var per = [["today", "Сьогодні"], ["yest", "Вчора"], [7, "7 днів"], [30, "30 днів"], [90, "90 днів"], ["all", "Увесь час"]];
       app.innerHTML = '<div class="bar">' + per.map(function(x){ return '<button class="chip" data-per="' + x[0] + '" aria-pressed="' + (String(days) === String(x[0])) + '">' + x[1] + '</button>'; }).join("") + '</div>' +
+        '<div id="team"></div>' +
         '<div class="stats">' +
         '<div class="card stat"><span>Заявок</span><b>' + L.length + '</b></div>' +
         '<div class="card stat"><span>Без менеджера</span><b>' + un + '</b></div>' +
@@ -794,7 +810,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         '<div class="card stat"><span>Виїхали</span><b>' + L.filter(reached).length + '</b></div>' +
         '<div class="card stat hl"><span>Вийшли на роботу</span><b>' + nW + ' <small style="font-size:14px">(' + pct(nW, L.length) + ')</small></b></div>' +
         '<div class="card stat"><span>Оплачено роботодавцем</span><b>' + (cnt.paid || 0) + '</b></div>' +
-        '<div class="card stat"><span>Запитів роботодавців</span><b>' + emps.filter(function(e){ return new Date(e.created_at).getTime() >= from; }).length + '</b></div></div>' +
+        '<div class="card stat"><span>Запитів роботодавців</span><b>' + emps.filter(function(e){ return inR(e.created_at); }).length + '</b></div></div>' +
         '<div class="card pad" style="margin-bottom:16px"><h3>Менеджери</h3><div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Менеджер</th><th>Кандидатів</th><th>В роботі</th><th>Виїхали</th><th>Працюють</th><th>Оплачено</th><th>Відмови</th><th>Конверсія</th><th>Відповідь (медіана)</th><th>Відповіли ≤15 хв</th><th>Чекають зараз</th><th>Прострочені задачі</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(x){ return '<tr><td><b>' + E(pname(x.p)) + '</b><small>' + E(ROLES[x.p.role]) + (x.p.tg_username ? " · @" + E(x.p.tg_username) : "") + '</small></td><td>' + x.n + '</td><td>' + x.act + '</td><td>' + x.dep + '</td><td>' + x.w + '</td><td>' + x.paid + '</td><td>' + x.rej + '</td><td><b>' + pct(x.w, x.n) + '</b></td><td>' + (x.med === null ? "—" : '<span style="color:' + (x.med > 15 * 6e4 ? "var(--red)" : "var(--green)") + ';font-weight:700">' + E(mins(x.med)) + '</span>') + '</td><td>' + x.fast + '</td><td>' + (x.waiting ? '<span class="st st-rejected">' + x.waiting + '</span>' : "0") + '</td><td>' + (x.od ? '<span class="st st-rejected">' + x.od + '</span>' : "0") + '</td></tr>'; }).join("") : '<tr><td colspan="12" class="empty">Менеджерів ще немає</td></tr>') +
         '</tbody></table></div></div>' +
@@ -804,10 +820,82 @@ main{padding:20px;max-width:1500px;margin:0 auto}
           '</div><p class="note" style="margin:0">Вийшли на роботу за каналами: ' + chStat.map(function(x){ return E(CH[x.k][0]) + " — " + x.w + " (" + pct(x.w, x.n) + ")"; }).join(" · ") + '</p></div>' +
         '<div class="card pad"><h3>Заявки за останні 30 днів</h3><div class="cols">' + byDay.map(function(b){ return '<i style="height:' + Math.round(b.n / maxDay * 100) + '%" data-t="' + E(dt(b.d)) + ': ' + b.n + '"></i>'; }).join("") + '</div><p class="note">Наведіть на стовпчик, щоб побачити дату й кількість.</p></div>' +
         '<div class="card pad"><h3>Бонуси «Приведи друга»</h3><div class="stats" style="margin:0"><div class="card stat"><span>Нараховано за період</span><b>' + E(M(bonusAcc)) + '</b></div><div class="card stat"><span>Виплачено за період</span><b>' + E(M(bonusPaid)) + '</b></div><div class="card stat hl"><span>Борг до виплати зараз</span><b>' + E(M(bonusDue)) + '</b></div></div></div></div>';
-      document.querySelectorAll("[data-per]").forEach(function(b){ b.onclick = function(){ var v = b.getAttribute("data-per"); S.period = v === "all" ? "all" : +v; rAnalytics(); }; });
+      rTeam(document.getElementById("team"), from, to, tasks, all);
+      document.querySelectorAll("[data-per]").forEach(function(b){ b.onclick = function(){ var v = b.getAttribute("data-per"); S.period = isNaN(+v) ? v : +v; rAnalytics(); }; });
     }).catch(fail);
   }
 
+
+  /* ================= Команда: хто на роботі ================= */
+  function ymd(d){ d = new Date(d); return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
+  function perRange(p){
+    var d0 = new Date(); d0.setHours(0, 0, 0, 0); var t0 = d0.getTime();
+    if (p === "today") return [t0, t0 + 864e5];
+    if (p === "yest") return [t0 - 864e5, t0];
+    if (p === "all") return [0, Infinity];
+    return [Date.now() - p * 864e5, Infinity];
+  }
+  function workCfg(){
+    var st = S.st || {}, hm = function(v, d){ var m = String(v || d).match(/(\d{1,2}):(\d{2})/); return m ? +m[1] * 60 + +m[2] : 0; };
+    var days = String(st.work_days || "1,2,3,4,5").split(/[\s,]+/).map(Number).filter(Boolean);
+    return {ws: hm(st.work_start, "10:00"), we: hm(st.work_end, "17:00"), days: days, idle: +st.idle_min || 45, late: st.late_min === undefined || st.late_min === "" ? 30 : +st.late_min,
+      s1: st.work_start || "10:00", s2: st.work_end || "17:00"};
+  }
+  function hhmm(t){ return t ? new Date(t).toLocaleTimeString("uk-UA", {hour: "2-digit", minute: "2-digit"}) : "—"; }
+  var DN = ["", "пн", "вт", "ср", "чт", "пт", "сб", "нд"];
+  function daysLabel(a){ a = a.slice().sort(); if (a.join() === "1,2,3,4,5") return "пн–пт"; if (a.join() === "1,2,3,4,5,6") return "пн–сб"; if (a.length === 7) return "щодня"; return a.map(function(x){ return DN[x]; }).join(", "); }
+  function rTeam(box, from, to, tasks, leads){
+    if (!box) return;
+    var C = workCfg(), now = new Date(), nowMin = now.getHours() * 60 + now.getMinutes(), dow = now.getDay() || 7;
+    var workNow = C.days.indexOf(dow) >= 0 && nowMin >= C.ws && nowMin < C.we;
+    var d1 = ymd(from > 0 ? from : Date.now() - 90 * 864e5), d2 = ymd(to === Infinity ? Date.now() : to - 1), today = ymd(now);
+    var oneDay = d1 === d2;
+    Promise.all([API.workLog(d1 < today ? d1 : today, d2 > today ? d2 : today), API.eventsSince(new Date(from > 0 ? from : Date.now() - 90 * 864e5).toISOString()), API.staff()]).then(function(r){
+      var logs = r[0], evs = r[1], staff = r[2].filter(function(p){ return p.role === "manager"; }); S.staff = r[2];
+      var inR = function(x){ var t = new Date(x).getTime(); return t >= from && t < to; };
+      var online = 0, warnN = 0, workedToday = 0;
+      var rows = staff.map(function(p){
+        var mine = logs.filter(function(w){ return w.user_id === p.id; });
+        var tl = mine.filter(function(w){ return w.day === today; })[0] || {};
+        var ls = p.last_seen_at ? new Date(p.last_seen_at).getTime() : 0, ago = Date.now() - ls;
+        var on = ls && ago < 2.5 * 6e4; if (on) online++; if (tl.first_seen) workedToday++;
+        var st, warn = "";
+        if (on) st = '<span class="dot on"></span><b style="color:var(--green)">онлайн</b>';
+        else if (tl.first_seen) { st = '<span class="dot"></span>був(ла) ' + E(mins(ago)) + ' тому';
+          if (workNow && ago > C.idle * 6e4) warn = "Не працює вже " + mins(ago); }
+        else { st = '<span class="dot off"></span>сьогодні не заходив(ла)';
+          if (workNow && nowMin >= C.ws + C.late) warn = "Не з’явився(лась) на роботі"; }
+        if (warn) warnN++;
+        var per = mine.filter(function(w){ return w.day >= d1 && w.day <= d2 && w.first_seen; });
+        var act = per.reduce(function(a, w){ return a + (w.active_min || 0); }, 0);
+        var idles = per.reduce(function(a, w){ return a + (w.idle_alerts || 0); }, 0);
+        var lates = per.filter(function(w){ var t = new Date(w.first_seen); return t.getHours() * 60 + t.getMinutes() > C.ws + C.late; }).length;
+        var ev = evs.filter(function(e){ return e.actor_id === p.id && inR(e.created_at); }).length;
+        var tk = tasks.filter(function(t){ return t.assignee_id === p.id && t.done_at && inR(t.done_at); }).length;
+        var day = per[0] || {};
+        return {p: p, st: st, warn: warn, on: on, act: act, idles: idles, lates: lates, ev: ev, tk: tk, days: per.length,
+          start: oneDay ? hhmm(day.first_seen) : (per.length ? (function(){ var m = Math.round(per.reduce(function(a, w){ var t = new Date(w.first_seen); return a + t.getHours() * 60 + t.getMinutes(); }, 0) / per.length); return ("0" + Math.floor(m / 60)).slice(-2) + ":" + ("0" + m % 60).slice(-2); })() : "—"),
+          end: oneDay ? hhmm(day.last_seen) : ""};
+      }).sort(function(a, b){ return (b.warn ? 1 : 0) - (a.warn ? 1 : 0) || (b.on ? 1 : 0) - (a.on ? 1 : 0) || b.act - a.act; });
+      var hm = function(m){ return m ? Math.floor(m / 60) + " год " + (m % 60) + " хв" : "—"; };
+      box.innerHTML = '<div class="card pad" style="margin-bottom:16px"><div style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between"><h3 style="margin:0">' + ic("users", "xs") + ' Команда</h3>' +
+        '<small class="note" style="margin:0">Робочий день ' + E(C.s1) + '–' + E(C.s2) + ', ' + E(daysLabel(C.days)) + ' · ' + (workNow ? '<b style="color:var(--green)">зараз робочий час</b>' : "зараз неробочий час") + '</small></div>' +
+        '<div class="stats" style="margin:12px 0"><div class="card stat hl"><span>Менеджерів онлайн</span><b>' + online + ' <small style="font-size:14px">з ' + staff.length + '</small></b></div>' +
+        '<div class="card stat"><span>Працювали сьогодні</span><b>' + workedToday + '</b></div>' +
+        '<div class="card stat"><span>Попередження зараз</span><b style="color:' + (warnN ? "var(--red)" : "inherit") + '">' + warnN + '</b></div></div>' +
+        (rows.filter(function(x){ return x.warn; }).map(function(x){ return '<div class="warnline">' + ic("clock", "xs") + ' <b>' + E(pname(x.p)) + '</b> — ' + E(x.warn) + '</div>'; }).join("")) +
+        '<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Менеджер</th><th>Зараз</th>' +
+        (oneDay ? '<th>Почав(ла)</th><th>Востаннє</th>' : '<th>Днів у роботі</th><th>Сер. початок</th>') +
+        '<th>Активно в CRM</th><th>Змін статусів</th><th>Задач виконано</th><th>Простої</th>' + (oneDay ? "" : "<th>Запізнення</th>") + '</tr></thead><tbody>' +
+        (rows.length ? rows.map(function(x){
+          return '<tr' + (x.warn ? ' style="background:#fff4f4"' : "") + '><td><b>' + E(pname(x.p)) + '</b>' + (x.p.tg_username ? '<small>@' + E(x.p.tg_username) + '</small>' : "") + '</td><td style="white-space:nowrap">' + x.st + '</td>' +
+            (oneDay ? '<td>' + E(x.start) + '</td><td>' + E(x.end) + '</td>' : '<td>' + x.days + '</td><td>' + E(x.start) + '</td>') +
+            '<td>' + hm(x.act) + '</td><td>' + x.ev + '</td><td>' + x.tk + '</td><td>' + (x.idles ? '<span class="st st-rejected">' + x.idles + '</span>' : "0") + '</td>' +
+            (oneDay ? "" : '<td>' + (x.lates ? '<span class="st st-rejected">' + x.lates + '</span>' : "0") + '</td>') + '</tr>'; }).join("")
+          : '<tr><td colspan="9" class="empty">Менеджерів ще немає — додайте їхні Telegram-ніки в Налаштуваннях.</td></tr>') +
+        '</tbody></table></div><p class="note" style="margin-bottom:0">«Активно» — час, коли менеджер відкрив CRM і щось у ній робив (рахуємо щохвилини). Простій — понад ' + C.idle + ' хв без активності в робочий час; про простої, запізнення (понад ' + C.late + ' хв) і підсумок дня бот @vdalo_robota_bot пише власникам у Telegram.</p></div>';
+    }).catch(function(e){ console.warn(e); box.innerHTML = '<div class="card pad" style="margin-bottom:16px"><h3 style="margin:0">Команда</h3><p class="note">Дані про присутність з’являться після оновлення бази (кілька хвилин).</p></div>'; });
+  }
   /* ================= Роботодавці ================= */
   function rEmployers(){
     API.employers().then(function(list){
@@ -936,7 +1024,26 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         '<div class="card" style="padding:20px;max-width:620px;margin-top:16px;display:grid;gap:10px"><h3 style="margin:0">Менеджери</h3>' +
         '<div class="fld"><label>Telegram-ніки менеджерів (через кому, без @)</label><textarea id="s-mgr" placeholder="ivan_manager, olena_vdalo"' + dis + '>' + E(st.manager_tg || "") + '</textarea></div>' +
         '<p class="note">Людина з цим ніком, увійшовши на сайті через Telegram (значок кабінету або /crm/), одразу потрапить у CRM як менеджер. Прибрати доступ — змініть роль на «Користувач» у вкладці «Реферали й баланси».</p>' +
-        (isAdmin ? '<button class="btn" id="s-mgr-save" style="justify-self:start">Зберегти менеджерів</button>' : '') + '</div>';
+        (isAdmin ? '<button class="btn" id="s-mgr-save" style="justify-self:start">Зберегти менеджерів</button>' : '') + '</div>' +
+        '<div class="card" style="padding:20px;max-width:620px;margin-top:16px;display:grid;gap:12px"><h3 style="margin:0">Робочий час менеджерів</h3>' +
+        '<div class="g2"><div class="fld"><label>Початок дня</label><input id="w-s" type="time" value="' + E(st.work_start || "10:00") + '"' + dis + '></div>' +
+        '<div class="fld"><label>Кінець дня</label><input id="w-e" type="time" value="' + E(st.work_end || "17:00") + '"' + dis + '></div></div>' +
+        '<div class="fld"><label>Робочі дні</label><div class="bar" style="margin:0">' + [1, 2, 3, 4, 5, 6, 7].map(function(d){ var on = String(st.work_days || "1,2,3,4,5").split(/[\s,]+/).indexOf(String(d)) >= 0;
+          return '<label class="chip" style="display:inline-flex;gap:6px;align-items:center"><input type="checkbox" name="w-d" value="' + d + '"' + (on ? " checked" : "") + dis + '>' + DN[d] + '</label>'; }).join("") + '</div></div>' +
+        '<div class="g2"><div class="fld"><label>Попереджати про простій після, хв</label><input id="w-i" type="number" min="10" value="' + E(st.idle_min || "45") + '"' + dis + '></div>' +
+        '<div class="fld"><label>Запізнення — якщо немає після початку, хв</label><input id="w-l" type="number" min="0" value="' + E(st.late_min === undefined ? "30" : st.late_min) + '"' + dis + '></div></div>' +
+        '<p class="note">Сповіщення надсилає бот @vdalo_robota_bot усім власникам, кожні 10 хв у робочий час, і підсумок дня після його завершення. Якщо повідомлення не приходять — відкрийте бота й натисніть «Start».</p>' +
+        (isAdmin ? '<button class="btn" id="w-save" style="justify-self:start">Зберегти робочий час</button>' : '') + '</div>';
+      var wsv = document.getElementById("w-save");
+      if (wsv) wsv.onclick = function(){
+        var v = function(id){ return document.getElementById(id).value; };
+        var dd = [].map.call(document.querySelectorAll('input[name="w-d"]:checked'), function(i){ return i.value; });
+        if (!/^\d{2}:\d{2}$/.test(v("w-s")) || !/^\d{2}:\d{2}$/.test(v("w-e")) || v("w-s") >= v("w-e")) { toast("Перевірте години роботи"); return; }
+        if (!dd.length) { toast("Оберіть хоча б один робочий день"); return; }
+        Promise.all([API.setSetting("work_start", v("w-s")), API.setSetting("work_end", v("w-e")), API.setSetting("work_days", dd.join(",")),
+          API.setSetting("idle_min", Math.max(10, parseInt(v("w-i"), 10) || 45)), API.setSetting("late_min", Math.max(0, parseInt(v("w-l"), 10) || 0))])
+          .then(function(){ toast("Робочий час збережено"); rSettings(); }).catch(fail);
+      };
       var ms = document.getElementById("s-mgr-save");
       if (ms) ms.onclick = function(){
         var list = document.getElementById("s-mgr").value.split(/[\s,]+/).map(function(x){ return x.trim().replace(/^@/, "").toLowerCase(); }).filter(Boolean);
