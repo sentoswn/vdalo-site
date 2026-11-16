@@ -118,6 +118,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   function toast(t){ var el = document.getElementById("toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(function(){ el.classList.remove("show"); }, 2200); }
   function dt(d, time){ if (!d) return ""; var x = new Date(d); return x.toLocaleDateString("uk-UA", {day: "2-digit", month: "2-digit", year: "2-digit"}) + (time ? " " + x.toLocaleTimeString("uk-UA", {hour: "2-digit", minute: "2-digit"}) : ""); }
   function pname(p){ if (!p) return ""; return [p.first_name, p.last_name].filter(Boolean).join(" ") || (p.tg_username ? "@" + p.tg_username : "—"); }
+  function bonusRange(){ var st = S.st || {}; return M(+st.bonus_base || 2000) + " – " + M(+st.bonus_max || 4000); }
   function opts(list, v){ return list.map(function(x){ return '<option value="' + x[0] + '"' + (x[0] === v ? " selected" : "") + ">" + E(x[1]) + "</option>"; }).join(""); }
 
   /* ================= API ================= */
@@ -128,7 +129,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       {id: "u2", first_name: "Оксана", last_name: "Мельник", tg_username: "oksana_m", role: "user", ref_code: "ok7m2p", phone: "+380 67 111 22 33", created_at: new Date(now - 30*day)},
       {id: "u3", first_name: "Іван", tg_username: "ivan_k", role: "user", ref_code: "iv4k9x", phone: "", created_at: new Date(now - 10*day)}
     ];
-    var ledger = [{id: 1, user_id: "u2", kind: "bonus", amount: 1000, lead_id: 3, created_at: new Date(now - 4*day), note: "Бонус за Петро Іваненко"}];
+    var ledger = [{id: 1, user_id: "u2", kind: "bonus", amount: 2000, lead_id: 3, created_at: new Date(now - 4*day), note: "Бонус за Петро Іваненко"}];
     function L(n, ph, st, ago, ref, extra){ return Object.assign({id: ++id, created_at: new Date(now - ago*day), updated_at: new Date(now - ago*day), name: n, phone: ph, status: st, referrer_id: ref, vacancy_title: "Комплектувальник на склад SHEIN", vacancy_id: "132", who: "Сам / сама", when_go: "Найближчим часом", contact_mode: "Дзвінок", channel: null, source: ref ? "рекомендація" : "google ads", lang: "uk", note: "", employer: null, start_date: null, manager_note: ""}, extra || {}); }
     var leads = [
       L("Марина Ткач", "+380 50 123 45 67", "new", 0.1, null),
@@ -142,7 +143,10 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     var events = {};
     var employers = [{id: 1, created_at: new Date(now - day), company: "Logistics Sp. z o.o.", contact_name: "Jan Kowalski", phone: "+48 600 100 200", email: "jan@example.pl", country: "Польща", city: "Poznań", workers: "15", positions: "Комплектувальники на склад, 2 зміни, житло від роботодавця", start_when: "З 1 грудня", status: "new", manager_note: ""}];
     var payouts = [{id: 1, created_at: new Date(now - day), user_id: "u2", amount: 600, contact: "Telegram @oksana_m", status: "new"}];
-    var settings = {bonus_amount: "1000"};
+    var settings = {bonus_base: "2000", bonus_step: "200", bonus_max: "4000"};
+    function tier(uid){ var m = new Date(); m = m.getFullYear() + "-" + m.getMonth();
+      var n = ledger.filter(function(g){ var d = new Date(g.created_at); return g.user_id === uid && g.kind === "bonus" && d.getFullYear() + "-" + d.getMonth() === m; }).length;
+      return Math.min(+settings.bonus_base + +settings.bonus_step * n, +settings.bonus_max); }
     function bal(uid){ return ledger.filter(function(g){ return g.user_id === uid; }).reduce(function(a, g){ return a + g.amount; }, 0); }
     function withRef(l){ var p = people.filter(function(x){ return x.id === l.referrer_id; })[0]; return Object.assign({}, l, {referrer: p || null}); }
     return {
@@ -154,8 +158,9 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         var l = leads.filter(function(x){ return x.id === lid; })[0];
         if (patch.status && patch.status !== l.status) {
           (events[lid] = events[lid] || []).unshift({created_at: new Date(), old_status: l.status, new_status: patch.status});
-          if (patch.status === "paid" && (patch.referrer_id || l.referrer_id) && !ledger.some(function(g){ return g.lead_id === lid && g.kind === "bonus"; }) && +settings.bonus_amount > 0)
-            ledger.push({id: ledger.length + 1, user_id: patch.referrer_id || l.referrer_id, kind: "bonus", amount: +settings.bonus_amount, lead_id: lid, created_at: new Date(), note: "Бонус за " + l.name});
+          var ru = patch.referrer_id || l.referrer_id;
+          if (patch.status === "paid" && ru && !ledger.some(function(g){ return g.lead_id === lid && g.kind === "bonus"; }))
+            ledger.push({id: ledger.length + 1, user_id: ru, kind: "bonus", amount: tier(ru), lead_id: lid, created_at: new Date(), note: "Бонус за " + l.name});
         }
         Object.assign(l, patch, {updated_at: new Date()}); return Promise.resolve();
       },
@@ -229,7 +234,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         document.getElementById("out").onclick = function(){ API.logout(); }; return;
       }
       S.me = me;
-      API.settings().then(function(st){ S.bonus = +st.bonus_amount || 0; }).catch(function(){});
+      API.settings().then(function(st){ S.st = st; }).catch(function(){});
       document.getElementById("me").innerHTML = E(pname(me)) + ' · ' + E(ROLES[me.role]) + ' <button class="btn ghost sm" id="out">Вийти</button>';
       document.getElementById("out").onclick = function(){ API.logout(); };
       document.getElementById("tabs").hidden = false;
@@ -323,14 +328,16 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     drawer.querySelectorAll("[data-x]").forEach(function(b){ b.onclick = closeDrawer; });
     var stSel = document.getElementById("d-status"), bn = document.getElementById("d-bonus-note");
     function bonusNote(){
-      bn.textContent = stSel.value === "paid" && l.status !== "paid" ? (S.bonus > 0 ? "Після збереження тому, хто запросив, автоматично нарахується бонус " + M(S.bonus) + "." : "Бонус не нарахується: у «Налаштуваннях» не задано суму бонусу.") : "";
+      if (stSel.value !== "paid" || l.status === "paid") { bn.textContent = ""; return; }
+      if (!refId) { bn.textContent = "Бонус не нарахується: не вказано, хто запросив."; return; }
+      bn.textContent = "Після збереження тому, хто запросив, автоматично нарахується бонус " + E(bonusRange()) + " (за шкалою: залежить від того, котрий це друг цього місяця).";
     }
-    stSel.onchange = bonusNote; bonusNote();
     var refId = l.referrer_id || null, refIn = document.getElementById("d-ref");
+    stSel.onchange = bonusNote; bonusNote();
     refIn.onchange = function(){
       var c = refIn.value.trim(); var out = document.getElementById("d-ref-name");
       if (!c) { refId = null; out.textContent = ""; return; }
-      API.findRef(c).then(function(p){ refId = p ? p.id : refId; out.textContent = p ? pname(p) : "Код не знайдено"; });
+      API.findRef(c).then(function(p){ refId = p ? p.id : refId; out.textContent = p ? pname(p) : "Код не знайдено"; bonusNote(); });
     };
     if (!isNew) API.events(l.id).then(function(ev){
       document.getElementById("d-hist").innerHTML = ev.length ? ev.map(function(e){ return '<li>' + E(dt(e.created_at, true)) + ': ' + E(LSN[e.old_status] || e.old_status || "—") + ' → <b>' + E(LSN[e.new_status] || e.new_status) + '</b></li>'; }).join("") : "<li>Змін ще не було</li>";
@@ -345,7 +352,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         if (!patch.name || !patch.phone) { toast("Вкажіть ім’я й телефон"); return; }
         p = API.addLead(patch);
       } else p = API.saveLead(l.id, patch);
-      p.then(function(){ toast(patch.status === "paid" && l.status !== "paid" && refId && S.bonus > 0 ? "Збережено. Бонус нараховано." : "Збережено"); closeDrawer(); counts(); rLeads(); }).catch(fail);
+      p.then(function(){ toast(patch.status === "paid" && l.status !== "paid" && refId ? "Збережено. Бонус нараховано." : "Збережено"); closeDrawer(); counts(); rLeads(); }).catch(fail);
     };
     var del = document.getElementById("d-del");
     if (del) del.onclick = function(){ if (confirm("Видалити заявку " + l.name + "?")) API.deleteLead(l.id).then(function(){ closeDrawer(); counts(); rLeads(); }).catch(fail); };
@@ -465,15 +472,24 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   /* ================= Налаштування ================= */
   function rSettings(){
     API.settings().then(function(st){
-      S.bonus = +st.bonus_amount || 0;
-      var isAdmin = S.me.role === "admin";
-      app.innerHTML = demoBar() + '<div class="card" style="padding:20px;max-width:560px;display:grid;gap:12px"><h3 style="margin:0">Бонус «Приведи друга»</h3>' +
-        '<div class="fld"><label>Сума бонусу за одного друга, грн</label><input id="s-bonus" type="number" min="0" value="' + E(st.bonus_amount || "0") + '"' + (isAdmin ? "" : " disabled") + '></div>' +
-        '<p class="note">Бонус нараховується автоматично, коли кандидату, який прийшов за посиланням, ставлять статус «Відпрацював 2 тижні, оплату отримано». Нова сума діє для наступних нарахувань.</p>' +
+      S.st = st;
+      var isAdmin = S.me.role === "admin", dis = isAdmin ? "" : " disabled";
+      var base = +st.bonus_base || 2000, step = +st.bonus_step || 200, mx = +st.bonus_max || 4000;
+      var ex = []; for (var i = 0; i < 6; i++) ex.push((i + 1) + "-й — " + M(Math.min(base + step * i, mx)));
+      app.innerHTML = demoBar() + '<div class="card" style="padding:20px;max-width:620px;display:grid;gap:12px"><h3 style="margin:0">Бонус «Приведи друга»</h3>' +
+        '<div class="g2"><div class="fld"><label>Перший друг у місяці, грн</label><input id="s-base" type="number" min="0" value="' + base + '"' + dis + '></div>' +
+        '<div class="fld"><label>Кожен наступний — більше на, грн</label><input id="s-step" type="number" min="0" value="' + step + '"' + dis + '></div></div>' +
+        '<div class="fld"><label>Максимум за одного друга, грн</label><input id="s-max" type="number" min="0" value="' + mx + '"' + dis + '></div>' +
+        '<p class="note">Зараз: ' + E(ex.join(" · ")) + ' … і так до максимуму ' + E(M(mx)) + '. Щомісяця (за київським часом) відлік починається знову.</p>' +
+        '<p class="note">Бонус нараховується автоматично, коли кандидату, який прийшов за посиланням, ставлять статус «Відпрацював 2 тижні, оплату отримано».</p>' +
         (isAdmin ? '<button class="btn" id="s-save" style="justify-self:start">Зберегти</button>' : '<p class="note">Змінювати може лише адміністратор.</p>') + '</div>' +
-        '<div class="card" style="padding:20px;max-width:560px;margin-top:16px;display:grid;gap:8px"><h3 style="margin:0">Менеджери</h3><p class="note">Щоб додати менеджера: людина входить у <a href="/kabinet/">особистий кабінет</a> через Telegram, після чого адмін у вкладці «Реферали й баланси» змінює їй роль на «Менеджер».</p></div>';
+        '<div class="card" style="padding:20px;max-width:620px;margin-top:16px;display:grid;gap:8px"><h3 style="margin:0">Менеджери</h3><p class="note">Щоб додати менеджера: людина входить у <a href="/kabinet/">особистий кабінет</a> через Telegram, після чого адмін у вкладці «Реферали й баланси» змінює їй роль на «Менеджер».</p></div>';
       var sv = document.getElementById("s-save");
-      if (sv) sv.onclick = function(){ var v = Math.max(0, parseInt(document.getElementById("s-bonus").value, 10) || 0); API.setSetting("bonus_amount", v).then(function(){ S.bonus = v; toast("Збережено"); }).catch(fail); };
+      if (sv) sv.onclick = function(){
+        var v = function(id){ return Math.max(0, parseInt(document.getElementById(id).value, 10) || 0); };
+        Promise.all([API.setSetting("bonus_base", v("s-base")), API.setSetting("bonus_step", v("s-step")), API.setSetting("bonus_max", v("s-max"))])
+          .then(function(){ toast("Збережено"); rSettings(); }).catch(fail);
+      };
     }).catch(fail);
   }
 

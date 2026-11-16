@@ -772,12 +772,12 @@ body.mnav-open .fab{display:none}
     var st = {
       profile: {first_name: "Олена", tg_username: "olena_demo", phone: "", ref_code: "demo42"},
       refs: [
-        {created_at: new Date(now - 40*day), name: "Іван К.", status: "paid", bonus: 1000},
+        {created_at: new Date(now - 40*day), name: "Іван К.", status: "paid", bonus: 2000},
         {created_at: new Date(now - 12*day), name: "Марія С.", status: "working", bonus: null},
         {created_at: new Date(now - 3*day), name: "Петро", status: "contacted", bonus: null}
       ],
-      ledger: [{created_at: new Date(now - 5*day), kind: "bonus", amount: 1000, note: "Бонус за Іван К."}],
-      requests: [], bonus: 1000
+      ledger: [{created_at: new Date(now - 5*day), kind: "bonus", amount: 2000, note: "Бонус за Іван К."}],
+      requests: [], bonus: 2000
     };
     function bal(){ var b = st.ledger.reduce(function(a, x){ return a + x.amount; }, 0);
       return {balance: b, earned: st.ledger.filter(function(x){ return x.kind === "bonus"; }).reduce(function(a, x){ return a + x.amount; }, 0),
