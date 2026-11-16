@@ -737,14 +737,14 @@ body.mnav-open .fab{display:none}
       <div class="lang-menu" id="lang-menu" hidden><a data-l="uk" translate="no">Українська</a><a data-l="ru" translate="no">Русский</a><a data-l="en" translate="no">English</a><a data-l="pl" translate="no">Polski</a></div>
     </div>
     <div class="top-cta">
-      <a class="top-phone" href="tel:+380736067700" data-ch="phone">+380 73 606 77 00</a>
+      <a class="top-phone" href="tel:+380660050060" data-ch="phone">+380 66 005 00 60</a>
       <a class="top-cab" href="/kabinet/" aria-label="Особистий кабінет" title="Особистий кабінет"><svg class="i"><use href="#i-user"/></svg></a>
       <a class="btn sm" href="#apply">Залишити заявку</a>
       <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="Меню"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
-<div class="mnav" id="mnav" hidden><div class="wrap"><!--seo:mnav--><div class="mn-main"><a href="/#vacancies">Усі вакансії</a><a href="/yak-tse-pratsiuie/">Як це працює</a><a href="/pryvedy-druha/">Приведи друга</a><a href="/pytannia/">Питання</a><a href="/statti/">Статті</a><a href="/pro-nas/">Про нас</a><a href="/kontakty/">Контакти</a><a href="/robotodavtsiam/">Роботодавцям</a><a href="/kabinet/">Особистий кабінет</a></div><b>Вакансії за країною</b><div class="mn-chips"><a href="/robota-v-polshchi/">Польща<small>78</small></a><a href="/robota-v-lytvi/">Литва<small>10</small></a><a href="/robota-v-chekhii/">Чехія<small>4</small></a></div><b>За видом роботи</b><div class="mn-chips"><a href="/robota-na-skladi/">Робота на складі<small>41</small></a><a href="/robota-na-vyrobnytstvi/">Робота на заводі<small>72</small></a><a href="/robota-na-kharchovomu-vyrobnytstvi/">М’ясне й рибне виробництво<small>15</small></a><a href="/vodii-navantazhuvacha/">Водій навантажувача<small>9</small></a><a href="/robota-dlia-zhinok/">Для жінок<small>60</small></a><a href="/robota-dlia-cholovikiv/">Для чоловіків<small>79</small></a><a href="/robota-dlia-par/">Для пар<small>46</small></a><a href="/robota-v-polshchi-dlia-studentiv/">Для студентів<small>60</small></a></div><div class="mn-cta"><a class="btn wide" href="#apply">Залишити заявку</a><a class="btn ghost wide" href="tel:+380736067700" data-ch="phone">Подзвонити: +380 73 606 77 00</a></div><!--/seo:mnav--></div></div>
+<div class="mnav" id="mnav" hidden><div class="wrap"><!--seo:mnav--><div class="mn-main"><a href="/#vacancies">Усі вакансії</a><a href="/yak-tse-pratsiuie/">Як це працює</a><a href="/pryvedy-druha/">Приведи друга</a><a href="/pytannia/">Питання</a><a href="/statti/">Статті</a><a href="/pro-nas/">Про нас</a><a href="/kontakty/">Контакти</a><a href="/robotodavtsiam/">Роботодавцям</a><a href="/kabinet/">Особистий кабінет</a></div><b>Вакансії за країною</b><div class="mn-chips"><a href="/robota-v-polshchi/">Польща<small>78</small></a><a href="/robota-v-lytvi/">Литва<small>10</small></a><a href="/robota-v-chekhii/">Чехія<small>4</small></a></div><b>За видом роботи</b><div class="mn-chips"><a href="/robota-na-skladi/">Робота на складі<small>41</small></a><a href="/robota-na-vyrobnytstvi/">Робота на заводі<small>72</small></a><a href="/robota-na-kharchovomu-vyrobnytstvi/">М’ясне й рибне виробництво<small>15</small></a><a href="/vodii-navantazhuvacha/">Водій навантажувача<small>9</small></a><a href="/robota-dlia-zhinok/">Для жінок<small>60</small></a><a href="/robota-dlia-cholovikiv/">Для чоловіків<small>79</small></a><a href="/robota-dlia-par/">Для пар<small>46</small></a><a href="/robota-v-polshchi-dlia-studentiv/">Для студентів<small>60</small></a></div><div class="mn-cta"><a class="btn wide" href="#apply">Залишити заявку</a><a class="btn ghost wide" href="tel:+380660050060" data-ch="phone">Подзвонити: +380 66 005 00 60</a></div><!--/seo:mnav--></div></div>
 
 <main class="wrap">
   <!--seo:hero-->
@@ -840,7 +840,7 @@ body.mnav-open .fab{display:none}
       .sort(function(a, c){ return new Date(c.created_at) - new Date(a.created_at); });
     var histHtml = hist.length ? '<ul class="cab-hist">' + hist.map(function(x){
       return '<li><span>' + E(x.kind === "request" ? "Запит на виплату" : (KIND[x.kind] || x.kind)) + '<small>' + E(date(x.created_at)) + (x.note ? " · " + E(x.note) : "") + '</small></span><b class="' + (x.amount >= 0 ? "pos" : "neg") + '">' + (x.amount >= 0 ? "+" : "−") + E(M(Math.abs(x.amount))) + '</b></li>'; }).join("") + '</ul>' : '<p class="cab-empty">Тут з’являться нарахування й виплати.</p>';
-    var bonusTxt = d.bonus ? "Бонус " + M(d.bonus) + " — за кожного друга, який відпрацює 2 тижні." : "Бонус — за кожного друга, який відпрацює 2 тижні. Розмір уточнюйте в менеджера.";
+    var bonusTxt = "2 000 грн за першого друга, який відпрацює 2 тижні, далі на 200 грн більше за кожного наступного в місяці, до 4 000 грн за друга.";
 
     root.innerHTML =
       (api.demo ? '<p class="cab-demo">Це демо: дані вигадані, кнопки працюють лише на цій сторінці.</p>' : "") +
@@ -867,7 +867,7 @@ body.mnav-open .fab{display:none}
       '</div>' +
       '<div class="card cab-wide"><h3>Кого ви запросили</h3>' + refs + '</div>' +
       '<div class="card cab-wide"><h3>Історія балансу</h3>' + histHtml + '</div>' +
-      '<p class="hint cab-foot">Бонус нараховується, коли друг відпрацює 2 тижні й ми отримаємо оплату від роботодавця. Питання — пишіть менеджеру: <a href="https://t.me/+380736067700">Telegram</a>, <a href="tel:+380736067700">+380 73 606 77 00</a>.</p>';
+      '<p class="hint cab-foot">Бонус нараховується, коли друг відпрацює 2 тижні й ми отримаємо оплату від роботодавця. Питання — пишіть менеджеру: <a href="https://t.me/+380660050060">Telegram</a>, <a href="tel:+380660050060">+380 66 005 00 60</a>.</p>';
 
     document.getElementById("cab-out").onclick = function(){ api.logout(); };
     document.getElementById("cab-copy").onclick = function(){
@@ -967,17 +967,17 @@ body.mnav-open .fab{display:none}
   <!--/seo:foot-->
   <div class="wrap">
     <span>© 2026 Вдало · Підбір роботи в Європі</span>
-    <span><a href="tel:+380736067700" data-ch="phone">+380 73 606 77 00</a> · Telegram · Viber · WhatsApp</span>
+    <span><a href="tel:+380660050060" data-ch="phone">+380 66 005 00 60</a> · Telegram · Viber · WhatsApp</span>
     <span>Офіс: м. Київ, вул. Джона Маккейна, 7, офіс 169 · <a href="#oferta" style="text-decoration:underline">Публічна оферта</a> · <a href="#privacy" style="text-decoration:underline">Політика конфіденційності</a></span>
   </div>
 </footer>
 
 <div class="fab" id="fab">
   <div class="fab-menu" id="fab-menu" hidden role="menu" aria-label="Як з нами зв'язатися">
-    <a role="menuitem" href="https://t.me/+380736067700" data-ch="telegram"><span class="mi tg"><svg class="i"><use href="#i-send"/></svg></span><span>Telegram</span></a>
-    <a role="menuitem" href="viber://chat?number=%2B380736067700" data-ch="viber"><span class="mi vb"><svg class="i"><use href="#i-bubble"/></svg></span><span>Viber</span></a>
-    <a role="menuitem" href="https://wa.me/380736067700" data-ch="whatsapp"><span class="mi wa"><svg class="i"><use href="#i-round"/></svg></span><span>WhatsApp</span></a>
-    <a role="menuitem" href="tel:+380736067700" data-ch="phone"><span class="mi ph"><svg class="i"><use href="#i-phone"/></svg></span><span>Подзвонити</span></a>
+    <a role="menuitem" href="https://t.me/+380660050060" data-ch="telegram"><span class="mi tg"><svg class="i"><use href="#i-send"/></svg></span><span>Telegram</span></a>
+    <a role="menuitem" href="viber://chat?number=%2B380660050060" data-ch="viber"><span class="mi vb"><svg class="i"><use href="#i-bubble"/></svg></span><span>Viber</span></a>
+    <a role="menuitem" href="https://wa.me/380660050060" data-ch="whatsapp"><span class="mi wa"><svg class="i"><use href="#i-round"/></svg></span><span>WhatsApp</span></a>
+    <a role="menuitem" href="tel:+380660050060" data-ch="phone"><span class="mi ph"><svg class="i"><use href="#i-phone"/></svg></span><span>Подзвонити</span></a>
   </div>
   <button class="fab-btn" type="button" id="fab-btn" aria-expanded="false" aria-controls="fab-menu" aria-label="Написати нам"><svg class="i fi-open"><use href="#i-msg"/></svg><svg class="i fi-close"><use href="#i-x"/></svg><span class="fab-lbl">Написати нам</span></button>
 </div>
@@ -1033,7 +1033,7 @@ body.mnav-open .fab{display:none}
       <p>8.1. Виконавець може змінювати умови оферти, публікуючи нову редакцію на сайті. Нова редакція діє з моменту публікації.</p>
       <p>8.2. Питання, не врегульовані цією офертою, вирішуються відповідно до законодавства України.</p>
       <h3>9. Контакти</h3>
-      <p>«Вдало»<br>Адреса офісу: м. Київ, вул. Джона Маккейна, 7, офіс 169<br>Телефон, Telegram, Viber, WhatsApp: +380 73 606 77 00</p>
+      <p>«Вдало»<br>Адреса офісу: м. Київ, вул. Джона Маккейна, 7, офіс 169<br>Телефон, Telegram, Viber, WhatsApp: +380 66 005 00 60</p>
     </div>
   </div>
 </div>
@@ -1044,7 +1044,7 @@ body.mnav-open .fab{display:none}
     <p class="hint" style="margin-top:6px">редакція від 13 листопада 2026 року</p>
     <div class="doc-body">
       <h3>1. Хто обробляє ваші дані</h3>
-      <p>Ваші персональні дані обробляє сервіс підбору роботи «Вдало» (м. Київ, вул. Джона Маккейна, 7, офіс 169; +380 73 606 77 00) відповідно до Закону України «Про захист персональних даних».</p>
+      <p>Ваші персональні дані обробляє сервіс підбору роботи «Вдало» (м. Київ, вул. Джона Маккейна, 7, офіс 169; +380 66 005 00 60) відповідно до Закону України «Про захист персональних даних».</p>
       <h3>2. Які дані ми збираємо</h3>
       <p>Ім'я, номер телефону, обрану вакансію, відповіді з форми заявки (хто їде, коли, як зв'язатися), коментар, який ви залишили, а також — якщо ви прийшли за посиланням друга — позначку про те, хто вас порекомендував. У програмі «Приведи друга» ми зберігаємо номер телефону учасника, щоб зв'язатися з ним щодо бонусу.</p>
       <h3>3. Навіщо</h3>
@@ -1054,7 +1054,7 @@ body.mnav-open .fab{display:none}
       <h3>5. Скільки зберігаємо</h3>
       <p>Поки це потрібно для підбору роботи, але не довше 3 років з моменту останнього звернення. Після цього дані видаляються.</p>
       <h3>6. Ваші права</h3>
-      <p>Ви можете дізнатися, які ваші дані ми зберігаємо, виправити їх, відкликати згоду або попросити видалити дані. Для цього напишіть чи зателефонуйте нам: +380 73 606 77 00 (Telegram, Viber, WhatsApp). Ми виконаємо запит протягом 10 робочих днів.</p>
+      <p>Ви можете дізнатися, які ваші дані ми зберігаємо, виправити їх, відкликати згоду або попросити видалити дані. Для цього напишіть чи зателефонуйте нам: +380 66 005 00 60 (Telegram, Viber, WhatsApp). Ми виконаємо запит протягом 10 робочих днів.</p>
       <h3>7. Зміни</h3>
       <p>Ми можемо оновлювати цю політику; нова редакція діє з моменту публікації на сайті.</p>
     </div>
@@ -1116,9 +1116,9 @@ window.Vdalo = window.Vdalo || (function(){
   /* ---------- Налаштування ---------- */
   var LANG = window.VDALO_LANG || "uk", LP = LANG === "uk" ? "" : "/" + LANG;
   var CONFIG = {
-    wa: "380736067700",
-    tg: "https://t.me/+380736067700",
-    viber: "viber://chat?number=%2B380736067700",
+    wa: "380660050060",
+    tg: "https://t.me/+380660050060",
+    viber: "viber://chat?number=%2B380660050060",
     metaPixelId: "",   // ID пікселя Meta (Facebook/Instagram) — вставити, коли буде
     ga4Id: "G-4BHJ4VK5L4", // ID Google Analytics 4, наприклад G-XXXXXXX
     clarityId: "",     // ID проєкту Microsoft Clarity (записи сесій і теплові карти)
