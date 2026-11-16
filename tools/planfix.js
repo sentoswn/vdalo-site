@@ -80,6 +80,7 @@
     try {
       if (!rt) throw new Error('немає входу в Planfix (cookie rtoken)');
       // 1. підвантажити весь список фільтра прокручуванням
+      for (let w = 0; w < 40 && !document.querySelector('tr[class*="tr-taskid-"]'); w++) await sleep(500); // чекаємо, поки список з’явиться
       let prev = -1;
       for (let i = 0; i < 80; i++) {
         document.querySelectorAll('*').forEach(e => { if (e.scrollHeight > e.clientHeight + 50 && /auto|scroll/.test(getComputedStyle(e).overflowY)) e.scrollTop = e.scrollHeight; });
