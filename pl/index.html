@@ -712,6 +712,20 @@ body.mnav-open .fab{display:none}
 .sortl{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--muted);font-size:14px}
 .sortl select{width:auto;padding:8px 34px 8px 12px;border-radius:999px;font-size:14px;background-color:var(--surface)}
 @media (max-width:640px){.sortl span{display:none}.sortl select{max-width:200px}}
+/* Красивий випадний список замість системного (сортування) */
+.csel{position:relative;display:inline-block}
+.csel select{position:absolute!important;opacity:0;pointer-events:none;width:1px!important;height:1px}
+.csel-btn{display:inline-flex;align-items:center;gap:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:9px 14px 9px 16px;font:inherit;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap}
+.csel-btn:hover,.csel.open .csel-btn{border-color:var(--ink)}
+.csel-btn svg{width:14px;height:14px;transition:transform .15s}
+.csel.open .csel-btn svg{transform:rotate(180deg)}
+.csel-menu{position:absolute;right:0;top:calc(100% + 8px);min-width:100%;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:0 16px 40px rgba(17,24,39,.14);padding:6px;z-index:40;display:none;list-style:none;margin:0}
+.csel.open .csel-menu{display:block}
+.csel-menu li{padding:10px 14px;border-radius:12px;cursor:pointer;white-space:nowrap;font-weight:500;font-size:14px;color:var(--ink)}
+.csel-menu li:hover{background:var(--soft)}
+.csel-menu li[aria-selected="true"]{background:var(--ink);color:var(--surface);font-weight:600}
+.fgroup .csel,.fgroup .csel-btn{width:100%;justify-content:space-between}
+@media (max-width:640px){.csel-menu{right:auto;left:0}}
 </style>
 </head>
 <body>
@@ -1061,7 +1075,7 @@ body.mnav-open .fab{display:none}
   <!--/seo:apply-->
 
   <!--seo:text-->
-  <section aria-labelledby="seo-h"><div class="seo"><div class="seo-grid has-f"><div class="seo-txt"><h2 id="seo-h">Praca za granicą dla Ukraińców</h2><p>Vdalo pomaga Ukraińcom znaleźć pracę za granicą: w magazynach, fabrykach i zakładach spożywczych w Polsce, na Litwie, w Czechach i na Słowacji. Dla kandydatów dobór jest bezpłatny.</p><p>Pokazujemy warunki tak, aby można je było porównać przed wyjazdem: stawkę brutto i przybliżoną kwotę na rękę, liczbę godzin, zakwaterowanie, rodzaj umowy i najbliższe terminy przyjazdu. Lista ofert jest aktualizowana codziennie.</p><p>Zwykle na rękę wychodzi ≈ 43 000–83 500 UAH miesięcznie (według średniego kursu bankowego z 16.11.2026; wynagrodzenie wypłacane w walucie kraju) — to 31,40–37 PLN za godzinę brutto, 22,69–29,07 PLN za godzinę na rękę. Zakwaterowanie oferowane jest w 165 ofertach z 194, w tym darmowe w 11. Rodzaj umowy jest podany w każdej ofercie: umowa o pracę — 27, umowa zlecenie (umowa zlecenie) — 73.</p><p>Miejscowości, w których jest teraz praca: Bydgoszcz, Gdańsk, Łódź, Warszawa, Wrocław, Bielany. Wśród pracodawców — Sunreef Yachts, Cubic Polska, Dellner, Fresh Logistics, AIC, AURORA, FORVIA (Faurecia), Hanplast.</p></div><div class="facts"><div class="ft ft-main"><span class="ft-ic"><svg class="i"><use href="#i-piggy"/></svg></span><b class="num">≈ 43 000–83 500 UAH</b><span>miesięcznie na rękę — tyle zwykle wychodzi w naszych ofertach</span></div><div class="ft"><span class="ft-ic"><svg class="i"><use href="#i-bld"/></svg></span><b class="num">194 oferty</b><span>w 4 krajach · aktualizujemy codziennie</span></div><div class="ft"><span class="ft-ic"><svg class="i"><use href="#i-home"/></svg></span><b class="num">165 z 194</b><span>ofert z zakwaterowaniem, w 11 — darmowe</span></div><div class="ft"><span class="ft-ic"><svg class="i"><use href="#i-cal"/></svg></span><b class="num">17.11</b><span>najbliższy przyjazd</span></div><div class="ft"><span class="ft-ic"><svg class="i"><use href="#i-doc"/></svg></span><b class="num">27 / 73</b><span>umowa o pracę / umowa zlecenie</span></div></div></div><h3 style="margin-top:26px">Inne kierunki</h3><div class="links"><a href="/pl/" aria-current="page">Wszystkie oferty</a><a href="/pl/robota-v-polshchi/">Praca w Polsce · 180</a><a href="/pl/robota-v-lytvi/">Praca na Litwie · 8</a><a href="/pl/robota-v-chekhii/">Praca w Czechach · 5</a><a href="/pl/robota-na-skladi/">Praca w magazynie · 93</a><a href="/pl/robota-na-vyrobnytstvi/">Praca w fabryce · 124</a><a href="/pl/robota-na-kharchovomu-vyrobnytstvi/">Przetwórstwo mięsa i ryb · 23</a><a href="/pl/vodii-navantazhuvacha/">Operator wózka widłowego · 26</a><a href="/pl/robota-dlia-zhinok/">Dla kobiet · 100</a><a href="/pl/robota-dlia-cholovikiv/">Dla mężczyzn · 172</a><a href="/pl/robota-dlia-par/">Dla par · 78</a><a href="/pl/robota-v-polshchi-dlia-studentiv/">Dla studentów · 66</a></div></div></section>
+  <section aria-labelledby="seo-h"><div class="seo"><div class="seo-grid has-f"><div class="seo-txt"><h2 id="seo-h">Praca za granicą dla Ukraińców</h2><p>Vdalo pomaga Ukraińcom znaleźć pracę za granicą: w magazynach, fabrykach i zakładach spożywczych w Polsce, na Litwie, w Czechach i na Słowacji. Dla kandydatów dobór jest bezpłatny.</p><p>Pokazujemy warunki tak, aby można je było porównać przed wyjazdem: stawkę brutto i przybliżoną kwotę na rękę, liczbę godzin, zakwaterowanie, rodzaj umowy i najbliższe terminy przyjazdu. Lista ofert jest aktualizowana codziennie.</p><p>Zwykle na rękę wychodzi ≈ 43 000–83 500 UAH miesięcznie (według średniego kursu bankowego z 16.11.2026; wynagrodzenie wypłacane w walucie kraju) — to 31,40–37 PLN za godzinę brutto, 22,69–29,07 PLN za godzinę na rękę. Zakwaterowanie oferowane jest w 165 ofertach z 194, w tym darmowe w 11. Rodzaj umowy jest podany w każdej ofercie: umowa o pracę — 27, umowa zlecenie (umowa zlecenie) — 73.</p><p>Miejscowości, w których jest teraz praca: Bydgoszcz, Gdańsk, Łódź, Warszawa, Wrocław, Bielany. Wśród pracodawców — Sunreef Yachts, Cubic Polska, Dellner, Fresh Logistics, TEMU, AIC, AURORA, FORVIA (Faurecia).</p></div><div class="facts"><div class="ft ft-main"><span class="ft-ic"><svg class="i"><use href="#i-piggy"/></svg></span><b class="num">≈ 43 000–83 500 UAH</b><span>miesięcznie na rękę — tyle zwykle wychodzi w naszych ofertach</span></div><div class="ft"><span class="ft-ic"><svg class="i"><use href="#i-bld"/></svg></span><b class="num">194 oferty</b><span>w 4 krajach · aktualizujemy codziennie</span></div><div class="ft"><span class="ft-ic"><svg class="i"><use href="#i-home"/></svg></span><b class="num">165 z 194</b><span>ofert z zakwaterowaniem, w 11 — darmowe</span></div><div class="ft"><span class="ft-ic"><svg class="i"><use href="#i-cal"/></svg></span><b class="num">17.11</b><span>najbliższy przyjazd</span></div><div class="ft"><span class="ft-ic"><svg class="i"><use href="#i-doc"/></svg></span><b class="num">27 / 73</b><span>umowa o pracę / umowa zlecenie</span></div></div></div><h3 style="margin-top:26px">Inne kierunki</h3><div class="links"><a href="/pl/" aria-current="page">Wszystkie oferty</a><a href="/pl/robota-v-polshchi/">Praca w Polsce · 180</a><a href="/pl/robota-v-lytvi/">Praca na Litwie · 8</a><a href="/pl/robota-v-chekhii/">Praca w Czechach · 5</a><a href="/pl/robota-na-skladi/">Praca w magazynie · 93</a><a href="/pl/robota-na-vyrobnytstvi/">Praca w fabryce · 124</a><a href="/pl/robota-na-kharchovomu-vyrobnytstvi/">Przetwórstwo mięsa i ryb · 23</a><a href="/pl/vodii-navantazhuvacha/">Operator wózka widłowego · 26</a><a href="/pl/robota-dlia-zhinok/">Dla kobiet · 100</a><a href="/pl/robota-dlia-cholovikiv/">Dla mężczyzn · 172</a><a href="/pl/robota-dlia-par/">Dla par · 78</a><a href="/pl/robota-v-polshchi-dlia-studentiv/">Dla studentów · 66</a></div></div></section>
   <!--/seo:text-->
 
 <!--seo:faq-->
@@ -1631,7 +1645,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
   function filtered(o){
     o=o||st; var q=norm(o.q||"").trim(), qw=q.split(/\s+/).filter(Boolean);
     var list=items.filter(function(v){
-      return (!o.ids||o.ids.indexOf(String(v.id))>=0) && (o.country==="all"||v.country===o.country) && passWho(v,o.who) && (!o.housing||(v._h&&v._h.k!=="no")) && (!o.co||v.company===o.co) && (!q||v._text.indexOf(q)>=0||qw.every(function(w){ return v._text.indexOf(w)>=0; }));
+      return (!o.ids||o.ids.indexOf(String(v.id))>=0) && (o.country==="all"||v.country===o.country) && passWho(v,o.who) && (!o.housing||(v._h&&v._h.k!=="no")) && (!o.co||(v.company||"").toLowerCase()===String(o.co).toLowerCase()) && (!q||v._text.indexOf(q)>=0||qw.every(function(w){ return v._text.indexOf(w)>=0; }));
     });
     var byDate=function(a,b){ return (a._next?a._next.getTime():9e15)-(b._next?b._next.getTime():9e15); };
     var pay=function(v){ var u=v._uah; return u?(u.unit==="міс"?u.max:u.max*170):0; };
@@ -1688,7 +1702,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
     $("f-co").value=st.co;
     var nf=(st.country!=="all"&&!P.country?1:0)+(st.who!=="all"&&!P.who?1:0)+(st.housing?1:0)+(st.co?1:0)+(st.sort!=="rec"?1:0);
     $("fcount").hidden=!nf; $("fcount").textContent=nf;
-    $("tb-housing").checked=st.housing; $("pick-housing").checked=st.housing; $("q").value!==st.q&&($("q").value=st.q); $("sort").value=st.sort; $("sort2").value=st.sort;
+    $("tb-housing").checked=st.housing; $("pick-housing").checked=st.housing; $("q").value!==st.q&&($("q").value=st.q); $("sort").value=st.sort; $("sort2").value=st.sort; ["sort","sort2"].forEach(function(i){ var x=$(i); if (x&&x.__draw) x.__draw(); });
     $("pick-country").value=st.country;
     Array.prototype.forEach.call($("pick-who").children,function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-who")===st.who); });
     Array.prototype.forEach.call($("countries").children,function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-country")===st.country); });
@@ -1708,14 +1722,11 @@ window.VdaloTrack = window.VdaloTrack || (function(){
   /* ---------- Компанії ---------- */
   var coAll=false;
   function companies(){
-    var cnt={}; items.forEach(function(v){ if (v.company) cnt[v.company]=(cnt[v.company]||0)+1; });
-    var names=Object.keys(cnt);
-    names.sort(function(a,b){
-      var fa=FEATURED.indexOf(a), fb=FEATURED.indexOf(b);
-      if (fa>=0||fb>=0) return (fa<0?999:fa)-(fb<0?999:fb);
-      return (cnt[b]-cnt[a]) || a.localeCompare(b);
-    });
-    return names.map(function(n){ return [n,cnt[n]]; });
+    // Компанії завжди за алфавітом; однакові назви в різному регістрі (SHEIN / Shein) — одна компанія
+    var cnt={}, disp={}; items.forEach(function(v){ if (!v.company) return; var k=v.company.toLowerCase(); cnt[k]=(cnt[k]||0)+1; if (!disp[k]||v.company===v.company.toUpperCase()) disp[k]=v.company; });
+    var keys=Object.keys(cnt);
+    keys.sort(function(a,b){ return disp[a].localeCompare(disp[b],"pl",{sensitivity:"base"}); });
+    return keys.map(function(k){ return [disp[k],cnt[k]]; });
   }
   function renderCos(){
     var cs=companies(); if (!cs.length){ $("cos").hidden=true; return; }
@@ -2071,6 +2082,25 @@ window.VdaloTrack = window.VdaloTrack || (function(){
           items.forEach(function(v){ if (v.hot) v.hr = m[String(v.id)] || (9000+(v.hr||0)); }); render(); });
     }).catch(function(){}); } catch(e){}
   }
+  /* Красивий список сортування: кнопка + меню, звичайний select лишається для логіки */
+  function niceSelect(sel){
+    if (!sel || sel.dataset.nice) return; sel.dataset.nice="1";
+    var w=document.createElement("div"); w.className="csel"; sel.parentNode.insertBefore(w,sel); w.appendChild(sel);
+    var b=document.createElement("button"); b.type="button"; b.className="csel-btn"; b.setAttribute("aria-haspopup","listbox");
+    var m=document.createElement("ul"); m.className="csel-menu"; m.setAttribute("role","listbox");
+    w.appendChild(b); w.appendChild(m);
+    function draw(){ var o=sel.options[sel.selectedIndex]; b.innerHTML='<span>'+esc(o?o.textContent:"")+'</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>';
+      m.innerHTML=[].map.call(sel.options,function(x){ return '<li role="option" data-v="'+esc(x.value)+'" aria-selected="'+(x.value===sel.value)+'">'+esc(x.textContent)+'</li>'; }).join(""); }
+    draw();
+    b.addEventListener("click",function(e){ e.stopPropagation(); document.querySelectorAll(".csel.open").forEach(function(x){ if(x!==w) x.classList.remove("open"); }); w.classList.toggle("open"); });
+    m.addEventListener("click",function(e){ var li=e.target.closest("li"); if(!li) return; sel.value=li.getAttribute("data-v"); w.classList.remove("open"); draw(); sel.dispatchEvent(new Event("change",{bubbles:true})); });
+    document.addEventListener("click",function(){ w.classList.remove("open"); });
+    document.addEventListener("keydown",function(e){ if(e.key==="Escape") w.classList.remove("open"); });
+    new MutationObserver(draw).observe(sel,{attributes:true,childList:true});
+    sel.addEventListener("change",draw); sel.__draw=draw;
+  }
+  niceSelect($("sort2")); niceSelect($("sort"));
+
   /* ---------- Старт ---------- */
   function boot(d){
     data=d||{}; RATES=data.rates||{}; items=(data.items||[]).filter(function(v){ return v&&v.title&&v.salary; }).map(enrich);

@@ -11,7 +11,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Країни: Польща (180), Литва (8), Чехія (5), Нідерланди (1).
 - Типова ставка: 31,40–37 PLN за годину брутто; на руки зазвичай 22,69–29,07 PLN за годину.
 - Житло пропонують у 165 вакансіях з 194; трудовий договір — 27, договір доручення (umowa zlecenie) — 73.
-- Серед роботодавців: Sunreef Yachts, Cubic Polska, Dellner, Fresh Logistics, AIC, AURORA, FORVIA (Faurecia), Hanplast.
+- Серед роботодавців: Sunreef Yachts, Cubic Polska, Dellner, Fresh Logistics, TEMU, AIC, AURORA, FORVIA (Faurecia).
 - Дані вакансій у машиночитаному вигляді: https://vdalo-robota.com.ua/vacancies.json. Кожна сторінка вакансії має розмітку schema.org/JobPosting.
 
 ## Актуальні вакансії (194 вакансії, станом на 16.11.2026)
@@ -397,7 +397,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Вимоги: Хороші мануальні навички, Можна без досвіду та знання мови, Фізична витривалість (люди ходять до 20 тис. кроків за зміну)
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/1893635/
 
-### Склад брендового одягу Jasionka
+### Склад брендового одягу Jasionka — SINSAY
 - Країна / місто: Польща, Rzeszów
 - Оплата: 31,40 PLN/год брутто; на руки ≈ 22,68–25,36 PLN/год; ≈ 4 080–6 340 PLN за місяць
 - Житло: Житло безкоштовне (Щомісячна вартість проживання 790 zł. Квартири по 2–3 особи в кімнаті. Безкоштовно службовим автобусом)
@@ -469,7 +469,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Вимоги: Гарна фізична форма, Відповідальний підхід до роботи та уважність, Можна без досвіду, Знання польської мови на комунікативному рівні, Відстутність…
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/2018833/
 
-### Працівник на склад Temu
+### Працівник на склад Temu — TEMU
 - Країна / місто: Польща, Bielany Wrocławskie
 - Оплата: 36 PLN/год брутто; на руки ≈ 26,07–29,07 PLN/год; ≈ 5 210–5 810 PLN за місяць
 - Житло: Житло 650 PLN/міс (650 злотих на місяць (стягується з зарплати))
@@ -482,7 +482,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Вимоги: Уміння користуватися ПК, планшетом, смартфоном тощо.• Досвід роботи вітається
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/2027366/
 
-### Працівник на склад Temu
+### Працівник на склад Temu — TEMU
 - Країна / місто: Польща, Strykow
 - Оплата: 33 PLN/год брутто; на руки ≈ 23,84–26,65 PLN/год; ≈ 4 770–5 330 PLN за місяць
 - Житло: Житло надається (850 zł/місяць. Łódź, або Stryków - 850 zł/місяць знімається з зарплати. Умови: 3 людини в кімнаті. Просимо мати свою…)
@@ -495,7 +495,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Вимоги: Уміння користуватися ПК, планшетом, смартфоном тощо, Досвід роботи вітається
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/2055563/
 
-### Працівник на склад Temu
+### Працівник на склад Temu — TEMU
 - Країна / місто: Польща, Strykow
 - Оплата: 32,30 PLN/год брутто; на руки ≈ 23,33–26,08 PLN/год; ≈ 3 970–4 430 PLN за місяць
 - Житло: Житло надається (850 zł/місяць. Stryków - 850 zł/місяць знімається з зарплати. Умови: 3 людини в кімнаті. Просимо мати свою постільну…)

@@ -11,7 +11,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Країни: Польща (180), Литва (8), Чехія (5), Нідерланди (1).
 - Типова ставка: 31,40–37 PLN за годину брутто; на руки зазвичай 22,69–29,07 PLN за годину.
 - Житло пропонують у 165 вакансіях з 194; трудовий договір — 27, договір доручення (umowa zlecenie) — 73.
-- Серед роботодавців: Sunreef Yachts, Cubic Polska, Dellner, Fresh Logistics, AIC, AURORA, FORVIA (Faurecia), Hanplast.
+- Серед роботодавців: Sunreef Yachts, Cubic Polska, Dellner, Fresh Logistics, TEMU, AIC, AURORA, FORVIA (Faurecia).
 - Дані вакансій у машиночитаному вигляді: https://vdalo-robota.com.ua/vacancies.json. Кожна сторінка вакансії має розмітку schema.org/JobPosting.
 
 ## Головні сторінки
