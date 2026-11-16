@@ -834,7 +834,7 @@ body.mnav-open .fab{display:none}
   function stat(label, value, cls){ return '<div class="card cab-stat ' + (cls || "") + '"><span>' + E(label) + '</span><b>' + E(value) + '</b></div>'; }
 
   var HEARD = ["Від знайомих", "Telegram", "Viber", "Facebook / Instagram", "TikTok", "OLX", "Google", "Інше"];
-  var SAFE = '<div class="cab-safe"><b>🔒 Ваші дані захищені</b><span>Їх бачать лише власники «Вдало». Дані передаються зашифровано й зберігаються в захищеній базі в ЄС. Ми не передаємо їх третім особам і не використовуємо для реклами. Видалити дані можна на запит менеджеру.</span></div>';
+  var SAFE = '<div class="cab-safe"><b><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>Ваші дані захищені</b><span>Їх бачать лише власники «Вдало». Дані передаються зашифровано й зберігаються в захищеній базі в ЄС. Ми не передаємо їх третім особам і не використовуємо для реклами. Видалити дані можна на запит менеджеру.</span></div>';
   function anketa(api, d, edit){
     var p = d.profile;
     var name = p.full_name || [p.first_name, p.last_name].filter(Boolean).join(" ");

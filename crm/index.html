@@ -155,21 +155,37 @@ main{padding:20px;max-width:1500px;margin:0 auto}
 .login{background:linear-gradient(var(--surface),var(--surface)) padding-box,linear-gradient(135deg,#4f9df7,#3ccf8e,#f7a1c4) border-box;border:2px solid transparent}
 .toast{border-radius:999px;padding:12px 20px;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
 @media (max-width:800px){.hello-stats div{min-width:0;flex:1 1 40%}}
+.ic{width:18px;height:18px;flex:0 0 auto;vertical-align:-3px}
+.ic.xs{width:15px;height:15px;vertical-align:-2px}
+.tabs button{display:inline-flex;align-items:center;gap:7px}
+.tabs button .ic{width:17px;height:17px;opacity:.75}
+.tabs button[aria-selected=true] .ic{opacity:1;color:#1f4fd1}
+.hello-l{display:flex;gap:14px;align-items:center}
+.hello-ic{width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.8);display:grid;place-items:center;color:#f59e0b}
+.hello-ic .ic{width:26px;height:26px}
+.hello-stats div{position:relative;padding-left:52px!important}
+.hs-ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:10px;display:grid;place-items:center}
+.hs-ic .ic{width:17px;height:17px}
+.c-blue{background:#e5edff;color:#1f4fd1}.c-red{background:#fde8e8;color:#c0262d}.c-violet{background:#efe5ff;color:#5b2bb5}.c-green{background:#e2f5e9;color:#146c34}
+.tpl-chip{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+.tpl-chip .ic{color:#1f4fd1}
+.btn .ic{margin-right:2px}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="ic-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8"/><path d="M18 14.3a6.5 6.5 0 0 1 3.5 5.7"/></symbol><symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="m8 12 3 3 5-6"/></symbol><symbol id="ic-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></symbol><symbol id="ic-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l6 3V9l6 3V5l6 3v13z"/><path d="M7 17h2M12 17h2M17 17h1"/></symbol><symbol id="ic-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="5" rx="1.5"/><path d="M5 13v7h14v-7"/><path d="M12 8v12"/><path d="M12 8c-1.5-3.5-6-3.5-5.5-1s5.5 1 5.5 1zM12 8c1.5-3.5 6-3.5 5.5-1S12 8 12 8z"/></symbol><symbol id="ic-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h12v4"/><rect x="3" y="7" width="18" height="13" rx="2.5"/><circle cx="16.5" cy="13.5" r="1.3"/></symbol><symbol id="ic-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol><symbol id="ic-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol><symbol id="ic-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/><circle cx="12" cy="12" r="6.5"/></symbol><symbol id="ic-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol><symbol id="ic-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol><symbol id="ic-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H4.5a3 3 0 0 0 3.5 4M16 6h3.5a3 3 0 0 1-3.5 4"/><path d="M12 13v4M8.5 20h7M10 17h4"/></symbol><symbol id="ic-inbox" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h5l1.5 3h5L16 13h5"/><path d="M5 5h14l2 8v6H3v-6z"/></symbol><symbol id="ic-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h3.5l1.5 4.5-2.3 1.5a11 11 0 0 0 6.8 6.8l1.5-2.3 4.5 1.5V19a2 2 0 0 1-2.2 2A17 17 0 0 1 3 5.7 2 2 0 0 1 5 3.5z"/></symbol><symbol id="ic-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></symbol><symbol id="ic-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol><symbol id="ic-id" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16a3.4 3.4 0 0 1 6.4 0M14.5 10h4M14.5 13.5h3"/></symbol><symbol id="ic-hand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M11 10.5V4.5a1.5 1.5 0 0 1 3 0V11"/><path d="M14 10.5V6a1.5 1.5 0 0 1 3 0v8a7 7 0 0 1-12.5 4.3L2.6 15a1.6 1.6 0 0 1 2.6-1.8L8 15"/></symbol><symbol id="ic-bus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3.5" width="16" height="14" rx="3"/><path d="M4 11h16M8 21v-3.5M16 21v-3.5"/><circle cx="8" cy="14.5" r=".8"/><circle cx="16" cy="14.5" r=".8"/></symbol><symbol id="ic-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 6 6-2.5 6 2.5 6-2.5v14.5l-6 2.5-6-2.5L3 20.5z"/><path d="M9 3.5v14.5M15 6v14.5"/></symbol><symbol id="ic-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></symbol><symbol id="ic-brief" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol><symbol id="ic-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="6"/><path d="m9.5 10 1.8 1.8 3.4-3.6"/><path d="m8.5 15-1.5 6 5-2.5 5 2.5-1.5-6"/></symbol><symbol id="ic-userplus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M19 8v6M16 11h6"/></symbol><symbol id="ic-mega" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4h4l7 5V5L7 10z"/><path d="M17 9a4 4 0 0 1 0 6"/></symbol><symbol id="ic-video" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="m16 10.5 5-3v9l-5-3"/></symbol><symbol id="ic-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.3-4.3"/></symbol><symbol id="ic-repeat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a7 7 0 0 1 12-4.5L19 8"/><path d="M19 3v5h-5"/><path d="M20 14a7 7 0 0 1-12 4.5L5 16"/><path d="M5 21v-5h5"/></symbol><symbol id="ic-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3"/></symbol><symbol id="ic-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2.5 4.5 13.5H11l-1 8 8.5-11H12z"/></symbol><symbol id="ic-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3"/></symbol><symbol id="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></symbol><symbol id="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol><symbol id="ic-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-13 15-14-1 10-6 15-14 15"/><path d="M5 19 13 11"/></symbol></defs></svg>
 <header class="top">
   <a class="logo" href="/"><span>В</span>CRM</a>
   <nav class="tabs" id="tabs" role="tablist" hidden>
-    <button role="tab" data-tab="leads" aria-selected="true">👥 <span id="t-leads">Кандидати</span><span class="n" id="n-leads" hidden></span></button>
-    <button role="tab" data-tab="tasks">✅ Задачі<span class="n" id="n-tasks" hidden></span></button>
-    <button role="tab" data-tab="analytics" data-own>📊 Аналітика</button>
-    <button role="tab" data-tab="employers" data-own>🏭 Роботодавці<span class="n" id="n-employers" hidden></span></button>
-    <button role="tab" data-tab="people" data-own>🎁 Реферали</button>
-    <button role="tab" data-tab="payouts" data-own>💸 Виплати<span class="n" id="n-payouts" hidden></span></button>
-    <button role="tab" data-tab="mylink">🔗 Моє посилання</button>
-    <button role="tab" data-tab="guide">🧭 Як шукати</button>
-    <button role="tab" data-tab="settings" data-own>⚙️</button>
+    <button role="tab" data-tab="leads" aria-selected="true"><svg class="ic"><use href="#ic-users"/></svg><span id="t-leads">Кандидати</span><span class="n" id="n-leads" hidden></span></button>
+    <button role="tab" data-tab="tasks"><svg class="ic"><use href="#ic-check"/></svg>Задачі<span class="n" id="n-tasks" hidden></span></button>
+    <button role="tab" data-tab="analytics" data-own><svg class="ic"><use href="#ic-chart"/></svg>Аналітика</button>
+    <button role="tab" data-tab="employers" data-own><svg class="ic"><use href="#ic-building"/></svg>Роботодавці<span class="n" id="n-employers" hidden></span></button>
+    <button role="tab" data-tab="people" data-own><svg class="ic"><use href="#ic-gift"/></svg>Реферали</button>
+    <button role="tab" data-tab="payouts" data-own><svg class="ic"><use href="#ic-wallet"/></svg>Виплати<span class="n" id="n-payouts" hidden></span></button>
+    <button role="tab" data-tab="mylink"><svg class="ic"><use href="#ic-link"/></svg>Моє посилання</button>
+    <button role="tab" data-tab="guide"><svg class="ic"><use href="#ic-compass"/></svg>Як шукати</button>
+    <button role="tab" data-tab="settings" data-own title="Налаштування"><svg class="ic"><use href="#ic-gear"/></svg></button>
   </nav>
   <div class="me" id="me"></div>
 </header>
@@ -318,7 +334,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       '<div class="fld"><label>Місто, область *</label><input id="m-city" value="' + E(me.city || "") + '"></div></div>' +
       '<label style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="m-ok1"' + (me.consent_at ? " checked" : "") + '> <span>Погоджуюся на обробку моїх персональних даних *</span></label>' +
       '<label style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="m-ok2"' + (f.nda ? " checked" : "") + '> <span>Зобов’язуюся не передавати контакти кандидатів і дані з CRM третім особам та використовувати їх лише для роботи з «Вдало» *</span></label>' +
-      '<div style="background:#eef8f1;border:1px solid #cbe9d5;border-radius:12px;padding:12px 14px;color:#21452d"><b>🔒 Ваші дані захищені.</b> Анкету бачать лише власники «Вдало». Дані передаються зашифровано й зберігаються в захищеній базі в ЄС, ми не передаємо їх третім особам.</div>' +
+      '<div style="background:#eef8f1;border:1px solid #cbe9d5;border-radius:12px;padding:12px 14px;color:#21452d"><b style="display:inline-flex;gap:6px;align-items:center">' + ic("lock", "xs") + ' Ваші дані захищені.</b> Анкету бачать лише власники «Вдало». Дані передаються зашифровано й зберігаються в захищеній базі в ЄС, ми не передаємо їх третім особам.</div>' +
       '<p class="err" id="m-err"></p><div style="display:flex;gap:8px"><button class="btn" id="m-save">' + (first ? "Почати роботу" : "Зберегти") + '</button>' + (first ? "" : '<button class="btn ghost" id="m-back">Назад</button>') + '</div></div>';
     var back = document.getElementById("m-back"); if (back) back.onclick = function(){ document.getElementById("tabs").hidden = false; render(); };
     document.getElementById("m-save").onclick = function(){
@@ -340,6 +356,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     return '<b>Анкета</b><dl class="kv">' + rows.filter(function(r){ return r[1]; }).map(function(r){ return '<dt>' + E(r[0]) + '</dt><dd>' + E(r[1]) + '</dd>'; }).join("") + '</dl>';
   }
   function tabsAllowed(){ return S.own ? ["leads", "tasks", "analytics", "employers", "people", "payouts", "mylink", "guide", "settings"] : ["leads", "tasks", "mylink", "guide"]; }
+  function ic(n, cls){ return '<svg class="ic' + (cls ? " " + cls : "") + '"><use href="#ic-' + n + '"/></svg>'; }
   function mgrsOf(l){ var a = (l.managers && l.managers.length) ? l.managers.slice() : []; if (l.manager_id && a.indexOf(l.manager_id) < 0) a.unshift(l.manager_id); return a; }
   function hasMgr(l, id){ return mgrsOf(l).indexOf(id) >= 0; }
   S.vac = []; fetch("/vacancies.json", {cache: "no-store"}).then(function(r){ return r.json(); }).then(function(j){ S.vac = j.items || j.vacancies || j || []; }).catch(function(){});
@@ -393,7 +410,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   function waitBadge(l){
     if (l.status !== "new" || (S.own && !l.manager_id && false)) return "";
     var w = Date.now() - waitStart(l), late = w > 15 * 6e4;
-    return '<small style="color:' + (late ? "var(--red)" : "var(--muted)") + ';font-weight:700">' + (late ? "⏰ " : "") + 'чекає ' + E(mins(w)) + '</small>';
+    return '<small style="color:' + (late ? "var(--red)" : "var(--muted)") + ';font-weight:700">' + (late ? ic("clock", "xs") + " " : "") + 'чекає ' + E(mins(w)) + '</small>';
   }
   function rLeads(){
     API.leads().then(function(list){
@@ -427,10 +444,12 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       var eod = new Date(); eod.setHours(23, 59, 59, 999);
       var nTask = (S.tasks || []).filter(function(t){ return !t.done_at && t.due_at && new Date(t.due_at) <= eod && t.assignee_id === S.me.id; }).length;
       var nWin = mineL.filter(function(l){ return (l.status === "working" || l.status === "paid") && new Date(l.updated_at || l.created_at) >= mon; }).length;
-      var MOT = ["Кожен дзвінок — чиясь нова робота 💪", "Швидка відповідь = довіра кандидата ⚡", "Сьогодні чудовий день, щоб когось працевлаштувати 🚀", "Маленькі кроки щодня — великий результат 🌱", "Кандидат, який чекає, — кандидат, який пише іншим ⏰"];
-      var banner = '<div class="hello"><div><h2>' + E(hello) + ', ' + E((S.me.full_name || S.me.first_name || "").split(" ")[0]) + '! 👋</h2><p>' + E(MOT[today.getDate() % MOT.length]) + '</p></div>' +
-        '<div class="hello-stats"><div><b>' + nNew + '</b><span>🆕 нових сьогодні</span></div><div class="' + (nWait ? "bad" : "") + '"><b>' + nWait + '</b><span>⏰ чекають &gt;15 хв</span></div>' +
-        '<div><b>' + nTask + '</b><span>✅ задач на сьогодні</span></div><div class="good"><b>' + nWin + '</b><span>🎉 вийшли на роботу цього місяця</span></div></div></div>';
+      var MOT = ["Кожен дзвінок — чиясь нова робота", "Швидка відповідь — це довіра кандидата", "Сьогодні чудовий день, щоб когось працевлаштувати", "Маленькі кроки щодня — великий результат", "Кандидат, який чекає, пише іншим агенціям"];
+      var banner = '<div class="hello"><div class="hello-l"><span class="hello-ic">' + ic(hr >= 5 && hr < 19 ? "sun" : "moon") + '</span><div><h2>' + E(hello) + ', ' + E((S.me.full_name || S.me.first_name || "").split(" ")[0]) + '!</h2><p>' + E(MOT[today.getDate() % MOT.length]) + '</p></div></div>' +
+        '<div class="hello-stats"><div><i class="hs-ic c-blue">' + ic("inbox") + '</i><b>' + nNew + '</b><span>нових сьогодні</span></div>' +
+        '<div class="' + (nWait ? "bad" : "") + '"><i class="hs-ic c-red">' + ic("clock") + '</i><b>' + nWait + '</b><span>чекають &gt;15 хв</span></div>' +
+        '<div><i class="hs-ic c-violet">' + ic("check") + '</i><b>' + nTask + '</b><span>задач на сьогодні</span></div>' +
+        '<div class="good"><i class="hs-ic c-green">' + ic("trophy") + '</i><b>' + nWin + '</b><span>вийшли на роботу цього місяця</span></div></div></div>';
       app.innerHTML = demoBar() + banner +
         '<div class="bar"><input type="search" id="q" placeholder="Пошук: ім’я, телефон, вакансія, роботодавець…" value="' + E(S.q) + '"><button class="btn" id="add">+ Нова заявка</button></div>' +
         '<div class="bar">' + mgrSel + chSel + chips + '</div>' +
@@ -442,7 +461,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
             '<td class="hide-m">' + chBadge(l) + (l.referrer ? '<small>від ' + E(pname(l.referrer)) + '</small>' : "") + '</td>' +
             (S.own ? '<td class="hide-m">' + (mgrsOf(l).length ? mgrsOf(l).map(function(id){ return E(staffName(id)); }).join(", ") : '<span class="st st-new">Не призначено</span>') + '</td>' : '') +
             '<td><span class="st st-' + l.status + '">' + E(LSN[l.status] || l.status) + '</span>' + waitBadge(l) + '</td></tr>';
-        }).join("") : '<tr><td colspan="6" class="empty">' + (S.own ? "Тут поки порожньо 🌱 Нові заявки з’являться автоматично" : "Поки немає кандидатів 🌱 Діліться своїм посиланням (вкладка «Моє посилання») — кандидати з нього потраплять сюди.") + '</td></tr>') + '</tbody></table></div>';
+        }).join("") : '<tr><td colspan="6" class="empty">' + (S.own ? "Тут поки порожньо. Нові заявки з’являться автоматично" : "Поки немає кандидатів. Діліться своїм посиланням (вкладка «Моє посилання») — кандидати з нього потраплять сюди.") + '</td></tr>') + '</tbody></table></div>';
       var cf = document.getElementById("chf"); if (cf) cf.onchange = function(){ S.ch = cf.value; rLeads(); };
       var ms = document.getElementById("mgr"); if (ms) ms.onchange = function(){ S.mgr = ms.value; rLeads(); };
       var qi = document.getElementById("q");
@@ -480,7 +499,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       '<div class="fld"><label>Хто запросив (реферальний код)</label><div class="g2"><input id="d-ref" placeholder="напр. ok7m2p" value="' + E(l.referrer ? l.referrer.ref_code || "" : "") + '"><span class="note" id="d-ref-name" style="align-self:center">' + (l.referrer ? E(pname(l.referrer)) : (l.ref_raw ? "з посилання: " + E(l.ref_raw) + " (не знайдено)" : "")) + '</span></div></div>' +
       '<div class="fld"><label>Нотатки менеджера</label><textarea id="d-note">' + E(l.manager_note || "") + '</textarea></div>' +
       (isNew ? "" : '<div class="mini"><b>Задачі по кандидату</b><div id="d-tasks"></div><p class="note" style="margin:4px 0 0">Шаблони — натисніть, змініть дату за потреби й «Додати»:</p>' + tplChips(T_LEAD, "data-tl") +
-        '<div class="bar" style="margin:0"><button type="button" class="btn ghost sm" data-flow="start">⚡ Набір «Новий кандидат» (3 задачі)</button><button type="button" class="btn ghost sm" data-flow="trip">⚡ Набір «Виїзд» (6 задач)</button></div><div class="row2"><input id="dt-title" placeholder="Напр. передзвонити, надіслати документи"><input id="dt-due" type="datetime-local"><button class="btn sm" id="dt-add" type="button">Додати</button></div></div>' +
+        '<div class="bar" style="margin:0"><button type="button" class="btn ghost sm" data-flow="start">' + ic("bolt", "xs") + ' Набір «Новий кандидат» · 3 задачі</button><button type="button" class="btn ghost sm" data-flow="trip">' + ic("bolt", "xs") + ' Набір «Виїзд» · 6 задач</button></div><div class="row2"><input id="dt-title" placeholder="Напр. передзвонити, надіслати документи"><input id="dt-due" type="datetime-local"><button class="btn sm" id="dt-add" type="button">Додати</button></div></div>' +
         '<div><b>Історія статусів</b><ul class="hist" id="d-hist"><li>…</li></ul></div>') +
       '</div><div class="df">' + (!isNew && S.me.role === "admin" ? '<button class="btn ghost" id="d-del" style="margin-right:auto;color:var(--red)">Видалити</button>' : "") +
       '<button class="btn ghost" data-x>Скасувати</button><button class="btn" id="d-save">Зберегти</button></div>');
@@ -550,7 +569,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       p.then(function(){
         var win = (patch.status === "working" || patch.status === "paid") && patch.status !== l.status;
         if (win) confetti();
-        toast(patch.status === "paid" && l.status !== "paid" && refId ? "🎉 Збережено. Бонус нараховано!" : patch.status === "working" && l.status !== "working" ? "🎉 Ще один кандидат на роботі!" : isNew ? "✨ Кандидата додано" : "✅ Збережено");
+        toast(patch.status === "paid" && l.status !== "paid" && refId ? "Збережено. Бонус нараховано!" : patch.status === "working" && l.status !== "working" ? "Ще один кандидат на роботі!" : isNew ? "Кандидата додано" : "Збережено");
         closeDrawer(); counts(); rLeads(); }).catch(fail);
     };
     var del = document.getElementById("d-del");
@@ -560,21 +579,21 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   /* ---------- Шаблони задач ---------- */
   var H = 36e5, D = 864e5;
   var T_LEAD = [
-    ["📞 Передзвонити", 2 * H], ["📋 Надіслати 2–3 вакансії", 1 * H], ["🔔 Нагадати, якщо не відповів", D],
-    ["🪪 Перевірити документи (паспорт, підстава для виїзду)", D], ["🤝 Погодити дату заїзду з роботодавцем", D],
-    ["🚌 Нагадати про квиток", D], ["🗺 Надіслати маршрутний лист і контакт координатора", D],
-    ["👋 Спитати, як доїхав і заселився", 2 * D], ["💼 Спитати про перший робочий день", 3 * D],
-    ["✅ Перевірити, чи відпрацював 2 тижні", 14 * D], ["👥 Запропонувати «Приведи друга»", 7 * D]
+    ["Передзвонити", 2 * H, "phone"], ["Надіслати 2–3 вакансії", 1 * H, "list"], ["Нагадати, якщо не відповів", D, "bell"],
+    ["Перевірити документи (паспорт, підстава для виїзду)", D, "id"], ["Погодити дату заїзду з роботодавцем", D, "brief"],
+    ["Нагадати про квиток", D, "bus"], ["Надіслати маршрутний лист і контакт координатора", D, "map"],
+    ["Спитати, як доїхав і заселився", 2 * D, "hand"], ["Спитати про перший робочий день", 3 * D, "chat"],
+    ["Перевірити, чи відпрацював 2 тижні", 14 * D, "badge"], ["Запропонувати «Приведи друга»", 7 * D, "userplus"]
   ];
   var T_GEN = [
-    ["📢 Опублікувати 5 оголошень у групах", "today18"], ["🎬 Зняти й викласти відео (TikTok / Reels)", D],
-    ["💬 Відповісти на коментарі в групах", 3 * H], ["🔍 Написати 10 людям, які шукають роботу", "today18"],
-    ["🔁 Нагадати всім, хто не відповів 2 дні", "today18"], ["📊 Оновити статуси всіх кандидатів у CRM", "today20"],
-    ["🧾 Знайти 10 людей на вакансію …", 3 * D], ["📞 Обдзвонити кандидатів «На зв’язку»", D]
+    ["Опублікувати 5 оголошень у групах", "today18", "mega"], ["Зняти й викласти відео (TikTok / Reels)", D, "video"],
+    ["Відповісти на коментарі в групах", 3 * H, "chat"], ["Написати 10 людям, які шукають роботу", "today18", "search"],
+    ["Нагадати всім, хто не відповів 2 дні", "today18", "repeat"], ["Оновити статуси всіх кандидатів у CRM", "today20", "chart"],
+    ["Знайти 10 людей на вакансію …", 3 * D, "target"], ["Обдзвонити кандидатів «На зв’язку»", D, "phone"]
   ];
   var FLOWS = {
-    start: ["Новий кандидат", [["📞 Зателефонувати / написати", 15 * 6e4], ["📋 Надіслати 2–3 вакансії", 2 * H], ["🔔 Нагадати, якщо не відповів", D]]],
-    trip: ["Виїзд", [["🪪 Перевірити документи", 0], ["🚌 Нагадати про квиток", D], ["🗺 Надіслати маршрутний лист і контакт координатора", D], ["👋 Спитати, як доїхав", 3 * D], ["💼 Спитати про перший робочий день", 4 * D], ["✅ Перевірити, чи відпрацював 2 тижні", 18 * D]]]
+    start: ["Новий кандидат", [["Зателефонувати / написати", 15 * 6e4], ["Надіслати 2–3 вакансії", 2 * H], ["Нагадати, якщо не відповів", D]]],
+    trip: ["Виїзд", [["Перевірити документи", 0], ["Нагадати про квиток", D], ["Надіслати маршрутний лист і контакт координатора", D], ["Спитати, як доїхав", 3 * D], ["Спитати про перший робочий день", 4 * D], ["Перевірити, чи відпрацював 2 тижні", 18 * D]]]
   };
   function dueAt(off){
     var d = new Date();
@@ -584,7 +603,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     return d;
   }
   function localInput(d){ var p = function(n){ return (n < 10 ? "0" : "") + n; }; return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes()); }
-  function tplChips(list, attr){ return '<div class="bar" style="margin:0">' + list.map(function(t, i){ return '<button type="button" class="chip" style="font-size:13px" ' + attr + '="' + i + '">' + E(t[0]) + '</button>'; }).join("") + '</div>'; }
+  function tplChips(list, attr){ return '<div class="bar tpls" style="margin:0">' + list.map(function(t, i){ return '<button type="button" class="chip tpl-chip" ' + attr + '="' + i + '">' + ic(t[2] || "check", "xs") + E(t[0]) + '</button>'; }).join("") + '</div>'; }
 
   /* ================= Задачі ================= */
   function leadName(id){ var l = S.leads.filter(function(x){ return x.id === id; })[0]; return l ? l.name : ""; }
