@@ -793,8 +793,11 @@ def nav_html(path):
     dd = (f'<div class="dd"><button class="dd-btn" type="button" aria-expanded="false" aria-haspopup="true"{cur(vcur)}>Вакансії{ch}</button>'
           f'<div class="dd-menu"><div class="dd-box">{col(cs, "За країною")}{col(ks, "За видом роботи")}'
           f'<a class="dd-all" href="/#vacancies">Усі вакансії{ch}</a></div></div></div>')
-    links = [(SEC.PAGES[k]["path"], SEC.PAGES[k]["label"]) for k in ("how", "friend", "faq")] + [("/statti/", "Статті")] + [(SEC.PAGES[k]["path"], SEC.PAGES[k]["label"]) for k in ("about", "contacts")]
-    nav = "\n      " + dd + "".join(f'\n      <a href="{h}"{cur(path == h or (h == "/statti/" and path.startswith("/statti/")))}>{esc(t)}</a>' for h, t in links) + "\n    "
+    P = SEC.PAGES
+    links = [(P[k]["path"], P[k]["label"]) for k in ("how", "friend", "faq")] + [("/statti/", "Статті")] + [(P[k]["path"], P[k]["label"]) for k in ("about", "contacts")]
+    top = [x for x in links if x[0] != P["faq"]["path"]] + [(P["employers"]["path"], P["employers"]["label"])]
+    nav = "\n      " + dd + "".join(f'\n      <a href="{h}"{cur(path == h or (h == "/statti/" and path.startswith("/statti/")))}>{esc(t)}</a>' for h, t in top) + "\n    "
+    links = links + [(P["employers"]["path"], P["employers"]["label"]), (P["cabinet"]["path"], P["cabinet"]["label"])]
     chips = lambda lst: '<div class="mn-chips">' + "".join(f'<a href="/{p["slug"]}/">{esc(p["country"] if p.get("country") else p["label"])}<small>{len(l)}</small></a>' for p, l in lst) + "</div>"
     mn = ('<div class="mn-main"><a href="/#vacancies">Усі вакансії</a>' + "".join(f'<a href="{h}">{esc(t)}</a>' for h, t in links) + "</div>"
           + "<b>Вакансії за країною</b>" + chips(cs) + "<b>За видом роботи</b>" + chips(ks)
@@ -910,6 +913,7 @@ def main():
 
     # спільний підвал зі списком напрямків
     tpl = region(tpl, "foot", foot_links(live))
+    tpl = region(tpl, "appjs", "<script>" + open(os.path.join(ROOT, "app", "common.js"), encoding="utf-8").read() + "</script>")
     hero_tpl = get_region(tpl, "hero")
     NAV_LIVE[:] = live
     BLK, FAQ, APPLY = get_region(tpl, "blocks"), get_region(tpl, "faq"), get_region(tpl, "apply")
@@ -1066,6 +1070,103 @@ def main():
         write(path, t)
         sitemap.append((path, TODAY.isoformat(), "monthly", "0.7"))
 
+    # ---------- Роботодавцям ----------
+    HIDE_VAC = "<style>.marq,#countries,#cos,#vacancies{display:none!important}</style>"
+    P = SEC.PAGES["employers"]
+    path = P["path"]
+    opt = lambda xs: "".join(f'<option>{esc(x)}</option>' for x in xs)
+    emp_form = f'''
+  <section id="emp" aria-labelledby="emp-h">
+    <div class="apply">
+      <div>
+        <h2 id="emp-h">Залиште запит на працівників</h2>
+        <p class="lead">Опишіть, кого шукаєте, — менеджер зв’яжеться з вами протягом робочого дня й запропонує кандидатів.</p>
+        <div class="contacts">
+          <a class="contact" href="tel:+380736067700" data-ch="phone"><span class="ic ph" style="color:var(--bg)"><svg class="i"><use href="#i-phone"/></svg></span><span>+380 73 606 77 00<small>Телефон, Telegram, Viber, WhatsApp</small></span><svg class="i chev"><use href="#i-chev"/></svg></a>
+          <a class="contact" href="https://t.me/+380736067700" data-ch="telegram"><span class="ic tg"><svg class="i"><use href="#i-send"/></svg></span><span>Telegram<small>Відкрити чат</small></span><svg class="i chev"><use href="#i-chev"/></svg></a>
+          <a class="contact" href="https://wa.me/380736067700" data-ch="whatsapp"><span class="ic wa"><svg class="i"><use href="#i-round"/></svg></span><span>WhatsApp<small>Відкрити чат</small></span><svg class="i chev"><use href="#i-chev"/></svg></a>
+        </div>
+      </div>
+      <div class="form-card">
+        <form class="lead-form" id="emp-form" method="post" action="#" novalidate>
+          <div class="row2">
+            <div><label class="lbl" for="e-company">Компанія</label><input id="e-company" name="company" autocomplete="organization" required></div>
+            <div><label class="lbl" for="e-contact">Контактна особа</label><input id="e-contact" name="contact_name" autocomplete="name" required></div>
+          </div>
+          <div class="row2">
+            <div><label class="lbl" for="e-phone">Телефон</label><input id="e-phone" name="phone" type="tel" autocomplete="tel" placeholder="+48 …"></div>
+            <div><label class="lbl" for="e-email">E-mail</label><input id="e-email" name="email" type="email" autocomplete="email"></div>
+          </div>
+          <div class="row2">
+            <div><label class="lbl" for="e-country">Країна</label><select id="e-country" name="country">{opt(["Польща", "Литва", "Чехія", "Словаччина", "Інша країна"])}</select></div>
+            <div><label class="lbl" for="e-city">Місто</label><input id="e-city" name="city"></div>
+          </div>
+          <div class="row2">
+            <div><label class="lbl" for="e-workers">Скільки працівників потрібно</label><input id="e-workers" name="workers" inputmode="numeric" placeholder="10"></div>
+            <div><label class="lbl" for="e-start">Коли потрібні</label><input id="e-start" name="start_when" placeholder="З 1 грудня"></div>
+          </div>
+          <div><label class="lbl" for="e-pos">Позиції та умови</label><textarea id="e-pos" name="positions" required placeholder="Наприклад: комплектувальник на склад, 2 зміни, ставка, житло"></textarea></div>
+          <div><label class="lbl" for="e-note">Коментар (необов’язково)</label><textarea id="e-note" name="note"></textarea></div>
+          <div class="hp" aria-hidden="true"><label for="e-website">Сайт</label><input id="e-website" name="website" tabindex="-1" autocomplete="off"></div>
+          <p class="err" id="emp-err" role="alert"></p>
+          <button class="btn wide" type="submit" id="emp-submit">Надіслати запит</button>
+          <p class="hint">Надсилаючи запит, ви погоджуєтеся на обробку контактних даних відповідно до <a href="#privacy">політики конфіденційності</a>.</p>
+        </form>
+        <div class="done" id="emp-sent">
+          <div class="sent-ic"><svg class="i"><use href="#i-check"/></svg></div>
+          <p><b>Дякуємо! Запит отримано.</b></p>
+          <p>Менеджер зв’яжеться з вами протягом робочого дня.</p>
+          <button class="btn ghost" type="button" data-emp-again>Надіслати ще один запит</button>
+        </div>
+        <div class="done" id="emp-fallback">
+          <p><b>Залишився один крок.</b> Надішліть запит нам у месенджер — текст уже готовий:</p>
+          <div class="msg" id="emp-msg"></div>
+          <div class="send-row">
+            <a class="msgr" id="emp-wa" href="https://wa.me/380736067700" data-ch="whatsapp"><span class="dot wa"></span>WhatsApp</a>
+            <a class="msgr" href="https://t.me/+380736067700" data-ch="telegram" data-emp-copy><span class="dot tg"></span>Telegram</a>
+            <a class="msgr" href="viber://chat?number=%2B380736067700" data-ch="viber" data-emp-copy><span class="dot vb"></span>Viber</a>
+          </div>
+          <button class="btn ghost" type="button" data-emp-again>Заповнити ще раз</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>addEventListener("DOMContentLoaded", function(){{ {open(os.path.join(ROOT, "app", "employer.js"), encoding="utf-8").read()} }});</script>
+'''
+    hero = (crumbs([("Головна", "/"), (P["h1"], "")]) + HIDE_VAC
+            + f'\n  <section id="hero"><div class="page-head"><h1>{esc(P["h1"])}</h1><p class="lead">{esc(P["lead"])}</p>'
+            + '<div class="ph-cta"><a class="btn" href="#emp">Залишити запит</a><a class="btn ghost" href="tel:+380736067700" data-ch="phone">+380 73 606 77 00</a></div></div></section>\n'
+            + '\n  <section aria-labelledby="eo-h"><div class="sec-head"><div><h2 id="eo-h">Що ми робимо для роботодавців</h2></div></div>' + cards(SEC.EMP_OFFER) + "</section>\n"
+            + '\n  <section aria-labelledby="es-h"><div class="sec-head"><div><h2 id="es-h">Як ми працюємо</h2></div></div>' + cards(SEC.EMP_STEPS, "steps6 s4") + "</section>\n"
+            + '\n  <section aria-labelledby="ef-h"><div class="sec-head"><div><h2 id="ef-h">Кого підбираємо</h2><p>Працівників для Польщі, Литви, Чехії та Словаччини — з досвідом і без, поодинці, парами й бригадами.</p></div></div>'
+            + '<div class="mn-chips emp-chips">' + "".join(f"<span>{esc(x)}</span>" for x in SEC.EMP_FIELDS) + "</div></section>\n")
+    ld = [crumbs_ld([("Головна", "/"), (P["h1"], path)]), ORG]
+    t = region(tpl, "head", head(P["title"], P["desc"], path, ld))
+    t = region(t, "hero", "\n  " + hero + "  ")
+    t = region(t, "vach", "Вакансії")
+    t = region(t, "grid", "")
+    t = region(t, "apply", emp_form)
+    t = region(t, "text", "")
+    t = inner(t)
+    write(path, t)
+    sitemap.append((path, TODAY.isoformat(), "monthly", "0.7"))
+
+    # ---------- Особистий кабінет ----------
+    P = SEC.PAGES["cabinet"]
+    path = P["path"]
+    hero = (crumbs([("Головна", "/"), (P["h1"], "")]) + HIDE_VAC
+            + f'\n  <section id="hero"><div class="page-head"><h1>{esc(P["h1"])}</h1><p class="lead">{esc(P["lead"])}</p></div></section>\n'
+            + '\n  <section id="cab" aria-live="polite"><div class="cab-load">Завантаження…</div></section>\n'
+            + "  <script>addEventListener(\"DOMContentLoaded\", function(){ " + open(os.path.join(ROOT, "app", "kabinet.js"), encoding="utf-8").read() + " });</script>\n")
+    t = region(tpl, "head", head(P["title"], P["desc"], path, [crumbs_ld([("Головна", "/"), (P["h1"], path)])], None, robots="noindex"))
+    t = region(t, "hero", "\n  " + hero + "  ")
+    t = region(t, "vach", "Вакансії")
+    t = region(t, "grid", "")
+    t = region(t, "apply", "")
+    t = region(t, "text", "")
+    t = inner(t, sec("how"))
+    write(path, t)
+
     # 404 — для закритих вакансій і старих посилань
     t = region(tpl, "head", head("Сторінку не знайдено | Вдало", "Можливо, вакансію вже закрито. Перегляньте актуальні вакансії.", "/404.html", (), None, robots="noindex"))
     t = region(t, "hero", region(hero_tpl, "h1", h1_block("Цю вакансію вже закрито", "Або сторінку перенесено. Нижче — актуальні вакансії, оновлені сьогодні. Можна також залишити заявку — підберемо схожу.")))
@@ -1091,13 +1192,13 @@ def main():
     for p in uk_pages:
         h = open(page_file(p), encoding="utf-8").read()
         segs |= i18n.segments_from_html(h)
-        if p == "/":
-            js = i18n.js_literals(h)
+        js |= i18n.js_literals(h)
     segs |= js
     months = ["січня", "лютого", "березня", "квітня", "травня", "червня", "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"]
     os.makedirs(i18n.DICT_DIR, exist_ok=True)
     json.dump(sorted(segs), open(os.path.join(i18n.DICT_DIR, "_segments.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=0)
-    rt_keys = js | set(i18n.vacancy_segments(items)) | set(months) | {"Заїзд", "І", "О", "Н", "Л", "Т", "М", "В", "Ю", "Г", "НП", "А", "С", "К", "Р", "Брно", "Вроцлава", "Гданська", "Лодзі", "Любіна", "Острави", "Пльзеня", "Познані"}
+    app_keys = {ln.split(" ¦ ")[0].strip() for ln in open(os.path.join(i18n.SRC_DIR, "07_app.txt"), encoding="utf-8") if " ¦ " in ln and not ln.startswith("#")}
+    rt_keys = app_keys | js | set(i18n.vacancy_segments(items)) | set(months) | {"Заїзд", "І", "О", "Н", "Л", "Т", "М", "В", "Ю", "Г", "НП", "А", "С", "К", "Р", "Брно", "Вроцлава", "Гданська", "Лодзі", "Любіна", "Острави", "Пльзеня", "Познані", "Гданськ"}
     for p in uk_pages:  # hreflang і на українських сторінках
         if p == "404.html":
             continue
@@ -1116,6 +1217,9 @@ def main():
         d = i18n.load(lang)
         ex = i18n.load_desc(lang)
         ex = {k: v for k, v in ex.items() if k in whole}
+        for k, v in ex.items():
+            if len(k) <= 60 and k not in d:
+                d[k] = v
         frozen = set(x for x in i18n.desc_texts(items) if x not in ex)
         tr = i18n.Tr(d, lang, ex, frozen)
         ldir = os.path.join(ROOT, lang)

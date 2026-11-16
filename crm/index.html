@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>CRM · Вдало</title>
+<link rel="icon" href="/favicon.svg">
+<style>
+:root{--bg:#f4f5f7;--surface:#fff;--ink:#0d0f12;--muted:#667085;--line:#e4e7ec;--soft:#eef1f5;--green:#146c34;--red:#a11d1d;--amber:#8a5a00;--blue:#1f4fd1;
+  --grad:linear-gradient(120deg,#c3e3f7 0%,#cdeee0 50%,#f6dbe4 100%);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-size:14px}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:16px;padding:10px 20px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;text-decoration:none}
+.logo span{width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:15px}
+.tabs{display:flex;gap:4px;flex:1;overflow-x:auto}
+.tabs button{border:0;background:none;padding:8px 12px;border-radius:10px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected=true]{background:var(--soft);color:var(--ink)}
+.tabs .n{display:inline-block;min-width:18px;padding:0 5px;margin-left:4px;border-radius:9px;background:var(--ink);color:#fff;font-size:11px;line-height:18px;text-align:center}
+.me{display:flex;align-items:center;gap:8px;color:var(--muted);white-space:nowrap}
+main{padding:20px;max-width:1500px;margin:0 auto}
+.btn{border:0;border-radius:10px;background:var(--ink);color:#fff;font-weight:700;padding:9px 14px;cursor:pointer;white-space:nowrap}
+.btn.ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.btn.sm{padding:6px 10px;font-size:13px}
+.btn.green{background:var(--green)}
+.btn:disabled{opacity:.5;cursor:default}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.bar input[type=search]{flex:1;min-width:200px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip b{font-weight:800;margin-left:4px;opacity:.7}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{position:sticky;top:57px;background:var(--surface);text-align:left;font-size:12px;color:var(--muted);font-weight:700;padding:10px 12px;border-bottom:1px solid var(--line);z-index:1}
+.tbl td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr.row{cursor:pointer}
+.tbl tr.row:hover td{background:#fafbfc}
+.tbl small{display:block;color:var(--muted);margin-top:2px}
+.st{display:inline-block;padding:3px 9px;border-radius:999px;font-weight:700;font-size:12px;background:var(--soft);white-space:nowrap}
+.st-new{background:#e5edff;color:var(--blue)}
+.st-contacted,.st-in_progress{background:#fff2d6;color:var(--amber)}
+.st-matched,.st-departed{background:#efe5ff;color:#5b2bb5}
+.st-working,.st-contract{background:#e2f5e9;color:var(--green)}
+.st-paid,.st-done{background:var(--green);color:#fff}
+.st-rejected{background:#f6e3e3;color:var(--red)}
+.money{font-weight:800;white-space:nowrap}
+.empty{padding:40px;text-align:center;color:var(--muted)}
+.drawer{position:fixed;inset:0 0 0 auto;width:min(520px,100%);background:var(--surface);box-shadow:-20px 0 60px rgba(0,0,0,.15);z-index:20;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .2s,visibility .2s;visibility:hidden}
+.drawer.open{transform:none;visibility:visible}
+.shade{position:fixed;inset:0;background:rgba(13,15,18,.3);z-index:19;display:none}
+.shade.open{display:block}
+.dh{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.dh h2{margin:0;font-size:18px;flex:1}
+.db{padding:16px 20px;overflow:auto;flex:1;display:grid;gap:12px;align-content:start}
+.df{padding:12px 20px;border-top:1px solid var(--line);display:flex;gap:8px;justify-content:flex-end}
+.fld{display:grid;gap:4px}
+.fld label{font-size:12px;font-weight:700;color:var(--muted)}
+.fld input,.fld select,.fld textarea{padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.fld textarea{min-height:70px;resize:vertical}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:6px 10px;background:var(--soft);border-radius:12px;padding:12px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;word-break:break-word}
+.hist{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:13px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+.stat{padding:14px 16px}
+.stat span{color:var(--muted);font-weight:600;font-size:12px}
+.stat b{display:block;font-size:24px;margin-top:4px}
+.stat.hl{background:var(--grad)}
+.login{max-width:440px;margin:10vh auto;padding:32px;display:grid;gap:14px;text-align:center;justify-items:center}
+.login h1{margin:0;font-size:24px}
+.login p{margin:0;color:var(--muted)}
+.err{color:var(--red);font-weight:600;min-height:1em}
+.demo{background:#fff7d6;border:1px solid #f1d675;color:#5c4a00;border-radius:12px;padding:8px 12px;font-weight:600;margin-bottom:14px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-weight:600;z-index:30;display:none}
+.toast.show{display:block}
+.note{color:var(--muted);font-size:13px}
+@media (max-width:800px){
+  .top{flex-wrap:wrap;padding:10px 12px}.tabs{order:3;flex-basis:100%}main{padding:12px}
+  .tbl thead{display:none}.tbl tr.row{display:grid;grid-template-columns:1fr auto;padding:10px 12px;border-bottom:1px solid var(--line)}
+  .tbl tr.row td{border:0;padding:2px 0}.tbl td.hide-m{display:none}.g2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="/"><span>В</span>CRM</a>
+  <nav class="tabs" id="tabs" role="tablist" hidden>
+    <button role="tab" data-tab="leads" aria-selected="true">Кандидати<span class="n" id="n-leads" hidden></span></button>
+    <button role="tab" data-tab="employers">Роботодавці<span class="n" id="n-employers" hidden></span></button>
+    <button role="tab" data-tab="people">Реферали й баланси</button>
+    <button role="tab" data-tab="payouts">Виплати<span class="n" id="n-payouts" hidden></span></button>
+    <button role="tab" data-tab="settings">Налаштування</button>
+  </nav>
+  <div class="me" id="me"></div>
+</header>
+<main id="app"><div class="empty">Завантаження…</div></main>
+<div class="shade" id="shade"></div>
+<aside class="drawer" id="drawer" aria-hidden="true"></aside>
+<div class="toast" id="toast"></div>
+
+<script src="/app/common.js"></script>
+<script>
+(function(){
+  var E = Vdalo.esc, M = Vdalo.money;
+  var app = document.getElementById("app"), drawer = document.getElementById("drawer"), shade = document.getElementById("shade");
+  var DEMO = /[?&]demo=1/.test(location.search);
+  var LS = [["new","Нова заявка"],["contacted","На зв’язку"],["matched","Підібрано вакансію"],["departed","Виїхав"],["working","Працює"],["paid","Відпрацював 2 тижні, оплату отримано"],["rejected","Відмова"]];
+  var LSN = {}; LS.forEach(function(x){ LSN[x[0]] = x[1]; });
+  var ES = [["new","Новий запит"],["in_progress","В роботі"],["contract","Співпрацюємо"],["rejected","Відмова"]];
+  var ESN = {}; ES.forEach(function(x){ ESN[x[0]] = x[1]; });
+  var ROLES = {user: "Користувач", manager: "Менеджер", admin: "Адмін"};
+  var S = {tab: "leads", leads: [], employers: [], people: [], payouts: [], bonus: 0, me: null, filter: "active", q: "", efilter: "all"};
+
+  function toast(t){ var el = document.getElementById("toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(function(){ el.classList.remove("show"); }, 2200); }
+  function dt(d, time){ if (!d) return ""; var x = new Date(d); return x.toLocaleDateString("uk-UA", {day: "2-digit", month: "2-digit", year: "2-digit"}) + (time ? " " + x.toLocaleTimeString("uk-UA", {hour: "2-digit", minute: "2-digit"}) : ""); }
+  function pname(p){ if (!p) return ""; return [p.first_name, p.last_name].filter(Boolean).join(" ") || (p.tg_username ? "@" + p.tg_username : "—"); }
+  function opts(list, v){ return list.map(function(x){ return '<option value="' + x[0] + '"' + (x[0] === v ? " selected" : "") + ">" + E(x[1]) + "</option>"; }).join(""); }
+
+  /* ================= API ================= */
+  function demoApi(){
+    var day = 864e5, now = Date.now(), id = 100;
+    var people = [
+      {id: "u1", first_name: "Олександр", tg_username: "vdalo_admin", role: "admin", ref_code: "adm001", phone: "", created_at: new Date(now - 60*day)},
+      {id: "u2", first_name: "Оксана", last_name: "Мельник", tg_username: "oksana_m", role: "user", ref_code: "ok7m2p", phone: "+380 67 111 22 33", created_at: new Date(now - 30*day)},
+      {id: "u3", first_name: "Іван", tg_username: "ivan_k", role: "user", ref_code: "iv4k9x", phone: "", created_at: new Date(now - 10*day)}
+    ];
+    var ledger = [{id: 1, user_id: "u2", kind: "bonus", amount: 1000, lead_id: 3, created_at: new Date(now - 4*day), note: "Бонус за Петро Іваненко"}];
+    function L(n, ph, st, ago, ref, extra){ return Object.assign({id: ++id, created_at: new Date(now - ago*day), updated_at: new Date(now - ago*day), name: n, phone: ph, status: st, referrer_id: ref, vacancy_title: "Комплектувальник на склад SHEIN", vacancy_id: "132", who: "Сам / сама", when_go: "Найближчим часом", contact_mode: "Дзвінок", channel: null, source: ref ? "рекомендація" : "google ads", lang: "uk", note: "", employer: null, start_date: null, manager_note: ""}, extra || {}); }
+    var leads = [
+      L("Марина Ткач", "+380 50 123 45 67", "new", 0.1, null),
+      L("Василь Бойко", "+380 97 222 33 44", "new", 0.4, "u2", {who: "Пара"}),
+      L("Петро Іваненко", "+380 63 555 66 77", "paid", 30, "u2", {employer: "SHEIN Wrocław", start_date: "2026-10-20"}),
+      L("Марія Коваль", "+380 66 777 88 99", "working", 12, "u2", {employer: "Biedronka", start_date: "2026-11-05"}),
+      L("Андрій Литвин", "+48 512 345 678", "contacted", 2, null, {vacancy_title: "Оператор навантажувача", lang: "pl"}),
+      L("Ірина Савчук", "+380 68 000 11 22", "matched", 5, "u3"),
+      L("Олег Руденко", "+380 99 333 44 55", "rejected", 9, null)
+    ];
+    var events = {};
+    var employers = [{id: 1, created_at: new Date(now - day), company: "Logistics Sp. z o.o.", contact_name: "Jan Kowalski", phone: "+48 600 100 200", email: "jan@example.pl", country: "Польща", city: "Poznań", workers: "15", positions: "Комплектувальники на склад, 2 зміни, житло від роботодавця", start_when: "З 1 грудня", status: "new", manager_note: ""}];
+    var payouts = [{id: 1, created_at: new Date(now - day), user_id: "u2", amount: 600, contact: "Telegram @oksana_m", status: "new"}];
+    var settings = {bonus_amount: "1000"};
+    function bal(uid){ return ledger.filter(function(g){ return g.user_id === uid; }).reduce(function(a, g){ return a + g.amount; }, 0); }
+    function withRef(l){ var p = people.filter(function(x){ return x.id === l.referrer_id; })[0]; return Object.assign({}, l, {referrer: p || null}); }
+    return {
+      demo: true,
+      me: function(){ return Promise.resolve(people[0]); },
+      leads: function(){ return Promise.resolve(leads.map(withRef).sort(function(a, b){ return b.created_at - a.created_at; })); },
+      events: function(lid){ return Promise.resolve(events[lid] || []); },
+      saveLead: function(lid, patch){
+        var l = leads.filter(function(x){ return x.id === lid; })[0];
+        if (patch.status && patch.status !== l.status) {
+          (events[lid] = events[lid] || []).unshift({created_at: new Date(), old_status: l.status, new_status: patch.status});
+          if (patch.status === "paid" && (patch.referrer_id || l.referrer_id) && !ledger.some(function(g){ return g.lead_id === lid && g.kind === "bonus"; }) && +settings.bonus_amount > 0)
+            ledger.push({id: ledger.length + 1, user_id: patch.referrer_id || l.referrer_id, kind: "bonus", amount: +settings.bonus_amount, lead_id: lid, created_at: new Date(), note: "Бонус за " + l.name});
+        }
+        Object.assign(l, patch, {updated_at: new Date()}); return Promise.resolve();
+      },
+      addLead: function(row){ leads.push(Object.assign(L(row.name, row.phone, "new", 0, row.referrer_id || null), row)); return Promise.resolve(); },
+      deleteLead: function(lid){ leads = leads.filter(function(x){ return x.id !== lid; }); return Promise.resolve(); },
+      employers: function(){ return Promise.resolve(employers.slice()); },
+      saveEmployer: function(eid, patch){ Object.assign(employers.filter(function(x){ return x.id === eid; })[0], patch); return Promise.resolve(); },
+      people: function(){ return Promise.resolve(people.map(function(p){ return Object.assign({}, p, {balance: bal(p.id), earned: ledger.filter(function(g){ return g.user_id === p.id && g.kind === "bonus"; }).reduce(function(a, g){ return a + g.amount; }, 0), invited: leads.filter(function(l){ return l.referrer_id === p.id; }).length}); })); },
+      ledger: function(uid){ return Promise.resolve(ledger.filter(function(g){ return g.user_id === uid; }).reverse()); },
+      payouts: function(){ return Promise.resolve(payouts.map(function(r){ var p = people.filter(function(x){ return x.id === r.user_id; })[0]; return Object.assign({}, r, {user: p, balance: bal(r.user_id)}); })); },
+      makePayout: function(uid, amount, note, req){ ledger.push({id: ledger.length + 1, user_id: uid, kind: "payout", amount: -Math.abs(amount), note: note, created_at: new Date()}); if (req) payouts.filter(function(x){ return x.id === req; })[0].status = "done"; return Promise.resolve(); },
+      rejectPayout: function(req){ payouts.filter(function(x){ return x.id === req; })[0].status = "rejected"; return Promise.resolve(); },
+      setRole: function(uid, role){ people.filter(function(x){ return x.id === uid; })[0].role = role; return Promise.resolve(); },
+      settings: function(){ return Promise.resolve(Object.assign({}, settings)); },
+      setSetting: function(k, v){ settings[k] = v; return Promise.resolve(); },
+      findRef: function(code){ var p = people.filter(function(x){ return x.ref_code === code.toLowerCase(); })[0]; return Promise.resolve(p || null); },
+      logout: function(){ location.href = "/crm/"; }
+    };
+  }
+
+  function realApi(s, uid){
+    function ok(r){ if (r.error) throw r.error; return r.data; }
+    var REF = "referrer:profiles!leads_referrer_id_fkey(id,first_name,last_name,tg_username,ref_code,phone)";
+    return {
+      me: function(){ return s.from("profiles").select("*").eq("id", uid).maybeSingle().then(ok); },
+      leads: function(){ return s.from("leads").select("*," + REF).order("created_at", {ascending: false}).limit(2000).then(ok); },
+      events: function(lid){ return s.from("lead_events").select("*").eq("lead_id", lid).order("created_at", {ascending: false}).then(ok); },
+      saveLead: function(lid, patch){ return s.from("leads").update(patch).eq("id", lid).then(ok); },
+      addLead: function(row){ return s.from("leads").insert(row).then(ok); },
+      deleteLead: function(lid){ return s.from("leads").delete().eq("id", lid).then(ok); },
+      employers: function(){ return s.from("employer_leads").select("*").order("created_at", {ascending: false}).limit(1000).then(ok); },
+      saveEmployer: function(eid, patch){ return s.from("employer_leads").update(patch).eq("id", eid).then(ok); },
+      people: function(){ return s.from("user_balances").select("*").order("balance", {ascending: false}).limit(2000).then(ok); },
+      ledger: function(u){ return s.from("ledger").select("*").eq("user_id", u).order("created_at", {ascending: false}).then(ok); },
+      payouts: function(){
+        return Promise.all([s.from("payout_requests").select("*").order("created_at", {ascending: false}).limit(500).then(ok), s.from("user_balances").select("id,first_name,last_name,tg_username,phone,balance").then(ok)])
+          .then(function(r){ var by = {}; r[1].forEach(function(p){ by[p.id] = p; }); return r[0].map(function(x){ return Object.assign({}, x, {user: by[x.user_id], balance: by[x.user_id] ? by[x.user_id].balance : 0}); }); });
+      },
+      makePayout: function(u, a, note, req){ return s.rpc("make_payout", {p_user: u, p_amount: a, p_note: note, p_request: req || null}).then(ok); },
+      rejectPayout: function(req){ return s.from("payout_requests").update({status: "rejected"}).eq("id", req).then(ok); },
+      setRole: function(u, role){ return s.from("profiles").update({role: role}).eq("id", u).then(ok); },
+      settings: function(){ return s.from("settings").select("*").then(ok).then(function(r){ var o = {}; r.forEach(function(x){ o[x.key] = x.value; }); return o; }); },
+      setSetting: function(k, v){ return s.from("settings").upsert({key: k, value: String(v)}).then(ok); },
+      findRef: function(code){ return s.from("profiles").select("id,first_name,last_name,tg_username,ref_code").eq("ref_code", code.toLowerCase()).maybeSingle().then(ok); },
+      logout: function(){ s.auth.signOut().then(function(){ location.reload(); }); }
+    };
+  }
+
+  var API;
+
+  /* ================= Вхід ================= */
+  function loginScreen(msg){
+    app.innerHTML = '<div class="card login"><h1>CRM «Вдало»</h1><p>' + E(msg || "Увійдіть через Telegram. Доступ мають лише менеджери.") + '</p><div id="tg"></div><p class="err" id="lerr"></p>' +
+      '<p class="note"><a href="?demo=1">Відкрити демо з вигаданими даними</a></p></div>';
+    Vdalo.tgLogin(document.getElementById("tg"), function(){ location.reload(); }, function(m){ document.getElementById("lerr").textContent = m; });
+  }
+  function boot(){
+    if (DEMO) { API = demoApi(); return start(); }
+    Vdalo.sb().then(function(s){
+      if (!s) { app.innerHTML = '<div class="card login"><h1>CRM ще не підключено</h1><p>Заповніть config.json (адреса й ключ Supabase, ім’я бота) — інструкція в README.</p><p class="note"><a href="?demo=1">Відкрити демо</a></p></div>'; return; }
+      s.auth.getSession().then(function(r){
+        var ses = r.data.session; if (!ses) return loginScreen();
+        API = realApi(s, ses.user.id); start();
+      });
+    });
+  }
+  function start(){
+    API.me().then(function(me){
+      if (!me || (me.role !== "manager" && me.role !== "admin")) {
+        app.innerHTML = '<div class="card login"><h1>Немає доступу</h1><p>Ваш акаунт ' + E(pname(me)) + ' ще не має ролі менеджера. Попросіть адміністратора надати доступ у розділі «Реферали й баланси».</p><button class="btn ghost" id="out">Вийти</button></div>';
+        document.getElementById("out").onclick = function(){ API.logout(); }; return;
+      }
+      S.me = me;
+      API.settings().then(function(st){ S.bonus = +st.bonus_amount || 0; }).catch(function(){});
+      document.getElementById("me").innerHTML = E(pname(me)) + ' · ' + E(ROLES[me.role]) + ' <button class="btn ghost sm" id="out">Вийти</button>';
+      document.getElementById("out").onclick = function(){ API.logout(); };
+      document.getElementById("tabs").hidden = false;
+      document.querySelectorAll("#tabs button").forEach(function(b){ b.onclick = function(){ go(b.getAttribute("data-tab")); }; });
+      var h = location.hash.replace("#", ""); go(["leads", "employers", "people", "payouts", "settings"].indexOf(h) >= 0 ? h : "leads");
+      counts();
+    });
+  }
+  function go(tab){
+    S.tab = tab; history.replaceState(null, "", (DEMO ? "?demo=1" : location.pathname) + "#" + tab);
+    document.querySelectorAll("#tabs button").forEach(function(b){ b.setAttribute("aria-selected", b.getAttribute("data-tab") === tab); });
+    closeDrawer(); render();
+  }
+  function counts(){
+    Promise.all([API.leads(), API.employers(), API.payouts()]).then(function(r){
+      S.leads = r[0]; S.employers = r[1]; S.payouts = r[2];
+      badge("n-leads", r[0].filter(function(x){ return x.status === "new"; }).length);
+      badge("n-employers", r[1].filter(function(x){ return x.status === "new"; }).length);
+      badge("n-payouts", r[2].filter(function(x){ return x.status === "new"; }).length);
+    });
+  }
+  function badge(id, n){ var el = document.getElementById(id); el.hidden = !n; el.textContent = n; }
+  function demoBar(){ return API.demo ? '<div class="demo">Демо-режим: дані вигадані, зміни не зберігаються після оновлення сторінки.</div>' : ""; }
+  function render(){
+    app.innerHTML = '<div class="empty">Завантаження…</div>';
+    ({leads: rLeads, employers: rEmployers, people: rPeople, payouts: rPayouts, settings: rSettings})[S.tab]();
+  }
+  function fail(e){ console.warn(e); toast("Помилка: " + (e && e.message || "не вдалося зберегти")); }
+
+  /* ================= Кандидати ================= */
+  function rLeads(){
+    API.leads().then(function(list){
+      S.leads = list;
+      var cnt = {}; list.forEach(function(l){ cnt[l.status] = (cnt[l.status] || 0) + 1; });
+      var active = list.filter(function(l){ return l.status !== "rejected" && l.status !== "paid"; }).length;
+      var chips = '<button class="chip" data-f="active" aria-pressed="' + (S.filter === "active") + '">Активні<b>' + active + '</b></button>' +
+        '<button class="chip" data-f="all" aria-pressed="' + (S.filter === "all") + '">Усі<b>' + list.length + '</b></button>' +
+        LS.map(function(x){ return '<button class="chip" data-f="' + x[0] + '" aria-pressed="' + (S.filter === x[0]) + '">' + E(x[0] === "paid" ? "Оплачено" : x[1]) + '<b>' + (cnt[x[0]] || 0) + '</b></button>'; }).join("");
+      var q = S.q.toLowerCase();
+      var rows = list.filter(function(l){
+        if (S.filter === "active" && (l.status === "rejected" || l.status === "paid")) return false;
+        if (S.filter !== "active" && S.filter !== "all" && l.status !== S.filter) return false;
+        if (q && [l.name, l.phone, l.vacancy_title, l.employer, l.manager_note, l.referrer && pname(l.referrer)].join(" ").toLowerCase().indexOf(q) < 0) return false;
+        return true;
+      });
+      app.innerHTML = demoBar() +
+        '<div class="bar"><input type="search" id="q" placeholder="Пошук: ім’я, телефон, вакансія, роботодавець…" value="' + E(S.q) + '"><button class="btn" id="add">+ Нова заявка</button></div>' +
+        '<div class="bar">' + chips + '</div>' +
+        '<div class="card"><table class="tbl"><thead><tr><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Від кого</th><th>Статус</th></tr></thead><tbody>' +
+        (rows.length ? rows.map(function(l){
+          return '<tr class="row" data-id="' + l.id + '"><td class="hide-m">' + E(dt(l.created_at, true)) + '</td>' +
+            '<td><b>' + E(l.name) + '</b><small>' + E(l.phone) + (l.who ? " · " + E(l.who) : "") + '</small></td>' +
+            '<td class="hide-m">' + E(l.vacancy_title || "Будь-яка") + (l.employer ? '<small>' + E(l.employer) + '</small>' : "") + '</td>' +
+            '<td class="hide-m">' + (l.referrer ? E(pname(l.referrer)) : '<span class="note">' + E(l.ref_raw ? "ref: " + l.ref_raw : (l.source || "—")) + '</span>') + '</td>' +
+            '<td><span class="st st-' + l.status + '">' + E(LSN[l.status] || l.status) + '</span></td></tr>';
+        }).join("") : '<tr><td colspan="5" class="empty">Нічого не знайдено</td></tr>') + '</tbody></table></div>';
+      var qi = document.getElementById("q");
+      qi.oninput = function(){ S.q = qi.value; var pos = qi.selectionStart; rLeads(); };
+      document.querySelectorAll("[data-f]").forEach(function(b){ b.onclick = function(){ S.filter = b.getAttribute("data-f"); rLeads(); }; });
+      document.querySelectorAll("tr.row").forEach(function(tr){ tr.onclick = function(){ openLead(+tr.getAttribute("data-id")); }; });
+      document.getElementById("add").onclick = function(){ openLead(null); };
+      if (S.q) { qi.focus(); qi.setSelectionRange(qi.value.length, qi.value.length); }
+    }).catch(fail);
+  }
+  function openDrawer(html){ drawer.innerHTML = html; drawer.classList.add("open"); shade.classList.add("open"); drawer.setAttribute("aria-hidden", "false"); }
+  function closeDrawer(){ drawer.classList.remove("open"); shade.classList.remove("open"); drawer.setAttribute("aria-hidden", "true"); }
+  shade.onclick = closeDrawer;
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeDrawer(); });
+
+  function openLead(id){
+    var l = id ? S.leads.filter(function(x){ return x.id === id; })[0] : {name: "", phone: "", status: "new"};
+    if (!l) return;
+    var isNew = !id;
+    var info = isNew ? "" : '<dl class="kv"><dt>Заявка</dt><dd>' + E(dt(l.created_at, true)) + '</dd><dt>Телефон</dt><dd><a href="tel:' + E((l.phone || "").replace(/[^\d+]/g, "")) + '">' + E(l.phone) + '</a></dd>' +
+      '<dt>Вакансія</dt><dd>' + (l.vacancy_id ? '<a href="/vakansii/' + E(l.vacancy_id) + '/" target="_blank">' + E(l.vacancy_title || l.vacancy_id) + '</a>' : "Будь-яка") + '</dd>' +
+      '<dt>Хто їде</dt><dd>' + E(l.who || "—") + '</dd><dt>Коли</dt><dd>' + E(l.when_go || "—") + '</dd>' +
+      '<dt>Зв’язок</dt><dd>' + E([l.contact_mode, l.channel].filter(Boolean).join(" · ") || "—") + '</dd>' +
+      '<dt>Коментар</dt><dd>' + E(l.note || "—") + '</dd><dt>Джерело</dt><dd>' + E(l.source || "—") + (l.lang && l.lang !== "uk" ? " · мова " + E(l.lang) : "") + '</dd></dl>';
+    openDrawer('<div class="dh"><h2>' + (isNew ? "Нова заявка" : E(l.name)) + '</h2><button class="btn ghost sm" data-x>✕</button></div><div class="db">' + info +
+      (isNew ? '<div class="g2"><div class="fld"><label>Ім’я</label><input id="d-name"></div><div class="fld"><label>Телефон</label><input id="d-phone" type="tel"></div></div>' +
+        '<div class="fld"><label>Вакансія / побажання</label><input id="d-vac"></div>' : "") +
+      '<div class="fld"><label>Статус</label><select id="d-status">' + opts(LS, l.status) + '</select></div>' +
+      '<p class="note" id="d-bonus-note"></p>' +
+      '<div class="g2"><div class="fld"><label>Роботодавець / об’єкт</label><input id="d-emp" value="' + E(l.employer || "") + '"></div>' +
+      '<div class="fld"><label>Дата виходу на роботу</label><input id="d-start" type="date" value="' + E(l.start_date || "") + '"></div></div>' +
+      '<div class="fld"><label>Хто запросив (реферальний код)</label><div class="g2"><input id="d-ref" placeholder="напр. ok7m2p" value="' + E(l.referrer ? l.referrer.ref_code || "" : "") + '"><span class="note" id="d-ref-name" style="align-self:center">' + (l.referrer ? E(pname(l.referrer)) : (l.ref_raw ? "з посилання: " + E(l.ref_raw) + " (не знайдено)" : "")) + '</span></div></div>' +
+      '<div class="fld"><label>Нотатки менеджера</label><textarea id="d-note">' + E(l.manager_note || "") + '</textarea></div>' +
+      (isNew ? "" : '<div><b>Історія статусів</b><ul class="hist" id="d-hist"><li>…</li></ul></div>') +
+      '</div><div class="df">' + (!isNew && S.me.role === "admin" ? '<button class="btn ghost" id="d-del" style="margin-right:auto;color:var(--red)">Видалити</button>' : "") +
+      '<button class="btn ghost" data-x>Скасувати</button><button class="btn" id="d-save">Зберегти</button></div>');
+    drawer.querySelectorAll("[data-x]").forEach(function(b){ b.onclick = closeDrawer; });
+    var stSel = document.getElementById("d-status"), bn = document.getElementById("d-bonus-note");
+    function bonusNote(){
+      bn.textContent = stSel.value === "paid" && l.status !== "paid" ? (S.bonus > 0 ? "Після збереження тому, хто запросив, автоматично нарахується бонус " + M(S.bonus) + "." : "Бонус не нарахується: у «Налаштуваннях» не задано суму бонусу.") : "";
+    }
+    stSel.onchange = bonusNote; bonusNote();
+    var refId = l.referrer_id || null, refIn = document.getElementById("d-ref");
+    refIn.onchange = function(){
+      var c = refIn.value.trim(); var out = document.getElementById("d-ref-name");
+      if (!c) { refId = null; out.textContent = ""; return; }
+      API.findRef(c).then(function(p){ refId = p ? p.id : refId; out.textContent = p ? pname(p) : "Код не знайдено"; });
+    };
+    if (!isNew) API.events(l.id).then(function(ev){
+      document.getElementById("d-hist").innerHTML = ev.length ? ev.map(function(e){ return '<li>' + E(dt(e.created_at, true)) + ': ' + E(LSN[e.old_status] || e.old_status || "—") + ' → <b>' + E(LSN[e.new_status] || e.new_status) + '</b></li>'; }).join("") : "<li>Змін ще не було</li>";
+    });
+    document.getElementById("d-save").onclick = function(){
+      var patch = {status: stSel.value, employer: document.getElementById("d-emp").value.trim() || null, start_date: document.getElementById("d-start").value || null,
+        manager_note: document.getElementById("d-note").value.trim() || null, referrer_id: refId};
+      var p;
+      if (isNew) {
+        patch.name = document.getElementById("d-name").value.trim(); patch.phone = document.getElementById("d-phone").value.trim();
+        patch.vacancy_title = document.getElementById("d-vac").value.trim() || null; patch.source = "додано вручну в CRM";
+        if (!patch.name || !patch.phone) { toast("Вкажіть ім’я й телефон"); return; }
+        p = API.addLead(patch);
+      } else p = API.saveLead(l.id, patch);
+      p.then(function(){ toast(patch.status === "paid" && l.status !== "paid" && refId && S.bonus > 0 ? "Збережено. Бонус нараховано." : "Збережено"); closeDrawer(); counts(); rLeads(); }).catch(fail);
+    };
+    var del = document.getElementById("d-del");
+    if (del) del.onclick = function(){ if (confirm("Видалити заявку " + l.name + "?")) API.deleteLead(l.id).then(function(){ closeDrawer(); counts(); rLeads(); }).catch(fail); };
+  }
+
+  /* ================= Роботодавці ================= */
+  function rEmployers(){
+    API.employers().then(function(list){
+      S.employers = list;
+      var cnt = {}; list.forEach(function(x){ cnt[x.status] = (cnt[x.status] || 0) + 1; });
+      var rows = list.filter(function(x){ return S.efilter === "all" || x.status === S.efilter; });
+      app.innerHTML = demoBar() + '<div class="bar"><button class="chip" data-f="all" aria-pressed="' + (S.efilter === "all") + '">Усі<b>' + list.length + '</b></button>' +
+        ES.map(function(x){ return '<button class="chip" data-f="' + x[0] + '" aria-pressed="' + (S.efilter === x[0]) + '">' + E(x[1]) + '<b>' + (cnt[x[0]] || 0) + '</b></button>'; }).join("") + '</div>' +
+        '<div class="card"><table class="tbl"><thead><tr><th>Дата</th><th>Компанія</th><th>Потреба</th><th>Контакт</th><th>Статус</th></tr></thead><tbody>' +
+        (rows.length ? rows.map(function(x){
+          return '<tr class="row" data-id="' + x.id + '"><td class="hide-m">' + E(dt(x.created_at, true)) + '</td><td><b>' + E(x.company) + '</b><small>' + E([x.country, x.city].filter(Boolean).join(", ")) + '</small></td>' +
+            '<td class="hide-m">' + E(x.workers ? x.workers + " ос. · " : "") + E((x.positions || "").slice(0, 90)) + '</td><td class="hide-m">' + E(x.contact_name || "") + '<small>' + E([x.phone, x.email].filter(Boolean).join(" · ")) + '</small></td>' +
+            '<td><span class="st st-' + x.status + '">' + E(ESN[x.status] || x.status) + '</span></td></tr>';
+        }).join("") : '<tr><td colspan="5" class="empty">Запитів поки немає</td></tr>') + '</tbody></table></div>';
+      document.querySelectorAll("[data-f]").forEach(function(b){ b.onclick = function(){ S.efilter = b.getAttribute("data-f"); rEmployers(); }; });
+      document.querySelectorAll("tr.row").forEach(function(tr){ tr.onclick = function(){ openEmployer(+tr.getAttribute("data-id")); }; });
+    }).catch(fail);
+  }
+  function openEmployer(id){
+    var x = S.employers.filter(function(e){ return e.id === id; })[0]; if (!x) return;
+    openDrawer('<div class="dh"><h2>' + E(x.company) + '</h2><button class="btn ghost sm" data-x>✕</button></div><div class="db">' +
+      '<dl class="kv"><dt>Запит</dt><dd>' + E(dt(x.created_at, true)) + '</dd><dt>Контакт</dt><dd>' + E(x.contact_name || "—") + '</dd>' +
+      '<dt>Телефон</dt><dd>' + (x.phone ? '<a href="tel:' + E(x.phone.replace(/[^\d+]/g, "")) + '">' + E(x.phone) + '</a>' : "—") + '</dd><dt>E-mail</dt><dd>' + (x.email ? '<a href="mailto:' + E(x.email) + '">' + E(x.email) + '</a>' : "—") + '</dd>' +
+      '<dt>Де</dt><dd>' + E([x.country, x.city].filter(Boolean).join(", ") || "—") + '</dd><dt>Скільки людей</dt><dd>' + E(x.workers || "—") + '</dd>' +
+      '<dt>Коли</dt><dd>' + E(x.start_when || "—") + '</dd><dt>Позиції</dt><dd>' + E(x.positions || "—") + '</dd><dt>Коментар</dt><dd>' + E(x.note || "—") + '</dd><dt>Мова сайту</dt><dd>' + E(x.lang || "uk") + '</dd></dl>' +
+      '<div class="fld"><label>Статус</label><select id="e-st">' + opts(ES, x.status) + '</select></div>' +
+      '<div class="fld"><label>Нотатки менеджера</label><textarea id="e-note">' + E(x.manager_note || "") + '</textarea></div></div>' +
+      '<div class="df"><button class="btn ghost" data-x>Скасувати</button><button class="btn" id="e-save">Зберегти</button></div>');
+    drawer.querySelectorAll("[data-x]").forEach(function(b){ b.onclick = closeDrawer; });
+    document.getElementById("e-save").onclick = function(){
+      API.saveEmployer(x.id, {status: document.getElementById("e-st").value, manager_note: document.getElementById("e-note").value.trim() || null})
+        .then(function(){ toast("Збережено"); closeDrawer(); counts(); rEmployers(); }).catch(fail);
+    };
+  }
+
+  /* ================= Реферали й баланси ================= */
+  function rPeople(){
+    API.people().then(function(list){
+      S.people = list;
+      var total = list.reduce(function(a, p){ return a + (p.balance || 0); }, 0), earned = list.reduce(function(a, p){ return a + (p.earned || 0); }, 0);
+      var isAdmin = S.me.role === "admin";
+      app.innerHTML = demoBar() + '<div class="stats"><div class="card stat"><span>Учасників</span><b>' + list.length + '</b></div>' +
+        '<div class="card stat"><span>Нараховано бонусів усього</span><b>' + E(M(earned)) + '</b></div><div class="card stat hl"><span>До виплати зараз</span><b>' + E(M(total)) + '</b></div></div>' +
+        '<div class="bar"><input type="search" id="pq" placeholder="Пошук: ім’я, нік, телефон, код"></div>' +
+        '<div class="card"><table class="tbl"><thead><tr><th>Учасник</th><th>Код</th><th>Запросив</th><th>Зароблено</th><th>Баланс</th><th>Роль</th><th></th></tr></thead><tbody id="pb"></tbody></table></div>';
+      function draw(){
+        var q = document.getElementById("pq").value.toLowerCase();
+        document.getElementById("pb").innerHTML = list.filter(function(p){ return !q || [pname(p), p.tg_username, p.phone, p.ref_code].join(" ").toLowerCase().indexOf(q) >= 0; }).map(function(p){
+          return '<tr><td><b>' + E(pname(p)) + '</b><small>' + E([p.tg_username ? "@" + p.tg_username : "", p.phone].filter(Boolean).join(" · ")) + '</small></td>' +
+            '<td class="hide-m"><code>' + E(p.ref_code || "") + '</code></td><td class="hide-m">' + (p.invited || 0) + '</td><td class="hide-m money">' + E(M(p.earned)) + '</td>' +
+            '<td class="money">' + E(M(p.balance)) + '</td>' +
+            '<td class="hide-m">' + (isAdmin && p.id !== S.me.id ? '<select data-role="' + E(p.id) + '">' + opts([["user", "Користувач"], ["manager", "Менеджер"], ["admin", "Адмін"]], p.role) + '</select>' : E(ROLES[p.role] || p.role)) + '</td>' +
+            '<td><button class="btn ghost sm" data-hist="' + E(p.id) + '">Історія</button> ' + (p.balance > 0 ? '<button class="btn sm green" data-pay="' + E(p.id) + '">Виплатити</button>' : "") + '</td></tr>';
+        }).join("") || '<tr><td colspan="7" class="empty">Поки нікого</td></tr>';
+        document.querySelectorAll("[data-pay]").forEach(function(b){ b.onclick = function(){ payDialog(b.getAttribute("data-pay"), null); }; });
+        document.querySelectorAll("[data-hist]").forEach(function(b){ b.onclick = function(){ histDialog(b.getAttribute("data-hist")); }; });
+        document.querySelectorAll("[data-role]").forEach(function(sel){ sel.onchange = function(){ API.setRole(sel.getAttribute("data-role"), sel.value).then(function(){ toast("Роль змінено"); }).catch(fail); }; });
+      }
+      document.getElementById("pq").oninput = draw; draw();
+    }).catch(fail);
+  }
+  function personById(id){ return S.people.filter(function(p){ return p.id === id; })[0] || (S.payouts.filter(function(r){ return r.user_id === id; })[0] || {}).user || {id: id}; }
+  function payDialog(uid, req){
+    var p = personById(uid), r = req ? S.payouts.filter(function(x){ return x.id === req; })[0] : null;
+    var bal = r ? r.balance : p.balance;
+    openDrawer('<div class="dh"><h2>Виплата: ' + E(pname(p)) + '</h2><button class="btn ghost sm" data-x>✕</button></div><div class="db">' +
+      '<dl class="kv"><dt>Баланс</dt><dd class="money">' + E(M(bal)) + '</dd>' + (r ? '<dt>Запит</dt><dd>' + E(M(r.amount)) + ' · ' + E(dt(r.created_at, true)) + '</dd><dt>Зв’язок</dt><dd>' + E(r.contact || "—") + '</dd>' : "") +
+      (p.phone ? '<dt>Телефон</dt><dd>' + E(p.phone) + '</dd>' : "") + (p.tg_username ? '<dt>Telegram</dt><dd><a href="https://t.me/' + E(p.tg_username) + '" target="_blank">@' + E(p.tg_username) + '</a></dd>' : "") + '</dl>' +
+      '<div class="fld"><label>Сума, грн</label><input id="p-am" type="number" min="1" value="' + (r ? r.amount : Math.max(bal, 0)) + '"></div>' +
+      '<div class="fld"><label>Коментар (як виплатили)</label><input id="p-note" placeholder="Напр. переказ на картку 16.11"></div>' +
+      '<p class="note">Сума спишеться з балансу учасника, і він побачить виплату в кабінеті.</p></div>' +
+      '<div class="df"><button class="btn ghost" data-x>Скасувати</button><button class="btn green" id="p-ok">Підтвердити виплату</button></div>');
+    drawer.querySelectorAll("[data-x]").forEach(function(b){ b.onclick = closeDrawer; });
+    document.getElementById("p-ok").onclick = function(){
+      var a = parseInt(document.getElementById("p-am").value, 10);
+      if (!(a > 0)) { toast("Вкажіть суму"); return; }
+      if (a > bal && !confirm("Сума більша за баланс. Все одно виплатити?")) return;
+      API.makePayout(uid, a, document.getElementById("p-note").value.trim() || "Виплата", req).then(function(){ toast("Виплату записано"); closeDrawer(); counts(); render(); }).catch(fail);
+    };
+  }
+  function histDialog(uid){
+    var p = personById(uid);
+    API.ledger(uid).then(function(g){
+      openDrawer('<div class="dh"><h2>' + E(pname(p)) + '</h2><button class="btn ghost sm" data-x>✕</button></div><div class="db">' +
+        '<dl class="kv"><dt>Код</dt><dd><code>' + E(p.ref_code || "") + '</code></dd><dt>Посилання</dt><dd>' + E(location.origin + "/?ref=" + (p.ref_code || "")) + '</dd><dt>Баланс</dt><dd class="money">' + E(M(p.balance)) + '</dd></dl>' +
+        '<b>Рух коштів</b><ul class="hist">' + (g.length ? g.map(function(x){ return '<li>' + E(dt(x.created_at, true)) + ' · ' + E({bonus: "Бонус", payout: "Виплата", adjust: "Коригування"}[x.kind] || x.kind) + ' <b>' + (x.amount > 0 ? "+" : "") + E(M(x.amount)) + '</b>' + (x.note ? " · " + E(x.note) : "") + '</li>'; }).join("") : "<li>Порожньо</li>") + '</ul>' +
+        '<b>Запрошені</b><ul class="hist">' + (S.leads.filter(function(l){ return l.referrer_id === uid; }).map(function(l){ return '<li>' + E(l.name) + ' · ' + E(LSN[l.status]) + '</li>'; }).join("") || "<li>Нікого</li>") + '</ul></div>');
+      drawer.querySelectorAll("[data-x]").forEach(function(b){ b.onclick = closeDrawer; });
+    }).catch(fail);
+  }
+
+  /* ================= Виплати ================= */
+  function rPayouts(){
+    Promise.all([API.payouts(), API.people()]).then(function(r){
+      S.payouts = r[0]; S.people = r[1];
+      var nw = r[0].filter(function(x){ return x.status === "new"; }), old = r[0].filter(function(x){ return x.status !== "new"; });
+      function rows(list, actions){
+        return list.length ? list.map(function(x){
+          return '<tr><td class="hide-m">' + E(dt(x.created_at, true)) + '</td><td><b>' + E(pname(x.user)) + '</b><small>' + E(x.contact || "") + '</small></td><td class="money">' + E(M(x.amount)) + '</td>' +
+            '<td class="hide-m money">' + E(M(x.balance)) + '</td><td>' + (actions ? '<button class="btn sm green" data-ok="' + x.id + '">Виплачено</button> <button class="btn sm ghost" data-no="' + x.id + '">Відхилити</button>'
+            : '<span class="st st-' + x.status + '">' + (x.status === "done" ? "Виплачено" : "Відхилено") + '</span>') + '</td></tr>';
+        }).join("") : '<tr><td colspan="5" class="empty">' + (actions ? "Нових запитів немає" : "Порожньо") + '</td></tr>';
+      }
+      var head = '<thead><tr><th>Дата</th><th>Учасник</th><th>Сума</th><th>Баланс</th><th></th></tr></thead>';
+      app.innerHTML = demoBar() + '<h3>Нові запити на виплату</h3><div class="card"><table class="tbl">' + head + '<tbody>' + rows(nw, true) + '</tbody></table></div>' +
+        '<h3 style="margin-top:24px">Оброблені</h3><div class="card"><table class="tbl">' + head + '<tbody>' + rows(old, false) + '</tbody></table></div>';
+      document.querySelectorAll("[data-ok]").forEach(function(b){ b.onclick = function(){ var x = S.payouts.filter(function(p){ return p.id === +b.getAttribute("data-ok"); })[0]; payDialog(x.user_id, x.id); }; });
+      document.querySelectorAll("[data-no]").forEach(function(b){ b.onclick = function(){ if (confirm("Відхилити запит?")) API.rejectPayout(+b.getAttribute("data-no")).then(function(){ counts(); rPayouts(); }).catch(fail); }; });
+    }).catch(fail);
+  }
+
+  /* ================= Налаштування ================= */
+  function rSettings(){
+    API.settings().then(function(st){
+      S.bonus = +st.bonus_amount || 0;
+      var isAdmin = S.me.role === "admin";
+      app.innerHTML = demoBar() + '<div class="card" style="padding:20px;max-width:560px;display:grid;gap:12px"><h3 style="margin:0">Бонус «Приведи друга»</h3>' +
+        '<div class="fld"><label>Сума бонусу за одного друга, грн</label><input id="s-bonus" type="number" min="0" value="' + E(st.bonus_amount || "0") + '"' + (isAdmin ? "" : " disabled") + '></div>' +
+        '<p class="note">Бонус нараховується автоматично, коли кандидату, який прийшов за посиланням, ставлять статус «Відпрацював 2 тижні, оплату отримано». Нова сума діє для наступних нарахувань.</p>' +
+        (isAdmin ? '<button class="btn" id="s-save" style="justify-self:start">Зберегти</button>' : '<p class="note">Змінювати може лише адміністратор.</p>') + '</div>' +
+        '<div class="card" style="padding:20px;max-width:560px;margin-top:16px;display:grid;gap:8px"><h3 style="margin:0">Менеджери</h3><p class="note">Щоб додати менеджера: людина входить у <a href="/kabinet/">особистий кабінет</a> через Telegram, після чого адмін у вкладці «Реферали й баланси» змінює їй роль на «Менеджер».</p></div>';
+      var sv = document.getElementById("s-save");
+      if (sv) sv.onclick = function(){ var v = Math.max(0, parseInt(document.getElementById("s-bonus").value, 10) || 0); API.setSetting("bonus_amount", v).then(function(){ S.bonus = v; toast("Збережено"); }).catch(fail); };
+    }).catch(fail);
+  }
+
+  boot();
+})();
+</script>
+</body>
+</html>

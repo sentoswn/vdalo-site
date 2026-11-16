@@ -1,0 +1,54 @@
+# Розгортає базу (supabase/schema.sql) і функцію входу через Telegram у Supabase.
+# Потрібні секрети репозиторію (Settings → Secrets and variables → Actions):
+#   SUPABASE_ACCESS_TOKEN  — https://supabase.com/dashboard/account/tokens
+#   SUPABASE_PROJECT_REF   — ID проєкту (з адреси https://supabase.com/dashboard/project/<ID>)
+#   SUPABASE_DB_URL        — Project Settings → Database → Connection string (URI, «Session pooler»)
+#   TELEGRAM_BOT_TOKEN     — токен бота від @BotFather
+#   ADMIN_TG               — ваш Telegram-нік без @ (кілька — через кому)
+name: Supabase
+
+on:
+  push:
+    branches: [main]
+    paths: ["supabase/**", ".github/workflows/supabase.yml"]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check secrets
+        id: chk
+        run: |
+          if [ -z "$SUPABASE_ACCESS_TOKEN" ] || [ -z "$REF" ]; then
+            echo "Supabase ще не підключено — пропускаю."; echo "skip=1" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: supabase/setup-cli@v1
+        if: steps.chk.outputs.skip != '1'
+        with:
+          version: latest
+      - name: Database schema
+        if: steps.chk.outputs.skip != '1'
+        env:
+          DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          if [ -n "$DB_URL" ]; then
+            sudo apt-get install -y -qq postgresql-client >/dev/null
+            psql "$DB_URL" -v ON_ERROR_STOP=1 -q -f supabase/schema.sql
+          else
+            echo "SUPABASE_DB_URL не задано — схему виконайте вручну в SQL Editor."
+          fi
+      - name: Function secrets
+        if: steps.chk.outputs.skip != '1'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ADMIN_TG: ${{ secrets.ADMIN_TG }}
+        run: |
+          supabase secrets set --project-ref "$REF" TELEGRAM_BOT_TOKEN="$TELEGRAM_BOT_TOKEN" ADMIN_TG="$ADMIN_TG"
+      - name: Deploy tg-auth
+        if: steps.chk.outputs.skip != '1'
+        run: supabase functions deploy tg-auth --project-ref "$REF" --no-verify-jwt --use-api

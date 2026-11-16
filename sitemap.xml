@@ -115,6 +115,7 @@
   <url><loc>https://vdalo-robota.com.ua/pytannia/</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://vdalo-robota.com.ua/pro-nas/</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://vdalo-robota.com.ua/kontakty/</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/robotodavtsiam/</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://vdalo-robota.com.ua/ru/</loc><lastmod>2026-11-16</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
   <url><loc>https://vdalo-robota.com.ua/en/</loc><lastmod>2026-11-16</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
   <url><loc>https://vdalo-robota.com.ua/pl/</loc><lastmod>2026-11-16</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
@@ -460,4 +461,7 @@
   <url><loc>https://vdalo-robota.com.ua/ru/kontakty/</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://vdalo-robota.com.ua/en/kontakty/</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://vdalo-robota.com.ua/pl/kontakty/</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/ru/robotodavtsiam/</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/en/robotodavtsiam/</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vdalo-robota.com.ua/pl/robotodavtsiam/</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

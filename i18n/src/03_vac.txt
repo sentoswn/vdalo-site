@@ -231,3 +231,13 @@
 С ¦ С ¦ S ¦ S
 К ¦ К ¦ K ¦ K
 Р ¦ Р ¦ R ¦ R
+# нові вакансії (листопад)
+Працівник розвантаження – підвішування птиці на виробничій лінії ¦ Работник разгрузки – подвешивание птицы на производственной линии ¦ Unloading worker – hanging poultry on the production line ¦ Pracownik rozładunku – zawieszanie drobiu na linii produkcyjnej
+Працівник служби прибирання ¦ Работник службы уборки ¦ Cleaning staff ¦ Pracownik serwisu sprzątającego
+Працівник виробництва морозива ¦ Работник производства мороженого ¦ Ice cream production worker ¦ Pracownik produkcji lodów
+Електрик ¦ Электрик ¦ Electrician ¦ Elektryk
+Корабельний столяр ¦ Судовой столяр ¦ Marine joiner ¦ Stolarz jachtowy
+Працівник виробництва електронних компонентів ¦ Работник производства электронных компонентов ¦ Electronic components production worker ¦ Pracownik produkcji komponentów elektronicznych
+Працівник складу з UDT ¦ Работник склада с UDT ¦ Warehouse worker with UDT ¦ Pracownik magazynu z UDT
+Робітник на виробництві ¦ Рабочий на производстве ¦ Production worker ¦ Pracownik produkcji
+Гданськ ¦ Гданьск ¦ Gdańsk ¦ Gdańsk
