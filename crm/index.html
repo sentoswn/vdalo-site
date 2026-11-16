@@ -106,6 +106,17 @@ main{padding:20px;max-width:1500px;margin:0 auto}
 .mini{display:grid;gap:6px}
 .mini .row2{display:grid;grid-template-columns:1fr 150px auto;gap:6px}
 @media (max-width:800px){.grid2{grid-template-columns:1fr}.bars .b{grid-template-columns:120px 1fr 44px}.mini .row2{grid-template-columns:1fr}}
+.guide{max-width:900px;display:grid;gap:16px}
+.guide .card{padding:clamp(16px,3vw,26px);display:grid;gap:10px}
+.guide h3{margin:0;font-size:18px}
+.guide h4{margin:8px 0 0;font-size:15px}
+.guide p,.guide li{line-height:1.55}
+.guide ul,.guide ol{margin:0;padding-left:20px;display:grid;gap:6px}
+.guide .tpl{background:var(--soft);border-radius:12px;padding:12px 14px;white-space:pre-wrap;font-size:14px;line-height:1.5}
+.guide .tpl-row{display:grid;gap:6px}
+.guide .warn{background:#fff4e5;border:1px solid #f3d29a;border-radius:12px;padding:12px 14px}
+.guide nav{display:flex;flex-wrap:wrap;gap:6px}
+.guide nav a{padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);text-decoration:none;font-weight:600;font-size:13px}
 </style>
 </head>
 <body>
@@ -119,6 +130,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     <button role="tab" data-tab="people" data-own>Реферали й баланси</button>
     <button role="tab" data-tab="payouts" data-own>Виплати<span class="n" id="n-payouts" hidden></span></button>
     <button role="tab" data-tab="mylink">Моє посилання</button>
+    <button role="tab" data-tab="guide">Як шукати кандидатів</button>
     <button role="tab" data-tab="settings" data-own>Налаштування</button>
   </nav>
   <div class="me" id="me"></div>
@@ -225,7 +237,6 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     });
   }
   /* ---------- Анкета менеджера ---------- */
-  var M_SRC = ["OLX", "Facebook", "Instagram", "TikTok", "Telegram-канали й групи", "Viber-спільноти", "Знайомі й рекомендації", "Інше"];
   var M_LANG = ["Українська", "Російська", "Польська", "Англійська", "Чеська / словацька"];
   function managerForm(first){
     var me = S.me, f = me.manager_form || {};
@@ -240,13 +251,9 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       '<div class="fld"><label>Телефон *</label><input id="m-phone" type="tel" placeholder="+380 …" value="' + E(me.phone || "") + '"></div></div>' +
       '<div class="g2"><div class="fld"><label>E-mail</label><input id="m-email" type="email" value="' + E(me.email || "") + '"></div>' +
       '<div class="fld"><label>Місто, область *</label><input id="m-city" value="' + E(me.city || "") + '"></div></div>' +
-      '<div class="g2"><div class="fld"><label>Досвід у підборі персоналу *</label>' + sel("m-exp", ["Немає, хочу навчитися", "До 1 року", "1–3 роки", "Понад 3 роки"], f.experience) + '</div>' +
-      '<div class="fld"><label>Скільки часу готові приділяти *</label>' + sel("m-hours", ["До 10 год на тиждень", "10–20 год на тиждень", "20–40 год на тиждень", "Повний робочий день"], f.hours) + '</div></div>' +
-      '<div class="fld"><label>Де плануєте шукати кандидатів</label>' + chk("m-src", M_SRC, f.sources) + '</div>' +
+      '<div class="fld"><label>Скільки часу готові приділяти *</label>' + sel("m-hours", ["До 10 год на тиждень", "10–20 год на тиждень", "20–40 год на тиждень", "Повний робочий день"], f.hours) + '</div>' +
       '<div class="fld"><label>Якими мовами спілкуєтеся</label>' + chk("m-lang", M_LANG, f.languages) + '</div>' +
-      '<div class="g2"><div class="fld"><label>Чи працювали з кандидатами за кордон раніше?</label>' + sel("m-abroad", ["Так", "Ні"], f.abroad) + '</div>' +
-      '<div class="fld"><label>Звідки дізналися про «Вдало»</label><input id="m-heard" value="' + E(me.heard_from || "") + '"></div></div>' +
-      '<div class="fld"><label>Коротко про себе й свій досвід</label><textarea id="m-about">' + E(f.about || "") + '</textarea></div>' +
+      '<div class="fld"><label>Коротко про себе</label><textarea id="m-about">' + E(f.about || "") + '</textarea></div>' +
       '<label style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="m-ok1"' + (me.consent_at ? " checked" : "") + '> <span>Погоджуюся на обробку моїх персональних даних *</span></label>' +
       '<label style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="m-ok2"' + (f.nda ? " checked" : "") + '> <span>Зобов’язуюся не передавати контакти кандидатів і дані з CRM третім особам та використовувати їх лише для роботи з «Вдало» *</span></label>' +
       '<div style="background:#eef8f1;border:1px solid #cbe9d5;border-radius:12px;padding:12px 14px;color:#21452d"><b>🔒 Ваші дані захищені.</b> Анкету бачать лише власники «Вдало». Дані передаються зашифровано й зберігаються в захищеній базі в ЄС, ми не передаємо їх третім особам.</div>' +
@@ -255,23 +262,22 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     document.getElementById("m-save").onclick = function(){
       var v = function(id){ return document.getElementById(id).value.trim(); }, err = document.getElementById("m-err");
       var many = function(n){ return [].map.call(document.querySelectorAll('input[name="' + n + '"]:checked'), function(i){ return i.value; }); };
-      if (!v("m-name") || v("m-phone").replace(/\D/g, "").length < 9 || !v("m-city") || !v("m-exp") || !v("m-hours")) { err.textContent = "Заповніть поля, позначені *."; return; }
+      if (!v("m-name") || v("m-phone").replace(/\D/g, "").length < 9 || !v("m-city") || !v("m-hours")) { err.textContent = "Заповніть поля, позначені *."; return; }
       if (!document.getElementById("m-ok1").checked || !document.getElementById("m-ok2").checked) { err.textContent = "Потрібні обидві згоди."; return; }
       var now = new Date().toISOString();
-      var patch = {full_name: v("m-name"), phone: v("m-phone"), email: v("m-email") || null, city: v("m-city"), heard_from: v("m-heard") || null,
-        manager_form: {experience: v("m-exp"), hours: v("m-hours"), sources: many("m-src"), languages: many("m-lang"), abroad: v("m-abroad") || null, about: v("m-about") || null, nda: true, nda_at: f.nda_at || now},
+      var patch = {full_name: v("m-name"), phone: v("m-phone"), email: v("m-email") || null, city: v("m-city"),
+        manager_form: {hours: v("m-hours"), languages: many("m-lang"), about: v("m-about") || null, nda: true, nda_at: f.nda_at || now},
         consent_at: me.consent_at || now, onboarded_at: me.onboarded_at || now};
       API.saveMe(patch).then(function(){ Object.assign(S.me, patch); toast("Анкету збережено"); if (first) location.reload(); else { document.getElementById("tabs").hidden = false; render(); } }).catch(fail);
     };
   }
   function anketaHtml(p){
     var f = p.manager_form || {};
-    var rows = [["ПІБ", p.full_name], ["Телефон", p.phone], ["E-mail", p.email], ["Місто", p.city], ["Звідки дізнався", p.heard_from],
-      ["Досвід", f.experience], ["Час", f.hours], ["Де шукатиме", (f.sources || []).join(", ")], ["Мови", (f.languages || []).join(", ")],
-      ["Працював із виїздом за кордон", f.abroad], ["Про себе", f.about], ["Анкета заповнена", p.onboarded_at ? dt(p.onboarded_at, true) : "ні"]];
+    var rows = [["ПІБ", p.full_name], ["Телефон", p.phone], ["E-mail", p.email], ["Місто", p.city], ["Звідки дізнався", p.role === "user" ? p.heard_from : ""],
+      ["Час", f.hours], ["Мови", (f.languages || []).join(", ")], ["Про себе", f.about], ["Анкета заповнена", p.onboarded_at ? dt(p.onboarded_at, true) : "ні"]];
     return '<b>Анкета</b><dl class="kv">' + rows.filter(function(r){ return r[1]; }).map(function(r){ return '<dt>' + E(r[0]) + '</dt><dd>' + E(r[1]) + '</dd>'; }).join("") + '</dl>';
   }
-  function tabsAllowed(){ return S.own ? ["leads", "tasks", "analytics", "employers", "people", "payouts", "mylink", "settings"] : ["leads", "tasks", "mylink"]; }
+  function tabsAllowed(){ return S.own ? ["leads", "tasks", "analytics", "employers", "people", "payouts", "mylink", "guide", "settings"] : ["leads", "tasks", "mylink", "guide"]; }
   function staffName(id){ var p = S.staff.filter(function(x){ return x.id === id; })[0]; return p ? pname(p) : ""; }
   function go(tab){
     if (tabsAllowed().indexOf(tab) < 0) tab = "leads";
@@ -296,7 +302,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   function demoBar(){ return ""; }
   function render(){
     app.innerHTML = '<div class="empty">Завантаження…</div>';
-    ({leads: rLeads, tasks: rTasks, analytics: rAnalytics, mylink: rMyLink, employers: rEmployers, people: rPeople, payouts: rPayouts, settings: rSettings})[S.tab]();
+    ({guide: rGuide, leads: rLeads, tasks: rTasks, analytics: rAnalytics, mylink: rMyLink, employers: rEmployers, people: rPeople, payouts: rPayouts, settings: rSettings})[S.tab]();
   }
   function fail(e){ console.warn(e); toast("Помилка: " + (e && e.message || "не вдалося зберегти")); }
 
@@ -463,6 +469,61 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     }).catch(fail);
   }
 
+
+  /* ================= Інструкція: як шукати кандидатів ================= */
+  function rGuide(){
+    var code = S.me.ref_code || "", link = location.origin + "/?ref=" + code;
+    var T = {
+      ad: "🔥 Робота в Польщі, Литві, Чехії — з житлом від роботодавця\n\n✅ Склади, заводи, харчові виробництва\n✅ Без досвіду та без знання мови — навчать на місці\n✅ Офіційний договір, оплата щомісяця\n✅ Можна парою або з другом\n✅ Безкоштовно для кандидатів\n\nАктуальні вакансії зі ставками й житлом 👉 " + link + "\n\nПишіть — підберу варіант під вас 🙂",
+      short: "Шукаєте роботу за кордоном з житлом? Склади й заводи в Польщі, Литві, Чехії, без досвіду, офіційно. Вакансії тут 👉 " + link,
+      first: "Добрий день! Мене звати " + (S.me.full_name || S.me.first_name || "…") + ", я менеджер компанії «Вдало». Бачу, вас цікавить робота за кордоном. Підкажіть, будь ласка:\n1) Ви їдете самі, парою чи з другом?\n2) Яка країна цікавить і коли готові виїхати?\n3) Чи є біометричний паспорт?\nПісля цього підберу 2–3 варіанти з житлом і поясню всі умови.",
+      follow: "Добрий день! Нагадую про себе — менеджер «Вдало». Є нові вакансії з житлом і заїздом найближчими днями. Актуально ще для вас? Можу надіслати 2–3 варіанти 🙂",
+      story: "Сторіз / пост: «Знаю, де зараз беруть на роботу в Польщу без досвіду з житлом. Хто шукає — пишіть у приват або дивіться вакансії за посиланням: " + link + "»"
+    };
+    function tpl(k, title){ return '<div class="tpl-row"><b>' + E(title) + '</b><div class="tpl" id="tpl-' + k + '">' + E(T[k]) + '</div><button class="btn ghost sm" style="justify-self:start" data-copy="' + k + '">Копіювати текст</button></div>'; }
+    app.innerHTML = '<div class="guide">' +
+      '<div class="card"><h3>Як шукати кандидатів безкоштовно</h3><p>Ваше головне знаряддя — <b>особисте посилання</b>. Кожен, хто залишить заявку за ним, автоматично стає вашим кандидатом у CRM.</p>' +
+      '<div class="g2" style="grid-template-columns:1fr auto"><input id="g-link" readonly value="' + E(link) + '" style="padding:9px 11px;border:1px solid var(--line);border-radius:10px"><button class="btn" data-copy="link">Копіювати посилання</button></div>' +
+      '<p class="note">Посилання на конкретну вакансію: відкрийте вакансію на сайті й допишіть у кінці адреси <code>?ref=' + E(code) + '</code>. Посилання на сторінку країни, напр. Польщі: <code>' + E(location.origin) + '/robota-v-polshchi/?ref=' + E(code) + '</code></p>' +
+      '<nav><a href="#g1">Де шукати</a><a href="#g2">Шаблони оголошень</a><a href="#g3">Перша розмова</a><a href="#g4">Робота в CRM</a><a href="#g5">Правила</a><a href="#g6">План на день</a></nav></div>' +
+
+      '<div class="card" id="g1"><h3>1. Де шукати — безкоштовні канали</h3>' +
+      '<h4>Telegram</h4><ul><li>Знайдіть через пошук Telegram групи й канали: «робота в Польщі», «робота за кордоном», «заробітки», «вакансії Польща», а також міські й районні чати (напр. «Біла Церква чат», «Житомир оголошення»).</li><li>Читайте правила групи: у багатьох оголошення дозволені лише в певні дні або з позначкою #вакансія.</li><li>Публікуйте 1 раз на 2–3 дні в одній групі, міняйте текст і фото. Відповідайте на коментарі швидко.</li><li>Ведіть власний канал «Робота за кордоном від [ваше ім’я]» — 1–2 вакансії на день із посиланням.</li></ul>' +
+      '<h4>Viber</h4><ul><li>Спільноти міст і районів, групи «Робота [місто]», сільські й ОСББ-групи — там багато людей, які шукають підробіток.</li><li>Розсилайте особисто лише тим, хто сам написав або залишив коментар — масові розсилки незнайомим блокують.</li></ul>' +
+      '<h4>Facebook</h4><ul><li>Групи: «Робота в Польщі», «Работа в Польше», «Українці в Польщі / Литві / Чехії», міські групи «Підслухано [місто]», барахолки.</li><li>Пишіть від особистої сторінки з фото — довіри більше, ніж до порожніх профілів.</li><li>Пости з реальним фото житла чи заводу (з дозволу) й конкретною ставкою працюють найкраще.</li></ul>' +
+      '<h4>TikTok та Instagram (Reels)</h4><ul><li>Короткі відео 15–40 секунд: «3 вакансії тижня з житлом», «Скільки реально заробляють на складі в Польщі», «Що взяти в дорогу», відповіді на запитання.</li><li>Посилання — у профілі (шапці), у відео кажіть «посилання в профілі».</li><li>Знімайте регулярно: 3–5 відео на тиждень дають більше, ніж одне «ідеальне».</li></ul>' +
+      '<h4>OLX та сайти оголошень</h4><ul><li>Розміщення вакансій на OLX і job-сайтах часто платне або з обмеженнями — уточнюйте актуальні умови перед публікацією.</li><li>Безкоштовно можна відповідати людям, які самі розмістили оголошення «шукаю роботу» / резюме.</li></ul>' +
+      '<h4>Знайомі й «сарафанне радіо»</h4><ul><li>Розкажіть родичам, сусідам, колишнім колегам — найнадійніші кандидати приходять за рекомендацією.</li><li>Кандидатам, які вже поїхали, розкажіть про програму «Приведи друга» (бонус до 4 000 грн) — вони приводитимуть знайомих.</li><li>Оголошення на дошках у селах і містечках (магазин, зупинка, пошта) з QR-кодом на ваше посилання.</li></ul></div>' +
+
+      '<div class="card" id="g2"><h3>2. Шаблони оголошень</h3><p class="note">Ваше посилання вже вставлене. Міняйте текст під конкретну вакансію: місто, ставка, житло, дата заїзду.</p>' +
+      tpl("ad", "Оголошення для груп") + tpl("short", "Короткий текст / коментар") + tpl("story", "Сторіз або пост у соцмережах") + '</div>' +
+
+      '<div class="card" id="g3"><h3>3. Перша розмова з кандидатом</h3>' + tpl("first", "Перше повідомлення") +
+      '<h4>Що з’ясувати</h4><ol><li>Хто їде: сам, парою, з другом. Вік і стать — для підбору вакансії.</li><li>Документи: біометричний паспорт; для чоловіків — підстава для виїзду.</li><li>Коли готовий виїхати й на який строк.</li><li>Досвід і обмеження: важка робота, холод, нічні зміни.</li><li>Бажана країна, місто, чи важливе безкоштовне житло.</li></ol>' +
+      '<h4>Як пропонувати вакансію</h4><ul><li>Давайте 2–3 варіанти, не більше. Посилайте сторінку вакансії з сайту — там ставка, житло, договір.</li><li>Рахуйте з кандидатом суму <b>на руки за місяць</b>, а не лише ставку: ставка × години − житло.</li><li>Кажіть чесно про мінуси: нічні зміни, норма, відстань до роботи. Чесність = менше відмов на місці.</li></ul>' +
+      '<h4>Якщо не відповідає</h4>' + tpl("follow", "Нагадування через 1–2 дні") + '</div>' +
+
+      '<div class="card" id="g4"><h3>4. Як вести кандидата в CRM</h3><ol>' +
+      '<li><b>Нова заявка</b> — кандидат залишив заявку. Зв’яжіться протягом <b>години</b> в робочий час — швидкість вирішує.</li>' +
+      '<li><b>На зв’язку</b> — поговорили, з’ясовуєте деталі.</li><li><b>Підібрано вакансію</b> — кандидат погодився на конкретну вакансію. Впишіть роботодавця й дату виходу.</li>' +
+      '<li><b>Виїхав</b> — у дорозі. <b>Працює</b> — вийшов на зміну.</li><li><b>Відпрацював 2 тижні, оплату отримано</b> — ставить власник після оплати від роботодавця.</li><li><b>Відмова</b> — передумав або не підходить. Напишіть причину в нотатках.</li></ol>' +
+      '<p>Кожному кандидату ставте <b>задачу з датою</b> (у картці кандидата): «передзвонити», «нагадати про квиток», «спитати, як перший день». Прострочені задачі бачить власник.</p>' +
+      '<p>Кандидата, який подзвонив вам напряму, додайте кнопкою <b>«+ Нова заявка»</b> — він закріпиться за вами.</p></div>' +
+
+      '<div class="card" id="g5"><h3>5. Правила</h3><div class="warn"><ul>' +
+      '<li><b>Ніколи не беріть гроші з кандидатів</b> — для них підбір безкоштовний.</li><li>Не обіцяйте того, чого немає у вакансії: ставку, житло, «гарантовану» візу чи виїзд.</li>' +
+      '<li>Не вирішуйте питань перетину кордону для чоловіків — лише законні підстави.</li><li>Не передавайте контакти кандидатів нікому поза «Вдало» й не публікуйте їх.</li>' +
+      '<li>Дотримуйтеся правил груп, не спамте — інакше акаунт заблокують.</li><li>Якщо щось незрозуміло — запитайте власника, а не вигадуйте відповідь кандидату.</li></ul></div></div>' +
+
+      '<div class="card" id="g6"><h3>6. План на день</h3><ol><li>Зранку — відкрийте «Задачі»: спершу прострочені й сьогоднішні.</li><li>Відповісти всім новим заявкам і повідомленням.</li><li>Опублікувати 3–5 оголошень у різних групах / 1 відео.</li><li>Написати 5–10 людям, які шукають роботу (коментарі, резюме).</li><li>Нагадати тим, хто не відповів 1–2 дні.</li><li>Ввечері — оновити статуси в CRM і поставити задачі на завтра.</li></ol></div>' +
+      '</div>';
+    document.querySelectorAll("[data-copy]").forEach(function(b){ b.onclick = function(){
+      var k = b.getAttribute("data-copy"), txt = k === "link" ? link : T[k];
+      try { navigator.clipboard.writeText(txt); } catch(e){}
+      toast("Скопійовано"); }; });
+    document.querySelectorAll(".guide nav a").forEach(function(a){ a.onclick = function(e){ e.preventDefault(); document.querySelector(a.getAttribute("href")).scrollIntoView({behavior: "smooth", block: "start"}); }; });
+  }
+
   /* ================= Моє посилання ================= */
   function rMyLink(){
     API.leads().then(function(list){
@@ -475,7 +536,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         '<div class="g2" style="grid-template-columns:1fr auto"><input id="ml" readonly value="' + E(link) + '" style="padding:9px 11px;border:1px solid var(--line);border-radius:10px"><button class="btn" id="ml-c">Копіювати</button></div>' +
         '<div class="bar"><a class="btn ghost sm" target="_blank" href="https://t.me/share/url?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent("Робота за кордоном з житлом і офіційним договором") + '">Telegram</a>' +
         '<a class="btn ghost sm" href="viber://forward?text=' + encodeURIComponent(text) + '">Viber</a><a class="btn ghost sm" target="_blank" href="https://wa.me/?text=' + encodeURIComponent(text) + '">WhatsApp</a></div>' +
-        '<p class="note">Посилання на конкретну вакансію: відкрийте вакансію на сайті й додайте в кінці адреси <code>?ref=' + E(S.me.ref_code || "") + '</code>.</p></div>' +
+        '<p class="note">Посилання на конкретну вакансію: відкрийте вакансію на сайті й додайте в кінці адреси <code>?ref=' + E(S.me.ref_code || "") + '</code>.</p><button class="btn ghost" style="justify-self:start" onclick="document.querySelector(\'[data-tab=guide]\').click()">Інструкція: де й як шукати кандидатів →</button></div>' +
         '<div class="card pad"><h3>Ваші кандидати</h3><div class="stats" style="margin:0">' +
         '<div class="card stat"><span>Усього</span><b>' + mine.length + '</b></div>' +
         '<div class="card stat"><span>В роботі</span><b>' + mine.filter(function(l){ return ["new", "contacted", "matched", "departed"].indexOf(l.status) >= 0; }).length + '</b></div>' +
