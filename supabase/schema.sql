@@ -678,3 +678,20 @@ language sql stable security definer set search_path = public as $$
   from public.vacancy_pay v where public.vacancy_pay_eff(v) is not null
 $$;
 grant execute on function public.hot_order() to anon, authenticated;
+-- Щоденне завантаження сум із задачі оновлення вакансій (без входу в CRM): лише з секретним ключем.
+-- Тут зберігається тільки SHA-256 ключа; сам ключ — у налаштуваннях задачі.
+create extension if not exists pgcrypto with schema extensions;
+create or replace function public.sync_vacancy_pay(p_token text, p_rows jsonb) returns integer
+language plpgsql security definer set search_path = public, extensions as $$
+begin
+  if p_token is null or encode(extensions.digest(p_token, 'sha256'), 'hex') <> '2d1636c057882351667c4a6fec09ed0112682f339afb4ecf0d5a378a68a7f15e' then raise exception 'forbidden'; end if;
+  insert into public.vacancy_pay(id, src, pay_auto, updated_at)
+    select x->>0, coalesce(x->>2, 'trello'), nullif(x->>1, '')::int, now() from jsonb_array_elements(p_rows) x where x->>0 is not null
+  on conflict (id) do update set pay_auto = excluded.pay_auto, src = excluded.src, updated_at = now();
+  update public.vacancy_pay v set promo_pay = (x->>3)::int, promo_until = nullif(x->>4, '')::date,
+         promo2_pay = nullif(x->>5, '')::int, promo2_until = nullif(x->>6, '')::date
+    from jsonb_array_elements(p_rows) x where v.id = x->>0 and jsonb_array_length(x) > 3 and x->>3 is not null;
+  return jsonb_array_length(p_rows);
+end $$;
+revoke all on function public.sync_vacancy_pay(text, jsonb) from public;
+grant execute on function public.sync_vacancy_pay(text, jsonb) to anon, authenticated;
