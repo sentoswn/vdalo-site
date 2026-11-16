@@ -653,6 +653,7 @@ alter table public.vacancy_pay add column if not exists promo_until date;      -
 alter table public.vacancy_pay add column if not exists promo_note  text;
 alter table public.vacancy_pay add column if not exists promo2_pay   integer;   -- друга сходинка акції («далі 1300 zł до 30.11»)
 alter table public.vacancy_pay add column if not exists promo2_until date;
+alter table public.vacancy_pay add column if not exists bonus_note  text;      -- додаткові бонуси оператора за умови (обсяг стартів тощо) — з CRM
 -- Фактична сума: діюча акція → вписано вручну → автоматично.
 create or replace function public.vacancy_pay_eff(v public.vacancy_pay) returns integer language sql stable as $$
   select case when v.promo_pay is not null and (v.promo_until is null or v.promo_until >= (now() at time zone 'Europe/Kyiv')::date)
@@ -666,7 +667,7 @@ drop function if exists public.vacancy_pay_rank();
 -- Менеджерам: порядок і їхній бонус — 5% від нашої суми, округлено до 5 zł (саму нашу суму не видно).
 create or replace function public.vacancy_pay_rank() returns table(id text, rnk integer, bonus integer)
 language sql stable security definer set search_path = public as $$
-  select v.id, (row_number() over (order by public.vacancy_pay_eff(v) desc, length(v.id), v.id))::int,
+  select v.id, (row_number() over (order by public.vacancy_pay_eff(v) desc, (v.bonus_note is not null) desc, length(v.id), v.id))::int,
          (round(public.vacancy_pay_eff(v) * 0.05 / 5) * 5)::int
   from public.vacancy_pay v
   where public.is_staff() and public.vacancy_pay_eff(v) is not null
@@ -676,7 +677,7 @@ grant execute on function public.vacancy_pay_rank() to authenticated;
 -- Сайту — лише порядок (без сум), щоб гарячі вакансії йшли від найвигіднішої. Хто відкриє — бачить тільки номери й місця.
 create or replace function public.hot_order() returns table(id text, rnk integer)
 language sql stable security definer set search_path = public as $$
-  select v.id, (row_number() over (order by public.vacancy_pay_eff(v) desc, length(v.id), v.id))::int
+  select v.id, (row_number() over (order by public.vacancy_pay_eff(v) desc, (v.bonus_note is not null) desc, length(v.id), v.id))::int
   from public.vacancy_pay v where public.vacancy_pay_eff(v) is not null
 $$;
 grant execute on function public.hot_order() to anon, authenticated;

@@ -87,6 +87,8 @@ main{padding:20px;max-width:1500px;margin:0 auto}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-weight:600;z-index:30;display:none}
 .toast.show{display:block}
 .note{color:var(--muted);font-size:13px}
+.binfo{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--blue,#1f6feb);color:var(--blue,#1f6feb);background:transparent;font:700 12px/1 serif;font-style:italic;cursor:pointer;vertical-align:1px;margin-left:4px;padding:0}
+.bnote{white-space:normal;text-align:left;max-width:320px;margin:6px 0 0 auto;font-size:12px;color:var(--muted);background:var(--soft,#f3f5f8);border-radius:10px;padding:8px 10px}
 @media (max-width:800px){
   .top{flex-wrap:wrap;padding:10px 12px}.tabs{order:3;flex-basis:100%}main{padding:12px}
   .tbl thead{display:none}.tbl tr.row{display:grid;grid-template-columns:1fr auto;padding:10px 12px;border-bottom:1px solid var(--line)}
@@ -920,6 +922,20 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         .catch(function(e){ window.__paySynced = "error: " + (e && e.message || e); fail(e); });
     } catch (e) { window.__paySynced = "error: " + e.message; }
   }
+  // Додаткові бонуси EWL за умови (з карток «ВАЖЛИВА ІНФОРМАЦІЯ» у Trello). Оновлювати, коли EWL змінює програми.
+  var EWL_PRIO = "Пріоритетний проєкт EWL: премія за кількість стартів на пріоритетних проєктах за місяць — 10–20 стартів +1 000 zł, 21–40 +2 000, 41–70 +4 000, 71–120 +7 000, 121–150 +10 000 zł (виплата після підтвердження Controlling).";
+  var BONUS_RULES = [
+    {co: /shein/i, src: "trello", note: "SHEIN: бонус EWL за обсяг — 25+ стартів за період +100 zł, 50+ +250 zł, 75+ +350 zł за кожного кандидата (після гарантійного періоду; пороги не сумуються)."},
+    {co: /northern light/i}, {co: /modivo/i, city: /polkowice|głogów|glogow/i}, {co: /pantos/i}, {co: /dhl/i, city: /głuch|gluch|bydgoszcz/i},
+    {co: /ceva/i, city: /świebodzin|swiebodzin/i}, {co: /pkc/i, city: /starachowice/i}, {co: /lg energy/i}, {co: /eobuwie/i}, {co: /rhenus/i, city: /błonie|blonie|swarzędz|swarzedz|łozienica|lozienica/i},
+    {co: /truvant/i}, {co: /valeo/i, city: /chrzan/i}, {co: /lg electronics/i}, {co: /arvato/i, city: /stryk/i}, {co: /lisner/i, city: /charzyno/i}, {co: /trumpf/i, city: /annop|targ|warszawa/i},
+    {co: /perla/i}, {co: /fresh/i}, {co: /media expert|terg/i}, {co: /dawtona/i}, {co: /toppoint/i}, {co: /nuritech/i}, {co: /aurora/i, city: /kąty|katy|wrocław$|wroclaw$/i}, {co: /nifco/i}
+  ];
+  function bonusFor(v){
+    if ((v.src || "trello") !== "trello") return null; var hay = [v.company, v.title].join(" "), out = [];
+    BONUS_RULES.forEach(function(r){ if (r.co.test(hay) && (!r.city || r.city.test(v.city || ""))) { var t = r.note || EWL_PRIO; if (out.indexOf(t) < 0) out.push(t); } });
+    return out.length ? out.join(" ") : null;
+  }
   var GREMI = {s: 1000, m: 700, w: 500}; // Gremi: спеціалісти / м’ясо й риба / склади та інше, zł за кандидата
   function promoOn(p){ if (!p) return null; var t = new Date(), d = t.getFullYear() + "-" + ("0" + (t.getMonth() + 1)).slice(-2) + "-" + ("0" + t.getDate()).slice(-2);
     if (p.promo_pay != null && (!p.promo_until || p.promo_until >= d)) return {pay: p.promo_pay, until: p.promo_until};
@@ -964,14 +980,15 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       var nLeads = {}; (r[2] || []).forEach(function(l){ if (l.vacancy_id) nLeads[l.vacancy_id] = (nLeads[l.vacancy_id] || 0) + 1; });
       var heal = [];
       var all = r[1].map(function(v){ var p = pm[String(v.id)] || {};
+        var bnote = bonusFor(v); if ((p.bonus_note || null) !== bnote) { p = Object.assign({}, p, {bonus_note: bnote}); heal.push({id: String(v.id), src: v.src || "trello", pay_auto: p.pay_auto != null ? p.pay_auto : null, bonus_note: bnote}); }
         if (v.src === "planfix" && v.cat) { var base = GREMI[v.cat] || 500; if (p.pay_auto !== base) { p = Object.assign({}, p, {pay_auto: base}); heal.push({id: String(v.id), src: "planfix", pay_auto: base}); } } var pr = promoOn(p); var pay = pr ? pr.pay : p.pay_manual != null ? p.pay_manual : p.pay_auto;
         return {v: v, p: p, pay: pay == null ? null : +pay, promo: pr, manual: !pr && p.pay_manual != null, n: nLeads[String(v.id)] || 0}; });
-      if (heal.length) API.savePay(heal).catch(function(){});
+      if (heal.length) { var hm = {}; heal.forEach(function(h){ hm[h.id] = Object.assign(hm[h.id] || {}, h); }); var hs = Object.keys(hm).map(function(k){ var h = hm[k], c = pm[k] || {}; return {id: h.id, src: h.src, pay_auto: h.pay_auto != null ? h.pay_auto : (c.pay_auto != null ? c.pay_auto : null), bonus_note: "bonus_note" in h ? h.bonus_note : (c.bonus_note || null)}; }); API.savePay(hs).catch(function(){}); }
       var f = S.payf || "all", q = (S.payq || "").toLowerCase();
       var rows = all.filter(function(x){ var v = x.v;
         return (f === "all" || (f === "hot" ? v.hot : f === "none" ? x.pay == null : (v.src || "trello") === f)) &&
           (!q || [v.title, v.company, v.city, v.id].join(" ").toLowerCase().indexOf(q) >= 0); });
-      rows.sort(function(a, b){ var x = String(a.v.id), y = String(b.v.id); return (b.pay == null ? -1 : b.pay) - (a.pay == null ? -1 : a.pay) || ((b.v.hot ? 1 : 0) - (a.v.hot ? 1 : 0)) || (x.length - y.length) || (x < y ? -1 : x > y ? 1 : 0); });
+      rows.sort(function(a, b){ var x = String(a.v.id), y = String(b.v.id); return (b.pay == null ? -1 : b.pay) - (a.pay == null ? -1 : a.pay) || ((b.p.bonus_note ? 1 : 0) - (a.p.bonus_note ? 1 : 0)) || ((b.v.hot ? 1 : 0) - (a.v.hot ? 1 : 0)) || (x.length - y.length) || (x < y ? -1 : x > y ? 1 : 0); });
       var withPay = all.filter(function(x){ return x.pay != null; }), top = withPay.reduce(function(m, x){ return Math.max(m, x.pay); }, 0);
       var avg = withPay.length ? Math.round(withPay.reduce(function(s, x){ return s + x.pay; }, 0) / withPay.length) : 0;
       var last = r[0].reduce(function(m, x){ return x.updated_at > m ? x.updated_at : m; }, "");
@@ -989,12 +1006,13 @@ main{padding:20px;max-width:1500px;margin:0 auto}
           return '<tr class="row" data-pid="' + E(v.id) + '"><td class="hide-m">' + (i + 1) + '</td><td><b>' + E(v.title) + '</b>' + (v.hot ? ' <span class="st st-new">Гаряча</span>' : '') +
             '<small>' + E([v.company, v.city, v.country].filter(Boolean).join(" · ")) + '</small></td>' +
             '<td class="hide-m">' + (pf ? "Planfix (Gremi)" : "Trello (EWL)") + '<small>№' + E(v.id) + '</small></td><td class="hide-m">' + (x.n || "—") + '</td>' +
-            '<td style="text-align:right;white-space:nowrap"><b>' + (x.pay == null ? '—' : x.pay.toLocaleString("uk-UA") + ' zł') + '</b>' + (x.promo ? '<small style="color:var(--red)">акція' + (x.promo.until ? ' до ' + E(dd2(x.promo.until)) : '') + '</small>' : '') + (x.manual ? '<small>вручну</small>' : '') + (x.p.note ? '<small>' + E(x.p.note) + '</small>' : '') + '</td></tr>';
+            '<td style="text-align:right;white-space:nowrap"><b>' + (x.pay == null ? '—' : x.pay.toLocaleString("uk-UA") + ' zł') + '</b>' + (x.p.bonus_note ? ' <button type="button" class="binfo" title="' + E(x.p.bonus_note) + '" data-binfo>i</button><div class="bnote" hidden>' + E(x.p.bonus_note) + '</div>' : '') + (x.promo ? '<small style="color:var(--red)">акція' + (x.promo.until ? ' до ' + E(dd2(x.promo.until)) : '') + '</small>' : '') + (x.manual ? '<small>вручну</small>' : '') + (x.p.note ? '<small>' + E(x.p.note) + '</small>' : '') + '</td></tr>';
         }).join("") : '<tr><td colspan="5" class="empty">Нічого не знайдено</td></tr>') + '</tbody></table></div>';
       var pq = document.getElementById("pq"); if (S.payPos != null) { pq.focus(); pq.setSelectionRange(S.payPos, S.payPos); S.payPos = null; }
       pq.oninput = function(){ S.payq = pq.value; S.payPos = pq.selectionStart; rPay(); };
       document.querySelectorAll("[data-pf]").forEach(function(b){ b.onclick = function(){ S.payf = b.getAttribute("data-pf"); rPay(); }; });
       document.getElementById("promo-add").onclick = promoPaste;
+      document.querySelectorAll("[data-binfo]").forEach(function(b){ b.onclick = function(e){ e.stopPropagation(); var n = b.nextElementSibling; n.hidden = !n.hidden; }; });
       document.querySelectorAll("tr[data-pid]").forEach(function(tr){ tr.onclick = function(){ var id = tr.getAttribute("data-pid"); openPay(all.filter(function(x){ return String(x.v.id) === id; })[0]); }; });
     }).catch(fail);
   }
@@ -1025,7 +1043,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     openDrawer('<div class="dh"><h2>' + E(v.title) + '</h2><button class="btn ghost sm" data-x>✕</button></div><div class="db">' +
       '<dl class="kv"><dt>Оператор</dt><dd>' + (v.src === "planfix" ? '<a href="https://gremi.planfix.com/task/' + E(v.id) + '" target="_blank" rel="noopener">Planfix (Gremi) №' + E(v.id) + '</a>' : 'Trello (EWL) №' + E(v.id)) + '</dd>' +
       '<dt>Компанія</dt><dd>' + E(v.company || "—") + '</dd><dt>Де</dt><dd>' + E([v.city, v.country].filter(Boolean).join(", ") || "—") + '</dd>' +
-      '<dt>Автоматично</dt><dd>' + (x.p.pay_auto != null ? E(x.p.pay_auto) + ' zł' : '—') + '</dd><dt>Сторінка</dt><dd><a href="/vakansii/' + E(v.id) + '/" target="_blank">відкрити на сайті</a></dd></dl>' +
+      (x.p.bonus_note ? '<dt>Дод. бонуси</dt><dd>' + E(x.p.bonus_note) + '</dd>' : '') + '<dt>Автоматично</dt><dd>' + (x.p.pay_auto != null ? E(x.p.pay_auto) + ' zł' : '—') + '</dd><dt>Сторінка</dt><dd><a href="/vakansii/' + E(v.id) + '/" target="_blank">відкрити на сайті</a></dd></dl>' +
       '<div class="fld"><label>Сума за кандидата вручну, zł (порожньо — брати автоматичну)</label><input id="pay-m" type="number" min="0" step="50" value="' + (x.p.pay_manual != null ? E(x.p.pay_manual) : "") + '"></div>' +
       '<div class="fld"><label>Акція, zł</label><input id="pay-pp" type="number" min="0" step="50" value="' + (x.p.promo_pay != null ? E(x.p.promo_pay) : "") + '"></div>' +
       '<div class="fld"><label>Акція діє до (включно)</label><input id="pay-pu" type="date" value="' + E(x.p.promo_until || "") + '"></div>' +
