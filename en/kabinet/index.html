@@ -676,6 +676,24 @@ body.mnav-open .fab{display:none}
 @media (max-width:760px){.cab-grid{grid-template-columns:1fr}.cab-stats{grid-template-columns:1fr 1fr;gap:10px}.cab-stat.main{grid-column:1/-1}
 .cab-table thead{display:none}.cab-table tr{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:10px 0;border-bottom:1px solid var(--line)}
 .cab-table td{padding:0;border:0;white-space:normal}.cab-table td:nth-child(2){grid-row:2;color:var(--muted);font-size:13px}.cab-table td:nth-child(3){grid-row:1/3;grid-column:2;align-self:center}.cab-table td:nth-child(4){display:none}}
+
+/* вибір коду країни з прапорами */
+.phone-in.has-pick select{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.phone-in{position:relative}
+.cc-pick{position:relative;flex:0 0 auto}
+.cc-btn{height:100%;min-height:48px;display:flex;align-items:center;gap:8px;padding:0 10px 0 12px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:700 15px var(--font-body);cursor:pointer;white-space:nowrap}
+.cc-btn:hover,.cc-pick.open .cc-btn{border-color:var(--ink)}
+.cc-btn .chev{width:14px;height:14px;transform:rotate(90deg);opacity:.6;transition:transform .15s}
+.cc-pick.open .cc-btn .chev{transform:rotate(-90deg)}
+.cc-list{position:absolute;left:0;top:calc(100% + 6px);z-index:40;min-width:250px;max-height:320px;overflow:auto;margin:0;padding:6px;list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 44px -16px rgba(0,0,0,.35)}
+.cc-list[hidden]{display:none}
+.cc-list button{width:100%;display:flex;align-items:center;gap:10px;padding:10px 10px;border:0;border-radius:10px;background:none;color:var(--ink);font:600 15px var(--font-body);text-align:left;cursor:pointer}
+.cc-list button:hover,.cc-list button:focus-visible{background:var(--soft);outline:none}
+.cc-list button[aria-selected="true"]{background:var(--soft)}
+.cc-list .cc-n{flex:1}
+.cc-list .cc-c{color:var(--muted);font-weight:700}
+.cc-globe{width:24px;height:16px;flex:0 0 24px;display:grid;place-items:center;color:var(--muted)}
+.cc-globe svg{width:16px;height:16px}
 </style>
 </head>
 <body>
@@ -713,6 +731,9 @@ body.mnav-open .fab{display:none}
   <symbol id="f-SK" viewBox="0 0 24 16"><rect width="24" height="5.34" fill="#fff"/><rect y="5.33" width="24" height="5.34" fill="#0B4EA2"/><rect y="10.66" width="24" height="5.34" fill="#EE1C25"/><path d="M4.6 3.2h6.2v4.6c0 2.4-1.8 3.8-3.1 4.4-1.3-.6-3.1-2-3.1-4.4z" fill="#EE1C25" stroke="#fff" stroke-width=".55"/><path d="M7.4 4.1h.6v6h-.6zM6.3 5.3h2.8v.6H6.3zM5.9 6.8h3.6v.6H5.9z" fill="#fff"/><path d="M5.3 10.1q1.2-1.2 2.4 0 1.2-1.2 2.4 0l-.5.8q-1.9 1.1-3.8 0z" fill="#0B4EA2"/></symbol>
   <symbol id="f-DE" viewBox="0 0 24 16"><rect width="24" height="5.34" fill="#000"/><rect y="5.33" width="24" height="5.34" fill="#DD0000"/><rect y="10.66" width="24" height="5.34" fill="#FFCE00"/></symbol>
   <symbol id="f-NL" viewBox="0 0 24 16"><rect width="24" height="5.34" fill="#AE1C28"/><rect y="5.33" width="24" height="5.34" fill="#fff"/><rect y="10.66" width="24" height="5.34" fill="#21468B"/></symbol>
+  <symbol id="f-MD" viewBox="0 0 24 16"><rect width="8" height="16" fill="#0046AE"/><rect x="8" width="8" height="16" fill="#FFD200"/><rect x="16" width="8" height="16" fill="#CC092F"/><rect x="10.5" y="5" width="3" height="6" rx="1" fill="#B07E28"/></symbol>
+  <symbol id="f-RO" viewBox="0 0 24 16"><rect width="8" height="16" fill="#002B7F"/><rect x="8" width="8" height="16" fill="#FCD116"/><rect x="16" width="8" height="16" fill="#CE1126"/></symbol>
+  <symbol id="f-HU" viewBox="0 0 24 16"><rect width="24" height="5.34" fill="#CE2939"/><rect y="5.33" width="24" height="5.34" fill="#fff"/><rect y="10.66" width="24" height="5.34" fill="#477050"/></symbol>
   <symbol id="f-UA" viewBox="0 0 24 16"><rect width="24" height="8" fill="#0057B7"/><rect y="8" width="24" height="8" fill="#FFD700"/></symbol>
   <symbol id="i-grad" viewBox="0 0 24 24"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.5M22 9.5V15"/></symbol>
   <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 7h16M7 12h10M10 17h4"/></symbol>
@@ -1925,6 +1946,46 @@ window.Vdalo = window.Vdalo || (function(){
     mn.addEventListener("click",function(e){ if(e.target.closest("a")) set(false); });
     window.addEventListener("resize",function(){ if(window.innerWidth>960) set(false); });
   }
+})();
+</script>
+
+<script>
+/* Красивий вибір коду країни: прапор + назва + код. Справжній <select> лишається (для форми), лише прихований. */
+(function(){
+  var NAMES = {"380":["UA","Україна"],"48":["PL","Польща"],"370":["LT","Литва"],"420":["CZ","Чехія"],"421":["SK","Словаччина"],"49":["DE","Німеччина"],"31":["NL","Нідерланди"],"373":["MD","Молдова"],"40":["RO","Румунія"],"36":["HU","Угорщина"],"":["","Інший код"]};
+  function fl(c){ return c ? '<svg class="flag" aria-hidden="true"><use href="#f-'+c+'"/></svg>' : '<span class="cc-globe"><svg class="i"><use href="#i-globe"/></svg></span>'; }
+  document.querySelectorAll(".phone-in select").forEach(function(sel){
+    var wrap = sel.parentNode, pick = document.createElement("div");
+    pick.className = "cc-pick";
+    var btn = document.createElement("button"); btn.type = "button"; btn.className = "cc-btn";
+    btn.setAttribute("aria-haspopup", "listbox"); btn.setAttribute("aria-expanded", "false"); btn.setAttribute("aria-label", sel.getAttribute("aria-label") || "Код країни");
+    var list = document.createElement("ul"); list.className = "cc-list"; list.setAttribute("role", "listbox"); list.hidden = true;
+    [].forEach.call(sel.options, function(o){
+      var n = NAMES[o.value] || ["", o.textContent];
+      var li = document.createElement("li");
+      li.innerHTML = '<button type="button" role="option" data-v="'+o.value+'">'+fl(n[0])+'<span class="cc-n">'+n[1]+'</span><span class="cc-c">'+(o.value ? "+"+o.value : "")+'</span></button>';
+      list.appendChild(li);
+    });
+    function draw(){ var n = NAMES[sel.value] || ["", ""]; btn.innerHTML = fl(n[0]) + '<span>' + (sel.value ? "+" + sel.value : "+…") + '</span><svg class="i chev"><use href="#i-chev"/></svg>';
+      list.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-selected", b.getAttribute("data-v") === sel.value); }); }
+    function open(o){ pick.classList.toggle("open", o); list.hidden = !o; btn.setAttribute("aria-expanded", o);
+      if (o) { var cur = list.querySelector('[aria-selected="true"]') || list.querySelector("button"); cur.focus(); } }
+    btn.addEventListener("click", function(){ open(list.hidden); });
+    list.addEventListener("click", function(e){ var b = e.target.closest("button[data-v]"); if (!b) return;
+      sel.value = b.getAttribute("data-v"); sel.dispatchEvent(new Event("change", {bubbles: true})); draw(); open(false);
+      var inp = wrap.querySelector("input"); if (inp) inp.focus(); });
+    list.addEventListener("keydown", function(e){
+      var bs = [].slice.call(list.querySelectorAll("button")), i = bs.indexOf(document.activeElement);
+      if (e.key === "ArrowDown") { e.preventDefault(); bs[Math.min(i + 1, bs.length - 1)].focus(); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); bs[Math.max(i - 1, 0)].focus(); }
+      else if (e.key === "Escape") { open(false); btn.focus(); }
+    });
+    document.addEventListener("click", function(e){ if (!pick.contains(e.target)) open(false); });
+    sel.addEventListener("change", draw);
+    pick.appendChild(btn); pick.appendChild(list);
+    wrap.insertBefore(pick, sel); wrap.classList.add("has-pick"); sel.tabIndex = -1;
+    draw();
+  });
 })();
 </script>
 </body>
