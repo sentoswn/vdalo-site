@@ -633,3 +633,18 @@ grant select on public.work_log to authenticated;
 revoke all on function public.crm_ping() from public, anon;
 grant execute on function public.crm_ping() to authenticated;
 revoke all on function public.work_alerts() from public, anon, authenticated;
+
+-- ============ Оплата за кандидата по вакансіях (бачать і змінюють лише власники) ============
+-- pay_auto — щоденно з Trello (множник × ставка), pay_manual — вписано вручну в CRM (має пріоритет).
+create table if not exists public.vacancy_pay (
+  id          text primary key,
+  src         text,
+  pay_auto    integer,
+  pay_manual  integer,
+  note        text,
+  updated_at  timestamptz not null default now()
+);
+alter table public.vacancy_pay enable row level security;
+drop policy if exists vp_admin on public.vacancy_pay;
+create policy vp_admin on public.vacancy_pay for all using (public.is_admin()) with check (public.is_admin());
+grant select, insert, update, delete on public.vacancy_pay to authenticated;

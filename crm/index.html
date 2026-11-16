@@ -184,6 +184,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     <button role="tab" data-tab="tasks"><svg class="ic"><use href="#ic-check"/></svg>Задачі<span class="n" id="n-tasks" hidden></span></button>
     <button role="tab" data-tab="analytics" data-own><svg class="ic"><use href="#ic-chart"/></svg>Аналітика</button>
     <button role="tab" data-tab="sources" data-own><svg class="ic"><use href="#ic-target"/></svg>Джерела</button>
+    <button role="tab" data-tab="pay" data-own><svg class="ic"><use href="#ic-trophy"/></svg>Оплата за кандидата</button>
     <button role="tab" data-tab="employers" data-own><svg class="ic"><use href="#ic-building"/></svg>Роботодавці<span class="n" id="n-employers" hidden></span></button>
     <button role="tab" data-tab="people" data-own><svg class="ic"><use href="#ic-gift"/></svg>Реферали</button>
     <button role="tab" data-tab="payouts" data-own><svg class="ic"><use href="#ic-wallet"/></svg>Виплати<span class="n" id="n-payouts" hidden></span></button>
@@ -275,6 +276,8 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       setSetting: function(k, v){ return s.from("settings").upsert({key: k, value: String(v)}).then(ok); },
       findRef: function(code){ return s.from("profiles").select("id,first_name,last_name,tg_username,ref_code").eq("ref_code", code.toLowerCase()).maybeSingle().then(ok); },
       saveMe: function(patch){ return s.from("profiles").update(patch).eq("id", uid).then(ok); },
+      pay: function(){ return s.from("vacancy_pay").select("*").limit(5000).then(ok); },
+      savePay: function(rows){ return s.from("vacancy_pay").upsert(rows, {onConflict: "id"}).then(ok); },
       staff: function(){ return s.from("profiles").select("id,first_name,last_name,full_name,tg_username,role,ref_code,last_seen_at").in("role", ["manager", "admin"]).then(ok); },
       tasks: function(){ return s.from("tasks").select("*").order("due_at", {ascending: true, nullsFirst: false}).limit(2000).then(ok); },
       addTask: function(row){ return s.from("tasks").insert(row).then(ok); },
@@ -322,7 +325,9 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       document.getElementById("out").onclick = function(){ API.logout(); };
       document.getElementById("tabs").hidden = false;
       document.querySelectorAll("#tabs button").forEach(function(b){ b.onclick = function(){ go(b.getAttribute("data-tab")); }; });
-      var h = location.hash.replace("#", ""); go(tabsAllowed().indexOf(h) >= 0 ? h : "leads");
+      var h = location.hash.replace("#", "");
+      if (S.own && /^paysync=/.test(h)) { paySync(h.slice(8)); h = "pay"; }
+      go(tabsAllowed().indexOf(h) >= 0 ? h : "leads");
       counts(); heartbeat();
     });
   }
@@ -371,7 +376,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
  ["Анкета заповнена", p.onboarded_at ? dt(p.onboarded_at, true) : "ні"]];
     return '<b>Анкета</b><dl class="kv">' + rows.filter(function(r){ return r[1]; }).map(function(r){ return '<dt>' + E(r[0]) + '</dt><dd>' + E(r[1]) + '</dd>'; }).join("") + '</dl>';
   }
-  function tabsAllowed(){ return S.own ? ["leads", "tasks", "analytics", "sources", "employers", "people", "payouts", "mylink", "guide", "settings"] : ["leads", "tasks", "mylink", "guide"]; }
+  function tabsAllowed(){ return S.own ? ["leads", "tasks", "analytics", "sources", "pay", "employers", "people", "payouts", "mylink", "guide", "settings"] : ["leads", "tasks", "mylink", "guide"]; }
   function ic(n, cls){ return '<svg class="ic' + (cls ? " " + cls : "") + '"><use href="#ic-' + n + '"/></svg>'; }
   function mgrsOf(l){ var a = (l.managers && l.managers.length) ? l.managers.slice() : []; if (l.manager_id && a.indexOf(l.manager_id) < 0) a.unshift(l.manager_id); return a; }
   function hasMgr(l, id){ return mgrsOf(l).indexOf(id) >= 0; }
@@ -422,7 +427,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   function demoBar(){ return ""; }
   function render(){
     app.innerHTML = '<div class="empty">Завантаження…</div>';
-    ({guide: rGuide, leads: rLeads, tasks: rTasks, analytics: rAnalytics, sources: function(){ VdaloSources(app, {toast: toast, fail: fail}); }, mylink: rMyLink, employers: rEmployers, people: rPeople, payouts: rPayouts, settings: rSettings})[S.tab]();
+    ({guide: rGuide, leads: rLeads, tasks: rTasks, analytics: rAnalytics, sources: function(){ VdaloSources(app, {toast: toast, fail: fail}); }, mylink: rMyLink, pay: rPay, employers: rEmployers, people: rPeople, payouts: rPayouts, settings: rSettings})[S.tab]();
   }
   function fail(e){ console.warn(e); toast("Помилка: " + (e && e.message || "не вдалося зберегти")); }
 
@@ -897,6 +902,69 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     }).catch(function(e){ console.warn(e); box.innerHTML = '<div class="card pad" style="margin-bottom:16px"><h3 style="margin:0">Команда</h3><p class="note">Дані про присутність з’являться після оновлення бази (кілька хвилин).</p></div>'; });
   }
   /* ================= Роботодавці ================= */
+  /* ================= Оплата за кандидата (лише власники) ================= */
+  // Дані щодня передає задача оновлення вакансій: /crm/#paysync=[[id, сума], …] (Trello: множник × ставка).
+  // Для вакансій Planfix суму можна вписати вручну — вона не перезаписується автоматично.
+  function paySync(raw){
+    try {
+      var rows = JSON.parse(decodeURIComponent(raw)).map(function(x){ return {id: String(x[0]), src: x[2] || "trello", pay_auto: Math.round(+x[1]) || null, updated_at: new Date().toISOString()}; });
+      API.savePay(rows).then(function(){ toast("Оплату оновлено: " + rows.length + " вакансій"); window.__paySynced = rows.length; if (S.tab === "pay") rPay(); })
+        .catch(function(e){ window.__paySynced = "error: " + (e && e.message || e); fail(e); });
+    } catch (e) { window.__paySynced = "error: " + e.message; }
+  }
+  function vacList(){ return S.vac && S.vac.length ? Promise.resolve(S.vac) : fetch("/vacancies.json", {cache: "no-store"}).then(function(r){ return r.json(); }).then(function(j){ S.vac = j.items || []; return S.vac; }); }
+  function rPay(){
+    Promise.all([API.pay(), vacList(), S.leads ? Promise.resolve(S.leads) : API.leads()]).then(function(r){
+      var pm = {}; r[0].forEach(function(x){ pm[x.id] = x; });
+      var nLeads = {}; (r[2] || []).forEach(function(l){ if (l.vacancy_id) nLeads[l.vacancy_id] = (nLeads[l.vacancy_id] || 0) + 1; });
+      var all = r[1].map(function(v){ var p = pm[String(v.id)] || {}; var pay = p.pay_manual != null ? p.pay_manual : p.pay_auto;
+        return {v: v, p: p, pay: pay == null ? null : +pay, manual: p.pay_manual != null, n: nLeads[String(v.id)] || 0}; });
+      var f = S.payf || "all", q = (S.payq || "").toLowerCase();
+      var rows = all.filter(function(x){ var v = x.v;
+        return (f === "all" || (f === "hot" ? v.hot : f === "none" ? x.pay == null : (v.src || "trello") === f)) &&
+          (!q || [v.title, v.company, v.city, v.id].join(" ").toLowerCase().indexOf(q) >= 0); });
+      rows.sort(function(a, b){ return (b.pay == null ? -1 : b.pay) - (a.pay == null ? -1 : a.pay) || ((b.v.hot ? 1 : 0) - (a.v.hot ? 1 : 0)); });
+      var withPay = all.filter(function(x){ return x.pay != null; }), top = withPay.reduce(function(m, x){ return Math.max(m, x.pay); }, 0);
+      var avg = withPay.length ? Math.round(withPay.reduce(function(s, x){ return s + x.pay; }, 0) / withPay.length) : 0;
+      var last = r[0].reduce(function(m, x){ return x.updated_at > m ? x.updated_at : m; }, "");
+      var cnt = function(k){ return all.filter(function(x){ return k === "hot" ? x.v.hot : k === "none" ? x.pay == null : (x.v.src || "trello") === k; }).length; };
+      var chip = function(k, t, n){ return '<button class="chip" data-pf="' + k + '" aria-pressed="' + (f === k) + '">' + t + '<b>' + n + '</b></button>'; };
+      app.innerHTML = demoBar() +
+        '<div class="stats"><div class="card stat"><span>Найбільше за кандидата</span><b>' + (top ? top.toLocaleString("uk-UA") + " zł" : "—") + '</b></div>' +
+        '<div class="card stat"><span>Середнє</span><b>' + (avg ? avg.toLocaleString("uk-UA") + " zł" : "—") + '</b></div>' +
+        '<div class="card stat"><span>Вакансій із сумою</span><b>' + withPay.length + ' / ' + all.length + '</b></div></div>' +
+        '<div class="bar"><input type="search" id="pq" placeholder="Пошук: посада, компанія, місто, №" value="' + E(S.payq || "") + '">' +
+        chip("all", "Усі", all.length) + chip("hot", "Гарячі", cnt("hot")) + chip("trello", "Trello (EWL)", cnt("trello")) + chip("planfix", "Planfix (Gremi)", cnt("planfix")) + chip("none", "Без суми", cnt("none")) + '</div>' +
+        '<p class="note" style="margin:-4px 0 12px">Скільки нам платять за кандидата, від більшого до меншого. Trello — автоматично щодня: множник із картки × 900 zł (чоловіки / усі) або × 600 zł (жінки), + бонус «Проєкту тижня». Planfix — суми в картках немає, впишіть вручну (натисніть на рядок).' + (last ? ' Оновлено: ' + E(dt(last, true)) + '.' : '') + '</p>' +
+        '<div class="card"><table class="tbl"><thead><tr><th>#</th><th>Вакансія</th><th>Оператор</th><th>Заявок</th><th style="text-align:right">Нам платять</th></tr></thead><tbody>' +
+        (rows.length ? rows.map(function(x, i){ var v = x.v, pf = v.src === "planfix";
+          return '<tr class="row" data-pid="' + E(v.id) + '"><td class="hide-m">' + (i + 1) + '</td><td><b>' + E(v.title) + '</b>' + (v.hot ? ' <span class="st st-new">Гаряча</span>' : '') +
+            '<small>' + E([v.company, v.city, v.country].filter(Boolean).join(" · ")) + '</small></td>' +
+            '<td class="hide-m">' + (pf ? "Planfix (Gremi)" : "Trello (EWL)") + '<small>№' + E(v.id) + '</small></td><td class="hide-m">' + (x.n || "—") + '</td>' +
+            '<td style="text-align:right;white-space:nowrap"><b>' + (x.pay == null ? '—' : x.pay.toLocaleString("uk-UA") + ' zł') + '</b>' + (x.manual ? '<small>вручну</small>' : '') + (x.p.note ? '<small>' + E(x.p.note) + '</small>' : '') + '</td></tr>';
+        }).join("") : '<tr><td colspan="5" class="empty">Нічого не знайдено</td></tr>') + '</tbody></table></div>';
+      var pq = document.getElementById("pq"); if (S.payPos != null) { pq.focus(); pq.setSelectionRange(S.payPos, S.payPos); S.payPos = null; }
+      pq.oninput = function(){ S.payq = pq.value; S.payPos = pq.selectionStart; rPay(); };
+      document.querySelectorAll("[data-pf]").forEach(function(b){ b.onclick = function(){ S.payf = b.getAttribute("data-pf"); rPay(); }; });
+      document.querySelectorAll("tr[data-pid]").forEach(function(tr){ tr.onclick = function(){ var id = tr.getAttribute("data-pid"); openPay(all.filter(function(x){ return String(x.v.id) === id; })[0]); }; });
+    }).catch(fail);
+  }
+  function openPay(x){
+    if (!x) return; var v = x.v;
+    openDrawer('<div class="dh"><h2>' + E(v.title) + '</h2><button class="btn ghost sm" data-x>✕</button></div><div class="db">' +
+      '<dl class="kv"><dt>Оператор</dt><dd>' + (v.src === "planfix" ? '<a href="https://gremi.planfix.com/task/' + E(v.id) + '" target="_blank" rel="noopener">Planfix (Gremi) №' + E(v.id) + '</a>' : 'Trello (EWL) №' + E(v.id)) + '</dd>' +
+      '<dt>Компанія</dt><dd>' + E(v.company || "—") + '</dd><dt>Де</dt><dd>' + E([v.city, v.country].filter(Boolean).join(", ") || "—") + '</dd>' +
+      '<dt>Автоматично</dt><dd>' + (x.p.pay_auto != null ? E(x.p.pay_auto) + ' zł' : '—') + '</dd><dt>Сторінка</dt><dd><a href="/vakansii/' + E(v.id) + '/" target="_blank">відкрити на сайті</a></dd></dl>' +
+      '<div class="fld"><label>Сума за кандидата вручну, zł (порожньо — брати автоматичну)</label><input id="pay-m" type="number" min="0" step="50" value="' + (x.p.pay_manual != null ? E(x.p.pay_manual) : "") + '"></div>' +
+      '<div class="fld"><label>Примітка (умови виплати, бонуси)</label><input id="pay-n" value="' + E(x.p.note || "") + '"></div></div>' +
+      '<div class="df"><button class="btn ghost" data-x>Скасувати</button><button class="btn" id="pay-s">Зберегти</button></div>');
+    drawer.querySelectorAll("[data-x]").forEach(function(b){ b.onclick = closeDrawer; });
+    document.getElementById("pay-s").onclick = function(){
+      var m = document.getElementById("pay-m").value.trim(), n = document.getElementById("pay-n").value.trim();
+      API.savePay([{id: String(v.id), src: v.src || "trello", pay_manual: m === "" ? null : Math.round(+m), note: n || null, pay_auto: x.p.pay_auto != null ? x.p.pay_auto : null}])
+        .then(function(){ toast("Збережено"); closeDrawer(); rPay(); }).catch(fail);
+    };
+  }
   function rEmployers(){
     API.employers().then(function(list){
       S.employers = list;
