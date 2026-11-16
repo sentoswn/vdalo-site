@@ -354,7 +354,7 @@ def card(v):
 
 def sort_list(lst):
     far = dt.date(2100, 1, 1)
-    return sorted(lst, key=lambda v: (0 if v.get("hot") else 1, v["_next"] or far))
+    return sorted(lst, key=lambda v: (0 if v.get("hot") else 1, (v.get("hr") or 9999) if v.get("hot") else 0, v["_next"] or far))
 
 
 def grid_html(lst, n=12):

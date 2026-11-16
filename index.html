@@ -1359,6 +1359,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
 
   var P = window.VDALO_PAGE || {};
   var items = [], data = {}, KW = {};
+  var FIRST = {}; try { fetch("/seo-state.json",{cache:"no-store"}).then(function(r){ return r.json(); }).then(function(j){ for (var k in j) FIRST[k]=j[k].first||""; }).catch(function(){}); } catch(e){}
   var st = {country:P.country||"all", who:P.who||"all", housing:false, q:"", co:"", sort:"rec", shown:PAGE, ids:P.ids||null};
   var RATES = {};
   var today = new Date(); today.setHours(0,0,0,0);
@@ -1635,12 +1636,14 @@ window.VdaloTrack = window.VdaloTrack || (function(){
     var pay=function(v){ var u=v._uah; return u?(u.unit==="міс"?u.max:u.max*170):0; };
     var payMin=function(v){ var u=v._uah; return u?(u.unit==="міс"?u.min||u.max:(u.min||u.max)*170):9e15; };
     var free=function(v){ return v._h&&v._h.k==="ok"?1:0; };
-    var hotDate=function(a,b){ return ((b.hot?1:0)-(a.hot?1:0))||byDate(a,b); };
+    var hr=function(v){ return v.hot&&v.hr?v.hr:9999; };
+    var hotDate=function(a,b){ return ((b.hot?1:0)-(a.hot?1:0))||(hr(a)-hr(b))||byDate(a,b); };
+    var fst=function(v){ return (FIRST[v.id]||"")+"|"+String(1e9+(+v.id||0)); };
     list.sort(o.sort==="pay"?function(a,b){ return pay(b)-pay(a); }
       :o.sort==="payasc"?function(a,b){ return payMin(a)-payMin(b); }
       :o.sort==="date"?byDate
       :o.sort==="house"?function(a,b){ return (free(b)-free(a))||pay(b)-pay(a); }
-      :o.sort==="new"?function(a,b){ return (+b.id||0)-(+a.id||0); }
+      :o.sort==="new"?function(a,b){ return fst(b)<fst(a)?-1:fst(b)>fst(a)?1:0; }
       :hotDate);
     return list;
   }
