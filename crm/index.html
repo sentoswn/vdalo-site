@@ -909,11 +909,13 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   // Для вакансій Planfix суму можна вписати вручну — вона не перезаписується автоматично.
   function paySync(raw){
     try {
-      var rows = JSON.parse(decodeURIComponent(raw)).map(function(x){ return {id: String(x[0]), src: x[2] || "trello", pay_auto: Math.round(+x[1]) || null, updated_at: new Date().toISOString()}; });
+      var rows = JSON.parse(decodeURIComponent(raw)).map(function(x){ var r = {id: String(x[0]), src: x[2] || "trello", pay_auto: Math.round(+x[1]) || null, updated_at: new Date().toISOString()};
+        if (x.length > 3) { r.promo_pay = x[3] || null; r.promo_until = x[4] || null; r.promo2_pay = x[5] || null; r.promo2_until = x[6] || null; } return r; });
       API.savePay(rows).then(function(){ toast("Оплату оновлено: " + rows.length + " вакансій"); window.__paySynced = rows.length; if (S.tab === "pay") rPay(); })
         .catch(function(e){ window.__paySynced = "error: " + (e && e.message || e); fail(e); });
     } catch (e) { window.__paySynced = "error: " + e.message; }
   }
+  var GREMI = {s: 1000, m: 700, w: 500}; // Gremi: спеціалісти / м’ясо й риба / склади та інше, zł за кандидата
   function promoOn(p){ if (!p) return null; var t = new Date(), d = t.getFullYear() + "-" + ("0" + (t.getMonth() + 1)).slice(-2) + "-" + ("0" + t.getDate()).slice(-2);
     if (p.promo_pay != null && (!p.promo_until || p.promo_until >= d)) return {pay: p.promo_pay, until: p.promo_until};
     if (p.promo2_pay != null && (!p.promo2_until || p.promo2_until >= d)) return {pay: p.promo2_pay, until: p.promo2_until}; return null; }
@@ -955,8 +957,11 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     Promise.all([API.pay(), vacList(), S.leads ? Promise.resolve(S.leads) : API.leads()]).then(function(r){
       var pm = {}; r[0].forEach(function(x){ pm[x.id] = x; });
       var nLeads = {}; (r[2] || []).forEach(function(l){ if (l.vacancy_id) nLeads[l.vacancy_id] = (nLeads[l.vacancy_id] || 0) + 1; });
-      var all = r[1].map(function(v){ var p = pm[String(v.id)] || {}; var pr = promoOn(p); var pay = pr ? pr.pay : p.pay_manual != null ? p.pay_manual : p.pay_auto;
+      var heal = [];
+      var all = r[1].map(function(v){ var p = pm[String(v.id)] || {};
+        if (v.src === "planfix" && v.cat) { var base = GREMI[v.cat] || 500; if (p.pay_auto !== base) { p = Object.assign({}, p, {pay_auto: base}); heal.push({id: String(v.id), src: "planfix", pay_auto: base}); } } var pr = promoOn(p); var pay = pr ? pr.pay : p.pay_manual != null ? p.pay_manual : p.pay_auto;
         return {v: v, p: p, pay: pay == null ? null : +pay, promo: pr, manual: !pr && p.pay_manual != null, n: nLeads[String(v.id)] || 0}; });
+      if (heal.length) API.savePay(heal).catch(function(){});
       var f = S.payf || "all", q = (S.payq || "").toLowerCase();
       var rows = all.filter(function(x){ var v = x.v;
         return (f === "all" || (f === "hot" ? v.hot : f === "none" ? x.pay == null : (v.src || "trello") === f)) &&
