@@ -914,14 +914,49 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         .catch(function(e){ window.__paySynced = "error: " + (e && e.message || e); fail(e); });
     } catch (e) { window.__paySynced = "error: " + e.message; }
   }
+  function promoOn(p){ if (!p) return null; var t = new Date(), d = t.getFullYear() + "-" + ("0" + (t.getMonth() + 1)).slice(-2) + "-" + ("0" + t.getDate()).slice(-2);
+    if (p.promo_pay != null && (!p.promo_until || p.promo_until >= d)) return {pay: p.promo_pay, until: p.promo_until};
+    if (p.promo2_pay != null && (!p.promo2_until || p.promo2_until >= d)) return {pay: p.promo2_pay, until: p.promo2_until}; return null; }
+  function dd2(iso){ var a = String(iso).split("-"); return a.length === 3 ? a[2] + "." + a[1] : iso; }
+  // Вставка акцій із повідомлення оператора: рядки «2183356 - Склад посылок - 1500 zł - приезд до 30.11»
+  function parsePromos(txt){
+    var y = new Date().getFullYear(), out = [];
+    txt.split(/\n+/).forEach(function(line){
+      var m = line.match(/(\d{6,8})\s*[-–—]/); if (!m) return;
+      var sums = [], re = /(\d[\d\s]{2,5})\s*(?:zł|зл|pln)[^\d]{0,25}?до\s*(\d{1,2})\.(\d{1,2})/gi, x;
+      while ((x = re.exec(line))) sums.push({pay: +x[1].replace(/\s/g, ""), until: y + "-" + ("0" + x[3]).slice(-2) + "-" + ("0" + x[2]).slice(-2)});
+      if (!sums.length) { var a = line.match(/(\d[\d\s]{2,5})\s*(?:zł|зл|pln)/i), d = line.match(/до\s*(\d{1,2})\.(\d{1,2})/); if (a) sums.push({pay: +a[1].replace(/\s/g, ""), until: d ? y + "-" + ("0" + d[2]).slice(-2) + "-" + ("0" + d[1]).slice(-2) : null}); }
+      if (!sums.length) return;
+      out.push({id: m[1], pay: sums[0].pay, until: sums[0].until, pay2: sums[1] ? sums[1].pay : null, until2: sums[1] ? sums[1].until : null, note: sums.length > 1 ? "далі " + sums[1].pay + " zł до " + dd2(sums[1].until) : null, line: line.trim()});
+    });
+    return out;
+  }
+  function promoPaste(){
+    openDrawer('<div class="dh"><h2>Акції з повідомлення</h2><button class="btn ghost sm" data-x>✕</button></div><div class="db">' +
+      '<p class="note">Вставте повідомлення оператора з акційними вакансіями. Кожен рядок: номер вакансії, сума zł і «до ДД.ММ». Після дати акція вимкнеться сама.</p>' +
+      '<div class="fld"><textarea id="promo-txt" rows="14" placeholder="2183356 - Склад посылок (Warszawa) - 1500 zł - приезд до 30.11"></textarea></div><div id="promo-prev" class="note"></div></div>' +
+      '<div class="df"><button class="btn ghost" data-x>Скасувати</button><button class="btn" id="promo-save">Зберегти акції</button></div>');
+    drawer.querySelectorAll("[data-x]").forEach(function(b){ b.onclick = closeDrawer; });
+    var ta = document.getElementById("promo-txt"), pv = document.getElementById("promo-prev");
+    function prev(){ var r = parsePromos(ta.value), ids = {}; (S.vac || []).forEach(function(v){ ids[String(v.id)] = v; });
+      pv.innerHTML = r.length ? r.map(function(p){ return (ids[p.id] ? "✓ " : "⚠ немає на сайті: ") + E(p.id) + " — " + E(p.pay) + " zł" + (p.until ? " до " + E(dd2(p.until)) : "") + (p.note ? " (" + E(p.note) + ")" : ""); }).join("<br>") : "Поки нічого не розпізнано"; }
+    ta.oninput = prev;
+    document.getElementById("promo-save").onclick = function(){
+      var r = parsePromos(ta.value); if (!r.length) return toast("Нічого не розпізнано");
+      var cur = {}; API.pay().then(function(rows){ rows.forEach(function(x){ cur[x.id] = x; });
+        var vs = {}; (S.vac || []).forEach(function(v){ vs[String(v.id)] = v; });
+        return API.savePay(r.map(function(p){ var c = cur[p.id] || {}; return {id: p.id, src: (vs[p.id] && vs[p.id].src) || c.src || "planfix", pay_auto: c.pay_auto != null ? c.pay_auto : null, pay_manual: c.pay_manual != null ? c.pay_manual : null, note: c.note || null, promo_pay: p.pay, promo_until: p.until, promo_note: p.note, promo2_pay: p.pay2, promo2_until: p.until2}; }));
+      }).then(function(){ toast("Акцій збережено: " + r.length); closeDrawer(); rPay(); }).catch(fail);
+    };
+  }
   function vacList(){ return S.vac && S.vac.length ? Promise.resolve(S.vac) : fetch("/vacancies.json", {cache: "no-store"}).then(function(r){ return r.json(); }).then(function(j){ S.vac = j.items || []; return S.vac; }); }
   function rPay(){
     if (!S.own) return rPayMgr();
     Promise.all([API.pay(), vacList(), S.leads ? Promise.resolve(S.leads) : API.leads()]).then(function(r){
       var pm = {}; r[0].forEach(function(x){ pm[x.id] = x; });
       var nLeads = {}; (r[2] || []).forEach(function(l){ if (l.vacancy_id) nLeads[l.vacancy_id] = (nLeads[l.vacancy_id] || 0) + 1; });
-      var all = r[1].map(function(v){ var p = pm[String(v.id)] || {}; var pay = p.pay_manual != null ? p.pay_manual : p.pay_auto;
-        return {v: v, p: p, pay: pay == null ? null : +pay, manual: p.pay_manual != null, n: nLeads[String(v.id)] || 0}; });
+      var all = r[1].map(function(v){ var p = pm[String(v.id)] || {}; var pr = promoOn(p); var pay = pr ? pr.pay : p.pay_manual != null ? p.pay_manual : p.pay_auto;
+        return {v: v, p: p, pay: pay == null ? null : +pay, promo: pr, manual: !pr && p.pay_manual != null, n: nLeads[String(v.id)] || 0}; });
       var f = S.payf || "all", q = (S.payq || "").toLowerCase();
       var rows = all.filter(function(x){ var v = x.v;
         return (f === "all" || (f === "hot" ? v.hot : f === "none" ? x.pay == null : (v.src || "trello") === f)) &&
@@ -937,18 +972,19 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         '<div class="card stat"><span>Середнє</span><b>' + (avg ? avg.toLocaleString("uk-UA") + " zł" : "—") + '</b></div>' +
         '<div class="card stat"><span>Вакансій із сумою</span><b>' + withPay.length + ' / ' + all.length + '</b></div></div>' +
         '<div class="bar"><input type="search" id="pq" placeholder="Пошук: посада, компанія, місто, №" value="' + E(S.payq || "") + '">' +
-        chip("all", "Усі", all.length) + chip("hot", "Гарячі", cnt("hot")) + chip("trello", "Trello (EWL)", cnt("trello")) + chip("planfix", "Planfix (Gremi)", cnt("planfix")) + chip("none", "Без суми", cnt("none")) + '</div>' +
-        '<p class="note" style="margin:-4px 0 12px">Скільки нам платять за кандидата, від більшого до меншого. Trello — автоматично щодня: множник із картки × 900 zł (чоловіки / усі) або × 600 zł (жінки), + бонус «Проєкту тижня». Planfix — суми в картках немає, впишіть вручну (натисніть на рядок).' + (last ? ' Оновлено: ' + E(dt(last, true)) + '.' : '') + '</p>' +
+        chip("all", "Усі", all.length) + chip("hot", "Гарячі", cnt("hot")) + chip("trello", "Trello (EWL)", cnt("trello")) + chip("planfix", "Planfix (Gremi)", cnt("planfix")) + chip("none", "Без суми", cnt("none")) + '<button class="btn sm" id="promo-add">+ Акції з повідомлення</button></div>' +
+        '<p class="note" style="margin:-4px 0 12px">Скільки нам платять за кандидата, від більшого до меншого. Trello — автоматично щодня: множник із картки × 900 zł (чоловіки / усі) або × 600 zł (жінки), + бонус «Проєкту тижня». Planfix (Gremi) — автоматично за категорією: спеціалісти 1000 zł, м’ясо й риба 700 zł, склади та інше 500 zł (мінімальне відпрацювання 14 днів, виплати 15-го і 30-го). Акції вставляйте кнопкою «+ Акції з повідомлення» — вони діють до вказаної дати. Будь-яку суму можна змінити вручну (натисніть на рядок).' + (last ? ' Оновлено: ' + E(dt(last, true)) + '.' : '') + '</p>' +
         '<div class="card"><table class="tbl"><thead><tr><th>#</th><th>Вакансія</th><th>Оператор</th><th>Заявок</th><th style="text-align:right">Нам платять</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(x, i){ var v = x.v, pf = v.src === "planfix";
           return '<tr class="row" data-pid="' + E(v.id) + '"><td class="hide-m">' + (i + 1) + '</td><td><b>' + E(v.title) + '</b>' + (v.hot ? ' <span class="st st-new">Гаряча</span>' : '') +
             '<small>' + E([v.company, v.city, v.country].filter(Boolean).join(" · ")) + '</small></td>' +
             '<td class="hide-m">' + (pf ? "Planfix (Gremi)" : "Trello (EWL)") + '<small>№' + E(v.id) + '</small></td><td class="hide-m">' + (x.n || "—") + '</td>' +
-            '<td style="text-align:right;white-space:nowrap"><b>' + (x.pay == null ? '—' : x.pay.toLocaleString("uk-UA") + ' zł') + '</b>' + (x.manual ? '<small>вручну</small>' : '') + (x.p.note ? '<small>' + E(x.p.note) + '</small>' : '') + '</td></tr>';
+            '<td style="text-align:right;white-space:nowrap"><b>' + (x.pay == null ? '—' : x.pay.toLocaleString("uk-UA") + ' zł') + '</b>' + (x.promo ? '<small style="color:var(--red)">акція' + (x.promo.until ? ' до ' + E(dd2(x.promo.until)) : '') + '</small>' : '') + (x.manual ? '<small>вручну</small>' : '') + (x.p.note ? '<small>' + E(x.p.note) + '</small>' : '') + '</td></tr>';
         }).join("") : '<tr><td colspan="5" class="empty">Нічого не знайдено</td></tr>') + '</tbody></table></div>';
       var pq = document.getElementById("pq"); if (S.payPos != null) { pq.focus(); pq.setSelectionRange(S.payPos, S.payPos); S.payPos = null; }
       pq.oninput = function(){ S.payq = pq.value; S.payPos = pq.selectionStart; rPay(); };
       document.querySelectorAll("[data-pf]").forEach(function(b){ b.onclick = function(){ S.payf = b.getAttribute("data-pf"); rPay(); }; });
+      document.getElementById("promo-add").onclick = promoPaste;
       document.querySelectorAll("tr[data-pid]").forEach(function(tr){ tr.onclick = function(){ var id = tr.getAttribute("data-pid"); openPay(all.filter(function(x){ return String(x.v.id) === id; })[0]); }; });
     }).catch(fail);
   }
@@ -981,12 +1017,15 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       '<dt>Компанія</dt><dd>' + E(v.company || "—") + '</dd><dt>Де</dt><dd>' + E([v.city, v.country].filter(Boolean).join(", ") || "—") + '</dd>' +
       '<dt>Автоматично</dt><dd>' + (x.p.pay_auto != null ? E(x.p.pay_auto) + ' zł' : '—') + '</dd><dt>Сторінка</dt><dd><a href="/vakansii/' + E(v.id) + '/" target="_blank">відкрити на сайті</a></dd></dl>' +
       '<div class="fld"><label>Сума за кандидата вручну, zł (порожньо — брати автоматичну)</label><input id="pay-m" type="number" min="0" step="50" value="' + (x.p.pay_manual != null ? E(x.p.pay_manual) : "") + '"></div>' +
+      '<div class="fld"><label>Акція, zł</label><input id="pay-pp" type="number" min="0" step="50" value="' + (x.p.promo_pay != null ? E(x.p.promo_pay) : "") + '"></div>' +
+      '<div class="fld"><label>Акція діє до (включно)</label><input id="pay-pu" type="date" value="' + E(x.p.promo_until || "") + '"></div>' +
       '<div class="fld"><label>Примітка (умови виплати, бонуси)</label><input id="pay-n" value="' + E(x.p.note || "") + '"></div></div>' +
       '<div class="df"><button class="btn ghost" data-x>Скасувати</button><button class="btn" id="pay-s">Зберегти</button></div>');
     drawer.querySelectorAll("[data-x]").forEach(function(b){ b.onclick = closeDrawer; });
     document.getElementById("pay-s").onclick = function(){
       var m = document.getElementById("pay-m").value.trim(), n = document.getElementById("pay-n").value.trim();
-      API.savePay([{id: String(v.id), src: v.src || "trello", pay_manual: m === "" ? null : Math.round(+m), note: n || null, pay_auto: x.p.pay_auto != null ? x.p.pay_auto : null}])
+      var pp = document.getElementById("pay-pp").value.trim(), pu = document.getElementById("pay-pu").value;
+      API.savePay([{id: String(v.id), src: v.src || "trello", pay_manual: m === "" ? null : Math.round(+m), note: n || null, pay_auto: x.p.pay_auto != null ? x.p.pay_auto : null, promo_pay: pp === "" ? null : Math.round(+pp), promo_until: pp === "" ? null : (pu || null), promo_note: pp === "" ? null : (x.p.promo_note || null), promo2_pay: pp === "" ? null : (x.p.promo2_pay != null ? x.p.promo2_pay : null), promo2_until: pp === "" ? null : (x.p.promo2_until || null)}])
         .then(function(){ toast("Збережено"); closeDrawer(); rPay(); }).catch(fail);
     };
   }

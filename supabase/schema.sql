@@ -648,12 +648,33 @@ alter table public.vacancy_pay enable row level security;
 drop policy if exists vp_admin on public.vacancy_pay;
 create policy vp_admin on public.vacancy_pay for all using (public.is_admin()) with check (public.is_admin());
 grant select, insert, update, delete on public.vacancy_pay to authenticated;
+alter table public.vacancy_pay add column if not exists promo_pay   integer;   -- акція (напр. з повідомлення оператора)
+alter table public.vacancy_pay add column if not exists promo_until date;      -- до якої дати діє акція (включно)
+alter table public.vacancy_pay add column if not exists promo_note  text;
+alter table public.vacancy_pay add column if not exists promo2_pay   integer;   -- друга сходинка акції («далі 1300 zł до 30.11»)
+alter table public.vacancy_pay add column if not exists promo2_until date;
+-- Фактична сума: діюча акція → вписано вручну → автоматично.
+create or replace function public.vacancy_pay_eff(v public.vacancy_pay) returns integer language sql stable as $$
+  select case when v.promo_pay is not null and (v.promo_until is null or v.promo_until >= (now() at time zone 'Europe/Kyiv')::date)
+              then v.promo_pay
+              when v.promo2_pay is not null and (v.promo2_until is null or v.promo2_until >= (now() at time zone 'Europe/Kyiv')::date)
+              then v.promo2_pay
+              else coalesce(v.pay_manual, v.pay_auto) end
+$$;
 -- Менеджерам — лише порядок вакансій за вигідністю, без сум.
+drop function if exists public.vacancy_pay_rank();
 create or replace function public.vacancy_pay_rank() returns table(id text, rnk integer)
 language sql stable security definer set search_path = public as $$
-  select v.id, (row_number() over (order by coalesce(v.pay_manual, v.pay_auto) desc))::int
+  select v.id, (row_number() over (order by public.vacancy_pay_eff(v) desc))::int
   from public.vacancy_pay v
-  where public.is_staff() and coalesce(v.pay_manual, v.pay_auto) is not null
+  where public.is_staff() and public.vacancy_pay_eff(v) is not null
 $$;
 revoke all on function public.vacancy_pay_rank() from public, anon;
 grant execute on function public.vacancy_pay_rank() to authenticated;
+-- Сайту — лише порядок (без сум), щоб гарячі вакансії йшли від найвигіднішої. Хто відкриє — бачить тільки номери й місця.
+create or replace function public.hot_order() returns table(id text, rnk integer)
+language sql stable security definer set search_path = public as $$
+  select v.id, (row_number() over (order by public.vacancy_pay_eff(v) desc))::int
+  from public.vacancy_pay v where public.vacancy_pay_eff(v) is not null
+$$;
+grant execute on function public.hot_order() to anon, authenticated;

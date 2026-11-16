@@ -2062,6 +2062,14 @@ window.VdaloTrack = window.VdaloTrack || (function(){
   window.addEventListener("hashchange",function(){ if (DOCS[location.hash]) openDoc(DOCS[location.hash]); });
   if (DOCS[location.hash]) openDoc(DOCS[location.hash]);
 
+  /* Порядок гарячих вакансій — з бази (лише місця, без сум): враховує акції, які діють сьогодні */
+  function hotOrder(){
+    try { if (!window.Vdalo) return; Vdalo.cfg().then(function(c){ if (!c || !c.supabaseUrl || !c.supabaseKey) return;
+      return fetch(c.supabaseUrl+"/rest/v1/rpc/hot_order",{method:"POST",headers:{"apikey":c.supabaseKey,"Authorization":"Bearer "+c.supabaseKey,"Content-Type":"application/json"},body:"{}"})
+        .then(function(r){ return r.ok?r.json():[]; }).then(function(rows){ if (!rows||!rows.length) return; var m={}; rows.forEach(function(x){ m[x.id]=x.rnk; });
+          items.forEach(function(v){ if (v.hot) v.hr = m[String(v.id)] || (9000+(v.hr||0)); }); render(); });
+    }).catch(function(){}); } catch(e){}
+  }
   /* ---------- Старт ---------- */
   function boot(d){
     data=d||{}; RATES=data.rates||{}; items=(data.items||[]).filter(function(v){ return v&&v.title&&v.salary; }).map(enrich);
@@ -2098,6 +2106,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
     render();
     renderCos();
     route();
+    hotOrder();
     countUp($("st-count")); countUp($("st-housing")); calc();
   }
   var kwP = fetch("/keywords.json",{cache:"no-store"}).then(function(r){ return r.ok ? r.json() : {}; }).catch(function(){ return {}; });
