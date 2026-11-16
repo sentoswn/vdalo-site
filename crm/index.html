@@ -84,17 +84,41 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   .tbl thead{display:none}.tbl tr.row{display:grid;grid-template-columns:1fr auto;padding:10px 12px;border-bottom:1px solid var(--line)}
   .tbl tr.row td{border:0;padding:2px 0}.tbl td.hide-m{display:none}.g2{grid-template-columns:1fr}
 }
+.bars{display:grid;gap:8px}
+.bars .b{display:grid;grid-template-columns:200px 1fr 60px;gap:10px;align-items:center}
+.bars .t{height:12px;border-radius:6px;background:var(--soft);overflow:hidden}
+.bars .t i{display:block;height:100%;background:var(--ink);border-radius:6px}
+.cols{display:flex;align-items:flex-end;gap:3px;height:120px;padding-top:8px}
+.cols i{flex:1;background:var(--ink);border-radius:4px 4px 0 0;min-height:2px;position:relative}
+.cols i:hover::after{content:attr(data-t);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-style:normal;font-size:11px;padding:2px 6px;border-radius:6px;white-space:nowrap}
+.pad .tbl th{position:static}
+.mini input,.mini select,#t-who{padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--surface);min-width:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pad{padding:18px;display:grid;gap:12px;align-content:start}
+.pad h3{margin:0}
+.task{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:start;padding:10px 12px;border-bottom:1px solid var(--line)}
+.task input{margin-top:3px;width:18px;height:18px;accent-color:var(--green)}
+.task.done b{text-decoration:line-through;color:var(--muted)}
+.task small{display:block;color:var(--muted)}
+.task .od{color:var(--red);font-weight:700}
+.tgroup{padding:10px 12px 4px;font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.mini{display:grid;gap:6px}
+.mini .row2{display:grid;grid-template-columns:1fr 150px auto;gap:6px}
+@media (max-width:800px){.grid2{grid-template-columns:1fr}.bars .b{grid-template-columns:120px 1fr 44px}.mini .row2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header class="top">
   <a class="logo" href="/"><span>В</span>CRM</a>
   <nav class="tabs" id="tabs" role="tablist" hidden>
-    <button role="tab" data-tab="leads" aria-selected="true">Кандидати<span class="n" id="n-leads" hidden></span></button>
-    <button role="tab" data-tab="employers">Роботодавці<span class="n" id="n-employers" hidden></span></button>
-    <button role="tab" data-tab="people">Реферали й баланси</button>
-    <button role="tab" data-tab="payouts">Виплати<span class="n" id="n-payouts" hidden></span></button>
-    <button role="tab" data-tab="settings">Налаштування</button>
+    <button role="tab" data-tab="leads" aria-selected="true"><span id="t-leads">Кандидати</span><span class="n" id="n-leads" hidden></span></button>
+    <button role="tab" data-tab="tasks">Задачі<span class="n" id="n-tasks" hidden></span></button>
+    <button role="tab" data-tab="analytics" data-own>Аналітика</button>
+    <button role="tab" data-tab="employers" data-own>Роботодавці<span class="n" id="n-employers" hidden></span></button>
+    <button role="tab" data-tab="people" data-own>Реферали й баланси</button>
+    <button role="tab" data-tab="payouts" data-own>Виплати<span class="n" id="n-payouts" hidden></span></button>
+    <button role="tab" data-tab="mylink">Моє посилання</button>
+    <button role="tab" data-tab="settings" data-own>Налаштування</button>
   </nav>
   <div class="me" id="me"></div>
 </header>
@@ -112,8 +136,8 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   var LSN = {}; LS.forEach(function(x){ LSN[x[0]] = x[1]; });
   var ES = [["new","Новий запит"],["in_progress","В роботі"],["contract","Співпрацюємо"],["rejected","Відмова"]];
   var ESN = {}; ES.forEach(function(x){ ESN[x[0]] = x[1]; });
-  var ROLES = {user: "Користувач", manager: "Менеджер", admin: "Адмін"};
-  var S = {tab: "leads", leads: [], employers: [], people: [], payouts: [], bonus: 0, me: null, filter: "active", q: "", efilter: "all"};
+  var ROLES = {user: "Користувач", manager: "Менеджер", admin: "Власник"};
+  var S = {mgr: "all", tasks: [], staff: [], tab: "leads", leads: [], employers: [], people: [], payouts: [], bonus: 0, me: null, filter: "active", q: "", efilter: "all"};
 
   function toast(t){ var el = document.getElementById("toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(function(){ el.classList.remove("show"); }, 2200); }
   function dt(d, time){ if (!d) return ""; var x = new Date(d); return x.toLocaleDateString("uk-UA", {day: "2-digit", month: "2-digit", year: "2-digit"}) + (time ? " " + x.toLocaleTimeString("uk-UA", {hour: "2-digit", minute: "2-digit"}) : ""); }
@@ -150,6 +174,12 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       settings: function(){ return s.from("settings").select("*").then(ok).then(function(r){ var o = {}; r.forEach(function(x){ o[x.key] = x.value; }); return o; }); },
       setSetting: function(k, v){ return s.from("settings").upsert({key: k, value: String(v)}).then(ok); },
       findRef: function(code){ return s.from("profiles").select("id,first_name,last_name,tg_username,ref_code").eq("ref_code", code.toLowerCase()).maybeSingle().then(ok); },
+      staff: function(){ return s.from("profiles").select("id,first_name,last_name,tg_username,role,ref_code").in("role", ["manager", "admin"]).then(ok); },
+      tasks: function(){ return s.from("tasks").select("*").order("due_at", {ascending: true, nullsFirst: false}).limit(2000).then(ok); },
+      addTask: function(row){ return s.from("tasks").insert(row).then(ok); },
+      saveTask: function(tid, patch){ return s.from("tasks").update(patch).eq("id", tid).then(ok); },
+      deleteTask: function(tid){ return s.from("tasks").delete().eq("id", tid).then(ok); },
+      ledgerAll: function(){ return s.from("ledger").select("kind,amount,created_at").limit(10000).then(ok); },
       logout: function(){ s.auth.signOut().then(function(){ location.reload(); }); }
     };
   }
@@ -174,37 +204,48 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   function start(){
     API.me().then(function(me){
       if (!me || (me.role !== "manager" && me.role !== "admin")) {
-        app.innerHTML = '<div class="card login"><h1>Немає доступу</h1><p>Ваш акаунт ' + E(pname(me)) + ' ще не має ролі менеджера. Попросіть адміністратора надати доступ у розділі «Реферали й баланси».</p><button class="btn ghost" id="out">Вийти</button></div>';
+        app.innerHTML = '<div class="card login"><h1>Немає доступу</h1><p>Ваш акаунт ' + E(pname(me)) + ' ще не має ролі менеджера. Попросіть власника додати ваш Telegram-нік у CRM (Налаштування → Менеджери).</p><button class="btn ghost" id="out">Вийти</button></div>';
         document.getElementById("out").onclick = function(){ API.logout(); }; return;
       }
-      S.me = me;
+      S.me = me; S.own = me.role === "admin";
+      document.querySelectorAll("#tabs [data-own]").forEach(function(b){ b.hidden = !S.own; });
+      document.getElementById("t-leads").textContent = S.own ? "Кандидати" : "Мої кандидати";
+      API.staff().then(function(st){ S.staff = st; }).catch(function(){});
       API.settings().then(function(st){ S.st = st; }).catch(function(){});
       document.getElementById("me").innerHTML = E(pname(me)) + ' · ' + E(ROLES[me.role]) + ' <button class="btn ghost sm" id="out">Вийти</button>';
       document.getElementById("out").onclick = function(){ API.logout(); };
       document.getElementById("tabs").hidden = false;
       document.querySelectorAll("#tabs button").forEach(function(b){ b.onclick = function(){ go(b.getAttribute("data-tab")); }; });
-      var h = location.hash.replace("#", ""); go(["leads", "employers", "people", "payouts", "settings"].indexOf(h) >= 0 ? h : "leads");
+      var h = location.hash.replace("#", ""); go(tabsAllowed().indexOf(h) >= 0 ? h : "leads");
       counts();
     });
   }
+  function tabsAllowed(){ return S.own ? ["leads", "tasks", "analytics", "employers", "people", "payouts", "mylink", "settings"] : ["leads", "tasks", "mylink"]; }
+  function staffName(id){ var p = S.staff.filter(function(x){ return x.id === id; })[0]; return p ? pname(p) : ""; }
   function go(tab){
+    if (tabsAllowed().indexOf(tab) < 0) tab = "leads";
     S.tab = tab; history.replaceState(null, "", location.pathname + "#" + tab);
     document.querySelectorAll("#tabs button").forEach(function(b){ b.setAttribute("aria-selected", b.getAttribute("data-tab") === tab); });
     closeDrawer(); render();
   }
   function counts(){
-    Promise.all([API.leads(), API.employers(), API.payouts()]).then(function(r){
-      S.leads = r[0]; S.employers = r[1]; S.payouts = r[2];
-      badge("n-leads", r[0].filter(function(x){ return x.status === "new"; }).length);
-      badge("n-employers", r[1].filter(function(x){ return x.status === "new"; }).length);
-      badge("n-payouts", r[2].filter(function(x){ return x.status === "new"; }).length);
-    });
+    var jobs = [API.leads(), API.tasks()];
+    if (S.own) jobs.push(API.employers(), API.payouts());
+    Promise.all(jobs).then(function(r){
+      S.leads = r[0]; S.tasks = r[1];
+      badge("n-leads", r[0].filter(function(x){ return x.status === "new" && (S.own ? !x.manager_id : true); }).length);
+      var eod = new Date(); eod.setHours(23, 59, 59, 999);
+      badge("n-tasks", r[1].filter(function(t){ return !t.done_at && t.due_at && new Date(t.due_at) <= eod && t.assignee_id === S.me.id; }).length);
+      if (S.own) { S.employers = r[2]; S.payouts = r[3];
+        badge("n-employers", r[2].filter(function(x){ return x.status === "new"; }).length);
+        badge("n-payouts", r[3].filter(function(x){ return x.status === "new"; }).length); }
+    }).catch(function(){});
   }
   function badge(id, n){ var el = document.getElementById(id); el.hidden = !n; el.textContent = n; }
   function demoBar(){ return ""; }
   function render(){
     app.innerHTML = '<div class="empty">Завантаження…</div>';
-    ({leads: rLeads, employers: rEmployers, people: rPeople, payouts: rPayouts, settings: rSettings})[S.tab]();
+    ({leads: rLeads, tasks: rTasks, analytics: rAnalytics, mylink: rMyLink, employers: rEmployers, people: rPeople, payouts: rPayouts, settings: rSettings})[S.tab]();
   }
   function fail(e){ console.warn(e); toast("Помилка: " + (e && e.message || "не вдалося зберегти")); }
 
@@ -218,7 +259,12 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         '<button class="chip" data-f="all" aria-pressed="' + (S.filter === "all") + '">Усі<b>' + list.length + '</b></button>' +
         LS.map(function(x){ return '<button class="chip" data-f="' + x[0] + '" aria-pressed="' + (S.filter === x[0]) + '">' + E(x[0] === "paid" ? "Оплачено" : x[1]) + '<b>' + (cnt[x[0]] || 0) + '</b></button>'; }).join("");
       var q = S.q.toLowerCase();
+      var mgrSel = S.own ? '<select id="mgr" style="padding:7px 10px;border:1px solid var(--line);border-radius:999px;font-weight:600;background:var(--surface)">' +
+        '<option value="all">Усі менеджери</option><option value="none"' + (S.mgr === "none" ? " selected" : "") + '>Без менеджера (' + list.filter(function(l){ return !l.manager_id; }).length + ')</option>' +
+        S.staff.map(function(p){ return '<option value="' + p.id + '"' + (S.mgr === p.id ? " selected" : "") + '>' + E(pname(p)) + ' (' + list.filter(function(l){ return l.manager_id === p.id; }).length + ')</option>'; }).join("") + '</select>' : "";
       var rows = list.filter(function(l){
+        if (S.own && S.mgr === "none" && l.manager_id) return false;
+        if (S.own && S.mgr !== "all" && S.mgr !== "none" && l.manager_id !== S.mgr) return false;
         if (S.filter === "active" && (l.status === "rejected" || l.status === "paid")) return false;
         if (S.filter !== "active" && S.filter !== "all" && l.status !== S.filter) return false;
         if (q && [l.name, l.phone, l.vacancy_title, l.employer, l.manager_note, l.referrer && pname(l.referrer)].join(" ").toLowerCase().indexOf(q) < 0) return false;
@@ -226,15 +272,17 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       });
       app.innerHTML = demoBar() +
         '<div class="bar"><input type="search" id="q" placeholder="Пошук: ім’я, телефон, вакансія, роботодавець…" value="' + E(S.q) + '"><button class="btn" id="add">+ Нова заявка</button></div>' +
-        '<div class="bar">' + chips + '</div>' +
-        '<div class="card"><table class="tbl"><thead><tr><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Від кого</th><th>Статус</th></tr></thead><tbody>' +
+        '<div class="bar">' + mgrSel + chips + '</div>' +
+        '<div class="card"><table class="tbl"><thead><tr><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Від кого</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(l){
           return '<tr class="row" data-id="' + l.id + '"><td class="hide-m">' + E(dt(l.created_at, true)) + '</td>' +
             '<td><b>' + E(l.name) + '</b><small>' + E(l.phone) + (l.who ? " · " + E(l.who) : "") + '</small></td>' +
             '<td class="hide-m">' + E(l.vacancy_title || "Будь-яка") + (l.employer ? '<small>' + E(l.employer) + '</small>' : "") + '</td>' +
             '<td class="hide-m">' + (l.referrer ? E(pname(l.referrer)) : '<span class="note">' + E(l.ref_raw ? "ref: " + l.ref_raw : (l.source || "—")) + '</span>') + '</td>' +
+            (S.own ? '<td class="hide-m">' + (l.manager_id ? E(staffName(l.manager_id)) : '<span class="st st-new">Не призначено</span>') + '</td>' : '') +
             '<td><span class="st st-' + l.status + '">' + E(LSN[l.status] || l.status) + '</span></td></tr>';
-        }).join("") : '<tr><td colspan="5" class="empty">Нічого не знайдено</td></tr>') + '</tbody></table></div>';
+        }).join("") : '<tr><td colspan="6" class="empty">' + (S.own ? "Нічого не знайдено" : "Поки немає кандидатів. Діліться своїм посиланням (вкладка «Моє посилання») — кандидати з нього потраплять сюди.") + '</td></tr>') + '</tbody></table></div>';
+      var ms = document.getElementById("mgr"); if (ms) ms.onchange = function(){ S.mgr = ms.value; rLeads(); };
       var qi = document.getElementById("q");
       qi.oninput = function(){ S.q = qi.value; var pos = qi.selectionStart; rLeads(); };
       document.querySelectorAll("[data-f]").forEach(function(b){ b.onclick = function(){ S.filter = b.getAttribute("data-f"); rLeads(); }; });
@@ -261,12 +309,14 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       (isNew ? '<div class="g2"><div class="fld"><label>Ім’я</label><input id="d-name"></div><div class="fld"><label>Телефон</label><input id="d-phone" type="tel"></div></div>' +
         '<div class="fld"><label>Вакансія / побажання</label><input id="d-vac"></div>' : "") +
       '<div class="fld"><label>Статус</label><select id="d-status">' + opts(LS, l.status) + '</select></div>' +
+      (S.own ? '<div class="fld"><label>Менеджер</label><select id="d-mgr"><option value="">— не призначено —</option>' + S.staff.map(function(p){ return '<option value="' + p.id + '"' + (l.manager_id === p.id ? " selected" : "") + '>' + E(pname(p)) + (p.role === "admin" ? " (власник)" : "") + '</option>'; }).join("") + '</select></div>' : "") +
       '<p class="note" id="d-bonus-note"></p>' +
       '<div class="g2"><div class="fld"><label>Роботодавець / об’єкт</label><input id="d-emp" value="' + E(l.employer || "") + '"></div>' +
       '<div class="fld"><label>Дата виходу на роботу</label><input id="d-start" type="date" value="' + E(l.start_date || "") + '"></div></div>' +
       '<div class="fld"><label>Хто запросив (реферальний код)</label><div class="g2"><input id="d-ref" placeholder="напр. ok7m2p" value="' + E(l.referrer ? l.referrer.ref_code || "" : "") + '"><span class="note" id="d-ref-name" style="align-self:center">' + (l.referrer ? E(pname(l.referrer)) : (l.ref_raw ? "з посилання: " + E(l.ref_raw) + " (не знайдено)" : "")) + '</span></div></div>' +
       '<div class="fld"><label>Нотатки менеджера</label><textarea id="d-note">' + E(l.manager_note || "") + '</textarea></div>' +
-      (isNew ? "" : '<div><b>Історія статусів</b><ul class="hist" id="d-hist"><li>…</li></ul></div>') +
+      (isNew ? "" : '<div class="mini"><b>Задачі по кандидату</b><div id="d-tasks"></div><div class="row2"><input id="dt-title" placeholder="Напр. передзвонити, надіслати документи"><input id="dt-due" type="datetime-local"><button class="btn sm" id="dt-add" type="button">Додати</button></div></div>' +
+        '<div><b>Історія статусів</b><ul class="hist" id="d-hist"><li>…</li></ul></div>') +
       '</div><div class="df">' + (!isNew && S.me.role === "admin" ? '<button class="btn ghost" id="d-del" style="margin-right:auto;color:var(--red)">Видалити</button>' : "") +
       '<button class="btn ghost" data-x>Скасувати</button><button class="btn" id="d-save">Зберегти</button></div>');
     drawer.querySelectorAll("[data-x]").forEach(function(b){ b.onclick = closeDrawer; });
@@ -283,12 +333,27 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       if (!c) { refId = null; out.textContent = ""; return; }
       API.findRef(c).then(function(p){ refId = p ? p.id : refId; out.textContent = p ? pname(p) : "Код не знайдено"; bonusNote(); });
     };
+    if (!isNew) {
+      var drawTasks = function(){
+        var ts = S.tasks.filter(function(t){ return t.lead_id === l.id; });
+        document.getElementById("d-tasks").innerHTML = ts.length ? ts.map(taskRow).join("") : '<p class="note">Задач немає</p>';
+        bindTasks(document.getElementById("d-tasks"), function(){ API.tasks().then(function(t){ S.tasks = t; drawTasks(); counts(); }); });
+      };
+      drawTasks();
+      document.getElementById("dt-add").onclick = function(){
+        var t = document.getElementById("dt-title").value.trim(); if (!t) { toast("Напишіть, що зробити"); return; }
+        var due = document.getElementById("dt-due").value;
+        API.addTask({title: t, lead_id: l.id, due_at: due ? new Date(due).toISOString() : null, assignee_id: l.manager_id || S.me.id})
+          .then(function(){ return API.tasks(); }).then(function(tl){ S.tasks = tl; document.getElementById("dt-title").value = ""; drawTasks(); counts(); toast("Задачу додано"); }).catch(fail);
+      };
+    }
     if (!isNew) API.events(l.id).then(function(ev){
       document.getElementById("d-hist").innerHTML = ev.length ? ev.map(function(e){ return '<li>' + E(dt(e.created_at, true)) + ': ' + E(LSN[e.old_status] || e.old_status || "—") + ' → <b>' + E(LSN[e.new_status] || e.new_status) + '</b></li>'; }).join("") : "<li>Змін ще не було</li>";
     });
     document.getElementById("d-save").onclick = function(){
       var patch = {status: stSel.value, employer: document.getElementById("d-emp").value.trim() || null, start_date: document.getElementById("d-start").value || null,
         manager_note: document.getElementById("d-note").value.trim() || null, referrer_id: refId};
+      var dm = document.getElementById("d-mgr"); if (dm) patch.manager_id = dm.value || null;
       var p;
       if (isNew) {
         patch.name = document.getElementById("d-name").value.trim(); patch.phone = document.getElementById("d-phone").value.trim();
@@ -300,6 +365,129 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     };
     var del = document.getElementById("d-del");
     if (del) del.onclick = function(){ if (confirm("Видалити заявку " + l.name + "?")) API.deleteLead(l.id).then(function(){ closeDrawer(); counts(); rLeads(); }).catch(fail); };
+  }
+
+  /* ================= Задачі ================= */
+  function leadName(id){ var l = S.leads.filter(function(x){ return x.id === id; })[0]; return l ? l.name : ""; }
+  function taskRow(t){
+    var od = !t.done_at && t.due_at && new Date(t.due_at) < new Date();
+    return '<div class="task' + (t.done_at ? " done" : "") + '"><input type="checkbox" data-done="' + t.id + '"' + (t.done_at ? " checked" : "") + ' aria-label="Виконано">' +
+      '<div><b>' + E(t.title) + '</b><small>' + (t.due_at ? '<span class="' + (od ? "od" : "") + '">' + E(dt(t.due_at, true)) + (od ? " · прострочено" : "") + '</span>' : "без терміну") +
+      (t.lead_id ? ' · <a href="#" data-lead="' + t.lead_id + '">' + E(leadName(t.lead_id) || "кандидат") + '</a>' : "") +
+      (S.own && t.assignee_id !== S.me.id ? ' · ' + E(staffName(t.assignee_id) || "—") : "") + (t.note ? ' · ' + E(t.note) : "") + '</small></div>' +
+      '<button class="btn ghost sm" data-tdel="' + t.id + '" title="Видалити">✕</button></div>';
+  }
+  function bindTasks(root, after){
+    root.querySelectorAll("[data-done]").forEach(function(c){ c.onchange = function(){ API.saveTask(+c.getAttribute("data-done"), {done_at: c.checked ? new Date().toISOString() : null}).then(after).catch(fail); }; });
+    root.querySelectorAll("[data-tdel]").forEach(function(b){ b.onclick = function(){ if (confirm("Видалити задачу?")) API.deleteTask(+b.getAttribute("data-tdel")).then(after).catch(fail); }; });
+    root.querySelectorAll("[data-lead]").forEach(function(a){ a.onclick = function(e){ e.preventDefault(); openLead(+a.getAttribute("data-lead")); }; });
+  }
+  function rTasks(){
+    Promise.all([API.tasks(), API.leads()]).then(function(r){
+      S.tasks = r[0]; S.leads = r[1];
+      var who = S.tf || (S.own ? "all" : S.me.id);
+      var list = r[0].filter(function(t){ return who === "all" || t.assignee_id === who; });
+      var now = new Date(), eod = new Date(); eod.setHours(23, 59, 59, 999);
+      var open = list.filter(function(t){ return !t.done_at; });
+      var groups = [
+        ["Прострочені", open.filter(function(t){ return t.due_at && new Date(t.due_at) < now; })],
+        ["Сьогодні", open.filter(function(t){ return t.due_at && new Date(t.due_at) >= now && new Date(t.due_at) <= eod; })],
+        ["Далі", open.filter(function(t){ return t.due_at && new Date(t.due_at) > eod; })],
+        ["Без терміну", open.filter(function(t){ return !t.due_at; })],
+        ["Виконані (останні)", list.filter(function(t){ return t.done_at; }).sort(function(a, b){ return new Date(b.done_at) - new Date(a.done_at); }).slice(0, 20)]
+      ];
+      var assignSel = S.own ? '<select id="t-who">' + S.staff.map(function(p){ return '<option value="' + p.id + '"' + (p.id === S.me.id ? " selected" : "") + '>' + E(pname(p)) + '</option>'; }).join("") + '</select>' : "";
+      app.innerHTML = '<div class="card pad" style="margin-bottom:16px"><h3>Нова задача</h3><div class="mini"><div class="row2" style="grid-template-columns:1fr 190px ' + (S.own ? "180px " : "") + 'auto">' +
+        '<input id="t-title" placeholder="Що зробити? Напр. знайти 10 людей на склад SHEIN">' + '<input id="t-due" type="datetime-local">' + assignSel + '<button class="btn" id="t-add">Додати</button></div></div></div>' +
+        (S.own ? '<div class="bar"><button class="chip" data-tw="all" aria-pressed="' + (who === "all") + '">Усі</button>' + S.staff.map(function(p){ return '<button class="chip" data-tw="' + p.id + '" aria-pressed="' + (who === p.id) + '">' + E(pname(p)) + '<b>' + r[0].filter(function(t){ return !t.done_at && t.assignee_id === p.id; }).length + '</b></button>'; }).join("") + '</div>' : "") +
+        '<div class="card" id="tl">' + groups.map(function(g){ return g[1].length ? '<div class="tgroup">' + E(g[0]) + ' · ' + g[1].length + '</div>' + g[1].map(taskRow).join("") : ""; }).join("") +
+        (open.length || groups[4][1].length ? "" : '<div class="empty">Задач немає. Додайте першу вище або в картці кандидата.</div>') + '</div>';
+      bindTasks(document.getElementById("tl"), function(){ counts(); rTasks(); });
+      document.querySelectorAll("[data-tw]").forEach(function(b){ b.onclick = function(){ S.tf = b.getAttribute("data-tw"); rTasks(); }; });
+      document.getElementById("t-add").onclick = function(){
+        var t = document.getElementById("t-title").value.trim(); if (!t) { toast("Напишіть, що зробити"); return; }
+        var due = document.getElementById("t-due").value, ws = document.getElementById("t-who");
+        API.addTask({title: t, due_at: due ? new Date(due).toISOString() : null, assignee_id: ws ? ws.value : S.me.id}).then(function(){ toast("Задачу додано"); counts(); rTasks(); }).catch(fail);
+      };
+    }).catch(fail);
+  }
+
+  /* ================= Моє посилання ================= */
+  function rMyLink(){
+    API.leads().then(function(list){
+      var mine = list.filter(function(l){ return l.manager_id === S.me.id; });
+      var link = location.origin + "/?ref=" + (S.me.ref_code || "");
+      var cnt = {}; mine.forEach(function(l){ cnt[l.status] = (cnt[l.status] || 0) + 1; });
+      var text = "Робота за кордоном з житлом і офіційним договором — вакансії тут: " + link;
+      app.innerHTML = '<div class="grid2"><div class="card pad"><h3>Ваше посилання для кандидатів</h3>' +
+        '<p class="note">Розміщуйте його в оголошеннях (OLX, групи Facebook і Telegram, Viber-спільноти). Кожен, хто залишить заявку за цим посиланням, автоматично стане вашим кандидатом у CRM.</p>' +
+        '<div class="g2" style="grid-template-columns:1fr auto"><input id="ml" readonly value="' + E(link) + '" style="padding:9px 11px;border:1px solid var(--line);border-radius:10px"><button class="btn" id="ml-c">Копіювати</button></div>' +
+        '<div class="bar"><a class="btn ghost sm" target="_blank" href="https://t.me/share/url?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent("Робота за кордоном з житлом і офіційним договором") + '">Telegram</a>' +
+        '<a class="btn ghost sm" href="viber://forward?text=' + encodeURIComponent(text) + '">Viber</a><a class="btn ghost sm" target="_blank" href="https://wa.me/?text=' + encodeURIComponent(text) + '">WhatsApp</a></div>' +
+        '<p class="note">Посилання на конкретну вакансію: відкрийте вакансію на сайті й додайте в кінці адреси <code>?ref=' + E(S.me.ref_code || "") + '</code>.</p></div>' +
+        '<div class="card pad"><h3>Ваші кандидати</h3><div class="stats" style="margin:0">' +
+        '<div class="card stat"><span>Усього</span><b>' + mine.length + '</b></div>' +
+        '<div class="card stat"><span>В роботі</span><b>' + mine.filter(function(l){ return ["new", "contacted", "matched", "departed"].indexOf(l.status) >= 0; }).length + '</b></div>' +
+        '<div class="card stat hl"><span>Вийшли на роботу</span><b>' + ((cnt.working || 0) + (cnt.paid || 0)) + '</b></div></div>' +
+        '<div class="bars">' + LS.map(function(x){ var n = cnt[x[0]] || 0; return '<div class="b"><span>' + E(x[1]) + '</span><div class="t"><i style="width:' + (mine.length ? Math.round(n / mine.length * 100) : 0) + '%"></i></div><b>' + n + '</b></div>'; }).join("") + '</div></div></div>';
+      document.getElementById("ml-c").onclick = function(){ var i = document.getElementById("ml"); i.select(); try { navigator.clipboard.writeText(i.value); } catch(e){ document.execCommand("copy"); } toast("Скопійовано"); };
+    }).catch(fail);
+  }
+
+  /* ================= Аналітика (власники) ================= */
+  function rAnalytics(){
+    Promise.all([API.leads(), API.tasks(), API.employers(), API.ledgerAll(), API.staff()]).then(function(r){
+      var all = r[0], tasks = r[1], emps = r[2], ledger = r[3]; S.staff = r[4];
+      var days = S.period || 30, from = days === "all" ? 0 : Date.now() - days * 864e5;
+      var L = all.filter(function(l){ return new Date(l.created_at).getTime() >= from; });
+      var reached = function(l){ return ["departed", "working", "paid"].indexOf(l.status) >= 0; };
+      var workedF = function(l){ return l.status === "working" || l.status === "paid"; };
+      var pct = function(a, b){ return b ? Math.round(a / b * 100) + "%" : "—"; };
+      var nW = L.filter(workedF).length;
+      var src = {"Посилання менеджерів": 0, "Рекомендації («Приведи друга»)": 0, "Сайт і реклама": 0, "Додано вручну": 0};
+      L.forEach(function(l){
+        if (l.referrer_id) src["Рекомендації («Приведи друга»)"]++;
+        else if (/вручну/.test(l.source || "")) src["Додано вручну"]++;
+        else if (l.manager_id && l.ref_raw) src["Посилання менеджерів"]++;
+        else src["Сайт і реклама"]++;
+      });
+      var maxSrc = Math.max.apply(null, Object.keys(src).map(function(k){ return src[k]; }).concat([1]));
+      var cnt = {}; L.forEach(function(l){ cnt[l.status] = (cnt[l.status] || 0) + 1; });
+      // по днях (останні 30)
+      var byDay = []; for (var i = 29; i >= 0; i--) { var d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - i); byDay.push({d: d, n: 0}); }
+      all.forEach(function(l){ var t = new Date(l.created_at); t.setHours(0, 0, 0, 0); byDay.forEach(function(b){ if (b.d.getTime() === t.getTime()) b.n++; }); });
+      var maxDay = Math.max.apply(null, byDay.map(function(b){ return b.n; }).concat([1]));
+      // менеджери
+      var now = new Date();
+      var rows = S.staff.map(function(p){
+        var m = L.filter(function(l){ return l.manager_id === p.id; });
+        var od = tasks.filter(function(t){ return t.assignee_id === p.id && !t.done_at && t.due_at && new Date(t.due_at) < now; }).length;
+        return {p: p, n: m.length, act: m.filter(function(l){ return ["new", "contacted", "matched"].indexOf(l.status) >= 0; }).length,
+          dep: m.filter(reached).length, w: m.filter(workedF).length, paid: m.filter(function(l){ return l.status === "paid"; }).length,
+          rej: m.filter(function(l){ return l.status === "rejected"; }).length, od: od};
+      }).sort(function(a, b){ return b.w - a.w || b.n - a.n; });
+      var un = L.filter(function(l){ return !l.manager_id; }).length;
+      var bonusAcc = ledger.filter(function(g){ return g.kind === "bonus" && new Date(g.created_at).getTime() >= from; }).reduce(function(a, g){ return a + g.amount; }, 0);
+      var bonusPaid = -ledger.filter(function(g){ return g.kind === "payout" && new Date(g.created_at).getTime() >= from; }).reduce(function(a, g){ return a + g.amount; }, 0);
+      var bonusDue = ledger.reduce(function(a, g){ return a + g.amount; }, 0);
+      var per = [[7, "7 днів"], [30, "30 днів"], [90, "90 днів"], ["all", "Увесь час"]];
+      app.innerHTML = '<div class="bar">' + per.map(function(x){ return '<button class="chip" data-per="' + x[0] + '" aria-pressed="' + (String(days) === String(x[0])) + '">' + x[1] + '</button>'; }).join("") + '</div>' +
+        '<div class="stats">' +
+        '<div class="card stat"><span>Заявок</span><b>' + L.length + '</b></div>' +
+        '<div class="card stat"><span>Без менеджера</span><b>' + un + '</b></div>' +
+        '<div class="card stat"><span>Виїхали</span><b>' + L.filter(reached).length + '</b></div>' +
+        '<div class="card stat hl"><span>Вийшли на роботу</span><b>' + nW + ' <small style="font-size:14px">(' + pct(nW, L.length) + ')</small></b></div>' +
+        '<div class="card stat"><span>Оплачено роботодавцем</span><b>' + (cnt.paid || 0) + '</b></div>' +
+        '<div class="card stat"><span>Запитів роботодавців</span><b>' + emps.filter(function(e){ return new Date(e.created_at).getTime() >= from; }).length + '</b></div></div>' +
+        '<div class="card pad" style="margin-bottom:16px"><h3>Менеджери</h3><div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Менеджер</th><th>Кандидатів</th><th>В роботі</th><th>Виїхали</th><th>Працюють</th><th>Оплачено</th><th>Відмови</th><th>Конверсія</th><th>Прострочені задачі</th></tr></thead><tbody>' +
+        (rows.length ? rows.map(function(x){ return '<tr><td><b>' + E(pname(x.p)) + '</b><small>' + E(ROLES[x.p.role]) + (x.p.tg_username ? " · @" + E(x.p.tg_username) : "") + '</small></td><td>' + x.n + '</td><td>' + x.act + '</td><td>' + x.dep + '</td><td>' + x.w + '</td><td>' + x.paid + '</td><td>' + x.rej + '</td><td><b>' + pct(x.w, x.n) + '</b></td><td>' + (x.od ? '<span class="st st-rejected">' + x.od + '</span>' : "0") + '</td></tr>'; }).join("") : '<tr><td colspan="9" class="empty">Менеджерів ще немає</td></tr>') +
+        '</tbody></table></div></div>' +
+        '<div class="grid2"><div class="card pad"><h3>Воронка</h3><div class="bars">' + LS.map(function(x){ var n = cnt[x[0]] || 0; return '<div class="b"><span>' + E(x[1]) + '</span><div class="t"><i style="width:' + (L.length ? Math.round(n / L.length * 100) : 0) + '%"></i></div><b>' + n + '</b></div>'; }).join("") + '</div></div>' +
+        '<div class="card pad"><h3>Звідки кандидати</h3><div class="bars">' + Object.keys(src).map(function(k){ return '<div class="b"><span>' + E(k) + '</span><div class="t"><i style="width:' + Math.round(src[k] / maxSrc * 100) + '%"></i></div><b>' + src[k] + '</b></div>'; }).join("") + '</div></div>' +
+        '<div class="card pad"><h3>Заявки за останні 30 днів</h3><div class="cols">' + byDay.map(function(b){ return '<i style="height:' + Math.round(b.n / maxDay * 100) + '%" data-t="' + E(dt(b.d)) + ': ' + b.n + '"></i>'; }).join("") + '</div><p class="note">Наведіть на стовпчик, щоб побачити дату й кількість.</p></div>' +
+        '<div class="card pad"><h3>Бонуси «Приведи друга»</h3><div class="stats" style="margin:0"><div class="card stat"><span>Нараховано за період</span><b>' + E(M(bonusAcc)) + '</b></div><div class="card stat"><span>Виплачено за період</span><b>' + E(M(bonusPaid)) + '</b></div><div class="card stat hl"><span>Борг до виплати зараз</span><b>' + E(M(bonusDue)) + '</b></div></div></div></div>';
+      document.querySelectorAll("[data-per]").forEach(function(b){ b.onclick = function(){ var v = b.getAttribute("data-per"); S.period = v === "all" ? "all" : +v; rAnalytics(); }; });
+    }).catch(fail);
   }
 
   /* ================= Роботодавці ================= */

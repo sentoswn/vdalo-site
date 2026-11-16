@@ -146,6 +146,8 @@ begin
   if not public.is_staff() then
     new.status := 'new'; new.referrer_id := null; new.employer := null; new.start_date := null;
     new.manager_note := null; new.manager_id := null; new.bonus_paid := false;
+  elsif not public.is_admin() then
+    new.manager_id := auth.uid();              -- менеджер додає заявку — вона його
   end if;
   r := lower(trim(coalesce(new.ref_raw, '')));
   if new.referrer_id is null and r <> '' then
@@ -157,6 +159,11 @@ begin
          where regexp_replace(coalesce(phone, ''), '\D', '', 'g') like '%' || right(d, 9) limit 1;
       end if;
     end if;
+  end if;
+  -- прийшов за посиланням менеджера/власника → кандидат закріплюється за ним (бонус «Приведи друга» не нараховується)
+  if new.referrer_id is not null and exists (select 1 from public.profiles where id = new.referrer_id and role in ('manager','admin')) then
+    if new.manager_id is null then new.manager_id := new.referrer_id; end if;
+    new.referrer_id := null;
   end if;
   return new;
 end $$;
@@ -190,6 +197,16 @@ begin
 end $$;
 drop trigger if exists leads_after_update on public.leads;
 create trigger leads_after_update after update on public.leads for each row execute function public.leads_after_update();
+
+create or replace function public.leads_guard() returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  if auth.uid() is not null and not public.is_admin() then
+    new.manager_id := old.manager_id;          -- перепризначати може лише власник
+  end if;
+  return new;
+end $$;
+drop trigger if exists leads_guard on public.leads;
+create trigger leads_guard before update on public.leads for each row execute function public.leads_guard();
 
 create or replace function public.touch_updated() returns trigger language plpgsql as $$
 begin new.updated_at := now(); return new; end $$;
@@ -244,11 +261,38 @@ create or replace function public.make_payout(p_user uuid, p_amount integer, p_n
 returns bigint language plpgsql security definer set search_path = public as $$
 declare lid bigint;
 begin
-  if not public.is_staff() then raise exception 'forbidden'; end if;
+  if not public.is_admin() then raise exception 'forbidden'; end if;
   insert into public.ledger(user_id, kind, amount, note, created_by) values (p_user, 'payout', -abs(p_amount), p_note, auth.uid()) returning id into lid;
   if p_request is not null then update public.payout_requests set status = 'done', ledger_id = lid where id = p_request; end if;
   return lid;
 end $$;
+
+-- ============ Задачі (нагадування) ============
+create table if not exists public.tasks (
+  id          bigserial primary key,
+  created_at  timestamptz not null default now(),
+  title       text not null,
+  note        text,
+  due_at      timestamptz,
+  lead_id     bigint references public.leads(id) on delete cascade,
+  assignee_id uuid references public.profiles(id) on delete set null,
+  created_by  uuid references public.profiles(id) on delete set null,
+  done_at     timestamptz
+);
+create index if not exists tasks_assignee on public.tasks(assignee_id, done_at);
+
+create or replace function public.tasks_defaults() returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  if tg_op = 'INSERT' then
+    new.created_by := auth.uid();
+    if new.assignee_id is null or not public.is_admin() then new.assignee_id := auth.uid(); end if;
+  elsif not public.is_admin() then
+    new.assignee_id := old.assignee_id;
+  end if;
+  return new;
+end $$;
+drop trigger if exists tasks_defaults on public.tasks;
+create trigger tasks_defaults before insert or update on public.tasks for each row execute function public.tasks_defaults();
 
 -- ============ Права доступу (RLS) ============
 alter table public.profiles        enable row level security;
@@ -260,7 +304,8 @@ alter table public.ledger          enable row level security;
 alter table public.payout_requests enable row level security;
 
 drop policy if exists p_self on public.profiles;
-create policy p_self on public.profiles for select using (id = auth.uid() or public.is_staff());
+create policy p_self on public.profiles for select using (id = auth.uid() or public.is_admin()
+  or (public.is_staff() and role in ('manager','admin')));
 drop policy if exists p_self_upd on public.profiles;
 create policy p_self_upd on public.profiles for update using (id = auth.uid() or public.is_admin()) with check (id = auth.uid() or public.is_admin());
 
@@ -284,31 +329,41 @@ create policy s_write on public.settings for all using (public.is_admin()) with 
 drop policy if exists l_insert on public.leads;
 create policy l_insert on public.leads for insert with check (true);
 drop policy if exists l_staff on public.leads;
-create policy l_staff on public.leads for select using (public.is_staff());
+create policy l_staff on public.leads for select using (public.is_admin() or (public.is_staff() and manager_id = auth.uid()));
 drop policy if exists l_staff_upd on public.leads;
-create policy l_staff_upd on public.leads for update using (public.is_staff()) with check (public.is_staff());
+create policy l_staff_upd on public.leads for update using (public.is_admin() or (public.is_staff() and manager_id = auth.uid())) with check (public.is_staff());
 drop policy if exists l_staff_del on public.leads;
 create policy l_staff_del on public.leads for delete using (public.is_admin());
 
 drop policy if exists le_staff on public.lead_events;
-create policy le_staff on public.lead_events for select using (public.is_staff());
+create policy le_staff on public.lead_events for select using (public.is_admin() or exists (select 1 from public.leads l where l.id = lead_id and l.manager_id = auth.uid()));
 
 drop policy if exists e_insert on public.employer_leads;
 create policy e_insert on public.employer_leads for insert with check (status = 'new' and manager_note is null);
 drop policy if exists e_staff on public.employer_leads;
-create policy e_staff on public.employer_leads for select using (public.is_staff());
+create policy e_staff on public.employer_leads for select using (public.is_admin());
 drop policy if exists e_staff_upd on public.employer_leads;
-create policy e_staff_upd on public.employer_leads for update using (public.is_staff()) with check (public.is_staff());
+create policy e_staff_upd on public.employer_leads for update using (public.is_admin()) with check (public.is_admin());
 
 drop policy if exists g_read on public.ledger;
-create policy g_read on public.ledger for select using (user_id = auth.uid() or public.is_staff());
+create policy g_read on public.ledger for select using (user_id = auth.uid() or public.is_admin());
 drop policy if exists g_staff on public.ledger;
-create policy g_staff on public.ledger for insert with check (public.is_staff() and kind in ('payout','adjust'));
+create policy g_staff on public.ledger for insert with check (public.is_admin() and kind in ('payout','adjust'));
 
 drop policy if exists r_read on public.payout_requests;
-create policy r_read on public.payout_requests for select using (user_id = auth.uid() or public.is_staff());
+create policy r_read on public.payout_requests for select using (user_id = auth.uid() or public.is_admin());
 drop policy if exists r_staff on public.payout_requests;
-create policy r_staff on public.payout_requests for update using (public.is_staff()) with check (public.is_staff());
+create policy r_staff on public.payout_requests for update using (public.is_admin()) with check (public.is_admin());
+
+alter table public.tasks enable row level security;
+drop policy if exists t_read on public.tasks;
+create policy t_read on public.tasks for select using (public.is_admin() or (public.is_staff() and assignee_id = auth.uid()));
+drop policy if exists t_ins on public.tasks;
+create policy t_ins on public.tasks for insert with check (public.is_staff());
+drop policy if exists t_upd on public.tasks;
+create policy t_upd on public.tasks for update using (public.is_admin() or (public.is_staff() and assignee_id = auth.uid())) with check (public.is_staff());
+drop policy if exists t_del on public.tasks;
+create policy t_del on public.tasks for delete using (public.is_admin() or (public.is_staff() and created_by = auth.uid()));
 
 grant usage on schema public to anon, authenticated;
 grant insert on public.leads, public.employer_leads to anon, authenticated;
@@ -323,5 +378,7 @@ grant select, insert on public.ledger to authenticated;
 grant usage, select on sequence public.ledger_id_seq to authenticated;
 grant select, update on public.payout_requests to authenticated;
 grant select on public.user_balances to authenticated;
+grant select, insert, update, delete on public.tasks to authenticated;
+grant usage, select on sequence public.tasks_id_seq to authenticated;
 grant execute on function public.my_referrals(), public.my_balance(), public.request_payout(integer, text),
                           public.make_payout(uuid, integer, text, bigint), public.is_staff(), public.is_admin() to authenticated;
