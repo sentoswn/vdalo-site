@@ -113,7 +113,7 @@
       '</div>' +
       '<div class="card cab-wide"><h3>Кого ви запросили</h3>' + refs + '</div>' +
       '<div class="card cab-wide"><h3>Історія балансу</h3>' + histHtml + '</div>' +
-      '<p class="hint cab-foot">Бонус нараховується, коли друг відпрацює 2 тижні й ми отримаємо оплату від роботодавця. Питання — пишіть менеджеру: <a href="https://t.me/+380736067700">Telegram</a>, <a href="tel:+380736067700">+380 73 606 77 00</a>.</p>';
+      '<p class="hint cab-foot">Бонус нараховується, коли друг відпрацює 2 тижні й ми отримаємо оплату від роботодавця. Питання — пишіть менеджеру: <a href="https://t.me/+380660050060">Telegram</a>, <a href="tel:+380660050060">+380 66 005 00 60</a>.</p>';
 
     document.getElementById("cab-out").onclick = function(){ api.logout(); };
     document.getElementById("cab-copy").onclick = function(){
