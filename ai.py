@@ -121,7 +121,7 @@ def main():
         "hours, housing, contract type and next start dates. Site languages: Ukrainian (main), Russian (/ru/), English (/en/), Polish (/pl/).\n\n"
         "## Ключові факти\n"
         "- Для кандидатів безкоштовно: «Вдало» не бере грошей за працевлаштування.\n"
-        "- Контакти: телефон, Telegram, Viber, WhatsApp — +380 73 606 77 00. Офіс: м. Київ, вул. Джона Маккейна, 7, офіс 169.\n"
+        "- Контакти: телефон, Telegram, Viber, WhatsApp — +380 66 005 00 60. Офіс: м. Київ, вул. Джона Маккейна, 7, офіс 169.\n"
         "- Заявку можна залишити на сайті (форма «Залишити заявку») або написати в месенджер — менеджер підбере вакансію.\n"
         f"- Країни: " + ", ".join(f"{c} ({len(l)})" for c, l in sorted(by_c.items(), key=lambda x: -len(x[1]))) + ".\n"
         + (f"- Типова ставка: {B.rng(s['rate'])} за годину брутто" + (f"; на руки зазвичай {B.rng(s['net'])} за годину" if s.get("net") else "") + ".\n" if s.get("rate") else "")
