@@ -50,6 +50,7 @@ create table if not exists public.settings (
   value text not null
 );
 insert into public.settings(key, value) values ('bonus_amount', '0') on conflict do nothing;
+insert into public.settings(key, value) values ('bonus_base', '2000'), ('bonus_step', '200'), ('bonus_max', '4000') on conflict do nothing;
 
 -- ============ Заявки кандидатів ============
 create table if not exists public.leads (
@@ -163,14 +164,22 @@ drop trigger if exists leads_before_insert on public.leads;
 create trigger leads_before_insert before insert on public.leads for each row execute function public.leads_before_insert();
 
 -- статус «paid» = відпрацював 2 тижні й оплату від роботодавця отримано → бонус тому, хто запросив
+-- Бонус: перший друг у місяці — bonus_base (2000 грн), кожен наступний — +bonus_step (200 грн), не більше bonus_max (4000 грн).
+-- Відлік щомісяця (за київським часом) починається знову.
 create or replace function public.leads_after_update() returns trigger language plpgsql security definer set search_path = public as $$
-declare amt int;
+declare amt int; base int; step int; mx int; n int;
 begin
   if new.status is distinct from old.status then
     insert into public.lead_events(lead_id, actor_id, old_status, new_status) values (new.id, auth.uid(), old.status, new.status);
   end if;
   if new.status = 'paid' and old.status is distinct from 'paid' and new.referrer_id is not null then
-    select coalesce(nullif(value, '')::int, 0) into amt from public.settings where key = 'bonus_amount';
+    select coalesce((select nullif(value, '')::int from public.settings where key = 'bonus_base'), 2000) into base;
+    select coalesce((select nullif(value, '')::int from public.settings where key = 'bonus_step'), 200) into step;
+    select coalesce((select nullif(value, '')::int from public.settings where key = 'bonus_max'), 4000) into mx;
+    select count(*) into n from public.ledger
+      where user_id = new.referrer_id and kind = 'bonus'
+        and date_trunc('month', created_at at time zone 'Europe/Kyiv') = date_trunc('month', now() at time zone 'Europe/Kyiv');
+    amt := least(base + step * n, mx);
     if amt > 0 then
       insert into public.ledger(user_id, lead_id, kind, amount, note, created_by)
       values (new.referrer_id, new.id, 'bonus', amt, 'Бонус за ' || new.name, auth.uid())

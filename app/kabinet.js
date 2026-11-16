@@ -86,7 +86,7 @@
       .sort(function(a, c){ return new Date(c.created_at) - new Date(a.created_at); });
     var histHtml = hist.length ? '<ul class="cab-hist">' + hist.map(function(x){
       return '<li><span>' + E(x.kind === "request" ? "Запит на виплату" : (KIND[x.kind] || x.kind)) + '<small>' + E(date(x.created_at)) + (x.note ? " · " + E(x.note) : "") + '</small></span><b class="' + (x.amount >= 0 ? "pos" : "neg") + '">' + (x.amount >= 0 ? "+" : "−") + E(M(Math.abs(x.amount))) + '</b></li>'; }).join("") + '</ul>' : '<p class="cab-empty">Тут з’являться нарахування й виплати.</p>';
-    var bonusTxt = d.bonus ? "Бонус " + M(d.bonus) + " — за кожного друга, який відпрацює 2 тижні." : "Бонус — за кожного друга, який відпрацює 2 тижні. Розмір уточнюйте в менеджера.";
+    var bonusTxt = "2 000 грн за першого друга, який відпрацює 2 тижні, далі на 200 грн більше за кожного наступного в місяці, до 4 000 грн за друга.";
 
     root.innerHTML =
       (api.demo ? '<p class="cab-demo">Це демо: дані вигадані, кнопки працюють лише на цій сторінці.</p>' : "") +
