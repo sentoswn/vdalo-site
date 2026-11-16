@@ -48,7 +48,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           ADMIN_TG: ${{ secrets.ADMIN_TG }}
         run: |
-          supabase secrets set --project-ref "$REF" TELEGRAM_BOT_TOKEN="$TELEGRAM_BOT_TOKEN" ADMIN_TG="$ADMIN_TG"
+          supabase secrets set --yes --project-ref "$REF" TELEGRAM_BOT_TOKEN="$TELEGRAM_BOT_TOKEN" ADMIN_TG="$ADMIN_TG"
       - name: Deploy tg-auth
         if: steps.chk.outputs.skip != '1'
-        run: supabase functions deploy tg-auth --project-ref "$REF" --no-verify-jwt --use-api
+        run: supabase functions deploy tg-auth --yes --project-ref "$REF" --no-verify-jwt --use-api
