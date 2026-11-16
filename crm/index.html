@@ -142,7 +142,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
 
   function toast(t){ var el = document.getElementById("toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(function(){ el.classList.remove("show"); }, 2200); }
   function dt(d, time){ if (!d) return ""; var x = new Date(d); return x.toLocaleDateString("uk-UA", {day: "2-digit", month: "2-digit", year: "2-digit"}) + (time ? " " + x.toLocaleTimeString("uk-UA", {hour: "2-digit", minute: "2-digit"}) : ""); }
-  function pname(p){ if (!p) return ""; return [p.first_name, p.last_name].filter(Boolean).join(" ") || (p.tg_username ? "@" + p.tg_username : "—"); }
+  function pname(p){ if (!p) return ""; return p.full_name || [p.first_name, p.last_name].filter(Boolean).join(" ") || (p.tg_username ? "@" + p.tg_username : "—"); }
   function bonusRange(){ var st = S.st || {}; return M(+st.bonus_base || 2000) + " – " + M(+st.bonus_max || 4000); }
   function opts(list, v){ return list.map(function(x){ return '<option value="' + x[0] + '"' + (x[0] === v ? " selected" : "") + ">" + E(x[1]) + "</option>"; }).join(""); }
 
@@ -175,7 +175,8 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       settings: function(){ return s.from("settings").select("*").then(ok).then(function(r){ var o = {}; r.forEach(function(x){ o[x.key] = x.value; }); return o; }); },
       setSetting: function(k, v){ return s.from("settings").upsert({key: k, value: String(v)}).then(ok); },
       findRef: function(code){ return s.from("profiles").select("id,first_name,last_name,tg_username,ref_code").eq("ref_code", code.toLowerCase()).maybeSingle().then(ok); },
-      staff: function(){ return s.from("profiles").select("id,first_name,last_name,tg_username,role,ref_code").in("role", ["manager", "admin"]).then(ok); },
+      saveMe: function(patch){ return s.from("profiles").update(patch).eq("id", uid).then(ok); },
+      staff: function(){ return s.from("profiles").select("id,first_name,last_name,full_name,tg_username,role,ref_code").in("role", ["manager", "admin"]).then(ok); },
       tasks: function(){ return s.from("tasks").select("*").order("due_at", {ascending: true, nullsFirst: false}).limit(2000).then(ok); },
       addTask: function(row){ return s.from("tasks").insert(row).then(ok); },
       saveTask: function(tid, patch){ return s.from("tasks").update(patch).eq("id", tid).then(ok); },
@@ -209,17 +210,66 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         document.getElementById("out").onclick = function(){ API.logout(); }; return;
       }
       S.me = me; S.own = me.role === "admin";
+      if (!S.own && !me.onboarded_at) { managerForm(true); return; }
       document.querySelectorAll("#tabs [data-own]").forEach(function(b){ b.hidden = !S.own; });
       document.getElementById("t-leads").textContent = S.own ? "Кандидати" : "Мої кандидати";
       API.staff().then(function(st){ S.staff = st; }).catch(function(){});
       API.settings().then(function(st){ S.st = st; }).catch(function(){});
-      document.getElementById("me").innerHTML = E(pname(me)) + ' · ' + E(ROLES[me.role]) + ' <button class="btn ghost sm" id="out">Вийти</button>';
+      document.getElementById("me").innerHTML = E(me.full_name || pname(me)) + ' · ' + E(ROLES[me.role]) + (S.own ? "" : ' <button class="btn ghost sm" id="my-form">Моя анкета</button>') + ' <button class="btn ghost sm" id="out">Вийти</button>';
+      var mf = document.getElementById("my-form"); if (mf) mf.onclick = function(){ managerForm(false); };
       document.getElementById("out").onclick = function(){ API.logout(); };
       document.getElementById("tabs").hidden = false;
       document.querySelectorAll("#tabs button").forEach(function(b){ b.onclick = function(){ go(b.getAttribute("data-tab")); }; });
       var h = location.hash.replace("#", ""); go(tabsAllowed().indexOf(h) >= 0 ? h : "leads");
       counts();
     });
+  }
+  /* ---------- Анкета менеджера ---------- */
+  var M_SRC = ["OLX", "Facebook", "Instagram", "TikTok", "Telegram-канали й групи", "Viber-спільноти", "Знайомі й рекомендації", "Інше"];
+  var M_LANG = ["Українська", "Російська", "Польська", "Англійська", "Чеська / словацька"];
+  function managerForm(first){
+    var me = S.me, f = me.manager_form || {};
+    var chk = function(name, list, sel){ return '<div class="bar" style="margin:0">' + list.map(function(x){ var on = (sel || []).indexOf(x) >= 0;
+      return '<label class="chip" style="display:inline-flex;gap:6px;align-items:center"><input type="checkbox" name="' + name + '" value="' + E(x) + '"' + (on ? " checked" : "") + '>' + E(x) + '</label>'; }).join("") + '</div>'; };
+    var sel = function(id, list, v){ return '<select id="' + id + '"><option value="">Оберіть…</option>' + list.map(function(x){ return '<option' + (v === x ? " selected" : "") + '>' + E(x) + '</option>'; }).join("") + '</select>'; };
+    document.getElementById("tabs").hidden = true;
+    app.innerHTML = '<div class="card" style="max-width:760px;margin:0 auto;padding:clamp(18px,4vw,32px);display:grid;gap:14px">' +
+      '<h2 style="margin:0">' + (first ? "Анкета менеджера" : "Моя анкета") + '</h2>' +
+      '<p class="note" style="margin:0">' + (first ? "Перед початком роботи заповніть, будь ласка, анкету. Це займе 2–3 хвилини." : "Оновіть дані, якщо щось змінилося.") + '</p>' +
+      '<div class="g2"><div class="fld"><label>Ім’я та прізвище *</label><input id="m-name" value="' + E(me.full_name || [me.first_name, me.last_name].filter(Boolean).join(" ")) + '"></div>' +
+      '<div class="fld"><label>Телефон *</label><input id="m-phone" type="tel" placeholder="+380 …" value="' + E(me.phone || "") + '"></div></div>' +
+      '<div class="g2"><div class="fld"><label>E-mail</label><input id="m-email" type="email" value="' + E(me.email || "") + '"></div>' +
+      '<div class="fld"><label>Місто, область *</label><input id="m-city" value="' + E(me.city || "") + '"></div></div>' +
+      '<div class="g2"><div class="fld"><label>Досвід у підборі персоналу *</label>' + sel("m-exp", ["Немає, хочу навчитися", "До 1 року", "1–3 роки", "Понад 3 роки"], f.experience) + '</div>' +
+      '<div class="fld"><label>Скільки часу готові приділяти *</label>' + sel("m-hours", ["До 10 год на тиждень", "10–20 год на тиждень", "20–40 год на тиждень", "Повний робочий день"], f.hours) + '</div></div>' +
+      '<div class="fld"><label>Де плануєте шукати кандидатів</label>' + chk("m-src", M_SRC, f.sources) + '</div>' +
+      '<div class="fld"><label>Якими мовами спілкуєтеся</label>' + chk("m-lang", M_LANG, f.languages) + '</div>' +
+      '<div class="g2"><div class="fld"><label>Чи працювали з кандидатами за кордон раніше?</label>' + sel("m-abroad", ["Так", "Ні"], f.abroad) + '</div>' +
+      '<div class="fld"><label>Звідки дізналися про «Вдало»</label><input id="m-heard" value="' + E(me.heard_from || "") + '"></div></div>' +
+      '<div class="fld"><label>Коротко про себе й свій досвід</label><textarea id="m-about">' + E(f.about || "") + '</textarea></div>' +
+      '<label style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="m-ok1"' + (me.consent_at ? " checked" : "") + '> <span>Погоджуюся на обробку моїх персональних даних *</span></label>' +
+      '<label style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="m-ok2"' + (f.nda ? " checked" : "") + '> <span>Зобов’язуюся не передавати контакти кандидатів і дані з CRM третім особам та використовувати їх лише для роботи з «Вдало» *</span></label>' +
+      '<div style="background:#eef8f1;border:1px solid #cbe9d5;border-radius:12px;padding:12px 14px;color:#21452d"><b>🔒 Ваші дані захищені.</b> Анкету бачать лише власники «Вдало». Дані передаються зашифровано й зберігаються в захищеній базі в ЄС, ми не передаємо їх третім особам.</div>' +
+      '<p class="err" id="m-err"></p><div style="display:flex;gap:8px"><button class="btn" id="m-save">' + (first ? "Почати роботу" : "Зберегти") + '</button>' + (first ? "" : '<button class="btn ghost" id="m-back">Назад</button>') + '</div></div>';
+    var back = document.getElementById("m-back"); if (back) back.onclick = function(){ document.getElementById("tabs").hidden = false; render(); };
+    document.getElementById("m-save").onclick = function(){
+      var v = function(id){ return document.getElementById(id).value.trim(); }, err = document.getElementById("m-err");
+      var many = function(n){ return [].map.call(document.querySelectorAll('input[name="' + n + '"]:checked'), function(i){ return i.value; }); };
+      if (!v("m-name") || v("m-phone").replace(/\D/g, "").length < 9 || !v("m-city") || !v("m-exp") || !v("m-hours")) { err.textContent = "Заповніть поля, позначені *."; return; }
+      if (!document.getElementById("m-ok1").checked || !document.getElementById("m-ok2").checked) { err.textContent = "Потрібні обидві згоди."; return; }
+      var now = new Date().toISOString();
+      var patch = {full_name: v("m-name"), phone: v("m-phone"), email: v("m-email") || null, city: v("m-city"), heard_from: v("m-heard") || null,
+        manager_form: {experience: v("m-exp"), hours: v("m-hours"), sources: many("m-src"), languages: many("m-lang"), abroad: v("m-abroad") || null, about: v("m-about") || null, nda: true, nda_at: f.nda_at || now},
+        consent_at: me.consent_at || now, onboarded_at: me.onboarded_at || now};
+      API.saveMe(patch).then(function(){ Object.assign(S.me, patch); toast("Анкету збережено"); if (first) location.reload(); else { document.getElementById("tabs").hidden = false; render(); } }).catch(fail);
+    };
+  }
+  function anketaHtml(p){
+    var f = p.manager_form || {};
+    var rows = [["ПІБ", p.full_name], ["Телефон", p.phone], ["E-mail", p.email], ["Місто", p.city], ["Звідки дізнався", p.heard_from],
+      ["Досвід", f.experience], ["Час", f.hours], ["Де шукатиме", (f.sources || []).join(", ")], ["Мови", (f.languages || []).join(", ")],
+      ["Працював із виїздом за кордон", f.abroad], ["Про себе", f.about], ["Анкета заповнена", p.onboarded_at ? dt(p.onboarded_at, true) : "ні"]];
+    return '<b>Анкета</b><dl class="kv">' + rows.filter(function(r){ return r[1]; }).map(function(r){ return '<dt>' + E(r[0]) + '</dt><dd>' + E(r[1]) + '</dd>'; }).join("") + '</dl>';
   }
   function tabsAllowed(){ return S.own ? ["leads", "tasks", "analytics", "employers", "people", "payouts", "mylink", "settings"] : ["leads", "tasks", "mylink"]; }
   function staffName(id){ var p = S.staff.filter(function(x){ return x.id === id; })[0]; return p ? pname(p) : ""; }
@@ -539,14 +589,14 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       function draw(){
         var q = document.getElementById("pq").value.toLowerCase();
         document.getElementById("pb").innerHTML = list.filter(function(p){ return !q || [pname(p), p.tg_username, p.phone, p.ref_code].join(" ").toLowerCase().indexOf(q) >= 0; }).map(function(p){
-          return '<tr><td><b>' + E(pname(p)) + '</b><small>' + E([p.tg_username ? "@" + p.tg_username : "", p.phone].filter(Boolean).join(" · ")) + '</small></td>' +
+          return '<tr><td><b>' + E(p.full_name || pname(p)) + '</b><small>' + E([p.tg_username ? "@" + p.tg_username : "", p.phone, p.city].filter(Boolean).join(" · ")) + '</small></td>' +
             '<td class="hide-m"><code>' + E(p.ref_code || "") + '</code></td><td class="hide-m">' + (p.invited || 0) + '</td><td class="hide-m money">' + E(M(p.earned)) + '</td>' +
             '<td class="money">' + E(M(p.balance)) + '</td>' +
             '<td class="hide-m">' + (isAdmin && p.id !== S.me.id ? '<select data-role="' + E(p.id) + '">' + opts([["user", "Користувач"], ["manager", "Менеджер"], ["admin", "Власник"]], p.role) + '</select>' : E(ROLES[p.role] || p.role)) + '</td>' +
             '<td><button class="btn ghost sm" data-hist="' + E(p.id) + '">Історія</button> ' + (p.balance > 0 ? '<button class="btn sm green" data-pay="' + E(p.id) + '">Виплатити</button>' : "") + '</td></tr>';
         }).join("") || '<tr><td colspan="7" class="empty">Поки нікого</td></tr>';
         document.querySelectorAll("[data-pay]").forEach(function(b){ b.onclick = function(){ payDialog(b.getAttribute("data-pay"), null); }; });
-        document.querySelectorAll("[data-hist]").forEach(function(b){ b.onclick = function(){ histDialog(b.getAttribute("data-hist")); }; });
+        document.querySelectorAll("[data-hist]").forEach(function(b){ b.textContent = "Анкета й історія"; b.onclick = function(){ histDialog(b.getAttribute("data-hist")); }; });
         document.querySelectorAll("[data-role]").forEach(function(sel){ sel.onchange = function(){ API.setRole(sel.getAttribute("data-role"), sel.value).then(function(){ toast("Роль змінено"); }).catch(fail); }; });
       }
       document.getElementById("pq").oninput = draw; draw();
@@ -575,7 +625,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     var p = personById(uid);
     API.ledger(uid).then(function(g){
       openDrawer('<div class="dh"><h2>' + E(pname(p)) + '</h2><button class="btn ghost sm" data-x>✕</button></div><div class="db">' +
-        '<dl class="kv"><dt>Код</dt><dd><code>' + E(p.ref_code || "") + '</code></dd><dt>Посилання</dt><dd>' + E(location.origin + "/?ref=" + (p.ref_code || "")) + '</dd><dt>Баланс</dt><dd class="money">' + E(M(p.balance)) + '</dd></dl>' +
+        anketaHtml(p) + '<dl class="kv"><dt>Код</dt><dd><code>' + E(p.ref_code || "") + '</code></dd><dt>Посилання</dt><dd>' + E(location.origin + "/?ref=" + (p.ref_code || "")) + '</dd><dt>Баланс</dt><dd class="money">' + E(M(p.balance)) + '</dd></dl>' +
         '<b>Рух коштів</b><ul class="hist">' + (g.length ? g.map(function(x){ return '<li>' + E(dt(x.created_at, true)) + ' · ' + E({bonus: "Бонус", payout: "Виплата", adjust: "Коригування"}[x.kind] || x.kind) + ' <b>' + (x.amount > 0 ? "+" : "") + E(M(x.amount)) + '</b>' + (x.note ? " · " + E(x.note) : "") + '</li>'; }).join("") : "<li>Порожньо</li>") + '</ul>' +
         '<b>Запрошені</b><ul class="hist">' + (S.leads.filter(function(l){ return l.referrer_id === uid; }).map(function(l){ return '<li>' + E(l.name) + ' · ' + E(LSN[l.status]) + '</li>'; }).join("") || "<li>Нікого</li>") + '</ul></div>');
       drawer.querySelectorAll("[data-x]").forEach(function(b){ b.onclick = closeDrawer; });

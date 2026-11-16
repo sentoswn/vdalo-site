@@ -16,6 +16,15 @@ create table if not exists public.profiles (
   created_at  timestamptz not null default now()
 );
 
+-- анкета після першого входу
+alter table public.profiles add column if not exists full_name    text;
+alter table public.profiles add column if not exists city         text;
+alter table public.profiles add column if not exists email        text;
+alter table public.profiles add column if not exists heard_from   text;
+alter table public.profiles add column if not exists manager_form jsonb;
+alter table public.profiles add column if not exists consent_at   timestamptz;
+alter table public.profiles add column if not exists onboarded_at timestamptz;
+
 -- короткий реферальний код: 6 символів без схожих літер
 create or replace function public.gen_ref_code() returns text language plpgsql as $$
 declare c text; abc text := 'abcdefghjkmnpqrstuvwxyz23456789';
@@ -249,8 +258,10 @@ begin
 end $$;
 
 -- ============ Для CRM ============
-create or replace view public.user_balances with (security_invoker = true) as
+drop view if exists public.user_balances;
+create view public.user_balances with (security_invoker = true) as
   select p.id, p.first_name, p.last_name, p.tg_username, p.phone, p.ref_code, p.role, p.created_at,
+         p.full_name, p.city, p.email, p.heard_from, p.manager_form, p.onboarded_at,
          coalesce((select sum(amount) from public.ledger g where g.user_id = p.id), 0)::int as balance,
          coalesce((select sum(amount) from public.ledger g where g.user_id = p.id and g.kind = 'bonus'), 0)::int as earned,
          (select count(*) from public.leads l where l.referrer_id = p.id)::int as invited

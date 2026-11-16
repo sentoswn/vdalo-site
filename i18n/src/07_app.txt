@@ -127,3 +127,24 @@
 Молдова ¦ Молдова ¦ Moldova ¦ Mołdawia
 Румунія ¦ Румыния ¦ Romania ¦ Rumunia
 Угорщина ¦ Венгрия ¦ Hungary ¦ Węgry
+Мої дані ¦ Мои данные ¦ My details ¦ Moje dane
+Ще один крок — розкажіть про себе ¦ Ещё один шаг — расскажите о себе ¦ One more step — tell us about yourself ¦ Jeszcze jeden krok — opowiedz o sobie
+Перевірте й оновіть дані, якщо щось змінилося. ¦ Проверьте и обновите данные, если что-то изменилось. ¦ Check and update your details if anything has changed. ¦ Sprawdź i zaktualizuj dane, jeśli coś się zmieniło.
+Ці дані потрібні, щоб зарахувати вам бонуси за друзів і зв’язатися щодо виплат. ¦ Эти данные нужны, чтобы засчитать вам бонусы за друзей и связаться по поводу выплат. ¦ We need these details to credit your referral bonuses and contact you about payouts. ¦ Te dane są potrzebne, aby naliczyć bonusy za znajomych i skontaktować się w sprawie wypłat.
+Ім’я та прізвище ¦ Имя и фамилия ¦ Full name ¦ Imię i nazwisko
+Місто або село, область ¦ Город или село, область ¦ City or village, region ¦ Miasto lub wieś, obwód
+Напр. Біла Церква, Київська ¦ Напр. Белая Церковь, Киевская ¦ E.g. Bila Tserkva, Kyiv region ¦ Np. Biała Cerkiew, obwód kijowski
+Звідки дізналися про нас ¦ Откуда узнали о нас ¦ How did you hear about us ¦ Skąd się o nas dowiedziałeś
+Оберіть… ¦ Выберите… ¦ Choose… ¦ Wybierz…
+Від знайомих ¦ От знакомых ¦ From friends ¦ Od znajomych
+Інше ¦ Другое ¦ Other ¦ Inne
+Погоджуюся на обробку моїх персональних даних відповідно до ¦ Соглашаюсь на обработку моих персональных данных в соответствии с ¦ I agree to the processing of my personal data under the ¦ Wyrażam zgodę na przetwarzanie moich danych osobowych zgodnie z
+політики конфіденційності ¦ политикой конфиденциальности ¦ privacy policy ¦ polityką prywatności
+🔒 Ваші дані захищені ¦ 🔒 Ваши данные защищены ¦ 🔒 Your data is protected ¦ 🔒 Twoje dane są chronione
+Ваші дані захищені ¦ Ваши данные защищены ¦ Your data is protected ¦ Twoje dane są chronione
+Їх бачать лише власники «Вдало». Дані передаються зашифровано й зберігаються в захищеній базі в ЄС. Ми не передаємо їх третім особам і не використовуємо для реклами. Видалити дані можна на запит менеджеру. ¦ Их видят только владельцы «Вдало». Данные передаются в зашифрованном виде и хранятся в защищённой базе в ЕС. Мы не передаём их третьим лицам и не используем для рекламы. Удалить данные можно по запросу менеджеру. ¦ Only the owners of Vdalo can see them. Data is sent encrypted and stored in a secure database in the EU. We don't share it with third parties or use it for advertising. You can ask a manager to delete your data. ¦ Widzą je tylko właściciele Vdalo. Dane są przesyłane w formie zaszyfrowanej i przechowywane w zabezpieczonej bazie w UE. Nie przekazujemy ich osobom trzecim i nie używamy do reklamy. Usunięcia danych można zażądać u menedżera.
+Продовжити ¦ Продолжить ¦ Continue ¦ Dalej
+Назад ¦ Назад ¦ Back ¦ Wstecz
+Заповніть ім’я, телефон і місто. ¦ Заполните имя, телефон и город. ¦ Please fill in your name, phone and city. ¦ Uzupełnij imię, telefon i miasto.
+Потрібна згода на обробку даних. ¦ Нужно согласие на обработку данных. ¦ Consent to data processing is required. ¦ Wymagana jest zgoda na przetwarzanie danych.
+Не вдалося зберегти. Спробуйте ще раз. ¦ Не удалось сохранить. Попробуйте ещё раз. ¦ Couldn't save. Please try again. ¦ Nie udało się zapisać. Spróbuj ponownie.

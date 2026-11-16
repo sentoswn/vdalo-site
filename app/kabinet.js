@@ -30,6 +30,7 @@
       },
       requestPayout: function(a, c){ return s.rpc("request_payout", {p_amount: a, p_contact: c}).then(ok); },
       savePhone: function(p){ return s.from("profiles").update({phone: p}).eq("id", uid).then(ok); },
+      saveProfile: function(p){ return s.from("profiles").update(p).eq("id", uid).then(ok); },
       logout: function(){ return s.auth.signOut().then(function(){ location.reload(); }); }
     };
   }
@@ -49,6 +50,31 @@
   }
   function stat(label, value, cls){ return '<div class="card cab-stat ' + (cls || "") + '"><span>' + E(label) + '</span><b>' + E(value) + '</b></div>'; }
 
+  var HEARD = ["Від знайомих", "Telegram", "Viber", "Facebook / Instagram", "TikTok", "OLX", "Google", "Інше"];
+  var SAFE = '<div class="cab-safe"><b>🔒 Ваші дані захищені</b><span>Їх бачать лише власники «Вдало». Дані передаються зашифровано й зберігаються в захищеній базі в ЄС. Ми не передаємо їх третім особам і не використовуємо для реклами. Видалити дані можна на запит менеджеру.</span></div>';
+  function anketa(api, d, edit){
+    var p = d.profile;
+    var name = p.full_name || [p.first_name, p.last_name].filter(Boolean).join(" ");
+    root.innerHTML = '<div class="card cab-box cab-form"><h2>' + (edit ? "Мої дані" : "Ще один крок — розкажіть про себе") + '</h2>' +
+      '<p>' + (edit ? "Перевірте й оновіть дані, якщо щось змінилося." : "Ці дані потрібні, щоб зарахувати вам бонуси за друзів і зв’язатися щодо виплат.") + '</p>' +
+      '<form id="an" novalidate><div class="row2"><div><label class="lbl" for="an-name">Ім’я та прізвище</label><input id="an-name" autocomplete="name" value="' + E(name) + '" required></div>' +
+      '<div><label class="lbl" for="an-phone">Телефон</label><input id="an-phone" type="tel" autocomplete="tel" placeholder="+380 …" value="' + E(p.phone || "") + '" required></div></div>' +
+      '<div class="row2"><div><label class="lbl" for="an-city">Місто або село, область</label><input id="an-city" placeholder="Напр. Біла Церква, Київська" value="' + E(p.city || "") + '" required></div>' +
+      '<div><label class="lbl" for="an-heard">Звідки дізналися про нас</label><select id="an-heard"><option value="">Оберіть…</option>' + HEARD.map(function(h){ return '<option' + (p.heard_from === h ? " selected" : "") + '>' + E(h) + '</option>'; }).join("") + '</select></div></div>' +
+      '<label class="cab-check"><input type="checkbox" id="an-ok"' + (p.consent_at ? " checked" : "") + '> <span>Погоджуюся на обробку моїх персональних даних відповідно до <a href="#privacy">політики конфіденційності</a></span></label>' +
+      SAFE + '<p class="err" id="an-err" role="alert"></p><div class="ph-cta"><button class="btn" type="submit">' + (edit ? "Зберегти" : "Продовжити") + '</button>' + (edit ? '<button class="btn ghost" type="button" id="an-back">Назад</button>' : "") + '</div></form></div>';
+    if (edit) document.getElementById("an-back").onclick = function(){ dash(api, d); };
+    document.getElementById("an").onsubmit = function(e){
+      e.preventDefault();
+      var v = function(id){ return document.getElementById(id).value.trim(); }, err = document.getElementById("an-err");
+      if (!v("an-name") || v("an-phone").replace(/\D/g, "").length < 9 || !v("an-city")) { err.textContent = "Заповніть ім’я, телефон і місто."; return; }
+      if (!document.getElementById("an-ok").checked) { err.textContent = "Потрібна згода на обробку даних."; return; }
+      var now = new Date().toISOString();
+      api.saveProfile({full_name: v("an-name"), phone: v("an-phone"), city: v("an-city"), heard_from: v("an-heard") || null, consent_at: p.consent_at || now, onboarded_at: p.onboarded_at || now})
+        .then(function(){ refresh(api); }).catch(function(){ err.textContent = "Не вдалося зберегти. Спробуйте ще раз."; });
+    };
+  }
+
   function dash(api, d){
     var p = d.profile, b = d.bal, avail = (b.balance || 0) - (b.pending || 0);
     var link = location.origin + LP + "/?ref=" + encodeURIComponent(p.ref_code || "");
@@ -65,7 +91,7 @@
     root.innerHTML =
       '<div class="cab-head">' + (p.photo_url ? '<img src="' + E(p.photo_url) + '" alt="" width="48" height="48">' : '<span class="cab-ava">' + E((p.first_name || "?").charAt(0)) + '</span>') +
         '<div><b>Вітаємо, ' + E(p.first_name || "друже") + '!</b><small>' + (p.tg_username ? "@" + E(p.tg_username) : "") + '</small></div>' +
-        '<button class="btn ghost sm" type="button" id="cab-out">Вийти</button></div>' +
+        '<button class="btn ghost sm" type="button" id="cab-me">Мої дані</button><button class="btn ghost sm" type="button" id="cab-out">Вийти</button></div>' +
       '<div class="cab-stats">' + stat("Доступно до виплати", M(avail), "main") + stat("Зароблено всього", M(b.earned)) + stat("Виплачено", M(b.paid)) + '</div>' +
       (b.pending ? '<p class="cab-note">Запит на виплату ' + E(M(b.pending)) + ' в обробці — менеджер зв’яжеться з вами.</p>' : "") +
       '<div class="cab-grid">' +
@@ -89,6 +115,7 @@
       '<p class="hint cab-foot">Бонус нараховується, коли друг відпрацює 2 тижні й ми отримаємо оплату від роботодавця. Питання — пишіть менеджеру: <a href="https://t.me/+380660050060">Telegram</a>, <a href="tel:+380660050060">+380 66 005 00 60</a>.</p>';
 
     document.getElementById("cab-out").onclick = function(){ api.logout(); };
+    document.getElementById("cab-me").onclick = function(){ anketa(api, d, true); };
     document.getElementById("cab-copy").onclick = function(){
       var i = document.getElementById("cab-link"); i.select();
       try { navigator.clipboard.writeText(i.value); } catch(e){ document.execCommand("copy"); }
@@ -113,6 +140,7 @@
     return api.load().then(function(d){
       // менеджери й адміни одразу потрапляють у CRM
       if (d.profile && (d.profile.role === "manager" || d.profile.role === "admin")) { location.replace("/crm/"); return; }
+      if (!d.profile.onboarded_at) { anketa(api, d); return; }
       dash(api, d);
     }).catch(function(e){
       console.warn(e); root.innerHTML = '<div class="card cab-box"><h2>Не вдалося завантажити кабінет</h2><p>Оновіть сторінку або напишіть менеджеру.</p></div>';
