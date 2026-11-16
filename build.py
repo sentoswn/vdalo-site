@@ -913,7 +913,8 @@ def main():
 
     # спільний підвал зі списком напрямків
     tpl = region(tpl, "foot", foot_links(live))
-    tpl = region(tpl, "appjs", "<script>" + open(os.path.join(ROOT, "app", "common.js"), encoding="utf-8").read() + "</script>")
+    tpl = region(tpl, "appjs", "<script>" + open(os.path.join(ROOT, "app", "common.js"), encoding="utf-8").read() + "</script>"
+                 + "<script>" + open(os.path.join(ROOT, "app", "track.js"), encoding="utf-8").read() + "</script>")
     hero_tpl = get_region(tpl, "hero")
     NAV_LIVE[:] = live
     BLK, FAQ, APPLY = get_region(tpl, "blocks"), get_region(tpl, "faq"), get_region(tpl, "apply")

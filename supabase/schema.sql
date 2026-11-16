@@ -95,6 +95,11 @@ alter table public.leads add column if not exists first_contact_at timestamptz; 
 create index if not exists leads_status on public.leads(status);
 update public.leads set managers = array[manager_id] where manager_id is not null and coalesce(array_length(managers, 1), 0) = 0;
 create index if not exists leads_referrer on public.leads(referrer_id);
+-- джерело залучення (app/track.js): ref:<код>, utm:<source>/<campaign>, ads:…, seo:…, site:…, direct; manual — додано в CRM
+alter table public.leads add column if not exists src        text;
+alter table public.leads add column if not exists visitor_id text;
+alter table public.leads add column if not exists utm        jsonb;
+create index if not exists leads_src on public.leads(src, created_at);
 
 -- історія змін статусу
 create table if not exists public.lead_events (
@@ -164,6 +169,11 @@ begin
     new.manager_id := auth.uid();              -- менеджер додає заявку — вона його
   end if;
   r := lower(trim(coalesce(new.ref_raw, '')));
+  new.src := nullif(left(lower(trim(coalesce(new.src, ''))), 120), '');
+  new.visitor_id := nullif(left(trim(coalesce(new.visitor_id, '')), 64), '');
+  if pg_column_size(new.utm) > 2000 then new.utm := null; end if;
+  if new.src is null and r <> '' then new.src := 'ref:' || case when r ~ '[a-z]' then r else regexp_replace(r, '\D', '', 'g') end; end if;
+  if new.src is null and public.is_staff() then new.src := 'manual'; end if;
   if new.referrer_id is null and r <> '' then
     select id into new.referrer_id from public.profiles where ref_code = r;
     if new.referrer_id is null then
@@ -422,3 +432,108 @@ grant select, insert, update, delete on public.tasks to authenticated;
 grant usage, select on sequence public.tasks_id_seq to authenticated;
 grant execute on function public.my_referrals(), public.my_balance(), public.request_payout(integer, text),
                           public.make_payout(uuid, integer, text, bigint), public.is_staff(), public.is_admin() to authenticated;
+
+
+-- ============ Джерела залучення: відвідувачі, заявки, конверсія ============
+-- візити: один рядок на сесію й джерело; visitor_id — випадковий анонімний ID браузера
+create table if not exists public.visits (
+  id         bigserial primary key,
+  created_at timestamptz not null default now(),
+  visitor_id text not null,
+  src        text not null,
+  utm        jsonb,
+  landing    text,
+  referrer   text,
+  lang       text
+);
+create index if not exists visits_src_time on public.visits(src, created_at);
+create index if not exists visits_vid_time on public.visits(visitor_id, created_at);
+
+-- назви джерел (напр. Telegram-група) — задає власник у CRM → «Джерела»
+create table if not exists public.traffic_sources (
+  key        text primary key,
+  name       text,
+  tg_group   text,
+  note       text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+-- запис візиту з сайту (анонімно). Повтор того самого відвідувача й джерела протягом 30 хв ігнорується.
+create or replace function public.track_visit(p_vid text, p_src text, p_utm jsonb default null, p_landing text default null,
+                                              p_referrer text default null, p_lang text default null)
+returns void language plpgsql security definer set search_path = public as $$
+declare s text := left(lower(trim(coalesce(p_src, ''))), 120);
+begin
+  if coalesce(p_vid, '') !~ '^[A-Za-z0-9-]{8,64}$' or s = '' then return; end if;
+  if exists (select 1 from public.visits where visitor_id = p_vid and src = s and created_at > now() - interval '30 minutes') then return; end if;
+  insert into public.visits(visitor_id, src, utm, landing, referrer, lang)
+  values (p_vid, s, case when pg_column_size(p_utm) <= 2000 then p_utm end, left(p_landing, 300), left(p_referrer, 200), left(p_lang, 5));
+end $$;
+
+-- назва за замовчуванням для ref:<код> — ім'я власника посилання
+create or replace function public.src_auto_name(p_key text) returns text language sql stable security definer set search_path = public as $$
+  select coalesce(nullif(p.full_name, ''), nullif(trim(coalesce(p.first_name, '') || ' ' || coalesce(p.last_name, '')), ''), '@' || p.tg_username)
+         || case p.role when 'manager' then ' (менеджер)' when 'admin' then ' (власник)' else '' end
+  from public.profiles p where public.is_admin() and p_key like 'ref:%' and p.ref_code = substr(p_key, 5) limit 1
+$$;
+
+-- зведення по джерелах за період [p_from, p_to): унікальні відвідувачі, візити, заявки, працевлаштовані, конверсія
+create or replace function public.source_stats(p_from timestamptz, p_to timestamptz)
+returns table(src text, name text, tg_group text, note text, auto_name text, visitors bigint, sessions bigint,
+              leads bigint, lead_visitors bigint, hired bigint, conversion numeric, first_visit timestamptz, last_visit timestamptz)
+language sql stable security definer set search_path = public as $$
+  with v as (
+    select x.src, count(distinct x.visitor_id) as visitors, count(*) as sessions, min(x.created_at) as f, max(x.created_at) as l
+    from public.visits x where x.created_at >= p_from and x.created_at < p_to group by x.src
+  ), l as (
+    select coalesce(y.src, 'unknown') as src, count(*) as leads, count(distinct y.visitor_id) as lv,
+           count(*) filter (where y.status in ('departed','working','paid')) as hired
+    from public.leads y where y.created_at >= p_from and y.created_at < p_to group by 1
+  ), k as (
+    select v.src from v union select l.src from l union select t.key from public.traffic_sources t
+  )
+  select k.src, t.name, t.tg_group, t.note, public.src_auto_name(k.src),
+         coalesce(v.visitors, 0), coalesce(v.sessions, 0), coalesce(l.leads, 0), coalesce(l.lv, 0), coalesce(l.hired, 0),
+         case when coalesce(v.visitors, 0) > 0 then round(coalesce(l.leads, 0)::numeric * 100 / v.visitors, 2) end,
+         v.f, v.l
+  from k left join v on v.src = k.src left join l on l.src = k.src left join public.traffic_sources t on t.key = k.src
+  where public.is_admin()
+  order by coalesce(l.leads, 0) desc, coalesce(v.visitors, 0) desc, k.src
+$$;
+
+-- по днях (Київ) — для графіка й експорту
+create or replace function public.source_daily(p_from timestamptz, p_to timestamptz)
+returns table(day date, src text, visitors bigint, leads bigint)
+language sql stable security definer set search_path = public as $$
+  with v as (
+    select (x.created_at at time zone 'Europe/Kyiv')::date as d, x.src, count(distinct x.visitor_id) as n
+    from public.visits x where x.created_at >= p_from and x.created_at < p_to group by 1, 2
+  ), l as (
+    select (y.created_at at time zone 'Europe/Kyiv')::date as d, coalesce(y.src, 'unknown') as src, count(*) as n
+    from public.leads y where y.created_at >= p_from and y.created_at < p_to group by 1, 2
+  )
+  select coalesce(v.d, l.d), coalesce(v.src, l.src), coalesce(v.n, 0), coalesce(l.n, 0)
+  from v full join l on l.d = v.d and l.src = v.src
+  where public.is_admin()
+  order by 1, 2
+$$;
+
+create or replace function public.traffic_sources_touch() returns trigger language plpgsql as $$
+begin new.key := left(lower(trim(new.key)), 120); new.updated_at := now(); return new; end $$;
+drop trigger if exists traffic_sources_touch on public.traffic_sources;
+create trigger traffic_sources_touch before insert or update on public.traffic_sources for each row execute function public.traffic_sources_touch();
+
+alter table public.visits          enable row level security;
+alter table public.traffic_sources enable row level security;
+drop policy if exists v_admin on public.visits;
+create policy v_admin on public.visits for select using (public.is_admin());
+drop policy if exists ts_admin on public.traffic_sources;
+create policy ts_admin on public.traffic_sources for all using (public.is_admin()) with check (public.is_admin());
+
+revoke all on public.visits from anon;
+grant select on public.visits to authenticated;
+grant select, insert, update, delete on public.traffic_sources to authenticated;
+grant execute on function public.track_visit(text, text, jsonb, text, text, text) to anon, authenticated;
+grant execute on function public.source_stats(timestamptz, timestamptz), public.source_daily(timestamptz, timestamptz),
+                          public.src_auto_name(text) to authenticated;

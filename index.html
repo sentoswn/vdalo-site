@@ -1344,6 +1344,7 @@ window.Vdalo = window.Vdalo || (function(){
     if (parts.length) { SOURCE = parts.join("; "); try { sessionStorage.setItem("vdalo_src", SOURCE); } catch(e){} }
     else { try { SOURCE = sessionStorage.getItem("vdalo_src") || ""; } catch(e){} }
   } catch(e) {}
+  if (!SOURCE && window.VdaloTrack) SOURCE = VdaloTrack.label();   // джерело, збережене до 30 днів
 
   /* ---------- Рекомендація друга (пам'ятаємо 30 днів) ---------- */
   var REFBY = "";
@@ -1737,8 +1738,10 @@ window.Vdalo = window.Vdalo || (function(){
         showPanel("sent"); track("Lead",lead);
       } else fallback(true);
     }
-    if (window.Vdalo) Vdalo.sb().then(function(sbc){ if (sbc) return sbc.from("leads").insert({name:name, phone:phone, vacancy_id:sel.value||null, vacancy_title:vacTitle||null,
-      who:segVal("who"), when_go:segVal("when"), contact_mode:mode, channel:channel||null, note:f.note.value.trim()||null, source:SOURCE||null, page:location.href, lang:LANG, ref_raw:REFBY||null, traffic:TRAFFIC}); }).catch(function(){});
+    if (window.Vdalo) Vdalo.sb().then(function(sbc){ if (!sbc) return; var row={name:name, phone:phone, vacancy_id:sel.value||null, vacancy_title:vacTitle||null,
+      who:segVal("who"), when_go:segVal("when"), contact_mode:mode, channel:channel||null, note:f.note.value.trim()||null, source:SOURCE||null, page:location.href, lang:LANG, ref_raw:REFBY||null, traffic:TRAFFIC};
+      var trk=window.VdaloTrack ? VdaloTrack.lead() : null;
+      return sbc.from("leads").insert(trk ? Object.assign({}, row, trk) : row).then(function(r){ if (r && r.error && trk) return sbc.from("leads").insert(row); }); }).catch(function(){});
     fetch(CONFIG.leadsUrl,{method:"POST", body:JSON.stringify(payload)})
       .then(function(r){ return r.json(); })
       .then(function(j){ if(!done){ done=true; clearTimeout(timer); finish(!!(j&&j.ok)); } })

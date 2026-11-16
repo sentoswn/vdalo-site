@@ -180,6 +180,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     <button role="tab" data-tab="leads" aria-selected="true"><svg class="ic"><use href="#ic-users"/></svg><span id="t-leads">Кандидати</span><span class="n" id="n-leads" hidden></span></button>
     <button role="tab" data-tab="tasks"><svg class="ic"><use href="#ic-check"/></svg>Задачі<span class="n" id="n-tasks" hidden></span></button>
     <button role="tab" data-tab="analytics" data-own><svg class="ic"><use href="#ic-chart"/></svg>Аналітика</button>
+    <button role="tab" data-tab="sources" data-own><svg class="ic"><use href="#ic-target"/></svg>Джерела</button>
     <button role="tab" data-tab="employers" data-own><svg class="ic"><use href="#ic-building"/></svg>Роботодавці<span class="n" id="n-employers" hidden></span></button>
     <button role="tab" data-tab="people" data-own><svg class="ic"><use href="#ic-gift"/></svg>Реферали</button>
     <button role="tab" data-tab="payouts" data-own><svg class="ic"><use href="#ic-wallet"/></svg>Виплати<span class="n" id="n-payouts" hidden></span></button>
@@ -195,6 +196,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
 <div class="toast" id="toast"></div>
 
 <script src="/app/common.js"></script>
+<script src="/app/crm-sources.js"></script>
 <script>
 (function(){
   var E = Vdalo.esc, M = Vdalo.money;
@@ -355,7 +357,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
  ["Анкета заповнена", p.onboarded_at ? dt(p.onboarded_at, true) : "ні"]];
     return '<b>Анкета</b><dl class="kv">' + rows.filter(function(r){ return r[1]; }).map(function(r){ return '<dt>' + E(r[0]) + '</dt><dd>' + E(r[1]) + '</dd>'; }).join("") + '</dl>';
   }
-  function tabsAllowed(){ return S.own ? ["leads", "tasks", "analytics", "employers", "people", "payouts", "mylink", "guide", "settings"] : ["leads", "tasks", "mylink", "guide"]; }
+  function tabsAllowed(){ return S.own ? ["leads", "tasks", "analytics", "sources", "employers", "people", "payouts", "mylink", "guide", "settings"] : ["leads", "tasks", "mylink", "guide"]; }
   function ic(n, cls){ return '<svg class="ic' + (cls ? " " + cls : "") + '"><use href="#ic-' + n + '"/></svg>'; }
   function mgrsOf(l){ var a = (l.managers && l.managers.length) ? l.managers.slice() : []; if (l.manager_id && a.indexOf(l.manager_id) < 0) a.unshift(l.manager_id); return a; }
   function hasMgr(l, id){ return mgrsOf(l).indexOf(id) >= 0; }
@@ -402,7 +404,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   function demoBar(){ return ""; }
   function render(){
     app.innerHTML = '<div class="empty">Завантаження…</div>';
-    ({guide: rGuide, leads: rLeads, tasks: rTasks, analytics: rAnalytics, mylink: rMyLink, employers: rEmployers, people: rPeople, payouts: rPayouts, settings: rSettings})[S.tab]();
+    ({guide: rGuide, leads: rLeads, tasks: rTasks, analytics: rAnalytics, sources: function(){ VdaloSources(app, {toast: toast, fail: fail}); }, mylink: rMyLink, employers: rEmployers, people: rPeople, payouts: rPayouts, settings: rSettings})[S.tab]();
   }
   function fail(e){ console.warn(e); toast("Помилка: " + (e && e.message || "не вдалося зберегти")); }
 
