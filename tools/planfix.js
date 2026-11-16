@@ -24,14 +24,18 @@
     let ua = o['Опис UA'] || ''; const cut = ua.search(/Gremi Personal|Klauzula informacyjna|Numer KRAZ/i);
     const tail = cut >= 0 ? ua.slice(cut) : ''; if (cut >= 0) ua = ua.slice(0, cut);
     const S = sections(ua), top = S._top || [];
-    const cm = tail.match(/Rekrutujemy dla naszego klienta\s*[–-]\s*([^\n]+)/i);
-    let company = cm ? cm[1].replace(/\s*(Sp\.?\s*z\s*o\.?\s*o\.?|S\.A\.|sp\.\s*k\.|Spółka.*)\.?\s*$/i, '').replace(/[.\s]+$/, '').trim() : '';
-    if (/gremi/i.test(company) || company.length > 40) company = '';
-    let title = (top[0] && top[0].length < 70 && !/[:]/.test(top[0])) ? top[0] : (o['Назва вакансії'] || o.title.replace(/^\d+\s*-\s*/, ''));
-    title = title.replace(/\s*\([^)]*\)\s*/g, ' ').replace(/\s{2,}/g, ' ').replace(/[.\s]+$/, '').trim();
+    const ri = o['Інформація для рекрутації'] || '';
+    // справжній роботодавець — з «Інформації для рекрутації» (рядок «Назва – опис»); юр. особи агенції (APT…, Adera…) не беремо
+    const cm = ri.match(/(?:^|\n)\s*([A-ZĄĆĘŁŃÓŚŹŻ][\w&.'’ ĄĆĘŁŃÓŚŹŻąćęłńóśźż-]{1,40}?)\s+[–—-]\s+[а-яіїєa-z]/);
+    let company = cm ? cm[1].replace(/\s*(Sp\.?\s*z\s*o\.?\s*o\.?|S\.A\.|sp\.\s*k\.)\s*$/i, '').trim().split(/\s+/).slice(0, 3).join(' ') : '';
+    if (/^(rozmowa|gremi|apt\b|adera|debs|raxton|ważne|важно|приезд|выход)/i.test(company)) company = '';
+    if (company === company.toUpperCase() && company.length > 4) company = company.split(' ').map(w => w.length > 3 ? w.charAt(0) + w.slice(1).toLowerCase() : w).join(' ');
+    const t0 = (top[0] || '').split(/\s*Місце роботи/)[0];
+    let title = (t0 && t0.length < 70 && !/[:]/.test(t0) && !/^робота до/i.test(t0)) ? t0 : (o['Назва вакансії'] || o.title.replace(/^\d+\s*-\s*/, ''));
+    title = title.replace(/\budt\b/gi, 'UDT').replace(/\s*\([^)]*\)\s*/g, ' ').replace(/\s{2,}/g, ' ').replace(/[.\s]+$/, '').trim();
     if (title === title.toUpperCase()) title = title.toLowerCase();
     title = title.charAt(0).toUpperCase() + title.slice(1);
-    const br = num(o['Ставка брутто']), ri = o['Інформація для рекрутації'] || '';
+    const br = num(o['Ставка брутто']);
     const nets = [];
     if (br && br < 200) ri.split('\n').forEach(l => { if (!/net+o|нетто/i.test(l) || /студент/i.test(l)) return;
       (l.match(/\d{2}[.,]\d{1,2}/g) || []).map(num).forEach(x => { if (x < br * 0.97 && x > br * 0.55) nets.push(x); }); });
@@ -39,8 +43,12 @@
     const g = (o['Допустима стать'] || '').replace(/\s/g, '');
     const age = o['Вік (допустимий)'];
     const who = (g === 'М' ? 'Чоловіки' : g === 'Ж' ? 'Жінки' : 'Жінки та чоловіки') + (age && +age >= 30 && +age <= 70 ? `, до ${age} р.` : '');
-    let hours = join(S['робочих годин на місяць'] || S['робочі години на місяць'] || S['кількість робочих годин на місяць'] || S['робочі години в місяць'], 30, ', ');
-    if (!hours || /[A-Za-zł]/.test(hours)) { const hm = ua.match(/(\d{2,3})\s*[–-]\s*(\d{2,3})\s*(?:год|робочих)/i); hours = hm ? hm[1] + '–' + hm[2] : ''; }
+    const HR = /(?:^|[^\d.,])(\d{2,3})(?:\s*[–-]\s*(\d{2,3}))?(?![\d.,:])/;
+    const okH = (a, b) => +a >= 80 && +a <= 320 && (!b || (+b > +a && +b <= 330));
+    let hours = '';
+    for (const line of [].concat(S['робочих годин на місяць'] || [], S['робочі години на місяць'] || [], S['кількість робочих годин на місяць'] || [], S['робочі години в місяць'] || [])) {
+      if (/вартість|житл|zł|зл/i.test(line)) continue; const m = line.match(HR); if (m && okH(m[1], m[2])) { hours = m[2] ? m[1] + '–' + m[2] : m[1]; break; } }
+    if (!hours) { const hm = ua.match(/(\d{2,3})\s*[–-]\s*(\d{2,3})\s*(?:год|робочих)/i); if (hm && okH(hm[1], hm[2])) hours = hm[1] + '–' + hm[2]; }
     const vh = o['Вартість житла'] || '';
     let housing = join(S['проживання'], 120, '. ');
     if (!housing) housing = /своим жиль|своїм житл|власн/i.test(vh) ? 'Лише зі своїм житлом' : (o['Є місця на нашому житлі'] === 'Так' && /\d/.test(vh) ? 'Житло від роботодавця: ' + vh.replace(/zł|зл\.?/i, '').trim() + ' zł/міс' : '');
@@ -49,7 +57,7 @@
       salary: !br ? '' : br < 200 ? br.toFixed(2) + ' PLN брутто/година' : br.toFixed(0) + ' PLN брутто/місяць',
       net, hours, contract: o['Тип договора'] || '', housing, who,
       desc: join(S["обов'язки"] || S['завдання'], 170, ', '), schedule: join(S['графік роботи'] || S['графік'], 80, ', '),
-      night: night === 'Так' ? 'Є' : night === 'Ні' ? 'Ні' : '', transport: join(S['доїзд'], 90, '. '),
+      night: night === 'Так' || night === 'Ні' ? night : '', transport: join(S['доїзд'], 90, '. '),
       req: join(S['вимоги'] || S['вимоги до кандидата'], 150, ', '),
       perks: join(S['умови на підприємстві'] || S['умови роботи'] || S['умови роботи на підприємстві'], 130, ', ') };
     if (/^(ні|немає|відсутні)$/i.test(r.perks)) r.perks = '';
