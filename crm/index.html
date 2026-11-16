@@ -17,6 +17,7 @@ a{color:inherit}
 .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;text-decoration:none}
 .logo span{width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:15px}
 .tabs{display:flex;gap:4px;flex:1;overflow-x:auto}
+.tabs{scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
 .tabs[hidden],.tabs .n[hidden]{display:none}
 .tabs button{border:0;background:none;padding:8px 12px;border-radius:10px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap}
 .tabs button[aria-selected=true]{background:var(--soft);color:var(--ink)}
@@ -541,7 +542,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
           return '<tr><td><b>' + E(pname(p)) + '</b><small>' + E([p.tg_username ? "@" + p.tg_username : "", p.phone].filter(Boolean).join(" · ")) + '</small></td>' +
             '<td class="hide-m"><code>' + E(p.ref_code || "") + '</code></td><td class="hide-m">' + (p.invited || 0) + '</td><td class="hide-m money">' + E(M(p.earned)) + '</td>' +
             '<td class="money">' + E(M(p.balance)) + '</td>' +
-            '<td class="hide-m">' + (isAdmin && p.id !== S.me.id ? '<select data-role="' + E(p.id) + '">' + opts([["user", "Користувач"], ["manager", "Менеджер"], ["admin", "Адмін"]], p.role) + '</select>' : E(ROLES[p.role] || p.role)) + '</td>' +
+            '<td class="hide-m">' + (isAdmin && p.id !== S.me.id ? '<select data-role="' + E(p.id) + '">' + opts([["user", "Користувач"], ["manager", "Менеджер"], ["admin", "Власник"]], p.role) + '</select>' : E(ROLES[p.role] || p.role)) + '</td>' +
             '<td><button class="btn ghost sm" data-hist="' + E(p.id) + '">Історія</button> ' + (p.balance > 0 ? '<button class="btn sm green" data-pay="' + E(p.id) + '">Виплатити</button>' : "") + '</td></tr>';
         }).join("") || '<tr><td colspan="7" class="empty">Поки нікого</td></tr>';
         document.querySelectorAll("[data-pay]").forEach(function(b){ b.onclick = function(){ payDialog(b.getAttribute("data-pay"), null); }; });
