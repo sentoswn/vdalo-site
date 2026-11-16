@@ -89,9 +89,11 @@ create table if not exists public.leads (
   bonus_paid    boolean not null default false
 );
 alter table public.leads add column if not exists traffic          text;         -- канал: manager, referral, social, seo, paid, direct, other, manual
-alter table public.leads add column if not exists assigned_at      timestamptz;  -- коли закріпили за менеджером
+alter table public.leads add column if not exists assigned_at      timestamptz;
+alter table public.leads add column if not exists managers         uuid[] not null default '{}';  -- усі менеджери в роботі (перший = основний)  -- коли закріпили за менеджером
 alter table public.leads add column if not exists first_contact_at timestamptz;  -- коли вперше змінили статус із «Нова заявка»
 create index if not exists leads_status on public.leads(status);
+update public.leads set managers = array[manager_id] where manager_id is not null and coalesce(array_length(managers, 1), 0) = 0;
 create index if not exists leads_referrer on public.leads(referrer_id);
 
 -- історія змін статусу
@@ -185,6 +187,8 @@ begin
     new.traffic := 'direct';
   end if;
   new.first_contact_at := case when new.status <> 'new' then now() end;
+  if new.manager_id is not null and not (new.manager_id = any(coalesce(new.managers, '{}'))) then new.managers := array[new.manager_id] || coalesce(new.managers, '{}'); end if;
+  if new.manager_id is null and coalesce(array_length(new.managers, 1), 0) > 0 then new.manager_id := new.managers[1]; end if;
   new.assigned_at := case when new.manager_id is not null then now() end;
   return new;
 end $$;
@@ -223,6 +227,16 @@ create or replace function public.leads_guard() returns trigger language plpgsql
 begin
   if auth.uid() is not null and not public.is_admin() then
     new.manager_id := old.manager_id;          -- перепризначати може лише власник
+    new.managers := old.managers;
+  end if;
+  new.managers := coalesce(new.managers, '{}');
+  if new.managers is distinct from old.managers or new.manager_id is distinct from old.manager_id then
+    if coalesce(array_length(new.managers, 1), 0) = 0 then
+      if new.manager_id is not null and new.managers is not distinct from old.managers then new.managers := array[new.manager_id];
+      else new.manager_id := null; end if;
+    elsif new.manager_id is null or not (new.manager_id = any(new.managers)) then
+      new.manager_id := new.managers[1];
+    end if;
   end if;
   -- час реакції: рахує база, підробити не можна
   new.assigned_at := case when new.manager_id is distinct from old.manager_id then (case when new.manager_id is not null then now() end) else old.assigned_at end;
@@ -355,14 +369,14 @@ create policy s_write on public.settings for all using (public.is_admin()) with 
 drop policy if exists l_insert on public.leads;
 create policy l_insert on public.leads for insert with check (true);
 drop policy if exists l_staff on public.leads;
-create policy l_staff on public.leads for select using (public.is_admin() or (public.is_staff() and manager_id = auth.uid()));
+create policy l_staff on public.leads for select using (public.is_admin() or (public.is_staff() and (manager_id = auth.uid() or auth.uid() = any(managers))));
 drop policy if exists l_staff_upd on public.leads;
-create policy l_staff_upd on public.leads for update using (public.is_admin() or (public.is_staff() and manager_id = auth.uid())) with check (public.is_staff());
+create policy l_staff_upd on public.leads for update using (public.is_admin() or (public.is_staff() and (manager_id = auth.uid() or auth.uid() = any(managers)))) with check (public.is_staff());
 drop policy if exists l_staff_del on public.leads;
 create policy l_staff_del on public.leads for delete using (public.is_admin());
 
 drop policy if exists le_staff on public.lead_events;
-create policy le_staff on public.lead_events for select using (public.is_admin() or exists (select 1 from public.leads l where l.id = lead_id and l.manager_id = auth.uid()));
+create policy le_staff on public.lead_events for select using (public.is_admin() or exists (select 1 from public.leads l where l.id = lead_id and (l.manager_id = auth.uid() or auth.uid() = any(l.managers))));
 
 drop policy if exists e_insert on public.employer_leads;
 create policy e_insert on public.employer_leads for insert with check (status = 'new' and manager_note is null);

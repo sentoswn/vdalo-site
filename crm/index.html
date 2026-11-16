@@ -60,6 +60,10 @@ main{padding:20px;max-width:1500px;margin:0 auto}
 .df{padding:12px 20px;border-top:1px solid var(--line);display:flex;gap:8px;justify-content:flex-end}
 .fld{display:grid;gap:4px}
 .fld label{font-size:12px;font-weight:700;color:var(--muted)}
+.fld{min-width:0}
+.fld input{width:100%;box-sizing:border-box}
+.db{overflow-x:hidden}
+.fld select{max-width:100%;width:100%}
 .fld input,.fld select,.fld textarea{padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
 .fld textarea{min-height:70px;resize:vertical}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -117,21 +121,55 @@ main{padding:20px;max-width:1500px;margin:0 auto}
 .guide .warn{background:#fff4e5;border:1px solid #f3d29a;border-radius:12px;padding:12px 14px}
 .guide nav{display:flex;flex-wrap:wrap;gap:6px}
 .guide nav a{padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);text-decoration:none;font-weight:600;font-size:13px}
+.top{background:linear-gradient(90deg,#fff 0%,#fff 60%,#f4fbf7 100%);box-shadow:0 1px 0 var(--line),0 6px 20px -16px rgba(0,0,0,.25)}
+.top::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,#4f9df7,#3ccf8e,#f7a1c4)}
+.logo span{background:linear-gradient(135deg,#1f4fd1,#3ccf8e)}
+.tabs button{transition:background .15s,transform .15s}
+.tabs button:hover{background:var(--soft);transform:translateY(-1px)}
+.tabs button[aria-selected=true]{background:linear-gradient(135deg,#e5edff,#e2f5e9);color:var(--ink)}
+.hello{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;background:var(--grad);border-radius:20px;padding:18px 22px;margin-bottom:16px;box-shadow:0 14px 34px -24px rgba(31,79,209,.55)}
+.hello h2{margin:0;font-size:22px}
+.hello p{margin:4px 0 0;color:#344054;font-weight:600}
+.hello-stats{display:flex;flex-wrap:wrap;gap:10px}
+.hello-stats div{background:rgba(255,255,255,.75);backdrop-filter:blur(6px);border-radius:14px;padding:10px 14px;min-width:120px;display:grid}
+.hello-stats b{font-size:24px;line-height:1.1}
+.hello-stats span{font-size:12px;font-weight:700;color:#475467}
+.hello-stats .bad b{color:var(--red)}
+.hello-stats .good b{color:var(--green)}
+.who{display:flex;gap:10px;align-items:center}
+.av{width:34px;height:34px;flex:0 0 34px;border-radius:50%;display:inline-grid;place-items:center;font-weight:800;font-size:13px;color:#1d2433}
+.chip .av{width:22px;height:22px;flex-basis:22px;font-size:10px}
+.card{transition:box-shadow .2s}
+.tbl tr.row{transition:background .12s}
+.tbl tr.row:hover td{background:#f5f9ff}
+.st{box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
+.btn{transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px -10px rgba(0,0,0,.5)}
+.chip{transition:transform .12s}
+.chip:hover{transform:translateY(-1px)}
+.stat{transition:transform .15s}
+.stat:hover{transform:translateY(-2px)}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+.confetti i{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{top:105%;transform:rotate(720deg) translateX(40px)}}
+.login{background:linear-gradient(var(--surface),var(--surface)) padding-box,linear-gradient(135deg,#4f9df7,#3ccf8e,#f7a1c4) border-box;border:2px solid transparent}
+.toast{border-radius:999px;padding:12px 20px;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+@media (max-width:800px){.hello-stats div{min-width:0;flex:1 1 40%}}
 </style>
 </head>
 <body>
 <header class="top">
   <a class="logo" href="/"><span>В</span>CRM</a>
   <nav class="tabs" id="tabs" role="tablist" hidden>
-    <button role="tab" data-tab="leads" aria-selected="true"><span id="t-leads">Кандидати</span><span class="n" id="n-leads" hidden></span></button>
-    <button role="tab" data-tab="tasks">Задачі<span class="n" id="n-tasks" hidden></span></button>
-    <button role="tab" data-tab="analytics" data-own>Аналітика</button>
-    <button role="tab" data-tab="employers" data-own>Роботодавці<span class="n" id="n-employers" hidden></span></button>
-    <button role="tab" data-tab="people" data-own>Реферали й баланси</button>
-    <button role="tab" data-tab="payouts" data-own>Виплати<span class="n" id="n-payouts" hidden></span></button>
-    <button role="tab" data-tab="mylink">Моє посилання</button>
-    <button role="tab" data-tab="guide">Як шукати кандидатів</button>
-    <button role="tab" data-tab="settings" data-own>Налаштування</button>
+    <button role="tab" data-tab="leads" aria-selected="true">👥 <span id="t-leads">Кандидати</span><span class="n" id="n-leads" hidden></span></button>
+    <button role="tab" data-tab="tasks">✅ Задачі<span class="n" id="n-tasks" hidden></span></button>
+    <button role="tab" data-tab="analytics" data-own>📊 Аналітика</button>
+    <button role="tab" data-tab="employers" data-own>🏭 Роботодавці<span class="n" id="n-employers" hidden></span></button>
+    <button role="tab" data-tab="people" data-own>🎁 Реферали</button>
+    <button role="tab" data-tab="payouts" data-own>💸 Виплати<span class="n" id="n-payouts" hidden></span></button>
+    <button role="tab" data-tab="mylink">🔗 Моє посилання</button>
+    <button role="tab" data-tab="guide">🧭 Як шукати</button>
+    <button role="tab" data-tab="settings" data-own>⚙️</button>
   </nav>
   <div class="me" id="me"></div>
 </header>
@@ -302,6 +340,25 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     return '<b>Анкета</b><dl class="kv">' + rows.filter(function(r){ return r[1]; }).map(function(r){ return '<dt>' + E(r[0]) + '</dt><dd>' + E(r[1]) + '</dd>'; }).join("") + '</dl>';
   }
   function tabsAllowed(){ return S.own ? ["leads", "tasks", "analytics", "employers", "people", "payouts", "mylink", "guide", "settings"] : ["leads", "tasks", "mylink", "guide"]; }
+  function mgrsOf(l){ var a = (l.managers && l.managers.length) ? l.managers.slice() : []; if (l.manager_id && a.indexOf(l.manager_id) < 0) a.unshift(l.manager_id); return a; }
+  function hasMgr(l, id){ return mgrsOf(l).indexOf(id) >= 0; }
+  S.vac = []; fetch("/vacancies.json", {cache: "no-store"}).then(function(r){ return r.json(); }).then(function(j){ S.vac = j.items || j.vacancies || j || []; }).catch(function(){});
+  function companies(){
+    var set = {}; S.vac.forEach(function(v){ if (v.company) set[v.company] = 1; });
+    (S.leads || []).forEach(function(l){ if (l.employer) set[l.employer] = 1; });
+    (S.employers || []).forEach(function(e){ if (e.company) set[e.company] = 1; });
+    return Object.keys(set).sort(function(a, b){ return a.localeCompare(b, "uk"); });
+  }
+  var AV = ["#ffd6a5", "#caffbf", "#9bf6ff", "#bdb2ff", "#ffc6ff", "#fdffb6", "#a0c4ff", "#ffadad"];
+  function avatar(name){ var n = String(name || "?").trim(), h = 0; for (var i = 0; i < n.length; i++) h = (h * 31 + n.charCodeAt(i)) >>> 0;
+    var ini = n.split(/\s+/).map(function(w){ return w.charAt(0); }).join("").slice(0, 2).toUpperCase();
+    return '<span class="av" style="background:' + AV[h % AV.length] + '">' + E(ini) + '</span>'; }
+  function confetti(){
+    var box = document.createElement("div"); box.className = "confetti"; var cs = ["#ff595e", "#ffca3a", "#8ac926", "#1982c4", "#6a4c93", "#ff924c"];
+    for (var i = 0; i < 90; i++) { var p = document.createElement("i"); p.style.left = Math.random() * 100 + "%"; p.style.background = cs[i % cs.length];
+      p.style.animationDelay = Math.random() * .6 + "s"; p.style.animationDuration = 1.8 + Math.random() * 1.4 + "s"; p.style.transform = "rotate(" + Math.random() * 360 + "deg)"; box.appendChild(p); }
+    document.body.appendChild(box); setTimeout(function(){ box.remove(); }, 3800);
+  }
   function staffName(id){ var p = S.staff.filter(function(x){ return x.id === id; })[0]; return p ? pname(p) : ""; }
   function go(tab){
     if (tabsAllowed().indexOf(tab) < 0) tab = "leads";
@@ -348,32 +405,44 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         LS.map(function(x){ return '<button class="chip" data-f="' + x[0] + '" aria-pressed="' + (S.filter === x[0]) + '">' + E(x[0] === "paid" ? "Оплачено" : x[1]) + '<b>' + (cnt[x[0]] || 0) + '</b></button>'; }).join("");
       var q = S.q.toLowerCase();
       var mgrSel = S.own ? '<select id="mgr" style="padding:7px 10px;border:1px solid var(--line);border-radius:999px;font-weight:600;background:var(--surface)">' +
-        '<option value="all">Усі менеджери</option><option value="none"' + (S.mgr === "none" ? " selected" : "") + '>Без менеджера (' + list.filter(function(l){ return !l.manager_id; }).length + ')</option>' +
-        S.staff.map(function(p){ return '<option value="' + p.id + '"' + (S.mgr === p.id ? " selected" : "") + '>' + E(pname(p)) + ' (' + list.filter(function(l){ return l.manager_id === p.id; }).length + ')</option>'; }).join("") + '</select>' : "";
+        '<option value="all">Усі менеджери</option><option value="none"' + (S.mgr === "none" ? " selected" : "") + '>Без менеджера (' + list.filter(function(l){ return !mgrsOf(l).length; }).length + ')</option>' +
+        S.staff.map(function(p){ return '<option value="' + p.id + '"' + (S.mgr === p.id ? " selected" : "") + '>' + E(pname(p)) + ' (' + list.filter(function(l){ return hasMgr(l, p.id); }).length + ')</option>'; }).join("") + '</select>' : "";
       var chSel = '<select id="chf" style="padding:7px 10px;border:1px solid var(--line);border-radius:999px;font-weight:600;background:var(--surface)">' +
         '<option value="all">Усі канали</option><option value="free"' + (S.ch === "free" ? " selected" : "") + '>Усі безкоштовні</option>' +
         Object.keys(CH).map(function(k){ return '<option value="' + k + '"' + (S.ch === k ? " selected" : "") + '>' + E(CH[k][0]) + ' (' + list.filter(function(l){ return chOf(l) === k; }).length + ')</option>'; }).join("") + '</select>';
       var rows = list.filter(function(l){
         if (S.ch && S.ch !== "all" && (S.ch === "free" ? CH[chOf(l)][3] !== "free" : chOf(l) !== S.ch)) return false;
-        if (S.own && S.mgr === "none" && l.manager_id) return false;
-        if (S.own && S.mgr !== "all" && S.mgr !== "none" && l.manager_id !== S.mgr) return false;
+        if (S.own && S.mgr === "none" && mgrsOf(l).length) return false;
+        if (S.own && S.mgr !== "all" && S.mgr !== "none" && !hasMgr(l, S.mgr)) return false;
         if (S.filter === "active" && (l.status === "rejected" || l.status === "paid")) return false;
         if (S.filter !== "active" && S.filter !== "all" && l.status !== S.filter) return false;
         if (q && [l.name, l.phone, l.vacancy_title, l.employer, l.manager_note, l.referrer && pname(l.referrer)].join(" ").toLowerCase().indexOf(q) < 0) return false;
         return true;
       });
-      app.innerHTML = demoBar() +
+      var hr = new Date().getHours(), hello = hr < 5 ? "Доброї ночі" : hr < 12 ? "Доброго ранку" : hr < 18 ? "Доброго дня" : "Доброго вечора";
+      var today = new Date(); today.setHours(0, 0, 0, 0); var mon = new Date(today.getFullYear(), today.getMonth(), 1);
+      var mineL = S.own ? list : list.filter(function(l){ return hasMgr(l, S.me.id); });
+      var nNew = mineL.filter(function(l){ return new Date(l.created_at) >= today; }).length;
+      var nWait = mineL.filter(function(l){ return l.status === "new" && Date.now() - waitStart(l) > 15 * 6e4; }).length;
+      var eod = new Date(); eod.setHours(23, 59, 59, 999);
+      var nTask = (S.tasks || []).filter(function(t){ return !t.done_at && t.due_at && new Date(t.due_at) <= eod && t.assignee_id === S.me.id; }).length;
+      var nWin = mineL.filter(function(l){ return (l.status === "working" || l.status === "paid") && new Date(l.updated_at || l.created_at) >= mon; }).length;
+      var MOT = ["Кожен дзвінок — чиясь нова робота 💪", "Швидка відповідь = довіра кандидата ⚡", "Сьогодні чудовий день, щоб когось працевлаштувати 🚀", "Маленькі кроки щодня — великий результат 🌱", "Кандидат, який чекає, — кандидат, який пише іншим ⏰"];
+      var banner = '<div class="hello"><div><h2>' + E(hello) + ', ' + E((S.me.full_name || S.me.first_name || "").split(" ")[0]) + '! 👋</h2><p>' + E(MOT[today.getDate() % MOT.length]) + '</p></div>' +
+        '<div class="hello-stats"><div><b>' + nNew + '</b><span>🆕 нових сьогодні</span></div><div class="' + (nWait ? "bad" : "") + '"><b>' + nWait + '</b><span>⏰ чекають &gt;15 хв</span></div>' +
+        '<div><b>' + nTask + '</b><span>✅ задач на сьогодні</span></div><div class="good"><b>' + nWin + '</b><span>🎉 вийшли на роботу цього місяця</span></div></div></div>';
+      app.innerHTML = demoBar() + banner +
         '<div class="bar"><input type="search" id="q" placeholder="Пошук: ім’я, телефон, вакансія, роботодавець…" value="' + E(S.q) + '"><button class="btn" id="add">+ Нова заявка</button></div>' +
         '<div class="bar">' + mgrSel + chSel + chips + '</div>' +
         '<div class="card"><table class="tbl"><thead><tr><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Канал</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(l){
           return '<tr class="row" data-id="' + l.id + '"><td class="hide-m">' + E(dt(l.created_at, true)) + '</td>' +
-            '<td><b>' + E(l.name) + '</b><small>' + E(l.phone) + (l.who ? " · " + E(l.who) : "") + '</small></td>' +
+            '<td><div class="who">' + avatar(l.name) + '<div><b>' + E(l.name) + '</b><small>' + E(l.phone) + (l.who ? " · " + E(l.who) : "") + '</small></div></div></td>' +
             '<td class="hide-m">' + E(l.vacancy_title || "Будь-яка") + (l.employer ? '<small>' + E(l.employer) + '</small>' : "") + '</td>' +
             '<td class="hide-m">' + chBadge(l) + (l.referrer ? '<small>від ' + E(pname(l.referrer)) + '</small>' : "") + '</td>' +
-            (S.own ? '<td class="hide-m">' + (l.manager_id ? E(staffName(l.manager_id)) : '<span class="st st-new">Не призначено</span>') + '</td>' : '') +
+            (S.own ? '<td class="hide-m">' + (mgrsOf(l).length ? mgrsOf(l).map(function(id){ return E(staffName(id)); }).join(", ") : '<span class="st st-new">Не призначено</span>') + '</td>' : '') +
             '<td><span class="st st-' + l.status + '">' + E(LSN[l.status] || l.status) + '</span>' + waitBadge(l) + '</td></tr>';
-        }).join("") : '<tr><td colspan="6" class="empty">' + (S.own ? "Нічого не знайдено" : "Поки немає кандидатів. Діліться своїм посиланням (вкладка «Моє посилання») — кандидати з нього потраплять сюди.") + '</td></tr>') + '</tbody></table></div>';
+        }).join("") : '<tr><td colspan="6" class="empty">' + (S.own ? "Тут поки порожньо 🌱 Нові заявки з’являться автоматично" : "Поки немає кандидатів 🌱 Діліться своїм посиланням (вкладка «Моє посилання») — кандидати з нього потраплять сюди.") + '</td></tr>') + '</tbody></table></div>';
       var cf = document.getElementById("chf"); if (cf) cf.onchange = function(){ S.ch = cf.value; rLeads(); };
       var ms = document.getElementById("mgr"); if (ms) ms.onchange = function(){ S.mgr = ms.value; rLeads(); };
       var qi = document.getElementById("q");
@@ -400,11 +469,13 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       '<dt>Коментар</dt><dd>' + E(l.note || "—") + '</dd><dt>Канал</dt><dd>' + chBadge(l) + '</dd><dt>Джерело</dt><dd>' + E(l.source || "—") + (l.lang && l.lang !== "uk" ? " · мова " + E(l.lang) : "") + '</dd></dl>';
     openDrawer('<div class="dh"><h2>' + (isNew ? "Нова заявка" : E(l.name)) + '</h2><button class="btn ghost sm" data-x>✕</button></div><div class="db">' + info +
       (isNew ? '<div class="g2"><div class="fld"><label>Ім’я</label><input id="d-name"></div><div class="fld"><label>Телефон</label><input id="d-phone" type="tel"></div></div>' +
-        '<div class="fld"><label>Вакансія / побажання</label><input id="d-vac"></div>' : "") +
+        '<div class="fld"><label>Вакансія</label><select id="d-vacsel"><option value="">Будь-яка / ще не обрали</option>' + S.vac.map(function(v){ return '<option value="' + E(v.id) + '">' + E(v.title + " · " + (v.company || "") + " · " + (v.city || "")) + '</option>'; }).join("") + '<option value="__other">Інше (вписати)…</option></select><input id="d-vac" placeholder="Побажання кандидата" hidden style="margin-top:6px"></div>' : "") +
       '<div class="fld"><label>Статус</label><select id="d-status">' + opts(LS, l.status) + '</select></div>' +
-      (S.own ? '<div class="fld"><label>Менеджер</label><select id="d-mgr"><option value="">— не призначено —</option>' + S.staff.map(function(p){ return '<option value="' + p.id + '"' + (l.manager_id === p.id ? " selected" : "") + '>' + E(pname(p)) + (p.role === "admin" ? " (власник)" : "") + '</option>'; }).join("") + '</select></div>' : "") +
+      (S.own ? '<div class="fld"><label>Менеджери в роботі <span style="font-weight:500">(можна кілька; перший — основний)</span></label><div class="bar mgr-pick" style="margin:0">' + S.staff.map(function(p){ var on = hasMgr(l, p.id);
+        return '<label class="chip" style="display:inline-flex;gap:6px;align-items:center"><input type="checkbox" name="d-mgr" value="' + p.id + '"' + (on ? " checked" : "") + '>' + avatar(pname(p)) + E(pname(p)) + (p.role === "admin" ? " · власник" : "") + '</label>'; }).join("") + '</div></div>' : "") +
       '<p class="note" id="d-bonus-note"></p>' +
-      '<div class="g2"><div class="fld"><label>Роботодавець / об’єкт</label><input id="d-emp" value="' + E(l.employer || "") + '"></div>' +
+      '<div class="g2"><div class="fld"><label>Роботодавець</label><select id="d-empsel"><option value="">— не обрано —</option>' + (function(){ var cs = companies(); if (l.employer && cs.indexOf(l.employer) < 0) cs.unshift(l.employer);
+          return cs.map(function(c){ return '<option' + (c === l.employer ? " selected" : "") + '>' + E(c) + '</option>'; }).join(""); })() + '<option value="__other">Інший (вписати)…</option></select><input id="d-emp" placeholder="Назва роботодавця" hidden style="margin-top:6px"></div>' +
       '<div class="fld"><label>Дата виходу на роботу</label><input id="d-start" type="date" value="' + E(l.start_date || "") + '"></div></div>' +
       '<div class="fld"><label>Хто запросив (реферальний код)</label><div class="g2"><input id="d-ref" placeholder="напр. ok7m2p" value="' + E(l.referrer ? l.referrer.ref_code || "" : "") + '"><span class="note" id="d-ref-name" style="align-self:center">' + (l.referrer ? E(pname(l.referrer)) : (l.ref_raw ? "з посилання: " + E(l.ref_raw) + " (не знайдено)" : "")) + '</span></div></div>' +
       '<div class="fld"><label>Нотатки менеджера</label><textarea id="d-note">' + E(l.manager_note || "") + '</textarea></div>' +
@@ -414,6 +485,13 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       '</div><div class="df">' + (!isNew && S.me.role === "admin" ? '<button class="btn ghost" id="d-del" style="margin-right:auto;color:var(--red)">Видалити</button>' : "") +
       '<button class="btn ghost" data-x>Скасувати</button><button class="btn" id="d-save">Зберегти</button></div>');
     drawer.querySelectorAll("[data-x]").forEach(function(b){ b.onclick = closeDrawer; });
+    var es = document.getElementById("d-empsel"), ei = document.getElementById("d-emp");
+    es.onchange = function(){ ei.hidden = es.value !== "__other"; if (!ei.hidden) ei.focus(); };
+    var vs = document.getElementById("d-vacsel");
+    if (vs) vs.onchange = function(){ var vi = document.getElementById("d-vac"); vi.hidden = vs.value !== "__other";
+      var v = S.vac.filter(function(x){ return String(x.id) === vs.value; })[0];
+      if (v && v.company) { var opt = [].filter.call(es.options, function(o){ return o.value === v.company || o.text === v.company; })[0];
+        if (!opt) { opt = new Option(v.company, v.company); es.add(opt, 1); } es.value = opt.value; ei.hidden = true; } };
     var stSel = document.getElementById("d-status"), bn = document.getElementById("d-bonus-note");
     function bonusNote(){
       if (stSel.value !== "paid" || l.status === "paid") { bn.textContent = ""; return; }
@@ -452,17 +530,28 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       document.getElementById("d-hist").innerHTML = ev.length ? ev.map(function(e){ return '<li>' + E(dt(e.created_at, true)) + ': ' + E(LSN[e.old_status] || e.old_status || "—") + ' → <b>' + E(LSN[e.new_status] || e.new_status) + '</b></li>'; }).join("") : "<li>Змін ще не було</li>";
     });
     document.getElementById("d-save").onclick = function(){
-      var patch = {status: stSel.value, employer: document.getElementById("d-emp").value.trim() || null, start_date: document.getElementById("d-start").value || null,
+      var empV = es.value === "__other" ? ei.value.trim() : es.value;
+      var patch = {status: stSel.value, employer: empV || null, start_date: document.getElementById("d-start").value || null,
         manager_note: document.getElementById("d-note").value.trim() || null, referrer_id: refId};
-      var dm = document.getElementById("d-mgr"); if (dm) patch.manager_id = dm.value || null;
+      if (S.own) { var ms = [].map.call(drawer.querySelectorAll('input[name="d-mgr"]:checked'), function(i){ return i.value; });
+        var prim = l.manager_id && ms.indexOf(l.manager_id) >= 0 ? l.manager_id : (ms[0] || null);
+        if (prim) ms = [prim].concat(ms.filter(function(x){ return x !== prim; }));
+        patch.managers = ms; patch.manager_id = prim; }
       var p;
       if (isNew) {
         patch.name = document.getElementById("d-name").value.trim(); patch.phone = document.getElementById("d-phone").value.trim();
-        patch.vacancy_title = document.getElementById("d-vac").value.trim() || null; patch.source = "додано вручну в CRM";
+        var vsel = document.getElementById("d-vacsel"), vv = S.vac.filter(function(x){ return String(x.id) === vsel.value; })[0];
+        if (vv) { patch.vacancy_id = String(vv.id); patch.vacancy_title = vv.title + (vv.company ? " (" + vv.company + ")" : ""); }
+        else patch.vacancy_title = document.getElementById("d-vac").value.trim() || null;
+        patch.source = "додано вручну в CRM";
         if (!patch.name || !patch.phone) { toast("Вкажіть ім’я й телефон"); return; }
         p = API.addLead(patch);
       } else p = API.saveLead(l.id, patch);
-      p.then(function(){ toast(patch.status === "paid" && l.status !== "paid" && refId ? "Збережено. Бонус нараховано." : "Збережено"); closeDrawer(); counts(); rLeads(); }).catch(fail);
+      p.then(function(){
+        var win = (patch.status === "working" || patch.status === "paid") && patch.status !== l.status;
+        if (win) confetti();
+        toast(patch.status === "paid" && l.status !== "paid" && refId ? "🎉 Збережено. Бонус нараховано!" : patch.status === "working" && l.status !== "working" ? "🎉 Ще один кандидат на роботі!" : isNew ? "✨ Кандидата додано" : "✅ Збережено");
+        closeDrawer(); counts(); rLeads(); }).catch(fail);
     };
     var del = document.getElementById("d-del");
     if (del) del.onclick = function(){ if (confirm("Видалити заявку " + l.name + "?")) API.deleteLead(l.id).then(function(){ closeDrawer(); counts(); rLeads(); }).catch(fail); };
@@ -616,7 +705,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   /* ================= Моє посилання ================= */
   function rMyLink(){
     API.leads().then(function(list){
-      var mine = list.filter(function(l){ return l.manager_id === S.me.id; });
+      var mine = list.filter(function(l){ return hasMgr(l, S.me.id); });
       var link = location.origin + "/?ref=" + (S.me.ref_code || "");
       var cnt = {}; mine.forEach(function(l){ cnt[l.status] = (cnt[l.status] || 0) + 1; });
       var text = "Робота за кордоном з житлом і офіційним договором — вакансії тут: " + link;
@@ -656,7 +745,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       // менеджери
       var now = new Date();
       var rows = S.staff.map(function(p){
-        var m = L.filter(function(l){ return l.manager_id === p.id; });
+        var m = L.filter(function(l){ return hasMgr(l, p.id); });
         var od = tasks.filter(function(t){ return t.assignee_id === p.id && !t.done_at && t.due_at && new Date(t.due_at) < now; }).length;
         return {p: p, n: m.length, act: m.filter(function(l){ return ["new", "contacted", "matched"].indexOf(l.status) >= 0; }).length,
           dep: m.filter(reached).length, w: m.filter(workedF).length, paid: m.filter(function(l){ return l.status === "paid"; }).length,
@@ -665,7 +754,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
           fast: (function(){ var a = m.map(respMs).filter(function(x){ return x !== null; }); return a.length ? Math.round(a.filter(function(x){ return x <= 15 * 6e4; }).length / a.length * 100) + "%" : "—"; })(),
           waiting: m.filter(function(l){ return l.status === "new" && Date.now() - waitStart(l) > 15 * 6e4; }).length};
       }).sort(function(a, b){ return b.w - a.w || b.n - a.n; });
-      var un = L.filter(function(l){ return !l.manager_id; }).length;
+      var un = L.filter(function(l){ return !mgrsOf(l).length; }).length;
       var bonusAcc = ledger.filter(function(g){ return g.kind === "bonus" && new Date(g.created_at).getTime() >= from; }).reduce(function(a, g){ return a + g.amount; }, 0);
       var bonusPaid = -ledger.filter(function(g){ return g.kind === "payout" && new Date(g.created_at).getTime() >= from; }).reduce(function(a, g){ return a + g.amount; }, 0);
       var bonusDue = ledger.reduce(function(a, g){ return a + g.amount; }, 0);
