@@ -237,7 +237,6 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     });
   }
   /* ---------- Анкета менеджера ---------- */
-  var M_LANG = ["Українська", "Російська", "Польська", "Англійська", "Чеська / словацька"];
   function managerForm(first){
     var me = S.me, f = me.manager_form || {};
     var chk = function(name, list, sel){ return '<div class="bar" style="margin:0">' + list.map(function(x){ var on = (sel || []).indexOf(x) >= 0;
@@ -251,7 +250,6 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       '<div class="fld"><label>Телефон *</label><input id="m-phone" type="tel" placeholder="+380 …" value="' + E(me.phone || "") + '"></div></div>' +
       '<div class="g2"><div class="fld"><label>E-mail</label><input id="m-email" type="email" value="' + E(me.email || "") + '"></div>' +
       '<div class="fld"><label>Місто, область *</label><input id="m-city" value="' + E(me.city || "") + '"></div></div>' +
-      '<div class="fld"><label>Якими мовами спілкуєтеся</label>' + chk("m-lang", M_LANG, f.languages) + '</div>' +
       '<label style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="m-ok1"' + (me.consent_at ? " checked" : "") + '> <span>Погоджуюся на обробку моїх персональних даних *</span></label>' +
       '<label style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="m-ok2"' + (f.nda ? " checked" : "") + '> <span>Зобов’язуюся не передавати контакти кандидатів і дані з CRM третім особам та використовувати їх лише для роботи з «Вдало» *</span></label>' +
       '<div style="background:#eef8f1;border:1px solid #cbe9d5;border-radius:12px;padding:12px 14px;color:#21452d"><b>🔒 Ваші дані захищені.</b> Анкету бачать лише власники «Вдало». Дані передаються зашифровано й зберігаються в захищеній базі в ЄС, ми не передаємо їх третім особам.</div>' +
@@ -264,7 +262,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       if (!document.getElementById("m-ok1").checked || !document.getElementById("m-ok2").checked) { err.textContent = "Потрібні обидві згоди."; return; }
       var now = new Date().toISOString();
       var patch = {full_name: v("m-name"), phone: v("m-phone"), email: v("m-email") || null, city: v("m-city"),
-        manager_form: {languages: many("m-lang"), nda: true, nda_at: f.nda_at || now},
+        manager_form: {nda: true, nda_at: f.nda_at || now},
         consent_at: me.consent_at || now, onboarded_at: me.onboarded_at || now};
       API.saveMe(patch).then(function(){ Object.assign(S.me, patch); toast("Анкету збережено"); if (first) location.reload(); else { document.getElementById("tabs").hidden = false; render(); } }).catch(fail);
     };
@@ -272,7 +270,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   function anketaHtml(p){
     var f = p.manager_form || {};
     var rows = [["ПІБ", p.full_name], ["Телефон", p.phone], ["E-mail", p.email], ["Місто", p.city], ["Звідки дізнався", p.role === "user" ? p.heard_from : ""],
-      ["Мови", (f.languages || []).join(", ")], ["Анкета заповнена", p.onboarded_at ? dt(p.onboarded_at, true) : "ні"]];
+ ["Анкета заповнена", p.onboarded_at ? dt(p.onboarded_at, true) : "ні"]];
     return '<b>Анкета</b><dl class="kv">' + rows.filter(function(r){ return r[1]; }).map(function(r){ return '<dt>' + E(r[0]) + '</dt><dd>' + E(r[1]) + '</dd>'; }).join("") + '</dl>';
   }
   function tabsAllowed(){ return S.own ? ["leads", "tasks", "analytics", "employers", "people", "payouts", "mylink", "guide", "settings"] : ["leads", "tasks", "mylink", "guide"]; }
