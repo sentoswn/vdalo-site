@@ -155,6 +155,30 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   function toast(t){ var el = document.getElementById("toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(function(){ el.classList.remove("show"); }, 2200); }
   function dt(d, time){ if (!d) return ""; var x = new Date(d); return x.toLocaleDateString("uk-UA", {day: "2-digit", month: "2-digit", year: "2-digit"}) + (time ? " " + x.toLocaleTimeString("uk-UA", {hour: "2-digit", minute: "2-digit"}) : ""); }
   function pname(p){ if (!p) return ""; return p.full_name || [p.first_name, p.last_name].filter(Boolean).join(" ") || (p.tg_username ? "@" + p.tg_username : "—"); }
+  /* Канали: безкоштовні (менеджер, соцмережі, рекомендації, SEO), реклама, прямий захід */
+  var CH = {
+    manager: ["Посилання менеджера", "#e2f5e9", "#146c34", "free"],
+    social: ["Соцмережі / безкоштовні канали", "#e2f5e9", "#146c34", "free"],
+    referral: ["Сарафанне радіо («Приведи друга»)", "#efe5ff", "#5b2bb5", "free"],
+    seo: ["Пошук Google (SEO)", "#e5edff", "#1f4fd1", "free"],
+    paid: ["Реклама", "#fff2d6", "#8a5a00", "paid"],
+    direct: ["Прямий захід / знайшли самі", "#eef1f5", "#475467", "other"],
+    other: ["Інші сайти", "#eef1f5", "#475467", "other"],
+    manual: ["Додано вручну (дзвінок)", "#eef1f5", "#475467", "other"]
+  };
+  function chOf(l){
+    if (l.traffic && CH[l.traffic]) return l.traffic;
+    if (l.referrer_id) return "referral";
+    var src = l.source || "";
+    if (/вручну/.test(src)) return "manual";
+    if (l.manager_id && l.ref_raw) return "manager";
+    if (/google ads|facebook\/instagram|cpc|paid/i.test(src)) return "paid";
+    if (/перехід з .*(google|bing|yahoo|duckduckgo)/i.test(src)) return "seo";
+    if (/перехід з .*(t\.me|facebook|instagram|tiktok|viber|olx)/i.test(src) || /source=/.test(src)) return "social";
+    if (/перехід з/.test(src)) return "other";
+    return "direct";
+  }
+  function chBadge(l){ var c = CH[chOf(l)]; return '<span class="st" style="background:' + c[1] + ';color:' + c[2] + '">' + E(c[0]) + '</span>'; }
   function waitStart(l){ return Math.max(new Date(l.created_at).getTime(), l.assigned_at ? new Date(l.assigned_at).getTime() : 0); }
   function mins(ms){ var m = Math.max(0, Math.round(ms / 6e4)); if (m < 60) return m + " хв"; var h = Math.floor(m / 60); if (h < 24) return h + " год " + (m % 60) + " хв"; return Math.floor(h / 24) + " д " + (h % 24) + " год"; }
   function respMs(l){ return l.first_contact_at ? new Date(l.first_contact_at).getTime() - waitStart(l) : null; }
@@ -326,7 +350,11 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       var mgrSel = S.own ? '<select id="mgr" style="padding:7px 10px;border:1px solid var(--line);border-radius:999px;font-weight:600;background:var(--surface)">' +
         '<option value="all">Усі менеджери</option><option value="none"' + (S.mgr === "none" ? " selected" : "") + '>Без менеджера (' + list.filter(function(l){ return !l.manager_id; }).length + ')</option>' +
         S.staff.map(function(p){ return '<option value="' + p.id + '"' + (S.mgr === p.id ? " selected" : "") + '>' + E(pname(p)) + ' (' + list.filter(function(l){ return l.manager_id === p.id; }).length + ')</option>'; }).join("") + '</select>' : "";
+      var chSel = '<select id="chf" style="padding:7px 10px;border:1px solid var(--line);border-radius:999px;font-weight:600;background:var(--surface)">' +
+        '<option value="all">Усі канали</option><option value="free"' + (S.ch === "free" ? " selected" : "") + '>Усі безкоштовні</option>' +
+        Object.keys(CH).map(function(k){ return '<option value="' + k + '"' + (S.ch === k ? " selected" : "") + '>' + E(CH[k][0]) + ' (' + list.filter(function(l){ return chOf(l) === k; }).length + ')</option>'; }).join("") + '</select>';
       var rows = list.filter(function(l){
+        if (S.ch && S.ch !== "all" && (S.ch === "free" ? CH[chOf(l)][3] !== "free" : chOf(l) !== S.ch)) return false;
         if (S.own && S.mgr === "none" && l.manager_id) return false;
         if (S.own && S.mgr !== "all" && S.mgr !== "none" && l.manager_id !== S.mgr) return false;
         if (S.filter === "active" && (l.status === "rejected" || l.status === "paid")) return false;
@@ -336,16 +364,17 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       });
       app.innerHTML = demoBar() +
         '<div class="bar"><input type="search" id="q" placeholder="Пошук: ім’я, телефон, вакансія, роботодавець…" value="' + E(S.q) + '"><button class="btn" id="add">+ Нова заявка</button></div>' +
-        '<div class="bar">' + mgrSel + chips + '</div>' +
-        '<div class="card"><table class="tbl"><thead><tr><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Від кого</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th></tr></thead><tbody>' +
+        '<div class="bar">' + mgrSel + chSel + chips + '</div>' +
+        '<div class="card"><table class="tbl"><thead><tr><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Канал</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(l){
           return '<tr class="row" data-id="' + l.id + '"><td class="hide-m">' + E(dt(l.created_at, true)) + '</td>' +
             '<td><b>' + E(l.name) + '</b><small>' + E(l.phone) + (l.who ? " · " + E(l.who) : "") + '</small></td>' +
             '<td class="hide-m">' + E(l.vacancy_title || "Будь-яка") + (l.employer ? '<small>' + E(l.employer) + '</small>' : "") + '</td>' +
-            '<td class="hide-m">' + (l.referrer ? E(pname(l.referrer)) : '<span class="note">' + E(l.ref_raw ? "ref: " + l.ref_raw : (l.source || "—")) + '</span>') + '</td>' +
+            '<td class="hide-m">' + chBadge(l) + (l.referrer ? '<small>від ' + E(pname(l.referrer)) + '</small>' : "") + '</td>' +
             (S.own ? '<td class="hide-m">' + (l.manager_id ? E(staffName(l.manager_id)) : '<span class="st st-new">Не призначено</span>') + '</td>' : '') +
             '<td><span class="st st-' + l.status + '">' + E(LSN[l.status] || l.status) + '</span>' + waitBadge(l) + '</td></tr>';
         }).join("") : '<tr><td colspan="6" class="empty">' + (S.own ? "Нічого не знайдено" : "Поки немає кандидатів. Діліться своїм посиланням (вкладка «Моє посилання») — кандидати з нього потраплять сюди.") + '</td></tr>') + '</tbody></table></div>';
+      var cf = document.getElementById("chf"); if (cf) cf.onchange = function(){ S.ch = cf.value; rLeads(); };
       var ms = document.getElementById("mgr"); if (ms) ms.onchange = function(){ S.mgr = ms.value; rLeads(); };
       var qi = document.getElementById("q");
       qi.oninput = function(){ S.q = qi.value; var pos = qi.selectionStart; rLeads(); };
@@ -368,7 +397,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       '<dt>Вакансія</dt><dd>' + (l.vacancy_id ? '<a href="/vakansii/' + E(l.vacancy_id) + '/" target="_blank">' + E(l.vacancy_title || l.vacancy_id) + '</a>' : "Будь-яка") + '</dd>' +
       '<dt>Хто їде</dt><dd>' + E(l.who || "—") + '</dd><dt>Коли</dt><dd>' + E(l.when_go || "—") + '</dd>' +
       '<dt>Зв’язок</dt><dd>' + E([l.contact_mode, l.channel].filter(Boolean).join(" · ") || "—") + '</dd>' +
-      '<dt>Коментар</dt><dd>' + E(l.note || "—") + '</dd><dt>Джерело</dt><dd>' + E(l.source || "—") + (l.lang && l.lang !== "uk" ? " · мова " + E(l.lang) : "") + '</dd></dl>';
+      '<dt>Коментар</dt><dd>' + E(l.note || "—") + '</dd><dt>Канал</dt><dd>' + chBadge(l) + '</dd><dt>Джерело</dt><dd>' + E(l.source || "—") + (l.lang && l.lang !== "uk" ? " · мова " + E(l.lang) : "") + '</dd></dl>';
     openDrawer('<div class="dh"><h2>' + (isNew ? "Нова заявка" : E(l.name)) + '</h2><button class="btn ghost sm" data-x>✕</button></div><div class="db">' + info +
       (isNew ? '<div class="g2"><div class="fld"><label>Ім’я</label><input id="d-name"></div><div class="fld"><label>Телефон</label><input id="d-phone" type="tel"></div></div>' +
         '<div class="fld"><label>Вакансія / побажання</label><input id="d-vac"></div>' : "") +
@@ -576,14 +605,9 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       var workedF = function(l){ return l.status === "working" || l.status === "paid"; };
       var pct = function(a, b){ return b ? Math.round(a / b * 100) + "%" : "—"; };
       var nW = L.filter(workedF).length;
-      var src = {"Посилання менеджерів": 0, "Рекомендації («Приведи друга»)": 0, "Сайт і реклама": 0, "Додано вручну": 0};
-      L.forEach(function(l){
-        if (l.referrer_id) src["Рекомендації («Приведи друга»)"]++;
-        else if (/вручну/.test(l.source || "")) src["Додано вручну"]++;
-        else if (l.manager_id && l.ref_raw) src["Посилання менеджерів"]++;
-        else src["Сайт і реклама"]++;
-      });
-      var maxSrc = Math.max.apply(null, Object.keys(src).map(function(k){ return src[k]; }).concat([1]));
+      var chStat = Object.keys(CH).map(function(k){ var a = L.filter(function(l){ return chOf(l) === k; }); return {k: k, n: a.length, w: a.filter(workedF).length}; }).filter(function(x){ return x.n; }).sort(function(a, b){ return b.n - a.n; });
+      var maxSrc = Math.max.apply(null, chStat.map(function(x){ return x.n; }).concat([1]));
+      var freeN = L.filter(function(l){ return CH[chOf(l)][3] === "free"; }).length, paidN = L.filter(function(l){ return chOf(l) === "paid"; }).length;
       var cnt = {}; L.forEach(function(l){ cnt[l.status] = (cnt[l.status] || 0) + 1; });
       // по днях (останні 30)
       var byDay = []; for (var i = 29; i >= 0; i--) { var d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - i); byDay.push({d: d, n: 0}); }
@@ -620,7 +644,9 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         (rows.length ? rows.map(function(x){ return '<tr><td><b>' + E(pname(x.p)) + '</b><small>' + E(ROLES[x.p.role]) + (x.p.tg_username ? " · @" + E(x.p.tg_username) : "") + '</small></td><td>' + x.n + '</td><td>' + x.act + '</td><td>' + x.dep + '</td><td>' + x.w + '</td><td>' + x.paid + '</td><td>' + x.rej + '</td><td><b>' + pct(x.w, x.n) + '</b></td><td>' + (x.med === null ? "—" : '<span style="color:' + (x.med > 15 * 6e4 ? "var(--red)" : "var(--green)") + ';font-weight:700">' + E(mins(x.med)) + '</span>') + '</td><td>' + x.fast + '</td><td>' + (x.waiting ? '<span class="st st-rejected">' + x.waiting + '</span>' : "0") + '</td><td>' + (x.od ? '<span class="st st-rejected">' + x.od + '</span>' : "0") + '</td></tr>'; }).join("") : '<tr><td colspan="12" class="empty">Менеджерів ще немає</td></tr>') +
         '</tbody></table></div></div>' +
         '<div class="grid2"><div class="card pad"><h3>Воронка</h3><div class="bars">' + LS.map(function(x){ var n = cnt[x[0]] || 0; return '<div class="b"><span>' + E(x[1]) + '</span><div class="t"><i style="width:' + (L.length ? Math.round(n / L.length * 100) : 0) + '%"></i></div><b>' + n + '</b></div>'; }).join("") + '</div></div>' +
-        '<div class="card pad"><h3>Звідки кандидати</h3><div class="bars">' + Object.keys(src).map(function(k){ return '<div class="b"><span>' + E(k) + '</span><div class="t"><i style="width:' + Math.round(src[k] / maxSrc * 100) + '%"></i></div><b>' + src[k] + '</b></div>'; }).join("") + '</div></div>' +
+        '<div class="card pad"><h3>Звідки кандидати</h3><p class="note" style="margin:0">Безкоштовні канали: <b>' + freeN + '</b> · реклама: <b>' + paidN + '</b> · інше: <b>' + (L.length - freeN - paidN) + '</b></p><div class="bars">' +
+          (chStat.length ? chStat.map(function(x){ var c = CH[x.k]; return '<div class="b"><span><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:' + c[2] + ';margin-right:6px"></i>' + E(c[0]) + '</span><div class="t"><i style="width:' + Math.round(x.n / maxSrc * 100) + '%;background:' + c[2] + '"></i></div><b title="вийшли на роботу: ' + x.w + '">' + x.n + '</b></div>'; }).join("") : '<p class="note">Немає даних</p>') +
+          '</div><p class="note" style="margin:0">Вийшли на роботу за каналами: ' + chStat.map(function(x){ return E(CH[x.k][0]) + " — " + x.w + " (" + pct(x.w, x.n) + ")"; }).join(" · ") + '</p></div>' +
         '<div class="card pad"><h3>Заявки за останні 30 днів</h3><div class="cols">' + byDay.map(function(b){ return '<i style="height:' + Math.round(b.n / maxDay * 100) + '%" data-t="' + E(dt(b.d)) + ': ' + b.n + '"></i>'; }).join("") + '</div><p class="note">Наведіть на стовпчик, щоб побачити дату й кількість.</p></div>' +
         '<div class="card pad"><h3>Бонуси «Приведи друга»</h3><div class="stats" style="margin:0"><div class="card stat"><span>Нараховано за період</span><b>' + E(M(bonusAcc)) + '</b></div><div class="card stat"><span>Виплачено за період</span><b>' + E(M(bonusPaid)) + '</b></div><div class="card stat hl"><span>Борг до виплати зараз</span><b>' + E(M(bonusDue)) + '</b></div></div></div></div>';
       document.querySelectorAll("[data-per]").forEach(function(b){ b.onclick = function(){ var v = b.getAttribute("data-per"); S.period = v === "all" ? "all" : +v; rAnalytics(); }; });

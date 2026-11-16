@@ -27,10 +27,6 @@ jobs:
           if [ -z "$SUPABASE_ACCESS_TOKEN" ] || [ -z "$REF" ]; then
             echo "Supabase ще не підключено — пропускаю."; echo "skip=1" >> "$GITHUB_OUTPUT"
           fi
-      - uses: supabase/setup-cli@v1
-        if: steps.chk.outputs.skip != '1'
-        with:
-          version: latest
       - name: Database schema
         if: steps.chk.outputs.skip != '1'
         env:
@@ -42,6 +38,19 @@ jobs:
           else
             echo "SUPABASE_DB_URL не задано — схему виконайте вручну в SQL Editor."
           fi
+      - uses: supabase/setup-cli@v1
+        id: cli1
+        if: steps.chk.outputs.skip != '1'
+        continue-on-error: true
+        with:
+          version: latest
+      - name: Wait before retry
+        if: steps.chk.outputs.skip != '1' && steps.cli1.outcome == 'failure'
+        run: sleep 45
+      - uses: supabase/setup-cli@v1
+        if: steps.chk.outputs.skip != '1' && steps.cli1.outcome == 'failure'
+        with:
+          version: latest
       - name: Function secrets
         if: steps.chk.outputs.skip != '1'
         env:

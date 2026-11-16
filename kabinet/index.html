@@ -1222,6 +1222,23 @@ window.Vdalo = window.Vdalo || (function(){
   /* ?ref= — код із кабінету (літери й цифри) або номер телефону друга */
   function refNorm(v){ v = String(v||"").trim(); return /^[a-z0-9]{4,12}$/i.test(v) && /[a-z]/i.test(v) ? v.toLowerCase() : v.replace(/\D/g,""); }
   window.VDALO_REF = function(){ return REFBY; };
+  /* Канал, з якого людина вперше прийшла (пам'ятаємо 30 днів): paid — реклама, seo — пошук, social — соцмережі/безкоштовні канали, other — інші сайти, direct — прямий захід */
+  var TRAFFIC = "direct";
+  try {
+    var tq = new URLSearchParams(location.search), tm = (tq.get("utm_medium") || "").toLowerCase(), tr = "";
+    try { tr = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, "") : ""; } catch(e){}
+    if (tr === location.hostname.replace(/^www\./, "")) tr = "";
+    var tNow = "";
+    if (tq.get("gclid") || tq.get("fbclid") || tq.get("ttclid") || tq.get("wbraid") || tq.get("gbraid") || /cpc|ppc|paid|ads|cpm/.test(tm)) tNow = "paid";
+    else if (tq.get("utm_source")) tNow = "social";
+    else if (/(^|\.)(google|bing|yahoo|duckduckgo|ecosia|yandex|ukr\.net|meta\.ua)\./.test(tr + ".")) tNow = "seo";
+    else if (/(t\.me|telegram|facebook|fb\.|instagram|tiktok|viber|olx|youtube|youtu\.be|linkedin|twitter|x\.com|threads)/.test(tr)) tNow = "social";
+    else if (tr) tNow = "other";
+    var tSaved = JSON.parse(localStorage.getItem("vdalo_traffic") || "null");
+    if (tNow && !(tSaved && Date.now() - tSaved.t < 30*864e5 && tSaved.c !== "direct")) localStorage.setItem("vdalo_traffic", JSON.stringify({c: tNow, t: Date.now()}));
+    tSaved = JSON.parse(localStorage.getItem("vdalo_traffic") || "null");
+    TRAFFIC = tSaved && Date.now() - tSaved.t < 30*864e5 ? tSaved.c : (tNow || "direct");
+  } catch(e) {}
   try {
     var sp = new URLSearchParams(location.search), parts = [];
     ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(k){ if (sp.get(k)) parts.push(k.replace("utm_","")+"="+sp.get(k)); });
@@ -1618,7 +1635,7 @@ window.Vdalo = window.Vdalo || (function(){
       } else fallback(true);
     }
     if (window.Vdalo) Vdalo.sb().then(function(sbc){ if (sbc) return sbc.from("leads").insert({name:name, phone:phone, vacancy_id:sel.value||null, vacancy_title:vacTitle||null,
-      who:segVal("who"), when_go:segVal("when"), contact_mode:mode, channel:channel||null, note:f.note.value.trim()||null, source:SOURCE||null, page:location.href, lang:LANG, ref_raw:REFBY||null}); }).catch(function(){});
+      who:segVal("who"), when_go:segVal("when"), contact_mode:mode, channel:channel||null, note:f.note.value.trim()||null, source:SOURCE||null, page:location.href, lang:LANG, ref_raw:REFBY||null, traffic:TRAFFIC}); }).catch(function(){});
     fetch(CONFIG.leadsUrl,{method:"POST", body:JSON.stringify(payload)})
       .then(function(r){ return r.json(); })
       .then(function(j){ if(!done){ done=true; clearTimeout(timer); finish(!!(j&&j.ok)); } })

@@ -88,6 +88,7 @@ create table if not exists public.leads (
   manager_id    uuid references public.profiles(id) on delete set null,
   bonus_paid    boolean not null default false
 );
+alter table public.leads add column if not exists traffic          text;         -- канал: manager, referral, social, seo, paid, direct, other, manual
 alter table public.leads add column if not exists assigned_at      timestamptz;  -- коли закріпили за менеджером
 alter table public.leads add column if not exists first_contact_at timestamptz;  -- коли вперше змінили статус із «Нова заявка»
 create index if not exists leads_status on public.leads(status);
@@ -175,6 +176,13 @@ begin
   if new.referrer_id is not null and exists (select 1 from public.profiles where id = new.referrer_id and role in ('manager','admin')) then
     if new.manager_id is null then new.manager_id := new.referrer_id; end if;
     new.referrer_id := null;
+    new.traffic := 'manager';
+  elsif new.referrer_id is not null then
+    new.traffic := 'referral';
+  elsif public.is_staff() and coalesce(new.traffic, '') = '' then
+    new.traffic := 'manual';
+  elsif coalesce(new.traffic, '') not in ('social','seo','paid','direct','other') then
+    new.traffic := 'direct';
   end if;
   new.first_contact_at := case when new.status <> 'new' then now() end;
   new.assigned_at := case when new.manager_id is not null then now() end;

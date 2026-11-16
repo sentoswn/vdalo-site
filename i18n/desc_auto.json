@@ -1,1 +1,585 @@
-{}
+{
+"(не вказано)": {
+"en": "(not specified)",
+"pl": "(nieokreślone)",
+"ru": "(не указано)"
+},
+"1 зміна; 10–12 годин на день.": {
+"en": "1 shift; 10-12 hours a day.",
+"pl": "1 zmiana; 10-12 godzin dziennie.",
+"ru": "1 смена; 10–12 часов в день."
+},
+"10 грошей брутто за кожен кілограм понад цільовий показник": {
+"en": "10 gross money for each kilogram over the target",
+"pl": "10 pieniędzy brutto za każdy kilogram powyżej wartości docelowej",
+"ru": "10 денег брутто за каждый килограмм сверх целевого показателя"
+},
+"15 хвилин організованим транспортом від заводу": {
+"en": "15 minutes by organized transport from the plant",
+"pl": "15 minut zorganizowanym transportem z zakładu",
+"ru": "15 минут организованным транспортом от завода"
+},
+"155 PLN Плата за період роботи меншого від мінімального: 500 PLN": {
+"en": "155 PLN Fee for a period of work less than the minimum: 500 PLN",
+"pl": "155 zł Opłata za okres pracy krótszy niż minimalny: 500 zł",
+"ru": "155 PLN Плата за период работы меньше минимального: 500 PLN"
+},
+"2 дні — денна зміна; 2 дні — нічна зміна; 4 дні — вихідні.": {
+"en": "2 days — day shift; 2 days — night shift; 4 days are weekends.",
+"pl": "2 dni — zmiana dzienna; 2 dni — zmiana nocna; 4 dni to weekendy.",
+"ru": "2 дня – дневная смена; 2 дня – ночная смена; 4 дня – выходные."
+},
+"2 зміни по 8–12 годин; робота 5 днів на тиждень; можливі суботи та неділі;…": {
+"en": "2 зміни по 8–12 годин; work 5 days a week; possible Saturdays and Sundays;…",
+"pl": "2 zmiany po 8–12 godzin; praca 5 dni w tygodniu; możliwe soboty i niedziele;…",
+"ru": "2 смены по 8–12 часов; работа 5 дней в неделю; возможные субботы и воскресенья;"
+},
+"25 днів оплачуваної відпустки на рік; MyDay: 1 день після першого року роботи, 2 дні на 2–3-й рік, 3 дні від 4-го року;…": {
+"en": "25 days of paid vacation per year; MyDay: 1 day after the first year of work, 2 days for the 2nd-3rd year, 3 days from the 4th year;…",
+"pl": "25 dni płatnego urlopu rocznie; MyDay: 1 dzień po pierwszym roku pracy, 2 dni na 2-3 roku, 3 dni od 4 roku pracy;…",
+"ru": "25 дней оплачиваемого отпуска в год; MyDay: 1 день после первого года работы, 2 дня на 2–3-й год, 3 дня от 4-го года;"
+},
+"4–5 днів на тиждень. По 8 годин на день. 4 дні роботи — 1 вихідний; після…": {
+"en": "4-5 days a week. 8 hours a day. 4 working days — 1 day off; after…",
+"pl": "4-5 dni w tygodniu. 8 godzin dziennie. 4 dni robocze — 1 dzień wolny; Po…",
+"ru": "4–5 дней в неделю. По 8 часов в день. 4 дня работы - 1 выходной; после…"
+},
+"5 днів на тиждень по 12 годин на день денні та нічні зміни можлива робота по…": {
+"en": "5 days a week for 12 hours a day, day and night shifts, possible work on…",
+"pl": "Praca 5 dni w tygodniu po 12 godzin dziennie, zmiany dzienne i nocne, możliwa praca na…",
+"ru": "5 дней в неделю по 12 часов в день дневные и ночные смены возможна работа по…"
+},
+"5 робочих днів на тиждень. Зміни по 10 годин, за потреби — 11 годин, якщо склад…": {
+"en": "5 working days per week. Shifts of 10 hours, if necessary - 11 hours, if the composition...",
+"pl": "5 dni roboczych w tygodniu. W razie potrzeby zmiany 10-godzinne - 11-godzinne, jeśli skład...",
+"ru": "5 рабочих дней в неделю. Изменения по 10 часов, при необходимости — 11 часов, если состав…"
+},
+"5 робочих днів на тиждень; 2 вихідні; стандартна зміна — 8 годин; 7,5 годин…": {
+"en": "5 working days per week; 2 days off; standard shift — 8 hours; 7.5 hours…",
+"pl": "5 dni roboczych w tygodniu; 2 dni wolne; zmiana standardowa — 8 godzin; 7,5 godziny…",
+"ru": "5 рабочих дней в неделю; 2 выходных; стандартное изменение - 8 часов; 7,5 часов…"
+},
+"8 годин; 3 зміни; зміна графіку щотижня.": {
+"en": "8 hours; 3 shifts; schedule changes every week.",
+"pl": "8 godzin; 3 zmiany; zmiany harmonogramu co tydzień.",
+"ru": "8 часов; 3 смены; изменение графика еженедельно."
+},
+"I зміна: 05:30–13:30 II зміна: 13:30–21:30 III зміна: 21:30–05:30 8 годин на…": {
+"en": "I shift: 05:30–13:30 II shift: 13:30–21:30 III shift: 21:30–05:30 8 hours per…",
+"pl": "I zmiana: 05:30–13:30 II zmiana: 13:30–21:30 III zmiana: 21:30–05:30 8 godzin dziennie…",
+"ru": "I смена: 05:30–13:30 II смена: 13:30–21:30 III смена: 21:30–05:30 8 часов в…"
+},
+"I зміна: 06:00–14:00 II зміна: 12:00–20:00 Робочі дні: понеділок–п’ятниця, по…": {
+"en": "I shift: 06:00–14:00 II shift: 12:00–20:00 Working days: Monday–Friday, on…",
+"pl": "I zmiana: 06:00–14:00 II zmiana: 12:00–20:00 Dni robocze: poniedziałek–piątek, w…",
+"ru": "I смена: 06:00–14:00 II смена: 12:00–20:00 Рабочие дни: понедельник–пятница, по…"
+},
+"PWZ, відпрацьований нагляд, польська мова на рівні B1": {
+"en": "PWZ, experienced supervision, Polish language at B1 level",
+"pl": "PWZ, doświadczona superwizja, język polski na poziomie B1",
+"ru": "PWZ, отработанный надзор, польский язык на уровне B1"
+},
+"Umowa zlecenie (тільки składka zdrowotna)": {
+"en": "Umowa zlecenie (only health insurance)",
+"pl": "Umowa Umowa (tylko ubezpieczenie zdrowotne)",
+"ru": "Umowa zlecenie (только składka zdrowotna)"
+},
+"umowa zlecenie (лише внесок на медичне…": {
+"en": "umowa zlecenie (only contribution to medical…",
+"pl": "umowa zlecenia (wyłącznie wkład w usługę medyczną…",
+"ru": "umowa zlecenie (только вклад в медицинское…"
+},
+"umowa zlecenie (тільки внесок на медичне…": {
+"en": "umowa zlecenie (only contribution to medical…",
+"pl": "umowa zlecenia (wyłącznie wkład w usługę medyczną…",
+"ru": "umowa zlecenie (только вклад в медицинское…"
+},
+"umowa zlecenie (тільки медичне страхування —…": {
+"en": "umowa zlecenie (only health insurance —…",
+"pl": "umowa zlecenie (tylko ubezpieczenie zdrowotne —…",
+"ru": "umowa zlecenie (только медицинское страхование —…"
+},
+"umowa zlecenie (тільки медичне страхування)": {
+"en": "umowa zlecenie (only health insurance)",
+"pl": "umowa zlecenie (tylko ubezpieczenie zdrowotne)",
+"ru": "umowa zlecenie (только медицинское страхование)"
+},
+"umowa zlecenie (тільки складка здоровотна)": {
+"en": "umowa zlecenie (only the fold is great)",
+"pl": "umowa zlecenia (super jest tylko zgięcie)",
+"ru": "umowa zlecenie (только здоровотная складка)"
+},
+"Є": {
+"en": "THERE ARE",
+"pl": "TAM SĄ",
+"ru": "Есть"
+},
+"Бажання працювати; Хороша фізична форма.": {
+"en": "Willingness to work; Good physical shape.",
+"pl": "Chęć do pracy; Dobra forma fizyczna.",
+"ru": "Желание работать; Хорошая физическая форма."
+},
+"Бажано, щоб кандидати мали хоча б мінімальні навички читання технічних креслень (хоча це не є обов’язковою вимогою) та володіли польською мовою.": {
+"en": "Candidates should have at least minimal technical drawing reading skills (although this is not a mandatory requirement) and be fluent in Polish.",
+"pl": "Kandydaci powinni posiadać co najmniej minimalną umiejętność czytania rysunku technicznego (choć nie jest to wymóg obowiązkowy) oraz biegle posługiwać się językiem polskim.",
+"ru": "Желательно, чтобы кандидаты имели хотя бы минимальные навыки чтения технических чертежей (хотя это не обязательно) и владели польским языком."
+},
+"Базове володіння польською мовою; уміння користуватися комп’ютером і смартфоном; знання латинських літер.": {
+"en": "Basic command of the Polish language; the ability to use a computer and a smartphone; knowledge of Latin letters.",
+"pl": "Podstawowa znajomość języka polskiego; umiejętność obsługi komputera i smartfona; znajomość liter łacińskich.",
+"ru": "Базовое владение польским языком; умение пользоваться компьютером и смартфоном; знание латинских букв."
+},
+"Базові комп’ютерні навички; Вміння користуватися ручними інструментами; Відповідальність, уважність, готовність до фізичної та змінної роботи.": {
+"en": "Basic computer skills; Ability to use hand tools; Responsibility, attentiveness, readiness for physical and shift work.",
+"pl": "Podstawowa umiejętność obsługi komputera; Umiejętność posługiwania się narzędziami ręcznymi; Odpowiedzialność, sumienność, gotowość do pracy fizycznej i zmianowej.",
+"ru": "Базовые компьютерные навыки; Умение пользоваться ручными инструментами; Ответственность, внимательность, готовность к физической и сменной работе."
+},
+"Безкоштовне проживання та транспорт.": {
+"en": "Free accommodation and transport.",
+"pl": "Darmowe zakwaterowanie i transport.",
+"ru": "Бесплатное проживание и транспорт."
+},
+"Безкоштовне харчування при відпрацюванні 8 годин.": {
+"en": "Free food when working 8 hours.",
+"pl": "Darmowe jedzenie przy pracy 8 godzin.",
+"ru": "Бесплатное питание при отработке 8 часов."
+},
+"Безкоштовне харчування та пара чашок гарячих напоїв протягом зміни": {
+"en": "Free food and a couple of hot drinks during the shift",
+"pl": "Darmowe jedzenie i kilka gorących napojów podczas zmiany",
+"ru": "Бесплатное питание и пара чашек горячих напитков в течение смены"
+},
+"Безкоштовний автобус До зупинки — пішки або громадський транспорт": {
+"en": "Free bus The bus stop can be reached on foot or by public transport",
+"pl": "Bezpłatny autobus Do przystanku autobusowego można dojść pieszo lub komunikacją miejską",
+"ru": "Бесплатный автобус До остановки — пешком или общественным транспортом"
+},
+"Безкоштовний транспорт від агентства. Актуальний розклад надає координатор. До зупинки…": {
+"en": "Free transport from the agency. The actual schedule is provided by the coordinator. Until the stop...",
+"pl": "Bezpłatny transport z agencji. Aktualny harmonogram zajęć podaje koordynator. Do zatrzymania...",
+"ru": "Бесплатный транспорт от агентства. Актуальное расписание предоставляет координатор. До остановки…"
+},
+"Безкоштовний транспорт з: Brzeg, Jelcz-Laskowice, Namysłów, Oława, Przeworno, Strzelin": {
+"en": "Free transport from: Brzeg, Jelcz-Laskowice, Namysłów, Oława, Przeworno, Strzelin",
+"pl": "Bezpłatny dowóz z: Brzegu, Jelcza-Laskowic, Namysłowa, Oławy, Przeworna, Strzelina",
+"ru": "Бесплатный транспорт из: Brzeg, Jelcz-Laskowice, Namysłów, Oława, Przeworno, Strzelin"
+},
+"Бонус за відвідуваність — до 500 злотих на місяць (2 злотих за кожну стандартну годину роботи)": {
+"en": "Attendance bonus — up to PLN 500 per month (PLN 2 for each standard hour of work)",
+"pl": "Premia za frekwencję — do 500 zł miesięcznie (2 zł za każdą standardową godzinę pracy)",
+"ru": "Бонус за посещаемость – до 500 злотых в месяц (2 злотых за каждый стандартный час работы)"
+},
+"Важливий хороший зір (можна працювати з коригувальними окулярами), оскільки люди будуть працювати з дрібними дротами, на яких потрібно читати написи.…": {
+"en": "Good eyesight is essential (corrective glasses can be used) as people will be working with small wires that need to be read.…",
+"pl": "Dobry wzrok jest niezbędny (można używać okularów korekcyjnych), ponieważ ludzie będą pracować z małymi drutami, które należy czytać.…",
+"ru": "Важно хорошее зрение (можно работать с корректирующими очками), поскольку люди будут работать с мелкими проводами, на которых нужно читать надписи."
+},
+"Виготовлення деталей, виробництво та монтаж розкішних меблів і елементів інтер’єру на яхтах.": {
+"en": "Production of details, production and installation of luxury furniture and interior elements on yachts.",
+"pl": "Produkcja detali, produkcja i montaż luksusowych mebli i elementów wyposażenia wnętrz na jachtach.",
+"ru": "Изготовление деталей, производство и монтаж роскошной мебели и элементов интерьера на яхтах."
+},
+"Виробник електронних компонентів: світлодіодні лампи, акумулятори, зарядні пристрої.": {
+"en": "Manufacturer of electronic components: LED lamps, batteries, chargers.",
+"pl": "Producent podzespołów elektronicznych: lamp LED, akumulatorów, ładowarek.",
+"ru": "Производитель электронных компонент: светодиодные лампы, аккумуляторы, зарядные устройства."
+},
+"Виробник металевих виробів для автомобільної та садівничої галузей.": {
+"en": "Manufacturer of metal products for the automotive and gardening industries.",
+"pl": "Producent wyrobów metalowych dla przemysłu motoryzacyjnego i ogrodniczego.",
+"ru": "Производитель металлических изделий для автомобильной и садоводческой отраслей."
+},
+"Виробник морозива та сорбетів за традиційними сімейними рецептами з 2004 року.": {
+"en": "Manufacturer of ice cream and sorbets based on traditional family recipes since 2004.",
+"pl": "Od 2004 roku producent lodów i sorbetów bazujących na tradycyjnych, rodzinnych recepturach.",
+"ru": "Производитель мороженого и сорбетов по традиционным семейным рецептам с 2004 года."
+},
+"Впевнене володіння навичками роботи з електроустановками. Досвід роботи електриком. Готовність працювати у змінному режимі. Уміння читати електричні…": {
+"en": "Confident mastery of skills in working with electrical installations. Experience as an electrician. Willingness to work in variable mode. Ability to read electrical…",
+"pl": "Pewne opanowanie umiejętności pracy przy instalacjach elektrycznych. Doświadczenie jako elektryk. Chęć pracy w trybie zmiennym. Umiejętność czytania elektryki…",
+"ru": "Уверенное владение навыками работы с электроустановками. Опыт работы электриком. Готовность работать в сменном режиме. Умение читать электрические…"
+},
+"Відповідальне ставлення до роботи Швидкий темп роботи Фізична витривалість Заборонено мати нарощені нігті, вії, пірсинг на обличчі, виходити у зміну…": {
+"en": "Responsible attitude to work Fast pace of work Physical endurance It is forbidden to have extended nails, eyelashes, piercings on the face, to go out in a shift...",
+"pl": "Odpowiedzialne podejście do pracy Szybkie tempo pracy Wytrzymałość fizyczna Zabrania się noszenia przedłużanych paznokci, rzęs, kolczyków na twarzy, wychodzenia na zmianę...",
+"ru": "Ответственное отношение к работе Быстрый темп работы Физическая выносливость Запрещено наращивать ногти, ресницы, пирсинг на лице, выходить в смену…"
+},
+"Відсутність протипоказань до фізичної праці Знання англійської мови не потрібне": {
+"en": "No contraindications to physical work Knowledge of the English language is not required",
+"pl": "Brak przeciwwskazań do pracy fizycznej. Znajomość języka angielskiego nie jest wymagana",
+"ru": "Отсутствие противопоказаний к физическому труду Знание английского языка не требуется"
+},
+"Відсутність протипоказань до фізичної праці Ріст від 160 см": {
+"en": "No contraindications to physical labor Height from 160 cm",
+"pl": "Brak przeciwwskazań do pracy fizycznej. Wzrost od 160 cm",
+"ru": "Отсутствие противопоказаний к физическому труду Рост от 160 см"
+},
+"Відсутність протипоказань до фізичної роботи стоячи Сумлінність і уважність Спритність і вміння працювати руками Вміння працювати в команді": {
+"en": "Absence of contraindications to standing physical work Conscientiousness and attentiveness Dexterity and ability to work with hands Ability to work in a team",
+"pl": "Brak przeciwwskazań do pracy fizycznej na stojąco Sumienność i uważność Zręczność i umiejętność pracy rękami Umiejętność pracy w zespole",
+"ru": "Отсутствие противопоказаний к физической работе стоя Добросовестность и внимательность Ловкость и умение работать руками Умение работать в команде"
+},
+"Готовність до позмінної роботи (часто 3 зміни) Вміння керувати навантажувачем (UDT – бажано) Базові знання ПК та сканерів Відповідальність і…": {
+"en": "Willingness to work shifts (often 3 shifts) Ability to operate a forklift (UDT - preferred) Basic knowledge of PCs and scanners Accountability and…",
+"pl": "Gotowość do pracy zmianowej (często 3 zmiany) Umiejętność obsługi wózka widłowego (UDT – preferowany) Podstawowa znajomość obsługi komputerów PC i skanerów Odpowiedzialność i…",
+"ru": "Готовность к посменной работе (часто 3 смены) Умение управлять погрузчиком (UDT – желательно) Базовые знания ПК и сканеров Ответственность и…"
+},
+"Готовність до позмінної роботи Хороший фізичний стан Ручні навички Знання польської мови на розмовному рівні": {
+"en": "Willingness to work in shifts Good physical condition Manual skills Knowledge of the Polish language at a conversational level",
+"pl": "Gotowość do pracy zmianowej Dobra kondycja fizyczna Zdolności manualne Znajomość języka polskiego na poziomie konwersacyjnym",
+"ru": "Готовность к посменной работе Хорошее физическое состояние Ручные навыки Знание польского языка на разговорном уровне"
+},
+"Готовність працювати позмінно. Бажання виконувати фізичну роботу. Уміння працювати в команді. Уважність, точність і відповідальність. Досвід роботи…": {
+"en": "Willingness to work in shifts. Willingness to do physical work. The ability to work in a team. Attention, accuracy and responsibility. Work experience...",
+"pl": "Chęć pracy w systemie zmianowym. Chęć do pracy fizycznej. Umiejętność pracy w zespole. Uwaga, dokładność i odpowiedzialność. Doświadczenie zawodowe...",
+"ru": "Готовность работать посменно. Желание выполнять физическую работу. Умение работать в команде. Внимательность, точность и ответственность. Опыт работы…"
+},
+"Громадський транспорт": {
+"en": "Public transport",
+"pl": "Transport publiczny",
+"ru": "Общественный транспорт"
+},
+"Громадський транспорт.": {
+"en": "Public transport.",
+"pl": "Transport publiczny.",
+"ru": "Общественный транспорт."
+},
+"Громадський транспорт. Агентство надає проїзний, вартість якого вираховується із…": {
+"en": "Public transport. The agency provides a travel card, the cost of which is deducted from…",
+"pl": "Transport publiczny. Agencja udostępnia kartę podróżną, której koszt jest odliczany od…",
+"ru": "Общественный транспорт. Агентство предоставляет проездной, стоимость которого рассчитывается из…"
+},
+"Двозмінний режим, 38,75 годин на тиждень.": {
+"en": "Two-shift mode, 38.75 hours per week.",
+"pl": "Praca dwuzmianowa, 38,75 godzin tygodniowo.",
+"ru": "Двухсменный режим, 38,75 часов в неделю."
+},
+"Для громадян України — umowa zlecenie (лише…": {
+"en": "For citizens of Ukraine — umowa zlecenie (only...",
+"pl": "Dla obywateli Ukrainy — umowa zlecenia (tylko...",
+"ru": "Для граждан Украины — umowa zlecenie (лишь…"
+},
+"Для монтажу:": {
+"en": "For installation:",
+"pl": "Do instalacji:",
+"ru": "Для монтажа:"
+},
+"Для працівників орендуються кімнати в хостелах, будинках та квартирах у Полковіце. Кімнати на 2–5 осіб. Є Wi-Fi,…": {
+"en": "Rooms are rented for employees in hostels, houses and apartments in Polkovice. Rooms for 2-5 people. There is Wi-Fi,…",
+"pl": "Pokoje wynajmowane są dla pracowników w hostelach, domach i apartamentach w Polkovicach. Pokoje dla 2-5 osób. Jest Wi-Fi,…",
+"ru": "Для работников арендуются комнаты в хостелах, домах и квартирах в Полковице. Комнаты на 2-5 человек. Есть Wi-Fi,…"
+},
+"До 300 злотих брутто (виробництво / понаднормові години)": {
+"en": "Up to PLN 300 gross (production / overtime hours)",
+"pl": "Do 300 zł brutto (produkcja/nadgodziny)",
+"ru": "До 300 злотых брутто (производство / сверхурочные часы)"
+},
+"До автобусної зупинки працівники добираються пішки або міським транспортом. Актуальний…": {
+"en": "Employees reach the bus stop on foot or by public transport. Actual…",
+"pl": "Pracownicy docierają do przystanku pieszo lub komunikacją miejską. Rzeczywisty…",
+"ru": "До автобусной остановки работники добираются пешком или городским транспортом. Актуальный…"
+},
+"Доплата до власного житла: +300 зл/місяць.": {
+"en": "Additional payment for own housing: +300 PLN/month.",
+"pl": "Dopłata za własne mieszkanie: +300 zł/miesiąc.",
+"ru": "Доплата за собственное жилье: +300 зл/месяц."
+},
+"Досвід роботи на автонавантажувачі Права UDT WJO I / WJO II": {
+"en": "Experience working on a forklift. Rights UDT WJO I / WJO II",
+"pl": "Doświadczenie w pracy na wózku widłowym. Prawa UDT WJO I / WJO II",
+"ru": "Опыт работы на автопогрузчике Права UDT WJO I / WJO II"
+},
+"Досвід слюсарних робіт Уміння користуватися ручними та електричними інструментами Навички монтажу, шліфування, фрезерування, свердління та різання…": {
+"en": "Locksmith experience Ability to use hand and power tools Installation, grinding, milling, drilling and cutting skills…",
+"pl": "Doświadczenie ślusarskie Umiejętność obsługi narzędzi ręcznych i elektrycznych Umiejętność montażu, szlifowania, frezowania, wiercenia i cięcia…",
+"ru": "Опыт слесарных работ Умение пользоваться ручными и электрическими инструментами Навыки монтажа, шлифования, фрезерования, сверления и резки."
+},
+"Доїзд організовує роботодавець. Вартість транспорту — 200 PLN на місяць. До автобусної…": {
+"en": "Travel is organized by the employer. The cost of transport is PLN 200 per month. To the bus station...",
+"pl": "Podróż organizuje pracodawca. Koszt transportu to 200 zł miesięcznie. Na dworzec autobusowy...",
+"ru": "Доезд организует работодатель. Стоимость транспорта – 200 PLN в месяц. В автобусную…"
+},
+"Дуже хороший зір (переважно без окулярів) Хороші мануальні навички Фізична витривалість Бажаний досвід роботи на заводі Обов’язкова флюорограма…": {
+"en": "Very good vision (preferably without glasses) Good manual skills Physical endurance Factory experience preferred Fluorogram required…",
+"pl": "Bardzo dobry wzrok (najlepiej bez okularów) Dobre zdolności manualne Wytrzymałość fizyczna Mile widziane doświadczenie fabryczne Wymagany fluorogram…",
+"ru": "Очень хорошее зрение (преимущественно без очков) Хорошие мануальные навыки Физическая выносливость Желаемый опыт работы на заводе Обязательная флюорограмма…"
+},
+"З Опочно забезпечується доїзд на роботу. Автобус відправляється за 1 годину 15 хвилин до…": {
+"en": "Commuting to work is provided from Opochno. The bus departs 1 hour 15 minutes before…",
+"pl": "Dojazd do pracy zapewniamy z Opoczna. Autobus odjeżdża 1 godzinę 15 minut przed…",
+"ru": "Опочно обеспечивается доезд на работу. Автобус отправляется за 1 час 15 минут до…"
+},
+"Зазвичай працівники працюють за 8-годинним графіком:": {
+"en": "Employees usually work on an 8-hour schedule:",
+"pl": "Pracownicy zazwyczaj pracują według 8-godzinnego harmonogramu:",
+"ru": "Обычно работники работают по 8-часовому графику:"
+},
+"Залежить від місця проживання До заводу можна дійти пішки (1,5 – 3 км)": {
+"en": "Depends on the place of residence You can walk to the plant (1.5 - 3 km)",
+"pl": "Zależy od miejsca zamieszkania Do zakładu można dojść pieszo (1,5 - 3 km)",
+"ru": "Зависит от места обитания До завода можно дойти пешком (1,5 – 3 км)"
+},
+"Залежно від місця проживання — пішки або громадським транспортом (за власний рахунок)": {
+"en": "Depending on the place of residence - on foot or by public transport (at your own expense)",
+"pl": "W zależności od miejsca zamieszkania - pieszo lub komunikacją miejską (na własny koszt)",
+"ru": "В зависимости от места жительства - пешком или общественным транспортом (за свой счет)"
+},
+"Зміни по 10 годин Перша зміна: 06:00–16:45 Друга зміна: 18:00–04:45": {
+"en": "10-hour shifts First shift: 06:00–16:45 Second shift: 18:00–04:45",
+"pl": "Zmiany 10-godzinne Pierwsza zmiana: 06:00–16:45 Druga zmiana: 18:00–04:45",
+"ru": "Изменения по 10 часов Первое изменение: 06:00–16:45 Второе изменение: 18:00–04:45"
+},
+"Знання комп’ютера Для окремих відділів — польська мова Для транспорту — UDT 1 або 2 + польська": {
+"en": "Computer knowledge For certain departments - Polish For transport - UDT 1 or 2 + Polish",
+"pl": "Znajomość obsługi komputera Dla niektórych działów - język polski Dla transportu - UDT 1 lub 2 + język polski",
+"ru": "Знание компьютера Для определенных факультетов – польский язык Для транспорта – UDT 1 или 2 + польский язык"
+},
+"Знання польської мови Хороший фізичний стан Мануальні навички Досвід роботи на аналогічній посаді": {
+"en": "Knowledge of the Polish language Good physical condition Manual skills Work experience in a similar position",
+"pl": "Znajomość języka polskiego Dobra kondycja fizyczna Zdolności manualne Doświadczenie w pracy na podobnym stanowisku",
+"ru": "Знание польского языка Хорошее физическое состояние Мануальные навыки Опыт работы на аналогичной должности"
+},
+"Знижки на SPA-продукти та харчування Раз на місяць — безкоштовне відвідування SPA-центру (басейн, сауни, спортзал)": {
+"en": "Discounts on SPA products and food Once a month — free visit to the SPA center (swimming pool, saunas, gym)",
+"pl": "Zniżki na produkty i wyżywienie SPA Raz w miesiącu – bezpłatna wizyta w centrum SPA (basen, sauny, siłownia)",
+"ru": "Скидки на SPA-продукты и питание Раз в месяц – бесплатное посещение SPA-центра (бассейн, сауны, спортзал)"
+},
+"Зручний проїзд на роботу і з роботи. Курсують міські автобуси №6, 6A, 12, N2. Є…": {
+"en": "Convenient travel to and from work. There are city buses #6, 6A, 12, N2. THERE ARE…",
+"pl": "Wygodna podróż do i z pracy. Istnieją autobusy miejskie nr 6, 6A, 12, N2. TAM SĄ…",
+"ru": "Удобный проезд на работу и с работы. Курсируют городские автобусы №6, 6A, 12, N2. Есть…"
+},
+"Зріст від 160 см Гарна фізична форма, відсутність проблем зі здоров’ям Добра моторика рук": {
+"en": "Height from 160 cm Good physical shape, no health problems Good hand motility",
+"pl": "Wzrost od 160 cm Dobra kondycja fizyczna, brak problemów zdrowotnych Dobra motoryka rąk",
+"ru": "Рост от 160 см Хорошая физическая форма, отсутствие проблем со здоровьем Хорошая моторика рук"
+},
+"Зупинка громадського транспорту поруч з готелем": {
+"en": "Public transport stop near the hotel",
+"pl": "Przystanek komunikacji miejskiej w pobliżu hotelu",
+"ru": "Остановка общественного транспорта рядом с отелем"
+},
+"Зупинка громадського транспорту поруч із житлом.": {
+"en": "Public transport stop near the house.",
+"pl": "Przystanek komunikacji miejskiej w pobliżu domu.",
+"ru": "Остановка общественного транспорта рядом с жильем."
+},
+"Кваліфікація UDT Комунікативна польська або англійська мова Знання технічного креслення Навички роботи з комп'ютером": {
+"en": "UDT qualification Communicative Polish or English Knowledge of technical drawing Computer skills",
+"pl": "Kwalifikacja UDT Komunikatywna znajomość języka polskiego lub angielskiego Znajomość rysunku technicznego Umiejętność obsługi komputera",
+"ru": "Квалификация UDT Коммуникативный польский или английский язык Знание технического чертежа Навыки работы с компьютером"
+},
+"Комунікативна польська мова. Досвід роботи оператором машин. Наявність санітарної книжки (Sanepid) — бажано мати до співбесіди або оформити у…": {
+"en": "Communicative Polish language. Experience as a machine operator. The presence of a sanitary book (Sanepid) - it is desirable to have it before the interview or issue it in...",
+"pl": "Komunikatywny język polski. Doświadczenie na stanowisku operatora maszyn. Obecność książeczki sanitarnej (Sanepid) – wskazane jest posiadanie jej przed rozmową kwalifikacyjną lub wydanie w...",
+"ru": "Коммуникативный польский язык. Опыт работы оператором машин. Наличие санитарной книги (Sanepid) — желательно иметь собеседование или оформить в…"
+},
+"Корпоративний автобус.": {
+"en": "Corporate bus.",
+"pl": "Autobus firmowy.",
+"ru": "Корпоративный автобус."
+},
+"Кімнати на 3–4 особи (звичайні та двоярусні ліжка). Надаються ковдри, подушки, постільна білизна. Спільні туалети, душі…": {
+"en": "Rooms for 3-4 people (ordinary and bunk beds). Blankets, pillows, bed linen are provided. Shared toilets, showers...",
+"pl": "Pokoje 3-4 osobowe (łóżka zwykłe i piętrowe). Na wyposażeniu koce, poduszki, pościel. Wspólne toalety, prysznice...",
+"ru": "Комнаты на 3-4 человека (обычные и двухъярусные кровати). Предоставляется одеяла, подушки, постельное белье. Общие туалеты, души…"
+},
+"Можливі щоквартальні премії від підприємства — до 800 PLN брутто.": {
+"en": "Quarterly bonuses from the enterprise are possible - up to PLN 800 gross.",
+"pl": "Możliwe są premie kwartalne od przedsiębiorstwa – do kwoty 800 zł brutto.",
+"ru": "Возможны ежеквартальные премии от предприятия – до 800 PLN брутто."
+},
+"Можливість використання службових квартир для співробітників.": {
+"en": "The possibility of using service apartments for employees.",
+"pl": "Możliwość korzystania z apartamentów usługowych dla pracowników.",
+"ru": "Возможность использования служебных квартир для сотрудников."
+},
+"Можливість купувати продукцію заводу зі знижкою до -50%": {
+"en": "Possibility to buy factory products with a discount of up to -50%",
+"pl": "Możliwość zakupu produktów fabrycznych z rabatem do -50%",
+"ru": "Возможность покупать продукцию завода со скидкой до -50%"
+},
+"Можливість отримати бонус до 10% від місячної заробітної плати:": {
+"en": "The possibility of receiving a bonus of up to 10% of the monthly salary:",
+"pl": "Możliwość otrzymania premii w wysokości do 10% miesięcznego wynagrodzenia:",
+"ru": "Возможность получить бонус до 10% от месячной заработной платы:"
+},
+"Можливість премій (залежить від місця, якості та норм) – в середньому 100–400 PLN нетто": {
+"en": "Possibility of bonuses (depends on location, quality and norms) - on average PLN 100-400 net",
+"pl": "Możliwość premii (w zależności od lokalizacji, jakości i standardów) - średnio 100-400 zł netto",
+"ru": "Возможность премий (зависит от места, качества и норм) – в среднем 100–400 злотых нетто"
+},
+"Можна працювати в неділю, тоді понеділок вихідний.": {
+"en": "You can work on Sunday, then Monday is a day off.",
+"pl": "Możesz pracować w niedzielę, wtedy poniedziałek jest dniem wolnym.",
+"ru": "Можно работать в воскресенье, тогда выходной понедельник."
+},
+"Можна ходити пішки або їздити громадським транспортом за власний рахунок.": {
+"en": "You can walk or use public transport at your own expense.",
+"pl": "Można dojść pieszo lub skorzystać z transportu publicznego na własny koszt.",
+"ru": "Можно ходить пешком или ездить общественным транспортом за свой счет."
+},
+"Монтаж та упаковка компонентів електронних пристроїв": {
+"en": "Assembly and packaging of components of electronic devices",
+"pl": "Montaż i pakowanie elementów urządzeń elektronicznych",
+"ru": "Монтаж и упаковка компонентов электронных устройств"
+},
+"Міжнародна компанія зі складання електронних плат PCBA за технологією SMT.": {
+"en": "International PCBA assembly company using SMT technology.",
+"pl": "Międzynarodowa firma zajmująca się montażem PCBA z wykorzystaniem technologii SMT.",
+"ru": "Международная компания по сборке электронных плат PCBA по технологии SMT."
+},
+"Міжнародна логістична компанія: склади, транспорт, дистрибуція.": {
+"en": "International logistics company: warehouses, transport, distribution.",
+"pl": "Międzynarodowa firma logistyczna: magazyny, transport, dystrybucja.",
+"ru": "Международная логистическая компания: склады, транспорт, дистрибуция."
+},
+"На території заводу є їдальня Мікрохвильовки, чайник Автомати з їжею…": {
+"en": "On the territory of the plant, there is a dining room with microwaves, a kettle, machines with food...",
+"pl": "Na terenie zakładu znajduje się jadalnia z kuchenką mikrofalową, czajnikiem, maszynami z żywnością...",
+"ru": "На территории завода есть столовая Микроволновки, чайник Автоматы с едой."
+},
+"Надається": {
+"en": "It is provided",
+"pl": "Jest zapewnione",
+"ru": "Предоставляется"
+},
+"Надається безкоштовний гарячий обід, що включає перше і друге страви,…": {
+"en": "A free hot lunch is provided, including first and second courses,…",
+"pl": "Obiekt zapewnia bezpłatny gorący lunch obejmujący pierwsze i drugie danie,…",
+"ru": "К услугам гостей бесплатный горячий обед, включающий первое и второе блюда."
+},
+"Надається транспорт роботодавця з: Brzeg, Jelcz-Laskowice, Namysłów, Oława, Przeworno,…": {
+"en": "The employer's transport is provided from: Brzeg, Jelcz-Laskowice, Namysłów, Oława, Przeworno,…",
+"pl": "Transport pracodawcy zapewniamy z: Brzegu, Jelcza-Laskowic, Namysłowa, Oławy, Przeworna,…",
+"ru": "Предоставляется транспорт работодателя из: Brzeg, Jelcz-Laskowice, Namysłów, Oława, Przeworno,…"
+},
+"Наявність прав UDT.": {
+"en": "Availability of UDT rights.",
+"pl": "Dostępność uprawnień UDT.",
+"ru": "Наличие прав UDT."
+},
+"Наявність сертифіката UDT Досвід роботи на аналогічній посаді Вільне володіння польською мовою": {
+"en": "Possession of a UDT certificate Work experience in a similar position Fluency in the Polish language",
+"pl": "Posiadanie certyfikatu UDT Doświadczenie w pracy na podobnym stanowisku. Biegła znajomość języka polskiego",
+"ru": "Наличие сертификата UDT Опыт работы на аналогичной должности Свободное владение польским языком"
+},
+"Немає.": {
+"en": "There is none.",
+"pl": "Nie ma żadnego.",
+"ru": "Нет."
+},
+"Нідерландська компанія: м’ясні напівфабрикати для виробництва кормів для тварин.": {
+"en": "Dutch company: meat semi-finished products for the production of animal feed.",
+"pl": "Holenderska firma: półprodukty mięsne do produkcji pasz dla zwierząt.",
+"ru": "Нидерландская компания: мясные полуфабрикаты для производства кормов для животных."
+},
+"Обід за 1 PLN з 01.11.": {
+"en": "Lunch for 1 PLN from 01.11.",
+"pl": "Obiad za 1 zł od 01.11.",
+"ru": "Обед за 1 PLN с 01.11."
+},
+"Онлайн-ритейлер одягу, взуття, аксесуарів, косметики й товарів для дому.": {
+"en": "Online retailer of clothes, shoes, accessories, cosmetics and household goods.",
+"pl": "Internetowy sprzedawca odzieży, obuwia, akcesoriów, kosmetyków i artykułów gospodarstwa domowego.",
+"ru": "Онлайн-ритейлер одежды, обуви, аксессуаров, косметики и товаров для дома."
+},
+"Організований": {
+"en": "Organized",
+"pl": "Zorganizowany",
+"ru": "Организованный"
+},
+"Організований роботодавцем, вартість — 200 PLN на місяць. До автобусної зупинки потрібно…": {
+"en": "Organized by the employer, the cost is PLN 200 per month. To the bus stop you need…",
+"pl": "Organizowane przez pracodawcę koszt wynosi 200 zł miesięcznie. Na przystanek autobusowy trzeba…",
+"ru": "Организованный работодателем, стоимость – 200 PLN в месяц. До автобусной остановки нужно…"
+},
+"Організований транспорт для працівників. Скріншот із зупинками додається.": {
+"en": "Organized transport for employees. A screenshot with stops is attached.",
+"pl": "Zorganizowany transport dla pracowników. W załączeniu zrzut ekranu z przystankami.",
+"ru": "Организованный транспорт для работников. Скриншот с остановками прилагается."
+},
+"Перед початком зміни можна приготувати чай/каву На кухні завжди є…": {
+"en": "You can prepare tea/coffee before the start of the shift. There is always…",
+"pl": "Możesz przygotować kawę/herbatę przed rozpoczęciem zmiany. Zawsze jest…",
+"ru": "Перед началом смены можно приготовить чай/кофе."
+},
+"Повний супровід від офісу у Львові до місця проживання": {
+"en": "Full escort from the office in Lviv to the place of residence",
+"pl": "Pełna eskorta z biura we Lwowie do miejsca zamieszkania",
+"ru": "Полное сопровождение от офиса во Львове до места жительства"
+},
+"Понеділок–п’ятниця Початковий графік: одна зміна, 06:00–14:00 На початковому…": {
+"en": "Monday–Friday Initial schedule: One shift, 06:00–14:00 At the initial…",
+"pl": "poniedziałek – piątek Wstępny harmonogram: jedna zmiana, 06:00–14:00 Początkowo…",
+"ru": "Понедельник–пятница Начальный график: одна смена, 06:00–14:00 На начальном…"
+},
+"Понеділок–п’ятниця.": {
+"en": "Monday-Friday.",
+"pl": "poniedziałek-piątek.",
+"ru": "Понедельник-пятница."
+},
+"Поруч із місцем проживання є зупинки громадського транспорту та доступна широка мережа…": {
+"en": "Near the place of residence there are public transport stops and a wide network is available…",
+"pl": "W pobliżu miejsca zamieszkania znajdują się przystanki komunikacji miejskiej, dostępna jest szeroka sieć…",
+"ru": "Рядом с местом жительства есть остановки общественного транспорта и доступная широкая сеть."
+},
+"Посвідчення UDT WJO II. Знання польської мови. Уміння керувати навантажувачами. Досвід роботи на виробничому підприємстві буде перевагою.": {
+"en": "Certificate of UDT WJO II. Knowledge of the Polish language. Ability to operate forklifts. Experience working in a manufacturing enterprise will be an advantage.",
+"pl": "Certyfikat UDT WJO II. Znajomość języka polskiego. Umiejętność obsługi wózków widłowych. Doświadczenie w pracy w przedsiębiorstwie produkcyjnym będzie dodatkowym atutem.",
+"ru": "Сертификат UDT WJO II. Знание польского языка. Умение работать на погрузчиках. Опыт работы на производственном предприятии будет преимуществом."
+},
+"Посвідчення на керування навантажувачем буде перевагою, але не є обов’язковим. Готовність працювати за змінним графіком. Досвід роботи на складі буде…": {
+"ru": "Удостоверение на управление погрузчиком будет преимуществом, но не является обязательным. Готовность работать по скользящему графику. Опыт работы на складе будет…"
+},
+"Працівник складу UDT з досвідом роботи.": {
+"en": "An employee of the UDT warehouse with work experience.",
+"pl": "Pracownik magazynu UDT z doświadczeniem zawodowym.",
+"ru": "Сотрудник состава UDT с опытом работы."
+},
+"Працівник служби прибирання.": {
+"en": "Cleaning service worker.",
+"pl": "Pracownik serwisu sprzątającego.",
+"ru": "Работник службы уборки."
+},
+"Приймання та завантаження товару, комплектування, пакування, етикетування й сортування; робота на навантажувачі (потрібне посвідчення UDT).": {
+"en": "Acceptance and loading of goods, assembly, packaging, labeling and sorting; work on a forklift (requires a UDT certificate).",
+"pl": "Przyjęcie i załadunek towaru, montaż, pakowanie, etykietowanie i sortowanie; praca na wózku widłowym (wymagany certyfikat UDT).",
+"ru": "Прием и загрузка товара, комплектование, упаковка, этикетирование и сортировка; работа на погрузчике (требуется удостоверение UDT)."
+},
+"Робота на виробництві електронних компонентів. Обов’язки залежать від посади.": {
+"en": "Work in the production of electronic components. Duties depend on the position.",
+"pl": "Praca przy produkcji podzespołów elektronicznych. Obowiązki zależą od stanowiska.",
+"ru": "Работа в производстве электронных компонентов. Обязанности зависят от должности."
+},
+"Робота на виробництві яхт на посаді електрика передбачає монтаж та встановлення електричних систем.": {
+"en": "Work in yacht production as an electrician involves the assembly and installation of electrical systems.",
+"pl": "Praca przy produkcji jachtów jako elektryk wiąże się z montażem i instalacją instalacji elektrycznych.",
+"ru": "Работа на производстве яхт в должности электрика предполагает монтаж и установку электрических систем."
+},
+"Робота на підприємстві з виробництва кормів для домашніх тварин Робота на напівавтоматичних морозильних камерах": {
+"en": "Work at an enterprise for the production of pet food. Work on semi-automatic freezers",
+"pl": "Praca w przedsiębiorstwie zajmującym się produkcją karmy dla zwierząt domowych. Praca na półautomatycznych zamrażarkach",
+"ru": "Работа на предприятии по производству кормов для домашних животных Работа на полуавтоматических морозильных камерах"
+},
+"Робота полягає в підвішуванні птиці на виробничій лінії, забезпечуючи правильну підготовку продукції, а також у виконанні супутніх завдань.": {
+"en": "The work consists in hanging poultry on the production line, ensuring the correct preparation of products, as well as performing related tasks.",
+"pl": "Praca polega na wieszaniu drobiu na linii produkcyjnej, dbaniu o prawidłowe przygotowanie produktów, a także wykonywaniu zadań z tym związanych.",
+"ru": "Работа заключается в подвешивании птицы на производственной линии, обеспечивая правильную подготовку продукции, а также выполнение сопутствующих задач."
+},
+"Світовий лідер у виробництві систем з’єднання поїздів.": {
+"en": "The world leader in the production of train connection systems.",
+"pl": "Światowy lider w produkcji systemów połączeń kolejowych.",
+"ru": "Мировой лидер по производству систем соединения поездов."
+},
+"Складський працівник для ручного завантаження та розвантаження товарів.": {
+"en": "Warehouse worker for manual loading and unloading of goods.",
+"pl": "Pracownik magazynu do ręcznego załadunku i rozładunku towarów.",
+"ru": "Складской работник для ручной погрузки и разгрузки товаров."
+},
+"пакування морозива в коробки; наклеювання етикеток; закриття та укладання коробок на піддон; миття та нарізання фруктів, сухофруктів, горіхів.": {
+"en": "packing ice cream in boxes; pasting labels; closing and stacking boxes on a pallet; washing and cutting fruits, dried fruits, nuts.",
+"pl": "pakowanie lodów w pudełka; wklejanie etykiet; zamykanie i układanie pudeł na palecie; mycie i krojenie owoców, suszonych owoców, orzechów.",
+"ru": "упаковка мороженого в коробки; наклейка этикеток; закрытие и укладка коробок на поддон; мытье и нарезка фруктов, сухофруктов, орехов."
+}
+}
