@@ -27,9 +27,9 @@ import i18n
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = "https://vdalo-robota.com.ua"
-PHONE_WA = "380736067700"
-TG = "https://t.me/+380736067700"
-VIBER = "viber://chat?number=%2B380736067700"
+PHONE_WA = "380660050060"
+TG = "https://t.me/+380660050060"
+VIBER = "viber://chat?number=%2B380660050060"
 NOW = dt.datetime.now(ZoneInfo("Europe/Kyiv"))
 TODAY = NOW.date()
 MIN_PAGE = 3  # посадкова сторінка створюється, лише якщо на ній є стільки вакансій
@@ -481,7 +481,7 @@ PAGES = [
      "title": "Робота в Польщі для українців: {n} | Вдало",
      "h1": "Робота в Польщі для українців",
      "lead": "Вакансії на складах і заводах Польщі з житлом і офіційним договором. У кожній — підприємство, ставка, години, тип договору й дати заїзду.",
-     "desc": "Робота в Польщі для українців: {n}, ставка {rate} брутто/год, житло, umowa zlecenie або трудовий договір. Безкоштовно для кандидатів. +380 73 606 77 00.",
+     "desc": "Робота в Польщі для українців: {n}, ставка {rate} брутто/год, житло, umowa zlecenie або трудовий договір. Безкоштовно для кандидатів. +380 66 005 00 60.",
      "text": ["Польща — найпопулярніший напрямок для українців, які шукають роботу за кордоном: багато вакансій на складах, у логістиці та на виробництві, де не потрібне знання польської мови й досвід.",
               "Ставка в Польщі вказується брутто — до сплати податків і внесків. Для осіб до 26 років може діяти пільга з податку PIT, а студенти на договорі доручення можуть не сплачувати внески ZUS — умови залежать від договору й документів. Перед виїздом порівнюйте не тільки ставку, а й кількість годин на місяць, вартість житла й тип договору — усе це є в наших вакансіях."]},
     {"slug": "robota-v-lytvi", "label": "Робота в Литві", "country": "Литва",
@@ -489,7 +489,7 @@ PAGES = [
      "title": "Робота в Литві для українців: {n} | Вдало",
      "h1": "Робота в Литві для українців",
      "lead": "Вакансії в Литві з житлом: виробництво, переробка риби, склади. Ставка, графік і умови проживання — у кожній вакансії.",
-     "desc": "Робота в Литві для українців: {n}, зарплата {rate}, житло й офіційне працевлаштування. Підбір безкоштовний. Telegram, Viber, WhatsApp: +380 73 606 77 00.",
+     "desc": "Робота в Литві для українців: {n}, зарплата {rate}, житло й офіційне працевлаштування. Підбір безкоштовний. Telegram, Viber, WhatsApp: +380 66 005 00 60.",
      "text": ["У Литві українців найчастіше беруть на виробництво, рибопереробку й склади. Зарплату тут зазвичай вказують за місяць у євро, тож суму легко порівняти з іншими країнами.",
               "Литва входить до ЄС і зони євро, а до кордону з Польщею — кілька годин дороги, тому багато хто поєднує ці два напрямки й обирає вакансію з кращими умовами."]},
     {"slug": "robota-v-chekhii", "label": "Робота в Чехії", "country": "Чехія",
@@ -497,7 +497,7 @@ PAGES = [
      "title": "Робота в Чехії для українців: {n} | Вдало",
      "h1": "Робота в Чехії для українців",
      "lead": "Вакансії в Чехії: заводи, склади, виробництво. У кожній — ставка, години, житло та найближчі дати заїзду.",
-     "desc": "Робота в Чехії для українців: {n}, ставка {rate}, житло та офіційний договір. Безкоштовний підбір вакансії. +380 73 606 77 00.",
+     "desc": "Робота в Чехії для українців: {n}, ставка {rate}, житло та офіційний договір. Безкоштовний підбір вакансії. +380 66 005 00 60.",
      "text": ["Чехія — один із найстабільніших ринків праці в Європі: багато промислових підприємств і складів, які постійно шукають працівників з України.",
               "Ставки в Чехії вказують у кронах (CZK) або євро. Уточнюйте, скільки годин на місяць пропонує роботодавець і скільки коштує житло, — від цього залежить реальна сума на руки."]},
     {"slug": "robota-v-slovachchyni", "label": "Робота в Словаччині", "country": "Словаччина",
@@ -505,7 +505,7 @@ PAGES = [
      "title": "Робота в Словаччині для українців — {n} | Вдало",
      "h1": "Робота в Словаччині для українців",
      "lead": "Вакансії в Словаччині з житлом і офіційним договором. Ставка, графік і дати заїзду — у кожній вакансії.",
-     "desc": "Робота в Словаччині для українців: {n}, зарплата {rate}, житло, офіційне працевлаштування. Підбір безкоштовний. +380 73 606 77 00.",
+     "desc": "Робота в Словаччині для українців: {n}, зарплата {rate}, житло, офіційне працевлаштування. Підбір безкоштовний. +380 66 005 00 60.",
      "text": ["Словаччина межує із Закарпаттям, тому дорога туди коротка й недорога. Найчастіше українців запрошують на автомобільні й промислові заводи.",
               "Зарплату в Словаччині вказують у євро. Ми показуємо ставку, години й умови проживання, щоб ви могли порівняти вакансію з пропозиціями в Польщі чи Чехії."]},
     {"slug": "robota-na-skladi", "label": "Робота на складі",
@@ -537,7 +537,7 @@ PAGES = [
      "title": "Робота водієм навантажувача за кордоном — {n} | Вдало",
      "h1": "Робота водієм навантажувача за кордоном",
      "lead": "Вакансії оператора вилкового навантажувача й ретрака на складах і заводах Європи. Ставка вища, ніж у звичайного працівника складу.",
-     "desc": "Робота водієм навантажувача в Польщі та Європі: {n}, ставка {rate}, житло. Потрібне посвідчення UDT або аналог. +380 73 606 77 00.",
+     "desc": "Робота водієм навантажувача в Польщі та Європі: {n}, ставка {rate}, житло. Потрібне посвідчення UDT або аналог. +380 66 005 00 60.",
      "text": ["Водії навантажувачів потрібні на кожному великому складі. Зазвичай роботодавець просить посвідчення на навантажувач (у Польщі — UDT) і досвід роботи, але й платить за це більше.",
               "Якщо українського посвідчення недостатньо, менеджер підкаже, чи можна почати як працівник складу й отримати потрібні права вже на місці."]},
     {"slug": "robota-dlia-zhinok", "label": "Для жінок", "who": "w",
@@ -576,7 +576,7 @@ PAGES = [
 
 HOME = {
     "title": "Робота за кордоном для українців — {n} в Європі | Вдало",
-    "desc": "Робота за кордоном для українців: {n} у Польщі, Литві, Чехії та Словаччині. Ставка, житло, договір і дати заїзду в кожній вакансії. Безкоштовно. +380 73 606 77 00.",
+    "desc": "Робота за кордоном для українців: {n} у Польщі, Литві, Чехії та Словаччині. Ставка, житло, договір і дати заїзду в кожній вакансії. Безкоштовно. +380 66 005 00 60.",
     "text": ["«Вдало» допомагає українцям знайти роботу за кордоном: на складах, заводах і харчових виробництвах Польщі, Литви, Чехії та Словаччини. Для кандидатів підбір безкоштовний.",
              "Ми показуємо умови так, щоб їх можна було порівняти ще до виїзду: ставку брутто й приблизну суму на руки, кількість годин, житло, тип договору та найближчі дати заїзду. Список вакансій оновлюється щодня."],
 }
@@ -660,7 +660,7 @@ def h1_block(h1, lead):
 
 
 ORG = {"@context": "https://schema.org", "@type": "EmploymentAgency", "name": "Вдало", "url": SITE + "/",
-       "image": SITE + "/og.png", "telephone": "+380736067700", "areaServed": "UA",
+       "image": SITE + "/og.png", "telephone": "+380660050060", "areaServed": "UA",
        "address": {"@type": "PostalAddress", "streetAddress": "вул. Джона Маккейна, 7, офіс 169", "addressLocality": "Київ", "addressCountry": "UA"},
        "description": "Підбір роботи для українців у Польщі, Литві, Чехії та Словаччині. Безкоштовно для кандидатів."}
 
@@ -716,7 +716,7 @@ def vac_detail(v, back):
             f'<a class="msgr" href="{TG}" data-ch="telegram" data-copytext="{esc(msg)}"><span class="dot tg"></span>Telegram</a>'
             f'<a class="msgr" href="{VIBER}" data-ch="viber" data-copytext="{esc(msg)}"><span class="dot vb"></span>Viber</a>'
             "</div>"
-            '<a class="btn ghost wide" href="tel:+380736067700" data-ch="phone">Подзвонити: +380 73 606 77 00</a>'
+            '<a class="btn ghost wide" href="tel:+380660050060" data-ch="phone">Подзвонити: +380 66 005 00 60</a>'
             "</aside>"
             "</section>\n  ")
 
@@ -801,7 +801,7 @@ def nav_html(path):
     chips = lambda lst: '<div class="mn-chips">' + "".join(f'<a href="/{p["slug"]}/">{esc(p["country"] if p.get("country") else p["label"])}<small>{len(l)}</small></a>' for p, l in lst) + "</div>"
     mn = ('<div class="mn-main"><a href="/#vacancies">Усі вакансії</a>' + "".join(f'<a href="{h}">{esc(t)}</a>' for h, t in links) + "</div>"
           + "<b>Вакансії за країною</b>" + chips(cs) + "<b>За видом роботи</b>" + chips(ks)
-          + '<div class="mn-cta"><a class="btn wide" href="#apply">Залишити заявку</a><a class="btn ghost wide" href="tel:+380736067700" data-ch="phone">Подзвонити: +380 73 606 77 00</a></div>')
+          + '<div class="mn-cta"><a class="btn wide" href="#apply">Залишити заявку</a><a class="btn ghost wide" href="tel:+380660050060" data-ch="phone">Подзвонити: +380 66 005 00 60</a></div>')
     return nav, mn
 
 
@@ -1049,7 +1049,7 @@ def main():
             office = ('\n  <section id="office" aria-labelledby="off-h"><h2 id="off-h" class="sr-only" style="position:absolute;left:-9999px">Офіс і телефон</h2><div class="kgrid">'
                       '<div class="card"><h3>Офіс у Києві</h3><p>вул. Джона Маккейна, 7, офіс 169</p><p style="color:var(--muted)">Перед візитом радимо зателефонувати й домовитися про час.</p>'
                       f'<p style="margin-top:14px"><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Київ,+вулиця+Джона+Маккейна,+7" target="_blank" rel="noopener">Відкрити на мапі</a></p></div>'
-                      '<div class="card"><h3>Телефон і месенджери</h3><p><a href="tel:+380736067700" data-ch="phone" style="font-weight:800;font-size:22px">+380 73 606 77 00</a></p>'
+                      '<div class="card"><h3>Телефон і месенджери</h3><p><a href="tel:+380660050060" data-ch="phone" style="font-weight:800;font-size:22px">+380 66 005 00 60</a></p>'
                       '<p style="color:var(--muted)">Telegram, Viber і WhatsApp — за цим самим номером. Пишіть, як вам зручніше.</p></div>'
                       "</div></section>\n")
             hero = phead(P, False) + office + "\n" + APPLY
@@ -1082,9 +1082,9 @@ def main():
         <h2 id="emp-h">Залиште запит на працівників</h2>
         <p class="lead">Опишіть, кого шукаєте, — менеджер зв’яжеться з вами протягом робочого дня й запропонує кандидатів.</p>
         <div class="contacts">
-          <a class="contact" href="tel:+380736067700" data-ch="phone"><span class="ic ph" style="color:var(--bg)"><svg class="i"><use href="#i-phone"/></svg></span><span>+380 73 606 77 00<small>Телефон, Telegram, Viber, WhatsApp</small></span><svg class="i chev"><use href="#i-chev"/></svg></a>
-          <a class="contact" href="https://t.me/+380736067700" data-ch="telegram"><span class="ic tg"><svg class="i"><use href="#i-send"/></svg></span><span>Telegram<small>Відкрити чат</small></span><svg class="i chev"><use href="#i-chev"/></svg></a>
-          <a class="contact" href="https://wa.me/380736067700" data-ch="whatsapp"><span class="ic wa"><svg class="i"><use href="#i-round"/></svg></span><span>WhatsApp<small>Відкрити чат</small></span><svg class="i chev"><use href="#i-chev"/></svg></a>
+          <a class="contact" href="tel:+380660050060" data-ch="phone"><span class="ic ph" style="color:var(--bg)"><svg class="i"><use href="#i-phone"/></svg></span><span>+380 66 005 00 60<small>Телефон, Telegram, Viber, WhatsApp</small></span><svg class="i chev"><use href="#i-chev"/></svg></a>
+          <a class="contact" href="https://t.me/+380660050060" data-ch="telegram"><span class="ic tg"><svg class="i"><use href="#i-send"/></svg></span><span>Telegram<small>Відкрити чат</small></span><svg class="i chev"><use href="#i-chev"/></svg></a>
+          <a class="contact" href="https://wa.me/380660050060" data-ch="whatsapp"><span class="ic wa"><svg class="i"><use href="#i-round"/></svg></span><span>WhatsApp<small>Відкрити чат</small></span><svg class="i chev"><use href="#i-chev"/></svg></a>
         </div>
       </div>
       <div class="form-card">
@@ -1122,9 +1122,9 @@ def main():
           <p><b>Залишився один крок.</b> Надішліть запит нам у месенджер — текст уже готовий:</p>
           <div class="msg" id="emp-msg"></div>
           <div class="send-row">
-            <a class="msgr" id="emp-wa" href="https://wa.me/380736067700" data-ch="whatsapp"><span class="dot wa"></span>WhatsApp</a>
-            <a class="msgr" href="https://t.me/+380736067700" data-ch="telegram" data-emp-copy><span class="dot tg"></span>Telegram</a>
-            <a class="msgr" href="viber://chat?number=%2B380736067700" data-ch="viber" data-emp-copy><span class="dot vb"></span>Viber</a>
+            <a class="msgr" id="emp-wa" href="https://wa.me/380660050060" data-ch="whatsapp"><span class="dot wa"></span>WhatsApp</a>
+            <a class="msgr" href="https://t.me/+380660050060" data-ch="telegram" data-emp-copy><span class="dot tg"></span>Telegram</a>
+            <a class="msgr" href="viber://chat?number=%2B380660050060" data-ch="viber" data-emp-copy><span class="dot vb"></span>Viber</a>
           </div>
           <button class="btn ghost" type="button" data-emp-again>Заповнити ще раз</button>
         </div>
@@ -1135,7 +1135,7 @@ def main():
 '''
     hero = (crumbs([("Головна", "/"), (P["h1"], "")]) + HIDE_VAC
             + f'\n  <section id="hero"><div class="page-head"><h1>{esc(P["h1"])}</h1><p class="lead">{esc(P["lead"])}</p>'
-            + '<div class="ph-cta"><a class="btn" href="#emp">Залишити запит</a><a class="btn ghost" href="tel:+380736067700" data-ch="phone">+380 73 606 77 00</a></div></div></section>\n'
+            + '<div class="ph-cta"><a class="btn" href="#emp">Залишити запит</a><a class="btn ghost" href="tel:+380660050060" data-ch="phone">+380 66 005 00 60</a></div></div></section>\n'
             + '\n  <section aria-labelledby="eo-h"><div class="sec-head"><div><h2 id="eo-h">Що ми робимо для роботодавців</h2></div></div>' + cards(SEC.EMP_OFFER) + "</section>\n"
             + '\n  <section aria-labelledby="es-h"><div class="sec-head"><div><h2 id="es-h">Як ми працюємо</h2></div></div>' + cards(SEC.EMP_STEPS, "steps6 s4") + "</section>\n"
             + '\n  <section aria-labelledby="ef-h"><div class="sec-head"><div><h2 id="ef-h">Кого підбираємо</h2><p>Працівників для Польщі, Литви, Чехії та Словаччини — з досвідом і без, поодинці, парами й бригадами.</p></div></div>'
