@@ -408,7 +408,8 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       '<div class="fld"><label>Дата виходу на роботу</label><input id="d-start" type="date" value="' + E(l.start_date || "") + '"></div></div>' +
       '<div class="fld"><label>Хто запросив (реферальний код)</label><div class="g2"><input id="d-ref" placeholder="напр. ok7m2p" value="' + E(l.referrer ? l.referrer.ref_code || "" : "") + '"><span class="note" id="d-ref-name" style="align-self:center">' + (l.referrer ? E(pname(l.referrer)) : (l.ref_raw ? "з посилання: " + E(l.ref_raw) + " (не знайдено)" : "")) + '</span></div></div>' +
       '<div class="fld"><label>Нотатки менеджера</label><textarea id="d-note">' + E(l.manager_note || "") + '</textarea></div>' +
-      (isNew ? "" : '<div class="mini"><b>Задачі по кандидату</b><div id="d-tasks"></div><div class="row2"><input id="dt-title" placeholder="Напр. передзвонити, надіслати документи"><input id="dt-due" type="datetime-local"><button class="btn sm" id="dt-add" type="button">Додати</button></div></div>' +
+      (isNew ? "" : '<div class="mini"><b>Задачі по кандидату</b><div id="d-tasks"></div><p class="note" style="margin:4px 0 0">Шаблони — натисніть, змініть дату за потреби й «Додати»:</p>' + tplChips(T_LEAD, "data-tl") +
+        '<div class="bar" style="margin:0"><button type="button" class="btn ghost sm" data-flow="start">⚡ Набір «Новий кандидат» (3 задачі)</button><button type="button" class="btn ghost sm" data-flow="trip">⚡ Набір «Виїзд» (6 задач)</button></div><div class="row2"><input id="dt-title" placeholder="Напр. передзвонити, надіслати документи"><input id="dt-due" type="datetime-local"><button class="btn sm" id="dt-add" type="button">Додати</button></div></div>' +
         '<div><b>Історія статусів</b><ul class="hist" id="d-hist"><li>…</li></ul></div>') +
       '</div><div class="df">' + (!isNew && S.me.role === "admin" ? '<button class="btn ghost" id="d-del" style="margin-right:auto;color:var(--red)">Видалити</button>' : "") +
       '<button class="btn ghost" data-x>Скасувати</button><button class="btn" id="d-save">Зберегти</button></div>');
@@ -433,6 +434,13 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         bindTasks(document.getElementById("d-tasks"), function(){ API.tasks().then(function(t){ S.tasks = t; drawTasks(); counts(); }); });
       };
       drawTasks();
+      drawer.querySelectorAll("[data-tl]").forEach(function(b){ b.onclick = function(){ var t = T_LEAD[+b.getAttribute("data-tl")];
+        document.getElementById("dt-title").value = t[0]; document.getElementById("dt-due").value = localInput(dueAt(t[1])); document.getElementById("dt-title").focus(); }; });
+      drawer.querySelectorAll("[data-flow]").forEach(function(b){ b.onclick = function(){ var fl = FLOWS[b.getAttribute("data-flow")];
+        if (!confirm("Додати " + fl[1].length + " задач(і) «" + fl[0] + "» для " + l.name + "?")) return;
+        var who = l.manager_id || S.me.id;
+        Promise.all(fl[1].map(function(t){ return API.addTask({title: t[0], lead_id: l.id, due_at: dueAt(t[1]).toISOString(), assignee_id: who}); }))
+          .then(function(){ return API.tasks(); }).then(function(tl){ S.tasks = tl; drawTasks(); counts(); toast("Додано задач: " + fl[1].length); }).catch(fail); }; });
       document.getElementById("dt-add").onclick = function(){
         var t = document.getElementById("dt-title").value.trim(); if (!t) { toast("Напишіть, що зробити"); return; }
         var due = document.getElementById("dt-due").value;
@@ -459,6 +467,35 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     var del = document.getElementById("d-del");
     if (del) del.onclick = function(){ if (confirm("Видалити заявку " + l.name + "?")) API.deleteLead(l.id).then(function(){ closeDrawer(); counts(); rLeads(); }).catch(fail); };
   }
+
+  /* ---------- Шаблони задач ---------- */
+  var H = 36e5, D = 864e5;
+  var T_LEAD = [
+    ["📞 Передзвонити", 2 * H], ["📋 Надіслати 2–3 вакансії", 1 * H], ["🔔 Нагадати, якщо не відповів", D],
+    ["🪪 Перевірити документи (паспорт, підстава для виїзду)", D], ["🤝 Погодити дату заїзду з роботодавцем", D],
+    ["🚌 Нагадати про квиток", D], ["🗺 Надіслати маршрутний лист і контакт координатора", D],
+    ["👋 Спитати, як доїхав і заселився", 2 * D], ["💼 Спитати про перший робочий день", 3 * D],
+    ["✅ Перевірити, чи відпрацював 2 тижні", 14 * D], ["👥 Запропонувати «Приведи друга»", 7 * D]
+  ];
+  var T_GEN = [
+    ["📢 Опублікувати 5 оголошень у групах", "today18"], ["🎬 Зняти й викласти відео (TikTok / Reels)", D],
+    ["💬 Відповісти на коментарі в групах", 3 * H], ["🔍 Написати 10 людям, які шукають роботу", "today18"],
+    ["🔁 Нагадати всім, хто не відповів 2 дні", "today18"], ["📊 Оновити статуси всіх кандидатів у CRM", "today20"],
+    ["🧾 Знайти 10 людей на вакансію …", 3 * D], ["📞 Обдзвонити кандидатів «На зв’язку»", D]
+  ];
+  var FLOWS = {
+    start: ["Новий кандидат", [["📞 Зателефонувати / написати", 15 * 6e4], ["📋 Надіслати 2–3 вакансії", 2 * H], ["🔔 Нагадати, якщо не відповів", D]]],
+    trip: ["Виїзд", [["🪪 Перевірити документи", 0], ["🚌 Нагадати про квиток", D], ["🗺 Надіслати маршрутний лист і контакт координатора", D], ["👋 Спитати, як доїхав", 3 * D], ["💼 Спитати про перший робочий день", 4 * D], ["✅ Перевірити, чи відпрацював 2 тижні", 18 * D]]]
+  };
+  function dueAt(off){
+    var d = new Date();
+    if (off === "today18" || off === "today20") { d.setHours(off === "today18" ? 18 : 20, 0, 0, 0); if (d < new Date()) d.setDate(d.getDate() + 1); return d; }
+    d = new Date(Date.now() + off);
+    if (off >= D) { d.setHours(10, 0, 0, 0); }   // задачі «на день» — на 10:00
+    return d;
+  }
+  function localInput(d){ var p = function(n){ return (n < 10 ? "0" : "") + n; }; return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes()); }
+  function tplChips(list, attr){ return '<div class="bar" style="margin:0">' + list.map(function(t, i){ return '<button type="button" class="chip" style="font-size:13px" ' + attr + '="' + i + '">' + E(t[0]) + '</button>'; }).join("") + '</div>'; }
 
   /* ================= Задачі ================= */
   function leadName(id){ var l = S.leads.filter(function(x){ return x.id === id; })[0]; return l ? l.name : ""; }
@@ -491,11 +528,14 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       ];
       var assignSel = S.own ? '<select id="t-who">' + S.staff.map(function(p){ return '<option value="' + p.id + '"' + (p.id === S.me.id ? " selected" : "") + '>' + E(pname(p)) + '</option>'; }).join("") + '</select>' : "";
       app.innerHTML = '<div class="card pad" style="margin-bottom:16px"><h3>Нова задача</h3><div class="mini"><div class="row2" style="grid-template-columns:1fr 190px ' + (S.own ? "180px " : "") + 'auto">' +
-        '<input id="t-title" placeholder="Що зробити? Напр. знайти 10 людей на склад SHEIN">' + '<input id="t-due" type="datetime-local">' + assignSel + '<button class="btn" id="t-add">Додати</button></div></div></div>' +
+        '<input id="t-title" placeholder="Що зробити? Напр. знайти 10 людей на склад SHEIN">' + '<input id="t-due" type="datetime-local">' + assignSel + '<button class="btn" id="t-add">Додати</button></div>' +
+        '<p class="note" style="margin:6px 0 0">Шаблони:</p>' + tplChips(T_GEN, "data-tg") + '<p class="note" style="margin:0">Задачі по конкретному кандидату (передзвонити, квиток, перший день…) додавайте в його картці — там є свої шаблони й готові набори.</p></div></div>' +
         (S.own ? '<div class="bar"><button class="chip" data-tw="all" aria-pressed="' + (who === "all") + '">Усі</button>' + S.staff.map(function(p){ return '<button class="chip" data-tw="' + p.id + '" aria-pressed="' + (who === p.id) + '">' + E(pname(p)) + '<b>' + r[0].filter(function(t){ return !t.done_at && t.assignee_id === p.id; }).length + '</b></button>'; }).join("") + '</div>' : "") +
         '<div class="card" id="tl">' + groups.map(function(g){ return g[1].length ? '<div class="tgroup">' + E(g[0]) + ' · ' + g[1].length + '</div>' + g[1].map(taskRow).join("") : ""; }).join("") +
         (open.length || groups[4][1].length ? "" : '<div class="empty">Задач немає. Додайте першу вище або в картці кандидата.</div>') + '</div>';
       bindTasks(document.getElementById("tl"), function(){ counts(); rTasks(); });
+      document.querySelectorAll("[data-tg]").forEach(function(b){ b.onclick = function(){ var t = T_GEN[+b.getAttribute("data-tg")];
+        document.getElementById("t-title").value = t[0]; document.getElementById("t-due").value = localInput(dueAt(t[1])); var ti = document.getElementById("t-title"); ti.focus(); if (/…/.test(t[0])) ti.setSelectionRange(t[0].length - 1, t[0].length); }; });
       document.querySelectorAll("[data-tw]").forEach(function(b){ b.onclick = function(){ S.tf = b.getAttribute("data-tw"); rTasks(); }; });
       document.getElementById("t-add").onclick = function(){
         var t = document.getElementById("t-title").value.trim(); if (!t) { toast("Напишіть, що зробити"); return; }
