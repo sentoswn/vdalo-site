@@ -277,7 +277,7 @@ drop trigger if exists profiles_guard on public.profiles;
 create trigger profiles_guard before update on public.profiles for each row execute function public.profiles_guard();
 
 drop policy if exists s_read on public.settings;
-create policy s_read on public.settings for select using (true);
+create policy s_read on public.settings for select using (key like 'bonus%' or public.is_staff());
 drop policy if exists s_write on public.settings;
 create policy s_write on public.settings for all using (public.is_admin()) with check (public.is_admin());
 
