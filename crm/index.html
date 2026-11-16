@@ -329,6 +329,11 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       document.querySelectorAll("#tabs button").forEach(function(b){ b.onclick = function(){ go(b.getAttribute("data-tab")); }; });
       var h = location.hash.replace("#", "");
       if (S.own && /^paysync=/.test(h)) { paySync(h.slice(8)); h = "pay"; }
+      else if (S.own && /^paysyncz=/.test(h)) { // стиснуті дані (gzip + base64url) — коротке посилання
+        try { var bb = atob(h.slice(9).replace(/-/g, "+").replace(/_/g, "/")), u = Uint8Array.from(bb, function(c){ return c.charCodeAt(0); });
+          new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream("gzip"))).text().then(function(t){ paySync(encodeURIComponent(t)); }).catch(fail);
+        } catch (e) { fail(e); }
+        h = "pay"; }
       go(tabsAllowed().indexOf(h) >= 0 ? h : "leads");
       counts(); heartbeat();
     });
