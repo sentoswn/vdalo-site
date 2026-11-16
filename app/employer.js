@@ -29,7 +29,7 @@
       if (res.some(Boolean)) { show("emp-sent"); if (window.gtag) gtag("event", "generate_lead", {form: "employer"}); }
       else {
         var t = text(d); $("emp-msg").textContent = t;
-        $("emp-wa").href = "https://wa.me/380736067700?text=" + encodeURIComponent(t);
+        $("emp-wa").href = "https://wa.me/380660050060?text=" + encodeURIComponent(t);
         show("emp-fallback");
       }
     });
