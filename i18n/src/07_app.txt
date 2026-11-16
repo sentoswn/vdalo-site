@@ -148,3 +148,10 @@
 Заповніть ім’я, телефон і місто. ¦ Заполните имя, телефон и город. ¦ Please fill in your name, phone and city. ¦ Uzupełnij imię, telefon i miasto.
 Потрібна згода на обробку даних. ¦ Нужно согласие на обработку данных. ¦ Consent to data processing is required. ¦ Wymagana jest zgoda na przetwarzanie danych.
 Не вдалося зберегти. Спробуйте ще раз. ¦ Не удалось сохранить. Попробуйте ещё раз. ¦ Couldn't save. Please try again. ¦ Nie udało się zapisać. Spróbuj ponownie.
+Сортувати: ¦ Сортировать: ¦ Sort: ¦ Sortuj:
+Сортувати ¦ Сортировать ¦ Sort ¦ Sortuj
+Зарплата: від більшої ¦ Зарплата: по убыванию ¦ Pay: highest first ¦ Wynagrodzenie: od najwyższego
+Зарплата: від меншої ¦ Зарплата: по возрастанию ¦ Pay: lowest first ¦ Wynagrodzenie: od najniższego
+Спочатку з безкоштовним житлом ¦ Сначала с бесплатным жильём ¦ Free housing first ¦ Najpierw z darmowym zakwaterowaniem
+Нові вакансії ¦ Новые вакансии ¦ Newest jobs ¦ Najnowsze oferty
+Сортування вакансій ¦ Сортировка вакансий ¦ Sort jobs ¦ Sortowanie ofert

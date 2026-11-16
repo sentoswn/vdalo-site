@@ -708,6 +708,10 @@ body.mnav-open .fab{display:none}
 .cc-list .cc-c{color:var(--muted);font-weight:700}
 .cc-globe{width:24px;height:16px;flex:0 0 24px;display:grid;place-items:center;color:var(--muted)}
 .cc-globe svg{width:16px;height:16px}
+
+.sortl{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--muted);font-size:14px}
+.sortl select{width:auto;padding:8px 34px 8px 12px;border-radius:999px;font-size:14px;background-color:var(--surface)}
+@media (max-width:640px){.sortl span{display:none}.sortl select{max-width:200px}}
 </style>
 </head>
 <body>
@@ -815,6 +819,7 @@ body.mnav-open .fab{display:none}
     <div class="fmeta">
       <p class="count" id="count" aria-live="polite"></p>
       <button class="reset" type="button" id="reset" hidden>Wyczyść filtry</button>
+      <label class="sortl"><span>Sortuj:</span><select id="sort2" aria-label="Sortowanie ofert"><option value="rec">Najpierw pilne</option><option value="pay">Wynagrodzenie: od najwyższego</option><option value="payasc">Wynagrodzenie: od najniższego</option><option value="date">Najbliższy przyjazd</option><option value="house">Najpierw z darmowym zakwaterowaniem</option><option value="new">Najnowsze oferty</option></select></label>
     </div>
 
     <div class="grid" id="grid"><!--seo:grid--><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-CZ"/></svg><span class="loc">Czechy · Rajhrad (15 km od Brna)</span></div><h3><a href="/pl/vakansii/545/" data-vid="545">Operator magazynu logistycznego</a></h3><div class="money"><p class="uah num">≈ 51 000–74 500 <span class="u">UAH/mies.</span></p><p class="uah-sub">przed opodatkowaniem · 25 000–36 500 CZK/mies. brutto</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Zakwaterowanie zapewnione</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 18.11 (pojutrze)</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/545/" data-vid="545">Więcej</a><button class="btn sm" type="button" data-apply="545">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-CZ"/></svg><span class="loc">Czechy · Plzeň</span></div><h3><a href="/pl/vakansii/503/" data-vid="503">Pracownik magazynowy</a></h3><div class="money"><p class="uah num">≈ 55 500 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 31 700–36 000 CZK/mies. brutto</p></div><ul class="facts"><li class=""><svg class="i"><use href="#i-home"/></svg>Zakwaterowanie 6 500 CZK</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 18.11 (pojutrze)</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/503/" data-vid="503">Więcej</a><button class="btn sm" type="button" data-apply="503">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-CZ"/></svg><span class="loc">Czechy · Šenov u Nového Jičína (30 km od Frydek-Mistek)</span></div><h3><a href="/pl/vakansii/543/" data-vid="543">Operator produkcji</a></h3><p class="co-line"><svg class="i"><use href="#i-bld"/></svg>Plastic Omnium</p><div class="money"><p class="uah num">≈ 53 000 <span class="u">UAH/mies.</span></p><p class="uah-sub"><b>na rękę</b> · 27 723–32 000 CZK/mies. brutto</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Zakwaterowanie zapewnione</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 19.11</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/543/" data-vid="543">Więcej</a><button class="btn sm" type="button" data-apply="543">Aplikuj</button></div></article><article class="vac"><div class="vac-top"><svg class="flag" aria-hidden="true"><use href="#f-CZ"/></svg><span class="loc">Czechy · Bor u Tachova (45 km od Pilzno)</span></div><h3><a href="/pl/vakansii/513/" data-vid="513">Operator magazynu z uprawnieniami na reach truck</a></h3><div class="money"><p class="uah num">≈ 70 500–88 000 <span class="u">UAH/mies.</span></p><p class="uah-sub">przed opodatkowaniem · 215 CZK/godz. brutto</p></div><ul class="facts"><li class="ok"><svg class="i"><use href="#i-home"/></svg>Darmowe zakwaterowanie</li><li class="ok"><svg class="i"><use href="#i-doc"/></svg>Umowa o pracę</li><li class="date"><svg class="i"><use href="#i-cal"/></svg>Przyjazd 26.11</li><li><svg class="i"><use href="#i-users"/></svg>Mężczyźni</li></ul><div class="vac-actions"><a class="btn sm ghost" href="/pl/vakansii/513/" data-vid="513">Więcej</a><button class="btn sm" type="button" data-apply="513">Aplikuj</button></div></article><!--/seo:grid--></div>
@@ -927,7 +932,7 @@ body.mnav-open .fab{display:none}
     <div class="fgroup"><span class="lbl">Dla kogo</span><div class="seg" id="tb-who" role="group" aria-label="Dla kogo"></div></div>
     <div class="fgroup"><label class="switch"><input type="checkbox" id="tb-housing"> Tylko z zakwaterowaniem</label></div>
     <div class="fgroup"><label class="lbl" for="f-co">Firma</label><select id="f-co"><option value="">Dowolna firma</option></select></div>
-    <div class="fgroup"><label class="lbl" for="sort">Sortowanie</label><select id="sort"><option value="rec">Najpierw pilne</option><option value="date">Najbliższy przyjazd</option><option value="pay">Najwyższe wynagrodzenie</option></select></div>
+    <div class="fgroup"><label class="lbl" for="sort">Sortowanie</label><select id="sort"><option value="rec">Najpierw pilne</option><option value="pay">Wynagrodzenie: od najwyższego</option><option value="payasc">Wynagrodzenie: od najniższego</option><option value="date">Najbliższy przyjazd</option><option value="house">Najpierw z darmowym zakwaterowaniem</option><option value="new">Najnowsze oferty</option></select></div>
     <div class="fsheet-actions"><button class="btn ghost" type="button" id="f-reset">Wyczyść</button><button class="btn" type="button" id="f-apply">Pokaż oferty</button></div>
   </div>
 </div>
@@ -1349,7 +1354,15 @@ window.Vdalo = window.Vdalo || (function(){
     });
     var byDate=function(a,b){ return (a._next?a._next.getTime():9e15)-(b._next?b._next.getTime():9e15); };
     var pay=function(v){ var u=v._uah; return u?(u.unit==="міс"?u.max:u.max*170):0; };
-    list.sort(o.sort==="pay"?function(a,b){ return pay(b)-pay(a); }:o.sort==="date"?byDate:function(a,b){ return ((b.hot?1:0)-(a.hot?1:0))||byDate(a,b); });
+    var payMin=function(v){ var u=v._uah; return u?(u.unit==="міс"?u.min||u.max:(u.min||u.max)*170):9e15; };
+    var free=function(v){ return v._h&&v._h.k==="ok"?1:0; };
+    var hotDate=function(a,b){ return ((b.hot?1:0)-(a.hot?1:0))||byDate(a,b); };
+    list.sort(o.sort==="pay"?function(a,b){ return pay(b)-pay(a); }
+      :o.sort==="payasc"?function(a,b){ return payMin(a)-payMin(b); }
+      :o.sort==="date"?byDate
+      :o.sort==="house"?function(a,b){ return (free(b)-free(a))||pay(b)-pay(a); }
+      :o.sort==="new"?function(a,b){ return (+b.id||0)-(+a.id||0); }
+      :hotDate);
     return list;
   }
 
@@ -1392,7 +1405,7 @@ window.Vdalo = window.Vdalo || (function(){
     $("f-co").value=st.co;
     var nf=(st.country!=="all"&&!P.country?1:0)+(st.who!=="all"&&!P.who?1:0)+(st.housing?1:0)+(st.co?1:0)+(st.sort!=="rec"?1:0);
     $("fcount").hidden=!nf; $("fcount").textContent=nf;
-    $("tb-housing").checked=st.housing; $("pick-housing").checked=st.housing; $("q").value!==st.q&&($("q").value=st.q); $("sort").value=st.sort;
+    $("tb-housing").checked=st.housing; $("pick-housing").checked=st.housing; $("q").value!==st.q&&($("q").value=st.q); $("sort").value=st.sort; $("sort2").value=st.sort;
     $("pick-country").value=st.country;
     Array.prototype.forEach.call($("pick-who").children,function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-who")===st.who); });
     Array.prototype.forEach.call($("countries").children,function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-country")===st.country); });
@@ -1577,6 +1590,7 @@ window.Vdalo = window.Vdalo || (function(){
   window.addEventListener("hashchange",route);
   $("q").addEventListener("input",function(e){ st.q=e.target.value; st.shown=PAGE; render(); renderCos(); });
   $("sort").addEventListener("change",function(e){ set({sort:e.target.value}); });
+  $("sort2").addEventListener("change",function(e){ set({sort:e.target.value}); try { gtag("event","sort",{value:e.target.value}); } catch(x){} });
   $("tb-housing").addEventListener("change",function(e){ set({housing:e.target.checked}); });
   $("pick-housing").addEventListener("change",function(e){ set({housing:e.target.checked}); });
   $("pick-country").addEventListener("change",function(e){ set({country:e.target.value}); });
