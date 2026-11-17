@@ -1,20 +1,16 @@
 // Вхідні листи на @vdalo-robota.com.ua (Resend → веб-перехоплювач email.received).
-// URL у Resend: https://<project>.supabase.co/functions/v1/mail-in?k=<секретний ключ> (у коді — лише його SHA-256).
+// URL у Resend: https://<project>.supabase.co/functions/v1/mail-in
+// Підробити лист неможливо: функція бере вміст лише з API Resend за email_id нашим ключем — чужий id просто не знайдеться.
 // Функція забирає повний текст листа з Resend, кладе його в mail_messages (видно у CRM → «Пошта»)
 // і надсилає сповіщення в Telegram власникам (або в чат із налаштування mail_tg_chat).
 import { createClient } from "npm:@supabase/supabase-js@2";
 
-const KEY_SHA256 = "a0f10122b2435eef077f72ff805cbe3554ed135bd4451d4b8cef295d8462ef3d";
-const enc = new TextEncoder();
-const hex = (b: ArrayBuffer) => [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("");
 const esc = (s: unknown) => String(s ?? "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c] as string));
 const strip = (h: string) => h.replace(/<style[\s\S]*?<\/style>|<script[\s\S]*?<\/script>/gi, " ").replace(/<br\s*\/?>|<\/p>|<\/div>/gi, "\n")
   .replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/[ \t]+/g, " ").replace(/\n\s*\n+/g, "\n").trim();
 const addr = (v: unknown) => Array.isArray(v) ? v.join(", ") : String(v ?? "");
 
 Deno.serve(async (req) => {
-  const url = new URL(req.url);
-  if (hex(await crypto.subtle.digest("SHA-256", enc.encode(url.searchParams.get("k") || ""))) !== KEY_SHA256) return new Response("forbidden", { status: 403 });
   if (req.method !== "POST") return new Response("ok");
   let ev: any = {};
   try { ev = await req.json(); } catch { return new Response("bad json", { status: 400 }); }
@@ -23,11 +19,10 @@ Deno.serve(async (req) => {
   const meta = ev.data || {};
   const id = String(meta.email_id || meta.id || "");
   const { data: sec } = await sb.from("app_secrets").select("value").eq("key", "resend_api_key").maybeSingle();
-  let full: any = {};
-  if (sec?.value && id) {
-    const r = await fetch("https://api.resend.com/emails/receiving/" + id, { headers: { Authorization: "Bearer " + sec.value } });
-    if (r.ok) full = await r.json();
-  }
+  if (!sec?.value || !/^[0-9a-f-]{20,}$/i.test(id)) return new Response("no key / bad id", { status: 400 });
+  const r = await fetch("https://api.resend.com/emails/receiving/" + id, { headers: { Authorization: "Bearer " + sec.value } });
+  if (!r.ok) return new Response("not found in Resend", { status: 404 });
+  const full: any = await r.json();
   const fromRaw = String(full?.headers?.from || meta.from || full.from || "");
   const m = fromRaw.match(/^\s*"?([^"<]*)"?\s*<([^>]+)>/);
   const row = {

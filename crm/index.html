@@ -189,8 +189,23 @@ main{padding:20px;max-width:1500px;margin:0 auto}
 .ic{width:18px;height:18px;flex:0 0 auto;vertical-align:-3px}
 .ic.xs{width:15px;height:15px;vertical-align:-2px}
 .tabs button{display:inline-flex;align-items:center;gap:7px}
-.tabs button .ic{width:17px;height:17px;opacity:.75}
-.tabs button[aria-selected=true] .ic{opacity:1;color:#1f4fd1}
+.tabs button .ic{width:17px;height:17px;color:var(--c,#64748b);opacity:.9;transition:transform .15s}
+.tabs button:hover .ic{transform:scale(1.12)}
+.tabs button[aria-selected=true] .ic{opacity:1;color:var(--c,#1f4fd1)}
+.tabs button[data-tab=leads]{--c:#2563eb}
+.tabs button[data-tab=tasks]{--c:#16a34a}
+.tabs button[data-tab=chat]{--c:#0ea5e9}
+.tabs button[data-tab=mail]{--c:#7c3aed}
+.tabs button[data-tab=analytics]{--c:#f59e0b}
+.tabs button[data-tab=sources]{--c:#e11d48}
+.tabs button[data-tab=pay]{--c:#d97706}
+.tabs button[data-tab=employers]{--c:#0f766e}
+.tabs button[data-tab=people]{--c:#db2777}
+.tabs button[data-tab=payouts]{--c:#059669}
+.tabs button[data-tab=mylink]{--c:#4f46e5}
+.tabs button[data-tab=guide]{--c:#0891b2}
+.tabs button[data-tab=settings]{--c:#64748b}
+.tabs button[aria-selected=true]{box-shadow:inset 0 -2px 0 var(--c)}
 .hello-l{display:flex;gap:14px;align-items:center}
 .hello-ic{width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.8);display:grid;place-items:center;color:#f59e0b}
 .hello-ic .ic{width:26px;height:26px}
