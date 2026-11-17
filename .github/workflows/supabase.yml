@@ -61,3 +61,6 @@ jobs:
       - name: Deploy tg-auth
         if: steps.chk.outputs.skip != '1'
         run: supabase functions deploy tg-auth --yes --project-ref "$REF" --no-verify-jwt --use-api
+      - name: Deploy mail-in
+        if: steps.chk.outputs.skip != '1'
+        run: supabase functions deploy mail-in --yes --project-ref "$REF" --no-verify-jwt --use-api
