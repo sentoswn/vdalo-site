@@ -94,7 +94,7 @@ window.Vdalo = window.Vdalo || (function(){
   function show(){
     if (document.getElementById("vd-app") || hidden() || !mobile || location.pathname.indexOf("/crm") === 0) return;
     var b = document.createElement("div"); b.id = "vd-app";
-    b.setAttribute("style", "position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:9999;display:flex;align-items:center;gap:12px;padding:12px 12px 12px 14px;border-radius:18px;background:#0b0c0e;color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.25);font-family:inherit;max-width:520px;margin:0 auto");
+    b.setAttribute("style", "position:fixed;left:12px;right:12px;bottom:calc(88px + env(safe-area-inset-bottom));z-index:9999;display:flex;align-items:center;gap:12px;padding:12px 12px 12px 14px;border-radius:18px;background:#0b0c0e;color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.25);font-family:inherit;max-width:520px;margin:0 auto");
     b.innerHTML = '<img src="/img/app/icon-192.png" alt="" width="40" height="40" style="border-radius:10px;flex:none">' +
       '<div style="flex:1;min-width:0;line-height:1.25"><b style="display:block;font-size:15px">' + L[0] + '</b><small id="vd-app-sub" style="opacity:.75;font-size:12.5px">' + L[1] + '</small></div>' +
       '<button type="button" id="vd-app-go" style="border:0;border-radius:12px;padding:10px 14px;background:#fff;color:#0b0c0e;font:700 14px/1 inherit;cursor:pointer;flex:none">' + L[2] + '</button>' +
