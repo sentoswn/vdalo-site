@@ -1,0 +1,24 @@
+{
+  "id": "/?app",
+  "name": "Вдало — робота за кордоном",
+  "short_name": "Вдало",
+  "description": "Вакансії в Польщі та Європі для українців, особистий кабінет і CRM команди «Вдало».",
+  "lang": "uk",
+  "start_url": "/?source=app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f3f5f7",
+  "theme_color": "#0b0c0e",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {"src": "/img/app/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/img/app/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "/img/app/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ],
+  "shortcuts": [
+    {"name": "Вакансії", "url": "/?source=app#vacancies", "icons": [{"src": "/img/app/icon-192.png", "sizes": "192x192"}]},
+    {"name": "Мій кабінет", "url": "/kabinet/?source=app", "icons": [{"src": "/img/app/icon-192.png", "sizes": "192x192"}]},
+    {"name": "CRM команди", "url": "/crm/", "icons": [{"src": "/img/app/icon-192.png", "sizes": "192x192"}]}
+  ]
+}

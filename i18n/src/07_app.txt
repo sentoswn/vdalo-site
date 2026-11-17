@@ -159,3 +159,4 @@
 Перераховано за середнім банківським курсом ¦ Пересчитано по среднему банковскому курсу ¦ Converted at the average bank rate ¦ Przeliczono po średnim kursie bankowym
 грн на місяць (за середнім банківським курсом на ¦ грн в месяц (по среднему банковскому курсу на ¦ UAH a month (at the average bank rate of ¦ UAH miesięcznie (według średniego kursu bankowego z
 середнім банківським курсом ¦ среднему банковскому курсу ¦ the average bank rate ¦ średnim kursie bankowym
+📱 Застосунок «Вдало» на телефон ¦ 📱 Приложение «Вдало» на телефон ¦ 📱 Vdalo app for your phone ¦ 📱 Aplikacja Vdalo na telefon
