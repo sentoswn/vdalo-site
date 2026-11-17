@@ -1,0 +1,50 @@
+# Щоранку малює 3 сторіс для Instagram (tools/stories/stories.py) і надсилає їх
+# власникам (адміни CRM) від бота @vdalo_robota_bot разом із підказками,
+# яке посилання чи стікер додати. Нових секретів не потрібно.
+name: Сторіс на день
+
+on:
+  schedule:
+    - cron: "41 6 * * *"   # ~08:41 за Києвом (взимку), ~09:41 влітку
+  push:
+    branches: [main]
+    paths: [tools/stories/**, .github/workflows/stories.yml]
+  workflow_dispatch:
+    inputs:
+      day:
+        description: "Дата YYYY-MM-DD (порожньо — сьогодні)"
+        required: false
+
+concurrency: stories
+
+jobs:
+  stories:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Render
+        env: {TZ: Europe/Kyiv}
+        run: |
+          pip install -q playwright
+          python -m playwright install --with-deps chromium >/dev/null
+          python3 tools/stories/stories.py --out out ${{ github.event.inputs.day && format('--day {0}', github.event.inputs.day) || '' }}
+      - name: Send to Telegram
+        env:
+          DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          BOT: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: |
+          if [ -z "$DB_URL" ] || [ -z "$BOT" ]; then echo "Секрети не задано — пропускаю."; exit 0; fi
+          command -v psql >/dev/null || sudo apt-get install -y -qq postgresql-client >/dev/null
+          chats=$(psql "$DB_URL" -X -q -A -t -c "select tg_id from public.profiles where role='admin' and tg_id is not null")
+          media='[{"type":"photo","media":"attach://s1"},{"type":"photo","media":"attach://s2"},{"type":"photo","media":"attach://s3"}]'
+          for c in $chats; do
+            curl -s -o /dev/null -w "photos %{http_code}\n" "https://api.telegram.org/bot${BOT}/sendMediaGroup" \
+              -F chat_id="$c" -F media="$media" -F s1=@out/story-1.jpg -F s2=@out/story-2.jpg -F s3=@out/story-3.jpg
+            curl -s -o /dev/null -w "tips %{http_code}\n" "https://api.telegram.org/bot${BOT}/sendMessage" \
+              --data-urlencode chat_id="$c" --data-urlencode text@out/tips.txt -d disable_web_page_preview=true
+          done
+      - uses: actions/upload-artifact@v4
+        with: {name: stories, path: out, retention-days: 7}
