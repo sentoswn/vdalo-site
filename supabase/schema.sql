@@ -757,3 +757,52 @@ do $$ begin
     execute 'alter publication supabase_realtime add table public.chat_messages';
   end if;
 end $$;
+
+-- ============ Пошта info@vdalo-robota.com.ua в CRM (Resend): бачать і пишуть лише власники ============
+create table if not exists public.app_secrets (key text primary key, value text not null, updated_at timestamptz not null default now());
+alter table public.app_secrets enable row level security;   -- політик немає: читає лише service role (функції)
+revoke all on public.app_secrets from anon, authenticated;
+create or replace function public.set_secret(p_key text, p_value text) returns void
+language plpgsql security definer set search_path = public as $$
+begin
+  if not public.is_admin() then raise exception 'forbidden'; end if;
+  if p_key not in ('resend_api_key') then raise exception 'unknown key'; end if;
+  insert into public.app_secrets(key, value, updated_at) values (p_key, trim(p_value), now())
+  on conflict (key) do update set value = excluded.value, updated_at = now();
+end $$;
+create or replace function public.has_secret(p_key text) returns boolean language sql stable security definer set search_path = public as $$
+  select public.is_admin() and exists (select 1 from public.app_secrets where key = p_key and value <> '')
+$$;
+grant execute on function public.set_secret(text, text), public.has_secret(text) to authenticated;
+
+create table if not exists public.mail_messages (
+  id          bigserial primary key,
+  dir         text not null check (dir in ('in', 'out')),
+  resend_id   text unique,
+  message_id  text,
+  in_reply_to text,
+  from_addr   text,
+  from_name   text,
+  to_addr     text,
+  subject     text,
+  text_body   text,
+  html_body   text,
+  sent_by     uuid references public.profiles(id) on delete set null,
+  read_at     timestamptz,
+  created_at  timestamptz not null default now()
+);
+create index if not exists mail_messages_created on public.mail_messages(created_at desc);
+alter table public.mail_messages enable row level security;
+drop policy if exists mail_admin on public.mail_messages;
+create policy mail_admin on public.mail_messages for select using (public.is_admin());
+drop policy if exists mail_admin_upd on public.mail_messages;
+create policy mail_admin_upd on public.mail_messages for update using (public.is_admin()) with check (public.is_admin());
+drop policy if exists mail_admin_del on public.mail_messages;
+create policy mail_admin_del on public.mail_messages for delete using (public.is_admin());
+grant select, update, delete on public.mail_messages to authenticated;
+do $$ begin
+  if exists (select 1 from pg_publication where pubname = 'supabase_realtime')
+     and not exists (select 1 from pg_publication_tables where pubname = 'supabase_realtime' and tablename = 'mail_messages') then
+    execute 'alter publication supabase_realtime add table public.mail_messages';
+  end if;
+end $$;

@@ -64,3 +64,6 @@ jobs:
       - name: Deploy mail-in
         if: steps.chk.outputs.skip != '1'
         run: supabase functions deploy mail-in --yes --project-ref "$REF" --no-verify-jwt --use-api
+      - name: Deploy mail-send
+        if: steps.chk.outputs.skip != '1'
+        run: supabase functions deploy mail-send --yes --project-ref "$REF" --no-verify-jwt --use-api

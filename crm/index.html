@@ -88,6 +88,8 @@ main{padding:20px;max-width:1500px;margin:0 auto}
 .toast.show{display:block}
 .note{color:var(--muted);font-size:13px}
 /* Чат співробітників */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}.seg button{border:0;background:var(--surface);padding:8px 14px;cursor:pointer;font:inherit;color:var(--ink)}.seg button[aria-pressed=true]{background:#1f4fd1;color:#fff}
+#mail-form input,#mail-form textarea{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;background:var(--surface);color:var(--ink)}
 .chat{display:grid;grid-template-columns:260px 1fr;padding:0;overflow:hidden;height:calc(100vh - 170px);min-height:460px}
 .chat-l{border-right:1px solid var(--line);overflow-y:auto;padding:8px}
 .chat-i{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;text-align:left;padding:10px;border-radius:12px;cursor:pointer;color:inherit;font:inherit}
@@ -209,6 +211,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     <button role="tab" data-tab="leads" aria-selected="true"><svg class="ic"><use href="#ic-users"/></svg><span id="t-leads">Кандидати</span><span class="n" id="n-leads" hidden></span></button>
     <button role="tab" data-tab="tasks"><svg class="ic"><use href="#ic-check"/></svg>Задачі<span class="n" id="n-tasks" hidden></span></button>
     <button role="tab" data-tab="chat"><svg class="ic"><use href="#ic-chat"/></svg>Чат<span class="n" id="n-chat" hidden></span></button>
+    <button role="tab" data-tab="mail" data-own><svg class="ic"><use href="#ic-inbox"/></svg>Пошта<span class="n" id="n-mail" hidden></span></button>
     <button role="tab" data-tab="analytics" data-own><svg class="ic"><use href="#ic-chart"/></svg>Аналітика</button>
     <button role="tab" data-tab="sources" data-own><svg class="ic"><use href="#ic-target"/></svg>Джерела</button>
     <button role="tab" data-tab="pay"><svg class="ic"><use href="#ic-trophy"/></svg><span id="t-pay">Оплата за кандидата</span></button>
@@ -311,6 +314,17 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       chatDel: function(id){ return s.from("chat_messages").delete().eq("id", id).then(ok); },
       chatRead: function(room, last){ return s.from("chat_reads").upsert({user_id: uid, room: room, last_id: last}, {onConflict: "user_id,room"}).then(ok); },
       chatSub: function(fn){ return s.channel("chat-" + uid).on("postgres_changes", {event: "INSERT", schema: "public", table: "chat_messages"}, function(p){ fn(p.new); }).subscribe(); },
+      mailList: function(){ return s.from("mail_messages").select("id,dir,from_addr,from_name,to_addr,subject,text_body,read_at,created_at,sent_by").order("id", {ascending: false}).limit(300).then(ok); },
+      mailGet: function(id){ return s.from("mail_messages").select("*").eq("id", id).single().then(ok); },
+      mailRead: function(id){ return s.from("mail_messages").update({read_at: new Date().toISOString()}).eq("id", id).is("read_at", null).then(ok); },
+      mailDel: function(id){ return s.from("mail_messages").delete().eq("id", id).then(ok); },
+      mailUnread: function(){ return s.from("mail_messages").select("id", {count: "exact", head: true}).eq("dir", "in").is("read_at", null).then(function(r){ if (r.error) throw r.error; return r.count || 0; }); },
+      mailSend: function(body){ return s.functions.invoke("mail-send", {body: body}).then(function(r){
+        if (r.error) { var c = r.error.context; return (c && c.json ? c.json() : Promise.resolve({})).then(function(j){ throw new Error(j && j.error || r.error.message); }); }
+        if (r.data && r.data.error) throw new Error(r.data.error); return r.data; }); },
+      mailSub: function(fn){ return s.channel("mail-" + uid).on("postgres_changes", {event: "INSERT", schema: "public", table: "mail_messages"}, function(p){ fn(p.new); }).subscribe(); },
+      hasSecret: function(k){ return s.rpc("has_secret", {p_key: k}).then(ok); },
+      setSecret: function(k, v){ return s.rpc("set_secret", {p_key: k, p_value: v}).then(ok); },
       payRank: function(){ return s.rpc("vacancy_pay_rank").then(ok); },
       savePay: function(rows){ return s.from("vacancy_pay").upsert(rows, {onConflict: "id"}).then(ok); },
       staff: function(){ return s.from("profiles").select("id,first_name,last_name,full_name,tg_username,role,ref_code,last_seen_at").in("role", ["manager", "admin"]).then(ok); },
@@ -417,7 +431,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
  ["Анкета заповнена", p.onboarded_at ? dt(p.onboarded_at, true) : "ні"]];
     return '<b>Анкета</b><dl class="kv">' + rows.filter(function(r){ return r[1]; }).map(function(r){ return '<dt>' + E(r[0]) + '</dt><dd>' + E(r[1]) + '</dd>'; }).join("") + '</dl>';
   }
-  function tabsAllowed(){ return S.own ? ["leads", "tasks", "chat", "analytics", "sources", "pay", "employers", "people", "payouts", "mylink", "guide", "settings"] : ["leads", "tasks", "chat", "pay", "mylink", "guide"]; }
+  function tabsAllowed(){ return S.own ? ["leads", "tasks", "chat", "mail", "analytics", "sources", "pay", "employers", "people", "payouts", "mylink", "guide", "settings"] : ["leads", "tasks", "chat", "pay", "mylink", "guide"]; }
   function ic(n, cls){ return '<svg class="ic' + (cls ? " " + cls : "") + '"><use href="#ic-' + n + '"/></svg>'; }
   function mgrsOf(l){ var a = (l.managers && l.managers.length) ? l.managers.slice() : []; if (l.manager_id && a.indexOf(l.manager_id) < 0) a.unshift(l.manager_id); return a; }
   function hasMgr(l, id){ return mgrsOf(l).indexOf(id) >= 0; }
@@ -450,6 +464,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     closeDrawer(); render();
   }
   function counts(){
+    if (S.own) { mailBadge(); mailStart(); }
     chatBadge(); chatStart(); if (!S.chatPeople) API.chatPeople().then(function(p){ S.chatPeople = p || []; }).catch(function(){});
     var jobs = [API.leads(), API.tasks()];
     if (S.own) jobs.push(API.employers(), API.payouts());
@@ -469,7 +484,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   function demoBar(){ return ""; }
   function render(){
     app.innerHTML = '<div class="empty">Завантаження…</div>';
-    ({guide: rGuide, leads: rLeads, tasks: rTasks, analytics: rAnalytics, sources: function(){ VdaloSources(app, {toast: toast, fail: fail}); }, mylink: rMyLink, chat: rChat, pay: rPay, employers: rEmployers, people: rPeople, payouts: rPayouts, settings: rSettings})[S.tab]();
+    ({guide: rGuide, leads: rLeads, tasks: rTasks, analytics: rAnalytics, sources: function(){ VdaloSources(app, {toast: toast, fail: fail}); }, mylink: rMyLink, chat: rChat, mail: rMail, pay: rPay, employers: rEmployers, people: rPeople, payouts: rPayouts, settings: rSettings})[S.tab]();
   }
   function fail(e){ console.warn(e); toast("Помилка: " + (e && e.message || "не вдалося зберегти")); }
 
@@ -1014,6 +1029,85 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     box.appendChild(el);
     var del = el.querySelector("[data-del]"); if (del) del.onclick = function(e){ e.preventDefault(); if (!confirm("Видалити повідомлення?")) return; API.chatDel(m.id).then(function(){ el.remove(); }).catch(fail); };
     if (!bulk) box.scrollTop = box.scrollHeight;
+  }
+  /* ================= Пошта info@vdalo-robota.com.ua (лише власники) ================= */
+  // Вхідні приходять через Resend → функцію mail-in (і дублюються в Telegram); надсилання — функцією mail-send.
+  function mailBadge(){ API.mailUnread().then(function(n){ badge("n-mail", n); }).catch(function(){}); }
+  function mailStart(){
+    if (S.mailSub) return;
+    try { S.mailSub = API.mailSub(function(m){
+      if (m.dir === "in") { toast("📧 Новий лист: " + (m.from_name || m.from_addr || "") + " — " + (m.subject || "")); }
+      mailBadge(); if (S.tab === "mail") mailLoad(); }); } catch (e) {}
+  }
+  function mailWho(m){ return m.dir === "out" ? "Кому: " + (m.to_addr || "") : (m.from_name ? m.from_name + " <" + m.from_addr + ">" : (m.from_addr || "")); }
+  function rMail(){
+    S.mailBox = S.mailBox || "in";
+    app.innerHTML = '<div class="toolbar" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px">' +
+      '<button class="btn" id="mail-new">✉️ Новий лист</button>' +
+      '<div class="seg" id="mail-box"><button data-b="in">Вхідні</button><button data-b="out">Надіслані</button></div>' +
+      '<span class="note" style="margin:0">Скринька <b>info@vdalo-robota.com.ua</b> — бачите лише ви з Ритою</span>' +
+      '<button class="btn ghost" id="mail-key" style="margin-left:auto">Налаштувати</button></div>' +
+      '<div id="mail-warn"></div>' +
+      '<div class="chat card"><aside class="chat-l" id="mail-l"><p class="note" style="padding:12px">Завантаження…</p></aside><section class="chat-r" id="mail-r"><p class="note" style="padding:24px">Оберіть лист зліва.</p></section></div>';
+    document.getElementById("mail-new").onclick = function(){ mailCompose(); };
+    document.getElementById("mail-key").onclick = mailKey;
+    document.querySelectorAll("#mail-box [data-b]").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-b") === S.mailBox);
+      b.onclick = function(){ S.mailBox = b.getAttribute("data-b"); rMail(); }; });
+    API.hasSecret("resend_api_key").then(function(ok){ if (!ok) document.getElementById("mail-warn").innerHTML =
+      '<div class="card pad" style="margin-bottom:12px;border-color:#f0b429"><b>Пошту ще не підключено.</b> Натисніть «Налаштувати» і вставте ключ API з resend.com (API Keys → Create). Ключ зберігається в базі й не показується в браузері.</div>'; }).catch(function(){});
+    mailLoad(); mailStart();
+  }
+  function mailLoad(){
+    API.mailList().then(function(r){ S.mail = r; var el = document.getElementById("mail-l"); if (!el) return;
+      var list = r.filter(function(m){ return m.dir === S.mailBox; });
+      el.innerHTML = list.length ? list.map(function(m){ var un = m.dir === "in" && !m.read_at;
+        return '<button type="button" class="chat-i" data-mail="' + m.id + '" aria-current="' + (m.id === S.mailId) + '">' +
+          '<span class="chat-nm"><b style="' + (un ? "" : "font-weight:500") + '">' + (un ? "● " : "") + E(m.subject || "(без теми)") + '</b><small>' + E(mailWho(m)) + '</small>' +
+          '<small>' + new Date(m.created_at).toLocaleString("uk-UA", {day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"}) + '</small></span></button>'; }).join("")
+        : '<p class="note" style="padding:12px">' + (S.mailBox === "in" ? "Вхідних листів ще немає." : "Ви ще нічого не надсилали.") + '</p>';
+      el.querySelectorAll("[data-mail]").forEach(function(b){ b.onclick = function(){ mailOpen(+b.getAttribute("data-mail")); }; });
+    }).catch(fail);
+  }
+  function mailOpen(id){
+    S.mailId = id; var box = document.getElementById("mail-r"); box.innerHTML = '<p class="note" style="padding:24px">Завантаження…</p>';
+    document.querySelectorAll("#mail-l [data-mail]").forEach(function(b){ b.setAttribute("aria-current", +b.getAttribute("data-mail") === id); });
+    API.mailGet(id).then(function(m){
+      var who = m.sent_by ? staffName(m.sent_by) : "";
+      box.innerHTML = '<header class="chat-h" style="display:block"><b>' + E(m.subject || "(без теми)") + '</b><small>' + E(m.dir === "in" ? "Від: " + mailWho(m) : mailWho(m) + (who ? " · надіслав(ла) " + who : "")) +
+        ' · ' + new Date(m.created_at).toLocaleString("uk-UA") + '</small></header>' +
+        '<div class="chat-m" style="display:block"><iframe id="mail-f" sandbox="" style="width:100%;min-height:360px;border:0;background:#fff;border-radius:10px"></iframe></div>' +
+        '<div class="chat-f" style="justify-content:flex-end">' + (m.dir === "in" ? '<button class="btn" id="mail-rep">↩︎ Відповісти</button>' : '') +
+        '<button class="btn ghost" id="mail-del">Видалити</button></div>';
+      var f = document.getElementById("mail-f");
+      f.srcdoc = m.html_body ? '<base target="_blank"><style>body{font-family:Arial,sans-serif;font-size:14px;margin:12px;color:#111}img{max-width:100%}</style>' + m.html_body
+        : '<pre style="white-space:pre-wrap;font-family:Arial,sans-serif;font-size:14px;margin:12px">' + E(m.text_body || "") + '</pre>';
+      f.onload = function(){ try { f.style.height = Math.max(360, f.contentDocument.body.scrollHeight + 40) + "px"; } catch (e) {} };
+      var rp = document.getElementById("mail-rep"); if (rp) rp.onclick = function(){
+        var q = (m.text_body || "").split("\n").slice(0, 40).map(function(l){ return "> " + l; }).join("\n");
+        mailCompose({to: m.from_addr, subject: /^re:/i.test(m.subject || "") ? m.subject : "Re: " + (m.subject || ""), text: "\n\n" + new Date(m.created_at).toLocaleString("uk-UA") + ", " + (m.from_name || m.from_addr) + " пише:\n" + q, reply_to_id: m.id}); };
+      document.getElementById("mail-del").onclick = function(){ if (!confirm("Видалити лист із CRM?")) return; API.mailDel(m.id).then(function(){ S.mailId = null; box.innerHTML = '<p class="note" style="padding:24px">Лист видалено.</p>'; mailLoad(); mailBadge(); }).catch(fail); };
+      if (m.dir === "in" && !m.read_at) API.mailRead(m.id).then(function(){ mailBadge(); mailLoad(); }).catch(function(){});
+    }).catch(fail);
+  }
+  function mailCompose(d){
+    d = d || {}; var box = document.getElementById("mail-r"); if (!box) return;
+    box.innerHTML = '<form id="mail-form" class="pad" style="display:flex;flex-direction:column;gap:10px;padding:16px;height:100%">' +
+      '<b>' + (d.reply_to_id ? "Відповідь" : "Новий лист") + ' від info@vdalo-robota.com.ua</b>' +
+      '<input id="mail-to" type="text" placeholder="Кому (email, кілька — через кому)" value="' + E(d.to || "") + '" required>' +
+      '<input id="mail-sub" type="text" placeholder="Тема" value="' + E(d.subject || "") + '" required>' +
+      '<textarea id="mail-txt" rows="12" placeholder="Текст листа" style="flex:1;min-height:220px" required>' + E(d.text || "") + '</textarea>' +
+      '<div style="display:flex;gap:8px;justify-content:flex-end"><button type="button" class="btn ghost" id="mail-cancel">Скасувати</button><button class="btn" type="submit" id="mail-go">Надіслати</button></div></form>';
+    var t = document.getElementById("mail-txt"); if (d.reply_to_id) { t.focus(); t.setSelectionRange(0, 0); } else document.getElementById(d.to ? "mail-sub" : "mail-to").focus();
+    document.getElementById("mail-cancel").onclick = function(){ if (S.mailId) mailOpen(S.mailId); else box.innerHTML = '<p class="note" style="padding:24px">Оберіть лист зліва.</p>'; };
+    document.getElementById("mail-form").onsubmit = function(e){ e.preventDefault(); var b = document.getElementById("mail-go"); b.disabled = true; b.textContent = "Надсилаю…";
+      API.mailSend({to: document.getElementById("mail-to").value, subject: document.getElementById("mail-sub").value, text: t.value, reply_to_id: d.reply_to_id || null})
+        .then(function(){ toast("Лист надіслано ✅"); S.mailBox = "out"; rMail(); })
+        .catch(function(err){ b.disabled = false; b.textContent = "Надіслати"; fail(err); }); };
+  }
+  function mailKey(){
+    var v = prompt("Вставте ключ API з resend.com (починається з re_). Він збережеться в базі; у браузері його більше видно не буде.");
+    if (!v) return; v = v.trim(); if (!/^re_/.test(v)) return toast("Ключ має починатися з re_");
+    API.setSecret("resend_api_key", v).then(function(){ toast("Ключ збережено ✅"); rMail(); }).catch(fail);
   }
   /* ================= Оплата за кандидата (лише власники) ================= */
   // Дані щодня передає задача оновлення вакансій: /crm/#paysync=[[id, сума], …] (Trello: множник × ставка).
