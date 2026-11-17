@@ -43,14 +43,14 @@ jobs:
         if: steps.chk.outputs.skip != '1'
         continue-on-error: true
         with:
-          version: latest
+          version: 2.122.1
       - name: Wait before retry
         if: steps.chk.outputs.skip != '1' && steps.cli1.outcome == 'failure'
         run: sleep 45
       - uses: supabase/setup-cli@v1
         if: steps.chk.outputs.skip != '1' && steps.cli1.outcome == 'failure'
         with:
-          version: latest
+          version: 2.122.1
       - name: Function secrets
         if: steps.chk.outputs.skip != '1'
         env:
