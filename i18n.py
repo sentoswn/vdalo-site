@@ -173,7 +173,7 @@ def translate_html(h, lang, path, site, tr):
     h = h.replace('<meta property="og:locale" content="uk_UA">', f'<meta property="og:locale" content="{ {"ru": "ru_UA", "en": "en_US", "pl": "pl_PL"}[lang] }">')
     h = h.replace('<meta charset="utf-8">', f'<meta charset="utf-8">\n<script>window.VDALO_LANG="{lang}";</script>', 1)
     if lang in ("en", "pl"):
-        h = h.replace('<span class="logo-mark">В</span>', '<span class="logo-mark">V</span>')
+        h = h.replace('<span class="logo-mark">В<', '<span class="logo-mark">V<')
     return h
 
 
