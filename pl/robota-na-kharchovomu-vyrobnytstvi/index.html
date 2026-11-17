@@ -28,7 +28,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f3f5f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0f1114" media="(prefers-color-scheme: dark) and (max-width: 1024px)">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Ctext x='32' y='44' font-family='Arial Black,Arial' font-weight='900' font-size='36' text-anchor='middle' fill='%23fff'%3EВ%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="/img/app/favicon-64.png">
 <link rel="manifest" href="/pl/manifest.webmanifest">
 <link rel="apple-touch-icon" href="/img/app/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -104,7 +104,9 @@ svg.i{width:18px;height:18px;flex:0 0 18px;stroke:currentColor;fill:none;stroke-
 .top.scrolled{border-bottom-color:var(--line)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
 .logo{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:21px;text-decoration:none}
-.logo-mark{width:36px;height:36px;border-radius:11px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-size:17px}
+.logo-mark{position:relative;width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#c3e3f7,#cdeee0 50%,#f6dbe4);color:#0b0c0e;display:grid;place-items:center;font-size:17px;box-shadow:inset 0 0 0 1px rgba(11,12,14,.06)}
+.logo-ok{position:absolute;right:-5px;bottom:-5px;width:17px;height:17px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 2px var(--bg);display:grid;place-items:center}
+.logo-ok svg{width:12px;height:12px;display:block}
 .nav{display:flex;gap:22px;font-weight:600;font-size:15px}
 .nav a{text-decoration:none;color:var(--muted)}
 .nav a:hover{color:var(--ink)}
@@ -779,7 +781,7 @@ body.mnav-open .fab{display:none}
 
 <header class="top" id="top">
   <div class="wrap">
-    <a class="logo" href="/pl/" aria-label="Vdalo — strona główna"><span class="logo-mark">V</span>Vdalo</a>
+    <a class="logo" href="/pl/" aria-label="Vdalo — strona główna"><span class="logo-mark">V<i class="logo-ok" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4.2 8.3l2.5 2.5 5-5.3" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span>Vdalo</a>
     <nav class="nav" aria-label="Sekcje"><!--seo:nav-->
       <div class="dd"><button class="dd-btn" type="button" aria-expanded="false" aria-haspopup="true" aria-current="page">Oferty pracy<svg class="i"><use href="#i-chev"/></svg></button><div class="dd-menu"><div class="dd-box"><div><b>Według kraju</b><a href="/pl/robota-v-polshchi/">Polska<small>176</small></a><a href="/pl/robota-v-lytvi/">Litwa<small>8</small></a><a href="/pl/robota-v-chekhii/">Czechy<small>5</small></a></div><div><b>Według rodzaju pracy</b><a href="/pl/robota-na-skladi/">Praca w magazynie<small>94</small></a><a href="/pl/robota-na-vyrobnytstvi/">Praca w fabryce<small>123</small></a><a href="/pl/robota-na-kharchovomu-vyrobnytstvi/" aria-current="page">Przetwórstwo mięsa i ryb<small>24</small></a><a href="/pl/vodii-navantazhuvacha/">Operator wózka widłowego<small>28</small></a><a href="/pl/robota-dlia-zhinok/">Dla kobiet<small>99</small></a><a href="/pl/robota-dlia-cholovikiv/">Dla mężczyzn<small>170</small></a><a href="/pl/robota-dlia-par/">Dla par<small>78</small></a><a href="/pl/robota-v-polshchi-dlia-studentiv/">Dla studentów<small>66</small></a></div><a class="dd-all" href="/pl/#vacancies">Wszystkie oferty<svg class="i"><use href="#i-chev"/></svg></a></div></div></div>
       <a href="/pl/yak-tse-pratsiuie/">Jak to działa</a>
