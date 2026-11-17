@@ -660,7 +660,7 @@ def h1_block(h1, lead):
 
 
 ORG = {"@context": "https://schema.org", "@type": "EmploymentAgency", "name": "Вдало", "url": SITE + "/",
-       "image": SITE + "/og.png", "telephone": "+380660050060", "areaServed": "UA",
+       "image": SITE + "/og.png", "telephone": "+380660050060", "email": "info@vdalo-robota.com.ua", "areaServed": "UA",
        "address": {"@type": "PostalAddress", "streetAddress": "вул. Джона Маккейна, 7, офіс 169", "addressLocality": "Київ", "addressCountry": "UA"},
        "description": "Підбір роботи для українців у Польщі, Литві, Чехії та Словаччині. Безкоштовно для кандидатів."}
 
@@ -1093,7 +1093,8 @@ def main():
                       '<div class="card"><h3>Офіс у Києві</h3><p>вул. Джона Маккейна, 7, офіс 169</p><p style="color:var(--muted)">Перед візитом радимо зателефонувати й домовитися про час.</p>'
                       f'<p style="margin-top:14px"><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Київ,+вулиця+Джона+Маккейна,+7" target="_blank" rel="noopener">Відкрити на мапі</a></p></div>'
                       '<div class="card"><h3>Телефон і месенджери</h3><p><a href="tel:+380660050060" data-ch="phone" style="font-weight:800;font-size:22px">+380 66 005 00 60</a></p>'
-                      '<p style="color:var(--muted)">Telegram, Viber і WhatsApp — за цим самим номером. Пишіть, як вам зручніше.</p></div>'
+                      '<p style="color:var(--muted)">Telegram, Viber і WhatsApp — за цим самим номером. Пишіть, як вам зручніше.</p>'
+                      '<p style="margin-top:12px">E-mail: <a href="mailto:info@vdalo-robota.com.ua" data-ch="email" style="font-weight:700">info@vdalo-robota.com.ua</a></p></div>'
                       "</div></section>\n")
             hero = phead(P, False) + office + "\n" + APPLY
             apply_ = ""
@@ -1126,6 +1127,7 @@ def main():
         <p class="lead">Опишіть, кого шукаєте, — менеджер зв’яжеться з вами протягом робочого дня й запропонує кандидатів.</p>
         <div class="contacts">
           <a class="contact" href="tel:+380660050060" data-ch="phone"><span class="ic ph" style="color:var(--bg)"><svg class="i"><use href="#i-phone"/></svg></span><span>+380 66 005 00 60<small>Телефон, Telegram, Viber, WhatsApp</small></span><svg class="i chev"><use href="#i-chev"/></svg></a>
+          <a class="contact" href="mailto:info@vdalo-robota.com.ua" data-ch="email"><span class="ic ph" style="color:var(--bg)"><svg class="i"><use href="#i-send"/></svg></span><span>info@vdalo-robota.com.ua<small>Пошта для роботодавців і партнерів</small></span><svg class="i chev"><use href="#i-chev"/></svg></a>
           <a class="contact" href="https://t.me/+380660050060" data-ch="telegram"><span class="ic tg"><svg class="i"><use href="#i-send"/></svg></span><span>Telegram<small>Відкрити чат</small></span><svg class="i chev"><use href="#i-chev"/></svg></a>
           <a class="contact" href="https://wa.me/380660050060" data-ch="whatsapp"><span class="ic wa"><svg class="i"><use href="#i-round"/></svg></span><span>WhatsApp<small>Відкрити чат</small></span><svg class="i chev"><use href="#i-chev"/></svg></a>
         </div>
