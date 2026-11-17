@@ -1101,7 +1101,8 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       var f = document.getElementById("mail-f");
       f.srcdoc = m.html_body ? '<base target="_blank"><style>body{font-family:Arial,sans-serif;font-size:14px;margin:12px;color:#111}img{max-width:100%}</style>' + m.html_body
         : '<pre style="white-space:pre-wrap;font-family:Arial,sans-serif;font-size:14px;margin:12px">' + E(m.text_body || "") + '</pre>';
-      f.onload = function(){ try { var fit = function(){ f.style.height = Math.max(window.innerHeight * .7, f.contentDocument.documentElement.scrollHeight + 30) + "px"; }; fit(); setTimeout(fit, 400); setTimeout(fit, 1500); } catch (e) {} };
+      f.onload = function(){ try { try { f.contentDocument.querySelectorAll("a[href]").forEach(function(x){ x.target = "_blank"; x.rel = "noopener noreferrer"; }); } catch (e) {}
+        var fit = function(){ f.style.height = Math.max(window.innerHeight * .7, f.contentDocument.documentElement.scrollHeight + 30) + "px"; }; fit(); setTimeout(fit, 400); setTimeout(fit, 1500); } catch (e) {} };
       var rp = document.getElementById("mail-rep"); if (rp) rp.onclick = function(){
         var q = (m.text_body || "").split("\n").slice(0, 40).map(function(l){ return "> " + l; }).join("\n");
         mailCompose({to: m.from_addr, subject: /^re:/i.test(m.subject || "") ? m.subject : "Re: " + (m.subject || ""), text: "\n\n" + new Date(m.created_at).toLocaleString("uk-UA") + ", " + (m.from_name || m.from_addr) + " пише:\n" + q, reply_to_id: m.id}); };
