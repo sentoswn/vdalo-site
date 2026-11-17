@@ -1090,7 +1090,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       var who = m.sent_by ? staffName(m.sent_by) : "";
       box.innerHTML = '<header class="chat-h" style="display:block"><b>' + E(m.subject || "(без теми)") + '</b><small>' + E(m.dir === "in" ? "Від: " + mailWho(m) : mailWho(m) + (who ? " · надіслав(ла) " + who : "")) +
         ' · ' + new Date(m.created_at).toLocaleString("uk-UA") + '</small></header>' +
-        '<div class="chat-m" style="display:block"><iframe id="mail-f" sandbox="" style="width:100%;min-height:360px;border:0;background:#fff;border-radius:10px"></iframe></div>' +
+        '<div class="chat-m" style="display:block"><iframe id="mail-f" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin" style="width:100%;min-height:360px;border:0;background:#fff;border-radius:10px"></iframe></div>' +
         '<div class="chat-f" style="justify-content:flex-end">' + (m.dir === "in" ? '<button class="btn" id="mail-rep">↩︎ Відповісти</button>' : '') +
         '<button class="btn ghost" id="mail-del">Видалити</button></div>';
       var f = document.getElementById("mail-f");
