@@ -18,6 +18,8 @@ window.Vdalo = window.Vdalo || (function(){
     }).catch(function(){ return null; }));
   }
   /* Кнопка «Увійти через Telegram» у контейнері box; після входу викликає done() */
+  function tgRedirect(){ return "https://oauth.telegram.org/auth?bot_id=" + TG_BOT_ID + "&origin=" + encodeURIComponent(location.origin) +
+    "&request_access=write&return_to=" + encodeURIComponent(location.origin + location.pathname + location.search); }
   function tgLogin(box, done, onErr){
     cfg().then(function(c){
       if (!c.tgBot) { onErr && onErr("Вхід через Telegram ще не налаштовано."); return; }
@@ -48,8 +50,7 @@ window.Vdalo = window.Vdalo || (function(){
           '<svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M21.9 4.3 18.7 19.4c-.2 1.1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13 1.4 11.5c-1-.3-1-1 .2-1.5L20.6 2.9c.9-.3 1.6.2 1.3 1.4z"/></svg>' +
           ({uk: "Увійти через Telegram", ru: "Войти через Telegram", en: "Log in with Telegram", pl: "Zaloguj przez Telegram"}[lang] || "Увійти через Telegram") + '</button>';
         box.querySelector("button").onclick = function(){
-          location.href = "https://oauth.telegram.org/auth?bot_id=" + TG_BOT_ID + "&origin=" + encodeURIComponent(location.origin) +
-            "&request_access=write&return_to=" + encodeURIComponent(location.origin + location.pathname + location.search);
+          location.href = tgRedirect();
         };
         return;
       }
@@ -60,6 +61,10 @@ window.Vdalo = window.Vdalo || (function(){
       s.setAttribute("data-onauth", "VdaloTgAuth(user)"); s.setAttribute("data-request-access", "write");
       s.setAttribute("data-lang", (window.VDALO_LANG || "uk") === "uk" ? "uk" : window.VDALO_LANG);
       box.innerHTML = ""; box.appendChild(s);
+      var alt = document.createElement("a"); alt.href = "#"; alt.style.cssText = "display:block;margin-top:10px;font-size:13px;opacity:.75;text-decoration:underline";
+      alt.textContent = {uk: "Не відкривається вікно Telegram? Увійти інакше", ru: "Не открывается окно Telegram? Войти иначе", en: "Telegram window won’t open? Log in another way", pl: "Okno Telegram się nie otwiera? Zaloguj inaczej"}[window.VDALO_LANG || "uk"] || "Увійти інакше";
+      alt.onclick = function(e){ e.preventDefault(); location.href = tgRedirect(); };
+      box.appendChild(alt);
     });
   }
   function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
