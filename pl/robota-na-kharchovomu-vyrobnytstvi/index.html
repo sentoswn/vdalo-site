@@ -2065,7 +2065,8 @@ window.VdaloTrack = window.VdaloTrack || (function(){
       var u=new Date(data.updated+"T12:00:00"), k=Math.round((today-new Date(u.getFullYear(),u.getMonth(),u.getDate()))/864e5);
       var when=k===0?"сьогодні":k===1?"вчора":u.toLocaleDateString("uk-UA",{day:"numeric",month:"long"});
       $("updated").querySelector("span").textContent="Оновлено "+when+" · "+items.length+" "+plural(items.length,"вакансія","вакансії","вакансій");
-      $("eyebrow-txt").textContent=items.length+" "+plural(items.length,"вакансія","вакансії","вакансій")+" · оновлено "+when;
+      var pageN=(P.ids&&P.ids.length&&!P.vac&&!/\/statti\//.test(location.pathname))?items.filter(function(v){return P.ids.indexOf(String(v.id))>=0;}).length:items.length;
+      $("eyebrow-txt").textContent=pageN+" "+plural(pageN,"вакансія","вакансії","вакансій")+" · оновлено "+when;
     }
     $("pick-country").innerHTML='<option value="all">Будь-яка країна</option>'+cs.map(function(c){return '<option value="'+esc(c)+'">'+esc(c)+'</option>';}).join("");
     $("pick-who").innerHTML=PICK_WHO.map(function(x){return '<button type="button" data-who="'+x[0]+'" aria-pressed="false">'+x[1]+'</button>';}).join("");
