@@ -201,22 +201,37 @@ async def render(stories, out):
     return files
 
 
+DAYS_UA = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота", "Неділя"]
+
+
+def build_day(day, data, out):
+    idx = (day - START).days
+    stories = [vacancy_story(data, idx), tip_story(data, idx), poll_story(idx)]
+    asyncio.run(render(stories, out))
+    title = f"{DAYS_UA[day.weekday()]} {day.strftime('%d.%m')}"
+    tips = [f"{i}. {s[2]}" for i, s in enumerate(stories, 1)]
+    (out / "title.txt").write_text(title)
+    (out / "tips.txt").write_text(
+        f"{title} — сторіс (вакансія дня, порада, опитування). Викладайте по черзі, з інтервалом 2–3 години:\n\n" + "\n\n".join(tips))
+    print((out / "tips.txt").read_text())
+
+
 def main():
     ap = argparse.ArgumentParser()
     now = dt.datetime.now()
     ap.add_argument("--day", default=(now.date() + dt.timedelta(days=1 if now.hour >= 18 else 0)).isoformat())
+    ap.add_argument("--days", type=int, default=1, help="скільки днів поспіль (тиждень = 7)")
     ap.add_argument("--out", default="stories-out")
     a = ap.parse_args()
     day = dt.date.fromisoformat(a.day)
-    idx = (day - START).days
     data = json.loads((ROOT / "vacancies.json").read_text())
-    stories = [vacancy_story(data, idx), tip_story(data, idx), poll_story(idx)]
     out = pathlib.Path(a.out)
-    asyncio.run(render(stories, out))
-    tips = [f"{i}. {s[2]}" for i, s in enumerate(stories, 1)]
-    (out / "tips.txt").write_text(
-        f"Сторіс на {day.strftime('%d.%m')} — викладайте по черзі, з інтервалом 2–3 години:\n\n" + "\n\n".join(tips))
-    print((out / "tips.txt").read_text())
+    if a.days <= 1:
+        build_day(day, data, out)
+    else:
+        for i in range(a.days):
+            d = day + dt.timedelta(days=i)
+            build_day(d, data, out / d.isoformat())
 
 
 if __name__ == "__main__":

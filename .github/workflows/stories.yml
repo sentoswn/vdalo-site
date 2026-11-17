@@ -14,6 +14,10 @@ on:
       day:
         description: "Дата YYYY-MM-DD (порожньо — сьогодні)"
         required: false
+      days:
+        description: "Скільки днів надіслати одразу (7 = тиждень)"
+        required: false
+        default: "1"
 
 concurrency: stories
 
@@ -30,7 +34,7 @@ jobs:
         run: |
           pip install -q playwright
           python -m playwright install --with-deps chromium >/dev/null
-          python3 tools/stories/stories.py --out out ${{ github.event.inputs.day && format('--day {0}', github.event.inputs.day) || '' }}
+          python3 tools/stories/stories.py --out out --days ${{ github.event.inputs.days || '1' }} ${{ github.event.inputs.day && format('--day {0}', github.event.inputs.day) || '' }}
       - name: Send to Telegram
         env:
           DB_URL: ${{ secrets.SUPABASE_DB_URL }}
@@ -39,12 +43,18 @@ jobs:
           if [ -z "$DB_URL" ] || [ -z "$BOT" ]; then echo "Секрети не задано — пропускаю."; exit 0; fi
           command -v psql >/dev/null || sudo apt-get install -y -qq postgresql-client >/dev/null
           chats=$(psql "$DB_URL" -X -q -A -t -c "select tg_id from public.profiles where role='admin' and tg_id is not null")
-          media='[{"type":"photo","media":"attach://s1"},{"type":"photo","media":"attach://s2"},{"type":"photo","media":"attach://s3"}]'
+          if [ -f out/tips.txt ]; then dirs="out"; else dirs=$(ls -d out/*/ | sort); fi
           for c in $chats; do
-            curl -s -o /dev/null -w "photos %{http_code}\n" "https://api.telegram.org/bot${BOT}/sendMediaGroup" \
-              -F chat_id="$c" -F media="$media" -F s1=@out/story-1.jpg -F s2=@out/story-2.jpg -F s3=@out/story-3.jpg
-            curl -s -o /dev/null -w "tips %{http_code}\n" "https://api.telegram.org/bot${BOT}/sendMessage" \
-              --data-urlencode chat_id="$c" --data-urlencode text@out/tips.txt -d disable_web_page_preview=true
+            for d in $dirs; do
+              d=${d%/}; t=$(cat "$d/title.txt")
+              media=$(python3 -c 'import json,sys; t=sys.argv[1]; print(json.dumps([{"type":"document","media":f"attach://s{i}", **({"caption":t+" — сторіс"} if i==1 else {})} for i in (1,2,3)]))' "$t")
+              curl -s -o /dev/null -w "$t files %{http_code}\n" "https://api.telegram.org/bot${BOT}/sendMediaGroup" \
+                -F chat_id="$c" -F media="$media" \
+                -F "s1=@$d/story-1.jpg;filename=$t — 1 вакансія.jpg" -F "s2=@$d/story-2.jpg;filename=$t — 2 порада.jpg" -F "s3=@$d/story-3.jpg;filename=$t — 3 опитування.jpg"
+              curl -s -o /dev/null -w "$t tips %{http_code}\n" "https://api.telegram.org/bot${BOT}/sendMessage" \
+                --data-urlencode chat_id="$c" --data-urlencode text@$d/tips.txt -d disable_web_page_preview=true
+              sleep 2
+            done
           done
       - uses: actions/upload-artifact@v4
         with: {name: stories, path: out, retention-days: 7}
