@@ -698,3 +698,62 @@ begin
 end $$;
 revoke all on function public.sync_vacancy_pay(text, jsonb) from public;
 grant execute on function public.sync_vacancy_pay(text, jsonb) to anon, authenticated;
+
+-- ============ Чат співробітників: загальний чат («all») і особисті («dm:<uuid>:<uuid>») ============
+create table if not exists public.chat_messages (
+  id          bigserial primary key,
+  room        text not null,
+  sender_id   uuid not null default auth.uid() references public.profiles(id) on delete cascade,
+  body        text not null check (char_length(body) between 1 and 4000),
+  created_at  timestamptz not null default now()
+);
+create index if not exists chat_messages_room on public.chat_messages(room, created_at desc);
+create or replace function public.chat_can(p_room text) returns boolean language sql stable as $$
+  select public.is_staff() and (p_room = 'all' or (p_room like 'dm:%' and position(auth.uid()::text in p_room) > 0))
+$$;
+alter table public.chat_messages enable row level security;
+drop policy if exists chat_sel on public.chat_messages;
+create policy chat_sel on public.chat_messages for select using (public.chat_can(room));
+drop policy if exists chat_ins on public.chat_messages;
+create policy chat_ins on public.chat_messages for insert with check (public.chat_can(room) and sender_id = auth.uid());
+drop policy if exists chat_del on public.chat_messages;
+create policy chat_del on public.chat_messages for delete using (sender_id = auth.uid() or public.is_admin());
+grant select, insert, delete on public.chat_messages to authenticated;
+grant usage, select on sequence public.chat_messages_id_seq to authenticated;
+
+create table if not exists public.chat_reads (
+  user_id   uuid not null default auth.uid() references public.profiles(id) on delete cascade,
+  room      text not null,
+  last_id   bigint not null default 0,
+  primary key (user_id, room)
+);
+alter table public.chat_reads enable row level security;
+drop policy if exists chat_reads_own on public.chat_reads;
+create policy chat_reads_own on public.chat_reads for all using (user_id = auth.uid()) with check (user_id = auth.uid());
+grant select, insert, update on public.chat_reads to authenticated;
+
+-- Хто є в чаті (усі менеджери й власники) — менеджерам теж потрібен цей список
+create or replace function public.chat_people() returns table(id uuid, name text, tg_username text, role text, last_seen_at timestamptz)
+language sql stable security definer set search_path = public as $$
+  select p.id, coalesce(nullif(p.full_name, ''), nullif(trim(coalesce(p.first_name, '') || ' ' || coalesce(p.last_name, '')), ''), p.tg_username, 'Співробітник'),
+         p.tg_username, p.role, p.last_seen_at
+  from public.profiles p where public.is_staff() and p.role in ('manager', 'admin') order by p.role desc, 2
+$$;
+grant execute on function public.chat_people() to authenticated;
+
+-- Скільки непрочитаних у кожній кімнаті
+create or replace function public.chat_unread() returns table(room text, n integer, last_at timestamptz)
+language sql stable security definer set search_path = public as $$
+  select m.room, count(*) filter (where m.id > coalesce(r.last_id, 0) and m.sender_id <> auth.uid())::int, max(m.created_at)
+  from public.chat_messages m left join public.chat_reads r on r.user_id = auth.uid() and r.room = m.room
+  where public.chat_can(m.room) group by m.room
+$$;
+grant execute on function public.chat_unread() to authenticated;
+
+-- Нові повідомлення — одразу в CRM (Realtime)
+do $$ begin
+  if exists (select 1 from pg_publication where pubname = 'supabase_realtime')
+     and not exists (select 1 from pg_publication_tables where pubname = 'supabase_realtime' and tablename = 'chat_messages') then
+    execute 'alter publication supabase_realtime add table public.chat_messages';
+  end if;
+end $$;

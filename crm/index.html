@@ -87,6 +87,30 @@ main{padding:20px;max-width:1500px;margin:0 auto}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-weight:600;z-index:30;display:none}
 .toast.show{display:block}
 .note{color:var(--muted);font-size:13px}
+/* Чат співробітників */
+.chat{display:grid;grid-template-columns:260px 1fr;padding:0;overflow:hidden;height:calc(100vh - 170px);min-height:460px}
+.chat-l{border-right:1px solid var(--line);overflow-y:auto;padding:8px}
+.chat-i{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;text-align:left;padding:10px;border-radius:12px;cursor:pointer;color:inherit;font:inherit}
+.chat-i:hover{background:var(--soft,#f3f5f8)}.chat-i[aria-current="true"]{background:var(--soft,#eef1f4)}
+.chat-i .n{margin-left:auto}
+.chat-av{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--surface,#fff);font-weight:700;position:relative}
+.chat-av.on::after{content:"";position:absolute;right:0;bottom:0;width:10px;height:10px;border-radius:50%;background:#22c55e;border:2px solid var(--surface,#fff)}
+.chat-nm{display:flex;flex-direction:column;min-width:0}.chat-nm b,.chat-nm small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chat-nm small{color:var(--muted)}
+.chat-r{display:flex;flex-direction:column;min-width:0}
+.chat-h{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;flex-direction:column}.chat-h small{color:var(--muted)}
+.chat-m{flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.chat-day{align-self:center;font-size:12px;color:var(--muted);background:var(--soft,#f3f5f8);border-radius:999px;padding:3px 10px;margin:6px 0}
+.chat-msg{max-width:72%;align-self:flex-start;display:flex;flex-direction:column;gap:2px}
+.chat-msg.me{align-self:flex-end;align-items:flex-end}
+.chat-b{background:var(--soft,#f1f3f6);padding:9px 13px;border-radius:16px 16px 16px 4px;white-space:normal;overflow-wrap:anywhere;line-height:1.4}
+.chat-msg.me .chat-b{background:var(--ink);color:var(--surface,#fff);border-radius:16px 16px 4px 16px}
+.chat-msg.me .chat-b a{color:inherit}
+.chat-msg small{font-size:11px;color:var(--muted)}.chat-msg small a{color:var(--muted)}
+.chat-who{font-size:12px;color:var(--muted);margin-left:4px}
+.chat-f{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);align-items:flex-end}
+.chat-f textarea{flex:1;resize:none;border-radius:14px;min-height:44px;max-height:160px}
+@media (max-width:720px){.chat{grid-template-columns:1fr;height:auto}.chat-l{display:flex;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line)}.chat-i{width:auto;flex:none}.chat-nm small{display:none}.chat-m{height:55vh}.chat-msg{max-width:88%}}
+
 .binfo{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--blue,#1f6feb);color:var(--blue,#1f6feb);background:transparent;font:700 12px/1 serif;font-style:italic;cursor:pointer;vertical-align:1px;margin-left:4px;padding:0}
 .bnote{white-space:normal;text-align:left;max-width:320px;margin:6px 0 0 auto;font-size:12px;color:var(--muted);background:var(--soft,#f3f5f8);border-radius:10px;padding:8px 10px}
 @media (max-width:800px){
@@ -184,6 +208,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   <nav class="tabs" id="tabs" role="tablist" hidden>
     <button role="tab" data-tab="leads" aria-selected="true"><svg class="ic"><use href="#ic-users"/></svg><span id="t-leads">Кандидати</span><span class="n" id="n-leads" hidden></span></button>
     <button role="tab" data-tab="tasks"><svg class="ic"><use href="#ic-check"/></svg>Задачі<span class="n" id="n-tasks" hidden></span></button>
+    <button role="tab" data-tab="chat"><svg class="ic"><use href="#ic-chat"/></svg>Чат<span class="n" id="n-chat" hidden></span></button>
     <button role="tab" data-tab="analytics" data-own><svg class="ic"><use href="#ic-chart"/></svg>Аналітика</button>
     <button role="tab" data-tab="sources" data-own><svg class="ic"><use href="#ic-target"/></svg>Джерела</button>
     <button role="tab" data-tab="pay"><svg class="ic"><use href="#ic-trophy"/></svg><span id="t-pay">Оплата за кандидата</span></button>
@@ -279,6 +304,13 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       findRef: function(code){ return s.from("profiles").select("id,first_name,last_name,tg_username,ref_code").eq("ref_code", code.toLowerCase()).maybeSingle().then(ok); },
       saveMe: function(patch){ return s.from("profiles").update(patch).eq("id", uid).then(ok); },
       pay: function(){ return s.from("vacancy_pay").select("*").limit(5000).then(ok); },
+      chatPeople: function(){ return s.rpc("chat_people").then(ok); },
+      chatUnread: function(){ return s.rpc("chat_unread").then(ok); },
+      chatMsgs: function(room){ return s.from("chat_messages").select("*").eq("room", room).order("id", {ascending: false}).limit(200).then(ok).then(function(r){ return r.reverse(); }); },
+      chatSend: function(room, body){ return s.from("chat_messages").insert({room: room, body: body}).select().single().then(ok); },
+      chatDel: function(id){ return s.from("chat_messages").delete().eq("id", id).then(ok); },
+      chatRead: function(room, last){ return s.from("chat_reads").upsert({user_id: uid, room: room, last_id: last}, {onConflict: "user_id,room"}).then(ok); },
+      chatSub: function(fn){ return s.channel("chat-" + uid).on("postgres_changes", {event: "INSERT", schema: "public", table: "chat_messages"}, function(p){ fn(p.new); }).subscribe(); },
       payRank: function(){ return s.rpc("vacancy_pay_rank").then(ok); },
       savePay: function(rows){ return s.from("vacancy_pay").upsert(rows, {onConflict: "id"}).then(ok); },
       staff: function(){ return s.from("profiles").select("id,first_name,last_name,full_name,tg_username,role,ref_code,last_seen_at").in("role", ["manager", "admin"]).then(ok); },
@@ -385,7 +417,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
  ["Анкета заповнена", p.onboarded_at ? dt(p.onboarded_at, true) : "ні"]];
     return '<b>Анкета</b><dl class="kv">' + rows.filter(function(r){ return r[1]; }).map(function(r){ return '<dt>' + E(r[0]) + '</dt><dd>' + E(r[1]) + '</dd>'; }).join("") + '</dl>';
   }
-  function tabsAllowed(){ return S.own ? ["leads", "tasks", "analytics", "sources", "pay", "employers", "people", "payouts", "mylink", "guide", "settings"] : ["leads", "tasks", "pay", "mylink", "guide"]; }
+  function tabsAllowed(){ return S.own ? ["leads", "tasks", "chat", "analytics", "sources", "pay", "employers", "people", "payouts", "mylink", "guide", "settings"] : ["leads", "tasks", "chat", "pay", "mylink", "guide"]; }
   function ic(n, cls){ return '<svg class="ic' + (cls ? " " + cls : "") + '"><use href="#ic-' + n + '"/></svg>'; }
   function mgrsOf(l){ var a = (l.managers && l.managers.length) ? l.managers.slice() : []; if (l.manager_id && a.indexOf(l.manager_id) < 0) a.unshift(l.manager_id); return a; }
   function hasMgr(l, id){ return mgrsOf(l).indexOf(id) >= 0; }
@@ -418,6 +450,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     closeDrawer(); render();
   }
   function counts(){
+    chatBadge(); chatStart(); if (!S.chatPeople) API.chatPeople().then(function(p){ S.chatPeople = p || []; }).catch(function(){});
     var jobs = [API.leads(), API.tasks()];
     if (S.own) jobs.push(API.employers(), API.payouts());
     Promise.all(jobs).then(function(r){
@@ -436,7 +469,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
   function demoBar(){ return ""; }
   function render(){
     app.innerHTML = '<div class="empty">Завантаження…</div>';
-    ({guide: rGuide, leads: rLeads, tasks: rTasks, analytics: rAnalytics, sources: function(){ VdaloSources(app, {toast: toast, fail: fail}); }, mylink: rMyLink, pay: rPay, employers: rEmployers, people: rPeople, payouts: rPayouts, settings: rSettings})[S.tab]();
+    ({guide: rGuide, leads: rLeads, tasks: rTasks, analytics: rAnalytics, sources: function(){ VdaloSources(app, {toast: toast, fail: fail}); }, mylink: rMyLink, chat: rChat, pay: rPay, employers: rEmployers, people: rPeople, payouts: rPayouts, settings: rSettings})[S.tab]();
   }
   function fail(e){ console.warn(e); toast("Помилка: " + (e && e.message || "не вдалося зберегти")); }
 
@@ -911,6 +944,77 @@ main{padding:20px;max-width:1500px;margin:0 auto}
     }).catch(function(e){ console.warn(e); box.innerHTML = '<div class="card pad" style="margin-bottom:16px"><h3 style="margin:0">Команда</h3><p class="note">Дані про присутність з’являться після оновлення бази (кілька хвилин).</p></div>'; });
   }
   /* ================= Роботодавці ================= */
+  /* ================= Чат співробітників ================= */
+  // Кімнати: «all» — загальний чат усіх, «dm:<id>:<id>» — особистий чат двох людей (id відсортовані).
+  function dmRoom(a, b){ return "dm:" + [a, b].sort().join(":"); }
+  function chatBadge(){ API.chatUnread().then(function(r){ S.chatUnread = {}; var t = 0; (r || []).forEach(function(x){ S.chatUnread[x.room] = x.n; t += x.n; }); badge("n-chat", t); if (S.tab === "chat") chatList(); }).catch(function(){}); }
+  function chatStart(){
+    if (S.chatSub) return;
+    try { S.chatSub = API.chatSub(function(m){
+      if (S.tab === "chat" && m.room === S.chatRoom) { chatAppend(m); API.chatRead(m.room, m.id).catch(function(){}); }
+      else if (m.sender_id !== S.me.id) { chatBadge(); chatPing(m); }
+    }); } catch (e) {}
+  }
+  function chatPing(m){
+    var who = (S.chatPeople || []).filter(function(p){ return p.id === m.sender_id; })[0];
+    toast("💬 " + (who ? who.name : "Нове повідомлення") + ": " + m.body.slice(0, 60));
+    try { if (document.hidden && window.Notification && Notification.permission === "granted") new Notification("Чат «Вдало»: " + (who ? who.name : ""), {body: m.body.slice(0, 120)}); } catch (e) {}
+  }
+  function chatName(room){
+    if (room === "all") return "Загальний чат";
+    var other = room.split(":").slice(1).filter(function(x){ return x !== S.me.id; })[0] || S.me.id;
+    var p = (S.chatPeople || []).filter(function(x){ return x.id === other; })[0];
+    return p ? p.name : "Співробітник";
+  }
+  function rChat(){
+    S.chatRoom = S.chatRoom || "all";
+    app.innerHTML = '<div class="chat card"><aside class="chat-l" id="chat-l"></aside><section class="chat-r"><header class="chat-h" id="chat-h"></header>' +
+      '<div class="chat-m" id="chat-m"><p class="note" style="padding:16px">Завантаження…</p></div>' +
+      '<form class="chat-f" id="chat-f"><textarea id="chat-t" rows="1" placeholder="Напишіть повідомлення… (Enter — надіслати, Shift+Enter — новий рядок)" maxlength="4000"></textarea><button class="btn" type="submit">Надіслати</button></form></section></div>';
+    API.chatPeople().then(function(p){ S.chatPeople = p || []; chatList(); chatOpen(S.chatRoom); }).catch(fail);
+    var f = document.getElementById("chat-f"), t = document.getElementById("chat-t");
+    t.addEventListener("keydown", function(e){ if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); f.requestSubmit(); } });
+    t.addEventListener("input", function(){ t.style.height = "auto"; t.style.height = Math.min(t.scrollHeight, 160) + "px"; });
+    f.onsubmit = function(e){ e.preventDefault(); var b = t.value.trim(); if (!b) return; t.value = ""; t.style.height = "auto";
+      API.chatSend(S.chatRoom, b).then(function(m){ chatAppend(m); API.chatRead(S.chatRoom, m.id).catch(function(){}); }).catch(function(err){ t.value = b; fail(err); }); };
+    try { if (window.Notification && Notification.permission === "default") Notification.requestPermission(); } catch (e) {}
+    chatStart(); chatBadge();
+  }
+  function chatList(){
+    var el = document.getElementById("chat-l"); if (!el) return; var u = S.chatUnread || {};
+    var rooms = [{room: "all", name: "Загальний чат", sub: "Усі співробітники"}].concat((S.chatPeople || []).filter(function(p){ return p.id !== S.me.id; }).map(function(p){
+      var on = p.last_seen_at && Date.now() - new Date(p.last_seen_at) < 3 * 6e4;
+      return {room: dmRoom(S.me.id, p.id), name: p.name, sub: (p.role === "admin" ? "Власник" : "Менеджер") + (on ? " · онлайн" : ""), on: on}; }));
+    el.innerHTML = rooms.map(function(r){ return '<button type="button" class="chat-i" data-room="' + E(r.room) + '" aria-current="' + (r.room === S.chatRoom) + '">' +
+      '<span class="chat-av' + (r.on ? " on" : "") + '">' + (r.room === "all" ? "#" : E((r.name || "?").trim().charAt(0).toUpperCase())) + '</span>' +
+      '<span class="chat-nm"><b>' + E(r.name) + '</b><small>' + E(r.sub) + '</small></span>' + (u[r.room] ? '<span class="n">' + u[r.room] + '</span>' : '') + '</button>'; }).join("");
+    el.querySelectorAll("[data-room]").forEach(function(b){ b.onclick = function(){ chatOpen(b.getAttribute("data-room")); }; });
+  }
+  function chatOpen(room){
+    S.chatRoom = room; chatList();
+    document.getElementById("chat-h").innerHTML = '<b>' + E(chatName(room)) + '</b>' + (room === "all" ? '<small>Бачать усі менеджери й власники</small>' : '<small>Особисте листування — бачите лише ви двоє</small>');
+    var box = document.getElementById("chat-m");
+    API.chatMsgs(room).then(function(ms){ if (S.chatRoom !== room) return;
+      box.innerHTML = ms.length ? "" : '<p class="note chat-empty">Тут поки немає повідомлень. Напишіть першим 👋</p>';
+      S.chatLastDay = null; ms.forEach(function(m){ chatAppend(m, true); }); box.scrollTop = box.scrollHeight;
+      if (ms.length) API.chatRead(room, ms[ms.length - 1].id).then(chatBadge).catch(function(){}); else chatBadge();
+      document.getElementById("chat-t").focus();
+    }).catch(fail);
+  }
+  function chatAppend(m, bulk){
+    var box = document.getElementById("chat-m"); if (!box || m.room !== S.chatRoom || box.querySelector('[data-mid="' + m.id + '"]')) return;
+    var e0 = box.querySelector(".chat-empty"); if (e0) e0.remove();
+    var day = new Date(m.created_at).toLocaleDateString("uk-UA", {day: "numeric", month: "long"});
+    if (day !== S.chatLastDay) { S.chatLastDay = day; var d = document.createElement("div"); d.className = "chat-day"; d.textContent = day; box.appendChild(d); }
+    var mine = m.sender_id === S.me.id, who = (S.chatPeople || []).filter(function(p){ return p.id === m.sender_id; })[0];
+    var el = document.createElement("div"); el.className = "chat-msg" + (mine ? " me" : ""); el.setAttribute("data-mid", m.id);
+    el.innerHTML = (!mine && m.room === "all" ? '<b class="chat-who">' + E(who ? who.name : "Співробітник") + '</b>' : '') +
+      '<div class="chat-b">' + E(m.body).replace(/\n/g, "<br>").replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>') + '</div>' +
+      '<small>' + new Date(m.created_at).toLocaleTimeString("uk-UA", {hour: "2-digit", minute: "2-digit"}) + ((mine || S.own) ? ' · <a href="#" data-del="' + m.id + '">видалити</a>' : '') + '</small>';
+    box.appendChild(el);
+    var del = el.querySelector("[data-del]"); if (del) del.onclick = function(e){ e.preventDefault(); if (!confirm("Видалити повідомлення?")) return; API.chatDel(m.id).then(function(){ el.remove(); }).catch(fail); };
+    if (!bulk) box.scrollTop = box.scrollHeight;
+  }
   /* ================= Оплата за кандидата (лише власники) ================= */
   // Дані щодня передає задача оновлення вакансій: /crm/#paysync=[[id, сума], …] (Trello: множник × ставка).
   // Для вакансій Planfix суму можна вписати вручну — вона не перезаписується автоматично.
