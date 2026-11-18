@@ -347,6 +347,7 @@ main{padding:20px;max-width:1500px;margin:0 auto}
       mailRead: function(id){ return s.from("mail_messages").update({read_at: new Date().toISOString()}).eq("id", id).is("read_at", null).then(ok); },
       mailDel: function(id){ return s.from("mail_messages").delete().eq("id", id).then(ok); },
       mailUnread: function(){ return s.from("mail_messages").select("id", {count: "exact", head: true}).eq("dir", "in").is("read_at", null).then(function(r){ if (r.error) throw r.error; return r.count || 0; }); },
+      metaLeads: function(){ return s.functions.invoke("meta-leads", {body: {}}).then(function(r){ if (r.error) throw r.error; return r.data; }); },
       mailSend: function(body){ return s.functions.invoke("mail-send", {body: body}).then(function(r){
         if (r.error) { var c = r.error.context; return (c && c.json ? c.json() : Promise.resolve({})).then(function(j){ throw new Error(j && j.error || r.error.message); }); }
         if (r.data && r.data.error) throw new Error(r.data.error); return r.data; }); },
@@ -1413,6 +1414,10 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         '<div class="fld"><label>Telegram-ніки менеджерів (через кому, без @)</label><textarea id="s-mgr" placeholder="ivan_manager, olena_vdalo"' + dis + '>' + E(st.manager_tg || "") + '</textarea></div>' +
         '<p class="note">Людина з цим ніком, увійшовши на сайті через Telegram (значок кабінету або /crm/), одразу потрапить у CRM як менеджер. Прибрати доступ — змініть роль на «Користувач» у вкладці «Реферали й баланси».</p>' +
         (isAdmin ? '<button class="btn" id="s-mgr-save" style="justify-self:start">Зберегти менеджерів</button>' : '') + '</div>' +
+        (isAdmin ? '<div class="card" style="padding:20px;max-width:620px;margin-top:16px;display:grid;gap:10px"><h3 style="margin:0">Заявки з форм Facebook / Instagram</h3>' +
+          '<p class="note" id="fb-st">Перевіряю…</p>' +
+          '<p class="note">Нові заявки з рекламних форм кожні 2 хв самі потрапляють сюди в «Заявки» (джерело «Форма Facebook/Instagram») і в Telegram-групу «Вдало Заявки» разом із Google-таблицею.</p>' +
+          '<div class="bar" style="margin:0"><button class="btn" id="fb-key">Вставити ключ сторінки</button><button class="btn ghost" id="fb-run">Перевірити зараз</button></div></div>' : '') +
         '<div class="card" style="padding:20px;max-width:620px;margin-top:16px;display:grid;gap:12px"><h3 style="margin:0">Робочий час менеджерів</h3>' +
         '<div class="g2"><div class="fld"><label>Початок дня</label><input id="w-s" type="time" value="' + E(st.work_start || "10:00") + '"' + dis + '></div>' +
         '<div class="fld"><label>Кінець дня</label><input id="w-e" type="time" value="' + E(st.work_end || "17:00") + '"' + dis + '></div></div>' +
@@ -1422,6 +1427,21 @@ main{padding:20px;max-width:1500px;margin:0 auto}
         '<div class="fld"><label>Запізнення — якщо немає після початку, хв</label><input id="w-l" type="number" min="0" value="' + E(st.late_min === undefined ? "30" : st.late_min) + '"' + dis + '></div></div>' +
         '<p class="note">Сповіщення надсилає бот @vdalo_robota_bot усім власникам, кожні 10 хв у робочий час, і підсумок дня після його завершення. Якщо повідомлення не приходять — відкрийте бота й натисніть «Start».</p>' +
         (isAdmin ? '<button class="btn" id="w-save" style="justify-self:start">Зберегти робочий час</button>' : '') + '</div>';
+      var fbSt = document.getElementById("fb-st");
+      if (fbSt) {
+        API.hasSecret("meta_page_token").then(function(ok){ fbSt.innerHTML = ok ? "✅ Ключ сторінки збережено." : "<b>Ще не підключено.</b> Натисніть «Вставити ключ сторінки»."; }).catch(function(){ fbSt.textContent = ""; });
+        document.getElementById("fb-key").onclick = function(){
+          var v = prompt("Вставте ключ доступу сторінки «Вдало» (Page access token, починається з EAA). Він збережеться в базі; у браузері його більше видно не буде.");
+          if (!v) return; v = v.trim(); if (!/^EAA/.test(v)) return toast("Ключ має починатися з EAA");
+          API.setSecret("meta_page_token", v).then(function(){ toast("Ключ збережено ✅"); rSettings(); }).catch(fail);
+        };
+        document.getElementById("fb-run").onclick = function(){
+          fbSt.textContent = "Перевіряю заявки у Facebook…";
+          API.metaLeads()
+            .then(function(j){ fbSt.innerHTML = j.error ? "⚠️ " + E(j.error) : (j.ok ? "✅ " : "⚠️ ") + "Форм: " + j.forms + ", заявок за 14 днів: " + j.seen + ", нових додано: " + j.added + (j.errors && j.errors.length ? "<br>" + E(j.errors.join("; ")) : ""); })
+            .catch(function(){ fbSt.textContent = "Не вдалося звернутися до функції."; });
+        };
+      }
       var wsv = document.getElementById("w-save");
       if (wsv) wsv.onclick = function(){
         var v = function(id){ return document.getElementById(id).value; };

@@ -67,3 +67,6 @@ jobs:
       - name: Deploy mail-send
         if: steps.chk.outputs.skip != '1'
         run: supabase functions deploy mail-send --yes --project-ref "$REF" --no-verify-jwt --use-api
+      - name: Deploy meta-leads
+        if: steps.chk.outputs.skip != '1'
+        run: supabase functions deploy meta-leads --yes --project-ref "$REF" --no-verify-jwt --use-api

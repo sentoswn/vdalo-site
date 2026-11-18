@@ -779,7 +779,7 @@ create or replace function public.set_secret(p_key text, p_value text) returns v
 language plpgsql security definer set search_path = public as $$
 begin
   if not public.is_admin() then raise exception 'forbidden'; end if;
-  if p_key not in ('resend_api_key') then raise exception 'unknown key'; end if;
+  if p_key not in ('resend_api_key', 'meta_page_token') then raise exception 'unknown key'; end if;
   insert into public.app_secrets(key, value, updated_at) values (p_key, trim(p_value), now())
   on conflict (key) do update set value = excluded.value, updated_at = now();
 end $$;
@@ -818,4 +818,22 @@ do $$ begin
      and not exists (select 1 from pg_publication_tables where pubname = 'supabase_realtime' and tablename = 'mail_messages') then
     execute 'alter publication supabase_realtime add table public.mail_messages';
   end if;
+end $$;
+
+
+-- ============ Заявки з форм Facebook/Instagram (Lead Ads) → CRM + Telegram ============
+-- Функція meta-leads забирає нові заявки через Graph API (ключ сторінки в app_secrets.meta_page_token).
+alter table public.leads add column if not exists ext_id text;          -- fb:<id заявки> — щоб не було дублів
+create unique index if not exists leads_ext_id on public.leads(ext_id) where ext_id is not null;
+-- кожні 2 хвилини викликаємо функцію (pg_cron + pg_net)
+do $$
+begin
+  create extension if not exists pg_cron;
+  create extension if not exists pg_net;
+  perform cron.unschedule(jobid) from cron.job where jobname = 'meta-leads';
+  perform cron.schedule('meta-leads', '*/2 * * * *',
+    $j$ select net.http_post(url := 'https://paifsxbbdnnctspowizy.supabase.co/functions/v1/meta-leads',
+         headers := '{"Content-Type":"application/json"}'::jsonb, body := '{}'::jsonb) $j$);
+exception when others then
+  raise notice 'pg_cron/pg_net недоступні: %', sqlerrm;
 end $$;
