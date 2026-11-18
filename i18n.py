@@ -145,6 +145,25 @@ def translate_html(h, lang, path, site, tr):
     h = KEEP_RX.sub(stash, h)
     # прибираємо JobPosting (щоб Google Jobs не дублював вакансії різними мовами)
     h = re.sub(r'<script type="application/ld\+json">(?:(?!</script>).)*"JobPosting"(?:(?!</script>).)*</script>\n?', "", h, flags=re.S)
+    # структуровані дані (Article, FAQPage, BreadcrumbList) — тією ж мовою, що й сторінка
+    def ld(m):
+        try:
+            obj = json.loads(m.group(1).replace("<\\/", "</"))
+        except ValueError:
+            return m.group(0)
+
+        def walk(x, k=None):
+            if isinstance(x, dict):
+                return {kk: walk(vv, kk) for kk, vv in x.items()}
+            if isinstance(x, list):
+                return [walk(vv) for vv in x]
+            if k == "inLanguage" and x == "uk":
+                return HTML_LANG[lang]
+            if isinstance(x, str) and CYR.search(x) and not x.startswith("http"):
+                return tr.text(x)
+            return x
+        return '<script type="application/ld+json">' + json.dumps(walk(obj), ensure_ascii=False).replace("</", "<\\/") + "</script>"
+    h = re.sub(r'<script type="application/ld\+json">(.*?)</script>', ld, h, flags=re.S)
     parts = re.split(r"(<script\b.*?</script>|<style\b.*?</style>|<[^>]+>)", h, flags=re.S)
     out = []
     for p in parts:
