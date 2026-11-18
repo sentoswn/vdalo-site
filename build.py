@@ -650,7 +650,7 @@ def text_section(h2, paras, s, live, current):
 
 def foot_links(live):
     arts = '<div class="links" style="margin-top:6px"><a href="/statti/">Усі статті</a>' + "".join(f'<a href="/statti/{a["slug"]}/">{esc(a["h1"])}</a>' for a in ARTICLES) + "</div>"
-    sec = '<b style="display:block;margin-top:16px">Про компанію</b><div class="links" style="margin-top:6px">' + "".join(f'<a href="{SEC.PAGES[k]["path"]}">{esc(SEC.PAGES[k]["label"])}</a>' for k in SEC.ORDER) + "</div>"
+    sec = '<b style="display:block;margin-top:16px">Про компанію</b><div class="links" style="margin-top:6px">' + "".join(f'<a href="{SEC.PAGES[k]["path"]}">{esc(SEC.PAGES[k]["label"])}</a>' for k in SEC.ORDER + ["privacy"]) + "</div>"
     return ('\n  <div class="flinks"><b>Робота за кордоном</b>' + links_html(live).replace('class="links"', 'class="links" style="margin-top:6px"')
             + '<b style="display:block;margin-top:16px">Корисні статті</b>' + arts + sec + "</div>\n  ")
 
@@ -1127,6 +1127,21 @@ def main():
         t = inner(t, blocks, faq)
         write(path, t)
         sitemap.append((path, TODAY.isoformat(), "monthly", "0.7"))
+
+    # ---------- Конфіденційність ----------
+    P = SEC.PAGES["privacy"]
+    path = P["path"]
+    prose = "".join(f"<h2>{esc(h)}</h2>" + "".join(f"<p>{esc(x)}</p>" for x in ps) for h, ps in SEC.PRIVACY)
+    hero = phead(P, False) + f'\n  <section id="about" aria-label="Політика конфіденційності"><div class="prose">{prose}</div></section>\n'
+    t = region(tpl, "head", head(P["title"], P["desc"], path, [crumbs_ld([("Головна", "/"), (P["h1"], path)])], {"ids": [v["id"] for v in hot]}))
+    t = region(t, "hero", "\n  " + hero + "<style>.marq,#countries,#cos,#vacancies{display:none!important}</style>  ")
+    t = region(t, "vach", "Вакансії, відкриті зараз")
+    t = region(t, "grid", grid_html(hot))
+    t = region(t, "apply", "")
+    t = region(t, "text", "")
+    t = inner(t, "", "")
+    write(path, t)
+    sitemap.append((path, TODAY.isoformat(), "yearly", "0.3"))
 
     # ---------- Роботодавцям ----------
     HIDE_VAC = "<style>.marq,#countries,#cos,#vacancies{display:none!important}</style>"
