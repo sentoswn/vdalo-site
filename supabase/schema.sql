@@ -164,7 +164,20 @@ declare r text; d text;
 begin
   if not public.is_staff() then
     new.status := 'new'; new.referrer_id := null; new.employer := null; new.start_date := null;
-    new.manager_note := null; new.manager_id := null; new.bonus_paid := false;
+    new.manager_note := null; new.manager_id := null; new.managers := null; new.bonus_paid := false;
+    -- захист від спаму й «сміття»: обрізаємо довжину полів, номер має містити 9–15 цифр
+    new.name := left(trim(new.name), 80); new.phone := left(trim(new.phone), 32);
+    new.vacancy_id := left(new.vacancy_id, 40); new.vacancy_title := left(new.vacancy_title, 300);
+    new.who := left(new.who, 40); new.when_go := left(new.when_go, 60); new.contact_mode := left(new.contact_mode, 40);
+    new.channel := left(new.channel, 40); new.note := left(new.note, 1500); new.source := left(new.source, 120);
+    new.page := left(new.page, 300); new.lang := left(new.lang, 5); new.ref_raw := left(new.ref_raw, 64);
+    if length(regexp_replace(new.phone, '\D', '', 'g')) not between 9 and 15 then raise exception 'Невірний номер телефону'; end if;
+    -- не більше 3 заявок з одного номера за 10 хвилин і не більше 40 анонімних заявок за 10 хвилин загалом
+    if (select count(*) from public.leads where created_at > now() - interval '10 minutes'
+          and right(regexp_replace(phone, '\D', '', 'g'), 9) = right(regexp_replace(new.phone, '\D', '', 'g'), 9)) >= 3
+       or (select count(*) from public.leads where created_at > now() - interval '10 minutes' and manager_id is null) >= 40 then
+      raise exception 'Забагато заявок, спробуйте трохи пізніше';
+    end if;
   elsif not public.is_admin() then
     new.manager_id := auth.uid();              -- менеджер додає заявку — вона його
   end if;
