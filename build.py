@@ -639,11 +639,30 @@ def links_html(live, current=None):
     return '<div class="links">' + "".join(a) + "</div>"
 
 
-def text_section(h2, paras, s, live, current):
+def page_articles(slug, n=3):
+    """Статті для посадкової (slug "" — головна): ті, у полі pages яких є ця сторінка."""
+    own = [a for a in ARTICLES if slug in a.get("pages", ())]
+    # спершу статті, для яких ця сторінка стоїть раніше в pages (головна тема), потім новіші
+    own.sort(key=lambda a: (list(a["pages"]).index(slug), -ARTICLES.index(a)))
+    return own[:n]
+
+
+def related_articles(a, n=3):
+    """Схожі статті: за спільними посадковими (pages), потім найновіші."""
+    mine = set(a.get("pages", ()))
+    rest = [x for x in ARTICLES if x["slug"] != a["slug"]]
+    score = lambda x: (-len(mine & set(x.get("pages", ()))), -ARTICLES.index(x))
+    return sorted(rest, key=score)[:n]
+
+
+def text_section(h2, paras, s, live, current, arts=()):
     body = "".join(f"<p>{esc(q.strip())}</p>" for p in paras if p for q in p.split("\n\n") if q.strip())
     fx = facts_html(s) if s else ""
+    ah = ('<h3 style="margin-top:26px">Корисні статті</h3><div class="links">'
+          + "".join(f'<a href="/statti/{a["slug"]}/">{esc(a["h1"])}</a>' for a in arts) + "</div>") if arts else ""
     return ('\n  <section aria-labelledby="seo-h"><div class="seo">'
             f'<div class="seo-grid{" has-f" if fx else ""}"><div class="seo-txt"><h2 id="seo-h">{esc(h2)}</h2>{body}</div>{fx}</div>'
+            + ah
             + f'<h3 style="margin-top:26px">Інші напрямки</h3>{links_html(live, current)}'
             "</div></section>\n  ")
 
@@ -885,7 +904,7 @@ def article_page(a):
         src = ('<div class="src"><b>Джерела</b> (станом на ' + esc(a["updated"]) + "):<br>"
                + "<br>".join(f'<a href="{esc(u)}" target="_blank" rel="noopener nofollow">{esc(t)}</a>' for t, u in a["sources"]) + "</div>")
     msg = "Вітаю! Прочитав(ла) статтю «" + a["h1"] + "» на сайті. Хочу підібрати роботу."
-    others = [x for x in ARTICLES if x["slug"] != a["slug"]][:3]
+    others = related_articles(a)
     return (crumbs([("Головна", "/"), ("Статті", "/statti/"), (a["h1"], "")])
             + '\n  <section class="vpage" id="hero">'
             '<article class="vbox art">'
@@ -988,7 +1007,7 @@ def main():
     home = region(home, "hero", hero_tpl)
     home = region(home, "vach", "Актуальні вакансії")
     home = region(home, "grid", grid_html(items))
-    home = region(home, "text", text_section("Робота за кордоном для українців", HOME["text"] + [common_par(s)], s, live, ""))
+    home = region(home, "text", text_section("Робота за кордоном для українців", HOME["text"] + [common_par(s)], s, live, "", page_articles("")))
     write("index.html", home)
 
     # посадкові сторінки
@@ -1006,7 +1025,7 @@ def main():
         t = region(t, "hero", "\n  " + crumbs(cr) + hero)
         t = region(t, "vach", f"Вакансії: {p['label'].lower() if not p.get('country') else p['h1'].lower()}")
         t = region(t, "grid", grid_html(lst))
-        t = region(t, "text", text_section(p["h1"], p["text"] + [common_par(s)], s, live, p["slug"]))
+        t = region(t, "text", text_section(p["h1"], p["text"] + [common_par(s)], s, live, p["slug"], page_articles(p["slug"])))
         t = inner(t, sec("why") + sec("how"))
         write(path, t)
         sitemap.append((path, TODAY.isoformat(), "daily", "0.9"))
