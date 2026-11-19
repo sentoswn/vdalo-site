@@ -17,7 +17,7 @@
     return o; }
   const clean = s => s.replace(/^[•\-–◾·\s]+/, '').replace(/[,;.:\s]+$/, '').trim();
   const join = (a, n, sep) => { if (!a) return ''; let s = a.map(clean).filter(x => x && !/\d{2}-\d{3}|ul\.|вул\.|телефон|\+48|координатор|gremi|kraz/i.test(x)).join(sep || '; ');
-    if (s.length > n) s = s.slice(0, n).replace(/[\s;,]+\S*$/, '') + '…'; return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; };
+    /* тексти умов беремо повністю, без обрізання (n лишився для сумісності) */ return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; };
   const num = s => parseFloat(String(s).replace(',', '.'));
 
   function build(o) {
@@ -83,16 +83,27 @@
     try {
       if (!rt) throw new Error('немає входу в Planfix (cookie rtoken)');
       // 1. підвантажити весь список фільтра прокручуванням
-      for (let w = 0; w < 40 && !document.querySelector('tr[class*="tr-taskid-"]'); w++) await sleep(500); // чекаємо, поки список з’явиться
-      let prev = -1;
-      for (let i = 0; i < 80; i++) {
-        document.querySelectorAll('*').forEach(e => { if (e.scrollHeight > e.clientHeight + 50 && /auto|scroll/.test(getComputedStyle(e).overflowY)) e.scrollTop = e.scrollHeight; });
-        await sleep(700);
-        const c = document.querySelectorAll('tr[class*="tr-taskid-"]').length;
-        if (c === prev && i > 4) break; prev = c;
+      // Рядки списку: раніше <tr class="tr-taskid-…">, з листопада 2026 — <div class="… tr-taskid-…"> у віртуальному списку (react-virtuoso),
+      // де в DOM є лише видимі рядки. Тому прокручуємо список крок за кроком і збираємо id по дорозі.
+      const SEL = '[class*="tr-taskid-"]';
+      for (let w = 0; w < 40 && !document.querySelector(SEL); w++) await sleep(500); // чекаємо, поки список з’явиться
+      const seen = new Map();
+      const grab = () => document.querySelectorAll(SEL).forEach(row => { const m = row.className.match(/tr-taskid-(\d+)/); const a = row.querySelector('a[href*="/task/"]');
+        if (m && a) { const g = a.getAttribute('href').match(/task\/(\d+)/); if (g) seen.set(m[1], g[1]); } });
+      const sc = document.querySelector('[data-virtuoso-scroller]');
+      if (sc) { sc.scrollTop = 0; await sleep(800); }
+      let prev = -1, still = 0;
+      for (let i = 0; i < 300; i++) {
+        grab();
+        if (sc) sc.scrollTop += Math.max(300, sc.clientHeight * 0.7);
+        else document.querySelectorAll('*').forEach(e => { if (e.scrollHeight > e.clientHeight + 50 && /auto|scroll/.test(getComputedStyle(e).overflowY)) e.scrollTop = e.scrollHeight; });
+        await sleep(sc ? 500 : 700);
+        const atEnd = !sc || sc.scrollTop + sc.clientHeight >= sc.scrollHeight - 5;
+        if (seen.size === prev && atEnd) { if (++still > 4) break; } else still = 0;
+        prev = seen.size;
       }
-      const ids = [...document.querySelectorAll('tr[class*="tr-taskid-"]')].map(tr => { const a = tr.querySelector('a[href*="/task/"]');
-        return [tr.className.match(/tr-taskid-(\d+)/)[1], a ? a.href.match(/task\/(\d+)/)[1] : null]; }).filter(x => x[1]);
+      grab();
+      const ids = [...seen.entries()];
       if (!ids.length) throw new Error('список вакансій порожній');
       const raw = [];
       for (const [iid, gid] of ids) {
