@@ -2126,8 +2126,9 @@ window.VdaloTrack = window.VdaloTrack || (function(){
     countUp($("st-count")); countUp($("st-housing")); calc();
   }
   var kwP = fetch("/keywords.json",{cache:"no-store"}).then(function(r){ return r.ok ? r.json() : {}; }).catch(function(){ return {}; });
+  var ownP = fetch("/own-housing.json",{cache:"no-store"}).then(function(r){ return r.ok ? r.json() : {}; }).catch(function(){ return {}; });
   fetch("/vacancies.json",{cache:"no-store"}).then(function(r){ if(!r.ok) throw 0; return r.json(); })
-    .then(function(d){ return kwP.then(function(k){ KW = k || {}; return d; }); }).then(boot).catch(function(){
+    .then(function(d){ return kwP.then(function(k){ KW = k || {}; return ownP; }).then(function(o){ o=o||{}; (d.items||[]).forEach(function(v){ if (!v.own && o[String(v.id)] && (v.src||"trello")==="trello") v.own=o[String(v.id)]; }); return d; }); }).then(boot).catch(function(){
     $("grid").innerHTML='<div class="empty">Не вдалося завантажити вакансії. Напишіть нам у месенджер — розповімо про актуальні.</div>';
     $("updated").querySelector("span").textContent="Список тимчасово недоступний";
   });
