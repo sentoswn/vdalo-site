@@ -1811,8 +1811,11 @@ window.VdaloTrack = window.VdaloTrack || (function(){
   function passHouse(v){ return !st.housing||(v._h&&v._h.k!=="no"); }
   function filtered(o){
     o=o||st; var q=norm(o.q||"").trim(), qw=q.split(/\s+/).filter(Boolean); var qs=window.VdaloSearch?VdaloSearch.words(o.q||""):sk(o.q||"").trim().split(" ").filter(Boolean);
+    // «доплата за своє/своё житло/жильё», «компенсація житла» → лише вакансії з доплатою за власне житло
+    var ownQ=/(доплат|компенсац|dopłat|doplat)/i.test(o.q||"")&&/(жил|житл|квартир|оренд|аренд|mieszk|zakwat|housing)/i.test(o.q||"");
+    if (ownQ) qs=qs.filter(function(w){ return !/^(doplat|kompensac|za|zhil|zhitl|kvartir|orend|arend|svo|vlasn|sobstv|miesh|zakvat|housing|do)/.test(w); });
     var list=items.filter(function(v){
-      return (!o.ids||o.ids.indexOf(String(v.id))>=0) && (o.country==="all"||v.country===o.country) && passWho(v,o.who) && (!o.housing||(v._h&&v._h.k!=="no")) && (!o.co||(v.company||"").toLowerCase()===String(o.co).toLowerCase()) && (!q||v._text.indexOf(q)>=0||qw.every(function(w){ return v._text.indexOf(w)>=0; })||(qs.length&&skMatch(v._sk,qs)));
+      return (!o.ids||o.ids.indexOf(String(v.id))>=0) && (o.country==="all"||v.country===o.country) && passWho(v,o.who) && (!o.housing||(v._h&&v._h.k!=="no")) && (!o.co||(v.company||"").toLowerCase()===String(o.co).toLowerCase()) && (ownQ ? (!!v.own && (!qs.length||skMatch(v._sk,qs))) : (!q||v._text.indexOf(q)>=0||qw.every(function(w){ return v._text.indexOf(w)>=0; })||(qs.length&&skMatch(v._sk,qs))));
     });
     var byDate=function(a,b){ return (a._next?a._next.getTime():9e15)-(b._next?b._next.getTime():9e15); };
     var pay=function(v){ var u=v._uah; return u?(u.unit==="міс"?u.max:u.max*170):0; };
