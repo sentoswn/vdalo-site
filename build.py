@@ -955,6 +955,13 @@ def main():
     tpl = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
     vp = os.path.join(ROOT, "vacancies.json")
     data = json.load(open(vp, encoding="utf-8"))
+    # запасне джерело «доплати за власне житло» (own-housing.json), якщо щоденне оновлення її не принесло
+    op = os.path.join(ROOT, "own-housing.json")
+    if os.path.exists(op):
+        _own = json.load(open(op, encoding="utf-8"))
+        for _v in data.get("items", []):
+            if not _v.get("own") and _own.get(str(_v.get("id"))) and _v.get("src", "trello") == "trello":
+                _v["own"] = _own[str(_v["id"])]
     # курс гривні: середній банківський (або НБУ), інакше — останній збережений (rates.json)
     rp = os.path.join(ROOT, "rates.json")
     rates = fetch_rates() or data.get("rates") or (json.load(open(rp, encoding="utf-8")) if os.path.exists(rp) else None)
