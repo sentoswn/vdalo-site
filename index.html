@@ -1790,6 +1790,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
   function factsHtml(v){
     var t=[];
     if (v._h) t.push('<li class="'+(v._h.k==="ok"?"ok":"")+'"><svg class="i"><use href="#i-home"/></svg>'+esc(v._h.t)+'</li>');
+    if (v.own) t.push('<li class="ok"><svg class="i"><use href="#i-piggy"/></svg>Доплата за своє житло</li>');
     if (v._c) t.push('<li class="'+(v._c.ok?"ok":"")+'"><svg class="i"><use href="#i-doc"/></svg>'+esc(v._c.short)+'</li>');
     if (v._next) t.push('<li class="date"><svg class="i"><use href="#i-cal"/></svg>Заїзд '+dd(v._next)+(rel(v._next)?" ("+rel(v._next)+")":"")+'</li>');
     if (v._g==="w"||v._g==="m") t.push('<li><svg class="i"><use href="#i-users"/></svg>'+(v._g==="w"?"Жінкам":"Чоловікам")+'</li>');
@@ -1833,6 +1834,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
   function tagsHtml(v){
     var t=[];
     if (v._h) t.push('<li class="tag '+(v._h.k==="ok"?"ok":v._h.k==="no"?"no":"")+'"><svg class="i"><use href="#i-home"/></svg>'+esc(v._h.t)+'</li>');
+    if (v.own) t.push('<li class="tag ok"><svg class="i"><use href="#i-piggy"/></svg>Доплата за своє житло</li>');
     t.push('<li class="tag"><svg class="i"><use href="#i-users"/></svg>'+esc(v.who||"Жінки та чоловіки")+'</li>');
     if (v._c) t.push('<li class="tag'+(v._c.ok?' ok':'')+'"><svg class="i"><use href="#i-doc"/></svg>'+esc(v._c.short)+'</li>');
     if (v._next) t.push('<li class="tag date"><svg class="i"><use href="#i-cal"/></svg>Заїзд '+dd(v._next)+(rel(v._next)?" ("+rel(v._next)+")":"")+'</li>');
@@ -1911,7 +1913,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
     var v=items.filter(function(x){return String(x.id)===String(id);})[0];
     if (!v){ toast("Цієї вакансії вже немає — подивіться інші"); clearHash(); return; }
     ev("view_vacancy",{vacancy_id:String(v.id),country:v.country||"",company:v.company||""});
-    var rows=[["Для кого",v.who],["Годин на місяць",v.hours],["Графік",v.schedule],["Нічні зміни",v.night],["Житло",v.housing],["Харчування",v.food],["Доїзд до роботи",v.transport],["Договір",v._c?{html:esc(v._c.full)+(v._c.note?'<small>'+esc(v._c.note)+'</small>':'')}:null],["Вимоги",v.req],["Бонуси",v.perks],["Дати заїзду",v.trips]].filter(function(r){return r[1];});
+    var rows=[["Для кого",v.who],["Годин на місяць",v.hours],["Графік",v.schedule],["Нічні зміни",v.night],["Житло",v.housing],["Доплата за власне житло",v.own],["Харчування",v.food],["Доїзд до роботи",v.transport],["Договір",v._c?{html:esc(v._c.full)+(v._c.note?'<small>'+esc(v._c.note)+'</small>':'')}:null],["Вимоги",v.req],["Бонуси",v.perks],["Дати заїзду",v.trips]].filter(function(r){return r[1];});
     var msg=vacMsg(v);
     $("sheet").innerHTML=
       '<button class="x" type="button" data-close aria-label="Закрити"><svg class="i"><use href="#i-x"/></svg></button>'+

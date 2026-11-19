@@ -184,6 +184,8 @@ def search_extras(v):
             out.append("безкоштовне житло бесплатное жилье")
     else:
         out.append("без житла без жилья без проживания")
+    if v.get("own"):
+        out.append("доплата за власне житло доплата за своє житло доплата за свое жилье компенсація житла компенсация жилья своє житло свое жилье")
     sched = " ".join(str(v.get(k) or "") for k in ("schedule", "night"))
     days = set(re.findall(r"\b(8|10|11|12)\s*(?:[-–]\s*\d{1,2}\s*)?(?:год|h\b|godz|часов|час)", sched, re.I))
     if not days:

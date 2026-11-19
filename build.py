@@ -239,6 +239,8 @@ def card_facts(v):
     if v["_h"]:
         k, txt = v["_h"]
         t.append(f'<li class="{"ok" if k == "ok" else ""}"><svg class="i"><use href="#i-home"/></svg>{esc(txt)}</li>')
+    if v.get("own"):
+        t.append('<li class="ok"><svg class="i"><use href="#i-piggy"/></svg>Доплата за своє житло</li>')
     if v["_c"]:
         t.append(f'<li class="{"ok" if v["_c"]["ok"] else ""}"><svg class="i"><use href="#i-doc"/></svg>{esc(v["_c"]["short"])}</li>')
     if v["_next"]:
@@ -688,7 +690,7 @@ ORG = {"@context": "https://schema.org", "@type": "EmploymentAgency", "name": "�
 def vac_rows(v):
     c = v["_c"]
     rows = [("Для кого", v.get("who")), ("Годин на місяць", v.get("hours")), ("Графік", v.get("schedule")), ("Нічні зміни", v.get("night")),
-            ("Житло", v.get("housing")), ("Харчування", v.get("food")), ("Доїзд до роботи", v.get("transport")),
+            ("Житло", v.get("housing")), ("Доплата за власне житло", v.get("own")), ("Харчування", v.get("food")), ("Доїзд до роботи", v.get("transport")),
             ("Договір", {"html": esc(c["full"]) + (f"<small>{esc(c['note'])}</small>" if c["note"] else "")} if c else None),
             ("Вимоги", v.get("req")), ("Бонуси", v.get("perks")), ("Дати заїзду", v.get("trips"))]
     return [(k, x) for k, x in rows if x]
