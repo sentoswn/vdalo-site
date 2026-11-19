@@ -22,7 +22,7 @@ from zoneinfo import ZoneInfo
 
 from articles import ARTICLES
 import sections as SEC
-from keywords import vac_keywords, LANGS as KW_LANGS
+from keywords import vac_keywords, LANGS as KW_LANGS, search_extras
 import i18n
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -966,7 +966,7 @@ def main():
     items = [enrich(v) for v in data.get("items", []) if v and v.get("title") and v.get("salary")]
     by_id = {v["id"]: v for v in items}
     # ключові слова 4 мовами для пошуку на сайті
-    json.dump({str(v["id"]): " ".join(w for ws in vac_keywords(v).values() for w in ws) for v in items},
+    json.dump({str(v["id"]): " ".join(w for ws in vac_keywords(v).values() for w in ws) + " " + search_extras(v) for v in items},
               open(os.path.join(ROOT, "keywords.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 
     # стан: дата першої появи / зміни кожної вакансії
