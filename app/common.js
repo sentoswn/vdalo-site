@@ -126,7 +126,7 @@ window.Vdalo = window.Vdalo || (function(){
       .replace(/\u0001/g, "shch").replace(/\u0002/g, "sh").replace(/\u0003/g, "ch").replace(/\u0004/g, "zh").replace(/ł/g, "l").replace(/w/g, "v").replace(/y/g, "i").replace(/j/g, "i").replace(/x/g, "ks").replace(/q/g, "k");
     try { s = s.normalize("NFD").replace(/[̀-ͯ]/g, ""); } catch (e) {}
     var o = ""; for (var i = 0; i < s.length; i++) { var c = s[i]; o += (c in SKC) ? SKC[c] : c; }
-    return " " + o.replace(/[^a-z0-9]+/g, " ").trim() + " ";
+    return " " + o.replace(/[^a-z0-9]+/g, " ").replace(/(ou|uv|iv|ov)(?=\s|$)/g, "ov").trim() + " ";
   }
   function stem(w){ return w.length <= 4 ? w : w.length <= 6 ? w.slice(0, -1) : w.slice(0, -2); }
   // Як люди пишуть міста (укр., рос., з помилками) → як місто записане у вакансіях
