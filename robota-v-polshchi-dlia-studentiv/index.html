@@ -1275,8 +1275,8 @@ window.Vdalo = window.Vdalo || (function(){
   function words(q){
     return sk(q).trim().split(" ").filter(Boolean).map(function(w){
       if (AL[w]) return AL[w];
-      var sw = stem(w);
-      for (var k in AL) if (k.length >= 4 && (k.indexOf(sw) === 0 || w.indexOf(stem(k)) === 0) && sw.length >= 4) return AL[k];
+      // лише явний початок назви міста (≥5 літер: «быдго») або відмінок («лодзі», «быдгоще») — щоб «жильё» не ставало «Žilina»
+      for (var k in AL) if (k.length >= 4 && ((w.length >= 5 && k.indexOf(w) === 0) || (k.length >= 5 && w.indexOf(k.slice(0, -1)) === 0 && w.length - k.length <= 2) || (k.length === 4 && w.indexOf(k) === 0 && w.length - k.length <= 2))) return AL[k];
       return w;
     });
   }
