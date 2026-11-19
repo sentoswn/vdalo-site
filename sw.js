@@ -1,6 +1,6 @@
 /* Service worker застосунку «Вдало»: сторінки — спершу з мережі (завжди свіжі вакансії),
    без інтернету — остання збережена копія. Запити до бази (Supabase), Telegram і API не кешуються. */
-const V = "vdalo-v2";
+const V = "vdalo-v3";
 const CORE = ["/", "/kabinet/", "/crm/", "/manifest.webmanifest", "/img/app/icon-192.png", "/img/app/icon-512.png"];
 self.addEventListener("install", (e) => { e.waitUntil(caches.open(V).then((c) => c.addAll(CORE)).catch(() => {})); self.skipWaiting(); });
 self.addEventListener("activate", (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== V).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });

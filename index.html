@@ -1729,7 +1729,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
   function passWho(v,w){ return w==="all"||(w==="w"&&v._g!=="m")||(w==="m"&&v._g!=="w")||(w==="pair"&&v._g==="both"); }
   function passHouse(v){ return !st.housing||(v._h&&v._h.k!=="no"); }
   function filtered(o){
-    o=o||st; var q=norm(o.q||"").trim(), qw=q.split(/\s+/).filter(Boolean); var qs=sk(o.q||"").trim().split(" ").filter(Boolean);
+    o=o||st; var q=norm(o.q||"").trim(), qw=q.split(/\s+/).filter(Boolean); var qs=window.VdaloSearch?VdaloSearch.words(o.q||""):sk(o.q||"").trim().split(" ").filter(Boolean);
     var list=items.filter(function(v){
       return (!o.ids||o.ids.indexOf(String(v.id))>=0) && (o.country==="all"||v.country===o.country) && passWho(v,o.who) && (!o.housing||(v._h&&v._h.k!=="no")) && (!o.co||(v.company||"").toLowerCase()===String(o.co).toLowerCase()) && (!q||v._text.indexOf(q)>=0||qw.every(function(w){ return v._text.indexOf(w)>=0; })||(qs.length&&skMatch(v._sk,qs)));
     });
