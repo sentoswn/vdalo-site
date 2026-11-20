@@ -59,12 +59,13 @@ main{padding:20px;max-width:1500px;margin:0 auto}
 .st-contacted,.st-in_progress{background:#fff2d6;color:var(--amber)}
 .st-dialog{background:#e0f4f7;color:#0e6b7a}
 .st-waiting{background:#fde8f1;color:#a61e5a}
-select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;padding:4px 22px 4px 9px;max-width:230px;-webkit-appearance:none;appearance:none;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 11px) 52%,calc(100% - 7px) 52%;background-size:4px 4px;background-repeat:no-repeat}
+select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;padding:4px 22px 4px 9px;max-width:280px;-webkit-appearance:none;appearance:none;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 11px) 52%,calc(100% - 7px) 52%;background-size:4px 4px;background-repeat:no-repeat}
 .tbl td.ck,.tbl th.ck{width:34px;padding-right:0}
 .tbl input.ck{width:18px;height:18px;cursor:pointer;accent-color:var(--blue)}
 .bulk{position:sticky;top:8px;z-index:5;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px;margin-bottom:10px;border-radius:14px;background:#1d2939;color:#fff;box-shadow:0 8px 24px rgba(16,24,40,.18)}
-.bulk select{padding:7px 10px;border-radius:999px;border:0;font-weight:600}
-.bulk .btn{padding:7px 14px}
+.bulk select{padding:7px 10px;border-radius:999px;border:0;font-weight:600;background:#fff;color:#1d2939;max-width:240px}
+.bulk .btn{padding:7px 14px;background:#2f6bff;color:#fff;border:0}
+.bulk .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}
 .st-matched,.st-departed{background:#efe5ff;color:#5b2bb5}
 .st-working,.st-contract{background:#e2f5e9;color:var(--green)}
 .st-paid,.st-done{background:var(--green);color:#fff}
@@ -615,7 +616,7 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
         box.innerHTML = '<div class="bulk"><b>Вибрано: ' + sel.length + '</b>' +
           (S.own ? '<select id="bk-mgr"><option value="">Менеджер…</option>' + S.staff.map(function(p){ return '<option value="' + p.id + '">' + E(pname(p)) + '</option>'; }).join("") + '<option value="__none">— Зняти менеджера —</option></select><button class="btn sm" id="bk-mgr-go">Призначити</button>' : '') +
           '<select id="bk-st"><option value="">Статус…</option>' + opts(LS, "") + '</select><button class="btn sm" id="bk-st-go">Змінити статус</button>' +
-          '<button class="btn ghost sm" id="bk-x" style="margin-left:auto;color:#fff;border-color:rgba(255,255,255,.35)">Скасувати вибір</button></div>';
+          '<button class="btn ghost sm" id="bk-x" style="margin-left:auto">Скасувати вибір</button></div>';
         document.getElementById("bk-x").onclick = function(){ S.sel = {}; rLeads(); };
         var mg = document.getElementById("bk-mgr-go");
         if (mg) mg.onclick = function(){ var v = document.getElementById("bk-mgr").value; if (!v) { toast("Оберіть менеджера"); return; }
