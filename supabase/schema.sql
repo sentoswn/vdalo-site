@@ -855,3 +855,13 @@ begin
 end $$;
 drop trigger if exists leads_status_at on public.leads;
 create trigger leads_status_at before insert or update on public.leads for each row execute function public.leads_status_at();
+
+-- «Свій статус» — вільний текст поверх основного статусу (напр. «Чекає паспорт»)
+alter table public.leads add column if not exists status_note text;
+create or replace function public.leads_status_at() returns trigger language plpgsql as $$
+begin
+  if tg_op = 'INSERT' then new.status_at := coalesce(new.status_at, now());
+  elsif new.status is distinct from old.status or new.status_note is distinct from old.status_note then new.status_at := now(); end if;
+  new.status_note := nullif(left(trim(coalesce(new.status_note, '')), 80), '');
+  return new;
+end $$;

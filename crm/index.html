@@ -51,6 +51,8 @@ main{padding:20px;max-width:1500px;margin:0 auto}
 .tbl tr.row{cursor:pointer}
 .tbl tr.row:hover td{background:#fafbfc}
 .tbl tr.row.stale td{background:#fdecec}
+#d-cst::placeholder{color:#c4cad4;font-style:italic;font-weight:400}
+.tbl small.cst{display:block;margin-top:4px;color:#344054;font-weight:700}
 .tbl tr.row.stale td:first-child{box-shadow:inset 3px 0 0 var(--red)}
 .tbl tr.row.stale:hover td{background:#fbe1e1}
 .tbl small{display:block;color:var(--muted);margin-top:2px}
@@ -562,7 +564,7 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
         if (S.own && S.mgr !== "all" && S.mgr !== "none" && !hasMgr(l, S.mgr)) return false;
         if (S.filter === "active" && (l.status === "rejected" || l.status === "paid")) return false;
         if (S.filter !== "active" && S.filter !== "all" && l.status !== S.filter) return false;
-        if (q) { var hay = [l.name, l.phone, l.vacancy_title, l.employer, l.manager_note, l.referrer && pname(l.referrer)].join(" ");
+        if (q) { var hay = [l.name, l.phone, l.vacancy_title, l.employer, l.manager_note, l.status_note, l.referrer && pname(l.referrer)].join(" ");
           if (hay.toLowerCase().indexOf(q) < 0 && !(window.VdaloSearch && VdaloSearch.match(hay, VdaloSearch.words(q)))) return false; }
         return true;
       });
@@ -591,7 +593,8 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
             '<td class="hide-m">' + E((l.vacancy_title || "Будь-яка").replace(/ · Оператор: .*$/, "")) + opBadge(l) + (l.employer ? '<small>' + E(l.employer) + '</small>' : "") + '</td>' +
             '<td class="hide-m">' + chBadge(l) + (l.referrer ? '<small>від ' + E(pname(l.referrer)) + '</small>' : "") + '</td>' +
             (S.own ? '<td class="hide-m">' + (mgrsOf(l).length ? mgrsOf(l).map(function(id){ return E(staffName(id)); }).join(", ") : '<span class="st st-new">Не призначено</span>') + '</td>' : '') +
-            '<td><select class="st st-' + l.status + '" data-st="' + l.id + '" title="Змінити статус">' + opts(LS, l.status) + '</select>' + waitBadge(l) + '</td></tr>';
+            '<td><select class="st st-' + l.status + '" data-st="' + l.id + '" title="Змінити статус">' + opts(LS, l.status) + '<option value="__own">✎ Свій статус…</option></select>' +
+            (l.status_note ? '<small class="cst">✎ ' + E(l.status_note) + '</small>' : '') + waitBadge(l) + '</td></tr>';
         }).join("") : '<tr><td colspan="7" class="empty">' + (S.own ? "Тут поки порожньо. Нові заявки з’являться автоматично" : "Поки немає кандидатів. Діліться своїм посиланням (вкладка «Моє посилання») — кандидати з нього потраплять сюди.") + '</td></tr>') + '</tbody></table></div>';
       var cf = document.getElementById("chf"); if (cf) cf.onchange = function(){ S.ch = cf.value; rLeads(); };
       var ms = document.getElementById("mgr"); if (ms) ms.onchange = function(){ S.mgr = ms.value; rLeads(); };
@@ -602,8 +605,11 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
       // швидка зміна статусу прямо в таблиці
       document.querySelectorAll("select[data-st]").forEach(function(sel){
         sel.onchange = function(){ var id = +sel.getAttribute("data-st"), l = S.leads.filter(function(x){ return x.id === id; })[0], v = sel.value;
+          if (v === "__own") { sel.value = l.status; var t = prompt("Свій статус для " + l.name + " (напр. «Чекає паспорт»). Порожньо — прибрати.", l.status_note || "");
+            if (t === null) return; t = t.trim().slice(0, 80) || null;
+            API.saveLead(id, {status_note: t}).then(function(){ toast(t ? "Статус «" + t + "» збережено" : "Свій статус прибрано"); rLeads(); }).catch(fail); return; }
           sel.className = "st st-" + v;
-          API.saveLead(id, {status: v}).then(function(){ if (l && (v === "working" || v === "paid") && l.status !== v) confetti();
+          API.saveLead(id, {status: v, status_note: null}).then(function(){ if (l && (v === "working" || v === "paid") && l.status !== v) confetti();
             toast("Статус: " + LSN[v]); counts(); rLeads(); }).catch(fail); };
       });
       // вибір кандидатів галочками і масові дії
@@ -660,7 +666,10 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
       '<div class="fld"><label>Дата виходу на роботу</label><input id="d-start" type="date" value="' + E(l.start_date || "") + '"></div></div>' +
       '<div class="fld"><label>Хто запросив (реферальний код)</label><div class="g2"><input id="d-ref" placeholder="напр. ok7m2p" value="' + E(l.referrer ? l.referrer.ref_code || "" : "") + '"><span class="note" id="d-ref-name" style="align-self:center">' + (l.referrer ? E(pname(l.referrer)) : (l.ref_raw ? "з посилання: " + E(l.ref_raw) + " (не знайдено)" : "")) + '</span></div></div>' +
       '<div class="fld"><label>Нотатки менеджера</label><textarea id="d-note">' + E(l.manager_note || "") + '</textarea></div>' +
-      (isNew ? "" : '<div class="mini"><b>Задачі по кандидату</b><div id="d-tasks"></div><p class="note" style="margin:4px 0 0">Шаблони — натисніть, змініть дату за потреби й «Додати»:</p>' + tplChips(T_LEAD, "data-tl") +
+      (isNew ? "" : '<div class="mini"><b>Задачі по кандидату</b><div id="d-tasks"></div>' +
+        '<div class="fld" style="margin:6px 0 2px"><label>Свій статус <span style="font-weight:500">(якщо немає в шаблонах — напишіть і натисніть Enter)</span></label>' +
+        '<div class="row2" style="grid-template-columns:1fr auto"><input id="d-cst" maxlength="80" placeholder="Інше — напишіть свій статус…" value="' + E(l.status_note || "") + '"><button type="button" class="btn sm" id="d-cst-go">Зберегти статус</button></div></div>' +
+        '<p class="note" style="margin:4px 0 0">Шаблони — натисніть, змініть дату за потреби й «Додати»:</p>' + tplChips(T_LEAD, "data-tl") +
         '<div class="bar" style="margin:0"><button type="button" class="btn ghost sm" data-flow="start">' + ic("bolt", "xs") + ' Набір «Новий кандидат» · 3 задачі</button><button type="button" class="btn ghost sm" data-flow="trip">' + ic("bolt", "xs") + ' Набір «Виїзд» · 6 задач</button></div><div class="row2"><input id="dt-title" placeholder="Напр. передзвонити, надіслати документи"><input id="dt-due" type="datetime-local"><button class="btn sm" id="dt-add" type="button">Додати</button></div></div>' +
         '<div><b>Історія статусів</b><ul class="hist" id="d-hist"><li>…</li></ul></div>') +
       '</div><div class="df">' + (!isNew && S.me.role === "admin" ? '<button class="btn ghost" id="d-del" style="margin-right:auto;color:var(--red)">Видалити</button>' : "") +
@@ -693,6 +702,11 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
         bindTasks(document.getElementById("d-tasks"), function(){ API.tasks().then(function(t){ S.tasks = t; drawTasks(); counts(); }); });
       };
       drawTasks();
+      var cst = document.getElementById("d-cst");
+      function saveCst(){ var v = cst.value.trim() || null; if (v === (l.status_note || null)) { toast("Без змін"); return; }
+        API.saveLead(l.id, {status_note: v}).then(function(){ l.status_note = v; toast(v ? "Статус «" + v + "» збережено" : "Свій статус прибрано"); rLeads(); }).catch(fail); }
+      document.getElementById("d-cst-go").onclick = saveCst;
+      cst.onkeydown = function(e){ if (e.key === "Enter") { e.preventDefault(); saveCst(); } };
       drawer.querySelectorAll("[data-tl]").forEach(function(b){ b.onclick = function(){ var t = T_LEAD[+b.getAttribute("data-tl")];
         document.getElementById("dt-title").value = t[0]; document.getElementById("dt-due").value = localInput(dueAt(t[1])); document.getElementById("dt-title").focus();
         if (t[3] && l.status !== t[3]) { stSel.value = t[3];
@@ -716,6 +730,7 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
       var empV = es.value === "__other" ? ei.value.trim() : es.value;
       var patch = {status: stSel.value, employer: empV || null, start_date: document.getElementById("d-start").value || null,
         manager_note: document.getElementById("d-note").value.trim() || null, referrer_id: refId};
+      var cstEl = document.getElementById("d-cst"); if (cstEl) patch.status_note = cstEl.value.trim() || null;
       if (S.own) { var ms = [].map.call(drawer.querySelectorAll('input[name="d-mgr"]:checked'), function(i){ return i.value; });
         var prim = l.manager_id && ms.indexOf(l.manager_id) >= 0 ? l.manager_id : (ms[0] || null);
         if (prim) ms = [prim].concat(ms.filter(function(x){ return x !== prim; }));
