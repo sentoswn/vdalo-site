@@ -865,3 +865,56 @@ begin
   new.status_note := nullif(left(trim(coalesce(new.status_note, '')), 80), '');
   return new;
 end $$;
+
+-- ============ Пакет задач «Новий кандидат» — автоматично на кожну нову заявку ============
+-- (задачі з тригера: auth.uid() порожній → залишаємо виконавця, якого передав тригер; анонім напряму задачі створити не може — RLS t_ins)
+create or replace function public.tasks_defaults() returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  if tg_op = 'INSERT' then
+    if auth.uid() is null then return new; end if;
+    new.created_by := auth.uid();
+    if new.assignee_id is null or not public.is_admin() then new.assignee_id := auth.uid(); end if;
+  elsif auth.uid() is not null and not public.is_admin() then
+    new.assignee_id := old.assignee_id;
+  end if;
+  return new;
+end $$;
+
+create or replace function public.lead_start_tasks(lid bigint, who uuid, t0 timestamptz default now()) returns void language plpgsql security definer set search_path = public as $$
+begin
+  insert into public.tasks(title, lead_id, assignee_id, due_at, note) values
+    ('Зателефонувати / написати', lid, who, t0 + interval '15 minutes', 'Набір «Новий кандидат»'),
+    ('Надіслати 2–3 вакансії',    lid, who, t0 + interval '2 hours',    'Набір «Новий кандидат»'),
+    ('Нагадати, якщо не відповів', lid, who, ((t0 at time zone 'Europe/Kyiv')::date + 1 + time '10:00') at time zone 'Europe/Kyiv', 'Набір «Новий кандидат»');
+end $$;
+revoke all on function public.lead_start_tasks(bigint, uuid, timestamptz) from public, anon, authenticated;
+
+create or replace function public.leads_after_insert() returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  perform public.lead_start_tasks(new.id, new.manager_id, now());
+  return new;
+end $$;
+drop trigger if exists leads_after_insert on public.leads;
+create trigger leads_after_insert after insert on public.leads for each row execute function public.leads_after_insert();
+
+-- призначили / змінили менеджера → його відкриті задачі по кандидату переходять до нового менеджера
+create or replace function public.leads_tasks_follow_mgr() returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  if new.manager_id is distinct from old.manager_id and new.manager_id is not null then
+    update public.tasks set assignee_id = new.manager_id
+     where lead_id = new.id and done_at is null and (assignee_id is null or assignee_id is not distinct from old.manager_id);
+  end if;
+  return new;
+end $$;
+drop trigger if exists leads_tasks_follow_mgr on public.leads;
+create trigger leads_tasks_follow_mgr after update on public.leads for each row execute function public.leads_tasks_follow_mgr();
+
+-- один раз: пакет для нових заявок (статус «Нова заявка», без жодної задачі)
+do $$
+begin
+  if not exists (select 1 from public.settings where key = 'start_tasks_backfill') then
+    perform public.lead_start_tasks(l.id, l.manager_id, now())
+       from public.leads l where l.status = 'new' and not exists (select 1 from public.tasks t where t.lead_id = l.id);
+    insert into public.settings(key, value) values ('start_tasks_backfill', now()::text);
+  end if;
+end $$;

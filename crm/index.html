@@ -175,6 +175,26 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
 .task.done b{text-decoration:line-through;color:var(--muted)}
 .task small{display:block;color:var(--muted)}
 .task .od{color:var(--red);font-weight:700}
+.own-dlg{position:fixed;inset:0;z-index:60;background:rgba(16,24,40,.45);display:flex;align-items:center;justify-content:center;padding:16px}
+.own-box{background:var(--surface);border-radius:18px;box-shadow:0 24px 64px rgba(16,24,40,.3);padding:22px;width:min(460px,100%);display:grid;gap:12px}
+.own-box h3{margin:0;font-size:20px}
+.own-box .note{margin:0}
+.own-box input{font:inherit;font-size:17px;padding:12px 14px;border:2px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);outline:0}
+.own-box input:focus{border-color:var(--blue)}
+.own-act{display:flex;justify-content:flex-end;gap:8px}
+td.tk{min-width:230px;max-width:320px;cursor:default}
+.tki{display:flex;gap:8px;align-items:flex-start;padding:3px 0;font-size:13px;font-weight:600;line-height:1.3;cursor:pointer}
+.tki input[type=checkbox]{flex:none;width:16px;height:16px;margin-top:1px;accent-color:var(--green)}
+.tki small{display:block;font-weight:500;color:var(--muted)}
+.tki small.od{color:var(--red);font-weight:700}
+.tki.blank .bt{flex:1;min-width:0;border:0;border-bottom:1px dashed var(--line);background:none;padding:1px 2px;font:inherit;font-weight:500;color:var(--ink);outline:0}
+.tki.blank .bt:focus{border-bottom-color:var(--blue)}
+@media (max-width:760px){td.tk,th.tk-h{display:none}}
+.tbox{border:1px solid var(--line);border-radius:14px;padding:10px 12px 4px;background:var(--surface)}
+.tbox>b{display:flex;align-items:center;gap:6px}
+.task.blank{align-items:center}
+.task.blank .bt{border:0;border-bottom:1px dashed var(--line);background:none;padding:4px 2px;font:inherit;min-width:0;width:100%;outline:0}
+.task.blank .bt:focus{border-bottom-color:var(--blue)}
 .tgroup{padding:10px 12px 4px;font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
 .mini{display:grid;gap:6px}
 .mini .row2{display:grid;grid-template-columns:1fr 150px auto;gap:6px}
@@ -555,8 +575,31 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
     var w = Date.now() - waitStart(l), late = w > 15 * 6e4;
     return '<small style="color:' + (late ? "var(--red)" : "var(--muted)") + ';font-weight:700">' + (late ? ic("clock", "xs") + " " : "") + 'чекає ' + E(mins(w)) + '</small>';
   }
+  // колонка «Задачі» праворуч у таблиці: відкриті задачі кандидата з галочками + 2 порожні рядки для своїх
+  function rowTasks(l){
+    var now = new Date(), ts = (S.tasks || []).filter(function(t){ return t.lead_id === l.id && !t.done_at; });
+    var blank = '<label class="tki blank"><input type="checkbox" data-rbk="' + l.id + '"><input class="bt" data-rnew="' + l.id + '" maxlength="200" placeholder="Своя задача…"></label>';
+    return '<td class="tk">' + ts.map(function(t){ var od = t.due_at && new Date(t.due_at) < now;
+        return '<label class="tki"><input type="checkbox" data-rdone="' + t.id + '"><span>' + E(t.title) + (t.due_at ? '<small class="' + (od ? "od" : "") + '">' + E(dt(t.due_at, true)) + (od ? " · прострочено" : "") + '</small>' : '') + '</span></label>'; }).join("") +
+      blank + blank + '</td>';
+  }
+  function bindRowTasks(root){
+    root.querySelectorAll("[data-rdone]").forEach(function(c){ c.onchange = function(){ c.disabled = true;
+      API.saveTask(+c.getAttribute("data-rdone"), {done_at: new Date().toISOString()}).then(function(){ toast("Задачу виконано"); counts(); rLeads(); }).catch(fail); }; });
+    root.querySelectorAll("label.tki.blank").forEach(function(row){
+      var cb = row.querySelector("[data-rbk]"), inp = row.querySelector("[data-rnew]"), busy = false, id = +inp.getAttribute("data-rnew");
+      var l = S.leads.filter(function(x){ return x.id === id; })[0];
+      function add(done){ var t = inp.value.trim(); if (!t || busy) { if (done && !t) { cb.checked = false; inp.focus(); toast("Спочатку напишіть задачу"); } return; } busy = true;
+        API.addTask({title: t, lead_id: id, due_at: null, assignee_id: (l && l.manager_id) || S.me.id, done_at: done ? new Date().toISOString() : null})
+          .then(function(){ toast(done ? "Задачу додано й відмічено" : "Задачу додано"); counts(); rLeads(); }).catch(function(e){ busy = false; fail(e); }); }
+      inp.onkeydown = function(e){ if (e.key === "Enter") { e.preventDefault(); add(false); } };
+      inp.onblur = function(){ add(false); };
+      cb.onchange = function(){ add(cb.checked); };
+    });
+  }
   function rLeads(){
-    API.leads().then(function(list){
+    Promise.all([API.leads(), API.tasks()]).then(function(rr){
+      var list = rr[0]; S.tasks = rr[1];
       S.leads = list;
       var cnt = {}; list.forEach(function(l){ cnt[l.status] = (cnt[l.status] || 0) + 1; });
       var active = list.filter(function(l){ return l.status !== "rejected" && l.status !== "paid"; }).length;
@@ -598,7 +641,7 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
         '<div class="bar"><input type="search" id="q" placeholder="Пошук: ім’я, телефон, вакансія, роботодавець…" value="' + E(S.q) + '"><button class="btn" id="add">+ Нова заявка</button></div>' +
         '<div class="bar">' + mgrSel + chSel + chips + '</div>' +
         '<div id="bulk"></div>' +
-        '<div class="card"><table class="tbl"><thead><tr><th class="ck"><input type="checkbox" class="ck" id="ck-all" title="Вибрати всіх"></th><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Канал</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th></tr></thead><tbody>' +
+        '<div class="card"><table class="tbl"><thead><tr><th class="ck"><input type="checkbox" class="ck" id="ck-all" title="Вибрати всіх"></th><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Канал</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th><th class="tk-h">Задачі</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(l){
           return '<tr class="row' + (staleMs(l) > STALE_MS ? " stale" : "") + '" data-id="' + l.id + '"><td class="ck"><input type="checkbox" class="ck" data-ck="' + l.id + '"' + (S.sel[l.id] ? " checked" : "") + '></td><td class="hide-m">' + E(dt(l.created_at, true)) + '</td>' +
             '<td><div class="who">' + avatar(l.name) + '<div><b>' + E(l.name) + '</b><small>' + E(l.phone) + (l.who ? " · " + E(l.who) : "") + '</small></div></div></td>' +
@@ -606,18 +649,33 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
             '<td class="hide-m">' + chBadge(l) + (l.referrer ? '<small>від ' + E(pname(l.referrer)) + '</small>' : "") + '</td>' +
             (S.own ? '<td class="hide-m">' + (mgrsOf(l).length ? mgrsOf(l).map(function(id){ return E(staffName(id)); }).join(", ") : '<span class="st st-new">Не призначено</span>') + '</td>' : '') +
             '<td><button type="button" class="st st-' + l.status + '" data-st="' + l.id + '" title="Змінити статус">' + E(LSN[l.status] || l.status) + '</button>' +
-            (l.status_note ? '<small class="cst">✎ ' + E(l.status_note) + '</small>' : '') + waitBadge(l) + '</td></tr>';
-        }).join("") : '<tr><td colspan="7" class="empty">' + (S.own ? "Тут поки порожньо. Нові заявки з’являться автоматично" : "Поки немає кандидатів. Діліться своїм посиланням (вкладка «Моє посилання») — кандидати з нього потраплять сюди.") + '</td></tr>') + '</tbody></table></div>';
+            (l.status_note ? '<small class="cst">✎ ' + E(l.status_note) + '</small>' : '') + waitBadge(l) + '</td>' + rowTasks(l) + '</tr>';
+        }).join("") : '<tr><td colspan="8" class="empty">' + (S.own ? "Тут поки порожньо. Нові заявки з’являться автоматично" : "Поки немає кандидатів. Діліться своїм посиланням (вкладка «Моє посилання») — кандидати з нього потраплять сюди.") + '</td></tr>') + '</tbody></table></div>';
       var cf = document.getElementById("chf"); if (cf) cf.onchange = function(){ S.ch = cf.value; rLeads(); };
       var ms = document.getElementById("mgr"); if (ms) ms.onchange = function(){ S.mgr = ms.value; rLeads(); };
       var qi = document.getElementById("q");
       qi.oninput = function(){ S.q = qi.value; var pos = qi.selectionStart; rLeads(); };
       document.querySelectorAll("[data-f]").forEach(function(b){ b.onclick = function(){ S.filter = b.getAttribute("data-f"); rLeads(); }; });
-      document.querySelectorAll("tr.row").forEach(function(tr){ tr.onclick = function(e){ if (e.target.closest(".ck,select,button.st")) return; openLead(+tr.getAttribute("data-id")); }; });
+      document.querySelectorAll("tr.row").forEach(function(tr){ tr.onclick = function(e){ if (e.target.closest(".ck,select,button.st,td.tk")) return; openLead(+tr.getAttribute("data-id")); }; });
       // швидка зміна статусу прямо в таблиці
+      bindRowTasks(app);
       document.querySelectorAll("button[data-st]").forEach(function(btn){
         btn.onclick = function(e){ e.stopPropagation(); stMenu(btn, +btn.getAttribute("data-st")); };
       });
+      // «Свій статус» — власне вікно по центру екрана (замість системного prompt угорі)
+      function askOwn(l, done){
+        var o = document.createElement("div"); o.className = "own-dlg";
+        o.innerHTML = '<form class="own-box" role="dialog" aria-modal="true"><h3>Свій статус</h3><p class="note">для <b>' + E(l.name) + '</b> — напр. «Чекає паспорт». Порожньо — прибрати.</p>' +
+          '<input maxlength="80" placeholder="Напишіть свій статус…"><div class="own-act"><button type="button" class="btn ghost" data-c>Скасувати</button><button class="btn">Зберегти</button></div></form>';
+        document.body.appendChild(o);
+        var inp = o.querySelector("input"); inp.value = l.status_note || ""; setTimeout(function(){ inp.focus(); inp.select(); }, 0);
+        function close(){ o.remove(); document.removeEventListener("keydown", key, true); }
+        function key(e){ if (e.key === "Escape") { e.stopPropagation(); close(); } }
+        document.addEventListener("keydown", key, true);
+        o.onmousedown = function(e){ if (e.target === o) close(); };
+        o.querySelector("[data-c]").onclick = close;
+        o.querySelector("form").onsubmit = function(e){ e.preventDefault(); var t = inp.value.trim().slice(0, 80) || null; close(); done(t); };
+      }
       function stMenu(btn, id){
         var old = document.querySelector(".stm"); if (old) { var same = old._for === id; old._close(); if (same) return; }
         var l = S.leads.filter(function(x){ return x.id === id; })[0]; if (!l) return;
@@ -635,9 +693,8 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
         setTimeout(function(){ document.addEventListener("mousedown", out, true); document.addEventListener("keydown", key, true); addEventListener("scroll", function sc(e){ if (!m.contains(e.target)) { removeEventListener("scroll", sc, true); close(); } }, true); addEventListener("resize", close); }, 0);
         var cur = m.querySelector(".on") || m.querySelector("button"); cur.focus();
         m.onclick = function(e){ var b = e.target.closest("button[data-v]"); if (!b) return; var v = b.getAttribute("data-v"); close();
-          if (v === "__own") { var t = prompt("Свій статус для " + l.name + " (напр. «Чекає паспорт»). Порожньо — прибрати.", l.status_note || "");
-            if (t === null) return; t = t.trim().slice(0, 80) || null;
-            API.saveLead(id, {status_note: t}).then(function(){ toast(t ? "Статус «" + t + "» збережено" : "Свій статус прибрано"); rLeads(); }).catch(fail); return; }
+          if (v === "__own") { askOwn(l, function(t){
+            API.saveLead(id, {status_note: t}).then(function(){ toast(t ? "Статус «" + t + "» збережено" : "Свій статус прибрано"); rLeads(); }).catch(fail); }); return; }
           if (v === l.status) return;
           btn.className = "st st-" + v; btn.textContent = LSN[v];
           API.saveLead(id, {status: v, status_note: null}).then(function(){ if ((v === "working" || v === "paid") && l.status !== v) confetti();
@@ -686,6 +743,7 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
       '<dt>Зв’язок</dt><dd>' + E([l.contact_mode, l.channel].filter(Boolean).join(" · ") || "—") + '</dd>' +
       '<dt>Коментар</dt><dd>' + E(l.note || "—") + '</dd><dt>Канал</dt><dd>' + chBadge(l) + '</dd><dt>Джерело</dt><dd>' + E(l.source || "—") + (l.lang && l.lang !== "uk" ? " · мова " + E(l.lang) : "") + '</dd></dl>';
     openDrawer('<div class="dh"><h2>' + (isNew ? "Нова заявка" : E(l.name)) + '</h2><button class="btn ghost sm" data-x>✕</button></div><div class="db">' + info +
+      (isNew ? "" : '<div class="mini tbox"><b>' + ic("check", "xs") + ' Задачі по кандидату</b><div id="d-tasks"></div></div>') +
       (isNew ? '<div class="g2"><div class="fld"><label>Ім’я</label><input id="d-name"></div><div class="fld"><label>Телефон</label><input id="d-phone" type="tel"></div></div>' +
         '<div class="fld"><label>Вакансія</label><select id="d-vacsel"><option value="">Будь-яка / ще не обрали</option>' + S.vac.map(function(v){ return '<option value="' + E(v.id) + '">' + E(v.title + " · " + (v.company || "") + " · " + (v.city || "")) + '</option>'; }).join("") + '<option value="__other">Інше (вписати)…</option></select><input id="d-vac" placeholder="Побажання кандидата" hidden style="margin-top:6px"></div>' : "") +
       '<div class="fld"><label>Статус</label><select id="d-status">' + opts(LS, l.status) + '</select></div>' +
@@ -697,7 +755,7 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
       '<div class="fld"><label>Дата виходу на роботу</label><input id="d-start" type="date" value="' + E(l.start_date || "") + '"></div></div>' +
       '<div class="fld"><label>Хто запросив (реферальний код)</label><div class="g2"><input id="d-ref" placeholder="напр. ok7m2p" value="' + E(l.referrer ? l.referrer.ref_code || "" : "") + '"><span class="note" id="d-ref-name" style="align-self:center">' + (l.referrer ? E(pname(l.referrer)) : (l.ref_raw ? "з посилання: " + E(l.ref_raw) + " (не знайдено)" : "")) + '</span></div></div>' +
       '<div class="fld"><label>Нотатки менеджера</label><textarea id="d-note">' + E(l.manager_note || "") + '</textarea></div>' +
-      (isNew ? "" : '<div class="mini"><b>Задачі по кандидату</b><div id="d-tasks"></div>' +
+      (isNew ? "" : '<div class="mini"><b>Додати задачу</b>' +
         '<div class="fld" style="margin:6px 0 2px"><label>Свій статус <span style="font-weight:500">(якщо немає в шаблонах — напишіть і натисніть Enter)</span></label>' +
         '<div class="row2" style="grid-template-columns:1fr auto"><input id="d-cst" maxlength="80" placeholder="Інше — напишіть свій статус…" value="' + E(l.status_note || "") + '"><button type="button" class="btn sm" id="d-cst-go">Зберегти статус</button></div></div>' +
         '<p class="note" style="margin:4px 0 0">Шаблони — натисніть, змініть дату за потреби й «Додати»:</p>' + tplChips(T_LEAD, "data-tl") +
@@ -729,8 +787,19 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
     if (!isNew) {
       var drawTasks = function(){
         var ts = S.tasks.filter(function(t){ return t.lead_id === l.id; });
-        document.getElementById("d-tasks").innerHTML = ts.length ? ts.map(taskRow).join("") : '<p class="note">Задач немає</p>';
-        bindTasks(document.getElementById("d-tasks"), function(){ API.tasks().then(function(t){ S.tasks = t; drawTasks(); counts(); }); });
+        var box = document.getElementById("d-tasks");
+        box.innerHTML = ts.map(taskRow).join("") + [0, 1].map(function(i){ return '<div class="task blank"><input type="checkbox" data-bk="' + i + '" aria-label="Виконано"><input class="bt" id="bt' + i + '" maxlength="200" placeholder="Своя задача — напишіть і натисніть Enter"><span></span></div>'; }).join("");
+        bindTasks(box, function(){ API.tasks().then(function(t){ S.tasks = t; drawTasks(); counts(); }); });
+        box.querySelectorAll(".task.blank").forEach(function(row){
+          var cb = row.querySelector("input[type=checkbox]"), inp = row.querySelector(".bt"), busy = false;
+          function add(done){ var t = inp.value.trim(); if (!t || busy) { if (done && !t) { cb.checked = false; inp.focus(); toast("Спочатку напишіть задачу"); } return; } busy = true;
+            API.addTask({title: t, lead_id: l.id, due_at: null, assignee_id: l.manager_id || S.me.id, done_at: done ? new Date().toISOString() : null})
+              .then(function(){ return API.tasks(); }).then(function(tl){ S.tasks = tl; drawTasks(); counts(); toast(done ? "Задачу додано й відмічено" : "Задачу додано"); var n = document.getElementById("bt0"); if (n) n.focus(); })
+              .catch(function(e){ busy = false; fail(e); }); }
+          inp.onkeydown = function(e){ if (e.key === "Enter") { e.preventDefault(); add(false); } };
+          inp.onblur = function(){ add(false); };
+          cb.onchange = function(){ add(cb.checked); };
+        });
       };
       drawTasks();
       var cst = document.getElementById("d-cst");
