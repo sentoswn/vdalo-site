@@ -1601,7 +1601,8 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
         (isAdmin ? '<div class="card" style="padding:20px;max-width:620px;margin-top:16px;display:grid;gap:10px"><h3 style="margin:0">Заявки з форм Facebook / Instagram</h3>' +
           '<p class="note" id="fb-st">Перевіряю…</p>' +
           '<p class="note">Нові заявки з рекламних форм кожні 2 хв самі потрапляють сюди в «Заявки» (джерело «Форма Facebook/Instagram») і в Telegram-групу «Вдало Заявки» разом із Google-таблицею.</p>' +
-          '<div class="bar" style="margin:0"><button class="btn" id="fb-key">Вставити ключ сторінки</button><button class="btn ghost" id="fb-run">Перевірити зараз</button></div></div>' : '') +
+          '<div class="row2" style="display:grid;grid-template-columns:1fr auto;gap:8px"><input id="fb-tok" type="password" autocomplete="off" placeholder="Вставте сюди ключ сторінки (починається з EAA)" style="padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;min-width:0"><button class="btn" id="fb-key">Зберегти ключ</button></div>' +
+          '<div class="bar" style="margin:0"><button class="btn ghost" id="fb-run">Перевірити зараз</button></div></div>' : '') +
         '<div class="card" style="padding:20px;max-width:620px;margin-top:16px;display:grid;gap:12px"><h3 style="margin:0">Робочий час менеджерів</h3>' +
         '<div class="g2"><div class="fld"><label>Початок дня</label><input id="w-s" type="time" value="' + E(st.work_start || "10:00") + '"' + dis + '></div>' +
         '<div class="fld"><label>Кінець дня</label><input id="w-e" type="time" value="' + E(st.work_end || "17:00") + '"' + dis + '></div></div>' +
@@ -1615,15 +1616,15 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
       if (fbSt) {
         API.hasSecret("meta_page_token").then(function(ok){ fbSt.innerHTML = ok ? "✅ Ключ сторінки збережено." : "<b>Ще не підключено.</b> Натисніть «Вставити ключ сторінки»."; }).catch(function(){ fbSt.textContent = ""; });
         document.getElementById("fb-key").onclick = function(){
-          var v = prompt("Вставте ключ доступу сторінки «Вдало» (Page access token, починається з EAA). Він збережеться в базі; у браузері його більше видно не буде.");
-          if (!v) return; v = v.trim(); if (!/^EAA/.test(v)) return toast("Ключ має починатися з EAA");
-          API.setSecret("meta_page_token", v).then(function(){ toast("Ключ збережено ✅"); rSettings(); }).catch(fail);
+          var inp = document.getElementById("fb-tok"), v = inp.value.trim();
+          if (!v) { inp.focus(); return toast("Вставте ключ у поле (Ctrl+V)"); } if (!/^EAA/.test(v)) return toast("Ключ має починатися з EAA");
+          API.setSecret("meta_page_token", v).then(function(){ inp.value = ""; toast("Ключ збережено ✅"); fbSt.innerHTML = "✅ Ключ сторінки збережено. Перевіряю заявки…"; document.getElementById("fb-run").click(); }).catch(fail);
         };
         document.getElementById("fb-run").onclick = function(){
           fbSt.textContent = "Перевіряю заявки у Facebook…";
           API.metaLeads()
             .then(function(j){ fbSt.innerHTML = j.error ? "⚠️ " + E(j.error) : (j.ok ? "✅ " : "⚠️ ") + "Форм: " + j.forms + ", заявок за 14 днів: " + j.seen + ", нових додано: " + j.added + (j.errors && j.errors.length ? "<br>" + E(j.errors.join("; ")) : ""); })
-            .catch(function(){ fbSt.textContent = "Не вдалося звернутися до функції."; });
+            .catch(function(e){ fbSt.textContent = "Не вдалося звернутися до функції" + (e && e.message ? ": " + e.message : "."); });
         };
       }
       var wsv = document.getElementById("w-save");
