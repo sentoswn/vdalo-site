@@ -138,19 +138,25 @@ input:focus,select:focus{border-color:#2f6bff;box-shadow:0 0 0 3px rgba(47,107,2
       var trk = window.VdaloTrack ? VdaloTrack.lead() : null;
       return sbc.from("leads").insert(trk ? Object.assign({}, row, trk) : row).then(function(r){ if (r && r.error && trk) return sbc.from("leads").insert(row); });
     }).catch(function(){});
-    var done = false, timer = setTimeout(function(){ if (!done) { done = true; show(false); } }, 15000);
-    fetch(LEADS_URL, {method: "POST", body: JSON.stringify(payload)}).then(function(r){ return r.json(); })
-      .then(function(j){ if (!done) { done = true; clearTimeout(timer); show(!!(j && j.ok)); } })
-      .catch(function(){ if (!done) { done = true; clearTimeout(timer); show(false); } });
-    function show(ok){
+    // «Дякуємо» показуємо одразу: заявка паралельно йде в CRM і в Google-таблицю (keepalive — дійде, навіть якщо сторінку закрили).
+    show();
+    var settled = false, timer = setTimeout(function(){ fail(); }, 20000);
+    fetch(LEADS_URL, {method: "POST", body: JSON.stringify(payload), keepalive: true}).then(function(r){ return r.json(); })
+      .then(function(j){ clearTimeout(timer); if (!(j && j.ok)) fail(); else settled = true; })
+      .catch(function(){ clearTimeout(timer); fail(); });
+    function show(){
       btn.disabled = false; btn.textContent = "Надіслати заявку";
       $("f").style.display = "none"; $("done").style.display = "block";
       $("done-h").textContent = "Дякуємо, " + name + "!";
       $("done-t").textContent = mode === "Дзвінок" ? "Менеджер зателефонує вам на номер " + ph.text + " найближчим часом." : "Менеджер напише вам у " + mode + " найближчим часом.";
-      if (!ok) { $("done-h").textContent = "Майже готово, " + name + "!"; $("done-msg").hidden = false;
-        $("m-wa").href = "https://wa.me/380660050060?text=" + encodeURIComponent("Заявка «Вдало»\nІм'я: " + name + "\nТелефон: " + ph.text + (note ? "\n" + note : "")); }
-      if (ok) try { fbq("track", "Lead", {content_name: "zayavka" + (t ? "_" + t : "")}); gtag("event", "generate_lead", {form: "zayavka", topic: t || "general"}); } catch(e3) {}
+      try { fbq("track", "Lead", {content_name: "zayavka" + (t ? "_" + t : "")}); gtag("event", "generate_lead", {form: "zayavka", topic: t || "general"}); } catch(e3) {}
       window.scrollTo(0, 0);
+    }
+    // Таблиця не відповіла — про всяк випадок даємо кнопки месенджерів (у CRM заявка вже є)
+    function fail(){
+      if (settled) return; settled = true;
+      $("done-msg").hidden = false;
+      $("m-wa").href = "https://wa.me/380660050060?text=" + encodeURIComponent("Заявка «Вдало»\nІм'я: " + name + "\nТелефон: " + ph.text + (note ? "\n" + note : ""));
     }
   });
 })();
