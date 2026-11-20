@@ -50,6 +50,9 @@ main{padding:20px;max-width:1500px;margin:0 auto}
 .tbl td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
 .tbl tr.row{cursor:pointer}
 .tbl tr.row:hover td{background:#fafbfc}
+.tbl tr.row.stale td{background:#fdecec}
+.tbl tr.row.stale td:first-child{box-shadow:inset 3px 0 0 var(--red)}
+.tbl tr.row.stale:hover td{background:#fbe1e1}
 .tbl small{display:block;color:var(--muted);margin-top:2px}
 .st{display:inline-block;padding:3px 9px;border-radius:999px;font-weight:700;font-size:12px;background:var(--soft);white-space:nowrap}
 .st-new{background:#e5edff;color:var(--blue)}
@@ -528,7 +531,11 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
   function fail(e){ console.warn(e); toast("Помилка: " + (e && e.message || "не вдалося зберегти")); }
 
   /* ================= Кандидати ================= */
+  var STALE = ["contacted", "dialog", "waiting"], STALE_MS = 3 * 36e5;   // «На зв’язку», «Діалог», «Чекає вакансію»: без змін 3 год — червоне
+  function staleMs(l){ return STALE.indexOf(l.status) >= 0 ? Date.now() - new Date(l.status_at || l.updated_at || l.created_at).getTime() : 0; }
   function waitBadge(l){
+    var sm = staleMs(l);
+    if (sm) return '<small style="color:' + (sm > STALE_MS ? "var(--red)" : "var(--muted)") + ';font-weight:700">' + (sm > STALE_MS ? ic("clock", "xs") + " без змін " : "у статусі ") + E(mins(sm)) + '</small>';
     if (l.status !== "new" || (S.own && !l.manager_id && false)) return "";
     var w = Date.now() - waitStart(l), late = w > 15 * 6e4;
     return '<small style="color:' + (late ? "var(--red)" : "var(--muted)") + ';font-weight:700">' + (late ? ic("clock", "xs") + " " : "") + 'чекає ' + E(mins(w)) + '</small>';
@@ -578,7 +585,7 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
         '<div id="bulk"></div>' +
         '<div class="card"><table class="tbl"><thead><tr><th class="ck"><input type="checkbox" class="ck" id="ck-all" title="Вибрати всіх"></th><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Канал</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(l){
-          return '<tr class="row" data-id="' + l.id + '"><td class="ck"><input type="checkbox" class="ck" data-ck="' + l.id + '"' + (S.sel[l.id] ? " checked" : "") + '></td><td class="hide-m">' + E(dt(l.created_at, true)) + '</td>' +
+          return '<tr class="row' + (staleMs(l) > STALE_MS ? " stale" : "") + '" data-id="' + l.id + '"><td class="ck"><input type="checkbox" class="ck" data-ck="' + l.id + '"' + (S.sel[l.id] ? " checked" : "") + '></td><td class="hide-m">' + E(dt(l.created_at, true)) + '</td>' +
             '<td><div class="who">' + avatar(l.name) + '<div><b>' + E(l.name) + '</b><small>' + E(l.phone) + (l.who ? " · " + E(l.who) : "") + '</small></div></div></td>' +
             '<td class="hide-m">' + E((l.vacancy_title || "Будь-яка").replace(/ · Оператор: .*$/, "")) + opBadge(l) + (l.employer ? '<small>' + E(l.employer) + '</small>' : "") + '</td>' +
             '<td class="hide-m">' + chBadge(l) + (l.referrer ? '<small>від ' + E(pname(l.referrer)) + '</small>' : "") + '</td>' +
@@ -686,7 +693,9 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
       };
       drawTasks();
       drawer.querySelectorAll("[data-tl]").forEach(function(b){ b.onclick = function(){ var t = T_LEAD[+b.getAttribute("data-tl")];
-        document.getElementById("dt-title").value = t[0]; document.getElementById("dt-due").value = localInput(dueAt(t[1])); document.getElementById("dt-title").focus(); }; });
+        document.getElementById("dt-title").value = t[0]; document.getElementById("dt-due").value = localInput(dueAt(t[1])); document.getElementById("dt-title").focus();
+        if (t[3] && l.status !== t[3]) { stSel.value = t[3];
+          API.saveLead(l.id, {status: t[3]}).then(function(){ l.status = t[3]; toast("Статус «" + LSN[t[3]] + "» збережено. «Додати» — нагадування через 3 год"); counts(); rLeads(); }).catch(fail); } }; });
       drawer.querySelectorAll("[data-flow]").forEach(function(b){ b.onclick = function(){ var fl = FLOWS[b.getAttribute("data-flow")];
         if (!confirm("Додати " + fl[1].length + " задач(і) «" + fl[0] + "» для " + l.name + "?")) return;
         var who = l.manager_id || S.me.id;
@@ -733,6 +742,7 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
   /* ---------- Шаблони задач ---------- */
   var H = 36e5, D = 864e5;
   var T_LEAD = [
+    ["Списались у Viber — ведемо переписку", 3 * H, "chat", "dialog"], ["Зідзвонились — чекає вакансію", 3 * H, "phone", "waiting"],
     ["Передзвонити", 2 * H, "phone"], ["Надіслати 2–3 вакансії", 1 * H, "list"], ["Нагадати, якщо не відповів", D, "bell"],
     ["Перевірити документи (паспорт, підстава для виїзду)", D, "id"], ["Погодити дату заїзду з роботодавцем", D, "brief"],
     ["Нагадати про квиток", D, "bus"], ["Надіслати маршрутний лист і контакт координатора", D, "map"],

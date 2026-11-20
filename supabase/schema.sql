@@ -842,3 +842,16 @@ end $$;
 alter table public.leads drop constraint if exists leads_status_check;
 alter table public.leads add constraint leads_status_check check (status in
   ('new','contacted','dialog','waiting','matched','departed','working','paid','rejected'));
+
+-- коли востаннє змінювали статус (у CRM: «без змін 3 год» — червоне)
+alter table public.leads add column if not exists status_at timestamptz;
+update public.leads set status_at = coalesce(first_contact_at, created_at) where status_at is null;
+alter table public.leads alter column status_at set default now();
+create or replace function public.leads_status_at() returns trigger language plpgsql as $$
+begin
+  if tg_op = 'INSERT' then new.status_at := coalesce(new.status_at, now());
+  elsif new.status is distinct from old.status then new.status_at := now(); end if;
+  return new;
+end $$;
+drop trigger if exists leads_status_at on public.leads;
+create trigger leads_status_at before insert or update on public.leads for each row execute function public.leads_status_at();
