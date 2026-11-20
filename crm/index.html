@@ -182,13 +182,19 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
 .own-box input{font:inherit;font-size:17px;padding:12px 14px;border:2px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);outline:0}
 .own-box input:focus{border-color:var(--blue)}
 .own-act{display:flex;justify-content:flex-end;gap:8px}
-td.tk{min-width:230px;max-width:320px;cursor:default}
-.tki{display:flex;gap:8px;align-items:flex-start;padding:3px 0;font-size:13px;font-weight:600;line-height:1.3;cursor:pointer}
-.tki input[type=checkbox]{flex:none;width:16px;height:16px;margin-top:1px;accent-color:var(--green)}
-.tki small{display:block;font-weight:500;color:var(--muted)}
-.tki small.od{color:var(--red);font-weight:700}
-.tki.blank .bt{flex:1;min-width:0;border:0;border-bottom:1px dashed var(--line);background:none;padding:1px 2px;font:inherit;font-weight:500;color:var(--ink);outline:0}
-.tki.blank .bt:focus{border-bottom-color:var(--blue)}
+td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12px}
+.tki{display:flex;gap:8px;align-items:center;min-height:26px;font-size:13px;font-weight:600;line-height:1.25;cursor:pointer;border-radius:8px;padding:2px 6px;margin:0 -6px}
+.tki:hover{background:var(--soft)}
+.tki input[type=checkbox]{flex:none;width:16px;height:16px;margin:0;accent-color:var(--green)}
+.tki .tt{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tki time{flex:none;font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap}
+.tki.od time{color:#fff;background:var(--red);border-radius:6px;padding:1px 6px}
+.tkm{border:0;background:none;color:var(--blue);font:inherit;font-size:12px;font-weight:700;cursor:pointer;padding:2px 0 2px 24px}
+.tki.blank{color:var(--muted);cursor:text}
+.tki.blank .pl{flex:none;width:16px;text-align:center;font-weight:800;font-size:15px}
+.tki.blank .bt{flex:1;min-width:0;border:0;background:none;padding:2px 0;font:inherit;font-weight:500;color:var(--ink);outline:0}
+.tki.blank .bt::placeholder{color:var(--muted)}
+.tki.blank:focus-within{background:var(--soft)}
 @media (max-width:760px){td.tk,th.tk-h{display:none}}
 .tbox{border:1px solid var(--line);border-radius:14px;padding:10px 12px 4px;background:var(--surface)}
 .tbox>b{display:flex;align-items:center;gap:6px}
@@ -576,25 +582,33 @@ td.tk{min-width:230px;max-width:320px;cursor:default}
     return '<small style="color:' + (late ? "var(--red)" : "var(--muted)") + ';font-weight:700">' + (late ? ic("clock", "xs") + " " : "") + 'чекає ' + E(mins(w)) + '</small>';
   }
   // колонка «Задачі» праворуч у таблиці: відкриті задачі кандидата з галочками + 2 порожні рядки для своїх
+  function tkWhen(d){
+    var t = new Date(d), n = new Date(), p = function(x){ return (x < 10 ? "0" : "") + x; }, hm = p(t.getHours()) + ":" + p(t.getMinutes());
+    var day = function(x){ return new Date(x.getFullYear(), x.getMonth(), x.getDate()).getTime(); }, dd = Math.round((day(t) - day(n)) / 864e5);
+    return dd === 0 ? hm : dd === 1 ? "завтра " + hm : dd === -1 ? "вчора " + hm : p(t.getDate()) + "." + p(t.getMonth() + 1) + " " + hm;
+  }
   function rowTasks(l){
-    var now = new Date(), ts = (S.tasks || []).filter(function(t){ return t.lead_id === l.id && !t.done_at; });
-    var blank = '<label class="tki blank"><input type="checkbox" data-rbk="' + l.id + '"><input class="bt" data-rnew="' + l.id + '" maxlength="200" placeholder="Своя задача…"></label>';
-    return '<td class="tk">' + ts.map(function(t){ var od = t.due_at && new Date(t.due_at) < now;
-        return '<label class="tki"><input type="checkbox" data-rdone="' + t.id + '"><span>' + E(t.title) + (t.due_at ? '<small class="' + (od ? "od" : "") + '">' + E(dt(t.due_at, true)) + (od ? " · прострочено" : "") + '</small>' : '') + '</span></label>'; }).join("") +
-      blank + blank + '</td>';
+    var now = new Date(), ts = (S.tasks || []).filter(function(t){ return t.lead_id === l.id && !t.done_at; })
+      .sort(function(a, b){ return (a.due_at ? new Date(a.due_at) : 9e15) - (b.due_at ? new Date(b.due_at) : 9e15); });
+    S.tkOpen = S.tkOpen || {};
+    var show = S.tkOpen[l.id] ? ts : ts.slice(0, 2), more = ts.length - show.length;
+    return '<td class="tk">' + show.map(function(t){ var od = t.due_at && new Date(t.due_at) < now;
+        return '<label class="tki' + (od ? " od" : "") + '" title="' + E(t.title) + '"><input type="checkbox" data-rdone="' + t.id + '"><span class="tt">' + E(t.title) + '</span>' +
+          (t.due_at ? '<time>' + E(tkWhen(t.due_at)) + '</time>' : '') + '</label>'; }).join("") +
+      (more > 0 ? '<button type="button" class="tkm" data-tkm="' + l.id + '">+' + more + ' ще</button>' : (S.tkOpen[l.id] && ts.length > 2 ? '<button type="button" class="tkm" data-tkm="' + l.id + '">згорнути</button>' : '')) +
+      '<label class="tki blank"><span class="pl">+</span><input class="bt" data-rnew="' + l.id + '" maxlength="200" placeholder="своя задача"></label></td>';
   }
   function bindRowTasks(root){
     root.querySelectorAll("[data-rdone]").forEach(function(c){ c.onchange = function(){ c.disabled = true;
       API.saveTask(+c.getAttribute("data-rdone"), {done_at: new Date().toISOString()}).then(function(){ toast("Задачу виконано"); counts(); rLeads(); }).catch(fail); }; });
-    root.querySelectorAll("label.tki.blank").forEach(function(row){
-      var cb = row.querySelector("[data-rbk]"), inp = row.querySelector("[data-rnew]"), busy = false, id = +inp.getAttribute("data-rnew");
-      var l = S.leads.filter(function(x){ return x.id === id; })[0];
-      function add(done){ var t = inp.value.trim(); if (!t || busy) { if (done && !t) { cb.checked = false; inp.focus(); toast("Спочатку напишіть задачу"); } return; } busy = true;
-        API.addTask({title: t, lead_id: id, due_at: null, assignee_id: (l && l.manager_id) || S.me.id, done_at: done ? new Date().toISOString() : null})
-          .then(function(){ toast(done ? "Задачу додано й відмічено" : "Задачу додано"); counts(); rLeads(); }).catch(function(e){ busy = false; fail(e); }); }
-      inp.onkeydown = function(e){ if (e.key === "Enter") { e.preventDefault(); add(false); } };
-      inp.onblur = function(){ add(false); };
-      cb.onchange = function(){ add(cb.checked); };
+    root.querySelectorAll("[data-tkm]").forEach(function(b){ b.onclick = function(){ var id = +b.getAttribute("data-tkm"); S.tkOpen[id] = !S.tkOpen[id]; rLeads(); }; });
+    root.querySelectorAll("[data-rnew]").forEach(function(inp){
+      var busy = false, id = +inp.getAttribute("data-rnew"), l = S.leads.filter(function(x){ return x.id === id; })[0];
+      function add(){ var t = inp.value.trim(); if (!t || busy) return; busy = true;
+        API.addTask({title: t, lead_id: id, due_at: null, assignee_id: (l && l.manager_id) || S.me.id})
+          .then(function(){ toast("Задачу додано"); counts(); rLeads(); }).catch(function(e){ busy = false; fail(e); }); }
+      inp.onkeydown = function(e){ if (e.key === "Enter") { e.preventDefault(); add(); } else if (e.key === "Escape") { inp.value = ""; inp.blur(); } };
+      inp.onblur = add;
     });
   }
   function rLeads(){
