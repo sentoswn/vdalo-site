@@ -14,6 +14,28 @@ const esc = (s: unknown) => String(s ?? "").replace(/[&<>]/g, (c) => ({ "&": "&a
 
 type Field = { name: string; values: string[] };
 
+// Оголошення → вакансія, щоб менеджер одразу бачив, яку вакансію хоче людина.
+// Кампанія «ліди, 10 вакансій»: назви оголошень top-*. Для інших — номер у кінці назви (form-pary129 → №129).
+const AD_VAC: Record<string, [string, string]> = {
+  "top-shein": ["456", "SHEIN — оператор складу, Wrocław"],
+  "top-aurora": ["606", "Aurora — оператор складських процесів, Krajków"],
+  "top-arvato": ["218", "ARVATO — комплектувальник одягу, Stryków"],
+  "top-martom": ["72", "Mar-Tom — виробництво вікон і дверей, Jędrzejów"],
+  "top-kurka": ["2018823", "Курячий завод, Solec Kujawski"],
+  "top-oetker": ["380", "Dr. Oetker — виробничий працівник, Łebcz"],
+  "top-jeronimo": ["242", "Jeronimo Martins (Biedronka) — склад, Lubin"],
+  "top-morozyvo": ["333", "Grycan — виробництво морозива, Majdan"],
+  "top-sealogic": ["148", "Sealogic — переробка риби, Białogard"],
+  "top-truvant": ["63", "TRUVANT — пакування бритв, Łódź"],
+  "form-pary129": ["129", "PERLA — виробництво закусок, Głobino (для пар)"],
+};
+function adVacancy(adName?: string): { id: string; title: string } | null {
+  const n = String(adName || "").trim().toLowerCase();
+  if (AD_VAC[n]) return { id: AD_VAC[n][0], title: AD_VAC[n][1] };
+  const m = n.match(/(\d{2,7})$/);
+  return m ? { id: m[1], title: "" } : null;
+}
+
 // Питання форми → поля CRM. Стандартні поля Meta мають фіксовані імена, власні питання — шукаємо за словами.
 function mapFields(fd: Field[]) {
   const out: Record<string, string> = {}; const rest: string[] = [];
@@ -88,7 +110,9 @@ async function ingest(sb: any, l: any, formName: string): Promise<{ added: boole
   if (!l?.id || !Array.isArray(l.field_data)) return { added: false, error: "bad lead" };
   const m = mapFields(l.field_data);
   const plat = l.platform === "ig" ? "instagram" : "facebook";
+  const vac = adVacancy(l.ad_name);
   const row = {
+    vacancy_id: vac?.id || null, vacancy_title: vac?.title || null,
     ext_id: "fb:" + String(l.id).replace(/\D/g, ""), created_at: l.created_time || new Date().toISOString(),
     name: m.name, phone: m.phone || "—", who: m.who || null, when_go: m.when_go || null,
     contact_mode: m.contact_mode || null, note: m.note || null,
@@ -107,7 +131,7 @@ async function ingest(sb: any, l: any, formName: string): Promise<{ added: boole
   }
   const { error } = await sb.from("leads").insert(row);
   if (error) return /duplicate/i.test(error.message) ? { added: false, dup: true } : { added: false, error: m.name + ": " + error.message };
-  const payload = { name: m.name, phone: m.phone || "", vacancyId: "", vacancyTitle: "", operator: "",
+  const payload = { name: m.name, phone: m.phone || "", vacancyId: vac?.id || "", vacancyTitle: vac?.title || "", operator: "",
     who: m.who || "", when: m.when_go || "", mode: m.contact_mode || "", channel: "",
     note: [m.note, "Реклама: " + ([l.campaign_name, l.adset_name, l.ad_name].filter(Boolean).join(" / ") || "форма Facebook")].filter(Boolean).join("\n"),
     source: row.source, page: "Facebook Lead Ads — " + formName, website: "" };
@@ -115,7 +139,11 @@ async function ingest(sb: any, l: any, formName: string): Promise<{ added: boole
   const bot = Deno.env.get("TELEGRAM_BOT_TOKEN");
   const { data: st } = await sb.from("settings").select("value").eq("key", "leads_tg_chat").maybeSingle();
   if (bot && st?.value) {
-    const msg = "📝 <b>Заявка з форми " + (plat === "instagram" ? "Instagram" : "Facebook") + "</b>\n<b>Ім'я:</b> " + esc(m.name) +
+    const vacLine = vac
+      ? "\n🎯 <b>Вакансія:</b> <a href=\"https://vdalo-robota.com.ua/vakansii/" + vac.id + "/\">№" + vac.id + "</a>" + (vac.title ? " — " + esc(vac.title) : "")
+      : "";
+    const adLine = "\n📣 <b>Реклама:</b> " + esc([l.campaign_name, l.ad_name].filter(Boolean).join(" → ") || (l.is_organic ? "без реклами (органіка)" : "невідомо"));
+    const msg = "📝 <b>Заявка з форми " + (plat === "instagram" ? "Instagram" : "Facebook") + "</b>" + vacLine + adLine + "\n<b>Ім'я:</b> " + esc(m.name) +
       "\n<b>Телефон:</b> " + esc(m.phone) + (m.who ? "\n<b>Хто їде:</b> " + esc(m.who) : "") + (m.when_go ? "\n<b>Коли:</b> " + esc(m.when_go) : "") +
       (m.contact_mode ? "\n<b>Зв'язок:</b> " + esc(m.contact_mode) : "") + (m.note ? "\n" + esc(m.note) : "") +
       "\n\n<a href=\"https://vdalo-robota.com.ua/crm/\">Відкрити CRM</a>";
