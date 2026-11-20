@@ -164,7 +164,7 @@ declare r text; d text;
 begin
   if not public.is_staff() then
     new.status := 'new'; new.referrer_id := null; new.employer := null; new.start_date := null;
-    new.manager_note := null; new.manager_id := null; new.managers := null; new.bonus_paid := false;
+    new.manager_note := null; new.manager_id := null; new.managers := '{}'; new.bonus_paid := false;
     -- захист від спаму й «сміття»: обрізаємо довжину полів, номер має містити 9–15 цифр
     new.name := left(trim(new.name), 80); new.phone := left(trim(new.phone), 32);
     new.vacancy_id := left(new.vacancy_id, 40); new.vacancy_title := left(new.vacancy_title, 300);
