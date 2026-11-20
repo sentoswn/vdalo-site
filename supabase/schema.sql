@@ -838,10 +838,10 @@ exception when others then
   raise notice 'pg_cron/pg_net недоступні: %', sqlerrm;
 end $$;
 
--- нові проміжні статуси: «Ведеться діалог (Viber / Telegram)» і «Зідзвонились — чекає вакансію»
+-- проміжні статуси: «Чекає дзвінка», «Ведеться діалог (Viber / Telegram)» і «Зідзвонились — чекає вакансію»
 alter table public.leads drop constraint if exists leads_status_check;
 alter table public.leads add constraint leads_status_check check (status in
-  ('new','contacted','dialog','waiting','matched','departed','working','paid','rejected'));
+  ('new','call','contacted','dialog','waiting','matched','departed','working','paid','rejected'));
 
 -- коли востаннє змінювали статус (у CRM: «без змін 3 год» — червоне)
 alter table public.leads add column if not exists status_at timestamptz;
