@@ -232,7 +232,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/52/
 
 ### Оператор конвеєра — працівник виробництва — APTIV
-- Країна / місто: Польща
+- Країна / місто: Польща, Gdańsk
 - Оплата: 31,40 PLN/год брутто; на руки ≈ 22,69–25,36 PLN/год; ≈ 3 630–5 070 PLN за місяць
 - Житло: Житло надається (Кімнати для 2–3 осіб Wi-Fi доступний Подушки та ковдри надаються)
 - Для кого: Жінки та чоловіки, 20–50 р.
@@ -304,7 +304,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/345/
 
 ### Складський працівник — Jeronimo Martins
-- Країна / місто: Польща
+- Країна / місто: Польща, Lubin
 - Оплата: 31,40 PLN/год брутто
 - Житло: Житло 2 PLN
 - Для кого: Чоловіки
@@ -371,7 +371,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/1892911/
 
 ### Комплектація замовлень на електронавантажувачі
-- Країна / місто: Польща, Osla
+- Країна / місто: Польща, Osła
 - Оплата: 31,40 PLN/год брутто; на руки ≈ 22,68–25,36 PLN/год; ≈ 4 080–4 560 PLN за місяць
 - Житло: Житло надається (600 zł/міс. Будинок/квартира, 2-3 особи в кімнаті. Потрібно мати свою постільну білизну)
 - Для кого: Жінки та чоловіки, до 45 р.
@@ -469,7 +469,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/2030671/
 
 ### Працівник на склад Temu — TEMU
-- Країна / місто: Польща, Strykow
+- Країна / місто: Польща, Stryków
 - Оплата: 33 PLN/год брутто; на руки ≈ 23,84–26,65 PLN/год; ≈ 4 770–5 330 PLN за місяць
 - Житло: Житло надається
 - Для кого: Жінки та чоловіки, до 55 р.
@@ -482,7 +482,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/2055563/
 
 ### Працівник на склад Temu — TEMU
-- Країна / місто: Польща, Strykow
+- Країна / місто: Польща, Stryków
 - Оплата: 32,30 PLN/год брутто; на руки ≈ 23,33–26,08 PLN/год; ≈ 3 970–4 430 PLN за місяць
 - Житло: Житло надається
 - Для кого: Жінки та чоловіки, до 55 р.
@@ -563,7 +563,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/120/
 
 ### Водій навантажувача — MEGATECH
-- Країна / місто: Польща, Tomaszów
+- Країна / місто: Польща, Tomaszów Mazowiecki
 - Оплата: 31,40 PLN/год брутто
 - Житло: Житло 520 PLN (— 520 PLN. Відрахування за відпрацювання періоду меншого за мінімальний — 500 PLN.)
 - Для кого: Жінки та чоловіки
@@ -623,7 +623,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/433/
 
 ### Працівник складу — Fresh Logistics
-- Країна / місто: Польща
+- Країна / місто: Польща, Robakowo
 - Оплата: 31,40 PLN/год брутто
 - Для кого: Жінки та чоловіки, 18–45 р.
 - Годин на місяць: 250 - 270
@@ -695,7 +695,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/607/
 
 ### Пекар — Putka
-- Країна / місто: Польща
+- Країна / місто: Польща, Warszawa
 - Оплата: 31,40 PLN/год брутто; на руки ≈ 22,69–25,36 PLN/год; ≈ 4 540–6 090 PLN за місяць
 - Для кого: Жінки та чоловіки, 18–50 р.
 - Годин на місяць: 200–240
@@ -724,7 +724,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/270/
 
 ### Працівник виробництва — Kooperol
-- Країна / місто: Польща
+- Країна / місто: Польща, Zduny (Starogard Gdański)
 - Оплата: 31,40 PLN/год брутто; на руки ≈ 22,69–25,36 PLN/год; ≈ 3 810–4 260 PLN за місяць
 - Для кого: Жінки
 - Годин на місяць: 168
@@ -784,7 +784,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/200/
 
 ### Працівник на виробництві — Lisner
-- Країна / місто: Польща
+- Країна / місто: Польща, Poznań
 - Оплата: 31,40 PLN/год брутто; на руки ≈ 22,69–25,36 PLN/год; ≈ 3 630–5 580 PLN за місяць
 - Житло: Житло надається (Кімнати на 2–4 особи Кухня, техніка, постіль, пральна машина, Wi-Fi)
 - Для кого: Жінки
@@ -814,7 +814,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/178/
 
 ### Виробничий робітник у рибопереробці — ZMK Delikates
-- Країна / місто: Польща
+- Країна / місто: Польща, Ostrów Wielkopolski
 - Оплата: 31,40 PLN/год брутто; на руки ≈ 22,69–25,36 PLN/год; ≈ 3 630–5 330 PLN за місяць
 - Житло: Житло надається (комфортний хостел кімнати на 2–3 особи повністю обладнані)
 - Для кого: Жінки, 18–55 р.
@@ -843,7 +843,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/271/
 
 ### Працівник складу — Fresh Logistics
-- Країна / місто: Польща
+- Країна / місто: Польща, Grodzisk Mazowiecki
 - Оплата: 31,40 PLN/год брутто
 - Житло: Житло платне
 - Для кого: Чоловіки, 18–45 р.
@@ -972,7 +972,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/129/
 
 ### Складський працівник — eobuwie.pl
-- Країна / місто: Польща, Zielona
+- Країна / місто: Польща, Zielona Góra
 - Оплата: 31,40 PLN/год брутто
 - Житло: Житло надається (Кімнати на 2–5 осіб, хостели та квартири Кухні, пральні, Wi-Fi, постільна білизна, поруч магазини)
 - Для кого: Жінки та чоловіки
@@ -1034,7 +1034,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/67/
 
 ### Працівник продукції — Aryzta
-- Країна / місто: Польща
+- Країна / місто: Польща, Grodzisk Mazowiecki
 - Оплата: 27,40 PLN/год брутто; на руки ≈ 3 666–4 300 PLN/міс
 - Житло: Житло безкоштовне
 - Для кого: Жінки та чоловіки, 18–55 р.
@@ -1168,7 +1168,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/209/
 
 ### Корабельний столяр — Sunreef Yachts
-- Країна / місто: Польща, Гданськ
+- Країна / місто: Польща, Gdańsk
 - Оплата: 37,40 PLN/год брутто; на руки ≈ 27,01–35 PLN/год; ≈ 4 320–8 400 PLN за місяць
 - Житло: Житло надається
 - Для кого: Чоловіки
@@ -1181,7 +1181,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/557/
 
 ### Працівник виробництва — Bampton
-- Країна / місто: Польща
+- Країна / місто: Польща, Skoczów
 - Оплата: 30,87 PLN/год брутто
 - Житло: Житло надається
 - Для кого: Чоловіки, 18–50 р.
@@ -1194,7 +1194,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/158/
 
 ### Працівник виробництва пластикових елементів — MEGATECH
-- Країна / місто: Польща, Tomaszów
+- Країна / місто: Польща, Tomaszów Mazowiecki
 - Оплата: 31,40 PLN/год брутто; на руки ≈ 22,69–25,36 PLN/год; ≈ 4 080–5 070 PLN за місяць
 - Житло: Житло безкоштовне
 - Для кого: Жінки та чоловіки
@@ -1794,7 +1794,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/1893356/
 
 ### Працівник на виробництво трикотажу та тканин
-- Країна / місто: Польща, Rzgow
+- Країна / місто: Польща, Rzgów
 - Оплата: 32,30 PLN/год брутто; на руки ≈ 23,33–26,08 PLN/год; ≈ 3 730–4 380 PLN за місяць
 - Житло: Житло надається
 - Для кого: Жінки та чоловіки, до 55 р.
@@ -2240,7 +2240,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/2157762/
 
 ### Працівники на склад посилок
-- Країна / місто: Польща, Piotrkow Trybunalski
+- Країна / місто: Польща, Piotrków Trybunalski
 - Оплата: 34,50 PLN/год брутто; на руки ≈ 24,92–27,86 PLN/год; ≈ 3 990–5 010 PLN за місяць
 - Житло: Без житла
 - Для кого: Чоловіки, до 50 р.
@@ -2385,7 +2385,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 ## Литва — 8 вакансій
 
 ### Працівник виробництва (контроль якості) — Vilniaus Paukštynas
-- Країна / місто: Литва
+- Країна / місто: Литва, Rudamina (14 км від Вільнюса)
 - Оплата: 1 200 EUR/міс брутто; на руки ≈ 900–1 150 EUR/міс
 - Житло: Житло надається
 - Для кого: Жінки та чоловіки, 18–59 р.
@@ -2399,7 +2399,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/136/
 
 ### Обробка та пакування лосося — Vici
-- Країна / місто: Литва
+- Країна / місто: Литва, Plungė
 - Оплата: 1 400–1 600 EUR/міс брутто; на руки ≈ 900–1 200 EUR/міс
 - Житло: Житло безкоштовне
 - Для кого: Жінки, 18–55 р.
@@ -2414,7 +2414,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/1/
 
 ### Виробництво корпусів для вітрових турбін — Jupiter Bach
-- Країна / місто: Литва, Tauragė, Литва
+- Країна / місто: Литва, Tauragė
 - Оплата: 1 400–2 300 EUR/міс брутто; на руки ≈ 1 100–2 000 EUR/міс
 - Житло: Житло 75 EUR/міс (Вартість проживання — 75 EUR на місяць.)
 - Для кого: Жінки та чоловіки
@@ -2440,7 +2440,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/501/
 
 ### Пакування сирних паличок — Pieno žvaigždės
-- Країна / місто: Литва
+- Країна / місто: Литва, Mažeikiai
 - Оплата: 1 100 EUR/міс брутто
 - Житло: Житло безкоштовне
 - Для кого: Жінки та чоловіки, 18–53 р.
@@ -2453,7 +2453,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/6/
 
 ### Покоївка — SPA Vilnius
-- Країна / місто: Литва
+- Країна / місто: Литва, Druskininkai
 - Оплата: 1 180–1 200 EUR/міс брутто; на руки ≈ 850–1 100 EUR/міс
 - Житло: Житло безкоштовне (Безкоштовне У 300 м від роботи або в самому готелі (залежно від наявності місць))
 - Для кого: Жінки
@@ -2467,7 +2467,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/25/
 
 ### Працівник на виробництві автомобільних джгутів — AQ Wiring
-- Країна / місто: Литва, Panev
+- Країна / місто: Литва, Panevėžys
 - Оплата: 1 300 EUR/міс брутто; на руки ≈ 864,21–1 100 EUR/міс
 - Житло: Житло надається
 - Для кого: Жінки та чоловіки, 20–50 р.
@@ -2481,7 +2481,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/364/
 
 ### Зважування, пакування та фасування оселедця — Baltic Food Partners
-- Країна / місто: Литва
+- Країна / місто: Литва, Plungė
 - Оплата: 1 200–1 300 EUR/міс брутто; на руки ≈ 900–1 200 EUR/міс
 - Житло: Житло безкоштовне
 - Для кого: Жінки, 18–59 р.
@@ -2499,7 +2499,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 ## Словаччина — 6 вакансій
 
 ### Оператор виробництва — Sungwoo Hitech
-- Країна / місто: Словаччина, Zilina
+- Країна / місто: Словаччина, Žilina
 - Оплата: 6,32 EUR/год брутто; на руки ≈ 1 080 EUR/міс
 - Житло: Без житла
 - Для кого: Жінки та чоловіки
@@ -2513,7 +2513,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/454/
 
 ### Водій навантажувача — Sungwoo Hitech
-- Країна / місто: Словаччина, Zilina
+- Країна / місто: Словаччина, Žilina
 - Оплата: 6,44–7,44 EUR/год брутто
 - Житло: Без житла (Не надається. Можлива допомога в оренді житла. Вартість — приблизно 300–400 € на місяць за рахунок працівника.)
 - Для кого: Жінки та чоловіки
@@ -2540,7 +2540,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 - Сторінка вакансії: https://vdalo-robota.com.ua/vakansii/516/
 
 ### Водій навантажувача — Antolin
-- Країна / місто: Словаччина
+- Країна / місто: Словаччина, Bratislava
 - Оплата: 1 280–1 300 EUR/міс брутто
 - Житло: Житло 200 EUR (надається житло оплата — 200 €)
 - Для кого: Чоловіки, 18–50 р.
@@ -2632,7 +2632,7 @@ English summary: Vdalo is a Ukrainian job-matching service that helps Ukrainians
 ## Нідерланди — 1 вакансія
 
 ### Робітник на виробництві — Promix
-- Країна / місто: Нідерланди
+- Країна / місто: Нідерланди, Beringe
 - Оплата: 14,71 EUR/год брутто; на руки ≈ 2 300–2 500 EUR/міс
 - Житло: Житло платне
 - Для кого: Чоловіки, 18–42 р.

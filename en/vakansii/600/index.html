@@ -1666,7 +1666,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
   }
   function card(v){
     return '<article class="vac">'+
-      '<div class="vac-top">'+flag(v._cc)+'<span class="loc">'+esc(v.country)+(v.city?" · "+esc(v.city):"")+'</span>'+(v.hot?'<span class="badge">Гаряча</span>':'')+'</div>'+
+      '<div class="vac-top">'+flag(v._cc)+'<span class="loc">'+esc(v.country)+" · "+(v.city?esc(v.city):"місто уточнюйте в менеджера")+'</span>'+(v.hot?'<span class="badge">Гаряча</span>':'')+'</div>'+
       '<h3><a href="'+LP+'/vakansii/'+esc(v.id)+'/" data-vid="'+esc(v.id)+'">'+esc(v.title)+'</a></h3>'+
       (v.company?'<p class="co-line"><svg class="i"><use href="#i-bld"/></svg>'+esc(v.company)+'</p>':'')+
       moneyHtml(v)+
@@ -1734,7 +1734,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
     var msg=vacMsg(v);
     $("sheet").innerHTML=
       '<button class="x" type="button" data-close aria-label="Закрити"><svg class="i"><use href="#i-x"/></svg></button>'+
-      '<div class="vac-top">'+flag(v._cc)+'<span class="loc">'+esc(v.country)+(v.city?" · "+esc(v.city):"")+'</span>'+(v.hot?'<span class="badge">Гаряча</span>':'')+'</div>'+
+      '<div class="vac-top">'+flag(v._cc)+'<span class="loc">'+esc(v.country)+" · "+(v.city?esc(v.city):"місто уточнюйте в менеджера")+'</span>'+(v.hot?'<span class="badge">Гаряча</span>':'')+'</div>'+
       '<h2 id="m-title">'+esc(v.title)+'</h2>'+
       (v.company?'<p class="co-line" style="margin-top:10px"><svg class="i"><use href="#i-bld"/></svg>'+esc(v.company)+'</p>':'')+
       '<div class="m-pay">'+(v._uah?moneyHtml(v)+'<div class="m-break">':'<div>')+payHtml(v)+estHtml(v)+netHtml(v)+'</div>'+rateNote(v)+
