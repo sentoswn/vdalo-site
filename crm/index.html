@@ -714,7 +714,7 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
             API.saveLead(id, {status_note: t}).then(function(){ toast(t ? "Статус «" + t + "» збережено" : "Свій статус прибрано"); rLeads(); }).catch(fail); }); return; }
           if (v === l.status) return;
           btn.className = "st st-" + v; btn.textContent = LSN[v];
-          API.saveLead(id, {status: v, status_note: null}).then(function(){ if ((v === "working" || v === "paid") && l.status !== v) confetti();
+          API.saveLead(id, {status: v}).then(function(){ if ((v === "working" || v === "paid") && l.status !== v) confetti();
             toast("Статус: " + LSN[v]); counts(); rLeads(); }).catch(fail); };
       }
       // вибір кандидатів галочками і масові дії
