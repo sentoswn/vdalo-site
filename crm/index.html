@@ -189,8 +189,7 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
 .tki .tt{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tki time{flex:none;font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap}
 .tki.od time{color:#fff;background:var(--red);border-radius:6px;padding:1px 6px}
-.tki.od{background:#fde8e8;color:#9b1c1c;padding:4px 8px;margin:2px -8px;box-shadow:inset 3px 0 0 var(--red)}
-.tki.od:hover{background:#fbd5d5}
+.tki.od{color:#9b1c1c}
 .tki.od input[type=checkbox]{accent-color:var(--red)}
 .tkm{border:0;background:none;color:var(--blue);font:inherit;font-size:12px;font-weight:700;cursor:pointer;padding:2px 0 2px 24px}
 .tki.blank{color:var(--muted);cursor:text}
@@ -590,6 +589,7 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
     var day = function(x){ return new Date(x.getFullYear(), x.getMonth(), x.getDate()).getTime(); }, dd = Math.round((day(t) - day(n)) / 864e5);
     return dd === 0 ? hm : dd === 1 ? "завтра " + hm : dd === -1 ? "вчора " + hm : p(t.getDate()) + "." + p(t.getMonth() + 1) + " " + hm;
   }
+  function taskOverdue(l){ var n = new Date(); return (S.tasks || []).some(function(t){ return t.lead_id === l.id && !t.done_at && t.due_at && new Date(t.due_at) < n; }); }
   function rowTasks(l){
     var now = new Date(), ts = (S.tasks || []).filter(function(t){ return t.lead_id === l.id && !t.done_at; })
       .sort(function(a, b){ return (a.due_at ? new Date(a.due_at) : 9e15) - (b.due_at ? new Date(b.due_at) : 9e15); });
@@ -660,7 +660,7 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
         '<div id="bulk"></div>' +
         '<div class="card"><table class="tbl"><thead><tr><th class="ck"><input type="checkbox" class="ck" id="ck-all" title="Вибрати всіх"></th><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Канал</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th><th class="tk-h">Задачі</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(l){
-          return '<tr class="row' + (staleMs(l) > STALE_MS ? " stale" : "") + '" data-id="' + l.id + '"><td class="ck"><input type="checkbox" class="ck" data-ck="' + l.id + '"' + (S.sel[l.id] ? " checked" : "") + '></td><td class="hide-m">' + E(dt(l.created_at, true)) + '</td>' +
+          return '<tr class="row' + (staleMs(l) > STALE_MS || taskOverdue(l) ? " stale" : "") + '" data-id="' + l.id + '"><td class="ck"><input type="checkbox" class="ck" data-ck="' + l.id + '"' + (S.sel[l.id] ? " checked" : "") + '></td><td class="hide-m">' + E(dt(l.created_at, true)) + '</td>' +
             '<td><div class="who">' + avatar(l.name) + '<div><b>' + E(l.name) + '</b><small>' + E(l.phone) + (l.who ? " · " + E(l.who) : "") + '</small></div></div></td>' +
             '<td class="hide-m">' + E((l.vacancy_title || "Будь-яка").replace(/ · Оператор: .*$/, "")) + opBadge(l) + (l.employer ? '<small>' + E(l.employer) + '</small>' : "") + '</td>' +
             '<td class="hide-m">' + chBadge(l) + (l.referrer ? '<small>від ' + E(pname(l.referrer)) + '</small>' : "") + '</td>' +
