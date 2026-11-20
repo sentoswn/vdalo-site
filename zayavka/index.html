@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Залишити заявку на роботу за кордоном | Вдало</title>
+<meta name="description" content="Залиште ім'я й телефон — менеджер «Вдало» безкоштовно підбере роботу в Польщі, Литві чи Чехії з житлом. Без передоплати.">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://vdalo-robota.com.ua/zayavka/">
+<link rel="icon" href="/img/app/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:Manrope,system-ui,-apple-system,sans-serif;color:#0b0c0e;background:linear-gradient(160deg,#e9f7ef 0%,#f4f1fb 55%,#fdf0f4 100%);min-height:100vh;-webkit-font-smoothing:antialiased}
+.wrap{max-width:460px;margin:0 auto;padding:18px 16px 40px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:18px;text-decoration:none;color:inherit}
+.top img{width:36px;height:36px;border-radius:10px}.top b{font-family:Unbounded,sans-serif;font-size:20px}
+h1{font-family:Unbounded,sans-serif;font-size:25px;line-height:1.15;margin:0 0 10px}
+.lead{margin:0 0 14px;color:#344054;font-size:15.5px;line-height:1.45}
+.pts{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:7px}
+.pts li{display:flex;gap:8px;align-items:flex-start;font-weight:600;font-size:14.5px}.pts li:before{content:"✓";color:#16a34a;font-weight:800}
+form,.done{background:#fff;border-radius:22px;padding:18px;box-shadow:0 10px 30px rgba(16,24,40,.08)}
+label{display:block;font-weight:700;font-size:14px;margin:0 0 6px}
+.f{margin-bottom:14px}
+input[type=text],input[type=tel],select{width:100%;font:inherit;font-size:17px;padding:13px 14px;border:1.5px solid #d0d5dd;border-radius:14px;background:#fff;color:inherit;outline:none}
+input:focus,select:focus{border-color:#2f6bff;box-shadow:0 0 0 3px rgba(47,107,255,.15)}
+.ph{display:flex;gap:8px}.ph select{width:108px;flex:none;padding:13px 8px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{flex:1 1 auto;font:inherit;font-weight:700;font-size:14.5px;padding:11px 12px;border-radius:12px;border:1.5px solid #d0d5dd;background:#fff;cursor:pointer;color:inherit}
+.seg button[aria-pressed=true]{border-color:#0b0c0e;background:#0b0c0e;color:#fff}
+.go{width:100%;font:inherit;font-weight:800;font-size:17px;padding:15px;border:0;border-radius:14px;background:#0b0c0e;color:#fff;cursor:pointer;margin-top:4px}
+.go:disabled{opacity:.6}
+.err{color:#d92d20;font-weight:700;font-size:14px;min-height:0;margin:8px 0 0}
+.note{color:#667085;font-size:12.5px;line-height:1.4;margin:12px 0 0}.note a{color:inherit}
+.done{display:none;text-align:center}.done h2{font-family:Unbounded,sans-serif;font-size:21px;margin:6px 0 8px}.done p{color:#344054;line-height:1.45}
+.done .big{font-size:44px}.msg{display:grid;gap:8px;margin-top:14px}.msg[hidden]{display:none}
+.msg a{display:block;padding:12px;border-radius:12px;border:1.5px solid #d0d5dd;text-decoration:none;color:inherit;font-weight:700}
+.more{display:block;text-align:center;margin-top:16px;color:#344054;font-weight:700}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="top" href="/"><img src="/img/app/icon-192.png" alt=""><b>Вдало</b></a>
+  <h1 id="h1">Робота за кордоном з житлом</h1>
+  <p class="lead" id="lead">Залиште ім'я й телефон — менеджер зателефонує або напише й безкоштовно підбере 2–3 вакансії під вас.</p>
+  <ul class="pts">
+    <li>Підбір безкоштовний, без передоплати</li>
+    <li>Польща, Литва, Чехія — житло від роботодавця</li>
+    <li>Менеджер відповість протягом дня</li>
+  </ul>
+
+  <form id="f" novalidate autocomplete="on">
+    <div class="f"><label for="name">Ваше ім'я</label><input id="name" name="name" type="text" autocomplete="name" placeholder="Напр. Олена" maxlength="80"></div>
+    <div class="f"><label for="phone">Телефон</label>
+      <div class="ph"><select id="phone-cc" aria-label="Код країни"><option value="380">🇺🇦 +380</option><option value="48">🇵🇱 +48</option><option value="370">🇱🇹 +370</option><option value="420">🇨🇿 +420</option><option value="421">🇸🇰 +421</option><option value="49">🇩🇪 +49</option><option value="373">🇲🇩 +373</option><option value="">Інший</option></select>
+      <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="67 123 45 67" maxlength="22"></div></div>
+    <div class="f"><label>Як з вами зв'язатися?</label>
+      <div class="seg" id="mode"><button type="button" aria-pressed="true" data-v="Дзвінок">Дзвінок</button><button type="button" aria-pressed="false" data-v="Viber">Viber</button><button type="button" aria-pressed="false" data-v="Telegram">Telegram</button><button type="button" aria-pressed="false" data-v="WhatsApp">WhatsApp</button></div></div>
+    <div class="hp"><label>Сайт <input name="website" tabindex="-1" autocomplete="off"></label></div>
+    <button class="go" id="go" type="submit">Надіслати заявку</button>
+    <p class="err" id="err" role="alert"></p>
+    <p class="note">Натискаючи кнопку, ви погоджуєтеся на обробку контактних даних для підбору роботи. <a href="/konfidentsiinist/">Політика конфіденційності</a></p>
+  </form>
+
+  <div class="done" id="done">
+    <div class="big">✅</div>
+    <h2 id="done-h">Дякуємо! Заявку отримано</h2>
+    <p id="done-t">Менеджер зв'яжеться з вами найближчим часом.</p>
+    <div class="msg" id="done-msg" hidden><p style="margin:0">Не вдалося надіслати автоматично — напишіть нам, текст уже готовий:</p>
+      <a id="m-wa" href="#">WhatsApp</a><a href="https://t.me/+380660050060">Telegram</a><a href="viber://chat?number=%2B380660050060">Viber</a></div>
+  </div>
+  <a class="more" href="/">Переглянути всі вакансії →</a>
+</div>
+
+<script src="/app/common.js"></script>
+<script src="/app/track.js"></script>
+<script>
+(function(){
+  var LEADS_URL = "https://script.google.com/macros/s/AKfycbzt87VLFDpZYR13V56RsBHyjLm0q_P1teyIWZAHMQvc8WinxwyTUi4N0Bx27t2kUTGS9Q/exec";
+  var PIXEL = "2078454336180862", GA = "G-4BHJ4VK5L4";
+  var q = new URLSearchParams(location.search), $ = function(id){ return document.getElementById(id); };
+  // Тема з реклами (?t=...): підставляємо заголовок і пишемо в заявку
+  var T = {
+    sklad: ["Робота на складі в Польщі з житлом", "Склад у Польщі: 31–38 зл/год брутто, досвід не потрібен. Залиште ім'я й телефон — менеджер підбере склад під вас.", "Склад у Польщі"],
+    pary: ["Робота для пар у Польщі: окрема кімната", "Їдете парою? Підберемо роботу, де пари живуть в окремій кімнаті. Залиште ім'я й телефон — менеджер зателефонує.", "Робота для пар"],
+    stud: ["Робота в Польщі для студентів до 26", "Студентам до 26 на договорі доручення можлива пільга з податку й звільнення від внесків ZUS — умови уточнить менеджер.", "Студенти до 26"],
+    zhinky: ["Робота для жінок за кордоном", "Пакування, виробництво, склад — без досвіду. Залиште ім'я й телефон — менеджер підбере вакансії.", "Робота для жінок"]
+  };
+  var t = (q.get("t") || "").toLowerCase(), topic = T[t] ? T[t][2] : "";
+  if (T[t]) { $("h1").textContent = T[t][0]; $("lead").textContent = T[t][1]; }
+  var vac = (q.get("v") || "").replace(/\D/g, "").slice(0, 12);
+
+  // Канал і джерело (як на головній): paid для реклами
+  var TRAFFIC = /paid|cpc|ads/.test((q.get("utm_medium") || "").toLowerCase()) || q.get("fbclid") ? "paid" : (q.get("utm_source") ? "social" : "direct");
+  var parts = []; ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(k){ if (q.get(k)) parts.push(k.replace("utm_","") + "=" + q.get(k)); });
+  if (q.get("fbclid")) parts.push("facebook/instagram");
+  var SOURCE = "Коротка форма /zayavka/" + (topic ? " (" + topic + ")" : "") + (parts.length ? "; " + parts.join("; ") : "");
+
+  // Аналітика: піксель Meta (подія Lead) і GA4
+  !function(f,b,e,v,n,t2,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t2=b.createElement(e);t2.async=!0;t2.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t2,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
+  fbq("init", PIXEL); fbq("track", "PageView");
+  var g = document.createElement("script"); g.async = true; g.src = "https://www.googletagmanager.com/gtag/js?id=" + GA; document.head.appendChild(g);
+  window.dataLayer = window.dataLayer || []; window.gtag = function(){ dataLayer.push(arguments); }; gtag("js", new Date()); gtag("config", GA);
+
+  var mode = "Дзвінок";
+  $("mode").addEventListener("click", function(e){ var b = e.target.closest("button"); if (!b) return; mode = b.getAttribute("data-v");
+    [].forEach.call(this.querySelectorAll("button"), function(x){ x.setAttribute("aria-pressed", x === b); }); });
+  try { var cc0 = localStorage.getItem("vdalo_cc"); if (cc0 !== null && $("phone-cc").querySelector('option[value="' + cc0 + '"]')) $("phone-cc").value = cc0; } catch(e) {}
+  var started = false; $("f").addEventListener("focusin", function(){ if (!started) { started = true; try { gtag("event", "form_start", {form: "zayavka"}); } catch(e) {} } });
+
+  function phone(){
+    var cc = $("phone-cc").value, raw = $("phone").value.trim(), d = raw.replace(/\D/g, "");
+    if (/^\s*(\+|00)/.test(raw)) d = d.replace(/^00/, "");
+    else if (cc) { if (cc === "380" && d.indexOf("380") === 0 && d.length === 12) {} else if (cc === "380" && d.length === 10 && d[0] === "0") d = "38" + d; else if (d.indexOf(cc) === 0 && d.length >= cc.length + 8) {} else d = cc + d.replace(/^0+/, ""); }
+    var ok = d.length >= 10 && d.length <= 15 && (d.indexOf("380") !== 0 || d.length === 12);
+    return {ok: ok, text: d.indexOf("380") === 0 && d.length === 12 ? "+380 " + d.slice(3,5) + " " + d.slice(5,8) + " " + d.slice(8,10) + " " + d.slice(10) : "+" + d};
+  }
+
+  $("f").addEventListener("submit", function(e){
+    e.preventDefault();
+    var f = e.target, name = $("name").value.trim(), ph = phone(), err = $("err");
+    if (!name) { err.textContent = "Вкажіть, будь ласка, ваше ім'я."; $("name").focus(); return; }
+    if (!ph.ok) { err.textContent = "Вкажіть номер телефону, щоб ми могли з вами зв'язатися."; $("phone").focus(); return; }
+    err.textContent = "";
+    if (f.website.value) { show(true); return; }
+    try { localStorage.setItem("vdalo_cc", $("phone-cc").value); } catch(e2) {}
+    var btn = $("go"); btn.disabled = true; btn.textContent = "Надсилаємо…";
+    var note = (topic ? "Тема реклами: " + topic : "") + (vac ? (topic ? "\n" : "") + "Вакансія №" + vac : "");
+    var channel = mode === "Дзвінок" ? "" : mode;
+    var payload = {name: name, phone: ph.text, vacancyId: vac, vacancyTitle: "", operator: "", who: "", when: "", mode: mode === "Дзвінок" ? "Дзвінок" : "Переписка",
+      channel: channel, note: note, source: SOURCE, page: location.href, website: ""};
+    // CRM (Supabase) — як і заявки з головної
+    if (window.Vdalo) Vdalo.sb().then(function(sbc){ if (!sbc) return;
+      var row = {name: name, phone: ph.text, vacancy_id: vac || null, contact_mode: mode === "Дзвінок" ? "Дзвінок" : "Переписка", channel: channel || null,
+        note: note || null, source: SOURCE.slice(0, 120), page: location.href.slice(0, 300), lang: "uk", traffic: TRAFFIC};
+      var trk = window.VdaloTrack ? VdaloTrack.lead() : null;
+      return sbc.from("leads").insert(trk ? Object.assign({}, row, trk) : row).then(function(r){ if (r && r.error && trk) return sbc.from("leads").insert(row); });
+    }).catch(function(){});
+    var done = false, timer = setTimeout(function(){ if (!done) { done = true; show(false); } }, 15000);
+    fetch(LEADS_URL, {method: "POST", body: JSON.stringify(payload)}).then(function(r){ return r.json(); })
+      .then(function(j){ if (!done) { done = true; clearTimeout(timer); show(!!(j && j.ok)); } })
+      .catch(function(){ if (!done) { done = true; clearTimeout(timer); show(false); } });
+    function show(ok){
+      btn.disabled = false; btn.textContent = "Надіслати заявку";
+      $("f").style.display = "none"; $("done").style.display = "block";
+      $("done-h").textContent = "Дякуємо, " + name + "!";
+      $("done-t").textContent = mode === "Дзвінок" ? "Менеджер зателефонує вам на номер " + ph.text + " найближчим часом." : "Менеджер напише вам у " + mode + " найближчим часом.";
+      if (!ok) { $("done-h").textContent = "Майже готово, " + name + "!"; $("done-msg").hidden = false;
+        $("m-wa").href = "https://wa.me/380660050060?text=" + encodeURIComponent("Заявка «Вдало»\nІм'я: " + name + "\nТелефон: " + ph.text + (note ? "\n" + note : "")); }
+      if (ok) try { fbq("track", "Lead", {content_name: "zayavka" + (t ? "_" + t : "")}); gtag("event", "generate_lead", {form: "zayavka", topic: t || "general"}); } catch(e3) {}
+      window.scrollTo(0, 0);
+    }
+  });
+})();
+</script>
+</body>
+</html>
