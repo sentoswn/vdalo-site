@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Написати кандидату · Вдало</title>
+<style>
+:root{--ink:#101828;--muted:#667085;--line:#e4e7ec;--soft:#f2f4f7;--viber:#7360f2;--green:#12b76a}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:#f6f7f9}
+main{max-width:520px;margin:0 auto;padding:18px 16px 32px;display:grid;gap:14px}
+h1{font-size:20px;margin:4px 0 0}
+.sub{color:var(--muted);margin:0}
+textarea{width:100%;min-height:230px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;font:inherit;background:#fff;resize:vertical}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px;border-radius:14px;border:0;font:600 17px/1 inherit;font-family:inherit;text-decoration:none;cursor:pointer}
+.vb{background:var(--viber);color:#fff}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gh{background:#fff;color:var(--ink);border:1px solid var(--line);font-size:15px;padding:13px}
+.note{font-size:13px;color:var(--muted);margin:0}
+.ok{color:var(--green);font-weight:600}
+</style>
+</head>
+<body>
+<main>
+  <div>
+    <h1 id="h">Повідомлення кандидату</h1>
+    <p class="sub" id="who"></p>
+  </div>
+  <a class="btn vb" id="vb" href="#">Відкрити у Viber</a>
+  <textarea id="t" aria-label="Текст повідомлення"></textarea>
+  <div class="row">
+    <button class="btn gh" id="cp" type="button">Скопіювати текст</button>
+    <a class="btn gh" id="wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+  <p class="note" id="st">Текст можна змінити перед відправкою — кнопки беруть уже змінений.</p>
+</main>
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+  var raw = (q.get("n") || "").replace(/\D/g, "");
+  if (/^0\d{9}$/.test(raw)) raw = "38" + raw;
+  if (/^\d{9}$/.test(raw)) raw = "380" + raw;
+  var name = (q.get("nm") || "").trim(), first = name.split(/\s+/)[0] || "";
+  var vid = q.get("v") || "", ru = q.get("l") === "ru";
+  var who = q.get("w") || "", when = q.get("c") || "";
+  var ta = document.getElementById("t");
+  document.getElementById("who").textContent = [name, raw ? "+" + raw : ""].filter(Boolean).join(" · ");
+
+  function T(uk, r){ return ru ? r : uk; }
+  function pay(v){
+    if (v.net && v.net[0]) { var a = Math.round(v.net[0] * 10) / 10, b = v.net[1] ? Math.round(v.net[1] * 10) / 10 : 0;
+      var cur = (v.net[3] || "").replace("PLN", "zł").replace("EUR", "€").replace("CZK", "Kč");
+      return T("на руки ", "на руки ") + a + (b && b !== a ? "–" + b : "") + " " + cur + "/" + (v.net[2] === "год" ? T("год", "час") : (v.net[2] || T("год", "час"))); }
+    return v.salary || "";
+  }
+  function trip(v){
+    var now = new Date(), t0 = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1).getTime();
+    var ds = String(v.trips || "").match(/\d{1,2}\.\d{1,2}/g) || [];
+    for (var i = 0; i < ds.length; i++) { var p = ds[i].split("."), d = new Date(now.getFullYear(), +p[1] - 1, +p[0]);
+      if (d.getTime() < now.getTime() - 60 * 864e5) d.setFullYear(d.getFullYear() + 1);
+      if (d.getTime() >= t0) return ds[i]; }
+    return "";
+  }
+  function line(v){
+    var bits = [pay(v), v.housing ? T("є житло", "есть жильё") : "", trip(v) ? T("заїзд ", "заезд ") + trip(v) : ""].filter(Boolean);
+    return "• " + v.title + " — " + [v.city, v.country].filter(Boolean).join(", ") + (bits.length ? " (" + bits.join(", ") + ")" : "");
+  }
+  function compose(items){
+    var v = items.filter(function(x){ return String(x.id) === String(vid); })[0];
+    var hi = T("Добрий день", "Добрый день") + (first ? ", " + first : "") + "! 👋\n";
+    var intro = T("Це «Вдало» — ви залишили заявку на роботу за кордоном", "Это «Вдало» — вы оставили заявку на работу за границей");
+    var body;
+    if (v) {
+      body = intro + T(" на вакансію:", " на вакансию:") + "\n" + line(v) + "\n\n" +
+        T("Вакансія актуальна. Розкажу всі деталі: житло, графік, дорогу й документи.", "Вакансия актуальна. Расскажу все детали: жильё, график, дорогу и документы.");
+    } else {
+      var hot = items.filter(function(x){ return x.hot && x.title; });
+      var pick = (hot.length ? hot : items).slice(0, 2);
+      body = intro + ".\n\n" + T("Зараз є гарячі вакансії з житлом:", "Сейчас есть горячие вакансии с жильём:") + "\n" + pick.map(line).join("\n") + "\n\n" +
+        T("Є й інші міста та країни — підберу варіант саме під вас.", "Есть и другие города и страны — подберу вариант именно под вас.");
+    }
+    return hi + body + "\n\n" + T("Коли вам зручно поговорити — зателефонувати чи продовжимо тут?", "Когда вам удобно поговорить — позвонить или продолжим здесь?");
+  }
+  function links(){
+    var txt = ta.value;
+    document.getElementById("vb").href = "viber://chat?number=%2B" + raw + "&draft=" + encodeURIComponent(txt);
+    document.getElementById("wa").href = "https://wa.me/" + raw + "?text=" + encodeURIComponent(txt);
+  }
+  ta.oninput = links;
+  document.getElementById("cp").onclick = function(){
+    var b = this; ta.select();
+    (navigator.clipboard ? navigator.clipboard.writeText(ta.value) : Promise.reject()).catch(function(){ document.execCommand("copy"); })
+      .then(function(){ b.textContent = "Скопійовано ✓"; setTimeout(function(){ b.textContent = "Скопіювати текст"; }, 2000); });
+  };
+  if (!raw) { document.getElementById("st").textContent = "У посиланні немає номера телефону."; }
+  fetch("/vacancies.json", {cache: "no-store"}).then(function(r){ return r.json(); }).then(function(d){ return d.items || []; })
+    .catch(function(){ return []; }).then(function(items){
+      ta.value = compose(items); links();
+      if (raw && q.get("go") !== "0") { setTimeout(function(){ location.href = document.getElementById("vb").href; }, 250); }
+    });
+})();
+</script>
+</body>
+</html>

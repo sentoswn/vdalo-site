@@ -234,6 +234,7 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
   main input,main textarea,main select{min-width:0;max-width:100%}
   main .g2{grid-template-columns:minmax(0,1fr) auto}
 }
+.vbr{background:#7360f2;color:#fff;border-color:#7360f2;margin-left:6px;text-decoration:none}
 .tbox{border:1px solid var(--line);border-radius:14px;padding:10px 12px 4px;background:var(--surface)}
 .tbox>b{display:flex;align-items:center;gap:6px}
 .task.blank{align-items:center}
@@ -789,7 +790,8 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
     var l = id ? S.leads.filter(function(x){ return x.id === id; })[0] : {name: "", phone: "", status: "new"};
     if (!l) return;
     var isNew = !id;
-    var info = isNew ? "" : '<dl class="kv"><dt>Заявка</dt><dd>' + E(dt(l.created_at, true)) + '</dd><dt>Телефон</dt><dd><a href="tel:' + E((l.phone || "").replace(/[^\d+]/g, "")) + '">' + E(l.phone) + '</a></dd>' +
+    var info = isNew ? "" : '<dl class="kv"><dt>Заявка</dt><dd>' + E(dt(l.created_at, true)) + '</dd><dt>Телефон</dt><dd><a href="tel:' + E((l.phone || "").replace(/[^\d+]/g, "")) + '">' + E(l.phone) + '</a>' +
+      ((l.phone || "").replace(/\D/g, "").length >= 9 ? ' <a class="btn sm vbr" target="_blank" rel="noopener" href="/v/?n=' + encodeURIComponent((l.phone || "").replace(/\D/g, "")) + '&nm=' + encodeURIComponent(l.name || "") + (l.vacancy_id && !/^top-/.test(l.vacancy_id) ? '&v=' + encodeURIComponent(l.vacancy_id) : "") + '">💬 Написати у Viber</a>' : "") + '</dd>' +
       '<dt>Вакансія</dt><dd>' + (l.vacancy_id ? '<a href="/vakansii/' + E(l.vacancy_id) + '/" target="_blank">' + E(l.vacancy_title || l.vacancy_id) + '</a>' : "Будь-яка") + '</dd>' +
       (l.vacancy_id ? '<dt>Оператор</dt><dd>' + opBadge(l, true).replace(/^<small class="op">Оператор: |<\/small>$/g, "") + '</dd>' : "") +
       '<dt>Хто їде</dt><dd>' + E(l.who || "—") + '</dd><dt>Коли</dt><dd>' + E(l.when_go || "—") + '</dd>' +

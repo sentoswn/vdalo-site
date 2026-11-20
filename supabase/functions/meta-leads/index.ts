@@ -153,9 +153,13 @@ async function ingest(sb: any, l: any, formName: string): Promise<{ added: boole
       "\n<b>Телефон:</b> " + esc(m.phone) + (m.who ? "\n<b>Хто їде:</b> " + esc(m.who) : "") + (m.when_go ? "\n<b>Коли:</b> " + esc(m.when_go) : "") +
       (m.contact_mode ? "\n<b>Зв'язок:</b> " + esc(m.contact_mode) : "") + (m.note ? "\n" + esc(m.note) : "") +
       "\n\n<a href=\"https://vdalo-robota.com.ua/crm/\">Відкрити CRM</a>";
+    // кнопка «Написати у Viber»: сторінка /v/ складає готове привітання й відкриває Viber з цим номером
+    const vurl = "https://vdalo-robota.com.ua/v/?n=" + encodeURIComponent(String(m.phone || "").replace(/\D/g, "")) +
+      "&nm=" + encodeURIComponent(m.name || "") + (vac?.id ? "&v=" + encodeURIComponent(vac.id) : "");
+    const kb = { inline_keyboard: [[{ text: "💬 Написати у Viber", url: vurl }], [{ text: "Відкрити CRM", url: "https://vdalo-robota.com.ua/crm/" }]] };
     for (const chat of String(st.value).split(",").map((s: string) => s.trim()).filter(Boolean))
       await fetch("https://api.telegram.org/bot" + bot + "/sendMessage", { method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: chat, text: msg, parse_mode: "HTML", disable_web_page_preview: true }) }).catch(() => {});
+        body: JSON.stringify({ chat_id: chat, text: msg, parse_mode: "HTML", disable_web_page_preview: true, reply_markup: kb }) }).catch(() => {});
   }
   return { added: true };
 }
