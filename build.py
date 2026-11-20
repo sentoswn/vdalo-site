@@ -962,6 +962,17 @@ def main():
         for _v in data.get("items", []):
             if not _v.get("own") and _own.get(str(_v.get("id"))) and _v.get("src", "trello") == "trello":
                 _v["own"] = _own[str(_v["id"])]
+    # місто роботи: доповнюємо порожні й виправляємо назви з city-fix.json (щоденне оновлення може їх не принести)
+    cfp = os.path.join(ROOT, "city-fix.json")
+    if os.path.exists(cfp):
+        _cf = json.load(open(cfp, encoding="utf-8")); _chg = False
+        for _v in data.get("items", []):
+            _c = (_v.get("city") or "").strip()
+            _n = _cf.get("rename", {}).get(_c) or (_cf.get("fill", {}).get(str(_v.get("id"))) if not _c else None)
+            if _n and _n != _c:
+                _v["city"] = _n; _chg = True
+        if _chg:
+            json.dump(data, open(vp, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     # курс гривні: середній банківський (або НБУ), інакше — останній збережений (rates.json)
     rp = os.path.join(ROOT, "rates.json")
     rates = fetch_rates() or data.get("rates") or (json.load(open(rp, encoding="utf-8")) if os.path.exists(rp) else None)

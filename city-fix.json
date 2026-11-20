@@ -1,0 +1,34 @@
+{
+  "_": "Міста для вакансій, де щоденне оновлення з Trello/Planfix не принесло міста (fill), і виправлення назв (rename). Застосовує build.py.",
+  "fill": {
+    "210": "Grodzisk Mazowiecki",
+    "89": "Gdańsk",
+    "160": "Robakowo",
+    "37": "Warszawa",
+    "244": "Zduny (Starogard Gdański)",
+    "275": "Poznań",
+    "177": "Ostrów Wielkopolski",
+    "166": "Grodzisk Mazowiecki",
+    "242": "Lubin",
+    "158": "Skoczów",
+    "136": "Rudamina (14 км від Вільнюса)",
+    "1": "Plungė",
+    "6": "Mažeikiai",
+    "25": "Druskininkai",
+    "278": "Plungė",
+    "360": "Beringe",
+    "444": "Bratislava"
+  },
+  "rename": {
+    "Panev": "Panevėžys",
+    "Гданськ": "Gdańsk",
+    "Strykow": "Stryków",
+    "Osla": "Osła",
+    "Tomaszów": "Tomaszów Mazowiecki",
+    "Rzgow": "Rzgów",
+    "Piotrkow Trybunalski": "Piotrków Trybunalski",
+    "Zilina": "Žilina",
+    "Tauragė, Литва": "Tauragė",
+    "Zielona": "Zielona Góra"
+  }
+}

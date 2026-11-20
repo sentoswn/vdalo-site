@@ -100,6 +100,7 @@
 Вакансія ¦ Вакансия ¦ Job ¦ Oferta
 # ---- Картка вакансії
 Гаряча ¦ Горячая ¦ Hot ¦ Pilna
+місто уточнюйте в менеджера ¦ город уточняйте у менеджера ¦ ask the manager for the city ¦ miasto – zapytaj menedżera
 Детальніше ¦ Подробнее ¦ Details ¦ Szczegóły
 Відгукнутися ¦ Откликнуться ¦ Apply ¦ Aplikuj
 Житло надається ¦ Жильё предоставляется ¦ Housing provided ¦ Zakwaterowanie zapewnione
