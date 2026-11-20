@@ -79,7 +79,7 @@ window.VdaloSources = function(app, h){
         '<div class="card stat"><span>Виїхали / працюють</span><b>' + th + '</b></div>' +
         '<div class="card stat"><span>Джерел</span><b>' + rows.filter(function(r){ return +r.visitors || +r.leads; }).length + '</b></div></div>' +
       '<div class="card pad"><div class="bar" style="margin-bottom:10px"><h3 style="margin:0">Джерела · ' + E(perLabel()) + '</h3><span style="flex:1"></span><input type="search" id="s-q" placeholder="Пошук джерела чи групи" value="' + E(st.q) + '" style="max-width:280px"></div>' +
-      '<div style="overflow-x:auto"><table class="tbl"><thead><tr>' + col("name", "Джерело") + '<th>Telegram-група</th>' + col("visitors", "Унік. відвідувачі") + col("sessions", "Візити") + col("leads", "Заявки") + col("hired", "Виїхали / працюють") + col("conversion", "Конверсія") + '<th></th></tr></thead><tbody>' +
+      '<div style="overflow-x:auto"><table class="tbl tsx"><thead><tr>' + col("name", "Джерело") + '<th>Telegram-група</th>' + col("visitors", "Унік. відвідувачі") + col("sessions", "Візити") + col("leads", "Заявки") + col("hired", "Виїхали / працюють") + col("conversion", "Конверсія") + '<th></th></tr></thead><tbody>' +
       (list.length ? list.map(function(r){
         var c = r.conversion === null ? null : +r.conversion;
         return '<tr class="row" data-k="' + E(r.src) + '"><td><b>' + E(title(r)) + '</b><small><code>' + E(r.src) + '</code>' + (r.note ? " · " + E(r.note) : "") + '</small></td>' +

@@ -197,7 +197,43 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
 .tki.blank .bt{flex:1;min-width:0;border:0;background:none;padding:2px 0;font:inherit;font-weight:500;color:var(--ink);outline:0}
 .tki.blank .bt::placeholder{color:var(--muted)}
 .tki.blank:focus-within{background:var(--soft)}
-@media (max-width:760px){td.tk,th.tk-h{display:none}}
+.chips-x{display:contents}
+@media (max-width:800px){
+  /* Кандидати: картка замість рядка таблиці */
+  .tbl.lt tr.row{grid-template-columns:28px minmax(0,1fr);grid-template-areas:"ck who" ". st" ". tk";column-gap:8px;row-gap:6px;padding:12px}
+  .tbl.lt td.ck{grid-area:ck;padding-top:10px}
+  .tbl.lt td.c-who{grid-area:who;min-width:0}
+  .tbl.lt td.c-st{grid-area:st;min-width:0}
+  .tbl.lt td.tk{grid-area:tk;display:block;width:auto;min-width:0;max-width:none;padding:2px 0 0}
+  .tbl.lt td.tk .tki{margin:0;padding:3px 4px}
+  .tbl.lt .who{justify-content:flex-start;text-align:left;min-width:0}
+  .tbl.lt .who b{display:block;white-space:normal;overflow-wrap:anywhere}
+  .tbl.lt button.st{max-width:100%;font-size:13px}
+  .tbl.lt tr.row td,.tbl.lt tr.row:hover td,.tbl.lt tr.row.stale td{background:none;box-shadow:none}
+  .tbl.lt tr.row.stale{background:#fdecec;box-shadow:inset 4px 0 0 var(--red)}
+  /* фільтри статусів — один рядок, гортається вбік */
+  .lbar{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .lbar select{width:100%;min-width:0}
+  .lbar .chips-x{display:flex;gap:6px;overflow-x:auto;grid-column:1/-1;padding-bottom:4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .lbar .chips-x::-webkit-scrollbar{display:none}
+  .lbar .chip{flex:none;white-space:nowrap}
+  /* таблиці без карток (аналітика, джерела): шапка видима, гортаються вбік */
+  .tbl.tsx{display:block;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+  .tbl.tsx thead{display:table-header-group}
+  .tbl.tsx th{position:static}
+  .tbl.tsx tr.row{display:table-row;padding:0}
+  .tbl.tsx tr.row td{padding:8px 10px;border-bottom:1px solid var(--line)}
+  /* форми в один стовпчик */
+  .mini .row2,.row2{grid-template-columns:1fr !important}
+  /* пошта: не показувати порожню панель під списком */
+  .mailbox .chat-r:has(> .m-empty){display:none}
+  .mailbox .chat-i{max-width:100%}
+  main code,main pre{white-space:pre-wrap;overflow-wrap:anywhere}
+  main{overflow-x:hidden}
+  main .card,main .pad,main .g2>*,main .grid2>*,main .bar>*{min-width:0;max-width:100%}
+  main input,main textarea,main select{min-width:0;max-width:100%}
+  main .g2{grid-template-columns:minmax(0,1fr) auto}
+}
 .tbox{border:1px solid var(--line);border-radius:14px;padding:10px 12px 4px;background:var(--surface)}
 .tbox>b{display:flex;align-items:center;gap:6px}
 .task.blank{align-items:center}
@@ -656,16 +692,16 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
         '<div class="good"><i class="hs-ic c-green">' + ic("trophy") + '</i><b>' + nWin + '</b><span>вийшли на роботу цього місяця</span></div></div></div>';
       app.innerHTML = demoBar() + banner +
         '<div class="bar"><input type="search" id="q" placeholder="Пошук: ім’я, телефон, вакансія, роботодавець…" value="' + E(S.q) + '"><button class="btn" id="add">+ Нова заявка</button></div>' +
-        '<div class="bar">' + mgrSel + chSel + chips + '</div>' +
+        '<div class="bar lbar">' + mgrSel + chSel + '<div class="chips-x">' + chips + '</div></div>' +
         '<div id="bulk"></div>' +
-        '<div class="card"><table class="tbl"><thead><tr><th class="ck"><input type="checkbox" class="ck" id="ck-all" title="Вибрати всіх"></th><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Канал</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th><th class="tk-h">Задачі</th></tr></thead><tbody>' +
+        '<div class="card"><table class="tbl lt"><thead><tr><th class="ck"><input type="checkbox" class="ck" id="ck-all" title="Вибрати всіх"></th><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Канал</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th><th class="tk-h">Задачі</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(l){
           return '<tr class="row' + (staleMs(l) > STALE_MS || taskOverdue(l) || (l.status === "new" && Date.now() - waitStart(l) > 15 * 6e4) ? " stale" : "") + '" data-id="' + l.id + '"><td class="ck"><input type="checkbox" class="ck" data-ck="' + l.id + '"' + (S.sel[l.id] ? " checked" : "") + '></td><td class="hide-m">' + E(dt(l.created_at, true)) + '</td>' +
-            '<td><div class="who">' + avatar(l.name) + '<div><b>' + E(l.name) + '</b><small>' + E(l.phone) + (l.who ? " · " + E(l.who) : "") + '</small></div></div></td>' +
+            '<td class="c-who"><div class="who">' + avatar(l.name) + '<div><b>' + E(l.name) + '</b><small>' + E(l.phone) + (l.who ? " · " + E(l.who) : "") + '</small></div></div></td>' +
             '<td class="hide-m">' + E((l.vacancy_title || "Будь-яка").replace(/ · Оператор: .*$/, "")) + opBadge(l) + (l.employer ? '<small>' + E(l.employer) + '</small>' : "") + '</td>' +
             '<td class="hide-m">' + chBadge(l) + (l.referrer ? '<small>від ' + E(pname(l.referrer)) + '</small>' : "") + '</td>' +
             (S.own ? '<td class="hide-m">' + (mgrsOf(l).length ? mgrsOf(l).map(function(id){ return E(staffName(id)); }).join(", ") : '<span class="st st-new">Не призначено</span>') + '</td>' : '') +
-            '<td><button type="button" class="st st-' + l.status + '" data-st="' + l.id + '" title="Змінити статус">' + E(LSN[l.status] || l.status) + '</button>' +
+            '<td class="c-st"><button type="button" class="st st-' + l.status + '" data-st="' + l.id + '" title="Змінити статус">' + E(LSN[l.status] || l.status) + '</button>' +
             (l.status_note ? '<small class="cst">✎ ' + E(l.status_note) + '</small>' : '') + waitBadge(l) + '</td>' + rowTasks(l) + '</tr>';
         }).join("") : '<tr><td colspan="8" class="empty">' + (S.own ? "Тут поки порожньо. Нові заявки з’являться автоматично" : "Поки немає кандидатів. Діліться своїм посиланням (вкладка «Моє посилання») — кандидати з нього потраплять сюди.") + '</td></tr>') + '</tbody></table></div>';
       var cf = document.getElementById("chf"); if (cf) cf.onchange = function(){ S.ch = cf.value; rLeads(); };
@@ -1087,7 +1123,7 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
         '<div class="card stat hl"><span>Вийшли на роботу</span><b>' + nW + ' <small style="font-size:14px">(' + pct(nW, L.length) + ')</small></b></div>' +
         '<div class="card stat"><span>Оплачено роботодавцем</span><b>' + (cnt.paid || 0) + '</b></div>' +
         '<div class="card stat"><span>Запитів роботодавців</span><b>' + emps.filter(function(e){ return inR(e.created_at); }).length + '</b></div></div>' +
-        '<div class="card pad" style="margin-bottom:16px"><h3>Менеджери</h3><div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Менеджер</th><th>Кандидатів</th><th>В роботі</th><th>Виїхали</th><th>Працюють</th><th>Оплачено</th><th>Відмови</th><th>Конверсія</th><th>Відповідь (медіана)</th><th>Відповіли ≤15 хв</th><th>Чекають зараз</th><th>Прострочені задачі</th></tr></thead><tbody>' +
+        '<div class="card pad" style="margin-bottom:16px"><h3>Менеджери</h3><div style="overflow-x:auto"><table class="tbl tsx"><thead><tr><th>Менеджер</th><th>Кандидатів</th><th>В роботі</th><th>Виїхали</th><th>Працюють</th><th>Оплачено</th><th>Відмови</th><th>Конверсія</th><th>Відповідь (медіана)</th><th>Відповіли ≤15 хв</th><th>Чекають зараз</th><th>Прострочені задачі</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(x){ return '<tr><td><b>' + E(pname(x.p)) + '</b><small>' + E(ROLES[x.p.role]) + (x.p.tg_username ? " · @" + E(x.p.tg_username) : "") + '</small></td><td>' + x.n + '</td><td>' + x.act + '</td><td>' + x.dep + '</td><td>' + x.w + '</td><td>' + x.paid + '</td><td>' + x.rej + '</td><td><b>' + pct(x.w, x.n) + '</b></td><td>' + (x.med === null ? "—" : '<span style="color:' + (x.med > 15 * 6e4 ? "var(--red)" : "var(--green)") + ';font-weight:700">' + E(mins(x.med)) + '</span>') + '</td><td>' + x.fast + '</td><td>' + (x.waiting ? '<span class="st st-rejected">' + x.waiting + '</span>' : "0") + '</td><td>' + (x.od ? '<span class="st st-rejected">' + x.od + '</span>' : "0") + '</td></tr>'; }).join("") : '<tr><td colspan="12" class="empty">Менеджерів ще немає</td></tr>') +
         '</tbody></table></div></div>' +
         '<div class="grid2"><div class="card pad"><h3>Воронка</h3><div class="bars">' + LS.map(function(x){ var n = cnt[x[0]] || 0; return '<div class="b"><span>' + E(x[1]) + '</span><div class="t"><i style="width:' + (L.length ? Math.round(n / L.length * 100) : 0) + '%"></i></div><b>' + n + '</b></div>'; }).join("") + '</div></div>' +
@@ -1160,7 +1196,7 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
         '<div class="card stat"><span>Працювали сьогодні</span><b>' + workedToday + '</b></div>' +
         '<div class="card stat"><span>Попередження зараз</span><b style="color:' + (warnN ? "var(--red)" : "inherit") + '">' + warnN + '</b></div></div>' +
         (rows.filter(function(x){ return x.warn; }).map(function(x){ return '<div class="warnline">' + ic("clock", "xs") + ' <b>' + E(pname(x.p)) + '</b> — ' + E(x.warn) + '</div>'; }).join("")) +
-        '<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Менеджер</th><th>Зараз</th>' +
+        '<div style="overflow-x:auto"><table class="tbl tsx"><thead><tr><th>Менеджер</th><th>Зараз</th>' +
         (oneDay ? '<th>Почав(ла)</th><th>Востаннє</th>' : '<th>Днів у роботі</th><th>Сер. початок</th>') +
         '<th>Активно в CRM</th><th>Змін статусів</th><th>Задач виконано</th><th>Простої</th>' + (oneDay ? "" : "<th>Запізнення</th>") + '</tr></thead><tbody>' +
         (rows.length ? rows.map(function(x){
@@ -1262,7 +1298,7 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
       '<span class="note" style="margin:0">Скринька <b>info@vdalo-robota.com.ua</b> — бачите лише ви з Ритою</span>' +
       '<button class="btn ghost" id="mail-key" style="margin-left:auto">Налаштувати</button></div>' +
       '<div id="mail-warn"></div>' +
-      '<div class="chat card mailbox"><aside class="chat-l" id="mail-l"><p class="note" style="padding:12px">Завантаження…</p></aside><section class="chat-r" id="mail-r"><p class="note" style="padding:24px">Оберіть лист зліва.</p></section></div>';
+      '<div class="chat card mailbox"><aside class="chat-l" id="mail-l"><p class="note" style="padding:12px">Завантаження…</p></aside><section class="chat-r" id="mail-r"><p class="note m-empty" style="padding:24px">Оберіть лист зліва.</p></section></div>';
     document.getElementById("mail-new").onclick = function(){ mailCompose(); };
     document.getElementById("mail-key").onclick = mailKey;
     document.querySelectorAll("#mail-box [data-b]").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-b") === S.mailBox);
@@ -1313,7 +1349,7 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
       '<textarea id="mail-txt" rows="12" placeholder="Текст листа" style="flex:1;min-height:220px" required>' + E(d.text || "") + '</textarea>' +
       '<div style="display:flex;gap:8px;justify-content:flex-end"><button type="button" class="btn ghost" id="mail-cancel">Скасувати</button><button class="btn" type="submit" id="mail-go">Надіслати</button></div></form>';
     var t = document.getElementById("mail-txt"); if (d.reply_to_id) { t.focus(); t.setSelectionRange(0, 0); } else document.getElementById(d.to ? "mail-sub" : "mail-to").focus();
-    document.getElementById("mail-cancel").onclick = function(){ if (S.mailId) mailOpen(S.mailId); else box.innerHTML = '<p class="note" style="padding:24px">Оберіть лист зліва.</p>'; };
+    document.getElementById("mail-cancel").onclick = function(){ if (S.mailId) mailOpen(S.mailId); else box.innerHTML = '<p class="note m-empty" style="padding:24px">Оберіть лист зліва.</p>'; };
     document.getElementById("mail-form").onsubmit = function(e){ e.preventDefault(); var b = document.getElementById("mail-go"); b.disabled = true; b.textContent = "Надсилаю…";
       API.mailSend({to: document.getElementById("mail-to").value, subject: document.getElementById("mail-sub").value, text: t.value, reply_to_id: d.reply_to_id || null})
         .then(function(){ toast("Лист надіслано ✅"); S.mailBox = "out"; rMail(); })
