@@ -45,6 +45,14 @@ async function g(path: string, token: string) {
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: CORS });
   const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, { auth: { persistSession: false } });
+  // Прямий прийом заявки (Make.com / ручне перенесення з Центру лідів):
+  // POST {"lead": {"id", "created_time", "form", "platform", "ad_name", "campaign_name", "adset_name", "field_data": [{name, values}]}}
+  let body: any = {};
+  try { body = await req.json(); } catch { /* порожнє тіло — режим опитування */ }
+  if (body && body.lead) {
+    const r = await ingest(sb, body.lead, body.lead.form || "Facebook form");
+    return json(r);
+  }
   const { data: sec } = await sb.from("app_secrets").select("value").eq("key", "meta_page_token").maybeSingle();
   const token = sec?.value?.trim();
   if (!token) return json({ ok: false, error: "Ключ сторінки Facebook ще не вставлено (CRM → Налаштування)." });
@@ -69,43 +77,44 @@ Deno.serve(async (req) => {
 
     for (const l of leads.sort((a, b) => a.created_time.localeCompare(b.created_time))) {
       if (known.has("fb:" + l.id)) continue;
-      const m = mapFields(l.field_data);
-      const plat = l.platform === "ig" ? "instagram" : "facebook";
-      const row = {
-        ext_id: "fb:" + l.id, created_at: l.created_time,
-        name: m.name, phone: m.phone || "—", who: m.who || null, when_go: m.when_go || null,
-        contact_mode: m.contact_mode || null, note: m.note || null,
-        source: "Форма " + (plat === "instagram" ? "Instagram" : "Facebook") + (l.ad_name ? " · " + l.ad_name : ""),
-        page: "lead form: " + form.name, lang: "uk", traffic: l.is_organic ? "social" : "paid",
-        src: "ads:" + plat + "/leadform",
-        utm: { utm_source: plat, utm_medium: l.is_organic ? "organic" : "paid", utm_campaign: l.campaign_name || null,
-               utm_term: l.adset_name || null, utm_content: l.ad_name || null, form: form.name },
-      };
-      const { error } = await sb.from("leads").insert(row);
-      if (error) {
-        if (!/duplicate/i.test(error.message)) errors.push(m.name + ": " + error.message);
-        continue;
-      }
-      added++;
-      // Google-таблиця і Telegram-група «Вдало Заявки» — тим самим шляхом, що й заявки з сайту
-      const payload = { name: m.name, phone: m.phone || "", vacancyId: "", vacancyTitle: "", operator: "",
-        who: m.who || "", when: m.when_go || "", mode: m.contact_mode || "", channel: "",
-        note: [m.note, "Реклама: " + [l.campaign_name, l.adset_name, l.ad_name].filter(Boolean).join(" / ")].filter(Boolean).join("\n"),
-        source: row.source, page: "Facebook Lead Ads — " + form.name, website: "" };
-      await fetch(LEADS_URL, { method: "POST", body: JSON.stringify(payload) }).catch(() => {});
-      // запасне сповіщення власникам у бота (якщо в settings задано leads_tg_chat — туди)
-      const bot = Deno.env.get("TELEGRAM_BOT_TOKEN");
-      const { data: st } = await sb.from("settings").select("value").eq("key", "leads_tg_chat").maybeSingle();
-      if (bot && st?.value) {
-        const msg = "📝 <b>Заявка з форми " + esc(plat === "instagram" ? "Instagram" : "Facebook") + "</b>\n<b>Ім'я:</b> " + esc(m.name) +
-          "\n<b>Телефон:</b> " + esc(m.phone) + (m.who ? "\n<b>Хто їде:</b> " + esc(m.who) : "") + (m.when_go ? "\n<b>Коли:</b> " + esc(m.when_go) : "") +
-          (m.contact_mode ? "\n<b>Зв'язок:</b> " + esc(m.contact_mode) : "") + (m.note ? "\n" + esc(m.note) : "") +
-          "\n\n<a href=\"https://vdalo-robota.com.ua/crm/\">Відкрити CRM</a>";
-        for (const chat of String(st.value).split(",").map((s) => s.trim()).filter(Boolean))
-          await fetch("https://api.telegram.org/bot" + bot + "/sendMessage", { method: "POST", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ chat_id: chat, text: msg, parse_mode: "HTML", disable_web_page_preview: true }) }).catch(() => {});
-      }
+      const r = await ingest(sb, l, form.name);
+      if (r.added) added++; else if (r.error) errors.push(r.error);
     }
   }
   return json({ ok: errors.length === 0, forms: forms.length, seen, added, errors });
 });
+
+async function ingest(sb: any, l: any, formName: string): Promise<{ added: boolean; error?: string; dup?: boolean }> {
+  if (!l?.id || !Array.isArray(l.field_data)) return { added: false, error: "bad lead" };
+  const m = mapFields(l.field_data);
+  const plat = l.platform === "ig" ? "instagram" : "facebook";
+  const row = {
+    ext_id: "fb:" + String(l.id).replace(/\D/g, ""), created_at: l.created_time || new Date().toISOString(),
+    name: m.name, phone: m.phone || "—", who: m.who || null, when_go: m.when_go || null,
+    contact_mode: m.contact_mode || null, note: m.note || null,
+    source: "Форма " + (plat === "instagram" ? "Instagram" : "Facebook") + (l.ad_name ? " · " + l.ad_name : ""),
+    page: "lead form: " + formName, lang: "uk", traffic: l.is_organic ? "social" : "paid",
+    src: "ads:" + plat + "/leadform",
+    utm: { utm_source: plat, utm_medium: l.is_organic ? "organic" : "paid", utm_campaign: l.campaign_name || null,
+           utm_term: l.adset_name || null, utm_content: l.ad_name || null, form: formName },
+  };
+  const { error } = await sb.from("leads").insert(row);
+  if (error) return /duplicate/i.test(error.message) ? { added: false, dup: true } : { added: false, error: m.name + ": " + error.message };
+  const payload = { name: m.name, phone: m.phone || "", vacancyId: "", vacancyTitle: "", operator: "",
+    who: m.who || "", when: m.when_go || "", mode: m.contact_mode || "", channel: "",
+    note: [m.note, "Реклама: " + ([l.campaign_name, l.adset_name, l.ad_name].filter(Boolean).join(" / ") || "форма Facebook")].filter(Boolean).join("\n"),
+    source: row.source, page: "Facebook Lead Ads — " + formName, website: "" };
+  await fetch(LEADS_URL, { method: "POST", body: JSON.stringify(payload) }).catch(() => {});
+  const bot = Deno.env.get("TELEGRAM_BOT_TOKEN");
+  const { data: st } = await sb.from("settings").select("value").eq("key", "leads_tg_chat").maybeSingle();
+  if (bot && st?.value) {
+    const msg = "📝 <b>Заявка з форми " + (plat === "instagram" ? "Instagram" : "Facebook") + "</b>\n<b>Ім'я:</b> " + esc(m.name) +
+      "\n<b>Телефон:</b> " + esc(m.phone) + (m.who ? "\n<b>Хто їде:</b> " + esc(m.who) : "") + (m.when_go ? "\n<b>Коли:</b> " + esc(m.when_go) : "") +
+      (m.contact_mode ? "\n<b>Зв'язок:</b> " + esc(m.contact_mode) : "") + (m.note ? "\n" + esc(m.note) : "") +
+      "\n\n<a href=\"https://vdalo-robota.com.ua/crm/\">Відкрити CRM</a>";
+    for (const chat of String(st.value).split(",").map((s: string) => s.trim()).filter(Boolean))
+      await fetch("https://api.telegram.org/bot" + bot + "/sendMessage", { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: chat, text: msg, parse_mode: "HTML", disable_web_page_preview: true }) }).catch(() => {});
+  }
+  return { added: true };
+}
