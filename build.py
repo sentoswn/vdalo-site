@@ -971,6 +971,16 @@ def main():
             _n = _cf.get("rename", {}).get(_c) or (_cf.get("fill", {}).get(str(_v.get("id"))) if not _c else None)
             if _n and _n != _c:
                 _v["city"] = _n; _chg = True
+        # пам'ять міст: якщо щоденне оновлення принесло вакансію без міста, а раніше місто було — повертаємо його
+        ccp = os.path.join(ROOT, "city-cache.json")
+        _cc = json.load(open(ccp, encoding="utf-8")) if os.path.exists(ccp) else {}
+        for _v in data.get("items", []):
+            _k = str(_v.get("src", "trello")) + ":" + str(_v.get("id"))
+            if not (_v.get("city") or "").strip() and _cc.get(_k):
+                _v["city"] = _cc[_k]; _chg = True
+            elif (_v.get("city") or "").strip():
+                _cc[_k] = _v["city"].strip()
+        json.dump(_cc, open(ccp, "w", encoding="utf-8"), ensure_ascii=False, indent=0, sort_keys=True)
         if _chg:
             json.dump(data, open(vp, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     # курс гривні: середній банківський (або НБУ), інакше — останній збережений (rates.json)
