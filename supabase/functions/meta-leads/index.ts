@@ -50,6 +50,7 @@ function mapFields(fd: Field[]) {
     else if (/хто|who/.test(k)) out.who = v;
     else if (/коли|when|почати/.test(k)) out.when_go = v;
     else if (/зв.?яз|contact|зручн/.test(k)) out.contact_mode = v;
+    else if (/verified/.test(k)) continue;   // службове поле Meta «phone number verified»
     else rest.push((f.name || "").replace(/_/g, " ").replace(/\?$/, "") + ": " + v);
   }
   if (!out.name) out.name = [first, last].filter(Boolean).join(" ") || "Без імені";
@@ -95,7 +96,10 @@ Deno.serve(async (req) => {
     seen += leads.length;
     const ids = leads.map((l) => "fb:" + l.id);
     const { data: have } = await sb.from("leads").select("ext_id").in("ext_id", ids);
-    const known = new Set((have || []).map((x: any) => x.ext_id));
+    const { data: seenRows } = await sb.from("meta_seen").select("ext_id").in("ext_id", ids);
+    const known = new Set([...(have || []), ...(seenRows || [])].map((x: any) => x.ext_id));
+    // усе, що є в CRM, запам'ятовуємо: якщо потім видалять — заново не завантажимо і в Telegram не надішлемо
+    if (have && have.length) await sb.from("meta_seen").upsert(have.map((x: any) => ({ ext_id: x.ext_id })), { onConflict: "ext_id", ignoreDuplicates: true });
 
     for (const l of leads.sort((a, b) => a.created_time.localeCompare(b.created_time))) {
       if (known.has("fb:" + l.id)) continue;
@@ -111,6 +115,7 @@ async function ingest(sb: any, l: any, formName: string): Promise<{ added: boole
   const m = mapFields(l.field_data);
   const plat = l.platform === "ig" ? "instagram" : "facebook";
   const vac = adVacancy(l.ad_name);
+  const seen = () => sb.from("meta_seen").upsert({ ext_id: "fb:" + String(l.id).replace(/\D/g, "") }, { onConflict: "ext_id", ignoreDuplicates: true });
   const row = {
     vacancy_id: vac?.id || null, vacancy_title: vac?.title || null,
     ext_id: "fb:" + String(l.id).replace(/\D/g, ""), created_at: l.created_time || new Date().toISOString(),
@@ -127,10 +132,11 @@ async function ingest(sb: any, l: any, formName: string): Promise<{ added: boole
   if (d9.length === 9) {
     const { data: same } = await sb.from("leads").select("id, phone").like("src", "ads:%leadform")
       .gte("created_at", new Date(Date.now() - 60 * 86400e3).toISOString()).limit(500);
-    if ((same || []).some((x: any) => String(x.phone).replace(/\D/g, "").endsWith(d9))) return { added: false, dup: true };
+    if ((same || []).some((x: any) => String(x.phone).replace(/\D/g, "").endsWith(d9))) { await seen(); return { added: false, dup: true }; }
   }
   const { error } = await sb.from("leads").insert(row);
-  if (error) return /duplicate/i.test(error.message) ? { added: false, dup: true } : { added: false, error: m.name + ": " + error.message };
+  if (error) { if (/duplicate/i.test(error.message)) { await seen(); return { added: false, dup: true }; } return { added: false, error: m.name + ": " + error.message }; }
+  await seen();
   const payload = { name: m.name, phone: m.phone || "", vacancyId: vac?.id || "", vacancyTitle: vac?.title || "", operator: "",
     who: m.who || "", when: m.when_go || "", mode: m.contact_mode || "", channel: "",
     note: [m.note, "Реклама: " + ([l.campaign_name, l.adset_name, l.ad_name].filter(Boolean).join(" / ") || "форма Facebook")].filter(Boolean).join("\n"),

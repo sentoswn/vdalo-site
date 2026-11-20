@@ -825,6 +825,11 @@ end $$;
 -- Функція meta-leads забирає нові заявки через Graph API (ключ сторінки в app_secrets.meta_page_token).
 alter table public.leads add column if not exists ext_id text;          -- fb:<id заявки> — щоб не було дублів
 create unique index if not exists leads_ext_id on public.leads(ext_id) where ext_id is not null;
+-- Заявки з форм, які вже забрали хоч раз. Видалена в CRM заявка не повертається при наступному опитуванні.
+create table if not exists public.meta_seen (ext_id text primary key, seen_at timestamptz not null default now());
+alter table public.meta_seen enable row level security;   -- політик немає: лише service role (функція meta-leads)
+revoke all on public.meta_seen from anon, authenticated;
+insert into public.meta_seen(ext_id) select ext_id from public.leads where ext_id like 'fb:%' on conflict do nothing;
 -- кожні 2 хвилини викликаємо функцію (pg_cron + pg_net)
 do $$
 begin
