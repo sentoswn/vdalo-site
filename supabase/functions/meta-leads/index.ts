@@ -98,6 +98,13 @@ async function ingest(sb: any, l: any, formName: string): Promise<{ added: boole
     utm: { utm_source: plat, utm_medium: l.is_organic ? "organic" : "paid", utm_campaign: l.campaign_name || null,
            utm_term: l.adset_name || null, utm_content: l.ad_name || null, form: formName },
   };
+  // той самий номер уже приходив із форми за останні 60 днів — не дублюємо (захист від повторного перенесення)
+  const d9 = String(m.phone || "").replace(/\D/g, "").slice(-9);
+  if (d9.length === 9) {
+    const { data: same } = await sb.from("leads").select("id, phone").like("src", "ads:%leadform")
+      .gte("created_at", new Date(Date.now() - 60 * 86400e3).toISOString()).limit(500);
+    if ((same || []).some((x: any) => String(x.phone).replace(/\D/g, "").endsWith(d9))) return { added: false, dup: true };
+  }
   const { error } = await sb.from("leads").insert(row);
   if (error) return /duplicate/i.test(error.message) ? { added: false, dup: true } : { added: false, error: m.name + ": " + error.message };
   const payload = { name: m.name, phone: m.phone || "", vacancyId: "", vacancyTitle: "", operator: "",
