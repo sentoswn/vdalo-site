@@ -837,3 +837,8 @@ begin
 exception when others then
   raise notice 'pg_cron/pg_net недоступні: %', sqlerrm;
 end $$;
+
+-- нові проміжні статуси: «Ведеться діалог (Viber / Telegram)» і «Зідзвонились — чекає вакансію»
+alter table public.leads drop constraint if exists leads_status_check;
+alter table public.leads add constraint leads_status_check check (status in
+  ('new','contacted','dialog','waiting','matched','departed','working','paid','rejected'));

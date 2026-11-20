@@ -3,7 +3,7 @@
   var E = Vdalo.esc, M = Vdalo.money;
   var LANG = window.VDALO_LANG || "uk", LP = LANG === "uk" ? "" : "/" + LANG;
   var ST = {
-    "new": "Заявка отримана", "contacted": "На зв’язку з менеджером", "matched": "Підібрано вакансію",
+    "new": "Заявка отримана", "contacted": "На зв’язку з менеджером", "dialog": "На зв’язку з менеджером", "waiting": "Менеджер підбирає вакансію", "matched": "Підібрано вакансію",
     "departed": "У дорозі", "working": "Працює", "paid": "Бонус нараховано", "rejected": "Не поїхав"
   };
   var KIND = {"bonus": "Бонус", "payout": "Виплата", "adjust": "Коригування"};
