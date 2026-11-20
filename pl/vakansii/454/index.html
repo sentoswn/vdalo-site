@@ -1142,9 +1142,9 @@ window.Vdalo = window.Vdalo || (function(){
       else { document.getElementById("vd-app-sub").textContent = L[3]; document.getElementById("vd-app-sub").style.opacity = "1"; }
     };
   }
-  addEventListener("beforeinstallprompt", function(e){ e.preventDefault(); evt = e; setTimeout(show, 4000); });
+  addEventListener("beforeinstallprompt", function(e){ e.preventDefault(); evt = e; });  // банер сам не показуємо — лише за кнопкою «Встановити застосунок» (VdaloInstall)
   addEventListener("appinstalled", function(){ hide(3650); });
-  if (ios) setTimeout(show, 6000);
+  
   window.VdaloInstall = function(){ if (evt) { evt.prompt(); evt = null; } else { try { localStorage.removeItem("vdalo-app-hide"); } catch (e) {} mobile = true; show(); var s = document.getElementById("vd-app-sub"); if (s && !evt) { s.textContent = ios ? L[3] : L[1]; } } };
 })();
 
