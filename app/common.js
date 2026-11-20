@@ -98,6 +98,10 @@ window.Vdalo = window.Vdalo || (function(){
   function hide(days){ try { localStorage.setItem("vdalo-app-hide", Date.now() + days * 864e5); } catch (e) {} var b = document.getElementById("vd-app"); if (b) b.remove(); }
   function show(){
     if (document.getElementById("vd-app") || hidden() || !mobile || location.pathname.indexOf("/crm") === 0) return;
+    // не заважаємо новим відвідувачам: у браузері Facebook/Instagram встановити застосунок неможливо, а з реклами людина прийшла по вакансію
+    if (/FBAN|FBAV|FB_IAB|Instagram|Messenger/i.test(navigator.userAgent) || /[?&](fbclid|utm_medium=paid)/.test(location.search)) return;
+    try { if (!sessionStorage.getItem("vdalo-sess")) { sessionStorage.setItem("vdalo-sess", "1"); localStorage.setItem("vdalo-visits", (+localStorage.getItem("vdalo-visits") || 0) + 1); }
+          if ((+localStorage.getItem("vdalo-visits") || 0) < 2) return; } catch (e) {}
     var b = document.createElement("div"); b.id = "vd-app";
     b.setAttribute("style", "position:fixed;left:12px;right:12px;bottom:calc(88px + env(safe-area-inset-bottom));z-index:9999;display:flex;align-items:center;gap:12px;padding:12px 12px 12px 14px;border-radius:18px;background:#0b0c0e;color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.25);font-family:inherit;max-width:520px;margin:0 auto");
     b.innerHTML = '<img src="/img/app/icon-192.png" alt="" width="40" height="40" style="border-radius:10px;flex:none">' +

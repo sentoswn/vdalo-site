@@ -739,7 +739,11 @@ def vac_detail(v, back):
             "</div>"
             '<a class="btn ghost wide" href="tel:+380660050060" data-ch="phone">Подзвонити: +380 66 005 00 60</a>'
             "</aside>"
-            "</section>\n  ")
+            "</section>"
+            # на телефоні кнопка заявки завжди під рукою (форма в кінці довгої сторінки)
+            '<style>.m-sticky{display:none}@media (max-width:899px){.m-sticky{display:block;position:fixed;left:12px;right:84px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:50}'
+            '.m-sticky .btn{width:100%;box-shadow:0 8px 24px rgba(16,24,40,.22)}body{padding-bottom:76px}}</style>'
+            f'<div class="m-sticky"><button class="btn" type="button" data-apply="{esc(v["id"])}">Залишити заявку — 1 хвилина</button></div>\n  ')
 
 
 def city_ok(c):
