@@ -344,6 +344,11 @@
 "pl": "5-6 dni w tygodniu, od poniedziałku do niedzieli, według ustalonego harmonogramu. Zmiany 12-godzinne: 07:00-19:00 i 19:00-07:00. Przerwa na lunch trwa 45 minut i jest zwykle podzielona na 20 i 25 minut. Dodatkowo przewidziano 15 minut na potrzeby fizjologiczne. Opuszczanie miejsca pracy jest dozwolone wyłącznie za zgodą brygadzisty lub kierownika. Usługi dodatkowe i konserwacja: Inspekcja sanitarna – 200 zł.",
 "ru": "5–6 дней в неделю, с понедельника по воскресенье, по установленному графику. Изменения по 12 часов: 07:00–19:00 и 19:00–07:00. Обеденный перерыв – 45 минут, обычно разделен на 20 и 25 минут. Дополнительно 15 минут на физиологические потребности. Покидать рабочее место разрешено только с разрешения бригадира или руководителя. Дополнительные услуги и содержание: Санитарный осмотр - 200 PLN."
 },
+"5–6 робочих днів на тиждень; Тривалість робочого дня — 8–10 годин; Початок роботи може бути о 08:00, 15:00, 18:00 або 20:00. Перерва: одна перерва тривалістю 15 хвилин. Додаткові послуги та утримання: Відрахування за проходження санітарного огляду — 195 PLN.": {
+"en": "5-6 working days per week; The duration of the working day is 8–10 hours; The start of work can be at 08:00, 15:00, 18:00 or 20:00. Break: one break lasting 15 minutes. Additional services and maintenance: Deduction for passing a sanitary inspection — PLN 195.",
+"pl": "5-6 dni roboczych w tygodniu; Długość dnia pracy wynosi 8–10 godzin; Rozpoczęcie pracy może nastąpić o godzinie 08:00, 15:00, 18:00 lub 20:00. Przerwa: jedna przerwa trwająca 15 minut. Usługi dodatkowe i utrzymanie: Odliczenie za przejście kontroli sanitarnej – 195 zł.",
+"ru": "5–6 рабочих дней в неделю; Продолжительность рабочего дня – 8–10 часов; Начало работы может быть в 08:00, 15:00, 18:00 или 20:00. Перерыв: один перерыв продолжительностью 15 минут. Дополнительные услуги и содержание: Вычеты за прохождение санитарного осмотра - 195 PLN."
+},
 "600 zł/міс. Будинок/квартира, 2-3 особи в кімнаті. Потрібно мати свою постільну білизну": {
 "en": "PLN 600/month. House/apartment, 2-3 people in a room. You need to have your own bed linen",
 "pl": "600 zł/miesiąc. Dom/mieszkanie, 2-3 osoby w pokoju. Musisz mieć własną pościel",
@@ -1179,6 +1184,11 @@
 "pl": "Od 2004 roku producent lodów i sorbetów bazujących na tradycyjnych, rodzinnych recepturach.",
 "ru": "Производитель мороженого и сорбетов по традиционным семейным рецептам с 2004 года."
 },
+"Виробник паперової продукції та товарів для офісу і школи: зошити, календарі, пазли, розмальовки, папки.": {
+"en": "Manufacturer of paper products and goods for office and school: notebooks, calendars, puzzles, coloring pages, folders.",
+"pl": "Producent wyrobów papierowych oraz artykułów biurowych i szkolnych: zeszyty, kalendarze, puzzle, kolorowanki, teczki.",
+"ru": "Производитель бумажной продукции и товаров для офиса и школы: тетради, календари, пазлы, раскраски, папки."
+},
 "Виробник риби та рибних продуктів (солона, маринована, копчена риба, морепродукти, салати) для ринків Західної Європи.": {
 "en": "Producer of fish and fish products (salted, marinated, smoked fish, seafood, salads) for the markets of Western Europe.",
 "pl": "Producent ryb i przetworów rybnych (ryby solone, marynowane, wędzone, owoce morza, sałatki) na rynki Europy Zachodniej.",
@@ -1504,6 +1514,11 @@
 "pl": "Chęć pracy w systemie zmianowym. Chęć do pracy fizycznej. Umiejętność pracy w zespole. Uwaga, dokładność i odpowiedzialność. Doświadczenie zawodowe...",
 "ru": "Готовность работать посменно. Желание выполнять физическую работу. Умение работать в команде. Внимательность, точность и ответственность. Опыт работы…"
 },
+"Готовність працювати позмінно; Уміння працювати в команді; Уважність і точність; Бажання навчатися; Базове володіння польською мовою.": {
+"en": "Willingness to work in shifts; Ability to work in a team; Attention and accuracy; Desire to learn; Basic command of the Polish language.",
+"pl": "Gotowość do pracy zmianowej; Umiejętność pracy w zespole; Uwaga i dokładność; Chęć uczenia się; Podstawowa znajomość języka polskiego.",
+"ru": "Готовность работать посменно; Умение работать в команде; Внимательность и точность; Желание учиться; Базовое владение польским языком."
+},
 "Громадський транспорт": {
 "en": "Public transport",
 "pl": "Transport publiczny",
@@ -1694,6 +1709,11 @@
 "pl": "Do 300 zł brutto (produkcja/nadgodziny)",
 "ru": "До 300 злотых брутто (производство / сверхурочные часы)"
 },
+"До автобусної зупинки працівники добираються пішки або міським транспортом. Актуальний розклад автобусів координатор надає в день прибуття. Безкоштовний проїзд автобусом зі Львова.": {
+"en": "Employees reach the bus stop on foot or by public transport. The coordinator provides the actual bus schedule on the day of arrival. Free bus ride from Lviv.",
+"pl": "Pracownicy docierają na przystanek autobusowy pieszo lub komunikacją miejską. Koordynator podaje aktualny rozkład jazdy autobusów w dniu przyjazdu. Bezpłatny przejazd autobusem ze Lwowa.",
+"ru": "До автобусной остановки работники добираются пешком или городским транспортом. Актуальное расписание автобусов координатор предоставляет в день прибытия. Бесплатный проезд автобусом из Львова."
+},
 "До автобусної зупинки працівники добираються пішки або міським транспортом. Актуальний…": {
 "en": "Employees reach the bus stop on foot or by public transport. Actual…",
 "pl": "Pracownicy docierają do przystanku pieszo lub komunikacją miejską. Rzeczywisty…",
@@ -1778,6 +1798,11 @@
 "en": "Help in the kitchen",
 "pl": "Pomoc w kuchni",
 "ru": "Помощь на кухне"
+},
+"Допоміжні роботи на виробничій лінії в пекарні.": {
+"en": "Auxiliary work on the production line in the bakery.",
+"pl": "Prace pomocnicze na linii produkcyjnej w piekarni.",
+"ru": "Вспомогательные работы по производственной линии в пекарне."
 },
 "Досвід роботи водієм навантажувача від 1 року. Дійсне посвідчення VZV. Знання словацької мови. Відповідальність, точність та дотримання встановлених норм.": {
 "en": "Experience as a forklift driver from 1 year. Valid VZV certificate. Knowledge of the Slovak language. Responsibility, accuracy and compliance with established norms.",
@@ -2334,6 +2359,11 @@
 "pl": "Firma ZAKLAD PORCELANY STOŁOWEJ LUBIANA to nowoczesny producent zastawy stołowej oferujący produkty na najwyższym światowym poziomie.",
 "ru": "Компания ZAKLAD PORCELANY STOŁOWEJ LUBIANA является современным производителем столового фарфора, который предлагает продукцию на самом высоком мировом уровне."
 },
+"Компанія ZAKLAD PORCELANY STOŁOWEJ LUBIANA є сучасним виробником столового фарфору, що пропонує продукцію на найвищому світовому рівні. Ми шукаємо працівників на завод за адресою: Zakładowa 1, 83-407 Łubiana": {
+"en": "The company ZAKLAD PORCELANY STOŁOWEJ LUBIANA is a modern manufacturer of tableware that offers products at the highest global level. We are looking for workers for the factory at Zakładowa 1, 83-407 Łubiana",
+"pl": "Firma ZAKLAD PORCELANY STOŁOWEJ LUBIANA to nowoczesny producent zastawy stołowej oferujący produkty na najwyższym światowym poziomie. Poszukujemy pracowników do fabryki przy Zakładowej 1, 83-407 Łubiana",
+"ru": "Компания ZAKLAD PORCELANY STOŁOWEJ LUBIANA является современным производителем столового фарфора, который предлагает продукцию на самом высоком мировом уровне. Мы ищем работников на заводе по адресу: Zakładowa 1, 83-407 Łubiana"
+},
 "Компанія з автомобільної галузі.": {
 "en": "Company from the automotive industry.",
 "pl": "Firma z branży motoryzacyjnej.",
@@ -2674,6 +2704,11 @@
 "pl": "Umiejętności manualne",
 "ru": "Мануальные навыки"
 },
+"Мережа пекарень, що виробляє понад 70 видів хліба й булочок та понад 80 видів кондитерських виробів.": {
+"en": "A network of bakeries producing more than 70 types of bread and buns and more than 80 types of confectionery.",
+"pl": "Sieć piekarni produkujących ponad 70 rodzajów pieczywa i bułek oraz ponad 80 rodzajów wyrobów cukierniczych.",
+"ru": "Сеть пекарен, производящая более 70 видов хлеба и булочек и более 80 видов кондитерских изделий."
+},
 "Мережа пекарень, що виробляє понад 70 видів хліба та булочок і понад 80 кондитерських виробів.": {
 "en": "A network of bakeries producing more than 70 types of bread and buns and more than 80 confectionery products.",
 "pl": "Sieć piekarni produkujących ponad 70 rodzajów pieczywa i bułek oraz ponad 80 wyrobów cukierniczych.",
@@ -2924,6 +2959,11 @@
 "pl": "W przedsiębiorstwie znajduje się stołówka wyposażona w kuchenki mikrofalowe, lodówkę, czajnik, płatny ekspres do kawy oraz automaty z żywnością i napojami.",
 "ru": "На территории предприятия есть столовая с микроволновками, холодильником, чайником, платной кофеваркой и автоматами с едой и напитками."
 },
+"На території підприємства є їдальня з мікрохвильовими печами, холодильником, чайником, платною кавоваркою та автоматами з їжею і напоями.  Медіа — проживання:…": {
+"en": "The enterprise has a canteen with microwave ovens, a refrigerator, a kettle, a paid coffee maker and vending machines with food and drinks.  Media — accommodation:…",
+"pl": "W przedsiębiorstwie znajduje się stołówka wyposażona w kuchenki mikrofalowe, lodówkę, czajnik, płatny ekspres do kawy oraz automaty z żywnością i napojami.  Media — zakwaterowanie:…",
+"ru": "На территории предприятия есть столовая с микроволновками, холодильником, чайником, платной кофеваркой и автоматами с едой и напитками.  Медиа – проживание:…"
+},
 "На території підприємства є їдальня з мікрохвильовими печами, холодильником, чайником, платною кавоваркою та автоматами з їжею і напоями. ‌ Медіа — проживання:…": {
 "en": "The enterprise has a canteen with microwave ovens, a refrigerator, a kettle, a paid coffee maker and vending machines with food and drinks. ‌ Media — accommodation:…",
 "pl": "W przedsiębiorstwie znajduje się stołówka wyposażona w kuchenki mikrofalowe, lodówkę, czajnik, płatny ekspres do kawy oraz automaty z żywnością i napojami. ‌ Media — zakwaterowanie:…",
@@ -3123,6 +3163,9 @@
 "en": "No (except for the washing department - 18:00–06:00)",
 "pl": "Nie (z wyjątkiem działu prania - 18:00–06:00)",
 "ru": "Нет (кроме отдела мойки – 18:00–06:00)"
+},
+"Ні Зміни: 06:00–14:00 14:00–22:00": {
+"ru": "Нет Изменения: 06:00–14:00 14:00–22:00"
 },
 "Нідерландська компанія: м’ясні напівфабрикати для виробництва кормів для тварин.": {
 "en": "Dutch company: meat semi-finished products for the production of animal feed.",
@@ -4694,6 +4737,11 @@
 "pl": "Po 40 dniach — produkty firmy. Rabat 30% w sklepie niedaleko fabryki.",
 "ru": "После 40 дней – продукция компании. Скидка 30% в магазине у завода."
 },
+"Після випробувального періоду (2 тижні) працівники можуть отримати знижку 30% на хлібобулочні та кондитерські вироби.": {
+"en": "After the trial period (2 weeks), employees can get a 30% discount on bakery and confectionery products.",
+"pl": "Po okresie próbnym (2 tygodnie) pracownicy mogą uzyskać 30% rabatu na produkty piekarnicze i cukiernicze.",
+"ru": "После испытательного периода (2 недели) работники могут получить скидку 30% на хлебобулочные и кондитерские изделия."
+},
 "Після випробувального терміну (2 тижні) співробітники можуть отримати знижку -30% на хлібобулочні та кондитерські вироби.": {
 "en": "After the trial period (2 weeks), employees can get a 30% discount on bakery and confectionery products.",
 "pl": "Po okresie próbnym (2 tygodnie) pracownicy mogą uzyskać 30% rabatu na produkty piekarnicze i cukiernicze.",
@@ -6104,6 +6152,11 @@
 "pl": "podstawowa polska (najlepiej) wytrzymałość fizyczna odpowiedzialność praca zespołowa książeczka sanitarna",
 "ru": "базовая польская (желательно) физическая выносливость ответственность работа в команде санитарная книжка"
 },
+"базове знання польської мови хороша фізична форма готовність до стоячої роботи вміння працювати в команді бажання вчитися Умови роботи: кімнатна температура легкий запах паперу та картону шум у межах норми робота в невеликих групах чистий та організований цех куріння лише у визначених місцях перевірка тверезості на вході та виході": {
+"en": "basic knowledge of the Polish language good physical shape readiness for standing work ability to work in a team willingness to learn Working conditions: room temperature light smell of paper and cardboard noise within normal limits work in small groups clean and organized workshop smoking only in designated areas sobriety check at the entrance and exit",
+"pl": "podstawowa znajomość języka polskiego dobra kondycja fizyczna gotowość do pracy na stojąco zdolność do pracy w zespole chęć do nauki Warunki pracy: temperatura pokojowa lekki zapach papieru i tektury hałas w normalnych granicach praca w małych grupach czysty i zorganizowany warsztat palenie tylko w wyznaczonych miejscach kontrola trzeźwości przy wejściu i wyjściu",
+"ru": "базовое знание польского языка хорошая физическая форма готовность к стоячей работе умение работать в команде желание учиться Условия работы: комнатная температура легкий запах бумаги и картона шум в пределах нормы работа в небольших группах чистый и организованный цех курения только в определенных местах проверка трезвости на входе и выходе"
+},
 "близько 30 хвилин пішки від місця роботи. Хороші умови проживання, по 4 особи в кімнаті.": {
 "en": "about 30 minutes on foot from the place of work. Good living conditions, 4 people in a room.",
 "pl": "około 30 minut pieszo od miejsca pracy. Dobre warunki mieszkaniowe, 4 osoby w pokoju.",
@@ -6138,6 +6191,11 @@
 "en": "houses or apartments; rooms for 2–4 persons; bedding, blankets and pillows are provided; equipped kitchens; washing machines; Wi-Fi.",
 "pl": "domy lub mieszkania; pokoje 2–4 osobowe; zapewniona jest pościel, koce i poduszki; wyposażone kuchnie; pralki; Wi-Fi.",
 "ru": "дома или квартиры; комнаты по 2-4 человека; постельные принадлежности, одеяла и подушки предоставляются; оборудованные кухни; стиральные машины; Wi-Fi."
+},
+"будинок кімнати на 3–4 особи кухня, ванна, пральна машина інтернет": {
+"en": "house, rooms for 3-4 people, kitchen, bathroom, washing machine, internet",
+"pl": "dom, pokoje 3-4 osobowe, kuchnia, łazienka, pralka, internet",
+"ru": "дом комнаты на 3–4 чел. кухня, ванная, стиральная машина интернет"
 },
 "в місті Гданськ у хостелах. По 3–4 особи в кімнаті. Обладнання: спільна кухня, ванна кімната, пральна машина, інтернет. Дорога до роботи займає приблизно 15–20 хвилин на громадському транспорті.": {
 "en": "in the city of Gdansk in hostels. 3-4 people in a room. Equipment: shared kitchen, bathroom, washing machine, internet. The journey to work takes about 15-20 minutes by public transport.",
@@ -6338,6 +6396,11 @@
 "en": "at his own expense. Machines with coffee, tea and sweet snacks are available at the enterprise. Free drinking water. The dining room has lockers for personal dishes and food, a kettle, a microwave oven, a refrigerator, tables and chairs.",
 "pl": "na własny koszt. Na terenie przedsiębiorstwa dostępne są automaty z kawą, herbatą i słodkimi przekąskami. Darmowa woda pitna. W jadalni znajdują się szafki na osobiste naczynia i żywność, czajnik, kuchenka mikrofalowa, lodówka, stoły i krzesła.",
 "ru": "за свой счет. На предприятии доступны автоматы с кофе, чаем и сладкими закусками. Бесплатная питьевая вода. В столовой есть шкафчики для личной посуды и еды, чайник, микроволновка, холодильник, столы и стулья."
+},
+"забезпечено; Вартість — 400 PLN.": {
+"en": "provided; The price is PLN 400.",
+"pl": "pod warunkiem, że; Cena 400 zł.",
+"ru": "обеспечено; Стоимость – 400 PLN."
 },
 "зміни по 12 годин; робота 7 днів на тиждень за графіком.": {
 "en": "shifts of 12 hours; work 7 days a week according to the schedule.",
@@ -6839,6 +6902,11 @@
 "pl": "sprawność fizyczna gotowość do pracy zmianowej dokładność, sumienność, praca zespołowa aktywne konto bankowe i PESEL dobry wzrok, zdolności manualne doświadczenie w pracy na produkcji - mile widziane",
 "ru": "физическая подготовленность готовность к сменной работе точность, внимательность, командная работа активный банковский счет и PESEL доброе зрение, мануальные способности опыт работы на производстве – приветствуется"
 },
+"фізична підготовленість; готовність до змінної роботи та роботи в команді; точність, бажання вчитися; наявність активного банківського рахунку та номера PESEL (у разі відсутності — оформлюються самостійно на місці за інструкціями координатора).": {
+"en": "physical fitness; readiness for shift work and teamwork; accuracy, desire to learn; availability of an active bank account and PESEL number (in case of absence, they are issued independently on the spot according to the coordinator's instructions).",
+"pl": "sprawność fizyczna; gotowość do pracy zmianowej i pracy zespołowej; dokładność, chęć uczenia się; dostępność aktywnego rachunku bankowego oraz numeru PESEL (w przypadku nieobecności wydawane są samodzielnie na miejscu, zgodnie z dyspozycją koordynatora).",
+"ru": "физическая подготовленность; готовность к сменной работе и работе в команде; точность, желание обучаться; наличие активного банковского счета и номера PESEL (при отсутствии — оформляются самостоятельно на месте по инструкциям координатора)."
+},
 "фізична підготовленість; готовність до змінної роботи та роботи в команді; точність, бажання вчитися; наявність активного банківського рахунку та номера PESEL.": {
 "en": "physical fitness; readiness for shift work and teamwork; accuracy, desire to learn; having an active bank account and PESEL number.",
 "pl": "sprawność fizyczna; gotowość do pracy zmianowej i pracy zespołowej; dokładność, chęć uczenia się; posiadanie aktywnego rachunku bankowego i numeru PESEL.",
@@ -6956,6 +7024,11 @@
 "en": "there is a dining room with a buffet, there are microwaves, kettles, vending machines with food",
 "pl": "jest jadalnia z bufetem, są kuchenki mikrofalowe, czajniki, automaty z jedzeniem",
 "ru": "есть столовая с буфетом есть микроволновки, чайники, автоматы с едой"
+},
+"їжу потрібно брати із собою є їдальня холодильник, мікрохвильовка та чайники": {
+"en": "you need to bring your own food, there is a dining room with a refrigerator, a microwave and kettles",
+"pl": "trzeba zabrać ze sobą własne jedzenie, jest jadalnia z lodówką, kuchenką mikrofalową i czajnikami",
+"ru": "еду нужно брать с собой есть столовая холодильник, микроволновка и чайники"
 },
 "— 520 PLN. Відрахування за відпрацювання періоду меншого за мінімальний — 500 PLN.": {
 "en": "— PLN 520. Deduction for working a period less than the minimum — PLN 500.",
