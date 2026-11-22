@@ -3165,6 +3165,8 @@
 "ru": "Нет (кроме отдела мойки – 18:00–06:00)"
 },
 "Ні Зміни: 06:00–14:00 14:00–22:00": {
+"en": "No Shifts: 06:00–14:00 14:00–22:00",
+"pl": "Brak zmian: 06:00–14:00 14:00–22:00",
 "ru": "Нет Изменения: 06:00–14:00 14:00–22:00"
 },
 "Нідерландська компанія: м’ясні напівфабрикати для виробництва кормів для тварин.": {
@@ -4301,6 +4303,11 @@
 "en": "Working at the Fresh warehouse, the employee will be engaged in product assembly for the Auchan supermarket.",
 "pl": "Pracując na magazynie Fresh, pracownik będzie zajmował się montażem produktów dla supermarketu Auchan.",
 "ru": "Работая на складе Fresh, работник будет заниматься комплектацией товара для супермаркета Auchan."
+},
+"Працівник виробництва хлібобулочних виробів": {
+"en": "A worker in the production of bakery products",
+"pl": "Pracownik przy produkcji wyrobów piekarniczych",
+"ru": "Работник производства хлебобулочных изделий"
 },
 "Працівник виробничого цеху": {
 "en": "An employee of a production workshop",
@@ -6342,6 +6349,11 @@
 "pl": "dobry wzrok, zdolności manualne, chęć pracy zmianowej, uważność, chęć nauki, umiejętność pracy w zespole, doświadczenie branżowe mile widziane. Wymagane: aktywne konto bankowe i numer PESEL. Jeżeli ich nie ma, kandydat wystawia je samodzielnie na miejscu",
 "ru": "хорошее зрение мануальные способности готовность к сменной работе внимательность, желание учиться способность работать в команде приветствуется опыт работы на производстве Обязательно: активный банковский счет и номер PESEL. Если нет — кандидат оформляет самостоятельно на месте"
 },
+"добрий зір мануальні здібності готовність до змінної роботи уважність, бажання вчитися здатність працювати в команді вітається досвід роботи на виробництві Обов’язково: активний банківський рахунок і номер PESEL. Якщо відсутні — кандидат оформлює самостійно на місці за інструкціями координатора": {
+"en": "good eyesight, manual skills, willingness to work in shifts, attentiveness, willingness to learn, the ability to work in a team, industrial experience is welcome. Required: active bank account and PESEL number. If there are none, the candidate will complete it on the spot according to the coordinator's instructions",
+"pl": "dobry wzrok, zdolności manualne, chęć pracy zmianowej, uważność, chęć nauki, umiejętność pracy w zespole, doświadczenie branżowe mile widziane. Wymagane: aktywne konto bankowe i numer PESEL. Jeżeli ich nie ma, kandydat uzupełnia je na miejscu, zgodnie ze wskazówkami koordynatora",
+"ru": "доброе зрение мануальные способности готовность к сменной работе внимательность, желание учиться способность работать в команде приветствуется опыт работы на производстве Обязательно: активный банковский счет и номер PESEL. Если отсутствуют, кандидат оформляет самостоятельно на месте по инструкциям координатора."
+},
 "добрий зір мануальні здібності готовність до змінної роботи уважність, бажання вчитися здатність працювати в команді вітається досвід роботи на…": {
 "en": "good eyesight, manual skills, readiness for shift work, attentiveness, desire to learn, the ability to work in a team, work experience in...",
 "pl": "dobry wzrok, zdolności manualne, gotowość do pracy zmianowej, uważność, chęć uczenia się, umiejętność pracy w zespole, doświadczenie w pracy w...",
@@ -6562,6 +6574,11 @@
 "pl": "NIE",
 "ru": "нет"
 },
+"обов'язковий хороший зір у зв'язку зі складанням дрібних деталей; мануальні здібності; готовність до змінної роботи; здатність працювати в команді; уважність, бажання вчитися. Вітається досвід роботи на виробництві. Щоб приступити до роботи, кандидат повинен мати активний банківський рахунок і номер PESEL - якщо кандидат не має будь-якого з перерахованих документів, він повинен оформити їх самостійно на місці, користуючись інструкціями координатора.": {
+"en": "good vision is required in connection with the assembly of small parts; manual abilities; readiness for shift work; ability to work in a team; attentiveness, desire to learn. Experience in production is welcome. To start work, the candidate must have an active bank account and a PESEL number - if the candidate does not have any of the listed documents, he must issue them on the spot himself, using the coordinator's instructions.",
+"pl": "dobry wzrok jest wymagany w związku z montażem małych części; zdolności manualne; gotowość do pracy zmianowej; umiejętność pracy w zespole; uważność, chęć uczenia się. Mile widziane doświadczenie na produkcji. Aby rozpocząć pracę kandydat musi posiadać aktywne konto bankowe oraz numer PESEL – jeżeli kandydat nie posiada żadnego z wymienionych dokumentów, musi je wydać samodzielnie na miejscu, korzystając z wskazówek koordynatora.",
+"ru": "обязательно хорошее зрение в связи с составлением мелких деталей; мануальные способности; готовность к сменной работе; способность работать в команде; внимательность, желание учиться. Приветствуется опыт работы на производстве. Чтобы приступить к работе, кандидат должен иметь активный банковский счет и номер PESEL - если у кандидата нет какого-либо из перечисленных документов, он должен оформить их самостоятельно на месте, пользуясь инструкциями координатора."
+},
 "обов'язковий хороший зір у зв'язку зі складанням дрібних деталей; мануальні здібності; готовність до змінної роботи; здатність працювати в команді; уважність, бажання вчитися. Вітається досвід роботи на виробництві. Щоб приступити до роботи, кандидат повинен мати активний банківський рахунок і номер PESEL - якщо кандидат не має будь-якого з перерахованих документів, він повинен оформити їх самостійно на місці.": {
 "en": "good vision is required in connection with the assembly of small parts; manual abilities; readiness for shift work; ability to work in a team; attentiveness, desire to learn. Experience in production is welcome. In order to start work, the candidate must have an active bank account and a PESEL number - if the candidate does not have any of the listed documents, he must issue them himself on the spot.",
 "pl": "dobry wzrok jest wymagany w związku z montażem małych części; zdolności manualne; gotowość do pracy zmianowej; umiejętność pracy w zespole; uważność, chęć uczenia się. Mile widziane doświadczenie na produkcji. Aby rozpocząć pracę kandydat musi posiadać aktywne konto bankowe oraz numer PESEL – jeżeli kandydat nie posiada żadnego z wymienionych dokumentów, musi je samodzielnie wystawić na miejscu.",
@@ -6687,10 +6704,20 @@
 "pl": "proste czynności pomocnicze przy produkcji elementów z tworzyw sztucznych, praca na maszynach",
 "ru": "простые вспомогательные виды деятельности на производстве пластиковых элементов, работа с машинами"
 },
+"підтвердження легального перебування та права на роботу в Польщі — робоча віза, біометричний паспорт або для громадян України PESEL зі статусом UKR; фізичне здоров’я; вміння працювати в команді; акуратність та бажання навчатися. Для початку роботи необхідно мати банківський рахунок та номер PESEL. Якщо кандидат не має одного з документів, його потрібно самостійно оформити на місці за інструкціями координатора.": {
+"en": "confirmation of legal stay and right to work in Poland — work visa, biometric passport or, for citizens of Ukraine, PESEL with UKR status; physical health; ability to work in a team; accuracy and desire to learn. To start work, you must have a bank account and a PESEL number. If the candidate does not have one of the documents, it must be issued independently on the spot according to the coordinator's instructions.",
+"pl": "potwierdzenie legalnego pobytu i prawa do pracy w Polsce – wiza pracownicza, paszport biometryczny lub w przypadku obywateli Ukrainy PESEL ze statusem UKR; zdrowie fizyczne; umiejętność pracy w zespole; dokładność i chęć nauki. Aby rozpocząć pracę należy posiadać konto bankowe oraz numer PESEL. Jeżeli kandydat nie posiada żadnego z dokumentów, należy go wystawić samodzielnie na miejscu, zgodnie z instrukcją koordynatora.",
+"ru": "подтверждение легального пребывания и права на работу в Польше — рабочая виза, биометрический паспорт или граждане Украины PESEL со статусом UKR; физическое здоровье; умение работать в команде; аккуратность и желание обучаться. Для начала работы необходимо иметь банковский счет и номер PESEL. Если у кандидата нет одного из документов, его нужно самостоятельно оформить на месте по инструкциям координатора."
+},
 "підтвердження легального перебування та права на роботу в Польщі — робоча віза, біометричний паспорт або для громадян України PESEL зі статусом UKR; фізичне здоров’я; вміння працювати в команді; акуратність та бажання навчатися. Для початку роботи необхідно мати банківський рахунок та номер PESEL. Якщо кандидат не має одного з документів, його потрібно самостійно оформити на місці.": {
 "en": "confirmation of legal stay and right to work in Poland — work visa, biometric passport or, for citizens of Ukraine, PESEL with UKR status; physical health; ability to work in a team; accuracy and desire to learn. To start work, you must have a bank account and a PESEL number. If the candidate does not have one of the documents, it must be issued on the spot.",
 "pl": "potwierdzenie legalnego pobytu i prawa do pracy w Polsce – wiza pracownicza, paszport biometryczny lub w przypadku obywateli Ukrainy PESEL ze statusem UKR; zdrowie fizyczne; umiejętność pracy w zespole; dokładność i chęć nauki. Aby rozpocząć pracę należy posiadać konto bankowe oraz numer PESEL. Jeżeli kandydat nie posiada żadnego z dokumentów, należy go wydać na miejscu.",
 "ru": "подтверждение легального пребывания и права на работу в Польше — рабочая виза, биометрический паспорт или граждане Украины PESEL со статусом UKR; физическое здоровье; умение работать в команде; аккуратность и желание обучаться. Для начала работы необходимо иметь банковский счет и номер PESEL. Если у кандидата нет одного из документов, его нужно самостоятельно оформить на месте."
+},
+"підтвердження легального перебування і можливості праці в Польщі (робоча віза, біометричний паспорт або, для гр. України, ПЕСЕЛЬ зі статусом УКР) фізично здорові з мануальними здібностями готові до змінної роботи здатність працювати в команді уважність, бажання вчитися особиста гігієна базове розуміння польської мови санітарно-епідеміологічні дослідження Щоб приступити до роботи, кандидат повинен мати активний банківський рахунок і номер PESEL. Якщо кандидат не має будь-якого з перерахованих документів, він повинен оформити їх самостійно на місці, користуючись інструкціями координатора.": {
+"en": "confirmation of legal stay and the possibility of working in Poland (work visa, biometric passport or, for Ukraine, PESEL with UKR status) physically healthy with manual skills ready for shift work ability to work in a team attentiveness, willingness to learn personal hygiene basic understanding of the Polish language sanitary-epidemiological studies To start working, the candidate must have an active bank account and PESEL number. If the candidate does not have any of the listed documents, he must issue them himself on the spot, using the coordinator's instructions.",
+"pl": "potwierdzenie legalnego pobytu i możliwości pracy w Polsce (wiza pracownicza, paszport biometryczny lub w przypadku Ukrainy PESEL ze statusem UKR) zdrowy fizycznie, sprawny fizycznie, gotowy do pracy zmianowej, zdolność do pracy w zespole, sumienność, chęć nauki higieny osobistej, podstawowa znajomość języka polskiego, studia sanitarno-epidemiologiczne. Aby podjąć pracę, kandydat musi posiadać aktywne konto bankowe i numer PESEL. Jeżeli kandydat nie posiada żadnego z wymienionych dokumentów, musi je wydać samodzielnie na miejscu, korzystając z instrukcji koordynatora.",
+"ru": "подтверждение легального пребывания и возможности труда в Польше (рабочая виза, биометрический паспорт или, для гр. Украины, ПЕСЕЛЬ со статусом УКР) физически здоровые с мануальными способностями готовы к переменной работе способность работать в команде внимательность, желание учиться личная гигиена базовое понимание банковский счёт и номер PESEL. Если у кандидата нет ни одного из перечисленных документов, он должен оформить их самостоятельно на месте, пользуясь инструкциями координатора."
 },
 "підтвердження легального перебування і можливості праці в Польщі (робоча віза, біометричний паспорт або, для гр. України, ПЕСЕЛЬ зі статусом УКР) фізично здорові з мануальними здібностями готові до змінної роботи здатність працювати в команді уважність, бажання вчитися особиста гігієна базове розуміння польської мови санітарно-епідеміологічні дослідження Щоб приступити до роботи, кандидат повинен мати активний банківський рахунок і номер PESEL. Якщо кандидат не має будь-якого з перерахованих документів, він повинен оформити їх самостійно на місці.": {
 "en": "confirmation of legal stay and the possibility of working in Poland (work visa, biometric passport or, for Ukraine, PESEL with UKR status) physically healthy with manual skills ready for shift work ability to work in a team attentiveness, willingness to learn personal hygiene basic understanding of the Polish language sanitary-epidemiological studies To start working, the candidate must have an active bank account and PESEL number. If the candidate does not have any of the listed documents, he must issue them himself on the spot.",
@@ -6716,6 +6743,11 @@
 "en": "about 25 minutes on foot or by public transport. The fare is PLN 150.",
 "pl": "około 25 minut pieszo lub komunikacją miejską. Opłata wynosi 150 zł.",
 "ru": "пешком примерно 25 минут или общественным транспортом. Стоимость проезда – 150 PLN."
+},
+"робота 5–6 днів на тиждень зміни по 8–10 годин суботи за потреби перерва 15 хвилин додаткова перерва при змінах понад 8 годин Вирахування: житло — 300 PLN": {
+"en": "work 5-6 days a week shifts of 8-10 hours Saturday if necessary break of 15 minutes additional break for shifts of more than 8 hours Deduction: accommodation - PLN 300",
+"pl": "praca 5-6 dni w tygodniu na zmiany po 8-10 godzin w sobotę w razie potrzeby przerwa 15 minut dodatkowa przerwa na zmiany powyżej 8 godzin Odliczenie: zakwaterowanie - 300 zł",
+"ru": "работа 5–6 дней в неделю смены по 8–10 часов субботы при необходимости перерыв 15 минут дополнительный перерыв при изменениях свыше 8 часов Вычет: жилье — 300 PLN"
 },
 "робота з неділі по п'ятницю; субота — вихідний; додатковий вихідний визначає бригадир; перерва — 30 хвилин; можливі додаткові години залежно від виробничої потреби. Додаткові утримання: медичний огляд — 50 PLN (утримується, якщо працівник не відпрацює 3 місяці); санітарна книжка — 200 PLN (утримується із першої зарплати);": {
 "en": "work from Sunday to Friday; Saturday is a day off; the additional day off is determined by the foreman; break - 30 minutes; additional hours are possible depending on production needs. Additional deductions: medical examination - PLN 50 (withheld if the employee does not work for 3 months); sanitary book - PLN 200 (deducted from the first salary);",
@@ -6887,6 +6919,11 @@
 "pl": "trening fizyczny; odpowiedzialność; dobre maniery; doświadczenie w pracy na magazynie; uprawnienia na wózki widłowe.",
 "ru": "физическая подготовка; ответственность; хорошие манеры; опыт работы на складе; Лицензия на погрузчик."
 },
+"фізична підготовленість готовність до змінної роботи точність, уважність, командна робота активний банківський рахунок і PESEL (оформлюється на місці за інструкцією координатора) добрий зір, мануальні здібності досвід роботи на виробництві – вітається": {
+"en": "physical fitness readiness for shift work accuracy, attentiveness, teamwork active bank account and PESEL (issued on the spot according to the instructions of the coordinator) good eyesight, manual skills work experience in production - welcome",
+"pl": "sprawność fizyczna gotowość do pracy zmianowej dokładność, uważność, praca zespołowa aktywne konto bankowe i PESEL (wydawany na miejscu zgodnie z poleceniami koordynatora) dobry wzrok, zdolności manualne doświadczenie w pracy na produkcji - mile widziane",
+"ru": "физическая подготовленность готовность к сменной работе точность, внимательность, командная работа активный банковский счет и PESEL (оформляется на месте по инструкции координатора) хорошее зрение, мануальные способности опыт работы на производстве – приветствуется"
+},
 "фізична підготовленість готовність до змінної роботи точність, уважність, командна робота активний банківський рахунок і PESEL (оформлюється на місці) добрий зір, мануальні здібності досвід роботи на виробництві – вітається": {
 "en": "physical fitness readiness for shift work accuracy, attentiveness, teamwork active bank account and PESEL (issued on the spot) good eyesight, manual skills work experience in production - welcome",
 "pl": "sprawność fizyczna gotowość do pracy zmianowej dokładność, sumienność, praca zespołowa aktywne konto bankowe i PESEL (wydawany na miejscu) dobry wzrok, zdolności manualne doświadczenie w pracy na produkcji - mile widziane",
@@ -6979,6 +7016,11 @@
 },
 "хороший зір хороша фізична форма готовність працювати в холоді": {
 "ru": "хорошее зрение хорошая физическая форма готовность работать в холоде"
+},
+"хороший зір, вміння розпізнавати кольори; мануальні здібності; фізична підготовленість (особливо для чоловіків); готовність до змінної роботи; здатність працювати в команді; уважність, бажання вчитися. Для початку роботи необхідно мати активний банківський рахунок і номер PESEL. За їх відсутності — оформити на місці з допомогою координатора.": {
+"en": "good eyesight, the ability to recognize colors; manual abilities; physical fitness (especially for men); readiness for shift work; ability to work in a team; attentiveness, desire to learn. To start work, you must have an active bank account and a PESEL number. If they are not available, arrange it on the spot with the help of the coordinator.",
+"pl": "dobry wzrok, umiejętność rozpoznawania kolorów; zdolności manualne; sprawność fizyczna (szczególnie u mężczyzn); gotowość do pracy zmianowej; umiejętność pracy w zespole; uważność, chęć uczenia się. Aby rozpocząć pracę należy posiadać aktywne konto bankowe oraz numer PESEL. Jeśli ich nie ma, zorganizuj to na miejscu przy pomocy koordynatora.",
+"ru": "хорошее зрение, умение распознавать цвета; мануальные способности; физическая подготовленность (особенно для мужчин); готовность к сменной работе; способность работать в команде; внимательность, желание учиться. Для начала работы нужно иметь активный банковский счет и номер PESEL. При их отсутствии – оформить на месте с помощью координатора."
 },
 "хороший зір, вміння розпізнавати кольори; мануальні здібності; фізична підготовленість (особливо для чоловіків); готовність до змінної роботи; здатність працювати в команді; уважність, бажання вчитися. Для початку роботи необхідно мати активний банківський рахунок і номер PESEL. За їх відсутності — оформити на місці.": {
 "en": "good eyesight, the ability to recognize colors; manual abilities; physical fitness (especially for men); readiness for shift work; ability to work in a team; attentiveness, desire to learn. To start work, you must have an active bank account and a PESEL number. In their absence, issue on the spot.",
