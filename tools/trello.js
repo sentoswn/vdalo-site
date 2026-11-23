@@ -26,6 +26,19 @@ function netInfo(sal,firstLine){const g=grossOf(firstLine);if(!g)return null;con
     if(!big&&g.unit==='год'){if(x<g.min*0.97&&x>g.min*0.6)hr.push(x);} else if(big){ if(g.unit==='год'||(x>=g.min*0.5&&x<=g.max))mo.push(x);} });}});
  const use=hr.length?hr:mo; if(!use.length)return null; const mn=Math.min(...use),mx=Math.max(...use);
  return [mn,mx,hr.length?'год':'міс',g.cur,mn===mx?(upto?'до':from?'від':''):''];}
+// Віковий діапазон [від, до] для пошуку за віком: «Вікові обмеження», «вік до 40 років», «Вік: 18–55», «Важливо щодо віку…»;
+// якщо в картці віку немає — EWL бере до 55 років, а з міткою «55+ років» — без верхньої межі (99).
+function ageOf(desc,labels){const d=(desc||'').replace(/\*\*|__|(?<![\w])_|_(?![\w])/g,'');const bad=i=>/відпуст|студент|дитин/i.test(d.slice(Math.max(0,i-100),i+90));
+ let m=d.match(/Вікові обмеження\s*:?\s*([^\n]*(?:\n[^\n]*)?)/i);const vo=m?m[1]:'';
+ m=vo.match(/([1-7]\d)\s*(?:[–-]|до)\s*([1-7]\d)/);if(m)return [+m[1],+m[2]];
+ for(const x of d.matchAll(/(?<![а-яіїєґ])вік(?:у|ом)?(?![а-яіїєґ])\s*[:—-]?\s*(?:від\s*)?([1-7]\d)\s*(?:[–-]|до)\s*([1-7]\d)/gi))if(!bad(x.index))return [+x[1],+x[2]];
+ const ups=[];for(const x of d.matchAll(/(?<![а-яіїєґ])вік(?:у|ом)?(?![а-яіїєґ])[^\n\d]{0,12}до\s*([1-7]\d)/gi))if(!bad(x.index))ups.push(+x[1]);
+ const sec=d.match(/щодо віку[^\n]*\n([\s\S]{0,500})/i);if(sec)for(const x of sec[1].matchAll(/до\s*([1-7]\d)\s*(?:років|р\.)/gi))ups.push(+x[1]);
+ if(ups.length)return [18,Math.max(...ups)];
+ m=vo.match(/до\s*([1-7]\d)/);if(m)return [18,+m[1]];
+ m=d.match(/від\s*(\d{2})\s*до\s*(\d{2})\s*(?:років|р\.)/i);if(m&&+m[1]>=18&&!bad(m.index))return [+m[1],+m[2]];
+ if(labels.includes('55+ років')||/^\s*(немає|відсутні|без обмежень)/i.test(vo))return [18,99];
+ return [18,55];}
 const items=j.cards.filter(c=>ok(L[c.idList])).map(c=>{const p=parse(c.desc||'');const list=L[c.idList];const labels=c.labels.map(l=>l.name);
 const country=C.find(x=>list.startsWith(x))||C.find(x=>labels.includes(x))||'';
 let nm=c.name.replace(/\n/g,' ').replace(/^[\s.⭐️★]+/u,'');let [head,...rest]=nm.split(/\.\s*(?=(?:Приїзд|Виїзд|Приезд))/i);
@@ -36,7 +49,7 @@ const ms=[...c.name.matchAll(/множ\.?\s*(\d+(?:[.,]\d+)?)/gi)].map(x=>num(x[
 const age=((p['вікові обмеження']||'').match(/(\d{2})\s*(?:[–-]|до)\s*(\d{2})/)||(p['вікові обмеження']||c.desc).match(/від\s*(\d{2})\s*до\s*(\d{2})/i)||[]);
 const sal=(p['заробітна плата']||'')+'\n'+(p['ставки нетто']||'');const salFirst=(p['заробітна плата']||'').split('\n')[0];
 const _addr=[p['локація'],p['адреса місця роботи'],p['адреса роботи'],p['місце роботи'],p['місто']].filter(Boolean).map(x=>x.replace(/\s+/g,' ').slice(0,200)).join(' | ');
-const r={id:String(c.idShort),src:'trello',title,companyRaw:head,aboutRaw:first(p['про компанію'],230),country,city:cityOf(p),_addr,salary:first(salFirst,80),net:netInfo(sal,salFirst)||'',stud:(/студент/i.test(sal)&&/нетто|netto/i.test(sal))?1:'',hours:first(p['місячна кількість годин'],30),contract:first(p['тип контракту']||p['тип договору'],50),housing:full(p['проживання'],700),food:full(p['харчування'],300),who:g+(age[1]&&+age[1]>=18?`, ${age[1]}–${age[2]} р.`:''),trips,desc:full(p['опис посади']||p['опис вакансії']||p["обов'язки"],900),schedule:full(p['система змін']||p['графік роботи']||p['години роботи та графік']||p['графік'],500),night:full(p['нічні зміни'],200),transport:full(p['транспорт до роботи']||p['транспорт'],500),req:full(p['вимоги'],700),perks:full(p['пільги']||p['премії та фінансові надбавки'],900),_e,hot:c.name.trim().startsWith('⭐')||labels.includes('⭐️⭐️⭐️⭐️⭐️')||list.startsWith('ПРОЄКТ'),left:(()=>{const s=labels.map(l=>+((l.match(/від\s*(\d+)\+?\s*місць/i)||[])[1]||0)).filter(x=>x>0);return s.length?Math.max(...s)+'+':''})()};
+const r={id:String(c.idShort),src:'trello',title,companyRaw:head,aboutRaw:first(p['про компанію'],230),country,city:cityOf(p),_addr,salary:first(salFirst,80),net:netInfo(sal,salFirst)||'',stud:(/студент/i.test(sal)&&/нетто|netto/i.test(sal))?1:'',hours:first(p['місячна кількість годин'],30),contract:first(p['тип контракту']||p['тип договору'],50),housing:full(p['проживання'],700),food:full(p['харчування'],300),who:g+(age[1]&&+age[1]>=18?`, ${age[1]}–${age[2]} р.`:''),trips,desc:full(p['опис посади']||p['опис вакансії']||p["обов'язки"],900),schedule:full(p['система змін']||p['графік роботи']||p['години роботи та графік']||p['графік'],500),night:full(p['нічні зміни'],200),transport:full(p['транспорт до роботи']||p['транспорт'],500),req:full(p['вимоги'],700),perks:full(p['пільги']||p['премії та фінансові надбавки'],900),age:ageOf(c.desc,labels),_e,hot:c.name.trim().startsWith('⭐')||labels.includes('⭐️⭐️⭐️⭐️⭐️')||list.startsWith('ПРОЄКТ'),left:(()=>{const s=labels.map(l=>+((l.match(/від\s*(\d+)\+?\s*місць/i)||[])[1]||0)).filter(x=>x>0);return s.length?Math.max(...s)+'+':''})()};
 Object.keys(r).forEach(k=>{if(r[k]===''||r[k]===false)delete r[k];});return r;}).filter(o=>o.salary);
 window.__json=JSON.stringify(items);
 const s=new Blob([window.__json]).stream().pipeThrough(new CompressionStream('gzip'));const buf=new Uint8Array(await new Response(s).arrayBuffer());let b='';for(const x of buf)b+=String.fromCharCode(x);window.__b64=btoa(b).replace(/\+/g,'-').replace(/\//g,'_');
