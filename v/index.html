@@ -27,7 +27,6 @@ textarea{width:100%;min-height:230px;padding:12px 14px;border:1px solid var(--li
     <h1 id="h">Повідомлення кандидату</h1>
     <p class="sub" id="who"></p>
   </div>
-  <label class="note">Ваше ім’я в повідомленні: <input id="mg" style="font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:10px;width:160px"></label>
   <a class="btn vb" id="vb" href="#">Відкрити у Viber</a>
   <textarea id="t" aria-label="Текст повідомлення"></textarea>
   <div class="row">
@@ -45,9 +44,7 @@ textarea{width:100%;min-height:230px;padding:12px 14px;border:1px solid var(--li
   var name = (q.get("nm") || "").trim(), first = name.split(/\s+/)[0] || "";
   var vid = q.get("v") || "", ru = q.get("l") === "ru";
   var who = q.get("w") || "", when = q.get("c") || "";
-  var ta = document.getElementById("t"), mgEl = document.getElementById("mg"), mgr = "Маргарита";
-  try { mgr = localStorage.getItem("vdalo_mgr") || mgr; } catch(e) {}
-  mgEl.value = mgr;
+  var ta = document.getElementById("t");
   document.getElementById("who").textContent = [name, raw ? "+" + raw : ""].filter(Boolean).join(" · ");
 
   function T(uk, r){ return ru ? r : uk; }
@@ -72,17 +69,16 @@ textarea{width:100%;min-height:230px;padding:12px 14px;border:1px solid var(--li
   function compose(items){
     var v = items.filter(function(x){ return String(x.id) === String(vid); })[0];
     var hi = T("Добрий день", "Добрый день") + (first ? ", " + first : "") + "! 👋\n";
-    var me = mgr ? T("Це " + mgr + " з «Вдало»", "Это " + mgr + " из «Вдало»") : T("Це «Вдало»", "Это «Вдало»");
-    var intro = me + T(" — ви залишили заявку на роботу за кордоном", " — вы оставили заявку на работу за границей");
+    var intro = T("Це «Вдало» — ви залишили заявку на роботу за кордоном", "Это «Вдало» — вы оставили заявку на работу за границей");
     var body;
     if (v) {
       body = intro + T(" на вакансію:", " на вакансию:") + "\n" + line(v) + "\n\n" +
         T("Вакансія актуальна. Розкажу всі деталі: житло, графік, дорогу й документи.", "Вакансия актуальна. Расскажу все детали: жильё, график, дорогу и документы.");
     } else {
-      // заявка «порадьте мені»: зачіпка (гроші + житло + швидкий заїзд) і одне просте питання на вибір
-      return T("Добрий день", "Добрый день") + (first ? ", " + first : "") + "! 👋 " + (mgr ? T("Це " + mgr + " з «Вдало».", "Это " + mgr + " из «Вдало».") : T("Це «Вдало».", "Это «Вдало».")) + "\n" +
-        T("У Польщі зараз є кілька місць із житлом — до 80 тис. грн на руки, заїзд уже цього тижня.", "В Польше сейчас есть несколько мест с жильём — до 80 тыс. грн на руки, заезд уже на этой неделе.") + "\n" +
-        T("Вам ближче склад чи виробництво? Скину 2–3 найкращі варіанти 🙂", "Вам ближе склад или производство? Скину 2–3 лучших варианта 🙂");
+      var hot = items.filter(function(x){ return x.hot && x.title; });
+      var pick = (hot.length ? hot : items).slice(0, 2);
+      body = intro + ".\n\n" + T("Зараз є гарячі вакансії з житлом:", "Сейчас есть горячие вакансии с жильём:") + "\n" + pick.map(line).join("\n") + "\n\n" +
+        T("Є й інші міста та країни — підберу варіант саме під вас.", "Есть и другие города и страны — подберу вариант именно под вас.");
     }
     return hi + body + "\n\n" + T("Коли вам зручно поговорити — зателефонувати чи продовжимо тут?", "Когда вам удобно поговорить — позвонить или продолжим здесь?");
   }
@@ -92,8 +88,6 @@ textarea{width:100%;min-height:230px;padding:12px 14px;border:1px solid var(--li
     document.getElementById("wa").href = "https://wa.me/" + raw + "?text=" + encodeURIComponent(txt);
   }
   ta.oninput = links;
-  var ITEMS = [];
-  mgEl.oninput = function(){ mgr = mgEl.value.trim(); try { localStorage.setItem("vdalo_mgr", mgr); } catch(e) {} ta.value = compose(ITEMS); links(); };
   document.getElementById("cp").onclick = function(){
     var b = this; ta.select();
     (navigator.clipboard ? navigator.clipboard.writeText(ta.value) : Promise.reject()).catch(function(){ document.execCommand("copy"); })
@@ -102,7 +96,7 @@ textarea{width:100%;min-height:230px;padding:12px 14px;border:1px solid var(--li
   if (!raw) { document.getElementById("st").textContent = "У посиланні немає номера телефону."; }
   fetch("/vacancies.json", {cache: "no-store"}).then(function(r){ return r.json(); }).then(function(d){ return d.items || []; })
     .catch(function(){ return []; }).then(function(items){
-      ITEMS = items; ta.value = compose(items); links();
+      ta.value = compose(items); links();
       if (raw && q.get("go") !== "0") { setTimeout(function(){ location.href = document.getElementById("vb").href; }, 250); }
     });
 })();
