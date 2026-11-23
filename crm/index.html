@@ -73,6 +73,7 @@ button.st::after{content:"";position:absolute;right:11px;top:50%;width:6px;heigh
 .stm i.st-paid{background:var(--green)}
 .stm button.sub{padding:8px 14px 8px 38px;font-size:15px;font-weight:500;color:#9b1c1c}
 .stm button.sub i{width:6px;height:6px;opacity:.6}
+.stm button.sub-d{color:#0e6b7a}
 .stm .own{color:var(--blue);font-weight:700;border-bottom:1px solid var(--line);border-radius:11px 11px 0 0;margin-bottom:6px;padding-bottom:14px}
 .stm .own i{background:none;width:auto;height:auto;border-radius:0;font-style:normal;font-size:16px}
 select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;padding:4px 22px 4px 9px;max-width:280px;-webkit-appearance:none;appearance:none;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 11px) 52%,calc(100% - 7px) 52%;background-size:4px 4px;background-repeat:no-repeat}
@@ -371,7 +372,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
 (function(){
   var E = Vdalo.esc, M = Vdalo.money;
   var app = document.getElementById("app"), drawer = document.getElementById("drawer"), shade = document.getElementById("shade");
-  var LS = [["new","Нова заявка"],["call","Чекає дзвінка"],["contacted","На зв’язку"],["dialog","Ведеться діалог (Viber / Telegram)"],["waiting","Зідзвонились — чекає вакансію"],["matched","Підібрано вакансію"],["departed","Виїхав"],["working","Працює"],["paid","Відпрацював 2 тижні, оплату отримано"],["rejected","Відмова"]];
+  var LS = [["new","Нова заявка"],["call","Чекає дзвінка"],["contacted","На зв’язку"],["dialog","Ведеться діалог"],["waiting","Зідзвонились — чекає вакансію"],["matched","Підібрано вакансію"],["departed","Виїхав"],["working","Працює"],["paid","Відпрацював 2 тижні, оплату отримано"],["rejected","Відмова"]];
   var LSN = {}; LS.forEach(function(x){ LSN[x[0]] = x[1]; });
   var ES = [["new","Новий запит"],["in_progress","В роботі"],["contract","Співпрацюємо"],["rejected","Відмова"]];
   var ESN = {}; ES.forEach(function(x){ ESN[x[0]] = x[1]; });
@@ -639,6 +640,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
   }
   // «Відмова» — одразу причина: готові варіанти або своя
   var REJ = ["Невірний номер", "Вже знайшов роботу", "Не відповідає", "Не актуально"];
+  var SUBS = {dialog: ["Viber", "WhatsApp", "Telegram"], rejected: REJ};   // варіанти під статусом у меню
   function askReason(l, done){
     var o = document.createElement("div"); o.className = "own-dlg";
     o.innerHTML = '<div class="own-box" role="dialog" aria-modal="true"><h3>Причина відмови</h3><p class="note">' + E(l.name) + ' <span class="lno">№' + l.id + '</span></p>' +
@@ -785,8 +787,8 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
         var l = S.leads.filter(function(x){ return x.id === id; })[0]; if (!l) return;
         var m = document.createElement("div"); m.className = "stm"; m._for = id; m.setAttribute("role", "menu");
         m.innerHTML = '<button type="button" class="own" data-v="__own"><i>✎</i>Свій статус…</button>' +
-          LS.map(function(x){ return '<button type="button" data-v="' + x[0] + '"' + (x[0] === l.status && !(x[0] === "rejected" && REJ.indexOf(l.status_note) >= 0) ? ' class="on"' : '') + '><i class="st-' + x[0] + '"></i>' + E(x[1]) + '</button>' +
-            (x[0] === "rejected" ? REJ.map(function(r){ return '<button type="button" class="sub' + (l.status === "rejected" && l.status_note === r ? ' on' : '') + '" data-v="rejected" data-rr="' + E(r) + '"><i class="st-rejected"></i>' + E(r) + '</button>'; }).join("") : ""); }).join("");
+          LS.map(function(x){ return '<button type="button" data-v="' + x[0] + '"' + (x[0] === l.status && !(SUBS[x[0]] && SUBS[x[0]].indexOf(l.status_note) >= 0) ? ' class="on"' : '') + '><i class="st-' + x[0] + '"></i>' + E(x[1]) + '</button>' +
+            (SUBS[x[0]] ? SUBS[x[0]].map(function(r){ return '<button type="button" class="sub' + (x[0] === "dialog" ? " sub-d" : "") + (l.status === x[0] && l.status_note === r ? ' on' : '') + '" data-v="' + x[0] + '" data-rr="' + E(r) + '"><i class="st-' + x[0] + '"></i>' + E(r) + '</button>'; }).join("") : ""); }).join("");
         document.body.appendChild(m);
         var r = btn.getBoundingClientRect(), h = m.offsetHeight, w = m.offsetWidth;
         m.style.left = Math.max(8, Math.min(r.left, innerWidth - w - 8)) + "px";
@@ -798,8 +800,8 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
         setTimeout(function(){ document.addEventListener("mousedown", out, true); document.addEventListener("keydown", key, true); addEventListener("scroll", function sc(e){ if (!m.contains(e.target)) { removeEventListener("scroll", sc, true); close(); } }, true); addEventListener("resize", close); }, 0);
         var cur = m.querySelector(".on") || m.querySelector("button"); cur.focus();
         m.onclick = function(e){ var b = e.target.closest("button[data-v]"); if (!b) return; var v = b.getAttribute("data-v"), rr = b.getAttribute("data-rr"); close();
-          if (rr) { if (l.status === "rejected" && l.status_note === rr) return; btn.className = "st st-rejected"; btn.textContent = LSN.rejected;
-            API.saveLead(id, {status: "rejected", status_note: rr}).then(function(){ toast("Відмова: " + rr); counts(); rLeads(); }).catch(fail); return; }
+          if (rr) { if (l.status === v && l.status_note === rr) return; btn.className = "st st-" + v; btn.textContent = LSN[v];
+            API.saveLead(id, {status: v, status_note: rr}).then(function(){ toast(LSN[v] + ": " + rr); counts(); rLeads(); }).catch(fail); return; }
           if (v === "__own") { askOwn(l, function(t){
             API.saveLead(id, {status_note: t}).then(function(){ toast(t ? "Статус «" + t + "» збережено" : "Свій статус прибрано"); rLeads(); }).catch(fail); }); return; }
           if (v === l.status) return;
