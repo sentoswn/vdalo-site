@@ -941,3 +941,8 @@ update public.leads l set age = trim(m[1])
   from (select id, regexp_match(note, '(?:вік|років|рокiв|лет|возраст|age)[^:\n]*:\s*([^\n]+)', 'i') as m from public.leads
          where age is null and note is not null) x
  where l.id = x.id and x.m is not null;
+
+-- новий статус «Не підходить за віком» (age): кандидат лишається в базі, щоб пізніше підібрати вакансію за віком
+alter table public.leads drop constraint if exists leads_status_check;
+alter table public.leads add constraint leads_status_check check (status in
+  ('new','call','contacted','dialog','waiting','age','matched','departed','working','paid','rejected'));
