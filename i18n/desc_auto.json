@@ -179,6 +179,11 @@
 "pl": "155 zł Opłata za okres pracy krótszy niż minimalny: 500 zł",
 "ru": "155 PLN Плата за период работы меньше минимального: 500 PLN"
 },
+"2 денні зміни: 07:00–19:00. 1 вихідний день. 2 нічні зміни: 19:00–07:00. 3 вихідні дні.": {
+"en": "2 day shifts: 07:00-19:00. 1 day off. 2 night shifts: 19:00-07:00. 3 days off.",
+"pl": "2 zmiany dzienne: 07:00-19:00. 1 dzień wolny. 2 zmiany nocne: 19:00-07:00. 3 dni wolnego.",
+"ru": "2 дневные изменения: 07:00–19:00. 1 выходной день. 2 ночные смены: 19:00–07:00. 3 выходных дня."
+},
 "2 дні — денна зміна; 2 дні — нічна зміна; 4 дні — вихідні.": {
 "en": "2 days — day shift; 2 days — night shift; 4 days are weekends.",
 "pl": "2 dni — zmiana dzienna; 2 dni — zmiana nocna; 4 dni to weekendy.",
@@ -199,6 +204,11 @@
 "pl": "2 zmiany po 8–12 godzin; praca 5 dni w tygodniu; możliwe soboty i niedziele;…",
 "ru": "2 смены по 8–12 часов; работа 5 дней в неделю; возможные субботы и воскресенья;"
 },
+"2-4-місні кімнати, з ковдрами, подушками, білизною, кухнями, пральними машинами (прання безкоштовне), Wi-Fi": {
+"en": "2-4-person rooms, with blankets, pillows, linen, kitchens, washing machines (free laundry), Wi-Fi",
+"pl": "Pokoje 2-4 osobowe, z kocami, poduszkami, pościelą, kuchnią, pralką (pranie gratis), Wi-Fi",
+"ru": "2-4-местные комнаты, с одеялами, подушками, бельем, кухнями, стиральными машинами (стирка бесплатная), Wi-Fi"
+},
 "200–250 Бажане громадянство:…": {
 "en": "200–250 Preferred citizenship:…",
 "pl": "200–250 Preferowane obywatelstwo:…",
@@ -218,6 +228,11 @@
 "en": "25 days of paid vacation; additional payment for work on weekends (Saturday, Sunday) — +10%; additional payment for overtime work — +25% on weekdays, +40% on weekends; surcharge for night shifts (22:00–06:00) — +10%; additional payment for work on holidays — +100%.",
 "pl": "25 dni płatnego urlopu; dodatek za pracę w weekendy (sobota, niedziela) — +10%; dodatek za pracę w godzinach nadliczbowych — +25% w dni powszednie, +40% w weekendy; dopłata za zmiany nocne (22:00–06:00) — +10%; dodatek za pracę w święta — +100%.",
 "ru": "25 дней оплачиваемого отпуска; доплата за работу в выходные (суббота, воскресенье) - +10%; доплата за сверхурочную работу - +25% по будням, +40% по выходным; доплата за ночные смены (22:00–06:00) – +10%; доплата за работу в праздничные дни - +100%."
+},
+"3 зміни по 8 годин; перерва 20 хвилин; додаткова перерва 10 хвилин при 12-годинній зміні. Додаткові послуги (утримання): відрахування за санітарний огляд — 150 PLN відрахування за житло — 470 PLN вартість робочого одягу — 180 PLN (якщо працівник звільняється до завершення першого місяця роботи)": {
+"en": "3 shifts of 8 hours each; a break of 20 minutes; an additional break of 10 minutes for a 12-hour shift. Additional services (maintenance): deduction for sanitary inspection — 150 PLN deduction for housing — 470 PLN cost of work clothes — 180 PLN (if the employee is dismissed before the end of the first month of work)",
+"pl": "3 zmiany po 8 godzin każda; przerwa 20 minut; dodatkowa przerwa 10 minut w przypadku zmiany 12-godzinnej. Usługi dodatkowe (utrzymania): potrącenie na inspekcję sanitarną — 150 zł potrącenie na mieszkanie — 470 zł koszt odzieży roboczej — 180 zł (w przypadku zwolnienia pracownika przed upływem pierwszego miesiąca pracy)",
+"ru": "3 смены по 8 часов; перерыв 20 минут; дополнительный перерыв 10 минут при 12-часовой смене. Дополнительные услуги (содержание): отчисления за санитарный осмотр - 150 PLN отчисления за жилье - 470 PLN стоимость рабочей одежды - 180 PLN (если работник увольняется до завершения первого месяца работы)"
 },
 "3 зміни, понеділок–п’ятниця Робочий час: 8 годин на день, у середньому 40 годин на тиждень Додатково: Робочий тиждень закінчується в суботу вранці. За потреби можлива робота в суботу.": {
 "en": "3 shifts, Monday-Friday Working hours: 8 hours per day, an average of 40 hours per week Additional: The working week ends on Saturday morning. If necessary, it is possible to work on Saturdays.",
@@ -248,6 +263,11 @@
 "en": "400 zł/month (deducted from salary). Housing format: apartments or hostels, 2-3-4 people in a room. Bring your own bed linen",
 "pl": "400 zł/miesiąc (odliczane od wynagrodzenia). Format zakwaterowania: apartamenty lub hostele, 2-3-4 osoby w pokoju. Zabierz ze sobą własną pościel",
 "ru": "400 zł/мес (вычисляется из зарплаты). Формат жилья: квартиры или хостелы, 2-3-4 человека в комнате. Постельное белье брать с собой"
+},
+"450–500 злотих": {
+"en": "450–500 zlotys",
+"pl": "450–500 zł",
+"ru": "450–500 злотых"
 },
 "4806.00 PLN брутто/місяць +20% за нічні години+50% за понаднормові години+100%…": {
 "en": "4806.00 PLN gross/month +20% for night hours+50% for overtime hours+100%…",
@@ -534,6 +554,16 @@
 "pl": "Biedronka to jedna z największych sieci dyskontów w Polsce.",
 "ru": "Biedronka – одна из крупнейших сетей дискаунтеров в Польше."
 },
+"Faurecia (FORVIA) — один із найбільших у світі виробників автозапчастин, зокрема каркасів сидінь.": {
+"en": "Faurecia (FORVIA) is one of the world's largest manufacturers of auto parts, including seat frames.",
+"pl": "Faurecia (FORVIA) to jeden z największych na świecie producentów części samochodowych, w tym ram siedzeń.",
+"ru": "Faurecia (FORVIA) — один из крупнейших в мире производителей автозапчастей, в том числе каркасов сидений."
+},
+"Glassolutions — частина групи Saint-Gobain, виробник інноваційних скляних виробів для архітектури й будівництва.": {
+"en": "Glassolutions is part of the Saint-Gobain group, a manufacturer of innovative glass products for architecture and construction.",
+"pl": "Glassolutions jest częścią grupy Saint-Gobain, producenta innowacyjnych produktów szklanych dla architektury i budownictwa.",
+"ru": "Glassolutions – часть группы Saint-Gobain, производитель инновационных стеклянных изделий для архитектуры и строительства."
+},
 "Grycan виробляє морозиво та сорбети за традиційними сімейними рецептами; від першого магазину у Варшаві виросла мережа по всій Польщі.": {
 "en": "Grycan produces ice cream and sorbets based on traditional family recipes; from the first store in Warsaw, a network has grown throughout Poland.",
 "pl": "Grycan produkuje lody i sorbety w oparciu o tradycyjne rodzinne receptury; od pierwszego sklepu w Warszawie rozrosła się sieć na terenie całej Polski.",
@@ -709,6 +739,11 @@
 "pl": "TAM SĄ; zmiany: 06:00–14:00, 07:00–19:00, 14:00–22:00, 19:00–07:00, 22:00–06:00; dni robocze: pon.–pt. (czasami sob.–niedz.); możliwe nadgodziny (+4 godz.).",
 "ru": "Есть; изменения: 06:00–14:00, 07:00–19:00, 14:00–22:00, 19:00–07:00, 22:00–06:00; рабочие дни: пн–пт (иногда сб–вс); возможны сверхурочные (+4 часа)."
 },
+"Існує можливість допомоги в організації транспорту для працівників, які не мають власного транспорту. Орієнтовна щомісячна вартість становить 80–120 злотих (приблизно 15 км від гуртожитку до складу). Для осіб, які мають власне житло, умови перевезення узгоджуються індивідуально.": {
+"en": "There is a possibility of assistance in organizing transport for employees who do not have their own transport. The approximate monthly cost is PLN 80-120 (approximately 15 km from the hostel to the warehouse). For persons who have their own housing, the terms of transportation are negotiated individually.",
+"pl": "Istnieje możliwość pomocy w organizacji transportu dla pracowników, którzy nie posiadają własnego transportu. Przybliżony koszt miesięczny to 80-120 zł (około 15 km od hostelu do magazynu). Dla osób posiadających własne mieszkanie warunki transportu negocjowane są indywidualnie.",
+"ru": "Существует возможность помощи в организации транспорта для работников, не имеющих собственного транспорта. Ориентировочная ежемесячная стоимость составляет 80–120 злотых (около 15 км от общежития в состав). Для лиц, имеющих собственное жилье условия перевозки согласовываются индивидуально."
+},
 "Їдальня на складі: обід — 1 PLN Безкоштовно: вода, чай, кава": {
 "en": "Canteen in the warehouse: lunch — 1 PLN Free: water, tea, coffee",
 "pl": "Stołówka na magazynie: obiad — 1 zł Gratis: woda, herbata, kawa",
@@ -748,6 +783,11 @@
 "en": "FREE The bus stops at the following stops in Poznań (hostels) and Swarzędz",
 "pl": "BEZPŁATNIE Autobus zatrzymuje się na przystankach w Poznaniu (hostele) i Swarzędzu",
 "ru": "БЕСПЛАТНО Автобус останавливается на следующих остановках в Познани (хостелы) и Swarzędz"
+},
+"БЕЗКОШТОВНО Автобус зупиняється на наступних зупинках у Познані (хостели): ul. Korczyńska 3, Познань Swarzędz Raczyńskiego 13 Pawia 7 Swarzędz AWF з Познані": {
+"en": "FREE The bus stops at the following stops in Poznań (hostels): ul. Korczyńska 3, Poznań Swarzędz Raczyńskiego 13 Pawia 7 Swarzędz AWF from Poznań",
+"pl": "BEZPŁATNIE Autobus zatrzymuje się na przystankach w Poznaniu (hostele): ul. Korczyńska 3, Poznań Swarzędz Raczyńskiego 13 Pawia 7 Swarzędz AWF z Poznania",
+"ru": "БЕСПЛАТНО Автобус останавливается на следующих остановках Познани (хостелы): ul. Korczyńska 3, Познань Swarzędz Raczyńskiego 13 Pawia 7 Swarzędz AWF из Познани"
 },
 "БЕЗКОШТОВНО Автобус зупиняється на наступних зупинках у Познані (хостели): Познань Swarzędz Raczyńskiego 13 Pawia 7 Swarzędz AWF з Познані": {
 "en": "FREE The bus stops at the following stops in Poznań (hostels): Poznań Swarzędz Raczyńskiego 13 Pawia 7 Swarzędz AWF from Poznań",
@@ -954,6 +994,16 @@
 "pl": "Bezpłatne organizowane przez naszego autobooma. Nie ma dojazdu z Wrocławia! Od strony Białego Wrocławskiego znajduje się przystanek „Makro” (do przystanku można dojechać komunikacją miejską i przesiąść się na nasz transport służbowy). Rekompensata za przejazd miejski od firmy – 74 zł. Warunki panujące w magazynie: W magazynie znajduje się stołówka z lodówkami, w której pracownicy mogą przechować żywność do przerwy. Do dyspozycji Gości jest także kuchenka mikrofalowa. Zainstalowano automaty z napojami i słodyczami",
 "ru": "Бесплатный организованный нашим автобумосм. Из г. Вроцлав доезда нет! Есть из Биля Вроцлавских, остановка \"Макро\" (общественным транспортом можно доехать до этой остановки и пересесть на наш рабочий транспорт). Компенсация в городской проездной от фирмы - 74 злотых. Условия на складе: на территории склада есть столовая с холодильниками, где работники могут хранить свою еду до перерыва. Также есть микроволновка. Установленные автоматы с напитками и сладостями"
 },
+"Безкоштовний суп Дофінансування до другого блюда: +2,50 PLN": {
+"en": "Free soup Supplement for second course: +2.50 PLN",
+"pl": "Zupa gratis Dodatek do drugiego dania: +2,50 zł",
+"ru": "Бесплатный суп Дофинансирование ко второму блюду: +2,50 PLN"
+},
+"Безкоштовний суп Повний обід (суп + друге) — 8 PLN": {
+"en": "Free soup Full lunch (soup + side dish) - 8 PLN",
+"pl": "Zupa gratis Pełny obiad (zupa + dodatek) - 8 zł",
+"ru": "Бесплатный суп Полный обед (суп + второй) — 8 PLN"
+},
 "Безкоштовний суп Повний обід — 8 злотих": {
 "en": "Free soup Full lunch - 8 zlotys",
 "pl": "Zupa gratis Pełny obiad - 8 zł",
@@ -973,6 +1023,11 @@
 "en": "Free transport from: Brzeg, Jelcz-Laskowice, Namysłów, Oława, Przeworno, Strzelin",
 "pl": "Bezpłatny dowóz z: Brzegu, Jelcza-Laskowic, Namysłowa, Oławy, Przeworna, Strzelina",
 "ru": "Бесплатный транспорт из: Brzeg, Jelcz-Laskowice, Namysłów, Oława, Przeworno, Strzelin"
+},
+"Безкоштовний трансфер від автовокзалу в Жилині (вул. Яна Мілца, 738/21) до місця роботи та назад.": {
+"en": "Free transfer from the bus station in Žilina (738/21 Yana Miltsa Street) to the place of work and back.",
+"pl": "Bezpłatny transfer z dworca autobusowego w Żylinie (ul. Yana Miltsa 738/21) do miejsca pracy i z powrotem.",
+"ru": "Бесплатный трансфер от автовокзала в Жилине (ул. Яна Милца, 738/21) до места работы и обратно."
 },
 "Безкоштовний трансфер від автовокзалу в Жилині до місця роботи та назад.": {
 "en": "Free transfer from the bus station in Žilina to the place of work and back.",
@@ -1078,6 +1133,11 @@
 "en": "The price is PLN 600/month. Be sure to have your own bed linen",
 "pl": "Cena 600 zł/miesiąc. Pamiętaj, aby mieć własną pościel",
 "ru": "Стоимость – 600 zł/мес. Обязательно иметь собственное постельное белье"
+},
+"Велика польська компанія — виробник м’яса та ковбасних виробів.": {
+"en": "A large Polish company — a producer of meat and sausage products.",
+"pl": "Duża polska firma — producent wyrobów mięsnych i wędliniarskich.",
+"ru": "Большая польская компания – производитель мяса и колбасных изделий."
 },
 "Велика польська компанія, що спеціалізується на виробництві м’яса та ковбасних виробів.": {
 "en": "A large Polish company specializing in the production of meat and sausage products.",
@@ -1199,6 +1259,11 @@
 "pl": "Producent wyrobów papierowych oraz artykułów biurowych i szkolnych: zeszyty, kalendarze, puzzle, kolorowanki, teczki.",
 "ru": "Производитель бумажной продукции и товаров для офиса и школы: тетради, календари, пазлы, раскраски, папки."
 },
+"Виробник пластикових кріплень для автомобільної промисловості.": {
+"en": "Manufacturer of plastic fasteners for the automotive industry.",
+"pl": "Producent elementów złącznych z tworzyw sztucznych dla przemysłu motoryzacyjnego.",
+"ru": "Производитель пластиковых креплений для автомобильной промышленности."
+},
 "Виробник риби та рибних продуктів (солона, маринована, копчена риба, морепродукти, салати) для ринків Західної Європи.": {
 "en": "Producer of fish and fish products (salted, marinated, smoked fish, seafood, salads) for the markets of Western Europe.",
 "pl": "Producent ryb i przetworów rybnych (ryby solone, marynowane, wędzone, owoce morza, sałatki) na rynki Europy Zachodniej.",
@@ -1313,6 +1378,11 @@
 "en": "Ability to use measuring tools (caliper, micrometer, depth gauge) Ability to use machine tools Production experience Communicability, teamwork Preferred knowledge of technical drawing",
 "pl": "Umiejętność obsługi narzędzi pomiarowych (suwmiarka, mikrometr, głębokościomierz) Umiejętność obsługi obrabiarek Doświadczenie produkcyjne Komunikatywność, praca zespołowa Preferowana znajomość rysunku technicznego",
 "ru": "Умение пользоваться измерительными инструментами (штангенциркуль, микрометр, глубиномер) Умение пользоваться станочными инструментами Опыт производства Коммуникабельность, работа в команде"
+},
+"Вміння працювати в команді, навички роботи руками, пунктуальність, відповідальність, бажання працювати і вчитися, хороша організація власної праці, відданість дорученим обов'язкам, терплячість": {
+"en": "Ability to work in a team, manual skills, punctuality, responsibility, desire to work and learn, good organization of own work, dedication to assigned duties, patience",
+"pl": "Umiejętność pracy w zespole, zdolności manualne, punktualność, odpowiedzialność, chęć do pracy i nauki, dobra organizacja pracy własnej, zaangażowanie w powierzone obowiązki, cierpliwość",
+"ru": "Умение работать в команде, навыки работы руками, пунктуальность, ответственность, желание работать и учиться, хорошая организация собственного труда, преданность порученным обязанностям, терпение"
 },
 "Вміння читати технічні рисунки (по збірці меблів), Досвід зі збиранням меблів, Комунікативне знання польського, Гарна фізична форма": {
 "en": "Ability to read technical drawings (for furniture assembly), Experience with furniture assembly, Communicative knowledge of Polish, Good physical shape",
@@ -1474,6 +1544,11 @@
 "pl": "Elastyczny (tylko zmiany dzienne)",
 "ru": "Гибкая (только дневные изменения)"
 },
+"Готовність до позмінної роботи (часто 3 зміни) Вміння керувати навантажувачем (UDT – бажано) Базові знання ПК та сканерів Відповідальність і акуратність Досвід роботи на складі": {
+"en": "Willingness to work shifts (often 3 shifts) Ability to operate a forklift (UDT - preferred) Basic knowledge of PCs and scanners Responsibility and accuracy Warehouse experience",
+"pl": "Gotowość do pracy zmianowej (często 3 zmiany) Umiejętność obsługi wózka widłowego (UDT – preferowany) Podstawowa znajomość komputerów PC i skanerów Odpowiedzialność i dokładność Doświadczenie magazynowe",
+"ru": "Готовность к посменной работе (часто 3 смены) Умение управлять погрузчиком (UDT – желательно) Базовые знания ПК и сканеров Ответственность и аккуратность Опыт работы на складе"
+},
 "Готовність до позмінної роботи (часто 3 зміни) Вміння керувати навантажувачем (UDT – бажано) Базові знання ПК та сканерів Відповідальність і…": {
 "en": "Willingness to work shifts (often 3 shifts) Ability to operate a forklift (UDT - preferred) Basic knowledge of PCs and scanners Accountability and…",
 "pl": "Gotowość do pracy zmianowej (często 3 zmiany) Umiejętność obsługi wózka widłowego (UDT – preferowany) Podstawowa znajomość obsługi komputerów PC i skanerów Odpowiedzialność i…",
@@ -1533,6 +1608,11 @@
 "en": "Public transport",
 "pl": "Transport publiczny",
 "ru": "Общественный транспорт"
+},
+"Громадський транспорт (безкоштовно)": {
+"en": "Public transport (free)",
+"pl": "Transport publiczny (bezpłatny)",
+"ru": "Общественный транспорт (бесплатно)"
 },
 "Громадський транспорт.": {
 "en": "Public transport.",
@@ -1719,6 +1799,11 @@
 "pl": "Do 300 zł brutto (produkcja/nadgodziny)",
 "ru": "До 300 злотых брутто (производство / сверхурочные часы)"
 },
+"До автобусної зупинки працівники добираються пішки або міським транспортом. Актуальний розклад автобусів координатор надає в день прибуття.": {
+"en": "Employees reach the bus stop on foot or by public transport. The coordinator provides the actual bus schedule on the day of arrival.",
+"pl": "Pracownicy docierają na przystanek autobusowy pieszo lub komunikacją miejską. Koordynator podaje aktualny rozkład jazdy autobusów w dniu przyjazdu.",
+"ru": "До автобусной остановки работники добираются пешком или городским транспортом. Актуальное расписание автобусов координатор предоставляет в день прибытия."
+},
 "До автобусної зупинки працівники добираються пішки або міським транспортом. Актуальний розклад автобусів координатор надає в день прибуття. Безкоштовний проїзд автобусом зі Львова.": {
 "en": "Employees reach the bus stop on foot or by public transport. The coordinator provides the actual bus schedule on the day of arrival. Free bus ride from Lviv.",
 "pl": "Pracownicy docierają na przystanek autobusowy pieszo lub komunikacją miejską. Koordynator podaje aktualny rozkład jazdy autobusów w dniu przyjazdu. Bezpłatny przejazd autobusem ze Lwowa.",
@@ -1854,6 +1939,11 @@
 "pl": "Doświadczenie w pracy na wózku widłowym; Brak przeciwwskazań do pracy fizycznej; Znajomość języka słowackiego na poziomie wystarczającym do komunikacji.",
 "ru": "Опыт работы на вилочном погрузчике; Отсутствие противопоказаний к физическому труду; Знание словацкого языка на уровне, достаточном для общения."
 },
+"Досвід роботи на складі, у комплектуванні замовлень або роботі зі сканером (бажано 6 місяців і більше) Відповідальність, зацікавленість та акуратність Готовність до фізичної праці Знання польської мови не є обов'язковим — можлива комунікація українською, російською або англійською мовами": {
+"en": "Experience working in a warehouse, picking orders or working with a scanner (preferably 6 months or more) Responsibility, interest and accuracy Willingness for physical work Knowledge of the Polish language is not mandatory - communication in Ukrainian, Russian or English is possible",
+"pl": "Doświadczenie w pracy na magazynie, kompletacji zamówień lub pracy ze skanerem (najlepiej 6 miesięcy lub dłużej) Odpowiedzialność, zainteresowanie i dokładność Chęć do pracy fizycznej Znajomość języka polskiego nie jest obowiązkowa - możliwa komunikacja w języku ukraińskim, rosyjskim lub angielskim",
+"ru": "Опыт работы на складе, в комплектовании заказов или со сканером (желательно 6 месяцев и более) Ответственность, заинтересованность и аккуратность Готовность к физическому труду Знание польского языка не является обязательным — возможна коммуникация на украинском, русском или английском языках"
+},
 "Досвід роботи не потрібен, комунікативна польська мова, хороша фізична форма": {
 "en": "No work experience required, communicative Polish, good physical condition",
 "pl": "Nie wymagamy doświadczenia zawodowego, komunikatywny język polski, dobra kondycja fizyczna",
@@ -1873,6 +1963,11 @@
 "en": "Experience and knowledge of the language are not mandatory. Women must not have extended nails and eyelashes",
 "pl": "Doświadczenie i znajomość języka nie są wymagane. Kobietom nie wolno mieć przedłużonych paznokci i rzęs",
 "ru": "Опыт и знание языка не обязательны, Женщины должны быть без наращенных ногтей и ресниц."
+},
+"Доступ до їдальні. Можна купити їжу або скористатися мікрохвильовою піччю.": {
+"en": "Access to the dining room. You can buy food or use the microwave oven.",
+"pl": "Dostęp do jadalni. Można kupić jedzenie lub skorzystać z kuchenki mikrofalowej.",
+"ru": "Доступ к столовой. Можно купить еду или воспользоваться микроволновкой."
 },
 "Дотація на харчування: 10 PLN/робочий день (або талони) Безкоштовна кава з автоматів (за карткою працівника)": {
 "en": "Food subsidy: PLN 10/working day (or vouchers) Free coffee from machines (with employee card)",
@@ -1968,6 +2063,11 @@
 "en": "Housing costs PLN 400/month",
 "pl": "Koszt mieszkania 400 zł/miesiąc",
 "ru": "Жилье стоит 400 PLN/мес"
+},
+"Житло надається безкоштовно. Постільну білизну потрібно мати із собою. Прання та сушіння — платні, 1–2 EUR. Мийні засоби надаються безкоштовно.": {
+"en": "Housing is provided free of charge. Bed linen must be brought with you. Washing and drying are paid, 1–2 EUR. Detergents are provided free of charge.",
+"pl": "Mieszkanie zapewniane jest bezpłatnie. Pościel należy zabrać ze sobą. Pranie i suszenie są płatne, 1–2 EUR. Detergenty dostarczane są bezpłatnie.",
+"ru": "Жилье предоставляется бесплатно. Постельное белье нужно иметь с собой. Стирка и сушка – платные, 1–2 EUR. Моющие средства предоставляются бесплатно."
 },
 "Жінки та чоловіки, до 40 р.": {
 "en": "Women and men, up to 40 years old.",
@@ -2083,6 +2183,11 @@
 "en": "At your own expense. Vending machines with sandwiches and drinks are installed in the kitchen",
 "pl": "Na własny koszt. W kuchni zainstalowane są automaty z kanapkami i napojami",
 "ru": "За свой счет. На кухне установлены автоматы с бутербродами и напитками."
+},
+"За власний рахунок. На кухні є автомати з бутербродами та напоями.": {
+"en": "At your own expense. The kitchen has vending machines with sandwiches and drinks.",
+"pl": "Na własny koszt. W kuchni znajdują się automaty z kanapkami i napojami.",
+"ru": "За свой счет. На кухне есть автоматы с бутербродами и напитками."
 },
 "За власний рахунок. Працівники мають доступ до автоматів з кавою та чаєм, солодких перекусів. Безкоштовний доступ до питної води з кулера у їдальні та на виробничому цеху. В їдальні є шафки для власного посуду та їжі, чайник, мікрохвильова піч, холодильник, столи та стільці.": {
 "en": "At your own expense. Employees have access to machines with coffee and tea, sweet snacks. Free access to drinking water from a cooler in the canteen and on the production floor. The dining room has lockers for your own dishes and food, a kettle, a microwave oven, a refrigerator, tables and chairs.",
@@ -2243,6 +2348,11 @@
 "en": "Shifts: 01:30–09:30, 02:30–10:30, 09:30–19:30, 10:30–20:30 Saturday work: 02:30–10:30 Every 2 months an additional shift is possible: 10:30–20:30",
 "pl": "Zmiany: 01:30–09:30, 02:30–10:30, 09:30–19:30, 10:30–20:30 Praca w sobotę: 02:30–10:30 Co 2 miesiące możliwa jest dodatkowa zmiana: 10:30–20:30",
 "ru": "Изменения: 01:30–09:30, 02:30–10:30, 09:30–19:30, 10:30–20:30 Работа в субботу: 02:30–10:30 Каждые 2 месяца возможно дополнительное изменение: 10:30–20:3"
+},
+"Зміни: 06:00-14:00, 14:00-22:00, 22:00-06:00 5-6 днів на тиждень (вихідні плаваючі) 8 годин на день 1 вихідний після 4 робочих днів (після нічної зміни – 2 вихідні) Одна перерва 15 хвилин Відрахування та проживання: Житло: 500 PLN": {
+"en": "Shifts: 06:00-14:00, 14:00-22:00, 22:00-06:00 5-6 days a week (floating weekends) 8 hours a day 1 day off after 4 working days (after night shift - 2 days off) One break 15 minutes Deductions and accommodation: Housing: 500 PLN",
+"pl": "Zmiany: 06:00-14:00, 14:00-22:00, 22:00-06:00 5-6 dni w tygodniu (pływające weekendy) 8 godzin dziennie 1 dzień wolny po 4 dniach roboczych (po nocnej zmianie - 2 dni wolne) Jedna przerwa 15 minut Odliczenia i zakwaterowanie: Zakwaterowanie: 500 zł",
+"ru": "Изменения: 06:00-14:00, 14:00-22:00, 22:00-06:00 5-6 дней в неделю (выходные плавающие) 8 часов в день 1 выходной после 4 рабочих дней (после ночной смены – 2 выходных) Один перерыв 15 минут Отчисление и проживание"
 },
 "Знання комп’ютера Для окремих відділів — польська мова Для транспорту — UDT 1 або 2 + польська": {
 "en": "Computer knowledge For certain departments - Polish For transport - UDT 1 or 2 + Polish",
@@ -2564,6 +2674,11 @@
 "pl": "Komfortowe warunki, temperatura pokojowa",
 "ru": "Комфортные условия, комнатная температура"
 },
+"Контроль роботи термопластавтомата Приймання виробів з конвеєра Перевірка якості продукції Обрізання зайвого пластику ножем Комплектування та пакування виробів": {
+"en": "Control of the operation of the injection molding machine Acceptance of products from the conveyor Product quality check Cutting of excess plastic with a knife Assembling and packaging of products",
+"pl": "Kontrola pracy wtryskarki Przyjęcie wyrobów z przenośnika Kontrola jakości wyrobów Cięcie nożem nadmiaru plastiku Montaż i pakowanie wyrobów",
+"ru": "Контроль работы термопластавтомата Прием изделий из конвейера Проверка качества продукции Обрезка лишнего пластика ножом Комплектование и упаковка изделий"
+},
 "Контроль якості деталей, що виробляються машинами, виправлення дефектних деталей, збірка та пакування готової продукції": {
 "en": "Quality control of parts produced by machines, correction of defective parts, assembly and packaging of finished products",
 "pl": "Kontrola jakości części produkowanych przez maszyny, korekta wadliwych części, montaż i pakowanie gotowych produktów",
@@ -2614,10 +2729,20 @@
 "pl": "Pokoje 2-4 osobowe Zapewniamy koce, poduszki, pościel Wspólna kuchnia, prysznice, toalety Kuchnia wyposażona w sprzęt AGD Bezpłatne pralki Preferowane Wi-Fi Sklepy w odległości 750 m - 2,7 km",
 "ru": "Комнаты 2–4 человека Предоставляются одеяла, подушки, постельные принадлежности Общая кухня, душевые, туалеты Кухня оборудована техникой Бесплатные стиральные машины Преимущественно есть Wi-Fi Магазины на расстоянии 750 м – 2,7 км"
 },
+"Кімнати 2–4 особи, базові умови, Wi-Fi, прання безкоштовне": {
+"en": "Rooms for 2-4 people, basic conditions, Wi-Fi, free laundry",
+"pl": "Pokoje 2-4 osobowe, podstawowe warunki, Wi-Fi, bezpłatna pralnia",
+"ru": "Комнаты 2–4 человека, базовые условия, Wi-Fi, стирка бесплатная"
+},
 "Кімнати 3-4-місні. У помешканні є все необхідне для комфортного проживання (пральна машина, сушарка для білизни, холодильник, мікрохвильова піч, столові прибори). Рекомендовано брати з собою постільну білизну, рушник, столові або кухонні прибори.": {
 "en": "Rooms for 3-4 people. The apartment has everything you need for a comfortable stay (washing machine, clothes dryer, refrigerator, microwave oven, cutlery). It is recommended to bring bed linen, a towel, cutlery or kitchen utensils.",
 "pl": "Pokoje dla 3-4 osób. W apartamencie jest wszystko co potrzebne do komfortowego pobytu (pralka, suszarka, lodówka, kuchenka mikrofalowa, sztućce). Zaleca się zabranie ze sobą pościeli, ręcznika, sztućców lub przyborów kuchennych.",
 "ru": "Комнаты 3-4-местные. В помещении есть все необходимое для комфортного проживания (стиральная машина, бельевая сушилка, холодильник, микроволновая печь, столовые приборы). Рекомендуется брать с собой постельное белье, полотенце, столовые или кухонные приборы."
+},
+"Кімнати для 2-4 осіб (стандартні ліжка). Ковдри, подушки та постільна білизна доступні. Пральні машини доступні, прання безкоштовне. У квартирі є безкоштовний доступ до Wi-Fi.": {
+"en": "Rooms for 2-4 people (standard beds). Blankets, pillows and bed linen are available. Washing machines are available, laundry is free. The apartment has free Wi-Fi access.",
+"pl": "Pokoje 2-4 osobowe (łóżka standardowe). Dostępne są koce, poduszki i pościel. Dostępne są pralki, pranie jest bezpłatne. W apartamencie można korzystać z bezpłatnego Wi-Fi.",
+"ru": "Комнаты для 2-4 человек (стандартные кровати). Одеяла, подушки и постельное белье доступны. Стиральные машины доступны, стирка бесплатная. В квартире есть бесплатный доступ к Wi-Fi."
 },
 "Кімнати для 2–3 осіб Wi-Fi доступний Подушки та ковдри надаються": {
 "en": "Rooms for 2-3 people Wi-Fi is available Pillows and blankets are provided",
@@ -2708,6 +2833,11 @@
 "en": "Only at your own home",
 "pl": "Tylko we własnym domu",
 "ru": "Только на собственном жилье"
+},
+"Логістична компанія, що обробляє онлайн-замовлення бренду SHEIN: одяг, прикраси, сумки та товари для дому.": {
+"en": "A logistics company that handles online orders for the SHEIN brand: apparel, jewelry, bags, and home goods.",
+"pl": "Firma logistyczna obsługująca zamówienia online dla marki SHEIN: odzieży, biżuterii, torebek i artykułów gospodarstwa domowego.",
+"ru": "Логистическая компания, обрабатывающая онлайн заказ бренда SHEIN: одежда, украшения, сумки и товары для дома."
 },
 "Лідер польського ринку з виробництва оселедців, салатів і спредів.": {
 "en": "The leader of the Polish market in the production of herrings, salads and spreads.",
@@ -2854,6 +2984,11 @@
 "pl": "Monter elektryk",
 "ru": "Монтер-электрик"
 },
+"Міжнародна компанія з понад 2500 працівниками, що виробляє рішення для провідних виробників побутової техніки.": {
+"en": "An international company with more than 2,500 employees that produces solutions for leading manufacturers of household appliances.",
+"pl": "Międzynarodowa firma zatrudniająca ponad 2500 pracowników, produkująca rozwiązania dla wiodących producentów sprzętu AGD.",
+"ru": "Международная компания с более чем 2500 работниками, производящая решения для ведущих производителей бытовой техники."
+},
 "Міжнародна компанія з понад 2500 працівниками, що постачає рішення провідним виробникам побутової техніки.": {
 "en": "An international company with more than 2,500 employees, providing solutions to leading manufacturers of household appliances.",
 "pl": "Międzynarodowa firma zatrudniająca ponad 2500 pracowników, dostarczająca rozwiązania wiodącym producentom sprzętu AGD.",
@@ -2898,6 +3033,11 @@
 "en": "By public transport, a monthly pass is about 90 zł",
 "pl": "W komunikacji miejskiej bilet miesięczny kosztuje około 90 zł",
 "ru": "Городской транспорт, проездной в месяц - около 90 zł"
+},
+"На Різдво працівникам дарують подарунки.": {
+"en": "Employees are given gifts at Christmas.",
+"pl": "Pracownicy dostają prezenty na Boże Narodzenie.",
+"ru": "На Рождество работникам дарят подарки."
 },
 "На власному житлі": {
 "en": "At your own home",
@@ -3059,6 +3199,11 @@
 "pl": "Zakwaterowanie w hotelu dla personelu Zakwaterowanie w odległości około 38 km od miejsca pracy Zakwaterowanie zapewniamy w formie pokoju dwuosobowego Pokoje są zamykane i wyposażone w łóżka pojedyncze, szafy, stół z krzesłami i lodówkę Pokoje nie są wyposażone w telewizor, ale mają dostęp do Wi-Fi Łazienka i kuchnia są wspólne dla wszystkich pokoi na piętrze Łazienka ma okna, w kuchni kilka kuchenek elektrycznych i mikrofalówek Klient zobowiązuje się do wyposażenia kuchni w określoną liczbę naczyń, garnków, czajników, ale ze względu na ich ograniczona liczba Zaleca się przywiezienie własnych. Hotel posiada pralkę i suszarkę dla personelu. Jeśli pokój wymaga odmalowania lub wymiany…",
 "ru": "Жилье находится примерно в 38 км от места работы. Жилье предоставляется в виде двухместного номера Номера закрываются на ключ и оборудованы односпальными кроватями, шкафами, столом со стульями и холодильником Номера не оборудованы телевизором, но имеют доступ к Wi-Fi Ванная комната и кухня общие для всех номеров электрических плит и микроволновок Клиент обязуется оборудовать кухню определенным количеством посуды, кастрюль, чайников, но из-за их ограниченного количества В гостинице для персонала есть стиральная машина и сушилка Если номер необходимо перекрасить или заменить…"
 },
+"Надається транспорт роботодавця з: Brzeg, Jelcz-Laskowice, Namysłów, Oława, Przeworno, Strzelin (Бжег, Єльч-Лясковіце, Намислув, Олава, Пжеворно, Стжелін)": {
+"en": "Employer transport is provided from: Brzeg, Jelcz-Laskowice, Namysłów, Oława, Przeworno, Strzelin",
+"pl": "Transport pracodawcy zapewniamy z: Brzegu, Jelcza-Laskowic, Namysłowa, Oławy, Przeworna, Strzelina",
+"ru": "Предоставляется транспорт работодателя из: Brzeg, Jelcz-Laskowice, Namysłów, Oława, Przeworno, Strzelin (Бжег, Ельч-Лясковице, Намыслов, Олава, Пжеворно, Стжелин)"
+},
 "Надається транспорт роботодавця з: Brzeg, Jelcz-Laskowice, Namysłów, Oława, Przeworno,…": {
 "en": "The employer's transport is provided from: Brzeg, Jelcz-Laskowice, Namysłów, Oława, Przeworno,…",
 "pl": "Transport pracodawcy zapewniamy z: Brzegu, Jelcza-Laskowic, Namysłowa, Oławy, Przeworna,…",
@@ -3219,6 +3364,11 @@
 "pl": "Konserwacja maszyn produkcyjnych, regulacja urządzeń zgodnie z dokumentacją i zamówieniami, kontrola procesu produkcyjnego, drobne korekty techniczne, kontrola jakości wyrobów i opakowań.",
 "ru": "Обслуживание производственных машин, настройка оборудования в соответствии с документацией и заказами, контроль производственного процесса, мелкие технические настройки, контроль качества продукции и упаковка."
 },
+"Обслуговування виробничої лінії та панелі управління": {
+"en": "Maintenance of production line and control panel",
+"pl": "Konserwacja linii produkcyjnej i panelu sterowania",
+"ru": "Обслуживание производственной линии и панели управления"
+},
 "Обслуговування прядильних верстатів, очищення обладнання, зміна виробничих партій, контроль продукції на наступних етапах виробництва та підтримання порядку на робочому місці.": {
 "en": "Maintenance of spinning machines, cleaning of equipment, change of production batches, control of products at the next stages of production and maintenance of order in the workplace.",
 "pl": "Konserwacja maszyn przędzalniczych, czyszczenie urządzeń, zmiana partii produkcyjnych, kontrola produktów na kolejnych etapach produkcji oraz utrzymanie porządku na stanowisku pracy.",
@@ -3314,6 +3464,11 @@
 "pl": "Jeden z liderów polskiego rynku przetworów śledziowych, sałatek i past kanapkowych.",
 "ru": "Один из лидеров польского рынка селедочных продуктов, салатов и бутербродных паст."
 },
+"Один із лідерів польського ринку оселедцевих продуктів, салатів і паст; входить до концерну UTM.": {
+"en": "One of the leaders of the Polish market of herring products, salads and pastes; is part of the UTM concern.",
+"pl": "Jeden z liderów polskiego rynku przetworów śledziowych, sałatek i past; jest częścią koncernu UTM.",
+"ru": "Один из лидеров польского рынка селедочных продуктов, салатов и паст; входит в концерн UTM."
+},
 "Один із найбільших виробників автомобільних деталей у світі; завод у Валбжиху виготовляє металеві рами сидінь.": {
 "en": "One of the largest manufacturers of automotive parts in the world; the Walbrzych plant produces metal seat frames.",
 "pl": "Jeden z największych producentów części samochodowych na świecie; zakład w Wałbrzychu produkuje metalowe ramy siedzeń.",
@@ -3399,6 +3554,11 @@
 "pl": "Operator maszyn do produkcji wyrobów z tworzyw sztucznych",
 "ru": "Оператор машины по производству пластиковых изделий"
 },
+"Оператор монтажу": {
+"en": "Installation operator",
+"pl": "Operator instalacji",
+"ru": "Оператор монтажа"
+},
 "Оператор навантажувача": {
 "en": "Forklift operator",
 "pl": "Operator wózka widłowego",
@@ -3454,6 +3614,11 @@
 "pl": "Organizowane przez pracodawcę (autobusy ze Strykowa, Łodzi, Głównej, Zgrzyża).",
 "ru": "Организован работодателем (автобусы из Стрыкова, Лодзи, Гловна, Згежа)."
 },
+"Організований роботодавцем, вартість — 200 PLN на місяць. До автобусної зупинки потрібно добиратися пішки або громадським транспортом.": {
+"en": "Organized by the employer, the cost is PLN 200 per month. You need to get to the bus stop on foot or by public transport.",
+"pl": "Organizowane przez pracodawcę koszt wynosi 200 zł miesięcznie. Na przystanek autobusowy trzeba dojść pieszo lub komunikacją miejską.",
+"ru": "Организованный работодателем, стоимость – 200 PLN в месяц. До автобусной остановки нужно добираться пешком или общественным транспортом."
+},
 "Організований роботодавцем, вартість — 200 PLN на місяць. До автобусної зупинки потрібно…": {
 "en": "Organized by the employer, the cost is PLN 200 per month. To the bus stop you need…",
 "pl": "Organizowane przez pracodawcę koszt wynosi 200 zł miesięcznie. Na przystanek autobusowy trzeba…",
@@ -3494,6 +3659,11 @@
 "pl": "Najważniejsze z nich to kompletacja (kompletacja) zamówień na paletach, układanie towaru na regałach magazynowych i uzupełnianie miejsc magazynowych, utrzymanie bieżących procesów magazynowych...",
 "ru": "Основные, Комплектация (пикинг) заказов на паллеты, Размещение товара на складских стеллажах и пополнение мест хранения, Обслуживание текущих складских процессов…"
 },
+"Отримання відправлень Зберігання товарів Збірка замовлень Поповнення виробничих ліній Навантаження та відвантаження Експлуатація складської техніки Підтримка порядку та безпеки на робочому місці": {
+"en": "Receiving shipments Storing goods Picking orders Replenishment of production lines Loading and shipping Operation of warehouse equipment Maintenance of order and safety at the workplace",
+"pl": "Przyjmowanie przesyłek Składowanie towarów Kompletacja zamówień Uzupełnianie linii produkcyjnych Załadunek i wysyłka Obsługa urządzeń magazynowych Utrzymanie porządku i bezpieczeństwa na stanowisku pracy",
+"ru": "Получение отправлений Хранение товаров Сборка заказов Пополнение производственных линий Погрузка и отгрузка Эксплуатация складской техники Поддержка порядка и безопасности на рабочем месте"
+},
 "ПН-СБ 2 зміни по 12 годин. (є можливість працювати по 8-10), 6:00-18:00, 18:00-6:00": {
 "en": "Mon-Sat 2 shifts of 12 hours. (there is an opportunity to work 8-10), 6:00-18:00, 18:00-6:00",
 "pl": "Praca od poniedziałku do soboty na 2 zmiany po 12 godzin. (istnieje możliwość pracy w godzinach 8-10), 6:00-18:00, 18:00-6:00",
@@ -3503,6 +3673,11 @@
 "en": "Mon-Sat 2 shifts of 12 hours. (there is an opportunity to work at 8-10), 6:00-18:00...",
 "pl": "Praca od poniedziałku do soboty na 2 zmiany po 12 godzin. (istnieje możliwość pracy w godzinach 8-10), 6:00-18:00...",
 "ru": "ПН-СБ 2 смены по 12 часов. (есть возможность работать по 8-10), 6:00-18:00…"
+},
+"Пакувальник печива в кондитерській": {
+"en": "Cookie packer in a pastry shop",
+"pl": "Pakowacz ciasteczek w cukierni",
+"ru": "Упаковщик печенья в кондитерской"
 },
 "Пакування дюбелів, Підготовка до відправлення, Складання коробок з дюбелями на палети, Візуальний контроль якості": {
 "en": "Packing of dowels, Preparing for shipment, Stacking boxes with dowels on pallets, Visual quality control",
@@ -3533,6 +3708,11 @@
 "en": "Palletizer for the production of plastic products",
 "pl": "Paletyzator do produkcji wyrobów z tworzyw sztucznych",
 "ru": "Паллетовщик на производство пластиковых изделий"
+},
+"Пекарня, що виробляє хлібобулочні та кондитерські вироби.": {
+"en": "A bakery that produces bakery and confectionery products.",
+"pl": "Piekarnia zajmująca się produkcją wyrobów piekarniczych i cukierniczych.",
+"ru": "Пекарня, производящая хлебобулочные и кондитерские изделия."
 },
 "Первинна обробка, опалка, розбір, Сортування і пакування продукції (1 година за зміну), Дотримання чистоти на робочому місці, Кожен працівник працює на своєму процесі": {
 "en": "Primary processing, burning, disassembly, Sorting and packaging of products (1 hour per shift), Maintaining cleanliness in the workplace, Each employee works on his own process",
@@ -3639,10 +3819,20 @@
 "pl": "Płatny",
 "ru": "Платное"
 },
+"Платне – 500 PLN": {
+"en": "Paid - PLN 500",
+"pl": "Płatne - 500 zł",
+"ru": "Платное – 500 PLN"
+},
 "Платний транспорт від компанії, зупинка поруч з хостелом. Час у дорозі ~20 хвилин.": {
 "en": "Paid transport from the company, stop next to the hostel. Travel time ~20 minutes.",
 "pl": "Płatny transport z firmy, przystanek obok hostelu. Czas podróży ~20 minut.",
 "ru": "Платный транспорт от компании, остановка рядом с хостелом. Время в пути ~20 минут."
+},
+"Платного харчування немає. Облаштована їдальня з холодильником, мікрохвильовою піччю та кавоваркою. Можна приносити їжу із собою та розігрівати її. Працівники можуть безкоштовно брати певні види продукції безпосередньо з виробництва та споживати їх в їдальні.": {
+"en": "There is no paid meal. Equipped dining room with refrigerator, microwave oven and coffee maker. You can bring food with you and heat it up. Employees can take certain types of products directly from production and consume them in the canteen free of charge.",
+"pl": "Nie ma płatnego posiłku. Wyposażona jadalnia z lodówką, kuchenką mikrofalową i ekspresem do kawy. Można zabrać ze sobą jedzenie i podgrzać je. Pracownicy mogą pobrać określone rodzaje produktów bezpośrednio z produkcji i bezpłatnie spożyć je w stołówce.",
+"ru": "Платного питания нет. Оборудована столовая с холодильником, микроволновкой и кофеваркой. Можно приносить с собой еду и разогревать ее. Работники могут бесплатно брать определенные виды продукции непосредственно с производства и потреблять их в столовой."
 },
 "Пн - Пт, позмінно, 10-12 годин, Субота – за бажанням, Є можливість брати додаткові години за погодженням із бригадиром, Перерва: 15-20 хв при 8-годинному графіку, 1 зміна: з 6:00, 2 зміна: з 14:00, 3 зміна: з 22:00": {
 "en": "Mon - Fri, alternately, 10-12 hours, Saturday - on request, It is possible to take additional hours upon agreement with the foreman, Break: 15-20 min in an 8-hour schedule, 1st shift: from 6:00 a.m., 2nd shift: from 2:00 p.m., 3rd shift: from 10:00 p.m.",
@@ -4214,6 +4404,11 @@
 "pl": "Polski producent lodów i sorbetów bazujący na rodzinnych przepisach, założony w 2004 roku, posiadający sieć ogólnopolską.",
 "ru": "Польский производитель мороженого и сорбетов по семейным рецептам, основанный в 2004 году, с сетью по всей стране."
 },
+"Польський виробник солодощів, відомий насамперед шоколадними праліне.": {
+"en": "Polish manufacturer of sweets, known primarily for chocolate pralines.",
+"pl": "Polski producent słodyczy, znany przede wszystkim z pralin czekoladowych.",
+"ru": "Польский производитель сладостей, известный прежде всего шоколадным пралине."
+},
 "Польський виробник шкіргалантереї: сумок, валіз, взуття та аксесуарів.": {
 "en": "Polish manufacturer of leather goods: bags, suitcases, shoes and accessories.",
 "pl": "Polski producent galanterii skórzanej: toreb, walizek, obuwia i akcesoriów.",
@@ -4289,6 +4484,11 @@
 "pl": "Certyfikat UDT WJO II. Znajomość języka polskiego. Umiejętność obsługi wózków widłowych. Doświadczenie w pracy w przedsiębiorstwie produkcyjnym będzie dodatkowym atutem.",
 "ru": "Сертификат UDT WJO II. Знание польского языка. Умение работать на погрузчиках. Опыт работы на производственном предприятии будет преимуществом."
 },
+"Посвідчення UDT на керування навантажувачем Знання польської мови на рівні розуміння інструкцій Навички роботи зі складським сканером Базові навички роботи з комп'ютером Вміння працювати зі складською документацією Дотримання процедур та інструкцій Бажано: Досвід роботи на висотному складі Знання складських систем WMS/ERP Навички роботи з принтерами та складськими вагами Знання MS Excel Досвід роботи на вантажних доках": {
+"en": "UDT license to drive a forklift. Knowledge of the Polish language at the level of understanding the instructions. Skills in working with a warehouse scanner. Basic computer skills. Ability to work with warehouse documentation. Adherence to procedures and instructions.",
+"pl": "Uprawnienia UDT na kierowanie wózkiem widłowym. Znajomość języka polskiego na poziomie zrozumienia instrukcji. Umiejętność pracy ze skanerem magazynowym. Podstawowe umiejętności obsługi komputera. Umiejętność pracy z dokumentacją magazynową. Przestrzeganie procedur i instrukcji.",
+"ru": "Удостоверение UDT на управление погрузчиком Знание польского языка на уровне понимания инструкций Навыки работы со складским сканером Базовые навыки работы с компьютером Умение работать со складской документацией Соблюдение процедур и инструкций Желательно: Опыт работы на высотном составе Знание складских систем WMS/ERP Навыки работы с принтерами грузовых доках"
+},
 "Посвідчення UDT на керування навантажувачем Знання польської мови на рівні розуміння інструкцій Навички роботи зі складським сканером Базові навички…": {
 "en": "UDT license to drive a forklift. Knowledge of the Polish language at the level of understanding the instructions. Skills in working with a warehouse scanner. Basic skills...",
 "pl": "Uprawnienia UDT na kierowanie wózkiem widłowym. Znajomość języka polskiego na poziomie zrozumienia instrukcji. Umiejętność pracy ze skanerem magazynowym. Podstawowe umiejętności...",
@@ -4308,6 +4508,11 @@
 "en": "Supplier of electrical equipment and wiring harnesses for leading commercial vehicle brands.",
 "pl": "Dostawca sprzętu elektrycznego i wiązek elektrycznych dla wiodących marek pojazdów użytkowych.",
 "ru": "Поставщик электрооборудования и жгутов проводов для ведущих брендов коммерческих автомобилей."
+},
+"Постачальник логістичних послуг; склад косметики й парфумерії з комплектацією онлайн-замовлень.": {
+"en": "Provider of logistics services; cosmetics and perfumery warehouse with online order fulfillment.",
+"pl": "Dostawca usług logistycznych; hurtownia kosmetyków i perfum z możliwością realizacji zamówień online.",
+"ru": "Поставщик логистических услуг; состав косметики и парфюмерии с комплектацией онлайн заказов."
 },
 "Потрібно фарбувати деталі за допомогою пістолета відповідно до стандартів заводу (порошкове фарбування), Змішувати фарби в необхідних пропорціях, Наносити шари фарби на готову продукцію за допомогою розпилювача": {
 "en": "It is necessary to paint parts using a gun in accordance with factory standards (powder coating), Mix paints in the necessary proportions, Apply layers of paint to finished products using a sprayer",
@@ -4354,6 +4559,11 @@
 "pl": "Pracując na magazynie Fresh, pracownik będzie zajmował się montażem produktów dla supermarketu Auchan.",
 "ru": "Работая на складе Fresh, работник будет заниматься комплектацией товара для супермаркета Auchan."
 },
+"Праця на виробництві пластикових компонентів": {
+"en": "Work in the production of plastic components",
+"pl": "Praca przy produkcji elementów z tworzyw sztucznych",
+"ru": "Работа на производстве пластиковых компонентов"
+},
 "Працівник виробництва хлібобулочних виробів": {
 "en": "A worker in the production of bakery products",
 "pl": "Pracownik przy produkcji wyrobów piekarniczych",
@@ -4363,6 +4573,11 @@
 "en": "An employee of a production workshop",
 "pl": "Pracownik warsztatu produkcyjnego",
 "ru": "Работник производственного цеха"
+},
+"Працівник виробничої лінії": {
+"en": "Production line worker",
+"pl": "Pracownik linii produkcyjnej",
+"ru": "Работник производственной линии"
 },
 "Працівник добирається самостійно.": {
 "en": "The employee gets there independently.",
@@ -4589,6 +4804,11 @@
 "pl": "Pracownicy mieszkający w kwaterach zapewnianych przez agencję piechotą do pracy…",
 "ru": "Работники, проживающие в помещениях, предоставленных агентством, добираются на работу пешком…"
 },
+"Премія до 6% на місяць Доплата за проїзд (для осіб, які проживають за межами Лодзі) Надгодини: +50% або +100% відповідно до законодавства Доплата за нічні зміни згідно із законодавством": {
+"en": "Bonus up to 6% per month Travel allowance (for people living outside Łódź) Overtime: +50% or +100% according to the law Night shift supplement according to the law",
+"pl": "Premia do 6% miesięcznie Dieta dojazdowa (dla osób mieszkających poza Łodzią) Nadgodziny: +50% lub +100% zgodnie z prawem Dodatek za pracę nocną zgodnie z prawem",
+"ru": "Премия до 6% в месяц Доплата за проезд (для лиц, проживающих за пределами Лодзи) Сроки: +50% или +100% в соответствии с законодательством Доплата за ночные изменения в соответствии с законодательством"
+},
 "Премія за відвідуваність: додатково 2,40 PLN брутто/год за умови відпрацювання щонайменше 200 годин на місяць; Сезонна премія: додатково 1,50 PLN брутто/год (попередньо діє до кінця грудня 2026 року). Загальна сума надбавок — 3,90 PLN брутто/год за виконання умов.": {
 "en": "Attendance bonus: additional PLN 2.40 gross/hour, subject to working at least 200 hours per month; Season premium: additional PLN 1.50 gross/hour (provisionally valid until the end of December 2026). The total amount of allowances is PLN 3.90 gross/hour for fulfilling the conditions.",
 "pl": "Premia za frekwencję: dodatkowo 2,40 zł brutto/godz., pod warunkiem przepracowania co najmniej 200 godzin miesięcznie; Premia sezonowa: dodatkowo 1,50 zł brutto/godz. (obowiązuje tymczasowo do końca grudnia 2026 r.). Łączna wysokość świadczeń za spełnienie warunków wynosi 3,90 zł brutto/godz.",
@@ -4684,15 +4904,30 @@
 "pl": "Przymocuj małe części do okna za pomocą śrubokręta, Zamontuj okna z podwójnymi szybami, Zamontuj elementy złączne, zamki, materiał uszczelniający, Zapakuj profile i gotowe okna z podwójnymi szybami...",
 "ru": "Прикреплять шуруповертом мелкие детали к окну, Собирать стеклопакеты, Устанавливать крепеж, замки, уплотняющий материал, Упаковывать профили и готовые стеклопакеты."
 },
+"Провідний бренд м’ясної галузі Польщі із сертифікатами якості IFS, BRC та ISO 14001.": {
+"en": "The leading brand of the Polish meat industry with IFS, BRC and ISO 14001 quality certificates.",
+"pl": "Wiodąca marka polskiej branży mięsnej posiadająca certyfikaty jakości IFS, BRC i ISO 14001.",
+"ru": "Ведущий бренд мясной отрасли Польши с сертификатами IFS, BRC и ISO 14001."
+},
 "Провідний логістичний оператор, що обслуговує відомі бренди та мережі магазинів.": {
 "en": "A leading logistics operator serving well-known brands and store chains.",
 "pl": "Wiodący operator logistyczny obsługujący znane marki i sieci sklepów.",
 "ru": "Ведущий логистический оператор, обслуживающий известные бренды и сети магазинов."
 },
+"Провідний польський виробник пластикових товарів для дому й саду, понад 700 працівників.": {
+"en": "The leading Polish manufacturer of plastic products for home and garden, more than 700 employees.",
+"pl": "Wiodący polski producent wyrobów z tworzyw sztucznych dla domu i ogrodu, zatrudniający ponad 700 pracowników.",
+"ru": "Ведущий польский производитель пластиковых товаров для дома и сада, более 700 человек."
+},
 "Провідний постачальник логістичних послуг; склад косметики й парфумерії з комплектацією онлайн-замовлень.": {
 "en": "A leading provider of logistics services; cosmetics and perfumery warehouse with online order fulfillment.",
 "pl": "Wiodący dostawca usług logistycznych; hurtownia kosmetyków i perfum z możliwością realizacji zamówień online.",
 "ru": "ведущий поставщик логистических услуг; состав косметики и парфюмерии с комплектацией онлайн заказов."
+},
+"Продуктовий склад, з якого товари потрапляють на полиці магазинів.": {
+"en": "A product warehouse from which goods are placed on store shelves.",
+"pl": "Magazyn produktów, z którego towary umieszczane są na półkach sklepowych.",
+"ru": "Продуктовый склад, из которого товары попадают на полки магазинов."
 },
 "Продукція, Перевіряти зовнішній вигляд і цілісність продукції перед пакуванням, Упаковувати продукцію відповідно до технологічних стандартів, Забезпечувати правильне маркування продукції, Контроль якості, Контролювати якість і видаляти дефекти, Склад, Готові коробки складають у фури на відправку, Філетування, Відділення курячого філе від кісток за допомогою ножа. Робота виконується вручну на виробничій лінії, Зважування, Контроль зважування включає перевірку ваги курячих тушок або упаковок на відповідність заданим нормам. Працівник розміщує продукцію на вагах, звіряє показники з допустимими стандартами та відбраковує товар з недостатньою або надмірною вагою, Оператор лінії, Контроль роботи виробничого конвеєра, слідкує за правильною подачею продукції та безперебійною роботою обладнання, Мийка, Мийка обладнання, конвеєрів, робочих столів і контейнерів із використанням спеціальних мийних засобів.Починають з 5-ї вечора на продукції, пізніше — з 10-11 вечора переходять на мийку, Прибирання, Прибирання роздягалень, виробничих приміщень після зміни (цехи, лінії обробки, пакування тощо), а також допомога на кухні — видача їжі, Потрошення, Акуратне відділення обмитих внутрішніх частин (печіночка, серце) для подальшої обробки, укладання їх при машині, Підвішування, Підвішування курочки за лапки, курка заспокоєна під дією ультрафіолету. Крові немає": {
 "en": "Products, Check the appearance and integrity of products before packaging, Pack products in accordance with technological standards, Ensure correct labeling of products, Quality control, Control quality and remove defects, Warehouse, Ready boxes are put into trucks for shipment, Filleting, Separation of chicken fillets from bones using a knife. The work is performed manually on the production line, Weighing, Weighing control includes checking the weight of chicken carcasses or packages for compliance with specified standards. The employee places products on scales, compares indicators with acceptable standards and rejects goods with insufficient or excessive weight. Line operator, control of the production conveyor, monitors the correct supply of products and smooth operation of equipment, Washer, washer of equipment, conveyors, work tables and containers using special detergents. They start from 5 in the evening on products, later - from 10-11 in the evening they go to washing, Cleaning, Cleaning changing rooms, production premises after a shift (workshops, processing lines, packaging, etc.), as well as helping in the kitchen - serving food, Eviscerating, Carefully separating the washed internal parts (liver, heart) for further processing, stacking them by the machine, Hanging, Hanging the chicken by its legs, the chicken is calmed under the influence of ultraviolet light. There is no blood",
@@ -4738,6 +4973,11 @@
 "en": "The process of loading: scanning pallets, transporting them with the help of a truck to the truck (movement distance - 4 m). Forming pallets with boxes (maximum weight - 30 kg)...",
 "pl": "Proces załadunku: skanowanie palet, transport za pomocą samochodu ciężarowego na samochód ciężarowy (odległość ruchu - 4 m). Formowanie palet ze skrzyniami (maksymalna waga - 30 kg)...",
 "ru": "Процесс загрузки: сканирование паллет, транспортировка их с помощью рохлы до фуры (расстояние перемещения – 4 м). Формирование паллет коробками (максимальный вес – 30 кг)…"
+},
+"Проїзд громадським транспортом (безкоштовно)": {
+"en": "Travel by public transport (free of charge)",
+"pl": "Podróż komunikacją miejską (bezpłatna)",
+"ru": "Проезд общественным транспортом (бесплатно)"
 },
 "Підвищення ставки можливе після пробного періоду. Пробний період триває 1–3 місяці і залежить від навичок та продуктивності кандидата.": {
 "en": "A rate increase is possible after the trial period. The probationary period lasts 1-3 months and depends on the candidate's skills and performance.",
@@ -5009,6 +5249,11 @@
 "pl": "Praca przy produkcji, przetwórstwie i pakowaniu produktów rybnych.",
 "ru": "Работа на производстве по переработке и упаковке рыбной продукции."
 },
+"Робота на виробництві кондитерських виробів.": {
+"en": "Work in the production of confectionery products.",
+"pl": "Praca przy produkcji wyrobów cukierniczych.",
+"ru": "Работа на производстве кондитерских изделий."
+},
 "Робота на виробництві корпусів для розподільних та керуючих шаф.": {
 "en": "Work on the production of enclosures for distribution and control cabinets.",
 "pl": "Praca przy produkcji obudów do szaf rozdzielczych i sterowniczych.",
@@ -5028,6 +5273,11 @@
 "en": "Work in the production of surimi - crab sticks.",
 "pl": "Praca przy produkcji surimi - paluszków krabowych.",
 "ru": "Работа на производстве сурими – крабовых палочек."
+},
+"Робота на виробництві хлібобулочних і кондитерських виробів.": {
+"en": "Work in the production of bakery and confectionery products.",
+"pl": "Praca przy produkcji wyrobów piekarniczych i cukierniczych.",
+"ru": "Работа на производстве хлебобулочных и кондитерских изделий."
 },
 "Робота на виробництві яхт на посаді електрика передбачає монтаж та встановлення електричних систем.": {
 "en": "Work in yacht production as an electrician involves the assembly and installation of electrical systems.",
@@ -5058,6 +5308,11 @@
 "en": "Work on the bakery production line, Maintenance of production machines and equipment, Quality control of finished products, Preparation of molds for...",
 "pl": "Praca na linii produkcyjnej piekarni, Konserwacja maszyn i urządzeń produkcyjnych, Kontrola jakości wyrobów gotowych, Przygotowanie form do...",
 "ru": "Работа на производственной линии по изготовлению хлебобулочных изделий, Обслуживание производственных машин и оборудования, Контроль качества готовой продукции, Подготовка форм для…"
+},
+"Робота на виробничій лінії згідно зі стандартами Виконання завдань згідно з інструкціями Збірка Контроль якості Робота з технікою у виробничому відділі Досвід у виробництві — обов'язковий": {
+"en": "Work on the production line according to standards Execution of tasks according to instructions Assembly Quality control Work with equipment in the production department Experience in production is a must",
+"pl": "Praca na linii produkcyjnej zgodnie ze standardami Wykonywanie zadań zgodnie z instrukcją Montaż Kontrola jakości Praca na urządzeniach na dziale produkcyjnym Doświadczenie na produkcji – warunek konieczny",
+"ru": "Работа на производственной линии согласно стандартам Выполнение задач согласно инструкциям Сборка Контроль качества Работа с техникой в ​​производственном отделе Опыт в производстве — обязателен"
 },
 "Робота на виробничій лінії рибопереробного підприємства.": {
 "en": "Work on the production line of a fish processing enterprise.",
@@ -5189,6 +5444,11 @@
 "pl": "Praca na magazynie, realizacja zamówień na mięso i rozbiór.",
 "ru": "Работа на складе, выполнение заказов на мясо и вырезку."
 },
+"Робота на складі, пов’язана із сортуванням, розміщенням товарів і підготовкою замовлень до відправлення.": {
+"en": "Work in the warehouse related to sorting, placing goods and preparing orders for shipment.",
+"pl": "Praca na magazynie związana z sortowaniem, układaniem towarów i przygotowywaniem zamówień do wysyłki.",
+"ru": "Работа на складе, связанная с сортировкой, размещением товаров и подготовкой заказов к отправке."
+},
 "Робота на складі, що передбачає завантаження та розвантаження контейнерів відповідно до встановлених стандартів.": {
 "en": "Work in the warehouse, which involves loading and unloading containers in accordance with established standards.",
 "pl": "Praca na magazynie polegająca na załadunku i rozładunku kontenerów zgodnie z ustalonymi standardami.",
@@ -5228,6 +5488,11 @@
 "en": "Work on assembling rubber hoses for cars. Placement of plastic parts on rubber hoses, connection using plastic or metal fittings, rubber parts. Final inspection of finished parts, cleaning. Sitting or standing work.",
 "pl": "Praca przy montażu węży gumowych do samochodów. Umieszczanie części plastikowych na wężach gumowych, łączenie za pomocą złączek plastikowych lub metalowych, części gumowych. Kontrola końcowa gotowych części, czyszczenie. Praca siedząca lub stojąca.",
 "ru": "Работа над сборкой резиновых шлангов для автомобилей. Размещение пластиковых деталей на резиновых шлангах, соединение с помощью пластиковых или металлических фитингов, резиновых деталей. Окончательная проверка готовых деталей, очистка. Сидящая или стоячая работа."
+},
+"Робота полягає в обслуговуванні складу та комплектуванні товарів.": {
+"en": "The work consists in servicing the warehouse and picking goods.",
+"pl": "Praca polega na obsłudze magazynu i kompletacji towaru.",
+"ru": "Работа заключается в обслуживании склада и комплектовании товаров."
 },
 "Робота полягає в підвішуванні птиці на виробничій лінії, забезпечуючи правильну підготовку продукції, а також у виконанні супутніх завдань.": {
 "en": "The work consists in hanging poultry on the production line, ensuring the correct preparation of products, as well as performing related tasks.",
@@ -5489,6 +5754,11 @@
 "pl": "Pracownik magazynu z certyfikatem UDT.",
 "ru": "Складской работник с сертификатом UDT."
 },
+"Складський працівник – комплектування замовлень": {
+"en": "Warehouse worker - picking orders",
+"pl": "Pracownik magazynu - zbieranie zamówień",
+"ru": "Складской работник – комплектование заказов"
+},
 "Складський працівник/експедитор": {
 "en": "Warehouse worker/forwarder",
 "pl": "Pracownik magazynu/spedytor",
@@ -5603,6 +5873,11 @@
 "en": "Soup is free. A full meal (soup + main dish) can be purchased for…",
 "pl": "Zupa jest bezpłatna. Pełny posiłek (zupa + danie główne) można wykupić za…",
 "ru": "Суп бесплатный.Полный обед (суп + основное блюдо) можно приобрести…"
+},
+"Сучасний логістичний склад поблизу Варшави: зберігання, приймання та відправлення товарів.": {
+"en": "A modern logistics warehouse near Warsaw: storage, reception and dispatch of goods.",
+"pl": "Nowoczesny magazyn logistyczny pod Warszawą: magazynowanie, przyjęcie i wysyłka towaru.",
+"ru": "Современный логистический состав вблизи Варшавы: хранение, прием и отправка товаров."
 },
 "Сучасний логістичний центр поблизу Вроцлава, що обробляє та зберігає товари, переважно одяг.": {
 "en": "A modern logistics center near Wroclaw that processes and stores goods, mainly clothing.",
@@ -5789,6 +6064,11 @@
 "pl": "Wytrzymałość fizyczna Odpowiedzialność i zainteresowanie pracą Wysoka kultura zachowania Gotowość do pracy fizycznej",
 "ru": "Физическая выносливость Ответственность и заинтересованность в работе Высокая культура поведения Готовность к физическому труду"
 },
+"Фізична витривалість. Відсутність протипоказань до фізичної праці.": {
+"en": "Physical endurance. No contraindications to physical work.",
+"pl": "Wytrzymałość fizyczna. Brak przeciwwskazań do pracy fizycznej.",
+"ru": "Физическая выносливость. Отсутствие противопоказаний к физическому труду."
+},
 "Фізична працездатність, готовність до змінної роботи, вміння працювати в команді, акуратність, базове знання польської.": {
 "en": "Physical capacity, readiness for shift work, ability to work in a team, accuracy, basic knowledge of Polish.",
 "pl": "Sprawność fizyczna, gotowość do pracy zmianowej, umiejętność pracy w zespole, dokładność, podstawowa znajomość języka polskiego.",
@@ -5819,6 +6099,11 @@
 "pl": "Trening fizyczny.",
 "ru": "Физическая подготовка."
 },
+"Фізичне здоров’я Добра моторика рук Готовність до змінної роботи Акуратність, уважність Базове знання польської мови Досвід роботи на виробництві Вміння працювати в команді": {
+"en": "Physical health Good hand motility Willingness to work in shifts Accuracy, attentiveness Basic knowledge of the Polish language Work experience in production Ability to work in a team",
+"pl": "Stan zdrowia Dobra motoryka rąk Chęć pracy zmianowej Dokładność, sumienność Podstawowa znajomość języka polskiego Doświadczenie w pracy na produkcji Umiejętność pracy w zespole",
+"ru": "Физическое здоровье Добрая моторика рук Готовность к сменной работе Аккуратность, внимательность Базовое знание польского языка Опыт работы на производстве Умение работать в команде"
+},
 "Фізичне здоров’я Добра моторика рук Готовність до змінної роботи Акуратність, уважність Базове знання польської мови Досвід роботи на виробництві…": {
 "en": "Physical health Good hand motility Willingness to work in shifts Accuracy, attentiveness Basic knowledge of the Polish language Work experience in production...",
 "pl": "Stan zdrowia Dobra motoryka rąk Chęć pracy zmianowej Dokładność, sumienność Podstawowa znajomość języka polskiego Doświadczenie w pracy na produkcji...",
@@ -5828,6 +6113,11 @@
 "en": "Physically healthy, ready for shift work, manual skills",
 "pl": "Sprawny fizycznie, gotowy do pracy zmianowej, zdolności manualne",
 "ru": "Физически здоровый, готовность к посменной работе, ручные навыки"
+},
+"Фізично здорові Готові працювати позмінно Вміння працювати в команді Акуратність, готовність вчитися": {
+"en": "Physically healthy Willing to work in shifts Ability to work in a team Neatness, willingness to learn",
+"pl": "Zdrowy fizycznie Chęć pracy zmianowej Umiejętność pracy w zespole Schludność, chęć nauki",
+"ru": "Физически здоровые Готовы работать посменно Умение работать в команде Аккуратность, готовность учиться"
 },
 "Фізично здорові З мануальними здібностями Готові до змінної роботи Здатність працювати в команді Точність, бажання вчитися": {
 "en": "Physically healthy With manual skills Ready for shift work Ability to work in a team Accuracy, desire to learn",
@@ -6009,6 +6299,11 @@
 "pl": "Dobra kondycja fizyczna Zręczność manualna Chęć pracy zmianowej Umiejętność pracy w zespole Dokładność i chęć uczenia się",
 "ru": "Хорошее физическое состояние Ручная ловкость Готовность работать посменно Умение работать в команде Аккуратность и желание учиться"
 },
+"Хороший фізичний стан Ручна спритність Готовність працювати позмінно Уміння працювати в команді Акуратність і бажання навчатися Умови роботи: Температура приміщення Значних фізичних навантажень немає Робота переважно стоячи або в русі Шкідливі фактори відсутні Можливий легкий запах повернених товарів Необхідно дотримуватися норми 90 одиниць на годину За потреби можливі понаднормові години Дотримання правил охорони праці обов’язкове Важливо: На склад заборонено приносити предмети в кишенях, зокрема телефони та сигарети. Заборонено носити прикраси й ювелірні вироби.": {
+"en": "Good physical condition Manual dexterity Willingness to work in shifts Ability to work in a team Neatness and willingness to learn Working conditions: Room temperature No significant physical exertion Work is mostly standing or in motion No harmful factors Possible slight smell of returned goods Must comply with the norm of 90 units per hour Overtime is possible If necessary Compliance with labor safety rules is mandatory Important: It is forbidden to bring objects in the warehouse, in particular phones and cigarettes. It is forbidden to wear ornaments and jewelry.",
+"pl": "Dobra kondycja fizyczna Sprawność manualna Chęć pracy w systemie zmianowym Umiejętność pracy w zespole Schludność i chęć nauki Warunki pracy: Temperatura pokojowa Brak dużego wysiłku fizycznego Praca w większości na stojąco lub w ruchu Brak czynników szkodliwych Możliwy delikatny zapach zwracanego towaru Musi spełniać normę 90 jednostek na godzinę W razie potrzeby możliwe są nadgodziny Obowiązkowe przestrzeganie zasad bezpieczeństwa pracy Ważne: Zabrania się wnoszenia na magazyn przedmiotów, w szczególności telefonów i papierosów. Zabrania się noszenia ozdób i biżuterii.",
+"ru": "Хорошее физическое состояние Ручная ловкость Готовность работать посменно Умение работать в команде Аккуратность и желание учиться Условия работы: Температура помещения Значительных физических нагрузок нет Работа преимущественно стоя или в движении Вредные факторы отсутствуют Возможен легкий запах возвращенных товаров Необходимо соблюдать норму 90 единиц в час При необходимости обязательно Важно: На склад запрещено приносить предметы в карманах, в том числе телефоны и сигареты. Запрещено носить украшения и ювелирные изделия."
+},
 "Хороші мануальні навички, Можна без досвіду та знання мови, Фізична витривалість (люди ходять до 20 тис. кроків за зміну)": {
 "en": "Good manual skills, It is possible without experience and knowledge of the language, Physical endurance (people walk up to 20 thousand steps per shift)",
 "pl": "Dobre zdolności manualne, Da się to zrobić bez doświadczenia i znajomości języka, Wytrzymałość fizyczna (ludzie pokonują do 20 tys. kroków na zmianę)",
@@ -6183,6 +6478,11 @@
 "en": "vending machines with drinks and fast food.",
 "pl": "automaty z napojami i fast foodami.",
 "ru": "автоматы с напитками и фастфудом."
+},
+"актуальна санітарна книжка (Sanepid); готовність до позмінної роботи; готовність працювати стоячи; відповідальність; готовність до довгострокової роботи; сезонна робота.": {
+"en": "current sanitary book (Sanepid); readiness for shift work; willingness to work standing; responsibility; readiness for long-term work; seasonal work",
+"pl": "aktualna książeczka sanitarna (Sanepid); gotowość do pracy zmianowej; gotowość do pracy na stojąco; odpowiedzialność; gotowość do długotrwałej pracy; praca sezonowa",
+"ru": "актуальная санитарная книга (Sanepid); готовность к посменной работе; готовность работать стоя; ответственность; готовность к долгосрочной работе; сезонная работа."
 },
 "актуальні аналізи Sanepid; готовність до позмінної роботи; готовність працювати стоячи; відповідальність; бажання працювати довгостроково; фізична витривалість.": {
 "en": "current Sanepid analyses; readiness for shift work; willingness to work standing; responsibility; desire to work long-term; physical endurance.",
@@ -6369,6 +6669,11 @@
 "pl": "komunikacja miejska 20–60 min czas dojazdu: 168 zł/miesiąc",
 "ru": "общественный транспорт 20–60 мин проездной: 168 PLN/месяц"
 },
+"громадський транспорт за власний рахунок": {
+"en": "public transport at own expense",
+"pl": "transport publiczny na własny koszt",
+"ru": "общественный транспорт за свой счет"
+},
 "громадський транспорт.": {
 "en": "public transport.",
 "pl": "transport publiczny.",
@@ -6464,6 +6769,11 @@
 "pl": "na własny koszt. Na terenie przedsiębiorstwa dostępne są automaty z kawą, herbatą i słodkimi przekąskami. Darmowa woda pitna. W jadalni znajdują się szafki na osobiste naczynia i żywność, czajnik, kuchenka mikrofalowa, lodówka, stoły i krzesła.",
 "ru": "за свой счет. На предприятии доступны автоматы с кофе, чаем и сладкими закусками. Бесплатная питьевая вода. В столовой есть шкафчики для личной посуды и еды, чайник, микроволновка, холодильник, столы и стулья."
 },
+"за свій рахунок": {
+"en": "at your own expense",
+"pl": "na własny koszt",
+"ru": "за свой счет"
+},
 "забезпечено; Вартість — 400 PLN.": {
 "en": "provided; The price is PLN 400.",
 "pl": "pod warunkiem, że; Cena 400 zł.",
@@ -6544,6 +6854,16 @@
 "pl": "komfortowy hostel, pokoje 2-3 osobowe są w pełni wyposażone",
 "ru": "комфортный хостел комнаты на 2–3 человека полностью оборудованы."
 },
+"кімнати для 2-4 осіб": {
+"en": "rooms for 2-4 people",
+"pl": "pokoje dla 2-4 osób",
+"ru": "комнаты для 2-4 человек"
+},
+"кімнати на 3–4 особи; стандартні ліжка; ковдри, подушки та постільна білизна надаються; безкоштовні пральні машини; безкоштовний Wi-Fi.": {
+"en": "rooms for 3-4 people; standard beds; blankets, pillows and bed linen are provided; free washing machines; free Wi-Fi.",
+"pl": "pokoje dla 3-4 osób; standardowe łóżka; zapewnione są koce, poduszki i pościel; bezpłatne pralki; darmowe Wi-Fi.",
+"ru": "комнаты на 3-4 человека; стандартные кровати; одеяла, подушки и постельное белье; бесплатные стиральные машины; бесплатный Wi-Fi."
+},
 "кімнати на 4 особи; стандартні ліжка; постільна білизна надається; безкоштовні пральні машини; безкоштовний Wi-Fi.": {
 "en": "rooms for 4 people; standard beds; bed linen is provided; free washing machines; free Wi-Fi.",
 "pl": "pokoje dla 4 osób; standardowe łóżka; pościel jest zapewniona; bezpłatne pralki; darmowe Wi-Fi.",
@@ -6558,6 +6878,11 @@
 "en": "rooms for 2–5 people in hostels/houses/apartments (Strykiv, Lodz, Główno) bedding, showers, toilets, equipped kitchens washing machines (free) Wi-Fi (free) shops up to 1 km",
 "pl": "pokoje 2–5 osobowe w hostelach/domach/apartamentach (Stryków, Łódź, Główno) pościel, prysznice, toalety, wyposażona kuchnia, pralki (bezpłatne) Wi-Fi (bezpłatne) sklepy do 1 km",
 "ru": "комнаты по 2–5 человек в хостелах/домах/квартирах (Стрыков, Лодзь, Гловно) постель, душевые, туалеты, оборудованные кухни стиральные машины (бесплатно) Wi-Fi (бесплатно) магазины до 1 км"
+},
+"мануальні навички хороший зір готовність працювати в положенні стоячи досвід роботи на виробничих лініях": {
+"en": "manual skills, good eyesight, willingness to work in a standing position, experience working on production lines",
+"pl": "zdolności manualne, dobry wzrok, chęć pracy w pozycji stojącej, doświadczenie w pracy na liniach produkcyjnych",
+"ru": "мануальные навыки хорошее зрение готовность работать в положении стоя опыт работы на производственных линиях"
 },
 "мануальні навички хороший зір робота стоячи досвід роботи на виробничих лініях": {
 "en": "manual skills, good vision, work while standing, experience working on production lines",
@@ -6929,6 +7254,11 @@
 "pl": "skanowanie wózkiem elektrycznym (skaner z językiem polskim)…",
 "ru": "с помощью электрического погрузчика сканирования (сканер с польским языком)…"
 },
+"ування матеріалів та компонентів Обслуговування висотного складу Комплектування матеріалів для виробництва Робота зі складським терміналом та сканером Кількісний та якісний контроль матеріалів Ведення складської документації Участь в інвентаризації Підтримання порядку та безпеки на складі": {
+"en": "handling of materials and components. Maintenance of high-rise warehouse. Selection of materials for production. Work with warehouse terminal and scanner. Quantitative and quality control of materials. Maintenance of warehouse documentation. Participation in inventory.",
+"pl": "postępowanie z materiałami i komponentami. Utrzymanie wysokiego magazynu. Dobór materiałów do produkcji. Praca z terminalem magazynowym i skanerem. Kontrola ilościowa i jakościowa materiałów. Prowadzenie dokumentacji magazynowej. Udział w inwentaryzacji.",
+"ru": "ведение материалов и компонентов Обслуживание высотного состава Комплектование материалов для производства Работа со складским терминалом и сканером Количественный и качественный контроль материалов Ведение складской документации Участие в инвентаризации Поддержание порядка и безопасности на складе"
+},
 "ування матеріалів та компонентів Обслуговування висотного складу Комплектування…": {
 "en": "handling of materials and components Maintenance of high-altitude warehouse Picking...",
 "pl": "obsługa materiałów i komponentów Utrzymanie magazynu na dużej wysokości Kompletacja...",
@@ -7059,6 +7389,11 @@
 "pl": "dobra kondycja fizyczna; dobry wzrok; co najmniej 6 miesięcy doświadczenia w pracy przy maszynach; praktyczne umiejętności naprawy i pracy z narzędziami; chęć rozwoju i zdobywania wiedzy technicznej. Pożądane: wykształcenie SEP w zakresie elektryki; świadectwo obsługi suwnic pomostowych; podstawowa wiedza z zakresu mechaniki przemysłowej.",
 "ru": "хорошая физическая форма; хорошее зрение; минимум 6 месяцев опыта работы со станками; практические навыки ремонта и работы с инструментами; желание развиваться и получать технические знания. Предпочтительно: квалификация SEP в сфере электроэнергетики; удостоверение на эксплуатацию мостовых кранов; базовые знания промышленной механики"
 },
+"хороша фізична форма; хороший зір; мінімум 6 місяців досвіду роботи з верстатами; практичні навички ремонту та роботи з інструментами; бажання розвиватися та здобувати технічні знання. Бажано: кваліфікація SEP у сфері електроенергетики; посвідчення на експлуатацію мостових кранів; базові знання промислової механіки. Адреса: 94-104 Łódź, Laskowicka 12": {
+"en": "good physical shape; good eyesight; at least 6 months of experience working with machines; practical skills of repair and working with tools; desire to develop and acquire technical knowledge. Desirable: SEP qualification in the field of electricity; certificate for the operation of bridge cranes; basic knowledge of industrial mechanics. Address: 94-104 Łódź, Laskowicka 12",
+"pl": "dobra kondycja fizyczna; dobry wzrok; co najmniej 6 miesięcy doświadczenia w pracy przy maszynach; praktyczne umiejętności naprawy i pracy z narzędziami; chęć rozwoju i zdobywania wiedzy technicznej. Pożądane: wykształcenie SEP w zakresie elektryki; świadectwo obsługi suwnic pomostowych; podstawowa wiedza z zakresu mechaniki przemysłowej. Adres: 94-104 Łódź, Laskowicka 12",
+"ru": "хорошая физическая форма; хорошее зрение; минимум 6 месяцев опыта работы со станками; практические навыки ремонта и работы с инструментами; желание развиваться и получать технические знания. Предпочтительно: квалификация SEP в сфере электроэнергетики; удостоверение на эксплуатацию мостовых кранов; базовые знания промышленной механики Адрес: 94-104 Łódź, Laskowicka 12"
+},
 "хороший зір мануальні навички хороша фізична форма": {
 "en": "good eyesight manual skills good physical shape",
 "pl": "dobry wzrok zdolności manualne dobra kondycja fizyczna",
@@ -7071,6 +7406,11 @@
 },
 "хороший зір хороша фізична форма готовність працювати в холоді": {
 "ru": "хорошее зрение хорошая физическая форма готовность работать в холоде"
+},
+"хороший зір і спритність рук готовність до тривалого перебування на роботі потрібен мінімальний зріст 168-170 см мінімальне знання польської мови": {
+"en": "good eyesight and manual dexterity readiness for a long stay at work a minimum height of 168-170 cm is required a minimum knowledge of the Polish language",
+"pl": "dobry wzrok i sprawność manualna gotowość do długotrwałej pracy wymagany wzrost min 168-170 cm minimalna znajomość języka polskiego",
+"ru": "хорошее зрение и ловкость рук готовность к длительному пребыванию на работе требуется минимальный рост 168-170 см минимальное знание польского языка"
 },
 "хороший зір, вміння розпізнавати кольори; мануальні здібності; фізична підготовленість (особливо для чоловіків); готовність до змінної роботи; здатність працювати в команді; уважність, бажання вчитися. Для початку роботи необхідно мати активний банківський рахунок і номер PESEL. За їх відсутності — оформити на місці з допомогою координатора.": {
 "en": "good eyesight, the ability to recognize colors; manual abilities; physical fitness (especially for men); readiness for shift work; ability to work in a team; attentiveness, desire to learn. To start work, you must have an active bank account and a PESEL number. If they are not available, arrange it on the spot with the help of the coordinator.",
@@ -7107,6 +7447,11 @@
 "pl": "W ciągu dnia przysługują dwie płatne przerwy: 15 minut na lunch 15 minut dodatkowej przerwy Dodatkowe koszty: Inspekcja sanitarna: 150 zł",
 "ru": "есть Два оплачиваемых перерыва в течение дня: 15 минут на обед 15 минут дополнительного перерыва Дополнительное содержание: Санитарный осмотр: 150 PLN"
 },
+"є Перерва: 45 хвилин Додаткові утримання:": {
+"en": "There is a break: 45 minutes. Additional deductions:",
+"pl": "Jest przerwa: 45 minut. Dodatkowe odliczenia:",
+"ru": "есть Перерыв: 45 минут Дополнительное содержание:"
+},
 "є Протягом 12-годинної зміни передбачено 2 перерви Додаткові утримання:": {
 "en": "yes During a 12-hour shift, 2 breaks are provided Additional deductions:",
 "pl": "tak Podczas 12-godzinnej zmiany przysługują 2 przerwy Dodatkowe potrącenia:",
@@ -7121,6 +7466,11 @@
 "en": "there is a dining room with a buffet, there are microwaves, kettles, vending machines with food",
 "pl": "jest jadalnia z bufetem, są kuchenki mikrofalowe, czajniki, automaty z jedzeniem",
 "ru": "есть столовая с буфетом есть микроволновки, чайники, автоматы с едой"
+},
+"їдальня (купівля їжі або мікрохвильовка)": {
+"en": "dining room (buy food or microwave)",
+"pl": "jadalnia (kup jedzenie lub kuchenkę mikrofalową)",
+"ru": "столовая (покупка пищи или микроволновка)"
 },
 "їжу потрібно брати із собою є їдальня холодильник, мікрохвильовка та чайники": {
 "en": "you need to bring your own food, there is a dining room with a refrigerator, a microwave and kettles",
