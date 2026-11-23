@@ -75,7 +75,7 @@
 [hidden]{display:none !important}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-html,body{margin:0}
+html,body{margin:0;overflow-x:clip}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.15;letter-spacing:-.01em}
@@ -475,7 +475,7 @@ section.vpage{padding-top:14px}
   .marq:hover .marq-track{animation-play-state:paused}
   .gift-ic{animation:wiggle 2.8s ease-in-out infinite;transform-origin:50% 80%}
 }
-.marq{overflow:hidden;margin-top:14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);padding:12px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.marq{overflow:hidden;isolation:isolate;transform:translateZ(0);margin-top:14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);padding:12px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
 .marq-track{display:flex;width:max-content}
 .marq-grp{display:flex}
 .marq-grp span{display:inline-flex;align-items:center;gap:8px;padding:0 20px;font-weight:700;font-size:15px;white-space:nowrap}
