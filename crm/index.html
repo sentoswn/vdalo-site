@@ -182,6 +182,10 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
 .own-box input{font:inherit;font-size:17px;padding:12px 14px;border:2px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);outline:0}
 .own-box input:focus{border-color:var(--blue)}
 .own-act{display:flex;justify-content:flex-end;gap:8px}
+.rej{display:grid;gap:8px}
+.rej .btn{justify-content:flex-start;font-size:16px;padding:12px 14px;border-radius:12px}
+.rej-own{display:grid;grid-template-columns:1fr auto;gap:8px}
+.rej-own input{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:12px;min-width:0}
 td.tk{width:auto;min-width:250px;max-width:380px;cursor:default;padding-top:12px}
 .tki{display:flex;gap:8px;align-items:flex-start;min-height:26px;font-size:13px;font-weight:600;line-height:1.25;cursor:pointer;border-radius:8px;padding:2px 6px;margin:0 -6px}
 .tki:hover{background:var(--soft)}
@@ -631,6 +635,25 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
     var w = Date.now() - waitStart(l), late = w > 15 * 6e4;
     return '<small style="color:' + (late ? "var(--red)" : "var(--muted)") + ';font-weight:700">' + (late ? ic("clock", "xs") + " " : "") + 'чекає ' + E(mins(w)) + '</small>';
   }
+  // «Відмова» — одразу причина: готові варіанти або своя
+  var REJ = ["Невірний номер", "Вже знайшов роботу", "Не відповідає"];
+  function askReason(l, done){
+    var o = document.createElement("div"); o.className = "own-dlg";
+    o.innerHTML = '<div class="own-box" role="dialog" aria-modal="true"><h3>Причина відмови</h3><p class="note">' + E(l.name) + ' <span class="lno">№' + l.id + '</span></p>' +
+      '<div class="rej">' + REJ.map(function(r){ return '<button type="button" class="btn ghost" data-r="' + E(r) + '">' + E(r) + '</button>'; }).join("") + '</div>' +
+      '<form class="rej-own"><input maxlength="80" placeholder="Інша причина…"><button class="btn">OK</button></form>' +
+      '<div class="own-act"><button type="button" class="btn ghost" data-c>Скасувати</button><button type="button" class="btn ghost" data-n>Без причини</button></div></div>';
+    document.body.appendChild(o);
+    function close(){ o.remove(); document.removeEventListener("keydown", key, true); }
+    function key(e){ if (e.key === "Escape") { e.stopPropagation(); close(); } }
+    document.addEventListener("keydown", key, true);
+    o.onmousedown = function(e){ if (e.target === o) close(); };
+    o.querySelectorAll("[data-r]").forEach(function(b){ b.onclick = function(){ close(); done(b.getAttribute("data-r")); }; });
+    o.querySelector("[data-c]").onclick = close;
+    o.querySelector("[data-n]").onclick = function(){ close(); done(undefined); };
+    o.querySelector("form").onsubmit = function(e){ e.preventDefault(); var t = this.querySelector("input").value.trim().slice(0, 80); if (!t) return this.querySelector("input").focus(); close(); done(t); };
+    setTimeout(function(){ var b = o.querySelector("[data-r]"); if (b) b.focus(); }, 0);
+  }
   // колонка «Задачі» праворуч у таблиці: відкриті задачі кандидата з галочками + 2 порожні рядки для своїх
   function tkWhen(d){
     var t = new Date(d), n = new Date(), p = function(x){ return (x < 10 ? "0" : "") + x; }, hm = p(t.getHours()) + ":" + p(t.getMinutes());
@@ -775,6 +798,9 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
           if (v === "__own") { askOwn(l, function(t){
             API.saveLead(id, {status_note: t}).then(function(){ toast(t ? "Статус «" + t + "» збережено" : "Свій статус прибрано"); rLeads(); }).catch(fail); }); return; }
           if (v === l.status) return;
+          if (v === "rejected") { askReason(l, function(r){
+            btn.className = "st st-rejected"; btn.textContent = LSN.rejected;
+            API.saveLead(id, r === undefined ? {status: "rejected"} : {status: "rejected", status_note: r}).then(function(){ toast("Відмова" + (r ? ": " + r : "")); counts(); rLeads(); }).catch(fail); }); return; }
           btn.className = "st st-" + v; btn.textContent = LSN[v];
           API.saveLead(id, {status: v}).then(function(){ if ((v === "working" || v === "paid") && l.status !== v) confetti();
             toast("Статус: " + LSN[v]); counts(); rLeads(); }).catch(fail); };
@@ -852,6 +878,11 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
       if (v && v.company) { var opt = [].filter.call(es.options, function(o){ return o.value === v.company || o.text === v.company; })[0];
         if (!opt) { opt = new Option(v.company, v.company); es.add(opt, 1); } es.value = opt.value; ei.hidden = true; } };
     var stSel = document.getElementById("d-status"), bn = document.getElementById("d-bonus-note");
+    if (stSel && !isNew) stSel.addEventListener("change", function(){
+      if (stSel.value !== "rejected" || l.status === "rejected") return;
+      askReason(l, function(r){ var c = document.getElementById("d-cst"); if (r !== undefined && c) c.value = r;
+        API.saveLead(l.id, r === undefined ? {status: "rejected"} : {status: "rejected", status_note: r}).then(function(){ l.status = "rejected"; if (r !== undefined) l.status_note = r; toast("Відмова" + (r ? ": " + r : "")); counts(); rLeads(); }).catch(fail); });
+    });
     function bonusNote(){
       if (stSel.value !== "paid" || l.status === "paid") { bn.textContent = ""; return; }
       if (!refId) { bn.textContent = "Бонус не нарахується: не вказано, хто запросив."; return; }
