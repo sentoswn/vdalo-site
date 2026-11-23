@@ -262,6 +262,8 @@ def card_facts(v):
         t.append(f'<li class="date"><svg class="i"><use href="#i-cal"/></svg>Заїзд {dd(v["_next"])}{" (" + r + ")" if r else ""}</li>')
     if v["_g"] in ("w", "m"):
         t.append(f'<li><svg class="i"><use href="#i-users"/></svg>{"Жінкам" if v["_g"] == "w" else "Чоловікам"}</li>')
+    if age_lbl(v):
+        t.append(f'<li><svg class="i"><use href="#i-user"/></svg>{esc(age_lbl(v))}</li>')
     return '<ul class="facts">' + "".join(t) + "</ul>"
 
 
@@ -324,12 +326,34 @@ def est_html(v):
     return f'<p class="est num">≈ {fmt(e["min"])}{"–" + fmt(e["max"]) if e["max"] != e["min"] else ""} {e["cur"]} за місяць до податків</p>'
 
 
+def age_lbl(v):
+    a = v.get("age")
+    if a and len(a) == 2:
+        r = [int(a[0]), int(a[1])]
+    else:
+        w = v.get("who") or ""
+        m = re.search(r"(\d{2})\s*[–-]\s*(\d{2})", w)
+        if m:
+            r = [int(m.group(1)), int(m.group(2))]
+        elif re.search(r"до\s*(\d{2})", w):
+            r = [18, int(re.search(r"до\s*(\d{2})", w).group(1))]
+        elif re.search(r"(?:від|з)\s*(\d{2})", w):
+            r = [int(re.search(r"(?:від|з)\s*(\d{2})", w).group(1)), 99]
+        else:
+            r = [18, 99]
+    if r[0] <= 18 and r[1] >= 99:
+        return ""
+    return "Вік: " + (f"{r[0]}–{r[1]}" if r[0] > 18 and r[1] < 99 else f"до {r[1]}" if r[1] < 99 else f"від {r[0]}")
+
+
 def tags_html(v):
     t = []
     if v["_h"]:
         k, txt = v["_h"]
         t.append(f'<li class="tag {"ok" if k == "ok" else "no" if k == "no" else ""}"><svg class="i"><use href="#i-home"/></svg>{esc(txt)}</li>')
     t.append(f'<li class="tag"><svg class="i"><use href="#i-users"/></svg>{esc(v.get("who") or "Жінки та чоловіки")}</li>')
+    if age_lbl(v):
+        t.append(f'<li class="tag"><svg class="i"><use href="#i-user"/></svg>{esc(age_lbl(v))}</li>')
     if seats_html(v, True):
         t.append(seats_html(v, True))
     if v["_c"]:
