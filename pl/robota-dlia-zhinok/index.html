@@ -1290,8 +1290,9 @@ window.Vdalo = window.Vdalo || (function(){
   var AGE_RX = /(^|[\s,;])(?:(?:вік|возраст|age|wiek)\s*:?\s*)?(1[4-9]|[2-7]\d)(?:\s*(?:р\.?|рік|роки|років|рок|г\.?|год|года|лет|л\.?|years?|yo|lat|lata|r\.?))?(?=$|[\s,;.!?])/i;
   function age(q){ var m = (q || "").match(AGE_RX); if (!m) return null;
     return {age: +m[2], rest: ((q || "").slice(0, m.index) + m[1] + (q || "").slice(m.index + m[0].length)).replace(/\s{2,}/g, " ").trim()}; }
-  // Віковий діапазон вакансії з поля «Для кого» («Жінки, 18–45 р.», «Чоловіки, до 50 р.»); якщо обмежень не вказано — від 18 років
-  function ageRange(v){ var w = (v && v.who) || "", m = w.match(/(\d{2})\s*[–-]\s*(\d{2})/); if (m) return [+m[1], +m[2]];
+  // Віковий діапазон вакансії: поле age [від, до] (Trello: з картки; без віку в картці EWL бере до 55, з міткою «55+ років» — без межі),
+  // інакше з поля «Для кого» («Жінки, 18–45 р.», «Чоловіки, до 50 р.»); якщо обмежень не вказано — від 18 років
+  function ageRange(v){ if (v && v.age && v.age.length === 2) return [+v.age[0], +v.age[1]]; var w = (v && v.who) || "", m = w.match(/(\d{2})\s*[–-]\s*(\d{2})/); if (m) return [+m[1], +m[2]];
     m = w.match(/до\s*(\d{2})/); if (m) return [18, +m[1]]; m = w.match(/(?:від|з)\s*(\d{2})/); if (m) return [+m[1], 99]; return [18, 99]; }
   function ageOk(v, a){ var r = ageRange(v); return a >= r[0] && a <= r[1]; }
   window.VdaloSearch = {sk: sk, stem: stem, words: words, match: match, cities: CITIES, age: age, ageRange: ageRange, ageOk: ageOk};
