@@ -53,9 +53,12 @@ function mapFields(fd: Field[]) {
     else if (/коли|when|почати/.test(k)) out.when_go = v;
     else if (/зв.?яз|contact|зручн/.test(k)) out.contact_mode = v;
     else if (/verified/.test(k)) continue;   // службове поле Meta «phone number verified»
+    else if (/вік|age/.test(k)) out.age = v;   // форма v2: «Ваш вік?»
     else rest.push((f.name || "").replace(/_/g, " ").replace(/\?$/, "") + ": " + v);
   }
   if (!out.name) out.name = [first, last].filter(Boolean).join(" ") || "Без імені";
+  // вік — першим рядком примітки; старше 55 позначаємо, щоб менеджер одразу бачив
+  if (out.age) rest.unshift((/55\s*\+|більше|старше|56|60|65/i.test(out.age) ? "⚠️ " : "") + "Вік: " + out.age);
   out.note = rest.join("\n");
   return out;
 }
