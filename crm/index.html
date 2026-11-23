@@ -651,7 +651,24 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
     return '<small style="color:' + (late ? "var(--red)" : "var(--muted)") + ';font-weight:700">' + (late ? ic("clock", "xs") + " " : "") + 'чекає ' + E(mins(w)) + '</small>';
   }
   // «Відмова» — одразу причина: готові варіанти або своя
-  var REJ = ["Невірний номер", "Вже знайшов роботу", "Не відповідає", "Не актуально"];
+  var AGE_R = "Не підходить за віком";
+  var REJ = ["Невірний номер", "Вже знайшов роботу", "Не відповідає", "Не актуально", AGE_R];
+  function noteIs(n, r){ return n === r || (r === AGE_R && String(n || "").indexOf(AGE_R) === 0); }
+  // «Не підходить за віком» — питаємо вік і пишемо його в причину та в поле «Вік»
+  function askAge(l, done){
+    var o = document.createElement("div"); o.className = "own-dlg";
+    o.innerHTML = '<form class="own-box" role="dialog" aria-modal="true"><h3>Не підходить за віком</h3><p class="note">' + E(l.name) + ' <span class="lno">№' + l.id + '</span> — скільки років?</p>' +
+      '<input maxlength="20" inputmode="numeric" placeholder="Напр. 58"><div class="own-act"><button type="button" class="btn ghost" data-c>Скасувати</button><button class="btn">Зберегти</button></div></form>';
+    document.body.appendChild(o);
+    var inp = o.querySelector("input"); inp.value = l.age || ""; setTimeout(function(){ inp.focus(); inp.select(); }, 0);
+    function close(){ o.remove(); document.removeEventListener("keydown", key, true); }
+    function key(e){ if (e.key === "Escape") { e.stopPropagation(); close(); } }
+    document.addEventListener("keydown", key, true);
+    o.onmousedown = function(e){ if (e.target === o) close(); };
+    o.querySelector("[data-c]").onclick = close;
+    o.querySelector("form").onsubmit = function(e){ e.preventDefault(); var a = inp.value.trim().slice(0, 20); close(); done(a); };
+  }
+  function rejPatch(r, a){ var p = {status: "rejected"}; if (r !== undefined) p.status_note = r === AGE_R && a ? AGE_R + " (" + ageTxt(a) + ")" : r; if (a) p.age = a; return p; }
   var SUBS = {dialog: ["Viber", "WhatsApp", "Telegram"], rejected: REJ};   // варіанти під статусом у меню
   function askReason(l, done){
     var o = document.createElement("div"); o.className = "own-dlg";
@@ -664,7 +681,8 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
     function key(e){ if (e.key === "Escape") { e.stopPropagation(); close(); } }
     document.addEventListener("keydown", key, true);
     o.onmousedown = function(e){ if (e.target === o) close(); };
-    o.querySelectorAll("[data-r]").forEach(function(b){ b.onclick = function(){ close(); done(b.getAttribute("data-r")); }; });
+    o.querySelectorAll("[data-r]").forEach(function(b){ b.onclick = function(){ var r = b.getAttribute("data-r"); close();
+      if (r === AGE_R) askAge(l, function(a){ done(r, a); }); else done(r); }; });
     o.querySelector("[data-c]").onclick = close;
     o.querySelector("[data-n]").onclick = function(){ close(); done(undefined); };
     o.querySelector("form").onsubmit = function(e){ e.preventDefault(); var t = this.querySelector("input").value.trim().slice(0, 80); if (!t) return this.querySelector("input").focus(); close(); done(t); };
@@ -799,8 +817,8 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
         var l = S.leads.filter(function(x){ return x.id === id; })[0]; if (!l) return;
         var m = document.createElement("div"); m.className = "stm"; m._for = id; m.setAttribute("role", "menu");
         m.innerHTML = '<button type="button" class="own" data-v="__own"><i>✎</i>Свій статус…</button>' +
-          LS.map(function(x){ return '<button type="button" data-v="' + x[0] + '"' + (x[0] === l.status && !(SUBS[x[0]] && SUBS[x[0]].indexOf(l.status_note) >= 0) ? ' class="on"' : '') + '><i class="st-' + x[0] + '"></i>' + E(x[1]) + '</button>' +
-            (SUBS[x[0]] ? SUBS[x[0]].map(function(r){ return '<button type="button" class="sub' + (x[0] === "dialog" ? " sub-d" : "") + (l.status === x[0] && l.status_note === r ? ' on' : '') + '" data-v="' + x[0] + '" data-rr="' + E(r) + '"><i class="st-' + x[0] + '"></i>' + E(r) + '</button>'; }).join("") : ""); }).join("");
+          LS.map(function(x){ return '<button type="button" data-v="' + x[0] + '"' + (x[0] === l.status && !(SUBS[x[0]] && SUBS[x[0]].some(function(r){ return noteIs(l.status_note, r); })) ? ' class="on"' : '') + '><i class="st-' + x[0] + '"></i>' + E(x[1]) + '</button>' +
+            (SUBS[x[0]] ? SUBS[x[0]].map(function(r){ return '<button type="button" class="sub' + (x[0] === "dialog" ? " sub-d" : "") + (l.status === x[0] && noteIs(l.status_note, r) ? ' on' : '') + '" data-v="' + x[0] + '" data-rr="' + E(r) + '"><i class="st-' + x[0] + '"></i>' + E(r) + '</button>'; }).join("") : ""); }).join("");
         document.body.appendChild(m);
         var r = btn.getBoundingClientRect(), h = m.offsetHeight, w = m.offsetWidth;
         m.style.left = Math.max(8, Math.min(r.left, innerWidth - w - 8)) + "px";
@@ -812,14 +830,16 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
         setTimeout(function(){ document.addEventListener("mousedown", out, true); document.addEventListener("keydown", key, true); addEventListener("scroll", function sc(e){ if (!m.contains(e.target)) { removeEventListener("scroll", sc, true); close(); } }, true); addEventListener("resize", close); }, 0);
         var cur = m.querySelector(".on") || m.querySelector("button"); cur.focus();
         m.onclick = function(e){ var b = e.target.closest("button[data-v]"); if (!b) return; var v = b.getAttribute("data-v"), rr = b.getAttribute("data-rr"); close();
+          if (rr === AGE_R) { askAge(l, function(a){ var p = rejPatch(AGE_R, a); btn.className = "st st-rejected"; btn.textContent = LSN.rejected;
+            API.saveLead(id, p).then(function(){ toast("Відмова: " + p.status_note); counts(); rLeads(); }).catch(fail); }); return; }
           if (rr) { if (l.status === v && l.status_note === rr) return; btn.className = "st st-" + v; btn.textContent = LSN[v];
             API.saveLead(id, {status: v, status_note: rr}).then(function(){ toast(LSN[v] + ": " + rr); counts(); rLeads(); }).catch(fail); return; }
           if (v === "__own") { askOwn(l, function(t){
             API.saveLead(id, {status_note: t}).then(function(){ toast(t ? "Статус «" + t + "» збережено" : "Свій статус прибрано"); rLeads(); }).catch(fail); }); return; }
           if (v === l.status) return;
-          if (v === "rejected") { askReason(l, function(r){
+          if (v === "rejected") { askReason(l, function(r, a){ var p = rejPatch(r, a);
             btn.className = "st st-rejected"; btn.textContent = LSN.rejected;
-            API.saveLead(id, r === undefined ? {status: "rejected"} : {status: "rejected", status_note: r}).then(function(){ toast("Відмова" + (r ? ": " + r : "")); counts(); rLeads(); }).catch(fail); }); return; }
+            API.saveLead(id, p).then(function(){ toast("Відмова" + (p.status_note ? ": " + p.status_note : "")); counts(); rLeads(); }).catch(fail); }); return; }
           btn.className = "st st-" + v; btn.textContent = LSN[v];
           API.saveLead(id, {status: v}).then(function(){ if ((v === "working" || v === "paid") && l.status !== v) confetti();
             toast("Статус: " + LSN[v]); counts(); rLeads(); }).catch(fail); };
@@ -899,8 +919,8 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
     var stSel = document.getElementById("d-status"), bn = document.getElementById("d-bonus-note");
     if (stSel && !isNew) stSel.addEventListener("change", function(){
       if (stSel.value !== "rejected" || l.status === "rejected") return;
-      askReason(l, function(r){ var c = document.getElementById("d-cst"); if (r !== undefined && c) c.value = r;
-        API.saveLead(l.id, r === undefined ? {status: "rejected"} : {status: "rejected", status_note: r}).then(function(){ l.status = "rejected"; if (r !== undefined) l.status_note = r; toast("Відмова" + (r ? ": " + r : "")); counts(); rLeads(); }).catch(fail); });
+      askReason(l, function(r, a){ var p = rejPatch(r, a), c = document.getElementById("d-cst"); if (p.status_note && c) c.value = p.status_note;
+        API.saveLead(l.id, p).then(function(){ l.status = "rejected"; if (p.status_note) l.status_note = p.status_note; if (p.age) l.age = p.age; toast("Відмова" + (p.status_note ? ": " + p.status_note : "")); counts(); rLeads(); }).catch(fail); });
     });
     function bonusNote(){
       if (stSel.value !== "paid" || l.status === "paid") { bn.textContent = ""; return; }
