@@ -248,7 +248,10 @@ td.c-nt{width:190px;min-width:150px;max-width:260px;cursor:default}
 .tbl.lt td.c-st .cst{white-space:normal;overflow-wrap:anywhere}
 .card:has(> .tbl.lt){overflow-x:clip}
 .tbl.lt td.c-st button.st{max-width:100%;white-space:normal;line-height:1.25;overflow:visible}
-.ntx{width:100%;min-height:40px;border:1px dashed transparent;border-radius:10px;background:transparent;padding:6px 8px;font:inherit;font-size:13px;line-height:1.35;color:var(--ink);resize:none;overflow:hidden;outline:0}
+.ntx{width:100%;min-height:40px;border:1px dashed transparent;border-radius:10px;background:transparent;padding:6px 8px;font:inherit;font-size:13px;line-height:1.35;color:var(--ink);resize:none;overflow:hidden;outline:0;scrollbar-width:thin;scrollbar-color:#98a2b3 transparent}
+.ntx::-webkit-scrollbar{width:8px}
+.ntx::-webkit-scrollbar-thumb{background:#98a2b3;border-radius:8px}
+.ntx::-webkit-scrollbar-track{background:transparent}
 tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
 .ntx::placeholder{color:var(--muted)}
 .ntx:focus{border:1px solid var(--blue);background:var(--surface)}
@@ -758,7 +761,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
       bindRowTasks(app);
       // примітки прямо в таблиці: зберігаються, коли виходите з поля
       app.querySelectorAll("textarea[data-nt]").forEach(function(ta){
-        var fit = function(){ ta.style.height = "auto"; ta.style.height = Math.min(ta.scrollHeight + 2, 160) + "px"; }; fit();
+        var fit = function(){ ta.style.height = "auto"; var h = ta.scrollHeight + 2; ta.style.height = Math.min(h, 200) + "px"; ta.style.overflowY = h > 200 ? "auto" : "hidden"; }; fit();
         ta.oninput = fit;
         ta.onkeydown = function(e){ if (e.key === "Escape") { var l0 = S.leads.filter(function(x){ return x.id === +ta.getAttribute("data-nt"); })[0]; ta.value = (l0 && l0.manager_note) || ""; ta.blur(); } };
         ta.onblur = function(){ var id = +ta.getAttribute("data-nt"), l = S.leads.filter(function(x){ return x.id === id; })[0], v = ta.value.trim() || null;
