@@ -182,11 +182,11 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
 .own-box input{font:inherit;font-size:17px;padding:12px 14px;border:2px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);outline:0}
 .own-box input:focus{border-color:var(--blue)}
 .own-act{display:flex;justify-content:flex-end;gap:8px}
-td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12px}
-.tki{display:flex;gap:8px;align-items:center;min-height:26px;font-size:13px;font-weight:600;line-height:1.25;cursor:pointer;border-radius:8px;padding:2px 6px;margin:0 -6px}
+td.tk{width:auto;min-width:250px;max-width:380px;cursor:default;padding-top:12px}
+.tki{display:flex;gap:8px;align-items:flex-start;min-height:26px;font-size:13px;font-weight:600;line-height:1.25;cursor:pointer;border-radius:8px;padding:2px 6px;margin:0 -6px}
 .tki:hover{background:var(--soft)}
-.tki input[type=checkbox]{flex:none;width:16px;height:16px;margin:0;accent-color:var(--green)}
-.tki .tt{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tki input[type=checkbox]{flex:none;width:16px;height:16px;margin:2px 0 0;accent-color:var(--green)}
+.tki .tt{flex:1;min-width:0;white-space:normal;overflow-wrap:anywhere;padding-top:1px}
 .tki time{flex:none;font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap}
 .tki.od time{color:#fff;background:var(--red);border-radius:6px;padding:1px 6px}
 .tki.od{color:#9b1c1c}
@@ -236,7 +236,10 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
   main .g2{grid-template-columns:minmax(0,1fr) auto}
 }
 .vbr{background:#7360f2;color:#fff;border-color:#7360f2;margin-left:6px;text-decoration:none}
-td.c-nt{width:240px;min-width:180px;max-width:300px;cursor:default}
+td.c-nt{width:190px;min-width:150px;max-width:260px;cursor:default}
+.tbl.lt td.c-st{max-width:220px}
+.tbl.lt td.c-st .cst{white-space:normal;overflow-wrap:anywhere}
+.card:has(> .tbl.lt){overflow-x:auto}
 .ntx{width:100%;min-height:40px;border:1px dashed transparent;border-radius:10px;background:transparent;padding:6px 8px;font:inherit;font-size:13px;line-height:1.35;color:var(--ink);resize:none;overflow:hidden;outline:0}
 tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
 .ntx::placeholder{color:var(--muted)}
