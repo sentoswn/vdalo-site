@@ -28,6 +28,13 @@ const AD_VAC: Record<string, [string, string]> = {
   "top-sealogic": ["148", "Sealogic — переробка риби, Białogard"],
   "top-truvant": ["63", "TRUVANT — пакування бритв, Łódź"],
   "form-pary129": ["129", "PERLA — виробництво закусок, Głobino (для пар)"],
+  // акційні вакансії (до 05.12), +200 zł бонус від нас за 2 тижні
+  "promo-brand": ["1893635", "Склад брендового одягу, Bydgoszcz (акція)"],
+  "promo-hanplast": ["2018833", "Hanplast — оператор машини, Bydgoszcz (акція)"],
+  "promo-paleta": ["2238374", "Hanplast — палетувальник, Bydgoszcz (акція)"],
+  "promo-osla": ["1893257", "Комплектація на електронавантажувачі, Osła (акція)"],
+  "promo-katy": ["1893927", "SHEIN — склад, Kąty Wrocławskie (акція)"],
+  "promo-sinsay": ["1893715", "SINSAY — склад, Jasionka/Rzeszów (акція)"],
 };
 function adVacancy(adName?: string): { id: string; title: string } | null {
   const n = String(adName || "").trim().toLowerCase();
