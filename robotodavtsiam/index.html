@@ -1790,7 +1790,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
     var v=items.filter(function(x){return String(x.id)===String(id);})[0];
     if (!v){ toast("Цієї вакансії вже немає — подивіться інші"); clearHash(); return; }
     ev("view_vacancy",{vacancy_id:String(v.id),country:v.country||"",company:v.company||""});
-    var rows=[["Для кого",v.who],["Годин на місяць",v.hours],["Графік",v.schedule],["Нічні зміни",v.night],["Житло",v.housing],["Доплата за власне житло",v.own],["Харчування",v.food],["Доїзд до роботи",v.transport],["Договір",v._c?{html:esc(v._c.full)+(v._c.note?'<small>'+esc(v._c.note)+'</small>':'')}:null],["Вимоги",v.req],["Бонуси",v.perks],["Дати заїзду",v.trips]].filter(function(r){return r[1];});
+    var rows=[["Місто",v.city?v.city+(v.country?", "+v.country:""):null],["Для кого",v.who],["Годин на місяць",v.hours],["Графік",v.schedule],["Нічні зміни",v.night],["Житло",v.housing],["Доплата за власне житло",v.own],["Харчування",v.food],["Доїзд до роботи",v.transport],["Договір",v._c?{html:esc(v._c.full)+(v._c.note?'<small>'+esc(v._c.note)+'</small>':'')}:null],["Вимоги",v.req],["Бонуси",v.perks],["Дати заїзду",v.trips]].filter(function(r){return r[1];});
     var msg=vacMsg(v);
     $("sheet").innerHTML=
       '<button class="x" type="button" data-close aria-label="Закрити"><svg class="i"><use href="#i-x"/></svg></button>'+
