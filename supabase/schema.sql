@@ -922,3 +922,14 @@ begin
     insert into public.settings(key, value) values ('start_tasks_backfill', now()::text);
   end if;
 end $$;
+
+-- один раз (23.11.2026): прибрати невиконані автоматичні задачі «Надіслати 2–3 вакансії» і «Нагадати, якщо не відповів»
+do $$
+begin
+  if not exists (select 1 from public.settings where key = 'start_tasks_cleanup_2311') then
+    delete from public.tasks
+     where done_at is null and created_by is null and note = 'Набір «Новий кандидат»'
+       and title in ('Надіслати 2–3 вакансії', 'Нагадати, якщо не відповів');
+    insert into public.settings(key, value) values ('start_tasks_cleanup_2311', now()::text);
+  end if;
+end $$;
