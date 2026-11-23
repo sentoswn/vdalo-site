@@ -764,6 +764,11 @@
 "pl": "Mile widziane doświadczenie w branży spożywczej Umiejętności manualne Umiejętność pracy w zespole Dla niektórych działów - czytać i pisać Język polski Warunki pracy: Temperatura: 8-12°C (w zależności od działu) Silny zapach ryb Zakaz: telefonów, jedzenia, biżuterii, makijażu, perfum",
 "ru": "Желаемый опыт в пищевой промышленности Ручные навыки Умение работать в команде Для отдельных отделов — чтение и письмо на польском Условия работы: Температура: 8–12°C (в зависимости от отдела) Сильный запах рыбы Запрещено: телефоны, еда, украшения, макияж, духи"
 },
+"Бажання працювати (на місці всього навчають), Хороші мануальні здібності, Хороша фізична форма": {
+"en": "Willingness to work (everything is taught on the spot), Good manual skills, Good physical shape",
+"pl": "Chęć do pracy (wszystkiego uczymy na miejscu), Dobre zdolności manualne, Dobra kondycja fizyczna",
+"ru": "Желание работать (на месте всего учат), Хорошие мануальные способности, Хорошая физическая форма"
+},
 "Бажання працювати на навчатись, Відсутність шкідливих звичок, Гарна фізична форма(вся зміна на ногах, велика кількість кроків за зміну)": {
 "en": "Willingness to work and learn, Absence of bad habits, Good physical condition (all shift on feet, large number of steps per shift)",
 "pl": "Chęć do pracy i nauki, Brak złych nawyków, Dobra kondycja fizyczna (wszystkie zmiany na nogach, duża liczba kroków na zmianę)",
@@ -998,6 +1003,11 @@
 "en": "Free, provided by our company bus. Conditions in the warehouse: there is a dining room with refrigerators...",
 "pl": "Bezpłatny, zapewniany przez nasz firmowy bus. Warunki w magazynie: znajduje się jadalnia z lodówkami...",
 "ru": "Бесплатный предоставляется наш фирменный автобус. Условия на складе: есть столовая с холодильниками."
+},
+"Безкоштовно на території підприємства є хостел, по 4 людини в кімнаті (у кімнаті своя кухня, душ та туалет). Сучасні умови та ремонт": {
+"en": "There is a hostel for free on the territory of the enterprise, for 4 people in a room (the room has its own kitchen, shower and toilet). Modern conditions and repairs",
+"pl": "Na terenie przedsiębiorstwa znajduje się bezpłatny hostel dla 4 osób w pokoju (pokój ma własną kuchnię, prysznic i toaletę). Nowoczesne warunki i naprawy",
+"ru": "На территории предприятия есть хостел, по 4 человека в комнате (в комнате своя кухня, душ и туалет). Современные условия и ремонт"
 },
 "Безкоштовно службовим автобусом згідно графіку. Для працівників на власному житлі з вулиці Kościuszki 53. Умови на складі: на території складу є їдальня з холодильниками, де працівники можуть зберігати свою їжу до перерви. Також є мікрохвильова піч. Встановлені автомати з напоями та солодощами": {
 "en": "Free service bus according to the schedule. For employees in their own accommodation from Kościuszki Street 53. Warehouse conditions: the warehouse has a canteen with refrigerators where employees can store their food until the break. There is also a microwave oven. Vending machines with drinks and sweets are installed",
@@ -1949,6 +1959,11 @@
 "pl": "Osiedle znajduje się w odległości spaceru, 10-15 minut do przedsiębiorstwa",
 "ru": "Жилье находится в пешей доступности, 10-15 минут на предприятии"
 },
+"Житло знаходиться у пішій доступності, 5 хвилин до підприємства": {
+"en": "Housing is within walking distance, 5 minutes to the enterprise",
+"pl": "Osiedle znajduje się w odległości spaceru, 5 minut do przedsiębiorstwa",
+"ru": "Жилье находится в пешей доступности, 5 минут на предприятии"
+},
 "Житло коштує 400 PLN/міс": {
 "en": "Housing costs PLN 400/month",
 "pl": "Koszt mieszkania 400 zł/miesiąc",
@@ -1998,6 +2013,11 @@
 "en": "Women, up to 53 years old",
 "pl": "Kobiety do 53 roku życia",
 "ru": "Женщины, до 53 лет."
+},
+"Жінки, до 55 р.": {
+"en": "Women, up to 55 years old",
+"pl": "Kobiety do 55 roku życia",
+"ru": "Женщины, до 55 лет."
 },
 "Жінки, до 60 р.": {
 "en": "Women, up to 60",
@@ -2149,6 +2169,11 @@
 "pl": "Certyfikat na UZEK lub UDT będzie dobrym bonusem na start, Znajomość języka na poziomie komunikatywnym (rozumienie, umiejętność czytania)",
 "ru": "Удостоверение на узек или удт будет хорошим бонусом на старт, знание языка на коммуникативном уровне (понимать, уметь читать)"
 },
+"Збирати печериці вручну, відбираючи їх за розміром, Акуратно сортувати та складати гриби в контейнери, Збір на верхніх полицях відбувається на електричних пересувних візках, які допомагають діставати до полиць. Найвищі полиці — до 3 метрів, Є норма, потрібно збирати 15 кг грибів на годину": {
+"en": "Collect champignons by hand, selecting them by size, Carefully sort and stack mushrooms in containers, Collection on the upper shelves takes place on electric mobile carts that help to get to the shelves. The highest shelves are up to 3 meters. There is a norm, you need to collect 15 kg of mushrooms per hour",
+"pl": "Zbieraj pieczarki ręcznie, wybierając je według wielkości. Pieczarki starannie sortuj i układaj w pojemnikach. Zbieranie na górnych półkach odbywa się na elektrycznych wózkach mobilnych, które pomagają dostać się na półki. Najwyższe półki mają aż 3 metry. Istnieje norma, należy zebrać 15 kg grzybów na godzinę",
+"ru": "Собирать шампиньоны вручную, отбирая их по размеру, аккуратно сортировать и складывать грибы в контейнеры, сбор на верхних полках происходит на электрических передвижных тележках, которые помогают доставать до полок. Самые высокие полки — до 3 метров. Есть норма, нужно собирать 15 кг грибов в час"
+},
 "Збирати і комплектувати замовлення на складі за допомогою bluetooth-гарнітури, куди надходить інформація про товар, який потрібно зібрати, Керувати електронавантажувачем (Order picker), Готувати до відправлення товари в магазини Action, Відео: https://www.youtube.com/watch?v=QXt1pkyGBsE": {
 "en": "Collect and complete orders in the warehouse using a bluetooth headset, which receives information about the goods to be collected, Control the electronic loader (Order picker), Prepare goods for shipment to Action stores, Video: https://www.youtube.com/watch?v=QXt1pkyGBsE",
 "pl": "Zbieranie i kompletowanie zamówień w magazynie za pomocą zestawu słuchawkowego Bluetooth, który odbiera informacje o towarze do odbioru, Sterowanie elektronicznym modułem ładującym (Order picker), Przygotowanie towaru do wysyłki do sklepów Action, Film: https://www.youtube.com/watch?v=QXt1pkyGBsE",
@@ -2163,6 +2188,11 @@
 "en": "Assembly of automobile harnesses in accordance with the technological documentation on the assembly line. Ensuring product quality. Preparation of wires and wire systems according to instructions and diagrams, quality control. Collection of different types of cables for cars.",
 "pl": "Montaż wiązek samochodowych zgodnie z dokumentacją technologiczną na linii montażowej. Zapewnienie jakości produktu. Przygotowanie przewodów i układów przewodów zgodnie z instrukcją i schematami, kontrola jakości. Kolekcja różnych typów kabli do samochodów.",
 "ru": "Сбор автомобильных жгутов в соответствии с технологической документацией на сборочной линии. Обеспечение качества продукции. Подготовка проводов и систем проводов в соответствии с инструкциями и схемами, проверка качества. Сбор разных видов кабелей для автомобилей."
+},
+"Збір печериць": {
+"en": "Mushroom picking",
+"pl": "Zbieranie grzybów",
+"ru": "Сбор шампиньонов"
 },
 "Збір та комплектація замовлень на складі на електронавантажувачі, Працівник складає товар і далі збирає замовлення": {
 "en": "Collection and assembly of orders in the warehouse on an electronic forklift, the employee assembles the goods and then collects the order",
@@ -2964,6 +2994,11 @@
 "pl": "W przedsiębiorstwie znajduje się stołówka wyposażona w kuchenki mikrofalowe, lodówkę, czajnik, płatny ekspres do kawy oraz automaty z żywnością i napojami.  Media — zakwaterowanie:…",
 "ru": "На территории предприятия есть столовая с микроволновками, холодильником, чайником, платной кофеваркой и автоматами с едой и напитками.  Медиа – проживание:…"
 },
+"На території підприємства є їдальня з мікрохвильовими печами, холодильником, чайником, платною кавоваркою та автоматами з їжею і напоями. Медіа — проживання:…": {
+"en": "The enterprise has a canteen with microwave ovens, a refrigerator, a kettle, a paid coffee maker and vending machines with food and drinks. Media — accommodation:…",
+"pl": "W przedsiębiorstwie znajduje się stołówka wyposażona w kuchenki mikrofalowe, lodówkę, czajnik, płatny ekspres do kawy oraz automaty z żywnością i napojami. Media — zakwaterowanie:…",
+"ru": "На территории предприятия есть столовая с микроволновками, холодильником, чайником, платной кофеваркой и автоматами с едой и напитками. Медиа – проживание:…"
+},
 "На території підприємства є їдальня з мікрохвильовими печами, холодильником, чайником, платною кавоваркою та автоматами з їжею і напоями. ‌ Медіа — проживання:…": {
 "en": "The enterprise has a canteen with microwave ovens, a refrigerator, a kettle, a paid coffee maker and vending machines with food and drinks. ‌ Media — accommodation:…",
 "pl": "W przedsiębiorstwie znajduje się stołówka wyposażona w kuchenki mikrofalowe, lodówkę, czajnik, płatny ekspres do kawy oraz automaty z żywnością i napojami. ‌ Media — zakwaterowanie:…",
@@ -3569,6 +3604,11 @@
 "pl": "Przerwy: 3 przerwy na zmianę, Temperatura w przedsiębiorstwie: zależna od warsztatu 0-5 C i -22 C, W przedsiębiorstwie działa stołówka (pod warunkiem…",
 "ru": "Перерывы: 3 перерыва в смену, Температура на предприятии: зависит от цеха 0-5 С и -22 С, На предприятии есть столовая."
 },
+"Перерви: 9:00-9:30 (сніданок), 14:00-14:30 (обід), 18:00-18:30 (вечеря), Безкоштовне харчування 2 рази на день, На підприємстві є їдальня з всім необхідним (холодильник, мікрохвильові печі, чайники, кавові машини), Температура в приміщенні +12+18": {
+"en": "Breaks: 9:00-9:30 (breakfast), 14:00-14:30 (lunch), 18:00-18:30 (dinner)",
+"pl": "Przerwy: 9:00-9:30 (śniadanie), 14:00-14:30 (lunch), 18:00-18:30 (kolacja)",
+"ru": "Перерывы: 9:00-9:30 (завтрак), 14:00-14:30 (обед), 18:00-18:30 (ужин), Бесплатное питание 2 раза в день, На предприятии есть столовая со всем необходимым (холодильник, микроволновые печи, чайники, +12+18"
+},
 "Перерви: на 12 годин роботи дається 45 хвилин перерви: розпоряджатися можна самому (використовувати можна як за одну перерву, так і розділити на кілька), але не раніше, ніж через 2,5 години після початку роботи. Якщо перевищено ліміт у 45 хвилин, це вираховується вже з відпрацьованих годин, Температура: на мийці/складі/лінії/філетуванні +8-9°; на потрошенні +10-15 ° (може бути вище); на завішуванні дорівнює вуличній; у робочому приміщенні+5-15°, Безкоштовне харчування двічі на день": {
 "en": "Breaks: a 45-minute break is given for 12 hours of work: you can manage yourself (you can use it both in one break and in several), but not earlier than 2.5 hours after the start of work. If the limit of 45 minutes is exceeded, it is already calculated from the hours worked. Temperature: at the sink/warehouse/line/filleting +8-9°; at evisceration +10-15 ° (may be higher); on hanging is equal to street; in the working room +5-15°, Free meals twice a day",
 "pl": "Przerwy: na 12 godzin pracy przysługuje 45-minutowa przerwa: możesz sobie poradzić samodzielnie (możesz z niej skorzystać zarówno w jednej przerwie, jak i w kilku), jednak nie wcześniej niż 2,5 godziny po rozpoczęciu pracy. W przypadku przekroczenia limitu 45 minut jest on już naliczany na podstawie przepracowanych godzin. Temperatura: przy zlewie/magazynie/linii/filetowaniu +8-9°; przy patroszenia +10-15 ° (może być wyższa); na zawieszeniu równa się ulicy; w pomieszczeniu do pracy +5-15°, Dwa razy dziennie bezpłatne posiłki",
@@ -3964,6 +4004,11 @@
 "pl": "Pon.-Sob.: 3 zmiany po 8/10 godz. Istnieje możliwość podjęcia dodatkowych godzin w innych działach, I zmiana 6:00-14:00, II zmiana 14:00-22:00, III zmiana 22:00-6:00",
 "ru": "Пн.-Суб: 3 смены по 8/10 часов. Можно брать дополнительные часы в других отделах, 1 смена 6:00-14:00, 2 смена 14:00-22:00, 3 смена 22:00-6:00"
 },
+"Пн.-Суб: 3 зміни по 8/10 годин. Можна брати додаткові години в інших відділах, 1 зміна 7:00-15:00, 2 зміна 15:00-23:00, 3 зміна 23:00-7:00": {
+"en": "Mon.-Sat: 3 shifts of 8/10 hours. You can take additional hours in other departments, 1st shift 7:00-15:00, 2nd shift 15:00-23:00, 3rd shift 23:00-7:00",
+"pl": "Pon.-Sob.: 3 zmiany po 8/10 godz. Istnieje możliwość podjęcia dodatkowych godzin w innych działach, I zmiana 7:00-15:00, II zmiana 15:00-23:00, III zmiana 23:00-7:00",
+"ru": "Пн.-Суб: 3 смены по 8/10 часов. Можно брать дополнительные часы в других отделах, 1 смена 7:00-15:00, 2 смена 15:00-23:00, 3 смена 23:00-7:00"
+},
 "Пн.-Суб: 3 зміни по 8/10 годин. Можна брати додаткові години в інших відділах…": {
 "en": "Mon.-Sat: 3 shifts of 8/10 hours. You can take additional hours in other departments...",
 "pl": "Pon.-Sob.: 3 zmiany po 8/10 godz. Istnieje możliwość podjęcia dodatkowych godzin w innych działach...",
@@ -4198,6 +4243,11 @@
 "en": "Monday - Saturday (the first 2-3 weeks schedule is Monday-Friday), 6:00-18:00...",
 "pl": "Poniedziałek - Sobota (pierwsze 2-3 tygodnie grafiku to poniedziałek-piątek), 6:00-18:00...",
 "ru": "Понедельник - суббота (первые 2-3 недели график понедельник-пятница), 6:00-18:00…"
+},
+"Понеділок - субота, Робота починається з 6:00, Зміна по 10-12 годин в день": {
+"en": "Monday - Saturday, Work starts at 6:00, Shift 10-12 hours a day",
+"pl": "Poniedziałek - Sobota, Praca rozpoczyna się o godzinie 6:00, Zmiana 10-12 godzin dziennie",
+"ru": "Понедельник - суббота, Работа начинается с 6:00, Смена по 10-12 часов в день."
 },
 "Понеділок–п’ятниця Початковий графік: одна зміна, 06:00–14:00 На початковому етапі — 168 годин на місяць Після проходження адаптації можливі понаднормові години та перехід на двозмінний графік Після 8 годин роботи передбачена перерва тривалістю 15 хвилин Нічних змін немає Додаткові утримання:": {
 "en": "Monday–Friday Initial schedule: one shift, 06:00–14:00 At the initial stage — 168 hours per month After adaptation, overtime hours and transition to a two-shift schedule are possible After 8 hours of work, a 15-minute break is provided No night shifts Additional deductions:",
@@ -5348,6 +5398,11 @@
 "en": "Independent",
 "pl": "Niezależny",
 "ru": "Самостоятельный"
+},
+"Самостійний (автобуси 703 і 63 до складу)": {
+"en": "Independent (buses 703 and 63 included)",
+"pl": "Niezależny (w tym autobusy 703 i 63)",
+"ru": "Самостоятельный (автобусы 703 и 63 в состав)"
 },
 "Самостійний (автобуси 703 і 711 до складу)": {
 "en": "Independent (buses 703 and 711 included)",
