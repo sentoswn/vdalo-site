@@ -234,8 +234,22 @@ def flag(cc):
     return f'<svg class="flag" aria-hidden="true"><use href="#f-{cc}"/></svg>' if cc in FLAG_CC else f'<span class="cc">{esc(cc)}</span>'
 
 
+def seats_html(v, tag=False):
+    """Скільки місць залишилось: число з Planfix («Wolne miejsca») або «10+» з мітки Trello."""
+    n = v.get("left")
+    if n is None or n == "":
+        return ""
+    if str(n) in ("0", "0+"):
+        k, txt = "none", "Місць немає, запис у резерв"
+    else:
+        low = isinstance(n, int) and n <= 5
+        k, txt = ("low" if low else ""), f'Залишилось місць: <b>{esc(str(n))}</b>'
+    cls = ("tag seats " if tag else "seats ") + k
+    return f'<li class="{cls.strip()}"><svg class="i"><use href="#i-user"/></svg>{txt}</li>'
+
+
 def card_facts(v):
-    t = []
+    t = [seats_html(v)] if seats_html(v) else []
     if v["_h"]:
         k, txt = v["_h"]
         t.append(f'<li class="{"ok" if k == "ok" else ""}"><svg class="i"><use href="#i-home"/></svg>{esc(txt)}</li>')
@@ -316,6 +330,8 @@ def tags_html(v):
         k, txt = v["_h"]
         t.append(f'<li class="tag {"ok" if k == "ok" else "no" if k == "no" else ""}"><svg class="i"><use href="#i-home"/></svg>{esc(txt)}</li>')
     t.append(f'<li class="tag"><svg class="i"><use href="#i-users"/></svg>{esc(v.get("who") or "Жінки та чоловіки")}</li>')
+    if seats_html(v, True):
+        t.append(seats_html(v, True))
     if v["_c"]:
         t.append(f'<li class="tag{" ok" if v["_c"]["ok"] else ""}"><svg class="i"><use href="#i-doc"/></svg>{esc(v["_c"]["short"])}</li>')
     if v["_next"]:
