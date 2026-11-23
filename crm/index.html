@@ -189,7 +189,7 @@ select.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;pa
 .rej .btn{justify-content:flex-start;font-size:16px;padding:12px 14px;border-radius:12px}
 .rej-own{display:grid;grid-template-columns:1fr auto;gap:8px}
 .rej-own input{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:12px;min-width:0}
-td.tk{width:auto;min-width:250px;max-width:380px;cursor:default;padding-top:12px}
+td.tk{width:auto;min-width:220px;max-width:360px;cursor:default;padding-top:12px}
 .tki{display:flex;gap:8px;align-items:flex-start;min-height:26px;font-size:13px;font-weight:600;line-height:1.25;cursor:pointer;border-radius:8px;padding:2px 6px;margin:0 -6px}
 .tki:hover{background:var(--soft)}
 .tki input[type=checkbox]{flex:none;width:16px;height:16px;margin:2px 0 0;accent-color:var(--green)}
@@ -243,7 +243,7 @@ td.tk{width:auto;min-width:250px;max-width:380px;cursor:default;padding-top:12px
   main .g2{grid-template-columns:minmax(0,1fr) auto}
 }
 .vbr{background:#7360f2;color:#fff;border-color:#7360f2;margin-left:6px;text-decoration:none}
-td.c-nt{width:190px;min-width:150px;max-width:260px;cursor:default}
+td.c-nt{width:380px;min-width:250px;max-width:460px;cursor:default}
 .tbl.lt td.c-st{max-width:220px}
 .tbl.lt td.c-st .cst{white-space:normal;overflow-wrap:anywhere}
 .card:has(> .tbl.lt){overflow-x:clip}
@@ -761,7 +761,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
       bindRowTasks(app);
       // примітки прямо в таблиці: зберігаються, коли виходите з поля
       app.querySelectorAll("textarea[data-nt]").forEach(function(ta){
-        var fit = function(){ ta.style.height = "auto"; var h = ta.scrollHeight + 2; ta.style.height = Math.min(h, 200) + "px"; ta.style.overflowY = h > 200 ? "auto" : "hidden"; }; fit();
+        var fit = function(){ ta.style.height = "auto"; ta.style.height = (ta.scrollHeight + 2) + "px"; }; fit();
         ta.oninput = fit;
         ta.onkeydown = function(e){ if (e.key === "Escape") { var l0 = S.leads.filter(function(x){ return x.id === +ta.getAttribute("data-nt"); })[0]; ta.value = (l0 && l0.manager_note) || ""; ta.blur(); } };
         ta.onblur = function(){ var id = +ta.getAttribute("data-nt"), l = S.leads.filter(function(x){ return x.id === id; })[0], v = ta.value.trim() || null;
