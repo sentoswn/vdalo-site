@@ -200,10 +200,11 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
 .chips-x{display:contents}
 @media (max-width:800px){
   /* Кандидати: картка замість рядка таблиці */
-  .tbl.lt tr.row{grid-template-columns:28px minmax(0,1fr);grid-template-areas:"ck who" ". st" ". tk";column-gap:8px;row-gap:6px;padding:12px}
+  .tbl.lt tr.row{grid-template-columns:28px minmax(0,1fr);grid-template-areas:"ck who" ". st" ". nt" ". tk";column-gap:8px;row-gap:6px;padding:12px}
   .tbl.lt td.ck{grid-area:ck;padding-top:10px}
   .tbl.lt td.c-who{grid-area:who;min-width:0}
   .tbl.lt td.c-st{grid-area:st;min-width:0}
+  .tbl.lt td.c-nt{grid-area:nt;display:block;width:auto;min-width:0;max-width:none;padding:0}
   .tbl.lt td.tk{grid-area:tk;display:block;width:auto;min-width:0;max-width:none;padding:2px 0 0}
   .tbl.lt td.tk .tki{margin:0;padding:3px 4px}
   .tbl.lt .who{justify-content:flex-start;text-align:left;min-width:0}
@@ -235,6 +236,11 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
   main .g2{grid-template-columns:minmax(0,1fr) auto}
 }
 .vbr{background:#7360f2;color:#fff;border-color:#7360f2;margin-left:6px;text-decoration:none}
+td.c-nt{width:240px;min-width:180px;max-width:300px;cursor:default}
+.ntx{width:100%;min-height:40px;border:1px dashed transparent;border-radius:10px;background:transparent;padding:6px 8px;font:inherit;font-size:13px;line-height:1.35;color:var(--ink);resize:none;overflow:hidden;outline:0}
+tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
+.ntx::placeholder{color:var(--muted)}
+.ntx:focus{border:1px solid var(--blue);background:var(--surface)}
 .tbox{border:1px solid var(--line);border-radius:14px;padding:10px 12px 4px;background:var(--surface)}
 .tbox>b{display:flex;align-items:center;gap:6px}
 .task.blank{align-items:center}
@@ -695,7 +701,7 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
         '<div class="bar"><input type="search" id="q" placeholder="Пошук: ім’я, телефон, вакансія, роботодавець…" value="' + E(S.q) + '"><button class="btn" id="add">+ Нова заявка</button></div>' +
         '<div class="bar lbar">' + mgrSel + chSel + '<div class="chips-x">' + chips + '</div></div>' +
         '<div id="bulk"></div>' +
-        '<div class="card"><table class="tbl lt"><thead><tr><th class="ck"><input type="checkbox" class="ck" id="ck-all" title="Вибрати всіх"></th><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Канал</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th><th class="tk-h">Задачі</th></tr></thead><tbody>' +
+        '<div class="card"><table class="tbl lt"><thead><tr><th class="ck"><input type="checkbox" class="ck" id="ck-all" title="Вибрати всіх"></th><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Канал</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th><th class="nt-h">Примітки</th><th class="tk-h">Задачі</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(l){
           return '<tr class="row' + (staleMs(l) > STALE_MS || taskOverdue(l) || (l.status === "new" && Date.now() - waitStart(l) > 15 * 6e4) ? " stale" : "") + '" data-id="' + l.id + '"><td class="ck"><input type="checkbox" class="ck" data-ck="' + l.id + '"' + (S.sel[l.id] ? " checked" : "") + '></td><td class="hide-m">' + E(dt(l.created_at, true)) + '</td>' +
             '<td class="c-who"><div class="who">' + avatar(l.name) + '<div><b>' + E(l.name) + '</b><small>' + E(l.phone) + (l.who ? " · " + E(l.who) : "") + '</small></div></div></td>' +
@@ -703,16 +709,26 @@ td.tk{width:300px;min-width:260px;max-width:320px;cursor:default;padding-top:12p
             '<td class="hide-m">' + chBadge(l) + (l.referrer ? '<small>від ' + E(pname(l.referrer)) + '</small>' : "") + '</td>' +
             (S.own ? '<td class="hide-m">' + (mgrsOf(l).length ? mgrsOf(l).map(function(id){ return E(staffName(id)); }).join(", ") : '<span class="st st-new">Не призначено</span>') + '</td>' : '') +
             '<td class="c-st"><button type="button" class="st st-' + l.status + '" data-st="' + l.id + '" title="Змінити статус">' + E(LSN[l.status] || l.status) + '</button>' +
-            (l.status_note ? '<small class="cst">✎ ' + E(l.status_note) + '</small>' : '') + waitBadge(l) + '</td>' + rowTasks(l) + '</tr>';
-        }).join("") : '<tr><td colspan="8" class="empty">' + (S.own ? "Тут поки порожньо. Нові заявки з’являться автоматично" : "Поки немає кандидатів. Діліться своїм посиланням (вкладка «Моє посилання») — кандидати з нього потраплять сюди.") + '</td></tr>') + '</tbody></table></div>';
+            (l.status_note ? '<small class="cst">✎ ' + E(l.status_note) + '</small>' : '') + waitBadge(l) + '</td>' +
+            '<td class="c-nt"><textarea class="ntx" data-nt="' + l.id + '" rows="2" maxlength="1000" placeholder="+ примітка">' + E(l.manager_note || "") + '</textarea></td>' + rowTasks(l) + '</tr>';
+        }).join("") : '<tr><td colspan="9" class="empty">' + (S.own ? "Тут поки порожньо. Нові заявки з’являться автоматично" : "Поки немає кандидатів. Діліться своїм посиланням (вкладка «Моє посилання») — кандидати з нього потраплять сюди.") + '</td></tr>') + '</tbody></table></div>';
       var cf = document.getElementById("chf"); if (cf) cf.onchange = function(){ S.ch = cf.value; rLeads(); };
       var ms = document.getElementById("mgr"); if (ms) ms.onchange = function(){ S.mgr = ms.value; rLeads(); };
       var qi = document.getElementById("q");
       qi.oninput = function(){ S.q = qi.value; var pos = qi.selectionStart; rLeads(); };
       document.querySelectorAll("[data-f]").forEach(function(b){ b.onclick = function(){ S.filter = b.getAttribute("data-f"); rLeads(); }; });
-      document.querySelectorAll("tr.row").forEach(function(tr){ tr.onclick = function(e){ if (e.target.closest(".ck,select,button.st,td.tk")) return; openLead(+tr.getAttribute("data-id")); }; });
+      document.querySelectorAll("tr.row").forEach(function(tr){ tr.onclick = function(e){ if (e.target.closest(".ck,select,button.st,td.tk,td.c-nt")) return; openLead(+tr.getAttribute("data-id")); }; });
       // швидка зміна статусу прямо в таблиці
       bindRowTasks(app);
+      // примітки прямо в таблиці: зберігаються, коли виходите з поля
+      app.querySelectorAll("textarea[data-nt]").forEach(function(ta){
+        var fit = function(){ ta.style.height = "auto"; ta.style.height = Math.min(ta.scrollHeight + 2, 160) + "px"; }; fit();
+        ta.oninput = fit;
+        ta.onkeydown = function(e){ if (e.key === "Escape") { var l0 = S.leads.filter(function(x){ return x.id === +ta.getAttribute("data-nt"); })[0]; ta.value = (l0 && l0.manager_note) || ""; ta.blur(); } };
+        ta.onblur = function(){ var id = +ta.getAttribute("data-nt"), l = S.leads.filter(function(x){ return x.id === id; })[0], v = ta.value.trim() || null;
+          if (!l || (l.manager_note || null) === v) return;
+          API.saveLead(id, {manager_note: v}).then(function(){ l.manager_note = v; toast(v ? "Примітку збережено" : "Примітку прибрано"); }).catch(fail); };
+      });
       document.querySelectorAll("button[data-st]").forEach(function(btn){
         btn.onclick = function(e){ e.stopPropagation(); stMenu(btn, +btn.getAttribute("data-st")); };
       });
