@@ -34,6 +34,9 @@ const AD_VAC: Record<string, [string, string]> = {
   "promo-paleta": ["2238374", "Hanplast — палетувальник, Bydgoszcz (акція)"],
   "promo-osla": ["1893257", "Комплектація на електронавантажувачі, Osła (акція)"],
   "promo-katy": ["1893927", "SHEIN — склад, Kąty Wrocławskie (акція)"],
+  "shein-katy-1": ["1893927", "SHEIN — склад, Kąty Wrocławskie (акція)"],
+  "shein-katy-2": ["1893927", "SHEIN — склад, Kąty Wrocławskie (акція)"],
+  "shein-katy-3": ["1893927", "SHEIN — склад, Kąty Wrocławskie (акція)"],
   "promo-sinsay": ["1893715", "SINSAY — склад, Jasionka/Rzeszów (акція)"],
 };
 function adVacancy(adName?: string): { id: string; title: string } | null {
