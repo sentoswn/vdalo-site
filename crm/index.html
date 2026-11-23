@@ -261,6 +261,8 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
 .ntx::placeholder{color:var(--muted)}
 .ntx:focus{border:1px solid var(--blue);background:var(--surface)}
 .lno{display:inline-block;font-size:12px;font-weight:700;color:var(--muted);background:var(--soft);border-radius:6px;padding:1px 6px;margin-left:4px;vertical-align:1px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.who a.tel{color:var(--blue);text-decoration:none;font-weight:600}
+.who a.tel:hover{text-decoration:underline}
 .tbox{border:1px solid var(--line);border-radius:14px;padding:10px 12px 4px;background:var(--surface)}
 .tbox>b{display:flex;align-items:center;gap:6px}
 .task.blank{align-items:center}
@@ -748,7 +750,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
         '<div class="card"><table class="tbl lt"><thead><tr><th class="ck"><input type="checkbox" class="ck" id="ck-all" title="Вибрати всіх"></th><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Канал</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th><th class="nt-h">Примітки</th><th class="tk-h">Задачі</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(l){
           return '<tr class="row' + (staleMs(l) > STALE_MS || taskOverdue(l) || (l.status === "new" && Date.now() - waitStart(l) > 15 * 6e4) ? " stale" : "") + '" data-id="' + l.id + '"><td class="ck"><input type="checkbox" class="ck" data-ck="' + l.id + '"' + (S.sel[l.id] ? " checked" : "") + '></td><td class="hide-m">' + E(dt(l.created_at, true)) + '</td>' +
-            '<td class="c-who"><div class="who">' + avatar(l.name) + '<div><b>' + E(l.name) + ' <span class="lno">№' + l.id + '</span></b><small>' + E(l.phone) + (l.who ? " · " + E(l.who) : "") + '</small></div></div></td>' +
+            '<td class="c-who"><div class="who">' + avatar(l.name) + '<div><b>' + E(l.name) + ' <span class="lno">№' + l.id + '</span></b><small>' + ((l.phone || "").replace(/\D/g, "").length >= 9 ? '<a class="tel" href="tel:' + E((l.phone || "").replace(/[^\d+]/g, "")) + '" title="Подзвонити">' + E(l.phone) + '</a>' : E(l.phone)) + (l.who ? " · " + E(l.who) : "") + '</small></div></div></td>' +
             '<td class="hide-m c-vac">' + E((l.vacancy_title || "Будь-яка").replace(/ · Оператор: .*$/, "")) + opBadge(l) + (l.employer ? '<small>' + E(l.employer) + '</small>' : "") + '</td>' +
             '<td class="hide-m c-ch">' + chBadge(l) + (l.referrer ? '<small>від ' + E(pname(l.referrer)) + '</small>' : "") + '</td>' +
             (S.own ? '<td class="hide-m c-mg">' + (mgrsOf(l).length ? mgrsOf(l).map(function(id){ return E(staffName(id)); }).join(", ") : '<span class="st st-new">Не призначено</span>') + '</td>' : '') +
@@ -761,7 +763,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
       var qi = document.getElementById("q");
       qi.oninput = function(){ S.q = qi.value; var pos = qi.selectionStart; rLeads(); };
       document.querySelectorAll("[data-f]").forEach(function(b){ b.onclick = function(){ S.filter = b.getAttribute("data-f"); rLeads(); }; });
-      document.querySelectorAll("tr.row").forEach(function(tr){ tr.onclick = function(e){ if (e.target.closest(".ck,select,button.st,td.tk,td.c-nt")) return; openLead(+tr.getAttribute("data-id")); }; });
+      document.querySelectorAll("tr.row").forEach(function(tr){ tr.onclick = function(e){ if (e.target.closest(".ck,select,button.st,td.tk,td.c-nt,a")) return; openLead(+tr.getAttribute("data-id")); }; });
       // швидка зміна статусу прямо в таблиці
       bindRowTasks(app);
       // примітки прямо в таблиці: зберігаються, коли виходите з поля
