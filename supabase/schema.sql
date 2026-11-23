@@ -887,10 +887,9 @@ end $$;
 
 create or replace function public.lead_start_tasks(lid bigint, who uuid, t0 timestamptz default now()) returns void language plpgsql security definer set search_path = public as $$
 begin
+  -- нова заявка: лише одна стартова задача — подзвонити (з 23.11.2026)
   insert into public.tasks(title, lead_id, assignee_id, due_at, note) values
-    ('Зателефонувати / написати', lid, who, t0 + interval '15 minutes', 'Набір «Новий кандидат»'),
-    ('Надіслати 2–3 вакансії',    lid, who, t0 + interval '2 hours',    'Набір «Новий кандидат»'),
-    ('Нагадати, якщо не відповів', lid, who, ((t0 at time zone 'Europe/Kyiv')::date + 1 + time '10:00') at time zone 'Europe/Kyiv', 'Набір «Новий кандидат»');
+    ('Зателефонувати / написати', lid, who, t0 + interval '15 minutes', 'Набір «Новий кандидат»');
 end $$;
 revoke all on function public.lead_start_tasks(bigint, uuid, timestamptz) from public, anon, authenticated;
 
