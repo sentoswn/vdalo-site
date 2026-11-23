@@ -463,3 +463,5 @@ Telegram, Viber, WhatsApp або дзвінок — пишіть, як вам з
 Вкажіть номер телефону повністю. Якщо у вас інший код країни, оберіть його зі списку ¦ Укажите номер телефона полностью. Если у вас другой код страны, выберите его из списка ¦ Please enter your full phone number. If your country code is different, choose it from the list ¦ Podaj pełny numer telefonu. Jeśli masz inny kod kraju, wybierz go z listy
 Доплата за власне житло ¦ Доплата за своё жильё ¦ Allowance for your own housing ¦ Dopłata do własnego mieszkania
 Доплата за своє житло ¦ Доплата за своё жильё ¦ Own housing allowance ¦ Dopłata do własnego mieszkania
+Залишилось місць ¦ Осталось мест ¦ Places left ¦ Wolnych miejsc
+Місць немає, запис у резерв ¦ Мест нет, запись в резерв ¦ No places left, waiting list only ¦ Brak miejsc, zapis na listę rezerwową
