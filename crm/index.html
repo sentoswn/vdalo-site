@@ -239,7 +239,8 @@ td.tk{width:auto;min-width:250px;max-width:380px;cursor:default;padding-top:12px
 td.c-nt{width:190px;min-width:150px;max-width:260px;cursor:default}
 .tbl.lt td.c-st{max-width:220px}
 .tbl.lt td.c-st .cst{white-space:normal;overflow-wrap:anywhere}
-.card:has(> .tbl.lt){overflow-x:auto}
+.card:has(> .tbl.lt){overflow-x:clip}
+.tbl.lt td.c-st button.st{max-width:100%;white-space:normal;line-height:1.25;overflow:visible}
 .ntx{width:100%;min-height:40px;border:1px dashed transparent;border-radius:10px;background:transparent;padding:6px 8px;font:inherit;font-size:13px;line-height:1.35;color:var(--ink);resize:none;overflow:hidden;outline:0}
 tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
 .ntx::placeholder{color:var(--muted)}
