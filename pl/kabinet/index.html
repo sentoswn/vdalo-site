@@ -1725,6 +1725,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
     if (v._c) t.push('<li class="'+(v._c.ok?"ok":"")+'"><svg class="i"><use href="#i-doc"/></svg>'+esc(v._c.short)+'</li>');
     if (v._next) t.push('<li class="date"><svg class="i"><use href="#i-cal"/></svg>Заїзд '+dd(v._next)+(rel(v._next)?" ("+rel(v._next)+")":"")+'</li>');
     if (v._g==="w"||v._g==="m") t.push('<li><svg class="i"><use href="#i-users"/></svg>'+(v._g==="w"?"Жінкам":"Чоловікам")+'</li>');
+    if (ageLbl(v)) t.push('<li><svg class="i"><use href="#i-user"/></svg>'+esc(ageLbl(v))+'</li>');
     return '<ul class="facts">'+t.join("")+'</ul>';
   }
   function enrich(v){
@@ -1766,11 +1767,14 @@ window.VdaloTrack = window.VdaloTrack || (function(){
   }
 
   /* ---------- Рендер ---------- */
+  function ageLbl(v){ var r=window.VdaloSearch?VdaloSearch.ageRange(v):[18,99]; if (r[0]<=18&&r[1]>=99) return "";
+    return "Вік: "+(r[0]>18&&r[1]<99?r[0]+"–"+r[1]:r[1]<99?"до "+r[1]:"від "+r[0]); }
   function tagsHtml(v){
     var t=[];
     if (v._h) t.push('<li class="tag '+(v._h.k==="ok"?"ok":v._h.k==="no"?"no":"")+'"><svg class="i"><use href="#i-home"/></svg>'+esc(v._h.t)+'</li>');
     if (v.own) t.push('<li class="tag ok"><svg class="i"><use href="#i-piggy"/></svg>Доплата за своє житло</li>');
     t.push('<li class="tag"><svg class="i"><use href="#i-users"/></svg>'+esc(v.who||"Жінки та чоловіки")+'</li>');
+    if (ageLbl(v)) t.push('<li class="tag"><svg class="i"><use href="#i-user"/></svg>'+esc(ageLbl(v))+'</li>');
     if (seatsHtml(v,true)) t.push(seatsHtml(v,true));
     if (v._c) t.push('<li class="tag'+(v._c.ok?' ok':'')+'"><svg class="i"><use href="#i-doc"/></svg>'+esc(v._c.short)+'</li>');
     if (v._next) t.push('<li class="tag date"><svg class="i"><use href="#i-cal"/></svg>Заїзд '+dd(v._next)+(rel(v._next)?" ("+rel(v._next)+")":"")+'</li>');
