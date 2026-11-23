@@ -933,3 +933,11 @@ begin
     insert into public.settings(key, value) values ('start_tasks_cleanup_2311', now()::text);
   end if;
 end $$;
+
+-- вік кандидата (з нової форми Facebook, питання про вік)
+alter table public.leads add column if not exists age text;
+-- один раз: вік із коментаря заявок нової форми («Скільки вам років?: 34») → окреме поле
+update public.leads l set age = trim(m[1])
+  from (select id, regexp_match(note, '(?:вік|років|рокiв|лет|возраст|age)[^:\n]*:\s*([^\n]+)', 'i') as m from public.leads
+         where age is null and note is not null) x
+ where l.id = x.id and x.m is not null;

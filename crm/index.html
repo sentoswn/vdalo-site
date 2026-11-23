@@ -263,6 +263,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
 .lno{display:inline-block;font-size:12px;font-weight:700;color:var(--muted);background:var(--soft);border-radius:6px;padding:1px 6px;margin-left:4px;vertical-align:1px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .who a.tel{color:var(--blue);text-decoration:none;font-weight:600}
 .who a.tel:hover{text-decoration:underline}
+.who .age{font-weight:600;color:var(--muted)}
 .tbox{border:1px solid var(--line);border-radius:14px;padding:10px 12px 4px;background:var(--surface)}
 .tbox>b{display:flex;align-items:center;gap:6px}
 .task.blank{align-items:center}
@@ -415,6 +416,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
     if (/перехід з/.test(src)) return "other";
     return "direct";
   }
+  function ageTxt(a){ a = String(a || "").trim(); var n = +a; if (!/^\d{1,3}$/.test(a)) return a; var d = n % 10, h = n % 100; return n + " " + (h >= 11 && h <= 14 ? "років" : d === 1 ? "рік" : d >= 2 && d <= 4 ? "роки" : "років"); }
   function chBadge(l){ var c = CH[chOf(l)]; return '<span class="st" style="background:' + c[1] + ';color:' + c[2] + '">' + E(c[0]) + '</span>'; }
   function waitStart(l){ return Math.max(new Date(l.created_at).getTime(), l.assigned_at ? new Date(l.assigned_at).getTime() : 0); }
   function mins(ms){ var m = Math.max(0, Math.round(ms / 6e4)); if (m < 60) return m + " хв"; var h = Math.floor(m / 60); if (h < 24) return h + " год " + (m % 60) + " хв"; return Math.floor(h / 24) + " д " + (h % 24) + " год"; }
@@ -750,7 +752,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
         '<div class="card"><table class="tbl lt"><thead><tr><th class="ck"><input type="checkbox" class="ck" id="ck-all" title="Вибрати всіх"></th><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Канал</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th><th class="nt-h">Примітки</th><th class="tk-h">Задачі</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(l){
           return '<tr class="row' + (staleMs(l) > STALE_MS || taskOverdue(l) || (l.status === "new" && Date.now() - waitStart(l) > 15 * 6e4) ? " stale" : "") + '" data-id="' + l.id + '"><td class="ck"><input type="checkbox" class="ck" data-ck="' + l.id + '"' + (S.sel[l.id] ? " checked" : "") + '></td><td class="hide-m">' + E(dt(l.created_at, true)) + '</td>' +
-            '<td class="c-who"><div class="who">' + avatar(l.name) + '<div><b>' + E(l.name) + ' <span class="lno">№' + l.id + '</span></b><small>' + ((l.phone || "").replace(/\D/g, "").length >= 9 ? '<a class="tel" href="tel:' + E((l.phone || "").replace(/[^\d+]/g, "")) + '" title="Подзвонити">' + E(l.phone) + '</a>' : E(l.phone)) + (l.who ? " · " + E(l.who) : "") + '</small></div></div></td>' +
+            '<td class="c-who"><div class="who">' + avatar(l.name) + '<div><b>' + E(l.name) + (l.age ? '<span class="age">, ' + E(ageTxt(l.age)) + '</span>' : '') + ' <span class="lno">№' + l.id + '</span></b><small>' + ((l.phone || "").replace(/\D/g, "").length >= 9 ? '<a class="tel" href="tel:' + E((l.phone || "").replace(/[^\d+]/g, "")) + '" title="Подзвонити">' + E(l.phone) + '</a>' : E(l.phone)) + (l.who ? " · " + E(l.who) : "") + '</small></div></div></td>' +
             '<td class="hide-m c-vac">' + E((l.vacancy_title || "Будь-яка").replace(/ · Оператор: .*$/, "")) + opBadge(l) + (l.employer ? '<small>' + E(l.employer) + '</small>' : "") + '</td>' +
             '<td class="hide-m c-ch">' + chBadge(l) + (l.referrer ? '<small>від ' + E(pname(l.referrer)) + '</small>' : "") + '</td>' +
             (S.own ? '<td class="hide-m c-mg">' + (mgrsOf(l).length ? mgrsOf(l).map(function(id){ return E(staffName(id)); }).join(", ") : '<span class="st st-new">Не призначено</span>') + '</td>' : '') +
@@ -858,7 +860,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
     var l = id ? S.leads.filter(function(x){ return x.id === id; })[0] : {name: "", phone: "", status: "new"};
     if (!l) return;
     var isNew = !id;
-    var info = isNew ? "" : '<dl class="kv"><dt>Заявка</dt><dd>' + E(dt(l.created_at, true)) + '</dd><dt>Телефон</dt><dd><a href="tel:' + E((l.phone || "").replace(/[^\d+]/g, "")) + '">' + E(l.phone) + '</a>' +
+    var info = isNew ? "" : '<dl class="kv"><dt>Заявка</dt><dd>' + E(dt(l.created_at, true)) + '</dd>' + (l.age ? '<dt>Вік</dt><dd>' + E(ageTxt(l.age)) + '</dd>' : '') + '<dt>Телефон</dt><dd><a href="tel:' + E((l.phone || "").replace(/[^\d+]/g, "")) + '">' + E(l.phone) + '</a>' +
       ((l.phone || "").replace(/\D/g, "").length >= 9 ? ' <a class="btn sm vbr" target="_blank" rel="noopener" href="/v/?n=' + encodeURIComponent((l.phone || "").replace(/\D/g, "")) + '&nm=' + encodeURIComponent(l.name || "") + (l.vacancy_id && !/^top-/.test(l.vacancy_id) ? '&v=' + encodeURIComponent(l.vacancy_id) : "") + '">💬 Написати у Viber</a>' : "") + '</dd>' +
       '<dt>Вакансія</dt><dd>' + (l.vacancy_id ? '<a href="/vakansii/' + E(l.vacancy_id) + '/" target="_blank">' + E(l.vacancy_title || l.vacancy_id) + '</a>' : "Будь-яка") + '</dd>' +
       (l.vacancy_id ? '<dt>Оператор</dt><dd>' + opBadge(l, true).replace(/^<small class="op">Оператор: |<\/small>$/g, "") + '</dd>' : "") +

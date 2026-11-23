@@ -47,6 +47,8 @@ function mapFields(fd: Field[]) {
     else if (k === "first_name") first = v;
     else if (k === "last_name") last = v;
     else if (k === "phone_number" || k === "phone") out.phone = v;
+    else if (k === "date_of_birth" || k === "dob") { const d = new Date(v); out.age = isNaN(+d) ? v : String(Math.floor((Date.now() - +d) / 31557600000)); }
+    else if (/вік|возраст|скільки.*рок|сколько.*лет|\bage\b|років|лет/.test(k)) out.age = v;
     else if (/хто|who/.test(k)) out.who = v;
     else if (/коли|when|почати/.test(k)) out.when_go = v;
     else if (/зв.?яз|contact|зручн/.test(k)) out.contact_mode = v;
@@ -119,7 +121,7 @@ async function ingest(sb: any, l: any, formName: string): Promise<{ added: boole
   const row = {
     vacancy_id: vac?.id || null, vacancy_title: vac?.title || null,
     ext_id: "fb:" + String(l.id).replace(/\D/g, ""), created_at: l.created_time || new Date().toISOString(),
-    name: m.name, phone: m.phone || "—", who: m.who || null, when_go: m.when_go || null,
+    name: m.name, phone: m.phone || "—", age: m.age || null, who: m.who || null, when_go: m.when_go || null,
     contact_mode: m.contact_mode || null, note: m.note || null,
     source: "Форма " + (plat === "instagram" ? "Instagram" : "Facebook") + (l.ad_name ? " · " + l.ad_name : ""),
     page: "lead form: " + formName, lang: "uk", traffic: l.is_organic ? "social" : "paid",
@@ -137,7 +139,7 @@ async function ingest(sb: any, l: any, formName: string): Promise<{ added: boole
   const { data: ins, error } = await sb.from("leads").insert(row).select("id").single();
   if (error) { if (/duplicate/i.test(error.message)) { await seen(); return { added: false, dup: true }; } return { added: false, error: m.name + ": " + error.message }; }
   await seen();
-  const payload = { name: m.name, phone: m.phone || "", vacancyId: vac?.id || "", vacancyTitle: vac?.title || "", operator: "",
+  const payload = { name: m.name + (m.age ? ", " + m.age : ""), phone: m.phone || "", vacancyId: vac?.id || "", vacancyTitle: vac?.title || "", operator: "",
     who: m.who || "", when: m.when_go || "", mode: m.contact_mode || "", channel: "",
     note: [m.note, "Реклама: " + ([l.campaign_name, l.adset_name, l.ad_name].filter(Boolean).join(" / ") || "форма Facebook")].filter(Boolean).join("\n"),
     source: row.source, page: "Facebook Lead Ads — " + formName, website: "" };
@@ -149,7 +151,7 @@ async function ingest(sb: any, l: any, formName: string): Promise<{ added: boole
       ? "\n🎯 <b>Вакансія:</b> <a href=\"https://vdalo-robota.com.ua/vakansii/" + vac.id + "/\">№" + vac.id + "</a>" + (vac.title ? " — " + esc(vac.title) : "")
       : "";
     const adLine = "\n📣 <b>Реклама:</b> " + esc([l.campaign_name, l.ad_name].filter(Boolean).join(" → ") || (l.is_organic ? "без реклами (органіка)" : "невідомо"));
-    const msg = "📝 <b>Заявка з форми " + (plat === "instagram" ? "Instagram" : "Facebook") + (ins?.id ? " · №" + ins.id : "") + "</b>" + vacLine + adLine + "\n<b>Ім'я:</b> " + esc(m.name) +
+    const msg = "📝 <b>Заявка з форми " + (plat === "instagram" ? "Instagram" : "Facebook") + (ins?.id ? " · №" + ins.id : "") + "</b>" + vacLine + adLine + "\n<b>Ім'я:</b> " + esc(m.name) + (m.age ? "\n<b>Вік:</b> " + esc(m.age) : "") +
       "\n<b>Телефон:</b> " + esc(m.phone) + (m.who ? "\n<b>Хто їде:</b> " + esc(m.who) : "") + (m.when_go ? "\n<b>Коли:</b> " + esc(m.when_go) : "") +
       (m.contact_mode ? "\n<b>Зв'язок:</b> " + esc(m.contact_mode) : "") + (m.note ? "\n" + esc(m.note) : "") +
       "\n\n<a href=\"https://vdalo-robota.com.ua/crm/\">Відкрити CRM</a>";
