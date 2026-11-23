@@ -749,7 +749,7 @@ ORG = {"@context": "https://schema.org", "@type": "EmploymentAgency", "name": "�
 # ---------- Сторінка вакансії ----------
 def vac_rows(v):
     c = v["_c"]
-    rows = [("Для кого", v.get("who")), ("Годин на місяць", v.get("hours")), ("Графік", v.get("schedule")), ("Нічні зміни", v.get("night")),
+    rows = [("Місто", ", ".join(x for x in (v.get("city"), v.get("country")) if x) if v.get("city") else None), ("Для кого", v.get("who")), ("Годин на місяць", v.get("hours")), ("Графік", v.get("schedule")), ("Нічні зміни", v.get("night")),
             ("Житло", v.get("housing")), ("Доплата за власне житло", v.get("own")), ("Харчування", v.get("food")), ("Доїзд до роботи", v.get("transport")),
             ("Договір", {"html": esc(c["full"]) + (f"<small>{esc(c['note'])}</small>" if c["note"] else "")} if c else None),
             ("Вимоги", v.get("req")), ("Бонуси", v.get("perks")), ("Дати заїзду", v.get("trips"))]
