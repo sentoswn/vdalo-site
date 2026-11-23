@@ -673,7 +673,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
     o.querySelector("form").onsubmit = function(e){ e.preventDefault(); var a = inp.value.trim().slice(0, 20); close(); done(a); };
   }
   function rejPatch(r, a){ var p = {status: "rejected"}; if (r !== undefined) p.status_note = r === AGE_R && a ? AGE_R + " (" + ageTxt(a) + ")" : r; if (a) p.age = a; return p; }
-  var SUBS = {wrote: ["Viber", "WhatsApp", "Telegram", "SMS"], dialog: ["Viber", "WhatsApp", "Telegram"], rejected: REJ};   // варіанти під статусом у меню
+  var SUBS = {wrote: ["Viber", "WhatsApp", "Telegram"], dialog: ["Viber", "WhatsApp", "Telegram"], rejected: REJ};   // варіанти під статусом у меню
   function askReason(l, done){
     var o = document.createElement("div"); o.className = "own-dlg";
     o.innerHTML = '<div class="own-box" role="dialog" aria-modal="true"><h3>Причина відмови</h3><p class="note">' + E(l.name) + ' <span class="lno">№' + l.id + '</span></p>' +
