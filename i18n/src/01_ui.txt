@@ -85,6 +85,8 @@
 Для кого ¦ Для кого ¦ For whom ¦ Dla kogo
 Усі ¦ Все ¦ All ¦ Wszyscy
 Жінкам ¦ Женщинам ¦ Women ¦ Kobiety
+Вік: ¦ Возраст: ¦ Age: ¦ Wiek:
+від ¦ от ¦ from ¦ od
 Чоловікам ¦ Мужчинам ¦ Men ¦ Mężczyźni
 Парам ¦ Парам ¦ Couples ¦ Pary
 Знайдено ¦ Найдено ¦ Found ¦ Znaleziono
