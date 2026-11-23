@@ -62,6 +62,7 @@ main{padding:20px;max-width:1840px;margin:0 auto}
 .st-dialog{background:#e0f4f7;color:#0e6b7a}
 .st-waiting{background:#fde8f1;color:#a61e5a}
 .st-age{background:#eef0f4;color:#475467}
+.st-noans{background:#fdeee5;color:#c4320a}
 .st-call{background:#ffe8d9;color:#b4480b}
 button.st{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:13px;padding:6px 26px 6px 12px;max-width:300px;overflow:hidden;text-overflow:ellipsis;position:relative;text-align:left}
 button.st::after{content:"";position:absolute;right:11px;top:50%;width:6px;height:6px;margin-top:-5px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg)}
@@ -384,7 +385,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
 (function(){
   var E = Vdalo.esc, M = Vdalo.money;
   var app = document.getElementById("app"), drawer = document.getElementById("drawer"), shade = document.getElementById("shade");
-  var LS = [["new","Нова заявка"],["call","Чекає дзвінка"],["contacted","На зв’язку"],["dialog","Ведеться діалог"],["waiting","Зідзвонились — чекає вакансію"],["age","Не підходить за віком"],["matched","Підібрано вакансію"],["departed","Виїхав"],["working","Працює"],["paid","Відпрацював 2 тижні, оплату отримано"],["rejected","Відмова"]];
+  var LS = [["new","Нова заявка"],["call","Чекає дзвінка"],["noans","Написали, подзвонили — не відповідає"],["contacted","На зв’язку"],["dialog","Ведеться діалог"],["waiting","Зідзвонились — чекає вакансію"],["age","Не підходить за віком"],["matched","Підібрано вакансію"],["departed","Виїхав"],["working","Працює"],["paid","Відпрацював 2 тижні, оплату отримано"],["rejected","Відмова"]];
   var LSN = {}; LS.forEach(function(x){ LSN[x[0]] = x[1]; });
   var ES = [["new","Новий запит"],["in_progress","В роботі"],["contract","Співпрацюємо"],["rejected","Відмова"]];
   var ESN = {}; ES.forEach(function(x){ ESN[x[0]] = x[1]; });
@@ -642,7 +643,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
   function fail(e){ console.warn(e); toast("Помилка: " + (e && e.message || "не вдалося зберегти")); }
 
   /* ================= Кандидати ================= */
-  var STALE = ["call", "contacted", "dialog", "waiting"], STALE_MS = 3 * 36e5;   // «На зв’язку», «Діалог», «Чекає вакансію»: без змін 3 год — червоне
+  var STALE = ["call", "noans", "contacted", "dialog", "waiting"], STALE_MS = 3 * 36e5;   // «На зв’язку», «Діалог», «Чекає вакансію»: без змін 3 год — червоне
   function staleMs(l){ return STALE.indexOf(l.status) >= 0 ? Date.now() - new Date(l.status_at || l.updated_at || l.created_at).getTime() : 0; }
   function waitBadge(l){
     var sm = staleMs(l);
@@ -1172,7 +1173,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
         '<p class="note">Посилання на конкретну вакансію: відкрийте вакансію на сайті й додайте в кінці адреси <code>?ref=' + E(S.me.ref_code || "") + '</code>.</p><button class="btn ghost" style="justify-self:start" onclick="document.querySelector(\'[data-tab=guide]\').click()">Інструкція: де й як шукати кандидатів →</button></div>' +
         '<div class="card pad"><h3>Ваші кандидати</h3><div class="stats" style="margin:0">' +
         '<div class="card stat"><span>Усього</span><b>' + mine.length + '</b></div>' +
-        '<div class="card stat"><span>В роботі</span><b>' + mine.filter(function(l){ return ["new", "call", "contacted", "dialog", "waiting", "age", "matched", "departed"].indexOf(l.status) >= 0; }).length + '</b></div>' +
+        '<div class="card stat"><span>В роботі</span><b>' + mine.filter(function(l){ return ["new", "call", "noans", "contacted", "dialog", "waiting", "age", "matched", "departed"].indexOf(l.status) >= 0; }).length + '</b></div>' +
         '<div class="card stat hl"><span>Вийшли на роботу</span><b>' + ((cnt.working || 0) + (cnt.paid || 0)) + '</b></div></div>' +
         '<div class="bars">' + LS.map(function(x){ var n = cnt[x[0]] || 0; return '<div class="b"><span>' + E(x[1]) + '</span><div class="t"><i style="width:' + (mine.length ? Math.round(n / mine.length * 100) : 0) + '%"></i></div><b>' + n + '</b></div>'; }).join("") + '</div></div></div>';
       document.getElementById("ml-c").onclick = function(){ var i = document.getElementById("ml"); i.select(); try { navigator.clipboard.writeText(i.value); } catch(e){ document.execCommand("copy"); } toast("Скопійовано"); };
@@ -1203,7 +1204,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
       var rows = S.staff.map(function(p){
         var m = L.filter(function(l){ return hasMgr(l, p.id); });
         var od = tasks.filter(function(t){ return t.assignee_id === p.id && !t.done_at && t.due_at && new Date(t.due_at) < now; }).length;
-        return {p: p, n: m.length, act: m.filter(function(l){ return ["new", "call", "contacted", "dialog", "waiting", "age", "matched"].indexOf(l.status) >= 0; }).length,
+        return {p: p, n: m.length, act: m.filter(function(l){ return ["new", "call", "noans", "contacted", "dialog", "waiting", "age", "matched"].indexOf(l.status) >= 0; }).length,
           dep: m.filter(reached).length, w: m.filter(workedF).length, paid: m.filter(function(l){ return l.status === "paid"; }).length,
           rej: m.filter(function(l){ return l.status === "rejected"; }).length, od: od,
           med: median(m.map(respMs).filter(function(x){ return x !== null; })),

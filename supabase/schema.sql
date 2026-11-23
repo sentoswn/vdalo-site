@@ -946,3 +946,8 @@ update public.leads l set age = trim(m[1])
 alter table public.leads drop constraint if exists leads_status_check;
 alter table public.leads add constraint leads_status_check check (status in
   ('new','call','contacted','dialog','waiting','age','matched','departed','working','paid','rejected'));
+
+-- новий статус «Написали, подзвонили — не відповідає» (noans)
+alter table public.leads drop constraint if exists leads_status_check;
+alter table public.leads add constraint leads_status_check check (status in
+  ('new','call','noans','contacted','dialog','waiting','age','matched','departed','working','paid','rejected'));
