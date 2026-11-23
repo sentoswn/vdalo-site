@@ -81,7 +81,7 @@ create table if not exists public.leads (
   ref_raw       text,                       -- що прийшло в ?ref= (код або телефон)
   referrer_id   uuid references public.profiles(id) on delete set null,
   status        text not null default 'new' check (status in
-                ('new','contacted','matched','departed','working','paid','rejected')),
+  ('new','call','noans','contacted','dialog','waiting','age','matched','departed','working','paid','rejected')),
   employer      text,
   start_date    date,
   manager_note  text,
@@ -846,7 +846,7 @@ end $$;
 -- проміжні статуси: «Чекає дзвінка», «Ведеться діалог (Viber / Telegram)» і «Зідзвонились — чекає вакансію»
 alter table public.leads drop constraint if exists leads_status_check;
 alter table public.leads add constraint leads_status_check check (status in
-  ('new','call','contacted','dialog','waiting','matched','departed','working','paid','rejected'));
+  ('new','call','noans','contacted','dialog','waiting','age','matched','departed','working','paid','rejected'));
 
 -- коли востаннє змінювали статус (у CRM: «без змін 3 год» — червоне)
 alter table public.leads add column if not exists status_at timestamptz;
@@ -945,7 +945,7 @@ update public.leads l set age = trim(m[1])
 -- новий статус «Не підходить за віком» (age): кандидат лишається в базі, щоб пізніше підібрати вакансію за віком
 alter table public.leads drop constraint if exists leads_status_check;
 alter table public.leads add constraint leads_status_check check (status in
-  ('new','call','contacted','dialog','waiting','age','matched','departed','working','paid','rejected'));
+  ('new','call','noans','contacted','dialog','waiting','age','matched','departed','working','paid','rejected'));
 
 -- новий статус «Написали, подзвонили — не відповідає» (noans)
 alter table public.leads drop constraint if exists leads_status_check;
