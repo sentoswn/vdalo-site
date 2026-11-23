@@ -69,6 +69,8 @@
     r.cat = /Specjali/i.test(cat) || (!cat && /UDT|УДТ|карщик|зварюв|сварщ|бригадир|кухар|повар|CNC|ЧПУ/i.test(nm)) ? 's'
       : /mięsn|rybn/i.test(cat) || (!cat && /риб|рыб|курин|куряч|м[’'`]яс|мяс|ковбас|колбас|індич|индюш|морепрод/i.test(nm)) ? 'm' : 'w';
     if (/^Акція/i.test(o['Тип приїзду акція для посередників'] || '')) r.hot = true;
+    // Скільки місць залишилось (поле «Wolne miejsca - Oferta pracy»); 0 → на сайті «Місць немає, запис у резерв»
+    const wl = parseInt(o['Wolne miejsca - Oferta pracy'], 10); if (!isNaN(wl)) r.left = Math.max(0, wl);
     Object.keys(r).forEach(k => { if (r[k] === '' || r[k] == null) delete r[k]; });
     return r;
   }
