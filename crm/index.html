@@ -245,6 +245,7 @@ td.c-nt{width:190px;min-width:150px;max-width:260px;cursor:default}
 tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
 .ntx::placeholder{color:var(--muted)}
 .ntx:focus{border:1px solid var(--blue);background:var(--surface)}
+.lno{display:inline-block;font-size:12px;font-weight:700;color:var(--muted);background:var(--soft);border-radius:6px;padding:1px 6px;margin-left:4px;vertical-align:1px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .tbox{border:1px solid var(--line);border-radius:14px;padding:10px 12px 4px;background:var(--surface)}
 .tbox>b{display:flex;align-items:center;gap:6px}
 .task.blank{align-items:center}
@@ -670,7 +671,9 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
       var chips = '<button class="chip" data-f="active" aria-pressed="' + (S.filter === "active") + '">Активні<b>' + active + '</b></button>' +
         '<button class="chip" data-f="all" aria-pressed="' + (S.filter === "all") + '">Усі<b>' + list.length + '</b></button>' +
         LS.map(function(x){ return '<button class="chip" data-f="' + x[0] + '" aria-pressed="' + (S.filter === x[0]) + '">' + E(x[0] === "paid" ? "Оплачено" : x[1]) + '<b>' + (cnt[x[0]] || 0) + '</b></button>'; }).join("");
-      var q = S.q.toLowerCase();
+      var q = S.q.toLowerCase().trim();
+      // пошук за номером: «123», «№123» або «#123» — знаходить кандидата з будь-яким статусом
+      var qn = q.replace(/^[№#]\s*/, ""), byNo = /^\d{1,7}$/.test(qn) ? +qn : 0, onlyNo = byNo && /^[№#]/.test(q);
       var mgrSel = S.own ? '<select id="mgr" style="padding:7px 10px;border:1px solid var(--line);border-radius:999px;font-weight:600;background:var(--surface)">' +
         '<option value="all">Усі менеджери</option><option value="none"' + (S.mgr === "none" ? " selected" : "") + '>Без менеджера (' + list.filter(function(l){ return !mgrsOf(l).length; }).length + ')</option>' +
         S.staff.map(function(p){ return '<option value="' + p.id + '"' + (S.mgr === p.id ? " selected" : "") + '>' + E(pname(p)) + ' (' + list.filter(function(l){ return hasMgr(l, p.id); }).length + ')</option>'; }).join("") + '</select>' : "";
@@ -678,9 +681,11 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
         '<option value="all">Усі канали</option><option value="free"' + (S.ch === "free" ? " selected" : "") + '>Усі безкоштовні</option>' +
         Object.keys(CH).map(function(k){ return '<option value="' + k + '"' + (S.ch === k ? " selected" : "") + '>' + E(CH[k][0]) + ' (' + list.filter(function(l){ return chOf(l) === k; }).length + ')</option>'; }).join("") + '</select>';
       var rows = list.filter(function(l){
+        if (byNo && l.id === byNo) return true;
         if (S.ch && S.ch !== "all" && (S.ch === "free" ? CH[chOf(l)][3] !== "free" : chOf(l) !== S.ch)) return false;
         if (S.own && S.mgr === "none" && mgrsOf(l).length) return false;
         if (S.own && S.mgr !== "all" && S.mgr !== "none" && !hasMgr(l, S.mgr)) return false;
+        if (onlyNo) return false;
         if (S.filter === "active" && (l.status === "rejected" || l.status === "paid")) return false;
         if (S.filter !== "active" && S.filter !== "all" && l.status !== S.filter) return false;
         if (q) { var hay = [l.name, l.phone, l.vacancy_title, l.employer, l.manager_note, l.status_note, l.referrer && pname(l.referrer)].join(" ");
@@ -702,13 +707,13 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
         '<div><i class="hs-ic c-violet">' + ic("check") + '</i><b>' + nTask + '</b><span>задач на сьогодні</span></div>' +
         '<div class="good"><i class="hs-ic c-green">' + ic("trophy") + '</i><b>' + nWin + '</b><span>вийшли на роботу цього місяця</span></div></div></div>';
       app.innerHTML = demoBar() + banner +
-        '<div class="bar"><input type="search" id="q" placeholder="Пошук: ім’я, телефон, вакансія, роботодавець…" value="' + E(S.q) + '"><button class="btn" id="add">+ Нова заявка</button></div>' +
+        '<div class="bar"><input type="search" id="q" placeholder="Пошук: №, ім’я, телефон, вакансія, роботодавець…" value="' + E(S.q) + '"><button class="btn" id="add">+ Нова заявка</button></div>' +
         '<div class="bar lbar">' + mgrSel + chSel + '<div class="chips-x">' + chips + '</div></div>' +
         '<div id="bulk"></div>' +
         '<div class="card"><table class="tbl lt"><thead><tr><th class="ck"><input type="checkbox" class="ck" id="ck-all" title="Вибрати всіх"></th><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Канал</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th><th class="nt-h">Примітки</th><th class="tk-h">Задачі</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(l){
           return '<tr class="row' + (staleMs(l) > STALE_MS || taskOverdue(l) || (l.status === "new" && Date.now() - waitStart(l) > 15 * 6e4) ? " stale" : "") + '" data-id="' + l.id + '"><td class="ck"><input type="checkbox" class="ck" data-ck="' + l.id + '"' + (S.sel[l.id] ? " checked" : "") + '></td><td class="hide-m">' + E(dt(l.created_at, true)) + '</td>' +
-            '<td class="c-who"><div class="who">' + avatar(l.name) + '<div><b>' + E(l.name) + '</b><small>' + E(l.phone) + (l.who ? " · " + E(l.who) : "") + '</small></div></div></td>' +
+            '<td class="c-who"><div class="who">' + avatar(l.name) + '<div><b>' + E(l.name) + ' <span class="lno">№' + l.id + '</span></b><small>' + E(l.phone) + (l.who ? " · " + E(l.who) : "") + '</small></div></div></td>' +
             '<td class="hide-m">' + E((l.vacancy_title || "Будь-яка").replace(/ · Оператор: .*$/, "")) + opBadge(l) + (l.employer ? '<small>' + E(l.employer) + '</small>' : "") + '</td>' +
             '<td class="hide-m">' + chBadge(l) + (l.referrer ? '<small>від ' + E(pname(l.referrer)) + '</small>' : "") + '</td>' +
             (S.own ? '<td class="hide-m">' + (mgrsOf(l).length ? mgrsOf(l).map(function(id){ return E(staffName(id)); }).join(", ") : '<span class="st st-new">Не призначено</span>') + '</td>' : '') +
@@ -817,7 +822,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
       '<dt>Хто їде</dt><dd>' + E(l.who || "—") + '</dd><dt>Коли</dt><dd>' + E(l.when_go || "—") + '</dd>' +
       '<dt>Зв’язок</dt><dd>' + E([l.contact_mode, l.channel].filter(Boolean).join(" · ") || "—") + '</dd>' +
       '<dt>Коментар</dt><dd>' + E(l.note || "—") + '</dd><dt>Канал</dt><dd>' + chBadge(l) + '</dd><dt>Джерело</dt><dd>' + E(l.source || "—") + (l.lang && l.lang !== "uk" ? " · мова " + E(l.lang) : "") + '</dd></dl>';
-    openDrawer('<div class="dh"><h2>' + (isNew ? "Нова заявка" : E(l.name)) + '</h2><button class="btn ghost sm" data-x>✕</button></div><div class="db">' + info +
+    openDrawer('<div class="dh"><h2>' + (isNew ? "Нова заявка" : E(l.name) + ' <span class="lno">№' + l.id + '</span>') + '</h2><button class="btn ghost sm" data-x>✕</button></div><div class="db">' + info +
       (isNew ? "" : '<div class="mini tbox"><b>' + ic("check", "xs") + ' Задачі по кандидату</b><div id="d-tasks"></div></div>') +
       (isNew ? '<div class="g2"><div class="fld"><label>Ім’я</label><input id="d-name"></div><div class="fld"><label>Телефон</label><input id="d-phone" type="tel"></div></div>' +
         '<div class="fld"><label>Вакансія</label><select id="d-vacsel"><option value="">Будь-яка / ще не обрали</option>' + S.vac.map(function(v){ return '<option value="' + E(v.id) + '">' + E(v.title + " · " + (v.company || "") + " · " + (v.city || "")) + '</option>'; }).join("") + '<option value="__other">Інше (вписати)…</option></select><input id="d-vac" placeholder="Побажання кандидата" hidden style="margin-top:6px"></div>' : "") +

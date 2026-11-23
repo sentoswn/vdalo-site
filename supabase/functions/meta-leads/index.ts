@@ -134,7 +134,7 @@ async function ingest(sb: any, l: any, formName: string): Promise<{ added: boole
       .gte("created_at", new Date(Date.now() - 60 * 86400e3).toISOString()).limit(500);
     if ((same || []).some((x: any) => String(x.phone).replace(/\D/g, "").endsWith(d9))) { await seen(); return { added: false, dup: true }; }
   }
-  const { error } = await sb.from("leads").insert(row);
+  const { data: ins, error } = await sb.from("leads").insert(row).select("id").single();
   if (error) { if (/duplicate/i.test(error.message)) { await seen(); return { added: false, dup: true }; } return { added: false, error: m.name + ": " + error.message }; }
   await seen();
   const payload = { name: m.name, phone: m.phone || "", vacancyId: vac?.id || "", vacancyTitle: vac?.title || "", operator: "",
@@ -149,7 +149,7 @@ async function ingest(sb: any, l: any, formName: string): Promise<{ added: boole
       ? "\n🎯 <b>Вакансія:</b> <a href=\"https://vdalo-robota.com.ua/vakansii/" + vac.id + "/\">№" + vac.id + "</a>" + (vac.title ? " — " + esc(vac.title) : "")
       : "";
     const adLine = "\n📣 <b>Реклама:</b> " + esc([l.campaign_name, l.ad_name].filter(Boolean).join(" → ") || (l.is_organic ? "без реклами (органіка)" : "невідомо"));
-    const msg = "📝 <b>Заявка з форми " + (plat === "instagram" ? "Instagram" : "Facebook") + "</b>" + vacLine + adLine + "\n<b>Ім'я:</b> " + esc(m.name) +
+    const msg = "📝 <b>Заявка з форми " + (plat === "instagram" ? "Instagram" : "Facebook") + (ins?.id ? " · №" + ins.id : "") + "</b>" + vacLine + adLine + "\n<b>Ім'я:</b> " + esc(m.name) +
       "\n<b>Телефон:</b> " + esc(m.phone) + (m.who ? "\n<b>Хто їде:</b> " + esc(m.who) : "") + (m.when_go ? "\n<b>Коли:</b> " + esc(m.when_go) : "") +
       (m.contact_mode ? "\n<b>Зв'язок:</b> " + esc(m.contact_mode) : "") + (m.note ? "\n" + esc(m.note) : "") +
       "\n\n<a href=\"https://vdalo-robota.com.ua/crm/\">Відкрити CRM</a>";
