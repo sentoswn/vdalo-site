@@ -80,6 +80,14 @@ textarea{width:100%;min-height:230px;padding:12px 14px;border:1px solid var(--li
     document.getElementById("wa").href = "https://wa.me/" + raw + "?text=" + encodeURIComponent(txt);
   }
   ta.oninput = links;
+  // На комп'ютері Viber обрізає текст із посилання (~100 символів) — тому кнопка спершу копіює весь текст
+  var desk = !/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  function copyAll(){ try { ta.select(); if (navigator.clipboard) return navigator.clipboard.writeText(ta.value).catch(function(){ document.execCommand("copy"); }); document.execCommand("copy"); } catch (e) {} return Promise.resolve(); }
+  if (desk) {
+    document.getElementById("vb").textContent = "Скопіювати текст і відкрити Viber";
+    document.getElementById("st").innerHTML = "<b>На комп'ютері:</b> Viber вставляє лише початок тексту. Після відкриття чату натисніть у полі повідомлення <b>Ctrl+A</b>, потім <b>Ctrl+V</b> — вставиться весь текст.";
+    document.getElementById("vb").addEventListener("click", function(e){ var href = this.href; e.preventDefault(); copyAll(); setTimeout(function(){ location.href = href; }, 150); });
+  }
   document.getElementById("cp").onclick = function(){
     var b = this; ta.select();
     (navigator.clipboard ? navigator.clipboard.writeText(ta.value) : Promise.reject()).catch(function(){ document.execCommand("copy"); })
@@ -89,7 +97,7 @@ textarea{width:100%;min-height:230px;padding:12px 14px;border:1px solid var(--li
   fetch("/vacancies.json", {cache: "no-store"}).then(function(r){ return r.json(); }).then(function(d){ return d.items || []; })
     .catch(function(){ return []; }).then(function(items){
       ta.value = compose(items); links();
-      if (raw && q.get("go") !== "0") { setTimeout(function(){ location.href = document.getElementById("vb").href; }, 250); }
+      if (raw && q.get("go") !== "0" && !desk) { setTimeout(function(){ location.href = document.getElementById("vb").href; }, 250); }
     });
 })();
 </script>
