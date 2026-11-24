@@ -5756,7 +5756,13 @@
 },
 "Проживання по 2–3 особи в кімнаті. Є окремі кімнати для сімейних пар. У помешканні є все необхідне для комфортного проживання (пральна машина, мікрохвильова піч, холодильник, плита, сушарка). Фото додаються. З собою рекомендується взяти постільну білизну, чашку, тарілку, каструлю за бажанням.": {
 "en": "Accommodation for 2-3 people in a room. There are separate rooms for couples. The apartment has everything you need for a comfortable stay (washing machine, microwave oven, refrigerator, stove, dryer). Photos are attached. It is recommended to take bed linen, a cup, a plate, a pan with you if you wish.",
+"pl": "Zakwaterowanie dla 2-3 osób w pokoju. Dla par dostępne są osobne pokoje. W apartamencie jest wszystko co potrzebne do komfortowego pobytu (pralka, kuchenka mikrofalowa, lodówka, kuchenka, suszarka). Zdjęcia są załączone. Zaleca się zabrać ze sobą pościel, kubek, talerz, patelnię, jeśli sobie tego życzysz.",
 "ru": "Размещение по 2–3 человека в комнате. Есть отдельные комнаты для семейных пар. В доме есть все необходимое для комфортного проживания (стиральная машина, микроволновка, холодильник, плита, сушилка). Фото прилагаются. С собой рекомендуется взять постельное белье, чашку, тарелку, кастрюлю по желанию."
+},
+"Проживання у Стеншеві.": {
+"en": "Accommodation in Stenshev.",
+"pl": "Zakwaterowanie w Stenshevie.",
+"ru": "Размещение в Стеншеве."
 },
 "Проживання у місті Гданськ, у хостелах. Кімнати на 3–4 особи. Обладнання: спільна кухня, ванна кімната, пральна машина, інтернет. Дорога до роботи займає приблизно 15–20 хвилин громадським транспортом.": {
 "en": "Accommodation in the city of Gdansk, in hostels. Rooms for 3-4 people. Equipment: shared kitchen, bathroom, washing machine, internet. The journey to work takes approximately 15-20 minutes by public transport.",
@@ -5832,6 +5838,11 @@
 "en": "A prepared resume (CV) must be sent before the interview. First, the company independently reviews the resume, and later the selected candidates...",
 "pl": "Przygotowane CV należy przesłać przed rozmową kwalifikacyjną. Najpierw firma samodzielnie przegląda CV, a później wybranych kandydatów...",
 "ru": "Подготовленное резюме (CV) необходимо отправить в собеседование. Сначала предприятие самостоятельно знакомится с резюме, а впоследствии отобранных кандидатов."
+},
+"Підтримка керівника в перші місяці роботи. 10 грошей брутто за кожен кілограм понад цільовий показник.": {
+"en": "Support of the manager in the first months of work. 10 gross money for each kilogram over the target.",
+"pl": "Wsparcie managera w pierwszych miesiącach pracy. 10 pieniędzy brutto za każdy kilogram powyżej wartości docelowej.",
+"ru": "Поддержка управляющего в первые месяцы работы. 10 денег брутто за каждый килограмм сверх целевого показателя."
 },
 "Підтримка координатора протягом усього процесу працевлаштування.": {
 "en": "Support of the coordinator throughout the entire employment process.",
@@ -6608,6 +6619,11 @@
 "pl": "Praca zmianowa — 8 godzin. Przerwa na lunch — 30 minut.",
 "ru": "Рабочая смена – 8 часов. Обеденный перерыв – 30 минут."
 },
+"Робочий автобус — платний, вартість становить 150 злотих нетто. Працівники, які проживають у власному житлі, самостійно добираються на роботу громадським транспортом (PKP — потяг або MZK — міський автобус). Витрати на проїзд оплачують самостійно. Поїздка потягом PKP займає приблизно 5–8 хвилин. Поїздка автобусом MZK — приблизно 30–40 хвилин. Після завершення надурочних годин усі працівники самостійно добираються до свого проживання громадським транспортом (PKP або MZK).": {
+"en": "The working bus is paid, the cost is PLN 150 net. Employees who live in their own housing get to work independently by public transport (PKP — train or MZK — city bus). Travel expenses are paid independently. The PKP train journey takes about 5-8 minutes. MZK bus ride is approximately 30-40 minutes. After the end of overtime hours, all employees get to their accommodation independently by public transport (PKP or MZK).",
+"pl": "Autobus służbowy jest płatny, koszt 150 zł netto. Pracownicy mieszkający we własnym mieszkaniu dojeżdżają do pracy samodzielnie komunikacją miejską (PKP — pociąg lub MZK — autobus miejski). Koszty podróży pokrywane są niezależnie. Podróż pociągiem PKP trwa około 5-8 minut. Podróż autobusem MZK trwa około 30-40 minut. Po zakończeniu godzin nadliczbowych wszyscy pracownicy samodzielnie dojeżdżają do miejsca zakwaterowania komunikacją miejską (PKP lub MZK).",
+"ru": "Рабочий автобус – платный, стоимость составляет 150 злотых нетто. Работники, проживающие в собственном жилье, самостоятельно добираются на работу общественным транспортом (PKP – поезд или MZK – городской автобус). Расходы на проезд оплачивают самостоятельно. Поездка на поезде PKP занимает примерно 5–8 минут. Поездка на автобусе MZK — примерно 30–40 минут. По завершении сверхурочных часов все работники самостоятельно добираются до своего проживания общественным транспортом (PKP или MZK)."
+},
 "Робочий день — 8–10 годин; Робота з понеділка по п’ятницю або суботу; У сезон (жовтень–грудень) робота в суботу — 8 або 12 годин. Перерва: 25 хвилин. Додаткові послуги та утримання:": {
 "en": "Working day — 8–10 hours; Work from Monday to Friday or Saturday; During the season (October–December), work on Saturdays is 8 or 12 hours. Intermission: 25 minutes. Additional services and maintenance:",
 "pl": "Dzień pracy — 8–10 godzin; Praca od poniedziałku do piątku lub soboty; W sezonie (październik-grudzień) praca w soboty wynosi 8 lub 12 godzin. Przerwa: 25 minut. Dodatkowe usługi i konserwacja:",
@@ -6672,6 +6688,11 @@
 "en": "An extensive network of public transport stops.",
 "pl": "Rozbudowana sieć przystanków komunikacji miejskiej.",
 "ru": "Разветвленная сеть остановок общественного транспорта."
+},
+"Розміщення здійснюється в кімнатах на 4-6 осіб. Доступні двоярусні ліжка. Сімейні пари можуть розміститися в одній кімнаті з іншими парами.": {
+"en": "Accommodation is provided in rooms for 4-6 people. Bunk beds are available. Married couples can share a room with other couples.",
+"pl": "Zakwaterowanie zapewniamy w pokojach dla 4-6 osób. Dostępne są łóżka piętrowe. Pary małżeńskie mogą dzielić pokój z innymi parami.",
+"ru": "Размещение производится в комнатах на 4-6 человек. Доступны двухъярусные кровати. Семейные пары могут разместиться в одной комнате с другими парами."
 },
 "Розміщення, переміщення будівельних товарів за допомогою бокового вилкового електропогрузчика, Дотримання техніки безпеки, Збір та комплектація замовлень на складі на електропогрузчику (за допомогою bluetooth-гарнітури працівнику надходить інформація про те, в якому місці та у якій кількості на складі потрібно забрати товар), Стрейчування піддона, Наклеювання наклейок та міток для доставки": {
 "en": "Placement, movement of construction goods using a side fork-lift truck, Compliance with safety procedures, Collection and assembly of orders in the warehouse on an electric forklift (with the help of a bluetooth headset, the employee receives information about where and in what quantity the goods need to be picked up from the warehouse), Stretching the pallet, Pasting stickers and labels for delivery",
@@ -6788,6 +6809,11 @@
 "pl": "Jego własne",
 "ru": "Свое"
 },
+"Своїми силами": {
+"en": "By their own strength",
+"pl": "Własną siłą",
+"ru": "Своими силами"
+},
 "Світовий лідер у виробництві кераміки, вогнетривких матеріалів та систем контролю для металургійної промисловості.": {
 "en": "World leader in the production of ceramics, refractories and control systems for the metallurgical industry.",
 "pl": "Światowy lider w produkcji ceramiki, materiałów ogniotrwałych i systemów sterowania dla przemysłu metalurgicznego.",
@@ -6797,6 +6823,16 @@
 "en": "The world leader in the production of train connection systems.",
 "pl": "Światowy lider w produkcji systemów połączeń kolejowych.",
 "ru": "Мировой лидер по производству систем соединения поездов."
+},
+"Середня школа Вміння читати технічні креслення Вміння користуватися контрольно-вимірювальними інструментами Бажаний досвід роботи в сфері контролю якості або на виробництві": {
+"en": "High school Ability to read technical drawings Ability to use control and measurement tools Desired work experience in the field of quality control or in production",
+"pl": "Wykształcenie średnie Umiejętność czytania rysunków technicznych Umiejętność posługiwania się narzędziami kontrolno-pomiarowymi Pożądane doświadczenie w pracy w obszarze kontroli jakości lub na produkcji",
+"ru": "Средняя школа Умение читать технические чертежи Умение пользоваться контрольно-измерительными инструментами Желаемый опыт работы в сфере контроля качества или на производстве"
+},
+"Сертифікат UDT Знання польської або англійської мови на комунікативному рівні Знання технічного креслення Вміння працювати з комп’ютером": {
+"en": "UDT certificate Knowledge of Polish or English at a communicative level Knowledge of technical drawing Ability to work with a computer",
+"pl": "Certyfikat UDT Znajomość języka polskiego lub angielskiego na poziomie komunikatywnym Znajomość rysunku technicznego Umiejętność pracy z komputerem",
+"ru": "Сертификат UDT Знание польского или английского языка на коммуникативном уровне Знание технического чертежа Умение работать с компьютером"
 },
 "Склад брендового одягу Jasionka": {
 "en": "Composition of branded clothing Jasionka",
@@ -6847,6 +6883,11 @@
 "en": "Warehouse worker/forwarder",
 "pl": "Pracownik magazynu/spedytor",
 "ru": "Складской работник/экспедитор"
+},
+"Службовий автобус — 200 злотих (нетто). До автобусної зупинки працівники добираються пішки або на міському транспорті. Розклад руху автобусної лінії": {
+"en": "Service bus - PLN 200 (net). Employees get to the bus stop on foot or by public transport. Bus schedule",
+"pl": "Autobus serwisowy – 200 zł (netto). Pracownicy docierają na przystanek autobusowy pieszo lub komunikacją miejską. Rozkład jazdy autobusów",
+"ru": "Служебный автобус - 200 злотых (нетто). До автобусной остановки работники добираются пешком или на городском транспорте. Расписание автобусной линии"
 },
 "Сортувальник": {
 "en": "Sorter",
@@ -6928,6 +6969,11 @@
 "pl": "Pracownicy dojeżdżają do pracy komunikacją miejską ze swojego miejsca zamieszkania w…",
 "ru": "Сотрудники добираются до места работы общественным транспортом с места жительства…"
 },
+"Співробітники добираються на роботу громадським транспортом (приблизно півгодини)": {
+"en": "Employees get to work by public transport (about half an hour)",
+"pl": "Pracownicy dojeżdżają do pracy komunikacją miejską (około pół godziny)",
+"ru": "Сотрудники добираются на работу общественным транспортом (около получаса)"
+},
 "Співробітники добираються на роботу громадським транспортом — до півгодини.": {
 "en": "Employees get to work by public transport - up to half an hour.",
 "pl": "Pracownicy dojeżdżają do pracy komunikacją miejską – nawet do pół godziny.",
@@ -6952,6 +6998,11 @@
 "en": "Subsidy for lunch. The company provides lunch.",
 "pl": "Dotacja na obiad. Firma zapewnia lunch.",
 "ru": "Субсидия на обед. Компания дает обед."
+},
+"Суп безкоштовний. Обід (суп + основна страва) за ціною 8 злотих.": {
+"en": "Soup is free. Lunch (soup + main course) at the price of PLN 8.",
+"pl": "Zupa jest bezpłatna. Obiad (zupa + danie główne) w cenie 8 zł.",
+"ru": "Суп бесплатный. Обед (суп+основное блюдо) по цене 8 злотых."
 },
 "Суп безкоштовний.Повний обід (суп + основне блюдо) можна придбати за 8 злотих.": {
 "en": "Soup is free. A full meal (soup + main dish) can be purchased for 8 zlotys.",
@@ -7088,6 +7139,11 @@
 "pl": "Międzynarodowa firma będąca właścicielem sieci sklepów Biedronka.",
 "ru": "Транснациональная компания, владеющая сетью магазинов Biedronka."
 },
+"Транспорт роботодавця": {
+"en": "Employer's transport",
+"pl": "Transport pracodawcy",
+"ru": "Транспорт работодателя"
+},
 "Триповерховий хостел Кімнати на 2–5 осіб (стандартні ліжка) Ковдри, подушки, постіль — надаються Душові, туалети, кухні — загальні, на кожному поверсі У кожній кухні: 3 холодильники, посуд, необхідне оснащення Пральні машини — безкоштовно Wi-Fi: безкоштовний Найближчі магазини: 0.6–1.1 км (Lidl, Żabka, Biedronka, ABC)": {
 "en": "Three-story hostel Rooms for 2-5 people (standard beds) Blankets, pillows, bedding - provided Showers, toilets, kitchens - shared, on each floor In each kitchen: 3 refrigerators, dishes, necessary equipment Washing machines - free Wi-Fi: free Nearest shops: 0.6-1.1 km (Lidl, Żabka, Biedronka, ABC)",
 "pl": "Hostel trzypiętrowy Pokoje 2-5 osobowe (łóżka standardowe) Kołdry, poduszki, pościel - na miejscu Prysznice, toalety, kuchnie - wspólne, na każdym piętrze W każdej kuchni: 3 lodówki, naczynia, niezbędny sprzęt Pralki - bezpłatne Wi-Fi: bezpłatne Najbliższe sklepy: 0,6-1,1 km (Lidl, Żabka, Biedronka, ABC)",
@@ -7122,6 +7178,11 @@
 "en": "There is a pleasant smell in the shop, Room temperature +17-20°C, Breaks: 2*15 minutes, The company has a canteen",
 "pl": "W sklepie panuje przyjemny zapach, Temperatura w pomieszczeniu +17-20°C, Przerwy: 2*15 minut, Firma posiada stołówkę",
 "ru": "В цехе приятный запах, Температура помещения +17-20°С, Перерывы: 2*15 минут, На предприятии есть столовая"
+},
+"У їдальні для працівників роздають безкоштовні пончики.": {
+"en": "Free donuts are distributed in the employee cafeteria.",
+"pl": "Bezpłatne pączki rozdawane są w stołówce pracowniczej.",
+"ru": "В столовой для работников раздают бесплатные пончики."
 },
 "Уважність та акуратність під час виконання завдань; Здатність швидко навчатися; Уміння читати й писати польською мовою.": {
 "en": "Attention and accuracy when performing tasks; Ability to learn quickly; Ability to read and write in Polish.",
@@ -7188,6 +7249,11 @@
 "pl": "Sprawność fizyczna Zdolności manualne Chęć pracy zmianowej Umiejętność pracy w zespole Uwaga Chęć nauki Podstawowa wiedza...",
 "ru": "Физическая подготовка Навыки ручного труда Готовность работать посменно Умение работать в команде Внимательность Готовность к обучению Базовые знания…"
 },
+"Фізична підготовка Спритність рук Досвід роботи на виробництві буде перевагою Розмовне знання польської мови": {
+"en": "Physical fitness Manual dexterity Experience in production will be an advantage Spoken knowledge of the Polish language",
+"pl": "Sprawność fizyczna Zręczność manualna Doświadczenie na produkcji będzie dodatkowym atutem Znajomość języka polskiego w mowie",
+"ru": "Физическая подготовка Ловкость рук Опыт работы на производстве будет преимуществом Разговорное знание польского языка"
+},
 "Фізична підготовка та ручна вправність. Готовність працювати за змінним графіком. Уміння працювати в команді. Ретельність і відповідальне ставлення…": {
 "en": "Physical fitness and manual dexterity. Willingness to work on a flexible schedule. The ability to work in a team. Thoroughness and responsible attitude...",
 "pl": "Sprawność fizyczna i sprawność manualna. Gotowość do pracy według elastycznego grafiku. Umiejętność pracy w zespole. Dokładność i odpowiedzialne podejście...",
@@ -7197,6 +7263,11 @@
 "en": "Physical training.",
 "pl": "Trening fizyczny.",
 "ru": "Физическая подготовка."
+},
+"Фізична форма / хороша фізична форма Готовність до змінної роботи / готовність працювати по змінах Вміння працювати в команді Точність (уважність), бажання навчатися Базове знання польської мови": {
+"en": "Physical fitness / good physical fitness Willingness to work in shifts / willingness to work in shifts Ability to work in a team Accuracy (attention), willingness to learn Basic knowledge of the Polish language",
+"pl": "Sprawność fizyczna / dobra sprawność fizyczna Chęć pracy zmianowej / chęć pracy zmianowej Umiejętność pracy w zespole Dokładność (uwaga), chęć nauki Podstawowa znajomość języka polskiego",
+"ru": "Физическая форма / хорошая физическая форма Готовность к переменной работе / готовность работать по сменам Умение работать в команде Точность (внимательность), желание учиться Базовое знание польского языка"
 },
 "Фізичне здоров’я Добра моторика рук Готовність до змінної роботи Акуратність, уважність Базове знання польської мови Досвід роботи на виробництві Вміння працювати в команді": {
 "en": "Physical health Good hand motility Willingness to work in shifts Accuracy, attentiveness Basic knowledge of the Polish language Work experience in production Ability to work in a team",
@@ -7248,6 +7319,11 @@
 "pl": "Dodatek finansowy do wynagrodzenia w wysokości 6,98 euro za przepracowaną zmianę.",
 "ru": "Финансовая доплата к заработной плате в размере 6,98 евро за отработанное изменение."
 },
+"Фінансова доплата за харчування: 9,30 € за відпрацьовану зміну": {
+"en": "Financial supplement for meals: €9.30 per shift worked",
+"pl": "Dodatek finansowy do posiłków: 9,30 € za przepracowaną zmianę",
+"ru": "Финансовая доплата за питание: 9,30 € за отработанное изменение"
+},
 "Фінансування + 10 зл на харчування за кожен робочий день або розрахунок ваучерами, співробітник отримує також спеціальні карти на безкоштовну каву в торгових автоматах.": {
 "en": "Financing + PLN 10 for meals for each working day or payment with vouchers, the employee also receives special cards for free coffee in vending machines.",
 "pl": "Dofinansowanie + 10 zł na posiłki za każdy dzień pracy lub płatność bonami, pracownik otrzymuje także specjalne karty na bezpłatną kawę w automatach.",
@@ -7262,6 +7338,11 @@
 "en": "Food stamps are a wage supplement of 123 CZK per day.",
 "pl": "Bony żywnościowe stanowią dodatek do wynagrodzenia w wysokości 123 CZK dziennie.",
 "ru": "Пищевые талоны – доплата к заработной плате в размере 123 CZK в день."
+},
+"Хороша організація роботи Відповідальне ставлення до доручених обов'язків Вміння працювати в команді Спритність рук Знання польської мови Досвід роботи на аналогічній посаді": {
+"en": "Good organization of work Responsible attitude to assigned duties Ability to work in a team Manual dexterity Knowledge of the Polish language Experience in a similar position",
+"pl": "Dobra organizacja pracy Odpowiedzialne podejście do powierzonych obowiązków Umiejętność pracy w zespole Zręczność manualna Znajomość języka polskiego Doświadczenie na podobnym stanowisku",
+"ru": "Хорошая организация работы Ответственное отношение к порученным обязанностям Умение работать в команде Ловкость рук Знание польского языка Опыт работы на аналогичной должности"
 },
 "Хороша організація роботи-Відповідальне ставлення до доручених обов'язків-Вміння працювати в команді-Спритність рук--Знання польської мови-Досвід роботи на аналогічній посаді": {
 "en": "Good work organization-Responsible attitude to assigned duties-Ability to work in a team-Manual dexterity--Knowledge of the Polish language-Experience in a similar position",
@@ -7287,6 +7368,11 @@
 "en": "Good physical fitness; Manual dexterity; Willingness to work on a flexible schedule; Ability to work in a team; Attention, thoroughness and...",
 "pl": "Dobra sprawność fizyczna; Zręczność manualna; Gotowość do pracy według elastycznego grafiku; Umiejętność pracy w zespole; Uwaga, dokładność i...",
 "ru": "Хорошая физическая подготовка; Ручная ловкость; Готовность работать по скользящему графику; Умение работать в команде; Внимательность, тщательность и…"
+},
+"Хороша фізична форма": {
+"en": "Good physical shape",
+"pl": "Dobra forma fizyczna",
+"ru": "Хорошая физическая форма"
 },
 "Хороша фізична форма (оскільки потрібно підіймати коробки вагою до 30 кг)": {
 "en": "Good physical condition (as you need to lift boxes weighing up to 30 kg)",
@@ -7388,6 +7474,11 @@
 "pl": "Dobry wzrok; Umiejętności manualne; dobra kondycja fizyczna; Po wstępnym badaniu wzroku w dziale przyjęć projekt jest testowany w kilku etapach: 1. kontrola na miejscu (umiejętność czytania drobnego druku na kablach i obudowach) 2. kontrola na miejscu (umiejętność czytania drobnego druku na kablach i obudowach) Jeśli kandydat nosi okulary - prosimy o natychmiastowe zabranie ich ze sobą! Jeżeli kandydat nie przejdzie badania wzroku – nie może rozpocząć pracy.",
 "ru": "Хорошее зрение; Навыки работы руками; Хорошая физическая форма; После первичной проверки зрения в отделе прибытия, на проекте проводится проверка зрения на нескольких этапах: 1. проверка на месте (способность читать мелкие надписи на кабелях и крышках) 2. проверка на месте (способность читать мелкие надписи на кабелях и крышках) Если кандидат носит очки - пожалуйста, возьми он не может приступить к работе."
 },
+"Хороший зір; Ручна спритність; Хороша фізична форма;": {
+"en": "Good eyesight; Manual dexterity; Good physical shape;",
+"pl": "Dobry wzrok; Zręczność manualna; Dobra kondycja fizyczna;",
+"ru": "Хорошее зрение; Ручная ловкость; Хорошая физическая форма;"
+},
 "Хороший фізичний стан Мануальні здібності Відповідальність": {
 "en": "Good physical condition Manual skills Responsibility",
 "pl": "Dobra kondycja fizyczna Zdolności manualne Odpowiedzialność",
@@ -7437,6 +7528,11 @@
 "en": "Hostels, houses, apartments. There are 2-4 people in the room. There is everything you need. A separate room for couples.",
 "pl": "Hostele, domy, apartamenty. W pokoju przebywają 2-4 osoby. Jest wszystko, czego potrzebujesz. Oddzielny pokój dla par.",
 "ru": "Хостелы, дома, квартиры. В комнате 2-4 человека. Есть все нужное. Для пар – отдельная комната."
+},
+"Хто на свому житлі - самостійно доїзжають Хто на житлі Агенції - пішки 15 хвилин": {
+"en": "Who lives in their own home - they travel independently Who lives in the Agency's home - 15 minutes on foot",
+"pl": "Kto mieszka we własnym domu – podróżuje samodzielnie Kto mieszka w domu Agencji – 15 minut pieszo",
+"ru": "Кто на своем жилье - самостоятельно доезжают Кто на жилье Агентства - пешком 15 минут"
 },
 "Цех обробки та цех конфекції. Розподіл працівників за процесами здійснюється виробництвом залежно від потреб і навичок, Цех обробки лосося, Чоловіки, Приймання та розвантаження лосося, Подача риби на виробничу лінію, Відрізання голів, Контроль роботи обладнання, Жінки, Дорізання плавників після машинної обробки, Видалення кісток із філе (доопрацювання після машини), Контроль якості продукції, Пакування, Транспортування продукції на склад, Цех конфекції, Викладання нарізаного та замороженого лосося слайсами згідно з установленою грамовкою, Пакування продукції, Викладання та зняття лосося з решіток до та після копчення, Пакування готової продукції в коробки, Встановлення коробок на палети": {
 "en": "Processing workshop and clothing workshop. Distribution of workers by processes is carried out by production depending on needs and skills, Salmon processing shop, Men, Receiving and unloading salmon, Feeding fish to the production line, Cutting off heads, Controlling the operation of equipment, Women, Trimming fins after machine processing, Removing bones from fillets (after machine finishing), Product quality control, Packaging, Transporting products to the warehouse, Confectionery shop, Laying out cut and frozen salmon in slices according to the established with a gramophone, Packaging of products, Laying and removing salmon from grills before and after smoking, Packaging of finished products in boxes, Installation of boxes on pallets",
@@ -7543,10 +7639,25 @@
 "pl": "Szeroka sieć przystanków autobusowych",
 "ru": "Широкая сеть автобусных остановок"
 },
+"Широка мережа автобусних зупинок Зупинка громадського транспорту поруч з готелем.": {
+"en": "Wide network of bus stops Public transport stop near the hotel.",
+"pl": "Szeroka sieć przystanków autobusowych Przystanek komunikacji miejskiej w pobliżu hotelu.",
+"ru": "Широкая сеть автобусных остановок Остановка общественного транспорта рядом с гостиницей."
+},
+"Широка мережа автобусних зупинок.": {
+"en": "Wide network of bus stops.",
+"pl": "Szeroka sieć przystanków autobusowych.",
+"ru": "Широкая сеть автобусных остановок."
+},
 "Широка мережа зупинок (зручний доїзд).": {
 "en": "Wide network of stops (convenient access).",
 "pl": "Szeroka sieć przystanków (wygodny dojazd).",
 "ru": "Широкая сеть остановок (удобный доезд)."
+},
+"Шпаклівник-шліфувальник": {
+"en": "Grinder putty",
+"pl": "Szpachlówka do szlifowania",
+"ru": "Шпаклевщик-шлифовщик"
 },
 "Щоденна безкоштовна гаряча їжа (суп, бутерброд, чай/кава)": {
 "en": "Daily free hot food (soup, sandwich, tea/coffee)",
@@ -7608,6 +7719,11 @@
 "pl": "chęć do pracy; motywacja; dobra kondycja fizyczna; umiejętność pracy rękami; dobry wzrok; wytrzymałość.",
 "ru": "желание работать; мотивация; хорошая физическая форма; способность работать руками; хорошее зрение; выносливость."
 },
+"бажання працювати; хороша фізична форма;": {
+"en": "desire to work; good physical shape;",
+"pl": "chęć do pracy; dobra kondycja fizyczna;",
+"ru": "желание работать; хорошая физическая форма;"
+},
 "базова польська (бажано) фізична витривалість відповідальність робота в команді санітарна книжка": {
 "en": "basic Polish (preferably) physical endurance responsibility teamwork sanitary book",
 "pl": "podstawowa polska (najlepiej) wytrzymałość fizyczna odpowiedzialność praca zespołowa książeczka sanitarna",
@@ -7617,6 +7733,16 @@
 "en": "basic knowledge of the Polish language good physical shape readiness for standing work ability to work in a team willingness to learn Working conditions: room temperature light smell of paper and cardboard noise within normal limits work in small groups clean and organized workshop smoking only in designated areas sobriety check at the entrance and exit",
 "pl": "podstawowa znajomość języka polskiego dobra kondycja fizyczna gotowość do pracy na stojąco zdolność do pracy w zespole chęć do nauki Warunki pracy: temperatura pokojowa lekki zapach papieru i tektury hałas w normalnych granicach praca w małych grupach czysty i zorganizowany warsztat palenie tylko w wyznaczonych miejscach kontrola trzeźwości przy wejściu i wyjściu",
 "ru": "базовое знание польского языка хорошая физическая форма готовность к стоячей работе умение работать в команде желание учиться Условия работы: комнатная температура легкий запах бумаги и картона шум в пределах нормы работа в небольших группах чистый и организованный цех курения только в определенных местах проверка трезвости на входе и выходе"
+},
+"базові знання польської мови (розуміння вказівок, знання назв кольорів) хороша фізична форма готовність до роботи стоячи вміння працювати в команді бажання навчатися": {
+"en": "basic knowledge of the Polish language (understanding of directions, knowledge of color names) good physical shape readiness to work standing up ability to work in a team willingness to learn",
+"pl": "podstawowa znajomość języka polskiego (rozumienie kierunków, znajomość nazw kolorów) dobra kondycja fizyczna gotowość do pracy na stojąco umiejętność pracy w zespole chęć nauki",
+"ru": "базовые знания польского языка (понимание указаний, знание названий цветов) хорошая физическая форма готовность к работе стоя умение работать в команде желание учиться"
+},
+"безкоштовний обід на роботі співробітники можуть розігріти собі піцу.": {
+"en": "free lunch at work employees can heat up a pizza.",
+"pl": "darmowy lunch w pracy, pracownicy mogą odgrzać pizzę.",
+"ru": "бесплатный обед на работе сотрудники могут разогреть себе пиццу."
 },
 "близько 30 хвилин пішки від місця роботи. Хороші умови проживання, по 4 особи в кімнаті.": {
 "en": "about 30 minutes on foot from the place of work. Good living conditions, 4 people in a room.",
@@ -7658,6 +7784,11 @@
 "pl": "dom, pokoje 3-4 osobowe, kuchnia, łazienka, pralka, internet",
 "ru": "дом комнаты на 3–4 чел. кухня, ванная, стиральная машина интернет"
 },
+"в місті Вальбжих — міський транспорт за власний рахунок (завод знаходиться в Валбжиху)": {
+"en": "in the city of Walbrzych - city transport at own expense (the plant is located in Walbrzych)",
+"pl": "na terenie miasta Wałbrzych - transport miejski na własny koszt (zakład znajduje się w Wałbrzychu)",
+"ru": "в городе Вальбжих — городской транспорт за свой счет (завод находится в Валбжихе)"
+},
 "в місті Гданськ у хостелах. По 3–4 особи в кімнаті. Обладнання: спільна кухня, ванна кімната, пральна машина, інтернет. Дорога до роботи займає приблизно 15–20 хвилин на громадському транспорті.": {
 "en": "in the city of Gdansk in hostels. 3-4 people in a room. Equipment: shared kitchen, bathroom, washing machine, internet. The journey to work takes about 15-20 minutes by public transport.",
 "pl": "w mieście Gdańsk w hostelach. 3-4 osoby w pokoju. Wyposażenie: wspólna kuchnia, łazienka, pralka, internet. Dojazd komunikacją miejską do pracy zajmuje około 15-20 minut.",
@@ -7682,6 +7813,11 @@
 "en": "actually",
 "pl": "Właściwie",
 "ru": "собственно"
+},
+"власний": {
+"en": "own",
+"pl": "własny",
+"ru": "собственный"
 },
 "вміння працювати в команді; навички ручної роботи; пунктуальність; відповідальність; готовність працювати та навчатися; уважність; організованість.": {
 "en": "ability to work in a team; manual skills; punctuality; responsibility; willingness to work and study; attentiveness; organization",
@@ -7713,6 +7849,31 @@
 "pl": "dział produktów mlecznych - temperatura...",
 "ru": "отдел молочной продукции – температура…"
 },
+"відсутні бонус за роботу по неділях 100-200 PLN брутто": {
+"en": "there is no bonus for working on Sundays PLN 100-200 gross",
+"pl": "za pracę w niedzielę nie ma premii 100-200 zł brutto",
+"ru": "отсутствуют бонус за работу по воскресеньям 100-200 PLN брутто"
+},
+"відсутність": {
+"en": "absence",
+"pl": "brak",
+"ru": "отсутствие"
+},
+"відсутність Премія за відвідування після відпрацювання місяця — 250 злотих.": {
+"en": "absent Bonus for visiting after a month's work — 250 zlotys.",
+"pl": "nieobecny Premia za odwiedziny po miesiącu pracy — 250 zł.",
+"ru": "отсутствие Премия за посещение после отработки месяца – 250 злотых."
+},
+"відсутність Премія за продовження роботи становить 500 злотих: Перші 250 злотих виплачуються після 1 місяця роботи, а наступні 250 злотих — після 3 місяців.": {
+"en": "no Continuance bonus is PLN 500: The first PLN 250 is paid after 1 month of work, and the next PLN 250 after 3 months.",
+"pl": "nie Premia kontynuacyjna wynosi 500 zł: Pierwsze 250 zł wypłacane jest po 1 miesiącu pracy, kolejne 250 zł po 3 miesiącach.",
+"ru": "отсутствие Премия за продолжение работы составляет 500 злотых: Первые 250 злотых выплачиваются после 1 месяца работы, а последующие 250 злотых – после 3 месяцев."
+},
+"відсутність відсутність": {
+"en": "absence absence",
+"pl": "nieobecność nieobecność",
+"ru": "отсутствие отсутствие"
+},
 "відсутність протипоказань до роботи стоячи та в русі.": {
 "en": "no contraindications to standing and moving work.",
 "pl": "brak przeciwwskazań do pracy stojącej i ruchomej.",
@@ -7737,6 +7898,10 @@
 "en": "absence of contraindications to physical work; knowledge of the Slovak language at a level sufficient for communication; availability of Slovak protection.",
 "pl": "brak przeciwwskazań do pracy fizycznej; znajomość języka słowackiego na poziomie wystarczającym do komunikacji; dostępność słowackiej ochrony.",
 "ru": "отсутствие противопоказаний к физической работе; знание словацкого языка на уровне, достаточном для общения; наличие словацкой защиты."
+},
+"готовність до фізичної роботи готовність до змінної роботи готовність працювати в холоді мотивація до роботи чесність": {
+"en": "readiness for physical work, readiness for shift work, readiness to work in the cold, motivation for work, honesty",
+"ru": "готовность к физической работе готовность к сменной работе готовность работать в холоде мотивация к работе честность"
 },
 "готовність працювати довгостроково; фізична витривалість.": {
 "en": "willingness to work long-term; physical endurance.",
