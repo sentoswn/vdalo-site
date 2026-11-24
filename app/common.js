@@ -199,9 +199,12 @@ window.Vdalo = window.Vdalo || (function(){
   }
   function match(hay, ws){ hay = hay.charAt(0) === " " ? hay : sk(hay); return ws.every(function(w){ return hay.indexOf(" " + stem(w)) >= 0; }); }
   // Вік кандидата в рядку пошуку: «45», «45 років», «45 лет», «вік 45», «age 45», «45 lat» → {age: 45, rest: решта запиту без віку}
-  var AGE_RX = /(^|[\s,;])(?:(?:вік|возраст|age|wiek)\s*:?\s*)?(1[4-9]|[2-7]\d)(?:\s*(?:р\.?|рік|роки|років|рок|г\.?|год|года|лет|л\.?|years?|yo|lat|lata|r\.?))?(?=$|[\s,;.!?])/i;
+  var AGE_RX = /(^|[\s,;])(?:(?:вік|возраст|age|wiek)\s*:?\s*)?(1[4-9]|[2-7]\d)(?:\s*-?\s*(?:ти|и|ть|х))?(?:\s*(?:р\.?|рік|роки|років|рокiв|рокив|рочків|рок|г\.?|год|года|годков|лет|л\.?|years?(?:\s*old)?|yo|y\.?o\.?|lat|lata|r\.?))?(?=$|[\s,;.!?])/i;
+  // слова-зв’язки навколо віку («мені 56», «мне уже 56», «I am 56») — не шукаємо їх як текст
+  var AGE_FILL = /(^|\s)(?:мені|мне|меня|мой|мій|моя|мое|моє|вже|уже|уж|исполнилось|виповнилось|повних|полных|возраст|вік|i\s*am|i'?m|im|am|mam|lat|рокiв|років|лет|years?)(?=$|\s)/gi;
   function age(q){ var m = (q || "").match(AGE_RX); if (!m) return null;
-    return {age: +m[2], rest: ((q || "").slice(0, m.index) + m[1] + (q || "").slice(m.index + m[0].length)).replace(/\s{2,}/g, " ").trim()}; }
+    var rest = ((q || "").slice(0, m.index) + m[1] + (q || "").slice(m.index + m[0].length)).replace(/[,;.!?]/g, " ");
+    return {age: +m[2], rest: rest.replace(AGE_FILL, " ").replace(AGE_FILL, " ").replace(/\s{2,}/g, " ").trim()}; }
   // Віковий діапазон вакансії: поле age [від, до] (Trello: з картки; без віку в картці EWL бере до 55, з міткою «55+ років» — без межі),
   // інакше з поля «Для кого» («Жінки, 18–45 р.», «Чоловіки, до 50 р.»); якщо обмежень не вказано — від 18 років
   function ageRange(v){ if (v && v.age && v.age.length === 2) return [+v.age[0], +v.age[1]]; var w = (v && v.who) || "", m = w.match(/(\d{2})\s*[–-]\s*(\d{2})/); if (m) return [+m[1], +m[2]];
