@@ -269,6 +269,14 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
 .who a.tel{color:var(--blue);text-decoration:none;font-weight:600}
 .who a.tel:hover{text-decoration:underline}
 .who .age{font-weight:600;color:var(--muted)}
+.thf{border:0;background:none;font:inherit;font-weight:700;color:inherit;cursor:pointer;padding:4px 6px;margin:-4px -6px;border-radius:8px;text-align:left}
+.thf:hover{background:var(--soft)}
+.thf.on{background:#e5edff;color:var(--blue)}
+.thx{border:0;background:none;cursor:pointer;color:var(--muted);font-size:13px;padding:2px 6px;margin-left:2px}
+.stm.vm{min-width:320px}
+.stm.vm button{font-size:14px;padding:9px 12px}
+.vmc{margin-left:auto;padding-left:12px;color:var(--muted);font-weight:700}
+.vmq{width:100%;box-sizing:border-box;padding:9px 12px;margin:0 0 6px;border:1px solid var(--line);border-radius:10px;font:inherit}
 .tbox{border:1px solid var(--line);border-radius:14px;padding:10px 12px 4px;background:var(--surface)}
 .tbox>b{display:flex;align-items:center;gap:6px}
 .task.blank{align-items:center}
@@ -741,6 +749,27 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
       inp.onblur = add;
     });
   }
+  function vacName(l){ return (l.vacancy_title || "Будь-яка").replace(/ · Оператор: .*$/, "").trim(); }
+  // фільтр за вакансією: натиснути на заголовок «Вакансія»
+  function vacMenu(btn){
+    var old = document.querySelector(".stm"); if (old) { old._close(); return; }
+    var cnt = {}; (S.leads || []).forEach(function(l){ var n = vacName(l); cnt[n] = (cnt[n] || 0) + 1; });
+    var names = Object.keys(cnt).sort(function(a, b){ return a === "Будь-яка" ? -1 : b === "Будь-яка" ? 1 : cnt[b] - cnt[a] || a.localeCompare(b, "uk"); });
+    var m = document.createElement("div"); m.className = "stm vm"; m.setAttribute("role", "menu");
+    m.innerHTML = '<input class="vmq" placeholder="Пошук вакансії…">' +
+      '<button type="button" data-n=""' + (!S.vacF ? ' class="on"' : '') + '>Усі вакансії</button>' +
+      names.map(function(n){ return '<button type="button" data-n="' + E(n) + '"' + (S.vacF === n ? ' class="on"' : '') + '>' + E(n) + '<b class="vmc">' + cnt[n] + '</b></button>'; }).join("");
+    document.body.appendChild(m);
+    var r = btn.getBoundingClientRect(); m.style.left = Math.max(8, Math.min(r.left, innerWidth - m.offsetWidth - 8)) + "px"; m.style.top = Math.min(r.bottom + 6, innerHeight - m.offsetHeight - 8) + "px";
+    function close(){ m.remove(); document.removeEventListener("mousedown", out, true); document.removeEventListener("keydown", key, true); }
+    function out(e){ if (!m.contains(e.target) && e.target !== btn) close(); }
+    function key(e){ if (e.key === "Escape") close(); }
+    m._close = close;
+    setTimeout(function(){ document.addEventListener("mousedown", out, true); document.addEventListener("keydown", key, true); }, 0);
+    var q = m.querySelector(".vmq"); q.focus();
+    q.oninput = function(){ var t = q.value.toLowerCase(); m.querySelectorAll("button[data-n]").forEach(function(b){ b.style.display = !t || b.textContent.toLowerCase().indexOf(t) >= 0 ? "" : "none"; }); };
+    m.onclick = function(e){ var b = e.target.closest("button[data-n]"); if (!b) return; S.vacF = b.getAttribute("data-n") || ""; close(); rLeads(); };
+  }
   function rLeads(){
     Promise.all([API.leads(), API.tasks()]).then(function(rr){
       var list = rr[0]; S.tasks = rr[1];
@@ -761,6 +790,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
         Object.keys(CH).map(function(k){ return '<option value="' + k + '"' + (S.ch === k ? " selected" : "") + '>' + E(CH[k][0]) + ' (' + list.filter(function(l){ return chOf(l) === k; }).length + ')</option>'; }).join("") + '</select>';
       var rows = list.filter(function(l){
         if (byNo && l.id === byNo) return true;
+        if (S.vacF && vacName(l) !== S.vacF) return false;
         if (S.ch && S.ch !== "all" && (S.ch === "free" ? CH[chOf(l)][3] !== "free" : chOf(l) !== S.ch)) return false;
         if (S.own && S.mgr === "none" && mgrsOf(l).length) return false;
         if (S.own && S.mgr !== "all" && S.mgr !== "none" && !hasMgr(l, S.mgr)) return false;
@@ -789,7 +819,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
         '<div class="bar"><input type="search" id="q" placeholder="Пошук: №, ім’я, телефон, вакансія, роботодавець…" value="' + E(S.q) + '"><button class="btn" id="add">+ Нова заявка</button></div>' +
         '<div class="bar lbar">' + mgrSel + chSel + '<div class="chips-x">' + chips + '</div></div>' +
         '<div id="bulk"></div>' +
-        '<div class="card"><table class="tbl lt"><thead><tr><th class="ck"><input type="checkbox" class="ck" id="ck-all" title="Вибрати всіх"></th><th>Дата</th><th>Кандидат</th><th>Вакансія</th><th>Канал</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th><th class="nt-h">Примітки</th><th class="tk-h">Задачі</th></tr></thead><tbody>' +
+        '<div class="card"><table class="tbl lt"><thead><tr><th class="ck"><input type="checkbox" class="ck" id="ck-all" title="Вибрати всіх"></th><th>Дата</th><th>Кандидат</th><th><button type="button" class="thf' + (S.vacF ? ' on' : '') + '" id="vac-f" title="Показати кандидатів на конкретну вакансію">' + (S.vacF ? E(S.vacF.length > 28 ? S.vacF.slice(0, 27) + "…" : S.vacF) : "Вакансія") + ' ▾</button>' + (S.vacF ? '<button type="button" class="thx" id="vac-x" title="Скинути">✕</button>' : '') + '</th><th>Канал</th>' + (S.own ? '<th>Менеджер</th>' : '') + '<th>Статус</th><th class="nt-h">Примітки</th><th class="tk-h">Задачі</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(l){
           return '<tr class="row' + (staleMs(l) > STALE_MS || taskOverdue(l) || (l.status === "new" && Date.now() - waitStart(l) > 15 * 6e4) ? " stale" : "") + '" data-id="' + l.id + '"><td class="ck"><input type="checkbox" class="ck" data-ck="' + l.id + '"' + (S.sel[l.id] ? " checked" : "") + '></td><td class="hide-m">' + E(dt(l.created_at, true)) + '</td>' +
             '<td class="c-who"><div class="who">' + avatar(l.name) + '<div><b>' + E(l.name) + (l.age ? '<span class="age">, ' + E(ageTxt(l.age)) + '</span>' : '') + ' <span class="lno">№' + l.id + '</span></b><small>' + ((l.phone || "").replace(/\D/g, "").length >= 9 ? '<a class="tel" href="tel:' + E((l.phone || "").replace(/[^\d+]/g, "")) + '" title="Подзвонити">' + E(l.phone) + '</a>' : E(l.phone)) + (l.who ? " · " + E(whoTxt(l)) : "") + '</small></div></div></td>' +
@@ -808,6 +838,8 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
       document.querySelectorAll("tr.row").forEach(function(tr){ tr.onclick = function(e){ if (e.target.closest(".ck,select,button.st,td.tk,td.c-nt,a")) return; openLead(+tr.getAttribute("data-id")); }; });
       // швидка зміна статусу прямо в таблиці
       bindRowTasks(app);
+      var vf = document.getElementById("vac-f"); if (vf) vf.onclick = function(e){ e.stopPropagation(); vacMenu(vf); };
+      var vx = document.getElementById("vac-x"); if (vx) vx.onclick = function(){ S.vacF = ""; rLeads(); };
       // примітки прямо в таблиці: зберігаються, коли виходите з поля
       app.querySelectorAll("textarea[data-nt]").forEach(function(ta){
         var fit = function(){ ta.style.height = "auto"; ta.style.height = (ta.scrollHeight + 2) + "px"; }; fit();
