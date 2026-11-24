@@ -17,6 +17,8 @@ textarea{width:100%;min-height:230px;padding:12px 14px;border:1px solid var(--li
 .vb{background:var(--viber);color:#fff}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .gh{background:#fff;color:var(--ink);border:1px solid var(--line);font-size:15px;padding:13px}
+.tg{background:#2aabee;color:#fff;font-size:16px}
+.wa{background:#25d366;color:#fff;font-size:16px}
 .note{font-size:13px;color:var(--muted);margin:0}
 .ok{color:var(--green);font-weight:600}
 </style>
@@ -30,9 +32,10 @@ textarea{width:100%;min-height:230px;padding:12px 14px;border:1px solid var(--li
   <a class="btn vb" id="vb" href="#">Відкрити у Viber</a>
   <textarea id="t" aria-label="Текст повідомлення"></textarea>
   <div class="row">
-    <button class="btn gh" id="cp" type="button">Скопіювати текст</button>
-    <a class="btn gh" id="wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="btn tg" id="tg" href="#" target="_blank" rel="noopener">Telegram</a>
+    <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
   </div>
+  <button class="btn gh" id="cp" type="button">Скопіювати текст</button>
   <p class="note" id="st">Текст можна змінити перед відправкою — кнопки беруть уже змінений.</p>
 </main>
 <script>
@@ -78,11 +81,15 @@ textarea{width:100%;min-height:230px;padding:12px 14px;border:1px solid var(--li
     var txt = ta.value;
     document.getElementById("vb").href = "viber://chat?number=%2B" + raw + "&draft=" + encodeURIComponent(txt);
     document.getElementById("wa").href = "https://wa.me/" + raw + "?text=" + encodeURIComponent(txt);
+    document.getElementById("tg").href = "https://t.me/+" + raw;
   }
   ta.oninput = links;
   // На комп'ютері Viber обрізає текст із посилання (~100 символів) — тому кнопка спершу копіює весь текст
   var desk = !/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
   function copyAll(){ try { ta.select(); if (navigator.clipboard) return navigator.clipboard.writeText(ta.value).catch(function(){ document.execCommand("copy"); }); document.execCommand("copy"); } catch (e) {} return Promise.resolve(); }
+  // Telegram не підставляє текст у посилання за номером — копіюємо текст перед відкриттям
+  document.getElementById("tg").addEventListener("click", function(){ copyAll(); var st = document.getElementById("st");
+    st.innerHTML = "<b>Telegram:</b> текст скопійовано. У чаті натисніть <b>Ctrl+V</b> (на телефоні — утримайте поле й «Вставити»). Якщо чат не відкрився — людина приховала номер у Telegram."; });
   if (desk) {
     document.getElementById("vb").textContent = "Скопіювати текст і відкрити Viber";
     document.getElementById("st").innerHTML = "<b>На комп'ютері:</b> Viber вставляє лише початок тексту. Після відкриття чату натисніть у полі повідомлення <b>Ctrl+A</b>, потім <b>Ctrl+V</b> — вставиться весь текст.";
