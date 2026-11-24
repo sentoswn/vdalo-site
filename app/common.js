@@ -205,10 +205,22 @@ window.Vdalo = window.Vdalo || (function(){
   function age(q){ var m = (q || "").match(AGE_RX); if (!m) return null;
     var rest = ((q || "").slice(0, m.index) + m[1] + (q || "").slice(m.index + m[0].length)).replace(/[,;.!?]/g, " ");
     return {age: +m[2], rest: rest.replace(AGE_FILL, " ").replace(AGE_FILL, " ").replace(/\s{2,}/g, " ").trim()}; }
+  // Стать у рядку пошуку: «мужчина», «жінка», «пара», «чоловік і дружина» → {g: "m"|"w"|"pair", rest: решта запиту}
+  var G_SEP = "(^|[\\s,;.!?/+&])", G_END = "(?=$|[\\s,;.!?/+&])";
+  var G_PAIR = new RegExp(G_SEP + "(пар[аиуоіы]?|парам|парами|парою|парой|сім['’ʼ]?я|сім['’ʼ]?ї|семья|семьи|семьей|сімейн\\S*|семейн\\S*|couples?|pary|para)" + G_END, "gi");
+  var G_M = new RegExp(G_SEP + "(чоловік\\S*|чоловіч\\S*|мужчин\\S*|мужик\\S*|мужск\\S*|муж|мужа|хлопець|хлопці|хлопців|хлопцям|парень|парни|парней|парням|хлопц\\S*|men|man|male|males|mężczy\\S*|mezczy\\S*|chłop\\S*|chlop\\S*)" + G_END, "gi");
+  var G_W = new RegExp(G_SEP + "(жін\\S*|жен[щс]\\S*|женск\\S*|жена|жены|жене|дружин\\S*|дівч\\S*|девуш\\S*|девоч\\S*|women|woman|female|females|kobiet\\S*|dziewczyn\\S*)" + G_END, "gi");
+  var G_FILL = new RegExp(G_SEP + "(для|for|dla|і|и|та|й|and|i|з|с|із|зі|со|with|z|робота|работа|роботу|работу|роботи|работы|вакансі\\S*|ваканси\\S*|praca|pracy|prace|job|jobs|work)" + G_END, "gi");
+  function gender(q){ var s = " " + (q || "") + " ", hit = {};
+    [["pair", G_PAIR], ["m", G_M], ["w", G_W]].forEach(function(x){ s = s.replace(x[1], function(m0, p){ hit[x[0]] = 1; return p + " "; }); });
+    var g = hit.pair || (hit.m && hit.w) ? "pair" : hit.m ? "m" : hit.w ? "w" : null; if (!g) return null;
+    return {g: g, rest: s.replace(G_FILL, "$1 ").replace(G_FILL, "$1 ").replace(/\s{2,}/g, " ").trim()}; }
+  function genderOk(v, g){ var w = (v && v.who) || "", vg = /^Жінки та чоловіки/.test(w) ? "both" : /^Жінки/.test(w) ? "w" : /^Чоловіки/.test(w) ? "m" : "both";
+    return !g || (g === "m" && vg !== "w") || (g === "w" && vg !== "m") || (g === "pair" && vg === "both"); }
   // Віковий діапазон вакансії: поле age [від, до] (Trello: з картки; без віку в картці EWL бере до 55, з міткою «55+ років» — без межі),
   // інакше з поля «Для кого» («Жінки, 18–45 р.», «Чоловіки, до 50 р.»); якщо обмежень не вказано — від 18 років
   function ageRange(v){ if (v && v.age && v.age.length === 2) return [+v.age[0], +v.age[1]]; var w = (v && v.who) || "", m = w.match(/(\d{2})\s*[–-]\s*(\d{2})/); if (m) return [+m[1], +m[2]];
     m = w.match(/до\s*(\d{2})/); if (m) return [18, +m[1]]; m = w.match(/(?:від|з)\s*(\d{2})/); if (m) return [+m[1], 99]; return [18, 99]; }
   function ageOk(v, a){ var r = ageRange(v); return a >= r[0] && a <= r[1]; }
-  window.VdaloSearch = {sk: sk, stem: stem, words: words, match: match, cities: CITIES, age: age, ageRange: ageRange, ageOk: ageOk};
+  window.VdaloSearch = {sk: sk, stem: stem, words: words, match: match, cities: CITIES, age: age, gender: gender, genderOk: genderOk, ageRange: ageRange, ageOk: ageOk};
 })();

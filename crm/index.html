@@ -1590,9 +1590,9 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
         return {v: v, p: p, pay: pay == null ? null : +pay, promo: pr, manual: !pr && p.pay_manual != null, n: nLeads[String(v.id)] || 0}; });
       if (heal.length) { var hm = {}; heal.forEach(function(h){ hm[h.id] = Object.assign(hm[h.id] || {}, h); }); var hs = Object.keys(hm).map(function(k){ var h = hm[k], c = pm[k] || {}; return {id: h.id, src: h.src, pay_auto: h.pay_auto != null ? h.pay_auto : (c.pay_auto != null ? c.pay_auto : null), bonus_note: "bonus_note" in h ? h.bonus_note : (c.bonus_note || null)}; }); API.savePay(hs).catch(function(){}); }
       var f = S.payf || "all", q = (S.payq || "").toLowerCase();
-      var AG = window.VdaloSearch && VdaloSearch.age ? VdaloSearch.age(S.payq || "") : null; if (AG) q = AG.rest.toLowerCase(); // вік кандидата → вакансії, де він підходить (або вакансія з таким №)
+      var AG = window.VdaloSearch && VdaloSearch.age ? VdaloSearch.age(S.payq || "") : null; if (AG) q = AG.rest.toLowerCase(); var GN = window.VdaloSearch && VdaloSearch.gender ? VdaloSearch.gender(AG ? AG.rest : (S.payq || "")) : null; if (GN) q = GN.rest.toLowerCase(); // вік кандидата → вакансії, де він підходить (або вакансія з таким №)
       var rows = all.filter(function(x){ var v = x.v;
-        if (AG && !VdaloSearch.ageOk(v, AG.age) && String(v.id) !== String(AG.age)) return false;
+        if (AG && !VdaloSearch.ageOk(v, AG.age) && String(v.id) !== String(AG.age)) return false; if (GN && !VdaloSearch.genderOk(v, GN.g)) return false;
         return (f === "all" || (f === "hot" ? v.hot : f === "none" ? x.pay == null : (v.src || "trello") === f)) &&
           (!q || [v.title, v.company, v.city, v.id].join(" ").toLowerCase().indexOf(q) >= 0 || (window.VdaloSearch && VdaloSearch.match([v.title, v.company, v.city, v.id, v.housing, v.desc].join(" "), VdaloSearch.words(q)))); });
       rows.sort(function(a, b){ var x = String(a.v.id), y = String(b.v.id); return (b.pay == null ? -1 : b.pay) - (a.pay == null ? -1 : a.pay) || ((b.p.bonus_note ? 1 : 0) - (a.p.bonus_note ? 1 : 0)) || ((b.v.hot ? 1 : 0) - (a.v.hot ? 1 : 0)) || (x.length - y.length) || (x < y ? -1 : x > y ? 1 : 0); });
@@ -1628,8 +1628,8 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
     Promise.all([API.payRank(), vacList()]).then(function(r){
       var rk = {}, bn = {}; (r[0] || []).forEach(function(x){ rk[x.id] = x.rnk; bn[x.id] = x.bonus; });
       var q = (S.payq || "").toLowerCase(), f = S.payf || "all";
-      var AG = window.VdaloSearch && VdaloSearch.age ? VdaloSearch.age(S.payq || "") : null; if (AG) q = AG.rest.toLowerCase();
-      var rows = r[1].filter(function(v){ if (AG && !VdaloSearch.ageOk(v, AG.age) && String(v.id) !== String(AG.age)) return false; return (f === "all" || (f === "hot" ? v.hot : (v.src || "trello") === f)) && (!q || [v.title, v.company, v.city, v.id].join(" ").toLowerCase().indexOf(q) >= 0 || (window.VdaloSearch && VdaloSearch.match([v.title, v.company, v.city, v.id, v.housing, v.desc].join(" "), VdaloSearch.words(q)))); });
+      var AG = window.VdaloSearch && VdaloSearch.age ? VdaloSearch.age(S.payq || "") : null; if (AG) q = AG.rest.toLowerCase(); var GN = window.VdaloSearch && VdaloSearch.gender ? VdaloSearch.gender(AG ? AG.rest : (S.payq || "")) : null; if (GN) q = GN.rest.toLowerCase();
+      var rows = r[1].filter(function(v){ if (AG && !VdaloSearch.ageOk(v, AG.age) && String(v.id) !== String(AG.age)) return false; if (GN && !VdaloSearch.genderOk(v, GN.g)) return false; return (f === "all" || (f === "hot" ? v.hot : (v.src || "trello") === f)) && (!q || [v.title, v.company, v.city, v.id].join(" ").toLowerCase().indexOf(q) >= 0 || (window.VdaloSearch && VdaloSearch.match([v.title, v.company, v.city, v.id, v.housing, v.desc].join(" "), VdaloSearch.words(q)))); });
       rows.sort(function(a, b){ return (rk[a.id] || 9e9) - (rk[b.id] || 9e9) || ((b.hot ? 1 : 0) - (a.hot ? 1 : 0)); });
       var chip = function(k, t){ return '<button class="chip" data-pf="' + k + '" aria-pressed="' + (f === k) + '">' + t + '</button>'; };
       app.innerHTML = '<div class="bar"><input type="search" id="pq" placeholder="Пошук: посада, компанія, місто, №" value="' + E(S.payq || "") + '">' +
