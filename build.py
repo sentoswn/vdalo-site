@@ -66,7 +66,7 @@ def cur(c):
         return "EUR"
     if c == "kč":
         return "CZK"
-    if c.startswith("зл"):
+    if c.startswith("зл") or c == "zł":
         return "PLN"
     return c.upper()
 
@@ -93,10 +93,12 @@ def house(v):
         return ("no", "Без житла")
     if not h:
         return None
-    if re.search(r"безкоштовн", h, re.I):
+    free_h = re.search(r"^\s*безкоштовн|житл\S*\s*(?:—|-|:)?\s*безкоштовн|безкоштовн\S*\s*(?:житл|прожив)|проживання\s*(?:—|-|:)?\s*безкоштовн", h, re.I)
+    priced = re.search(r"(?:вартість|коштує|оплата|плата)[^.]{0,40}\d|\d[\d\s]*(?:[.,]\d+)?\s*(?:PLN|EUR|CZK|€|Kč|zł|злотих|зл|євро)", h, re.I)
+    if free_h and not priced:
         return ("ok", "Житло безкоштовне")
     if not re.search(r"до працевлаштування", h, re.I):
-        m = re.search(r"(\d[\d\s]*(?:[.,]\d+)?)\s*(PLN|EUR|CZK|€|Kč|злотих|зл|євро)", h, re.I)
+        m = re.search(r"(\d[\d\s]*(?:[.,]\d+)?)\s*(PLN|EUR|CZK|€|Kč|zł|злотих|зл|євро)", h, re.I)
         if m:
             u = "/міс" if re.search(r"міс|month", h, re.I) else "/доба" if re.search(r"доб|день", h, re.I) else "/тиж." if re.search(r"тиж", h, re.I) else ""
             return ("paid", f"Житло {m.group(1).strip()} {cur(m.group(2))}{u}")
@@ -260,6 +262,11 @@ def card_facts(v):
     if v["_next"]:
         r = rel(v["_next"])
         t.append(f'<li class="date"><svg class="i"><use href="#i-cal"/></svg>Заїзд {trips_lbl(v)}</li>')
+    hm = re.search(r"(\d{2,3})\s*[-–]\s*(\d{2,3})|(\d{2,3})", str(v.get("hours") or ""))
+    if hm:
+        t.append(f'<li><svg class="i"><use href="#i-clock"/></svg>{hm.group(1) + "–" + hm.group(2) if hm.group(1) else hm.group(3)} год/міс</li>')
+    if re.match(r"так", str(v.get("night") or ""), re.I):
+        t.append('<li><svg class="i"><use href="#i-clock"/></svg>Є нічні зміни</li>')
     if v["_g"] in ("w", "m"):
         t.append(f'<li><svg class="i"><use href="#i-users"/></svg>{"Жінкам" if v["_g"] == "w" else "Чоловікам"}</li>')
     if age_lbl(v):
@@ -397,6 +404,7 @@ def card(v):
             f'<div class="vac-top">{flag(v["_cc"])}<span class="loc">{loc(v)}</span>{"<span class=\"badge\">Гаряча</span>" if v.get("hot") else ""}</div>'
             f'<h3><a href="{u}" data-vid="{esc(v["id"])}">{esc(v["title"])}</a></h3>'
             + (f'<p class="co-line"><svg class="i"><use href="#i-bld"/></svg>{esc(v["company"])}</p>' if v.get("company") else "")
+            + (f'<p class="vdesc">{esc(re.sub(r"[,;.\s]+$", "", re.sub(r"\s+", " ", str(v["desc"])))[:140])}</p>' if v.get("desc") else "")
             + money_html(v)
             + stud_html(v)
             + card_facts(v)
