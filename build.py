@@ -276,6 +276,9 @@ def card_facts(v):
 
 def enrich(v):
     v["id"] = str(v["id"])
+    # пільга ZUS для студентів до 26 — для будь-якої umowa zlecenie в Польщі
+    if not v.get("stud") and v.get("country") == "Польща" and re.search(r"zlecen|^\s*UZ\b", v.get("contract") or "", re.I) and not (v.get("age") and v["age"][0] > 25):
+        v["stud"] = 1
     v["_g"] = g_of(v)
     v["_h"] = house(v)
     v["_rate"] = rate(v)
