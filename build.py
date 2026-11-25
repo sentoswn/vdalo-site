@@ -259,7 +259,7 @@ def card_facts(v):
         t.append(f'<li class="{"ok" if v["_c"]["ok"] else ""}"><svg class="i"><use href="#i-doc"/></svg>{esc(v["_c"]["short"])}</li>')
     if v["_next"]:
         r = rel(v["_next"])
-        t.append(f'<li class="date"><svg class="i"><use href="#i-cal"/></svg>Заїзд {dd(v["_next"])}{" (" + r + ")" if r else ""}</li>')
+        t.append(f'<li class="date"><svg class="i"><use href="#i-cal"/></svg>Заїзд {trips_lbl(v)}</li>')
     if v["_g"] in ("w", "m"):
         t.append(f'<li><svg class="i"><use href="#i-users"/></svg>{"Жінкам" if v["_g"] == "w" else "Чоловікам"}</li>')
     if age_lbl(v):
@@ -276,6 +276,7 @@ def enrich(v):
     v["_c"] = contract_info(v.get("contract"))
     v["_cc"] = CC.get(v.get("country"), (v.get("country") or "")[:2].upper())
     ds = sorted(d for d in dates(v.get("trips")) if d >= TODAY)
+    v["_dates"] = sorted(set(ds))
     v["_next"] = ds[0] if ds else None
     v["_uah"] = uah_info(v)
     v["_txt"] = " ".join(str(v.get(k) or "") for k in ("title", "desc", "about", "company")).lower()
@@ -285,6 +286,15 @@ def enrich(v):
 # ---------- HTML-фрагменти (повторюють розмітку JS) ----------
 def dd(d):
     return d.strftime("%d.%m")
+
+
+def trips_lbl(v):
+    """Усі майбутні заїзди для картки: «25.11 (завтра), 30.11, 2.12»."""
+    out = []
+    for d in v.get("_dates") or [v["_next"]]:
+        r = rel(d)
+        out.append(dd(d) + (f" ({r})" if r else ""))
+    return ", ".join(out)
 
 
 def rel(d):
@@ -360,7 +370,7 @@ def tags_html(v):
         t.append(f'<li class="tag{" ok" if v["_c"]["ok"] else ""}"><svg class="i"><use href="#i-doc"/></svg>{esc(v["_c"]["short"])}</li>')
     if v["_next"]:
         r = rel(v["_next"])
-        t.append(f'<li class="tag date"><svg class="i"><use href="#i-cal"/></svg>Заїзд {dd(v["_next"])}{" (" + r + ")" if r else ""}</li>')
+        t.append(f'<li class="tag date"><svg class="i"><use href="#i-cal"/></svg>Заїзд {trips_lbl(v)}</li>')
     return '<ul class="tags">' + "".join(t) + "</ul>"
 
 

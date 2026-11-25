@@ -6786,6 +6786,7 @@
 },
 "Працівники доїжджатимуть до роботи самостійно (приблизно 40–50 хв.). Як компенсація за відсутність організованого транспорту для них буде доплата за транспорт у розмірі 0.63 злотих нетто за кожну відпрацьовану годину": {
 "en": "Employees will drive to work independently (approximately 40-50 minutes). As compensation for the lack of organized transport, they will be paid extra for transport in the amount of PLN 0.63 net for each hour worked",
+"pl": "Pracownicy będą dojeżdżać do pracy samodzielnie (około 40-50 minut). W ramach rekompensaty za brak zorganizowanego transportu otrzymają dopłatę za transport w wysokości 0,63 zł netto za każdą przepracowaną godzinę",
 "ru": "Работники будут доезжать до работы самостоятельно (приблизительно 40–50 мин.). В качестве компенсации за отсутствие организованного транспорта для них будет доплата за транспорт в размере 0.63 злотых нетто за каждый отработанный час"
 },
 "Працівники на склад автозапчастин": {
@@ -6808,10 +6809,20 @@
 "pl": "Pracownicy magazynu internetowego sklepu zoologicznego",
 "ru": "Работники на склад интернет-магазина зоотоваров"
 },
+"Працівники проживають у будинках або квартирах з усіма зручностями, по 2-4 людини в кімнаті (стандартні ліжка). Надаються ковдри, подушки та постільна білизна. Туалети, душові та кухні спільні. На кухні є холодильник, основне обладнання та посуд. Пральними машинами можна користуватися безкоштовно. Відстань до найближчих магазинів становить 750 м - 1,5 км (продуктовий магазин, Biedronka). Автобусна зупинка знаходиться поруч з квартирою, в 5 хвилинах ходьби. Поїздка на роботу займає 20 хвилин.": {
+"en": "Employees live in houses or apartments with all amenities, 2-4 people per room (standard beds). Blankets, pillows and bed linen are provided. Toilets, showers and kitchens are shared. The kitchen has a fridge, basic equipment and utensils. Washing machines can be used free of charge. The distance to the nearest shops is 750 m - 1.5 km (grocery store, Biedronka). The bus stop is next to the apartment, a 5-minute walk away. The trip to work takes 20 minutes.",
+"pl": "Pracownicy mieszkają w domach lub apartamentach ze wszystkimi udogodnieniami, po 2-4 osoby w pokoju (łóżka standardowe). Obiekt zapewnia koce, poduszki i pościel. Toalety, prysznice i kuchnie są wspólne. W kuchni znajduje się lodówka, podstawowy sprzęt i przybory kuchenne. Z pralek można korzystać bezpłatnie. Odległość do najbliższych sklepów 750 m - 1,5 km (sklep spożywczy, Biedronka). Przystanek autobusowy znajduje się obok apartamentu, 5 minut spacerem. Dojazd do pracy zajmuje 20 minut.",
+"ru": "Работники проживают в домах или квартирах со всеми удобствами, по 2-4 человека в комнате (стандартные кровати). К услугам гостей одеяла, подушки и постельное белье. Туалеты, душевые и кухни общие. На кухне есть холодильник, основное оборудование и посуда. Стиральными машинами можно пользоваться бесплатно. Расстояние до ближайших магазинов составляет 750 м – 1,5 км (продуктовый магазин, Biedronka). Автобусная остановка находится рядом с квартирой, в 5 минутах ходьбы. Поездка на работу занимает 20 минут."
+},
 "Працівники ходять пішки (1,5–3 км)": {
 "en": "Employees walk (1.5–3 km)",
 "pl": "Spacer pracowników (1,5–3 km)",
 "ru": "Работники ходят пешком (1,5-3 км)"
+},
+"Працівники якi живуть в Стараховіцах на роботу можуть добиратися пішки або на міському безкоштовному транспорті. Працівники, які мешкають в околицях Стараховиць, можуть користуватися безкоштовним транспортом від заводу (список зупинок прикріплюється до опису).": {
+"en": "Workers who live in Starakhovitsy can get to work on foot or by free city transport. Employees who live in the vicinity of Starahovytsi can use free transport from the plant (the list of stops is attached to the description).",
+"pl": "Pracownicy mieszkający w Starachowicach mogą dotrzeć do pracy pieszo lub bezpłatną komunikacją miejską. Pracownicy mieszkający w okolicach Starahovytsi mogą skorzystać z bezpłatnego transportu z zakładu (lista przystanków znajduje się w załączniku).",
+"ru": "Работники, которые живут в Стараховицах на работу, могут добираться пешком или на городском бесплатном транспорте. Работники, проживающие в окрестностях Стараховиц, могут пользоваться бесплатным транспортом от завода (список остановок прикрепляется к описанию)."
 },
 "Працівники їздять на роботу громадським транспортом за власний рахунок": {
 "en": "Employees travel to work by public transport at their own expense",
@@ -6828,6 +6839,11 @@
 "pl": "Pracownicy mieszkający w mieszkaniach agencji dojeżdżają do pracy pieszo – około 10 minut. Pracownicy posiadający własne mieszkania dojeżdżają tam we własnym zakresie. Nie ma działającego autobusu.",
 "ru": "Работники, живущие в жилье агентства, ходят к работе пешком – около 10 минут. Сотрудники с собственным жильем добираются самостоятельно. Рабочего автобуса нет."
 },
+"Працівники, які проживають у житлі агенції, ходять на роботу пішки — приблизно 10 хвилин. Працівники, які проживають у власному житлі, самостійно добираються до роботи. Завод не надає робочий автобус і не компенсує витрати на проїзд.": {
+"en": "Employees who live in the agency's housing walk to work - about 10 minutes. Workers who live in their own housing get to work independently. The plant does not provide a work bus and does not reimburse travel expenses.",
+"pl": "Pracownicy mieszkający w mieszkaniach agencji dochodzą do pracy pieszo – około 10 minut. Pracownicy mieszkający we własnym mieszkaniu mogą pracować niezależnie. Zakład nie zapewnia autobusu służbowego i nie zwraca kosztów dojazdu.",
+"ru": "Работники, проживающие в жилье агентства, ходят на работу пешком – примерно 10 минут. Работники, проживающие в собственном жилье самостоятельно добираются до работы. Завод не дает рабочий автобус и не компенсирует расходы на проезд."
+},
 "Працівники, які проживають у помешканнях, наданих агентством, добираються на роботу пішки — приблизно 10 хвилин (місце роботи розташоване неподалік від помешкання).": {
 "en": "Workers who live in accommodation provided by the agency walk to work - about 10 minutes (the place of work is located not far from the accommodation).",
 "pl": "Pracownicy mieszkający w kwaterach zapewnianych przez agencję dojeżdżają do pracy pieszo – około 10 minut (miejsce pracy znajduje się niedaleko miejsca zakwaterowania).",
@@ -6837,6 +6853,11 @@
 "en": "Workers who live in accommodation provided by the agency walk to work…",
 "pl": "Pracownicy mieszkający w kwaterach zapewnianych przez agencję piechotą do pracy…",
 "ru": "Работники, проживающие в помещениях, предоставленных агентством, добираются на работу пешком…"
+},
+"Премія 0–3500 чеських крон на місяць Відпускні виплачуються відповідно до чеського трудового кодексу (25 днів оплачуваної відпустки). Надбавка за роботу у вихідні (субота та неділя): +10% Надбавка за понаднормову роботу: +40 % у вихідні, +25 % у робочі дні Надбавка за нічну роботу (з 22:00 до 6:00): +10% Надбавка за роботу у святкові дні: +100% Оплачувана відпустка — 25 днів на рік.": {
+"en": "Bonus 0-3500 Czech crowns per month Vacation is paid in accordance with the Czech Labor Code (25 days of paid vacation). Bonus for work on weekends (Saturday and Sunday): +10% Bonus for overtime: +40% on weekends, +25% on weekdays Bonus for night work (from 22:00 to 6:00): +10% Bonus for work on public holidays: +100% Paid vacation - 25 days per year.",
+"pl": "Premia 0-3500 koron czeskich miesięcznie Urlop jest płatny zgodnie z czeskim Kodeksem pracy (25 dni płatnego urlopu). Premia za pracę w weekendy (sobota i niedziela): +10% Premia za pracę w godzinach nadliczbowych: +40% w weekendy, +25% w dni powszednie Premia za pracę w nocy (od 22:00 do 6:00): +10% Premia za pracę w święta: +100% Płatny urlop - 25 dni w roku.",
+"ru": "Премия 0–3500 чешских крон в месяц Отпускные выплачиваются в соответствии с чешским трудовым кодексом (25 дней оплачиваемого отпуска). Надбавка за работу в выходные (суббота и воскресенье): +10% Надбавка за сверхурочную работу: +40% в выходные, +25% в рабочие дни Надбавка за ночную работу (с 22:00 до 6:00): +10% Надбавка за работу в праздничные дни: +100% Оплачиваемый отпуск."
 },
 "Премія до 6% на місяць Доплата за проїзд (для осіб, які проживають за межами Лодзі) Надгодини: +50% або +100% відповідно до законодавства Доплата за нічні зміни згідно із законодавством": {
 "en": "Bonus up to 6% per month Travel allowance (for people living outside Łódź) Overtime: +50% or +100% according to the law Night shift supplement according to the law",
@@ -6868,10 +6889,25 @@
 "pl": "Bonus sprzedażowy – regulamin zostanie ogłoszony przed rozpoczęciem sprzedaży. Dodatek frekwencyjny wynosi 100 zł. Nagroda za pracę w święto —...",
 "ru": "Премия за продажу – условия объявят до начала распродажи. Премия за присутствие – 100 PLN. Премия за работу в государственный праздник..."
 },
+"Премія за продуктивність – 200 злотих брутто/місяць Надається за досягнення встановлених норм продуктивності на робочому місці. Премія за відвідування – 150 злотих брутто/місяць Нараховується за регулярну присутність на робочих змінах без пропусків та запізнень. Премія за загальний результат (AIB) – 150 злотих брутто/місяць AIB – це середній індивідуальний бонус, який розраховується на основі загального показника ефективності працівника: включає…": {
+"en": "Productivity bonus - PLN 200 gross/month Awarded for achieving set productivity standards at the workplace. Attendance bonus - PLN 150 gross/month. It is awarded for regular attendance at work shifts without absences and lateness. Overall Performance Bonus (AIB) - PLN 150 gross/month AIB is an average individual bonus calculated on the basis of an employee's overall performance: it includes…",
+"pl": "Premia za produktywność - 200 zł brutto/miesiąc Przyznawana za osiągnięcie ustalonych standardów produktywności w miejscu pracy. Premia za frekwencję - 150 zł brutto/miesiąc. Otrzymuje się je za regularne uczestnictwo w pracy zmianowej, bez nieobecności i spóźnień. Premia za Całokształt Efektywności (AIB) - 150 zł brutto/miesiąc AIB to średnia premia indywidualna wyliczana na podstawie ogólnych wyników pracownika: obejmuje…",
+"ru": "Премия за производительность – 200 злотых брутто/месяц Предоставляется за достижение установленных норм производительности на рабочем месте. Премия за посещение – 150 злотых брутто/месяц Начисляется за регулярное присутствие на рабочих сменах без пропусков и опозданий. Премия за общий результат (AIB) – 150 злотых брутто/месяц AIB – это средний индивидуальный бонус, рассчитываемый на основе общего показателя эффективности работника: включает…"
+},
 "Премія — до 6 300 CZK брутто/місяць. Розмір залежить від оцінки керівника: враховуються кількість і темп виконання завдань, якість роботи, дотримання інструкцій та ставлення до обов’язків. Робота у вихідні (субота та неділя): +10%. Понаднормова робота: +40% у вихідні, +25% у будні. Робота в нічну зміну (22:00–06:00): +10%. Робота у святкові дні: +100%. Оплачувана відпустка — 25 днів.": {
 "en": "The bonus is up to 6,300 CZK gross/month. The size depends on the manager's assessment: the number and pace of tasks, quality of work, compliance with instructions and attitude to duties are taken into account. Weekend work (Saturday and Sunday): +10%. Overtime: +40% on weekends, +25% on weekdays. Night shift work (22:00–06:00): +10%. Work on holidays: +100%. Paid vacation — 25 days.",
 "pl": "Premia wynosi do 6300 CZK brutto/miesiąc. Wielkość zależy od oceny kierownika: bierze się pod uwagę liczbę i tempo zadań, jakość pracy, przestrzeganie instrukcji i stosunek do obowiązków. Praca weekendowa (sobota i niedziela): +10%. Nadgodziny: +40% w weekendy, +25% w dni powszednie. Praca na nocną zmianę (22:00–06:00): +10%. Praca w święta: +100%. Płatny urlop — 25 dni.",
 "ru": "Премия – до 6 300 CZK брутто/месяц. Размер зависит от оценки руководителя: учитываются количество и темп выполнения задач, качество работы, следование инструкциям и отношение к обязанностям. Работа по выходным (суббота и воскресенье): +10%. Сверхурочные работы: +40% в выходные, +25% в будни. Работа в ночную смену (22:00–06:00): +10%. Работа в праздничные дни: 100%. Оплачиваемый отпуск – 25 дней."
+},
+"Премії (загалом +3,23 злотих брутто/год.): +1,99 злотих брутто/год. за повну відвідуваність при відпрацюванні щонайменше 200 годин/місяць, +1,24 злотих брутто/год. сезонної премії (за планом до кінця грудня 2026 року).": {
+"en": "Premiums (in total +3.23 PLN gross/hour): +1.99 PLN gross/hour. for full attendance when working at least 200 hours/month, + PLN 1.24 gross/hour. seasonal premium (as planned until the end of December 2026).",
+"pl": "Składki (łącznie +3,23 zł brutto/godz.): +1,99 zł brutto/godz. za pełną frekwencję przy przepracowaniu co najmniej 200 godzin/miesiąc + 1,24 zł brutto/godz. składka sezonowa (wg planu do końca grudnia 2026 r.).",
+"ru": "Премии (в общей сложности +3,23 злотых брутто/час): +1,99 злотых брутто/час. за полную посещаемость при отработке не менее 200 часов/месяц, +1,24 злотых брутто/час. сезонной премии (по плану до конца декабря 2026 г.)."
+},
+"Премії та надбавки: Премія за заслуги – до 1 390 злотих брутто на місяць. Квартальна премія, премія за відсутність на роботі – додаткова премія, що виплачується щокварталу в розмірі від 100 до 400 злотих.": {
+"en": "Bonuses and allowances: Merit bonus - up to PLN 1,390 gross per month. Quarterly bonus, bonus for absence from work - an additional bonus paid every quarter in the amount of PLN 100 to PLN 400.",
+"pl": "Premie i dodatki: Premia za zasługi – do 1390 zł brutto miesięcznie. Premia kwartalna, premia za nieobecność w pracy – dodatkowa premia wypłacana co kwartał w wysokości od 100 do 400 zł.",
+"ru": "Премии и надбавки: Премия за заслуги – до 1390 злотых брутто в месяц. Квартальная премия, премия за отсутствие на работе – дополнительная премия, выплачиваемая ежеквартально в размере от 100 до 400 злотых."
 },
 "Прибирання номерів в готелі": {
 "en": "Hotel room cleaning",
@@ -7003,10 +7039,55 @@
 "pl": "Produkcja, montaż części do maszyn, czyszczenie, szlifowanie i lakierowanie form do maszyn, klejenie kabin i podłóg, wycinanie części plastikowych specjalnym nożem, praca z...",
 "ru": "Продукция, сборка деталей к машинам, чистка, шлифовка и лакировка форм к машинам, оклейка кабин и полов, вырезка деталей из пластика специальным ножом, работа с…"
 },
+"Проживання безкоштовне, по 2–3 особи в кімнаті. У помешканні є все необхідне для комфортного проживання. Агентство намагається забезпечити робітникам комфортні умови проживання.": {
+"en": "Accommodation is free, 2-3 people in a room. The apartment has everything you need for a comfortable stay. The agency tries to provide workers with comfortable living conditions.",
+"pl": "Zakwaterowanie jest bezpłatne, 2-3 osoby w pokoju. W apartamencie jest wszystko co potrzebne do komfortowego pobytu. Agencja stara się zapewnić pracownikom komfortowe warunki życia.",
+"ru": "Проживание бесплатно, по 2–3 человека в комнате. В доме есть все необходимое для комфортного проживания. Агентство пытается обеспечить рабочим комфортные условия проживания."
+},
+"Проживання в апартаментах або будинках у Слупську, є кухні та ванні кімнати. У кімнаті проживає по 2–4 особи. У нас є окремі кімнати для пар. Є Wi-Fi.": {
+"en": "Accommodation in apartments or houses in Slupsk, there are kitchens and bathrooms. 2-4 people live in the room. We have separate rooms for couples. There is Wi-Fi.",
+"pl": "Noclegi w apartamentach lub domach w Słupsku, są kuchnie i łazienki. W pokoju mieszkają 2-4 osoby. Dla par posiadamy oddzielne pokoje. Jest Wi-Fi.",
+"ru": "Размещение в апартаментах или домах в Слупске, есть кухни и ванные комнаты. В комнате проживает по 2-4 человека. У нас есть отдельные комнаты для пар. Есть Wi-Fi."
+},
+"Проживання в будинках у м. Тчев. Номери розраховані на 3–4 особи. Доступ до Wi-Fi. Окремі кухні та ванні кімнати.": {
+"en": "Accommodation in houses in the city of Tchev. The rooms are designed for 3-4 people. Access to Wi-Fi. Separate kitchens and bathrooms.",
+"pl": "Zakwaterowanie w domach w mieście Tchev. Pokoje przeznaczone są dla 3-4 osób. Dostęp do Wi-Fi. Oddzielne kuchnie i łazienki.",
+"ru": "Размещение в домах в г. Тчев. Номера рассчитаны на 3-4 человека. Доступ к Wi-Fi. Отдельные кухни и ванные комнаты."
+},
+"Проживання в будинку, у якому є 3 кімнати, кухня та ванна кімната. У кімнатах розміщуються по 3–4 особи. Надаються ковдри, подушки та постільна білизна. Є Wi-Fi. Неподалік від будинку розташоване прекрасне озеро та місце для барбекю.": {
+"en": "Living in a house with 3 rooms, a kitchen and a bathroom. The rooms accommodate 3-4 people. Blankets, pillows and bed linen are provided. There is Wi-Fi. There is a beautiful lake and a barbecue area not far from the house.",
+"pl": "Mieszka w domu z 3 pokojami, kuchnią i łazienką. Pokoje są przeznaczone dla 3-4 osób. Obiekt zapewnia koce, poduszki i pościel. Jest Wi-Fi. Niedaleko domu znajduje się piękne jezioro i miejsce na grilla.",
+"ru": "Размещение в доме, в котором есть 3 комнаты, кухня и ванная. В комнатах размещаются по 3-4 человека. К услугам гостей одеяла, подушки и постельное белье. Есть Wi-Fi. Недалеко от дома расположено прекрасное озеро и барбекю."
+},
+"Проживання в кімнатах по 3–4 особи. Надаються ковдри, подушки та постільна білизна. Кухня повністю обладнана. Пральна машина безкоштовна, є Wi-Fi. Автобусна зупинка знаходиться за 10 м від житла. Магазин Biedronka за 500 м. Фото житла:": {
+"en": "Accommodation in rooms for 3-4 people. Blankets, pillows and bed linen are provided. The kitchen is fully equipped. The washing machine is free, there is Wi-Fi. The bus stop is 10 m from the house. Biedronka store 500 m away. Photo of the apartment:",
+"pl": "Zakwaterowanie w pokojach dla 3-4 osób. Obiekt zapewnia koce, poduszki i pościel. Kuchnia jest w pełni wyposażona. Pralka jest bezpłatna, jest Wi-Fi. Przystanek autobusowy znajduje się 10 m od domu. Sklep Biedronka w odległości 500 m. Zdjęcie mieszkania:",
+"ru": "Размещение в комнатах по 3–4 человека. К услугам гостей одеяла, подушки и постельное белье. Кухня полностью оборудована. Стиральная машина бесплатная, есть Wi-Fi. Автобусная остановка находится в 10 м от жилья. Магазин Biedronka за 500 м. Фото жилья:"
+},
+"Проживання в місті Гданськ у хостелах. По 3–4 особи в кімнаті. Обладнання: спільна кухня, ванна кімната, пральна машина, інтернет. Дорога до роботи займає приблизно 15–20 хвилин на громадському транспорті.": {
+"en": "Accommodation in the city of Gdansk in hostels. 3-4 people in a room. Equipment: shared kitchen, bathroom, washing machine, internet. The journey to work takes about 15-20 minutes by public transport.",
+"pl": "Zakwaterowanie na terenie miasta Gdańska w hostelach. 3-4 osoby w pokoju. Wyposażenie: wspólna kuchnia, łazienka, pralka, internet. Dojazd komunikacją miejską do pracy zajmuje około 15-20 minut.",
+"ru": "Размещение в Гданьске в хостелах. По 3-4 человека в комнате. Оборудование: общая кухня, ванная, стиральная машина, интернет. Дорога к работе занимает около 15–20 минут на общественном транспорте."
+},
 "Проживання в односімейному будинку. По 3–4 особи в кімнаті. Обладнання: спільна кухня, ванна кімната, пральна машина, інтернет.": {
 "en": "Living in a single-family house. 3-4 people in a room. Equipment: shared kitchen, bathroom, washing machine, internet.",
 "pl": "Mieszka w domu jednorodzinnym. 3-4 osoby w pokoju. Wyposażenie: wspólna kuchnia, łazienka, pralka, internet.",
 "ru": "Размещение в односемейном доме. По 3-4 человека в комнате. Оборудование: общая кухня, ванная, стиральная машина, интернет."
+},
+"Проживання для працівників надається в будинках або квартирах. Кімнати на 2-4 особи (стандартні ліжка). Ковдри, подушки та постільна білизна надаються в кожній квартирі. Всі кухні обладнані основною побутовою технікою та посудом. Безкоштовні пральні машини. Безкоштовний Wi-Fi надається в кожній квартирі.": {
+"en": "Accommodation for employees is provided in houses or apartments. Rooms for 2-4 people (standard beds). Blankets, pillows and bed linen are provided in each apartment. All kitchens are equipped with basic household appliances and dishes. Free washing machines. Free Wi-Fi is provided in every apartment.",
+"pl": "Zakwaterowanie dla pracowników zapewniane jest w domach lub mieszkaniach. Pokoje 2-4 osobowe (łóżka standardowe). W każdym apartamencie zapewnione są koce, poduszki i pościel. Wszystkie kuchnie wyposażone są w podstawowy sprzęt AGD i naczynia. Darmowe pralki. W każdym apartamencie zapewniony jest bezpłatny bezprzewodowy dostęp do Internetu.",
+"ru": "Проживание для работников предоставляется в домах или квартирах. Комнаты на 2-4 человека (стандартные кровати). Одеяла, подушки и постельное белье предоставляются в каждой квартире. Все кухни оборудованы основной бытовой техникой и посудой. Бесплатные стиральные машины. Бесплатный Wi-Fi предоставляется в каждой квартире."
+},
+"Проживання забезпечується в місті Хеб, у кімнаті на 2–4 особи. Пари розміщуються окремо. Кімната повністю обладнана всіма необхідними зручностями: ліжком, шафою, тумбочкою, столом та постільною білизною. Кухня, ванна кімната та пральна машина — спільного користування. Поруч розташовані магазини та супермаркети. Життя в цьому районі спокійне. Агентство докладає всіх зусиль, щоб забезпечити працівникам комфортні умови проживання.": {
+"en": "Accommodation is provided in the city of Heb, in a room for 2-4 people. Couples are housed separately. The room is fully equipped with all the necessary amenities: a bed, a wardrobe, a bedside table, a table and bed linen. Kitchen, bathroom and washing machine are shared. There are shops and supermarkets nearby. Life in this area is calm. The agency makes every effort to ensure comfortable living conditions for employees.",
+"pl": "Zakwaterowanie zapewniamy w mieście Heb, w pokoju dla 2-4 osób. Pary kwaterowane są oddzielnie. Pokój jest w pełni wyposażony we wszystkie niezbędne udogodnienia: łóżko, szafę, stolik nocny, stolik oraz pościel. Kuchnia, łazienka i pralka są wspólne. W pobliżu znajdują się sklepy i supermarkety. Życie w tej okolicy jest spokojne. Agencja dokłada wszelkich starań, aby zapewnić pracownikom komfortowe warunki życia.",
+"ru": "Размещение обеспечивается в городе Хэб, в комнате на 2–4 человека. Пара размещается отдельно. Комната полностью оборудована всеми необходимыми удобствами: кроватью, шкафом, тумбочкой, столом и постельным бельем. Кухня, ванная комната и стиральная машина – совместное пользование. Рядом находятся магазины и супермаркеты. Жизнь в этом районе спокойна. Агентство прилагает все усилия, чтобы обеспечить работникам комфортные условия проживания."
+},
+"Проживання надається в місті Кадань, приблизно за 10 км від місця роботи. Розміщення — по 2–4 особи в кімнаті. Житло обладнане всім необхідним для комфортного проживання. У розпорядженні працівників — спільна кухня, ванна кімната та туалет.": {
+"en": "Accommodation is provided in the city of Kadan, approximately 10 km from the place of work. Accommodation — 2–4 people in a room. The apartment is equipped with everything necessary for a comfortable stay. Employees have access to a shared kitchen, bathroom and toilet.",
+"pl": "Zakwaterowanie zapewniamy w mieście Kadan, około 10 km od miejsca pracy. Zakwaterowanie — 2–4 osoby w pokoju. Mieszkanie wyposażone jest we wszystko co niezbędne do komfortowego pobytu. Pracownicy mają dostęp do wspólnej kuchni, łazienki i toalety.",
+"ru": "Проживание находится в городе Кадань, примерно в 10 км от места работы. Размещение - по 2-4 человека в комнате. Жилье оборудовано всем необходимым для комфортного проживания. В распоряжении работников есть общая кухня, ванная комната и туалет."
 },
 "Проживання по 2–3 особи в кімнаті. Є окремі кімнати для сімейних пар. У помешканні є все необхідне для комфортного проживання (пральна машина, мікрохвильова піч, холодильник, плита, сушарка). Фото додаються. З собою рекомендується взяти постільну білизну, чашку, тарілку, каструлю за бажанням.": {
 "en": "Accommodation for 2-3 people in a room. There are separate rooms for couples. The apartment has everything you need for a comfortable stay (washing machine, microwave oven, refrigerator, stove, dryer). Photos are attached. It is recommended to take bed linen, a cup, a plate, a pan with you if you wish.",
@@ -7017,6 +7098,11 @@
 "en": "Accommodation in Stenshev.",
 "pl": "Zakwaterowanie w Stenshevie.",
 "ru": "Размещение в Стеншеве."
+},
+"Проживання у Стеншеві. Працівниці будуть добиратися пішки від місця проживання до роботи.": {
+"en": "Accommodation in Stenshev. The workers will walk from their place of residence to work.",
+"pl": "Zakwaterowanie w Stenshevie. Pracownicy będą przemieszczać się z miejsca zamieszkania do pracy.",
+"ru": "Размещение в Стеншеве. Работницы будут добираться пешком от места жительства до работы."
 },
 "Проживання у місті Гданськ, у хостелах. Кімнати на 3–4 особи. Обладнання: спільна кухня, ванна кімната, пральна машина, інтернет. Дорога до роботи займає приблизно 15–20 хвилин громадським транспортом.": {
 "en": "Accommodation in the city of Gdansk, in hostels. Rooms for 3-4 people. Equipment: shared kitchen, bathroom, washing machine, internet. The journey to work takes approximately 15-20 minutes by public transport.",
@@ -7113,6 +7199,11 @@
 "pl": "Wsparcie i pomoc koordynatora przez cały okres pracy.",
 "ru": "Поддержка и помощь координатора в течение всего периода работы."
 },
+"Підтримка та допомога координатора протягом усього періоду роботи. За двотижневий простій на заводі нараховується святкова премія у розмірі приблизно 1800 злотих нетто.": {
+"en": "Support and assistance of the coordinator during the entire period of work. For a two-week layoff at the plant, a holiday bonus in the amount of approximately PLN 1,800 net is charged.",
+"pl": "Wsparcie i pomoc koordynatora przez cały okres pracy. Za dwutygodniowe zwolnienie w zakładzie pobierana jest premia urlopowa w wysokości około 1800 zł netto.",
+"ru": "Поддержка и помощь координатора в течение всего периода работы. За двухнедельный простой на заводе насчитывается праздничная премия в размере примерно 1800 злотых нетто."
+},
 "Після 40 днів — продукція компанії. Знижка 30% у магазині біля заводу.": {
 "en": "After 40 days — the company's products. 30% discount in the store near the factory.",
 "pl": "Po 40 dniach — produkty firmy. Rabat 30% w sklepie niedaleko fabryki.",
@@ -7128,6 +7219,11 @@
 "pl": "Po okresie próbnym (2 tygodnie) pracownicy mogą uzyskać 30% rabatu na produkty piekarnicze i cukiernicze.",
 "ru": "После испытательного срока (2 недели) сотрудники могут получить скидку –30% на хлебобулочные и кондитерские изделия."
 },
+"Після відпрацювання 40 днів кожен працівник отримує продукцію компанії Dr. Oetker Біля заводу знаходиться магазин, де можна придбати продукцію компанії Dr. Oetker зі знижкою - 30% Після відпрацювання перших трьох місяців ставка збільшується на 1 злотий.": {
+"en": "After working for 40 days, each employee receives the products of Dr. Oetker There is a shop near the plant where you can buy Dr. Oetker with a discount - 30% After working for the first three months, the rate increases by PLN 1.",
+"pl": "Po 40 dniach pracy każdy pracownik otrzymuje produkty firmy Dr. Oetkera. W pobliżu zakładu znajduje się sklep, w którym można kupić firmę Dr. Oetkera z rabatem - 30%. Po pierwszych trzech miesiącach pracy stawka wzrasta o 1 zł.",
+"ru": "После отработки 40 дней каждый работник получает продукцию Dr. Oetker Возле завода находится магазин, где можно приобрести продукцию Dr. Oetker со скидкой - 30% После отработки первых трех месяцев ставка увеличивается на 1 злотый."
+},
 "Пішки (1,5–3 км)": {
 "en": "On foot (1.5–3 km)",
 "pl": "Pieszo (1,5–3 km)",
@@ -7138,15 +7234,30 @@
 "pl": "Pieszo lub komunikacją miejską.",
 "ru": "Пешком или общественным транспортом."
 },
+"Пішки або на громадському транспорті. Транспорт для громадян України є безкоштовним лише після отримання литовського тимчасового захисту. Під час очікування на надання захисту кандидат самостійно оплачує проїзд у громадському транспорті. Номери автобусів та зупинок координатор надсилає кожному кандидату після прибуття на проект.": {
+"en": "On foot or by public transport. Transport for citizens of Ukraine is free only after obtaining Lithuanian temporary protection. While waiting for protection, the candidate pays for public transport on his own. The coordinator sends the numbers of buses and stops to each candidate upon arrival at the project.",
+"pl": "Pieszo lub komunikacją miejską. Transport dla obywateli Ukrainy jest bezpłatny wyłącznie po uzyskaniu litewskiej ochrony tymczasowej. W oczekiwaniu na ochronę kandydat samodzielnie opłaca przejazd komunikacją miejską. Po przybyciu na projekt koordynator przesyła każdemu kandydatowi numery autobusów i przystanków.",
+"ru": "Пешком или на общественном транспорте. Транспорт для граждан Украины бесплатный только после получения литовской временной защиты. Во время ожидания предоставления защиты кандидат самостоятельно оплачивает проезд в общественном транспорте. Номера автобусов и остановок координатор посылает каждому кандидату по прибытии на проект."
+},
 "Пішки або самостійно.": {
 "en": "On foot or independently.",
 "pl": "Pieszo lub samodzielnie.",
 "ru": "Пешком или самостоятельно."
 },
+"Ретенційна премія: Протягом перших 3 місяців роботи доплата 5,50 злотих брутто за кожну годину роботи. (Можливість отримувати 36,90 злотих брутто за годину протягом перших 3 місяців роботи.) (Ретенційна премія виплачується виключно працівникам, які не мають жодних відсутностей протягом цього періоду, включаючи лікарняний (L4) та невиправдані відсутності; кожна відсутність призводить до втрати премії.) Щомісячна премія: до 400 злотих брутто…": {
+"en": "Retention bonus: During the first 3 months of work, an additional payment of PLN 5.50 gross for each hour of work. (Possibility to earn PLN 36.90 gross per hour during the first 3 months of employment.) (Retention bonus is paid exclusively to employees who do not have any absences during this period, including sick leave (L4) and unexcused absences; each absence leads to the loss of the bonus.) Monthly bonus: up to PLN 400 gross…",
+"pl": "Dodatek retencyjny: Przez pierwsze 3 miesiące pracy dodatek w wysokości 5,50 zł brutto za każdą godzinę pracy. (Możliwość zarabiania 36,90 zł brutto za godzinę przez pierwsze 3 miesiące zatrudnienia.) (Premia za utrzymanie wypłacana jest wyłącznie pracownikom, którzy w tym okresie nie mają nieobecności, w tym zwolnień lekarskich (L4) i nieobecności nieusprawiedliwionych; każda nieobecność skutkuje utratą premii.) Premia miesięczna: do 400 zł brutto…",
+"ru": "Ретенциальная премия: В течение первых 3 месяцев работы доплата 5,50 злотых брутто за каждый час работы. (Возможность получать 36,90 злотых брутто в час в течение первых 3 месяцев работы.) (Ретенционная премия выплачивается исключительно работникам, не имеющим никаких отсутствий в течение этого периода, включая больничный (L4) и неоправданные отсутствия; каждое отсутствие приводит к потере премии.) Ежемесячная премия: до 400"
+},
 "Робота 5 днів на тиждень, 2 вихідний (плаваючі), Зміни по 10 годин:Перша зміна: 6:00–16:45, Друга зміна: 18:00–4:45, Чергування змін кожні 4 тижні, Одина перерва на день – 45 хвилин (неоплачувана), У середньому 220 годин на місяць": {
 "en": "Work 5 days a week, 2 days off (floating), Shifts of 10 hours: First shift: 6:00 - 16:45, Second shift: 18:00 - 4:45, Alternating shifts every 4 weeks, One break per day - 45 minutes (unpaid), Average 220 hours per month",
 "pl": "Praca 5 dni w tygodniu, 2 dni wolne (zmienny), Zmiany po 10 godzin: Pierwsza zmiana: 6:00 - 16:45, Druga zmiana: 18:00 - 4:45, Zmiany naprzemienne co 4 tygodnie, Jedna przerwa dziennie - 45 minut (bezpłatna), Średnio 220 godzin miesięcznie",
 "ru": "Работа 5 дней в неделю, 2 выходные (плавающие), Изменения по 10 часов: Первая смена: 6:00–16:45, Вторая смена: 18:00–4:45, Чередование смен каждые 4 недели, Один перерыв в день – 45 минут (неоплачиваемый), В среднем 22"
+},
+"Робота 5-6 днів на тиждень (з понеділка по неділю, вільний день субота) 8-10-12 годин (залежно від кількості замовлень) тільки денна робоча зміна, + додаткові години в залежності від кількості замовлень (прикладові зміни: 5–17, 6–14, 8–16, 10–18, 10–22, 12–18, 12–22, 13–21, 14–22). Графік роботи…": {
+"en": "Work 5-6 days a week (from Monday to Sunday, Saturday is a day off) 8-10-12 hours (depending on the number of orders) only day shift, + additional hours depending on the number of orders (example shifts: 5-17, 6-14, 8-16, 10-18, 10-22, 12-18, 12-22, 13–21, 14–22). Work schedule...",
+"pl": "Praca 5-6 dni w tygodniu (od poniedziałku do niedzieli, sobota jest dniem wolnym) 8-10-12 godzin (w zależności od ilości zleceń) tylko zmiana dzienna, + dodatkowe godziny w zależności od ilości zleceń (przykładowe zmiany: 5-17, 6-14, 8-16, 10-18, 10-22, 12-18, 12-22, 13-21, 14–22). Harmonogram pracy...",
+"ru": "Работа 5-6 дней в неделю (с понедельника по воскресенье, свободный день суббота) 8-10-12 часов (в зависимости от количества заказов) только дневная рабочая смена, + дополнительные часы в зависимости от количества заказов (примерные изменения: 5-17, 6-14, 8-16, 10-12, 12, 12-12 13-21, 14-22). График работы…"
 },
 "Робота Нд - Чт: 14/15:00 - 18/19:00, Перерва 10-15 хвилин о 16:00, Комфортна атмосфера та бонуси, Робота на сучасному, чистому харчовому виробництві дієтичного харчування, Є спеціально відведене місце для куріння, Є роздягальня, у кожного працівника своя шафка під ключ, Зверніть увагу: На підприємстві суворо дотримуються стандартів гігієни, тому не можна носити біжутерію (каблучки, ланцюжки, сережки) та мати нарощені вії!": {
 "en": "Work Sun - Thu: 14/15:00 - 18/19:00, Break 10-15 minutes at 16:00, Comfortable atmosphere and bonuses, Work in a modern, clean food production of dietary food, There is a specially designated place for smoking, There is a changing room, each employee has his own locker, Please note: The company strictly adheres to hygiene standards, so it is not allowed to wear jewelry (rings, chains, earrings) and have eyelash extensions!",
@@ -7213,6 +7324,11 @@
 "pl": "Prace wewnętrzne (komora malarska)",
 "ru": "Работа в помещении (покрасочная камера)"
 },
+"Робота в приміщенні з комфортною температурою, Перерви: при зміні 8 годин - 1 перерва 15 хвилин, при зміні 12 годин - аналогічно": {
+"en": "Work in a room with a comfortable temperature, Breaks: for a shift of 8 hours - 1 break of 15 minutes, for a shift of 12 hours - similarly",
+"pl": "Praca w pomieszczeniu o komfortowej temperaturze, Przerwy: na zmianę 8 godzin - 1 przerwa 15 minut, na zmianę 12 godzin - analogicznie",
+"ru": "Работа в помещении с комфортной температурой, Перерывы: при смене 8 часов – 1 перерыв 15 минут, при смене 12 часов – аналогично"
+},
 "Робота в приміщенні з кімнатною температурою, Перерви 20 и 10 хвилин": {
 "en": "Work indoors at room temperature, take breaks of 20 and 10 minutes",
 "pl": "Pracuj w pomieszczeniu w temperaturze pokojowej, rób przerwy 20 i 10 minut",
@@ -7252,6 +7368,11 @@
 "en": "Order fulfillment work at a clothing warehouse.",
 "pl": "Praca przy kompletowaniu zamówień w hurtowni odzieżowej.",
 "ru": "Работа по выполнению заказов на складе одежды."
+},
+"Робота з електроінструментами Читання електричних схем Дуже добре знання електричних установок Досвід роботи на посаді електрика/електромонтажника Готовність до роботи у 2-змінному режимі Необхідні права SEP до 1 кВ": {
+"en": "Work with power tools Read electrical schematics Very good knowledge of electrical installations Experience as an electrician/electrician Willingness to work 2-shift SEP license up to 1kV required",
+"pl": "Praca z elektronarzędziami Czytanie schematów elektrycznych Bardzo dobra znajomość instalacji elektrycznych Doświadczenie jako elektryk/elektryk Gotowość do pracy na 2 zmiany Wymagane uprawnienia SEP do 1kV",
+"ru": "Работа с электроинструментами Чтение электрических схем Очень хорошо знание электрических установок Опыт работы в должности электрика/электромонтажника Готовность к работе в 2-сменном режиме Необходимые права SEP до 1 кВ"
 },
 "Робота з електроінструментами Читання електричних схем Дуже добре знання електричних установок Досвід роботи на посаді електрика/електромонтера Готовність до роботи у 2-змінному режимі Необхідні права SEP до 1 кВ": {
 "en": "Working with power tools Reading electrical schematics Very good knowledge of electrical installations Experience as an electrician/electrical fitter Willingness to work 2-shift SEP license up to 1kV required",
@@ -7863,6 +7984,11 @@
 "pl": "Pracodawca zapewnia samochód służbowy.",
 "ru": "Работодатель предоставляет служебный автомобиль."
 },
+"Роботодавець надає службовий автомобіль. Водій службового автомобіля зобов’язаний систематично заповнювати журнал пробігу (кількість пройдених кілометрів). Службовий автомобіль можна використовувати лише в робочих цілях та для поїздок за покупками (у радіусі 5 км від місця роботи до місця проживання).": {
+"en": "The employer provides a company car. The driver of a company car is obliged to systematically fill in the mileage log (number of kilometers driven). The company car can only be used for work purposes and for shopping trips (within a radius of 5 km from the place of work to the place of residence).",
+"pl": "Pracodawca zapewnia samochód służbowy. Kierowca samochodu służbowego zobowiązany jest do systematycznego uzupełniania dziennika przebiegu (liczby przejechanych kilometrów). Samochód służbowy może być wykorzystywany wyłącznie do celów służbowych i wyjazdów na zakupy (w promieniu 5 km od miejsca pracy do miejsca zamieszkania).",
+"ru": "Работодатель предоставляет служебный автомобиль. Водитель служебного автомобиля обязан систематически заполнять журнал пробега (количество пройденных километров). Служебный автомобиль можно использовать только в рабочих целях и для поездок за покупками (в радиусе 5 км от места работы до места жительства)."
+},
 "Роботі на касі на платній автостраді біля Познані, Обслуговування спеціального екранного монітора (комп'ютер), Робота сидяча": {
 "en": "Work at the ticket office on the toll freeway near Poznań, Maintenance of a special screen monitor (computer), Sitting work",
 "pl": "Praca w kasie biletowej na płatnej autostradzie pod Poznaniem, Konserwacja specjalnego monitora ekranowego (komputera), Praca siedząca",
@@ -7887,6 +8013,11 @@
 "en": "Logistics warehouse worker",
 "pl": "Pracownik magazynu logistycznego",
 "ru": "Рабочий на логистический состав"
+},
+"Робітник складу": {
+"en": "Warehouse worker",
+"pl": "Pracownik magazynu",
+"ru": "Рабочий склада"
 },
 "Робітники займаються надіванням і зняттям гумових шлангів на металеві оправки-конструкції, підготовлені для навантаження в парову піч, а також виконанням робіт з прибирання на території відділу.": {
 "en": "Workers are engaged in putting on and taking off rubber hoses on metal mandrels-structures, prepared for loading into a steam furnace, as well as performing cleaning work on the territory of the department.",
@@ -8192,6 +8323,9 @@
 "en": "Social assistance from the state: 300–350 EUR (the amount is individual, it can be paid once or over 2–3 months) Advance payment:…",
 "pl": "Pomoc społeczna ze strony państwa: 300–350 EUR (kwota indywidualna, można ją wypłacić jednorazowo lub w ciągu 2–3 miesięcy) Zaliczka:…",
 "ru": "Социальная помощь от государства: 300–350 EUR (индивидуальная сумма, может выплачиваться единовременно или в течение 2–3 месяцев) Аванс:…"
+},
+"Соціальна допомога: 300 - 350 євро допомоги від держави (кількість виплат дуже індивідуальна, можуть виплатити одноразово або протягом 2-3 місяців).": {
+"ru": "Социальная помощь: 300 - 350 евро пособия от государства (количество выплат очень индивидуально, могут выплатить единовременно или в течение 2-3 месяцев)."
 },
 "Соціальна допомога: 300–350 євро від держави (виплати індивідуальні, можливі одноразово або протягом 2–3 місяців)": {
 "en": "Social assistance: 300–350 euros from the state (payments are individual, possible once or for 2–3 months)",
