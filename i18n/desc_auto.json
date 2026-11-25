@@ -8325,6 +8325,8 @@
 "ru": "Социальная помощь от государства: 300–350 EUR (индивидуальная сумма, может выплачиваться единовременно или в течение 2–3 месяцев) Аванс:…"
 },
 "Соціальна допомога: 300 - 350 євро допомоги від держави (кількість виплат дуже індивідуальна, можуть виплатити одноразово або протягом 2-3 місяців).": {
+"en": "Social assistance: 300 - 350 euros of assistance from the state (the amount of payments is very individual, they can be paid once or during 2-3 months).",
+"pl": "Pomoc społeczna: 300 - 350 euro pomocy państwa (wysokość wpłat jest bardzo indywidualna, można je wpłacać jednorazowo lub w ciągu 2-3 miesięcy).",
 "ru": "Социальная помощь: 300 - 350 евро пособия от государства (количество выплат очень индивидуально, могут выплатить единовременно или в течение 2-3 месяцев)."
 },
 "Соціальна допомога: 300–350 євро від держави (виплати індивідуальні, можливі одноразово або протягом 2–3 місяців)": {
@@ -8352,6 +8354,11 @@
 "pl": "Początkowo: 5 dni w tygodniu; zmiany po 12 godzin; 07:00–19:00; dwie przerwy: 10 i 15 minut. Później: 5 dni w tygodniu po 8 godzin; I zmiana: 06:00–14:00; II zmiana: 14:00–22:00; III zmiana: 22:00–06:00; 168–200 godzin miesięcznie; przerwa 15 minut; możliwe są nadgodziny do +4 godzin. Dodatkowe koszty: Mieszkanie - 500 zł/miesiąc.",
 "ru": "Сначала: 5 дней в неделю; смены по 12 часов; 07:00–19:00; два перерыва: 10 и 15 минут. Позже: 5 дней в неделю по 8 часов; I смена: 06:00–14:00; II смена: 14:00–22:00; III смена: 22:00–06:00; 168–200 часов в месяц; перерыв 15 минут; возможны сверхурочные часы до +4 часов. Дополнительные расходы: Жилье – 500 PLN/месяц."
 },
+"Співробітникам надається безкоштовний обід у заводській їдальні. На вибір пропонується кілька страв, як і в системі «All Inclusive». Крім того, доступний холодильник із продуктами з підприємства, яким також можна користуватися.": {
+"en": "Employees are provided with free lunch in the factory canteen. A choice of several dishes is offered, as in the \"All Inclusive\" system. In addition, there is a refrigerator with products from the company, which can also be used.",
+"pl": "Pracownicy mają zapewniony bezpłatny obiad w stołówce zakładowej. Oferujemy wybór kilku dań, podobnie jak w systemie „All Inclusive”. Dodatkowo znajduje się lodówka z produktami firmy, z której również można skorzystać.",
+"ru": "Сотрудникам предоставляется бесплатный обед в заводской столовой. На выбор предлагается несколько блюд, как и в системе All Inclusive. Кроме того, доступен холодильник с продуктами предприятия, которым также можно пользоваться."
+},
 "Співробітники добираються до місця роботи громадським транспортом з місця проживання в…": {
 "en": "Employees get to their place of work by public transport from their place of residence in…",
 "pl": "Pracownicy dojeżdżają do pracy komunikacją miejską ze swojego miejsca zamieszkania w…",
@@ -8372,6 +8379,16 @@
 "pl": "Pracownicy mogą dojechać do pracy pieszo (około 25 minut) lub skorzystać z bezpłatnego…",
 "ru": "Сотрудники добираются на работу пешком (около 25 минут) или…"
 },
+"Співробітники можуть самостійно добиратися на роботу громадським транспортом або пішки. Відстань від місця проживання до місця роботи становить приблизно 1-2,5 км.": {
+"en": "Employees can get to work independently by public transport or on foot. The distance from the place of residence to the place of work is approximately 1-2.5 km.",
+"pl": "Pracownicy mogą dojeżdżać do pracy samodzielnie komunikacją miejską lub pieszo. Odległość miejsca zamieszkania od miejsca pracy wynosi około 1-2,5 km.",
+"ru": "Сотрудники могут самостоятельно добираться на работу общественным транспортом или пешком. Расстояние от места обитания до места работы составляет примерно 1-2,5 км."
+},
+"Співробітники, які проживають у житлових приміщеннях, наданих Агентством, добираються на роботу пішки — приблизно 10 хвилин (місце роботи розташоване неподалік від житла). Працівники, які мешкають у власній квартирі, добираються на роботу самостійно. Існує можливість відшкодування витрат на проїзд (для тих, хто має власний автомобіль). Доплата за власний транспорт: від +75 до +300 злотих на місяць (залежно від відстані).": {
+"en": "Employees who live in housing provided by the Agency walk to work in about 10 minutes (the place of work is located not far from the housing). Employees who live in their own apartment get to work independently. There is a possibility of reimbursement of travel expenses (for those who have their own car). Surcharge for own transport: from +75 to +300 zlotys per month (depending on the distance).",
+"pl": "Pracownicy mieszkający w mieszkaniach udostępnianych przez Agencję dojeżdżają do pracy w ciągu około 10 minut (miejsce pracy znajduje się niedaleko mieszkania). Pracownicy mieszkający we własnym mieszkaniu mogą pracować samodzielnie. Istnieje możliwość zwrotu kosztów podróży (dla osób posiadających własny samochód). Dopłata za transport własny: od +75 do +300 zł miesięcznie (w zależności od odległości).",
+"ru": "Сотрудники, проживающие в жилых помещениях, предоставленных Агентством, добираются на работу пешком — примерно 10 минут (место работы находится недалеко от жилья). Работники, проживающие в собственной квартире, добираются на работу самостоятельно. Существует возможность возмещения расходов на проезд (для тех, кто имеет свой автомобиль). Доплата за свой транспорт: от +75 до +300 злотых в месяц (в зависимости от расстояния)."
+},
 "Стабільна робота у сфері виробництва м’яса птиці в сучасній компанії, що має міцні позиції на ринку.": {
 "en": "Stable work in the field of poultry meat production in a modern company with a strong position in the market.",
 "pl": "Stabilna praca w branży produkcji mięsa drobiowego w nowoczesnej firmie o mocnej pozycji na rynku.",
@@ -8381,6 +8398,11 @@
 "en": "The rate is PLN 31.40 gross",
 "pl": "Stawka wynosi 31,40 zł brutto",
 "ru": "Ставка 31,40 злотых брутто"
+},
+"Стать: жінки, чоловіки, пари; Вік: до 40 років; Громадянство: Україна; Досвід роботи: не обов'язковий; Рівень володіння польською мовою: базовий.": {
+"en": "Gender: women, men, couples; Age: up to 40 years; Citizenship: Ukraine; Work experience: not required; Level of knowledge of the Polish language: basic.",
+"pl": "Płeć: kobiety, mężczyźni, pary; Wiek: do 40 lat; Obywatelstwo: Ukraina; Doświadczenie zawodowe: nie wymagane; Poziom znajomości języka polskiego: podstawowy.",
+"ru": "Пол: женщины, мужчины, пары; Возраст: до 40 лет; Гражданство: Украина; Опыт работы: не обязателен; Уровень владения польским языком: базовый."
 },
 "Субсидія на обід. Компанія надає обід.": {
 "en": "Subsidy for lunch. The company provides lunch.",
@@ -8421,6 +8443,11 @@
 "en": "A modern logistics center near Wroclaw that processes and stores goods, mainly clothing.",
 "pl": "Nowoczesne centrum logistyczne pod Wrocławiem zajmujące się obróbką i magazynowaniem towarów, głównie odzieży.",
 "ru": "Современный логистический центр вблизи Вроцлава, обрабатывающий и хранящий товары, преимущественно одежда."
+},
+"Сучасно обладнані приміщення (зона відпочинку, простора їдальня, автомати з їжею та кавою, ергономічні килимки на робочому місці). На території компанії працює мобільний фудтрак «Bisas ant ratų», що пропонує свіжу та гарячу їжу — зручне рішення для обіду без зайвих турбот. У їдальні компанії працює постачальник харчування, що забезпечує можливість придбати гарячу їжу під час роботи. Робочий одяг, його прання та всі необхідні засоби для роботи.… Нарахування премії за результатами роботи.": {
+"en": "Modernly equipped premises (rest area, spacious dining room, vending machines with food and coffee, ergonomic mats at the workplace). A mobile food truck \"Bisas ant ratų\" operates on the premises of the company, offering fresh and hot food - a convenient solution for a worry-free lunch. A caterer works in the company canteen, which provides the opportunity to purchase hot food during work. Work clothes, their washing and all the necessary tools for work.... Bonus accrual based on work results.",
+"pl": "Nowocześnie wyposażony lokal (strefa odpoczynku, przestronna jadalnia, automaty z jedzeniem i kawą, ergonomiczne maty w miejscu pracy). Na terenie firmy działa mobilny food truck „Bisas ant ratų”, oferujący świeże i gorące jedzenie – wygodne rozwiązanie na bezproblemowy lunch. W zakładowej stołówce pracuje firma cateringowa, która zapewnia możliwość zakupu ciepłego posiłku w trakcie pracy. Odzież robocza, jej pranie oraz wszystkie narzędzia niezbędne do pracy.... Naliczanie premii w oparciu o wyniki pracy.",
+"ru": "Современно оборудованные помещения (зона отдыха, просторная столовая, автоматы с едой и кофе, эргономичные коврики на рабочем месте). На территории компании работает мобильный фудтрак «Bisas ant ratų», предлагающий свежую и горячую еду – удобное решение для обеда без лишних забот. В столовой компании работает поставщик питания, обеспечивающий возможность приобрести горячую еду во время работы. Рабочая одежда, ее стирка и все необходимые средства для… Начисление премии по результатам работы."
 },
 "Сучасно обладнані приміщення (зона відпочинку, простора їдальня, апарати для їжі та кави, ергономічні килимки на робочому місці). На території компанії працює мобільний фудтрак «Bisas ant ratų», що пропонує свіжу і гарячу їжу. В їдальні компанії працює постачальник харчування, що забезпечує можливість придбати гарячу їжу під час роботи. Робочий одяг, його прання та всі необхідні засоби для роботи. Організація днів з фруктами та різними частуваннями. Можливість участі в діючих програмах лояльності. Стабільна і довгострокова робота в міжнародній компанії. Можливості професійного та особистісного розвитку, навчання та підвищення кваліфікації. У компанії діє колективний договір з додатковими перевагами для співробітників. На виробництві впроваджена культура LEAN. Турбота про фізичне та емоційне здоров'я співробітників (профілактичні аналізи крові, вакцинація, консультації психолога). Медичний пункт на території компанії з лікарем, сімейним лікарем, акушером і масажистом.": {
 "en": "Modernly equipped premises (rest area, spacious dining room, machines for food and coffee, ergonomic mats at the workplace). A mobile food truck \"Bisas ant ratų\" operates on the company's territory, offering fresh and hot food. The company canteen has a caterer, which provides the opportunity to purchase hot food during work. Work clothes, their washing and all necessary tools for work. Organization of days with fruits and various treats. Possibility of participation in existing loyalty programs. Stable and long-term work in an international company. Opportunities for professional and personal development, training and professional development. The company has a collective agreement with additional benefits for employees. LEAN culture is implemented in production. Caring for the physical and emotional health of employees (preventive blood tests, vaccinations, psychologist consultations). Medical center on the territory of the company with a doctor, a family doctor, an obstetrician and a massage therapist.",
@@ -8527,6 +8554,26 @@
 "pl": "Międzynarodowa firma będąca właścicielem sieci sklepów Biedronka.",
 "ru": "Транснациональная компания, владеющая сетью магазинов Biedronka."
 },
+"Транспорт безкоштовний: автобус забирає працівників біля хостелів у Познані та Сваженджі.": {
+"en": "Transport is free: the bus picks up workers near the hostels in Poznań and Swazheng.",
+"pl": "Transport jest bezpłatny: autobus zabiera pracowników z okolic hosteli w Poznaniu i Swazhengu.",
+"ru": "Транспорт бесплатный: автобус забирает работников возле хостелов в Познани и Сважендже."
+},
+"Транспорт від місця проживання до місця роботи.": {
+"en": "Transport from the place of residence to the place of work.",
+"pl": "Transport z miejsca zamieszkania do miejsca pracy.",
+"ru": "Транспорт от места жительства к месту работы."
+},
+"Транспорт від роботодавця – 190 злотих відраховуються із зарплати. Автобус підвозить робітників з різних частин Слупська.": {
+"en": "Transport from the employer - PLN 190 is deducted from the salary. The bus picks up workers from different parts of Slupsk.",
+"pl": "Transport od pracodawcy - z wynagrodzenia potrącamy 190 zł. Autobus zabiera pracowników z różnych części Słupska.",
+"ru": "Транспорт от работодателя – 190 злотых отчисляются из зарплаты. Автобус подвозит рабочих из разных частей Слупска."
+},
+"Транспорт організований роботодавцем. Автобус щоденно забирає працівників з визначених зупинок на території Лодзі, Гловна, Стрикова і Згєжа. Перелік автобусних зупинок доступний у SDS. Прошу писати в приватні повідомлення або на чаті.": {
+"en": "Transport is organized by the employer. The bus picks up workers daily from designated stops in Łódź, Główna, Stryków and Zgrzeż. The list of bus stops is available in SDS. Please write in private messages or chat.",
+"pl": "Transport organizuje pracodawca. Autobus codziennie odbiera pracowników z wyznaczonych przystanków w Łodzi, Głównej, Strykowie i Zgrzyżu. Wykaz przystanków dostępny jest w SDS. Proszę pisać w wiadomościach prywatnych lub na czacie.",
+"ru": "Транспорт организован работодателем. Автобус ежедневно забирает работников по определенным остановкам на территории Лодзи, Гловна, Стрыкова и Згежа. Список автобусных остановок доступен в SDS. Прошу писать в приватные сообщения или на чате."
+},
 "Транспорт роботодавця": {
 "en": "Employer's transport",
 "pl": "Transport pracodawcy",
@@ -8556,6 +8603,30 @@
 "en": "Only your own",
 "pl": "Tylko własne",
 "ru": "Только свое"
+},
+"У зв’язку з тим, що житло, яке надає агенція, знаходиться в різних частинах міста Любін, працівники добираються до місця роботи пішки або користуються безкоштовним міським транспортом.": {
+"en": "Due to the fact that the housing provided by the agency is located in different parts of the city of Lubin, employees get to the place of work on foot or use free public transport.",
+"pl": "Ze względu na to, że mieszkania udostępniane przez agencję zlokalizowane są w różnych częściach miasta Lubina, pracownicy dojeżdżają do miejsca pracy pieszo lub korzystają z bezpłatnej komunikacji miejskiej.",
+"ru": "В связи с тем, что жилье, которое предоставляет агентство, находится в разных частях города Любин, работники добираются до места работы пешком или пользуются бесплатным городским транспортом."
+},
+"У кожному відділі обов’язкове знання комп’ютера. У відділах: 2) Control Team / Rework 7) EOL QA 8) ELECTRODE Coater потрібний комунікативний рівень польської мови. У відділі: 10) Відділ транспортування потрібна комунікативна польська мова та наявність прав UDT1 або UDT2.": {
+"en": "Computer skills are mandatory in every department. In the departments: 2) Control Team / Rework 7) EOL QA 8) ELECTRODE Coater communicative level of the Polish language is required. In the department: 10) Transportation Department, communicative Polish language and the presence of UDT1 or UDT2 rights are required.",
+"pl": "Znajomość obsługi komputera jest obowiązkowa na każdym wydziale. W działach: 2) Zespół Kontroli / Rework 7) EOL QA 8) ELECTRODE Coater Wymagany komunikatywny poziom języka polskiego. Na wydziale: 10) Dział Transportu wymagana jest komunikatywna znajomość języka polskiego oraz posiadanie uprawnień UDT1 lub UDT2.",
+"ru": "В каждом отделе обязательно знание компьютера. В отделах: 2) Control Team/Rework 7) EOL QA 8) ELECTRODE Coater требуется коммуникативный уровень польского языка. В отделе: 10) Отдел транспортировки требуется коммуникативный польский язык и наличие прав UDT1 или UDT2."
+},
+"У нас є різні варіанти розміщення. Кімнати для 3-4 осіб (стандартні ліжка). Ковдри, подушки, ковдри доступні в кожному помешканні. Туалети та душові доступні на кожному поверсі. У кожному помешканні є кухні, повністю обладнані (холодильники, плита, чайник, каструлі, тарілки). Звичайно, пральні машини доступні для персоналу. (У кожному помешканні є безкоштовний доступ до Wi-Fi": {
+"en": "We have different accommodation options. Rooms for 3-4 people (standard beds). Blankets, pillows, blankets are available in every accommodation. Toilets and showers are available on each floor. Each apartment has fully equipped kitchens (fridges, stove, kettle, pots, plates). Of course, washing machines are available for the staff. (Each accommodation has free Wi-Fi access",
+"pl": "Mamy różne możliwości zakwaterowania. Pokoje 3-4 osobowe (łóżka standardowe). Koce, poduszki, koce dostępne są w każdym kwaterze. Toalety i prysznice znajdują się na każdym piętrze. W każdym apartamencie znajduje się w pełni wyposażona kuchnia (lodówka, kuchenka, czajnik, garnki, talerze). Dla personelu dostępne są oczywiście pralki. (Każdy obiekt posiada bezpłatny dostęp do Wi-Fi",
+"ru": "У нас есть разные варианты размещения. Комнаты для 3-4 человек (стандартные кровати). Одеяла, подушки, одеяла доступны в каждом доме. Туалеты и душевые доступны на каждом этаже. В каждом доме есть кухни, полностью оборудованные (холодильники, плита, чайник, кастрюли, тарелки). Конечно, стиральные машины доступны для персонала. (В каждом помещении есть бесплатный доступ к Wi-Fi."
+},
+"У нас є різні типи помешкань. 4-місні кімнати (стандартні ліжка). У кожному помешканні є ковдри, подушки та пледи. На кожному поверсі є туалети та душові. У кожному номері є повністю обладнані кухні (холодильники, плита, чайник, каструлі, тарілки). Звісно, для працівників доступні пральні машини (прання безкоштовне). У кожному об’єкті є безкоштовний доступ до Wi-Fi.": {
+"en": "We have different types of accommodation. 4-person rooms (standard beds). Each accommodation has blankets, pillows and blankets. There are toilets and showers on each floor. Each room has a fully equipped kitchen (fridge, stove, kettle, pots, plates). Of course, washing machines are available for employees (washing is free). Each facility has free Wi-Fi access.",
+"pl": "Mamy różne rodzaje zakwaterowania. Pokoje 4-osobowe (łóżka standardowe). W każdym domku znajdują się koce, poduszki i koce. Na każdym piętrze znajdują się toalety i prysznice. W każdym pokoju znajduje się w pełni wyposażona kuchnia (lodówka, kuchenka, czajnik, garnki, talerze). Dla pracowników dostępne są oczywiście pralki (pranie jest bezpłatne). W każdym obiekcie dostępny jest bezpłatny dostęp do Wi-Fi.",
+"ru": "У нас есть разные типы квартир. 4-х местные комнаты (стандартные кровати). В каждом доме есть одеяла, подушки и пледы. На каждом этаже есть туалеты и душевые. В каждом номере есть полностью оборудованные кухни (холодильники, плита, чайник, кастрюли, тарелки). Конечно, для работников доступны стиральные машины (стирка бесплатная). В каждом объекте есть бесплатный доступ к Wi-Fi."
+},
+"У рамках проєкту транспорт не надається. Співробітники добираються до місця роботи самостійно. Підприємство розташоване приблизно за 900 метрів від місця проживання. У разі користування службовим транспортом його вартість становить 100 zł.": {
+"en": "Transport is not provided as part of the project. Employees get to the workplace independently. The enterprise is located approximately 900 meters from the place of residence. In the case of using a company vehicle, its cost is 100 zł.",
+"ru": "В рамках проекта транспорт не предоставляется. Сотрудники добираются до места работы самостоятельно. Предприятие расположено примерно в 900 метрах от места жительства. В случае использования служебного транспорта его стоимость составляет 100 zł."
 },
 "У рамках цього проєкту проживання не надається. Можлива оренда квартири. Орієнтовна вартість — 300–400 євро на місяць, оплачує кандидат.": {
 "en": "Accommodation is not provided as part of this project. It is possible to rent an apartment. Estimated cost — 300–400 euros per month, paid by the candidate.",
