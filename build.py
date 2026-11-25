@@ -279,7 +279,7 @@ def card_facts(v):
 def enrich(v):
     v["id"] = str(v["id"])
     # польська мова: ручна позначка або явна вимога у тексті (рівень B1/B2, «знання польської мови»)
-    if not v.get("lang") and re.search(r"знання польськ\w* мов|польськ\w* мов\w*[^.;]{0,20}(?:на рівні|рівень)\s*[AB][12]", v.get("req") or "", re.I) and not re.search(r"(?:не|без)\s+(?:потрібн|обов)\w*[^.;]{0,15}польськ", v.get("req") or "", re.I):
+    if not v.get("lang") and re.search(r"знання польськ\w* мов|польськ\w* мов\w*[^.;]{0,20}(?:на рівні|рівень)\s*[AB][12]", v.get("req") or "", re.I) and not re.search(r"без[^.;]{0,30}польськ|польськ\w* мов\w*[^.;,]{0,25}(?:буде перевагою|перевага|бажан|не обов|не є обов|не потрібн|не вимага)|(?:бажан|перевагою|перевага)[^.;]{0,25}польськ", v.get("req") or "", re.I):
         v["lang"] = "pl"
     # пільга ZUS для студентів до 26 — для будь-якої umowa zlecenie в Польщі
     if not v.get("stud") and v.get("country") == "Польща" and re.search(r"zlecen|^\s*UZ\b", v.get("contract") or "", re.I) and not (v.get("age") and v["age"][0] > 25):

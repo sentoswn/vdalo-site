@@ -1723,7 +1723,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
   function enrich(v){
     // пільга ZUS для студентів до 26 діє для будь-якої umowa zlecenie в Польщі (а не лише там, де оператор написав про студентів)
     if (!v.stud && v.country==="Польща" && /zlecen|^\s*UZ\b/i.test(v.contract||"") && !(v.age&&v.age[0]>25)) v.stud=1;
-    if (!v.lang && /знання польськ\S* мов|польськ\S* мов\S*[^.;]{0,20}(?:на рівні|рівень)\s*[AB][12]/i.test(v.req||"") && !/(?:не|без)\s+(?:потрібн|обов)\S*[^.;]{0,15}польськ/i.test(v.req||"")) v.lang="pl";
+    if (!v.lang && /знання польськ\S* мов|польськ\S* мов\S*[^.;]{0,20}(?:на рівні|рівень)\s*[AB][12]/i.test(v.req||"") && !/без[^.;]{0,30}польськ|польськ\S* мов\S*[^.;,]{0,25}(?:буде перевагою|перевага|бажан|не обов|не є обов|не потрібн|не вимага)|(?:бажан|перевагою|перевага)[^.;]{0,25}польськ/i.test(v.req||"")) v.lang="pl";
     v._g=gOf(v); v._h=house(v); v._est=est(v); v._rate=rate(v); v._c=contractInfo(v.contract); v._cc=CC[v.country]||(v.country||"").slice(0,2).toUpperCase();
     var ds=dates(v.trips).filter(function(d){return d>=today;}).sort(function(a,b){return a-b;});
     ds=ds.filter(function(d,i){ return !i||d.getTime()!==ds[i-1].getTime(); }); v._dates=ds;
