@@ -271,11 +271,16 @@ def card_facts(v):
         t.append(f'<li><svg class="i"><use href="#i-users"/></svg>{"Жінкам" if v["_g"] == "w" else "Чоловікам"}</li>')
     if age_lbl(v):
         t.append(f'<li><svg class="i"><use href="#i-user"/></svg>{esc(age_lbl(v))}</li>')
+    if v.get("lang") == "pl":
+        t.append('<li class="date"><svg class="i"><use href="#i-globe"/></svg>Потрібна польська мова</li>')
     return '<ul class="facts">' + "".join(t) + "</ul>"
 
 
 def enrich(v):
     v["id"] = str(v["id"])
+    # польська мова: ручна позначка або явна вимога у тексті (рівень B1/B2, «знання польської мови»)
+    if not v.get("lang") and re.search(r"знання польськ\w* мов|польськ\w* мов\w*[^.;]{0,20}(?:на рівні|рівень)\s*[AB][12]", v.get("req") or "", re.I) and not re.search(r"(?:не|без)\s+(?:потрібн|обов)\w*[^.;]{0,15}польськ", v.get("req") or "", re.I):
+        v["lang"] = "pl"
     # пільга ZUS для студентів до 26 — для будь-якої umowa zlecenie в Польщі
     if not v.get("stud") and v.get("country") == "Польща" and re.search(r"zlecen|^\s*UZ\b", v.get("contract") or "", re.I) and not (v.get("age") and v["age"][0] > 25):
         v["stud"] = 1
@@ -1108,6 +1113,21 @@ def main():
             elif (_v.get("city") or "").strip():
                 _cc[_k] = _v["city"].strip()
         json.dump(_cc, open(ccp, "w", encoding="utf-8"), ensure_ascii=False, indent=0, sort_keys=True)
+        if _chg:
+            json.dump(data, open(vp, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    # ручні правки вакансій (vacancy-fix.json): напр. «потрібна польська мова» — не стираються щоденним оновленням
+    vfp = os.path.join(ROOT, "vacancy-fix.json")
+    if os.path.exists(vfp):
+        _vf = json.load(open(vfp, encoding="utf-8")); _chg = False
+        for _v in data.get("items", []):
+            _f = _vf.get(str(_v.get("id")))
+            if not isinstance(_f, dict):
+                continue
+            if _f.get("lang") and _v.get("lang") != _f["lang"]:
+                _v["lang"] = _f["lang"]; _chg = True
+            _p = _f.get("req_prefix")
+            if _p and not (_v.get("req") or "").startswith(_p):
+                _v["req"] = _p + (" " + _v["req"] if _v.get("req") else ""); _chg = True
         if _chg:
             json.dump(data, open(vp, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     # курс гривні: середній банківський (або НБУ), інакше — останній збережений (rates.json)
