@@ -58,6 +58,7 @@ function mapFields(fd: Field[]) {
     else if (k === "last_name") last = v;
     else if (k === "phone_number" || k === "phone") out.phone = v;
     else if (k === "date_of_birth" || k === "dob") { const d = new Date(v); out.age = isNaN(+d) ? v : String(Math.floor((Date.now() - +d) / 31557600000)); }
+    else if (/країн|country|страна|стране/.test(k)) out.country = v;   // форма v3: «В якій країні хочете працювати?»
     else if (/вік|возраст|скільки.*рок|сколько.*лет|\bage\b|років|лет/.test(k)) out.age = v;
     else if (/хто|who/.test(k)) out.who = v;
     else if (/коли|when|почати/.test(k)) out.when_go = v;
@@ -68,7 +69,12 @@ function mapFields(fd: Field[]) {
   }
   if (!out.name) out.name = [first, last].filter(Boolean).join(" ") || "Без імені";
   // вік — першим рядком примітки; старше 55 позначаємо, щоб менеджер одразу бачив
-  if (out.age) rest.unshift((/55\s*\+|більше|старше|56|60|65/i.test(out.age) ? "⚠️ " : "") + "Вік: " + out.age);
+  if (out.country) rest.unshift("Країна: " + out.country);
+  if (out.age) {
+    const n = parseInt((out.age.match(/\d+/) || [""])[0], 10);
+    const old = /55\s*\+|більше|старше/i.test(out.age) || (n > 55 && n < 120);
+    rest.unshift((old ? "⚠️ " : "") + "Вік: " + out.age);
+  }
   out.note = rest.join("\n");
   return out;
 }
