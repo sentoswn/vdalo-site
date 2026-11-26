@@ -594,6 +594,23 @@ PAGES = [
      "desc": "Робота в Словаччині для українців: {n}, зарплата {rate}, житло, офіційне працевлаштування. Підбір безкоштовний. +380 66 005 00 60.",
      "text": ["Словаччина межує із Закарпаттям, тому дорога туди коротка й недорога. Найчастіше українців запрошують на автомобільні й промислові заводи.",
               "Зарплату в Словаччині вказують у євро. Ми показуємо ставку, години й умови проживання, щоб ви могли порівняти вакансію з пропозиціями в Польщі чи Чехії."]},
+    # ---- міста (сторінка живе, лише поки в агломерації є щонайменше MIN_PAGE вакансій)
+    {"slug": "robota-u-vrotslavi", "label": "Вроцлав", "city": "Вроцлав",
+     "match": lambda v: v["country"] == "Польща" and bool(re.search(r"wrocław", v.get("city") or "", re.I)),
+     "title": "Робота у Вроцлаві для українців: {n} | Вдало",
+     "h1": "Робота у Вроцлаві для українців",
+     "lead": "Вакансії у Вроцлаві та передмісті — Бєланах Вроцлавських і Kąty Wrocławskie: склади, логістика й виробництво. У кожній — ставка, години, житло й тип договору.",
+     "desc": "Робота у Вроцлаві для українців: {n} на складах і виробництві, ставка {rate}. Житло або без нього, офіційний договір. Підбір безкоштовний.",
+     "text": ["Вроцлав — столиця Нижньої Сілезії й одне з найбільших міст Польщі. Більшість вакансій для українців тут — на логістичних складах і виробництвах у самому місті та в передмісті: Бєланах Вроцлавських і Kąty Wrocławskie.",
+              "Зверніть увагу на житло: частина вакансій у Вроцлаві — без проживання, і тоді оренду доведеться шукати самостійно. Якщо житло надають, у вакансії вказано його вартість. Перед виїздом уточніть, як добиратися з житла до роботи: склади в передмісті часто стоять за межами міста, а зміни починаються рано вранці або ввечері."]},
+    {"slug": "robota-v-gdansku", "label": "Гданськ", "city": "Гданськ",
+     "match": lambda v: v["country"] == "Польща" and bool(re.search(r"gdań|gdyni|sopot", v.get("city") or "", re.I)),
+     "title": "Робота в Гданську й Тримісті: {n} | Вдало",
+     "h1": "Робота в Гданську й Тримісті для українців",
+     "lead": "Вакансії в Гданську, Гдині та Прущі-Гданському: склади, виробництво, металообробка й переробка риби. Ставка, години й житло — у кожній вакансії.",
+     "desc": "Робота в Гданську, Гдині й Тримісті для українців: {n} — склад, виробництво, зварювання. Ставка {rate}, житло. Підбір безкоштовний.",
+     "text": ["Тримісто — Гданськ, Гдиня й Сопот — разом із передмістями утворює найбільшу агломерацію на польському узбережжі Балтики. Тут є робота на складах, на виробництві, в металообробці й на переробці риби.",
+              "На кваліфікованих посадах — зварювальника, оператора ЧПУ, водія навантажувача з посвідченням UDT — ставки зазвичай вищі, але роботодавець попросить підтвердити досвід. Житло в Тримісті часто надають за окрему плату, яку утримують із зарплати: суму й умови проживання шукайте у вакансії."]},
     {"slug": "robota-na-skladi", "label": "Робота на складі",
      "match": rx(r"склад|комплектув|пакувальн|логіст|ретрак|навантажувач"),
      "title": "Робота на складі в Польщі та Європі — {n} | Вдало",
@@ -960,9 +977,10 @@ def nav_html(path):
     col = lambda lst, lab: f"<div><b>{lab}</b>" + "".join(
         f'<a href="/{p["slug"]}/"{cur(path == "/" + p["slug"] + "/")}>{esc(p["country"] if p.get("country") else p["label"])}<small>{len(l)}</small></a>' for p, l in lst) + "</div>"
     cs = [x for x in NAV_LIVE if x[0].get("country")]
-    ks = [x for x in NAV_LIVE if not x[0].get("country")]
+    ts = [x for x in NAV_LIVE if x[0].get("city")]
+    ks = [x for x in NAV_LIVE if not x[0].get("country") and not x[0].get("city")]
     dd = (f'<div class="dd"><button class="dd-btn" type="button" aria-expanded="false" aria-haspopup="true"{cur(vcur)}>Вакансії{ch}</button>'
-          f'<div class="dd-menu"><div class="dd-box">{col(cs, "За країною")}{col(ks, "За видом роботи")}'
+          f'<div class="dd-menu"><div class="dd-box">{col(cs, "За країною")}{col(ks, "За видом роботи")}{col(ts, "Міста") if ts else ""}'
           f'<a class="dd-all" href="/#vacancies">Усі вакансії{ch}</a></div></div></div>')
     P = SEC.PAGES
     links = [(P[k]["path"], P[k]["label"]) for k in ("how", "friend", "faq")] + [("/statti/", "Статті")] + [(P[k]["path"], P[k]["label"]) for k in ("about", "contacts")]
@@ -971,7 +989,7 @@ def nav_html(path):
     links = links + [(P["employers"]["path"], P["employers"]["label"]), (P["cabinet"]["path"], P["cabinet"]["label"])]
     chips = lambda lst: '<div class="mn-chips">' + "".join(f'<a href="/{p["slug"]}/">{esc(p["country"] if p.get("country") else p["label"])}<small>{len(l)}</small></a>' for p, l in lst) + "</div>"
     mn = ('<div class="mn-main"><a href="/#vacancies">Усі вакансії</a>' + "".join(f'<a href="{h}">{esc(t)}</a>' for h, t in links) + "</div>"
-          + "<b>Вакансії за країною</b>" + chips(cs) + "<b>За видом роботи</b>" + chips(ks)
+          + "<b>Вакансії за країною</b>" + chips(cs) + "<b>За видом роботи</b>" + chips(ks) + ("<b>Міста</b>" + chips(ts) if ts else "")
           + '<div class="mn-cta"><a class="btn wide" href="#apply">Залишити заявку</a><a class="btn ghost wide" href="tel:+380660050060" data-ch="phone">Подзвонити: +380 66 005 00 60</a></div>')
     return nav, mn
 
@@ -1219,7 +1237,7 @@ def main():
         t = region(tpl, "head", head(fill(p["title"], s), fill(p["desc"], s), path, [crumbs_ld(cr)] + ([lfaq_ld] if lfaq_ld else []), page))
         hero = region(hero_tpl, "h1", h1_block(p["h1"], p["lead"]))
         t = region(t, "hero", "\n  " + crumbs(cr) + hero)
-        t = region(t, "vach", f"Вакансії: {p['label'].lower() if not p.get('country') else p['h1'].lower()}")
+        t = region(t, "vach", f"Вакансії: {p['label'] if p.get('city') else p['label'].lower() if not p.get('country') else p['h1'].lower()}")
         t = region(t, "grid", grid_html(lst))
         t = region(t, "text", text_section(p["h1"], p["text"] + [common_par(s)], s, live, p["slug"], page_articles(p["slug"])))
         t = inner(t, sec("why") + sec("how"), lfaq)
