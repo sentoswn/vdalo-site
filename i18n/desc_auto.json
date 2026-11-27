@@ -1019,6 +1019,11 @@
 "pl": "750 zł. Hostel, 2-4 osoby w pokoju. Dobre warunki życia. Proszę zabrać ze sobą własną pościel!",
 "ru": "750 zł. Хостел, 2-4 человека в комнате. Хорошие условия обитания. Просьба брать свое постельное белье!"
 },
+"750 zł., оплата стягується з першого дня заселения. Формат житла: хостел та будинок,кімнати по 3-4 особи. Різний тип житла.15-20 хв від роботи. Прохання брати свою постільну білизну": {
+"en": "750 zł., payment is charged from the first day of occupancy. Housing format: hostel and house, rooms for 3-4 people. Different types of housing. 15-20 minutes from work. Please bring your own bed linen",
+"pl": "750 zł., opłata pobierana jest od pierwszego dnia zamieszkania. Format zakwaterowania: hostel i dom, pokoje dla 3-4 osób. Różne typy mieszkań. 15-20 minut do pracy. Proszę zabrać ze sobą własną pościel",
+"ru": "750 zł., оплата взимается с первого дня заселения. Формат жилья: хостел и дом, комнаты по 3-4 человека. Различный тип жилья.15-20 мин от работы. Просьба брать свое постельное белье"
+},
 "750 zł/міс. Хостел у пішій доступності, 2 людини в кімнаті, окремий санвузол у кожній кімнаті, кухня одна на поверх. (10 кімнат). Прохання взяти свою постільну білизну": {
 "en": "750 zł/month. The hostel is within walking distance, 2 people in a room, a separate bathroom in each room, one kitchen per floor. (10 rooms). Please bring your own bed linen",
 "pl": "750 zł/miesiąc. Hostel znajduje się w niewielkiej odległości, 2 osoby w pokoju, osobna łazienka w każdym pokoju, jedna kuchnia na każdym piętrze. (10 pokoi). Proszę zabrać ze sobą własną pościel",
@@ -1523,6 +1528,11 @@
 "en": "The agency provides accommodation: private houses or apartments in the settlements of Siemianice and Prusice. Кімнати розраховані на 3–4 особи (звичайні одноярусні ліжка). У кожному житлі є ковдри, подушки та постільна білизна. All kitchens are equipped with the necessary household appliances and dishes. Пральні машини є у всіх місцях проживання, прання безкоштовне. There is Wi-Fi. Grocery stores are located up to 500 meters from the house.",
 "pl": "Agencja zapewnia zakwaterowanie: w domach prywatnych lub apartamentach na terenie osiedli Siemianice i Prusice. Pokoje przeznaczone są dla 3-4 osób (zwykłe łóżka piętrowe). W każdym apartamencie znajdują się koce, poduszki i pościel. Wszystkie kuchnie wyposażone są w niezbędny sprzęt AGD i naczynia. We wszystkich akademikach dostępne są pralki, pranie jest bezpłatne. Jest Wi-Fi. Sklepy spożywcze znajdują się w odległości do 500 metrów od domu.",
 "ru": "Агентство предоставляет жилье: частные дома или квартиры в населенных пунктах Siemianice и Prusice. Комнаты рассчитаны на 3-4 человека (обычные одноярусные кровати). В каждом доме есть одеяла, подушки и постельное белье. Все кухни оборудованы бытовой техникой и посудой. Стиральные машины есть во всех местах проживания, стирка бесплатная. Есть Wi-Fi. Продуктовые магазины находятся в 500 метрах от жилья."
+},
+"БЕЗКОШТОВНО Автобус зупиняється на наступних зупинках у Познані (біля хостелів) у Познані та Swarzędz": {
+"en": "FREE The bus stops at the following stops in Poznań (near the hostels) in Poznań and Swarzędz",
+"pl": "BEZPŁATNIE Autobus zatrzymuje się na przystankach w Poznaniu (w pobliżu hosteli) w Poznaniu i Swarzędzu",
+"ru": "БЕСПЛАТНО Автобус останавливается на следующих остановках в Познани (возле хостелов) в Познани и Swarzędz"
 },
 "БЕЗКОШТОВНО Автобус зупиняється на наступних зупинках у Познані (хостели) та у Swarzędz": {
 "en": "FREE The bus stops at the following stops in Poznań (hostels) and Swarzędz",
@@ -2229,6 +2239,11 @@
 "pl": "Producent elementów wyposażenia wnętrz samochodów dla wiodących producentów samochodów.",
 "ru": "Производитель компонентов интерьера автомобилей для ведущих автопроизводителей."
 },
+"Виробник компонентів інтер'єру та елементів оздоблення салону для автомобільної промисловості.": {
+"en": "Manufacturer of interior components and interior decoration elements for the automotive industry.",
+"pl": "Producent elementów wyposażenia wnętrz i elementów wyposażenia wnętrz dla branży motoryzacyjnej.",
+"ru": "Производитель компонентов интерьера и отделочных элементов салона для автомобильной промышленности."
+},
 "Виробник металевих виробів для автомобільної та садівничої галузей.": {
 "en": "Manufacturer of metal products for the automotive and gardening industries.",
 "pl": "Producent wyrobów metalowych dla przemysłu motoryzacyjnego i ogrodniczego.",
@@ -2258,6 +2273,11 @@
 "en": "Manufacturer of plastic fasteners for the automotive industry.",
 "pl": "Producent elementów złącznych z tworzyw sztucznych dla przemysłu motoryzacyjnego.",
 "ru": "Производитель пластиковых креплений для автомобильной промышленности."
+},
+"Виробник продуктів на основі сурімі (крабових паличок), що працює за європейськими стандартами якості.": {
+"en": "Manufacturer of products based on surimi (crab sticks) that works according to European quality standards.",
+"pl": "Producent wyrobów na bazie surimi (paluszki krabowe), działający według europejskich standardów jakości.",
+"ru": "Производитель продуктов на основе сурими (крабовых палочек), работающий по европейским стандартам качества."
 },
 "Виробник риби й рибних продуктів: солона, маринована й копчена риба, оселедець, морепродукти.": {
 "en": "Producer of fish and fish products: salted, marinated and smoked fish, herring, seafood.",
@@ -2469,6 +2489,11 @@
 "pl": "Pewne opanowanie umiejętności pracy przy instalacjach elektrycznych. Doświadczenie jako elektryk. Chęć pracy w trybie zmiennym. Umiejętność czytania elektryki…",
 "ru": "Уверенное владение навыками работы с электроустановками. Опыт работы электриком. Готовность работать в сменном режиме. Умение читать электрические…"
 },
+"Всесвітньо відома верф у Гданську, що будує розкішні вітрильні та моторні катамарани і яхти.": {
+"en": "The world-famous shipyard in Gdańsk, which builds luxury sailing and motor catamarans and yachts.",
+"pl": "Znana na całym świecie stocznia w Gdańsku, która buduje luksusowe katamarany i jachty żaglowe i motorowe.",
+"ru": "Всемирно известна верфь в Гданьске, строящая роскошные парусные и моторные катамараны и яхты."
+},
 "Від агентства не надається": {
 "en": "Not provided by the agency",
 "pl": "Nie zapewniane przez agencję",
@@ -2518,6 +2543,11 @@
 "en": "Responsible attitude to work Fast pace of work Physical endurance It is forbidden to have extended nails, eyelashes, piercings on the face, to go out in a shift...",
 "pl": "Odpowiedzialne podejście do pracy Szybkie tempo pracy Wytrzymałość fizyczna Zabrania się noszenia przedłużanych paznokci, rzęs, kolczyków na twarzy, wychodzenia na zmianę...",
 "ru": "Ответственное отношение к работе Быстрый темп работы Физическая выносливость Запрещено наращивать ногти, ресницы, пирсинг на лице, выходить в смену…"
+},
+"Відстань від житла до місця роботи 15-20 хв": {
+"en": "The distance from the house to the place of work is 15-20 minutes",
+"pl": "Odległość z domu do miejsca pracy wynosi 15-20 minut",
+"ru": "Расстояние от жилья до места работы 15-20 мин."
 },
 "Відсутні Відсутні": {
 "en": "Absent Absent",
@@ -2914,6 +2944,11 @@
 "pl": "Do instalacji:",
 "ru": "Для монтажа:"
 },
+"Для монтажу: розуміння польської мови та базовий розмовний рівень; мануальні навички; точність та акуратність; хороший зір; готовність працювати на виробничій лінії. Для поверхневого монтажу: розуміння польської мови та базовий розмовний рівень; точність; базові знання електроніки; акуратність. Для фінального контролю: хороше знання польської мови усно та письмово; уважність та точність; вміння виявляти дефекти; знання правил пакування. Умови роботи: температура 22–25 °C; робота фізична, переважно стоячи; чисте виробництво. Заборонено приносити у виробничий цех: телефони та інші записуючі пристрої; небезпечні та легкозаймисті предмети; скляні предмети; їжу та напої. Куріння дозволено лише у": {
+"en": "For editing: understanding of the Polish language and a basic conversational level; manual skills; precision and accuracy; good eyesight; willingness to work on the production line. For surface mounting: understanding of the Polish language and a basic conversational level; precision; basic knowledge of electronics; accuracy. For the final control: good knowledge of the Polish language orally and in writing; attentiveness and accuracy; the ability to identify defects; knowledge of packaging rules. Operating conditions: temperature 22–25 °C; physical work, mostly standing; clean production It is forbidden to bring into the production workshop: telephones and other recording devices; dangerous and flammable objects; glass objects; food and drinks. Smoking is allowed only in",
+"pl": "Za redakcję: znajomość języka polskiego i podstawowy poziom konwersacyjny; zdolności manualne; precyzja i dokładność; dobry wzrok; chęć pracy na linii produkcyjnej. Do montażu natynkowego: znajomość języka polskiego i podstawowy poziom konwersacyjny; precyzja; podstawowa wiedza z zakresu elektroniki; dokładność. Na ocenę końcową: dobra znajomość języka polskiego w mowie i piśmie; uważność i dokładność; umiejętność identyfikacji wad; znajomość zasad pakowania. Warunki pracy: temperatura 22–25°C; praca fizyczna, głównie stojąca; czysta produkcja Na halę produkcyjną zabrania się wnoszenia: telefonów i innych urządzeń rejestrujących; przedmioty niebezpieczne i łatwopalne; przedmioty szklane; jedzenie i napoje. Palenie dozwolone jest wyłącznie w środku",
+"ru": "Для монтажа: понимание польского языка и базовый уровень; мануальные навыки; точность и аккуратность; хорошее зрение; готовность работать на производственной линии Для поверхностного монтажа: понимание польского и базовый разговорный уровень; точность; базовые знания электроники; аккуратность. Для финального контроля: хорошее знание польского языка устно и письменно; внимательность и точность; умение выявлять дефекты; знание правил упаковки. Условия работы: температура 22-25 ° C; работа физическая, преимущественно стоя; чистое производство. Запрещено приносить в производственный цех телефоны и другие записывающие устройства; опасные и легковоспламеняющиеся предметы; стеклянные предметы; еду и напитки. Курение разрешено только в"
+},
 "Для монтажу: розуміння польської мови та базовий розмовний рівень; мануальні навички; точність та акуратність; хороший зір; готовність працювати на виробничій лінії. Для поверхневого монтажу: розуміння польської мови та базовий розмовний рівень; точність; базові знання електроніки; акуратність. Для фінального контролю: хороше знання польської мови усно та письмово; уважність та точність; вміння виявляти дефекти; знання правил пакування. Умови роботи: температура 22–25 °C; робота фізична, переважно стоячи; чисте виробництво. Заборонено приносити у виробничий цех: телефони та інші записуючі пристрої; небезпечні та легкозаймисті предмети; скляні предмети; їжу та напої. Куріння дозволено лише у спеціально відведеному місці.": {
 "en": "For editing: understanding of the Polish language and a basic conversational level; manual skills; precision and accuracy; good eyesight; willingness to work on the production line. For surface mounting: understanding of the Polish language and a basic conversational level; precision; basic knowledge of electronics; accuracy. For the final control: good knowledge of the Polish language orally and in writing; attentiveness and accuracy; the ability to identify defects; knowledge of packaging rules. Operating conditions: temperature 22–25 °C; physical work, mostly standing; clean production It is forbidden to bring into the production workshop: telephones and other recording devices; dangerous and flammable objects; glass objects; food and drinks. Smoking is allowed only in a designated area.",
 "pl": "Za redakcję: znajomość języka polskiego i podstawowy poziom konwersacyjny; zdolności manualne; precyzja i dokładność; dobry wzrok; chęć pracy na linii produkcyjnej. Do montażu natynkowego: znajomość języka polskiego i podstawowy poziom konwersacyjny; precyzja; podstawowa wiedza z zakresu elektroniki; dokładność. Na ocenę końcową: dobra znajomość języka polskiego w mowie i piśmie; uważność i dokładność; umiejętność identyfikacji wad; znajomość zasad pakowania. Warunki pracy: temperatura 22–25°C; praca fizyczna, głównie stojąca; czysta produkcja Na halę produkcyjną zabrania się wnoszenia: telefonów i innych urządzeń rejestrujących; przedmioty niebezpieczne i łatwopalne; przedmioty szklane; jedzenie i napoje. Palenie dozwolone jest wyłącznie w wyznaczonym miejscu.",
@@ -3058,6 +3093,11 @@
 "en": "Employees reach the bus stop on foot or by public transport. The coordinator provides the actual bus schedule on the day of arrival. Free bus ride from Lviv.",
 "pl": "Pracownicy docierają na przystanek autobusowy pieszo lub komunikacją miejską. Koordynator podaje aktualny rozkład jazdy autobusów w dniu przyjazdu. Bezpłatny przejazd autobusem ze Lwowa.",
 "ru": "До автобусной остановки работники добираются пешком или городским транспортом. Актуальное расписание автобусов координатор предоставляет в день прибытия. Бесплатный проезд автобусом из Львова."
+},
+"До автобусної зупинки працівники добираються пішки або міським транспортом. Актуальний розклад автобусів надають у день прибуття.": {
+"en": "Employees reach the bus stop on foot or by public transport. The current bus schedule is provided on the day of arrival.",
+"pl": "Pracownicy docierają na przystanek autobusowy pieszo lub komunikacją miejską. Aktualny rozkład jazdy autobusów podany jest w dniu przyjazdu.",
+"ru": "До автобусной остановки работники добираются пешком или городским транспортом. Актуальное расписание автобусов предоставляется в день прибытия."
 },
 "До автобусної зупинки працівники добираються пішки або міським транспортом. Актуальний…": {
 "en": "Employees reach the bus stop on foot or by public transport. Actual…",
@@ -3633,6 +3673,11 @@
 "en": "At your own expense",
 "pl": "Na własny koszt",
 "ru": "За свой счет"
+},
+"За власний рахунок. Завод безкоштовно надає каву та закуски. Легалізація та працевлаштування: Громадяни Білорусі, Грузії та Молдови: Приймаються кандидати, які мають будь-які документи, що підтверджують легальне перебування в Литві. У разі подання заяв громадянами цих країн необхідно попереджати": {
+"en": "At your own expense. The factory provides free coffee and snacks. Legalization and employment: Citizens of Belarus, Georgia and Moldova: Candidates who have any documents confirming legal stay in Lithuania are accepted. In case of submission of applications by citizens of these countries, it is necessary to warn",
+"pl": "Na własny koszt. Fabryka zapewnia bezpłatną kawę i przekąski. Legalizacja i zatrudnienie: Obywatele Białorusi, Gruzji i Mołdawii: Przyjmowani są kandydaci posiadający dokumenty potwierdzające legalny pobyt na Litwie. W przypadku składania wniosków przez obywateli tych krajów należy je uprzedzić",
+"ru": "За свой счет. Завод бесплатно предоставляет кофе и закуски. Легализация и трудоустройство: Граждане Беларуси, Грузии и Молдовы: Принимаются кандидаты, имеющие документы, подтверждающие легальное пребывание в Литве. При подаче заявлений гражданами этих стран необходимо предупреждать"
 },
 "За власний рахунок. Завод безкоштовно надає каву та закуски. Легалізація та працевлаштування: Громадяни Білорусі, Грузії та Молдови: Приймаються кандидати, які мають будь-які документи, що підтверджують легальне перебування в Литві. У разі подання заяв громадянами цих країн необхідно попереджати заздалегідь — для них організовується окремий приїзд. Громадяни України: Працевлаштування можливе для місцевих кандидатів, які вже мають тимчасовий статус у Литві та відповідають таким умовам: На момент початку війни (24.02.2022) перебували в Україні. Не мають чинної візи. Не мають чинної польської карти побиту. Не мають чинного статусу PESEL UKR. Не мають тимчасового захисту в інших європейських країнах. Якщо раніше був статус біженця в іншій європейській країні, необхідно надати підтвердження його закриття або анулювання. Для громадян України виїзди з України організованим транспортом відбуваються щопонеділка. Медіа:": {
 "en": "At your own expense. The factory provides free coffee and snacks. Legalization and employment: Citizens of Belarus, Georgia and Moldova: Candidates who have any documents confirming legal stay in Lithuania are accepted. In case of applications submitted by citizens of these countries, it is necessary to warn in advance - a separate arrival is organized for them. Citizens of Ukraine: Employment is possible for local candidates who already have temporary status in Lithuania and meet the following conditions: At the time of the start of the war (February 24, 2022) they were in Ukraine. They do not have a valid visa. They do not have a valid Polish card. Do not have a valid PESEL UKR status. They do not have temporary protection in other European countries. If you previously had refugee status in another European country, you must provide confirmation of its closure or cancellation. For citizens of Ukraine, departures from Ukraine by organized transport take place every Monday. Media:",
@@ -5089,6 +5134,11 @@
 "pl": "Na miejscu znajduje się stołówka, w której można kupić żywność i dania gotowe, a także ekspresy do kawy",
 "ru": "На территории есть столовая, где можно приобрести еду и готовые обеды, а также автоматы с кофе."
 },
+"Навички мануальної роботи": {
+"en": "Manual work skills",
+"pl": "Umiejętności pracy ręcznej",
+"ru": "Навыки мануальной работы"
+},
 "Навички роботи руками, наполегливість та бажання працювати": {
 "en": "Manual skills, perseverance and desire to work",
 "pl": "Zdolności manualne, wytrwałość i chęć do pracy",
@@ -5554,6 +5604,11 @@
 "pl": "Jedno z największych i najnowocześniejszych przedsiębiorstw przetwórstwa łososia na świecie.",
 "ru": "Одно из самых крупных и современных в мире предприятий по переработке лосося."
 },
+"Оздоровчий центр 4+ зірки з мінеральними процедурами, SPA-рестораном і конференц-центром.": {
+"en": "4+ star health center with mineral treatments, SPA restaurant and conference center.",
+"pl": "4+-gwiazdkowe centrum zdrowia z zabiegami mineralnymi, restauracją SPA i centrum konferencyjnym.",
+"ru": "Оздоровительный центр 4+ звезды с минеральными процедурами, SPA-рестораном и конференц-центром."
+},
 "Онлайн-ритейлер одягу, взуття, аксесуарів, косметики й товарів для дому.": {
 "en": "Online retailer of clothes, shoes, accessories, cosmetics and household goods.",
 "pl": "Internetowy sprzedawca odzieży, obuwia, akcesoriów, kosmetyków i artykułów gospodarstwa domowego.",
@@ -5773,6 +5828,11 @@
 "en": "Packing of dowels, Preparing for shipment, Stacking boxes with dowels on pallets, Visual quality control",
 "pl": "Pakowanie kołków, Przygotowanie do wysyłki, Układanie pudeł z kołkami na paletach, Wizualna kontrola jakości",
 "ru": "Упаковка дюбелей, Подготовка к отправке, Сборка коробок с дюбелями на паллеты, Визуальный контроль качества"
+},
+"Пакування лосося": {
+"en": "Salmon packaging",
+"pl": "Opakowanie na łososia",
+"ru": "Упаковка лосося"
 },
 "Пакування морепродуктів": {
 "en": "Packaging of seafood",
@@ -6148,6 +6208,11 @@
 "en": "Mon-Sat, shifts, 10-12 hours, 1st shift: 06:00-14:00 / 16:00, 2nd shift: 16:00 /…",
 "pl": "pn.-sob., zmiany, 10-12 godz., I zmiana: 06:00-14:00 / 16:00, II zmiana: 16:00 /…",
 "ru": "Пн-Сб, посменно, 10-12 часов, 1 смена: 06:00-14:00 / 16:00, 2 смена: 16:00 /…"
+},
+"Пн-Сб., позмінно.(в сезон можлива работа в неділю), 1 зміна: 05:00 - 15:00, 2 зміна: 15:00 - 01:00, Цех пакування - пакування готової продукції в картон, стрейчування, Пн-Сб., позмінно.(в сезон можлива работа в неділю), 1 зміна: 5:00-15:00, 2 зміна: 15:00-01:00": {
+"en": "Mon.-Sat., in shifts. (work on Sundays is possible during the season), 1st shift: 05:00 - 15:00, 2nd shift: 15:00 - 01:00. 5:00-15:00, 2nd shift: 15:00-01:00",
+"pl": "Pon.-Sob., w systemie zmianowym. (w sezonie możliwa jest praca w niedzielę), I zmiana: 05:00 - 15:00, II zmiana: 15:00 - 01:00. 5:00-15:00, II zmiana: 15:00-01:00",
+"ru": "Пн-Сб., посм. 5:00-15:00, 2 изменение: 15:00-01:00"
 },
 "Пн-Сб:06:00-14:0014:00-22:0022:00-06:00": {
 "en": "Mon-Sat: 06:00-14:00 14:00-22:00 22:00-06:00",
@@ -6583,6 +6648,11 @@
 "en": "Polish manufacturer of leather goods: bags, suitcases, shoes and accessories.",
 "pl": "Polski producent galanterii skórzanej: toreb, walizek, obuwia i akcesoriów.",
 "ru": "Польский производитель кожгалантереи: сумок, чемоданов, обуви и аксессуаров."
+},
+"Поліграфічна компанія, яка майже 35 років виробляє етикетки, гнучку упаковку та алюмінієві кришки.": {
+"en": "A printing company that has been producing labels, flexible packaging and aluminum lids for almost 35 years.",
+"pl": "Firma poligraficzna, która od prawie 35 lat zajmuje się produkcją etykiet, opakowań giętkich i wieczek aluminiowych.",
+"ru": "Полиграфическая компания, почти 35 лет производящая этикетки, гибкую упаковку и алюминиевые крышки."
 },
 "Помічник зварювальника на автозавод": {
 "en": "Welder's assistant at a car factory",
@@ -7483,6 +7553,11 @@
 "pl": "Przygotowane CV należy przesłać przed rozmową kwalifikacyjną. Najpierw firma samodzielnie przegląda CV, a później wybranych kandydatów...",
 "ru": "Подготовленное резюме (CV) необходимо отправить в собеседование. Сначала предприятие самостоятельно знакомится с резюме, а впоследствии отобранных кандидатов."
 },
+"Підприємство автомобільної галузі.": {
+"en": "Enterprise of the automotive industry.",
+"pl": "Przedsiębiorstwo branży motoryzacyjnej.",
+"ru": "Предприятие автомобильной отрасли."
+},
 "Підтримка керівника в перші місяці роботи. 10 грошей брутто за кожен кілограм понад цільовий показник.": {
 "en": "Support of the manager in the first months of work. 10 gross money for each kilogram over the target.",
 "pl": "Wsparcie managera w pierwszych miesiącach pracy. 10 pieniędzy brutto za każdy kilogram powyżej wartości docelowej.",
@@ -7797,6 +7872,11 @@
 "en": "Work in the production of electronic components. Duties depend on the position.",
 "pl": "Praca przy produkcji podzespołów elektronicznych. Obowiązki zależą od stanowiska.",
 "ru": "Работа в производстве электронных компонентов. Обязанности зависят от должности."
+},
+"Робота на виробництві електронних компонентів. Обов’язки залежать від посади. Важливо: Необхідне вміння паяти. Підійде навіть досвід, отриманий самостійно в домашніх умовах. Посади та обов’язки: 1. Встановлення компонентів на електронні плати: Працівник отримує 3–4 компоненти: транзистори, конденсатори, напівпровідники, резистори; Встановлення компонентів у відповідні місця згідно зі схемою; Заповнення документації; Сортування компонентів; Робота на виробничій лінії; Робота стоячи. 1. Тестування електронних плат: Працівник отримує підготовлені електронні плати; Встановлює плату в тестову машину; Якщо на екрані з’являється зелене повідомлення, це означає, що плата підготовлена правильно; Наклеювання етикеток на електронні плати та пакування їх у коробки; Заповнення документації; Робота стоячи. 1. Монтаж компонентів: Працівник отримує 2–4 деталі електронної плати; Монтаж деталей": {
+"en": "Work in the production of electronic components. Duties depend on the position. Important: The ability to solder is required. Even experience gained independently at home will do. Positions and duties: 1. Installation of components on electronic boards: the employee receives 3-4 components: transistors, capacitors, semiconductors, resistors; Installation of components in the appropriate places according to the scheme; Filling out documentation; Sorting components; Work on the production line; Standing work. 1. Testing of electronic boards: The employee receives prepared electronic boards; Installs the board in the test machine; If a green message appears on the screen, it means that the board is prepared correctly; Sticking labels on electronic boards and packing them in boxes; Filling out documentation; Standing work. 1. Assembly of components: The employee receives 2-4 parts of the electronic board; Installation of parts",
+"pl": "Praca przy produkcji podzespołów elektronicznych. Obowiązki zależą od stanowiska. Ważne: wymagana jest umiejętność lutowania. Nawet doświadczenie zdobyte niezależnie w domu wystarczy. Stanowiska i obowiązki: 1. Montaż podzespołów na płytkach elektronicznych: pracownik otrzymuje 3-4 elementy: tranzystory, kondensatory, półprzewodniki, rezystory; Montaż komponentów w odpowiednich miejscach zgodnie ze schematem; Wypełnianie dokumentacji; Sortowanie komponentów; Praca na linii produkcyjnej; Praca na stojąco. 1. Testowanie płytek elektronicznych: Pracownik otrzymuje przygotowane płytki elektroniczne; Instaluje płytkę w maszynie testowej; Jeśli na ekranie pojawi się zielony komunikat, oznacza to, że tablica jest przygotowana prawidłowo; Naklejanie etykiet na płytki elektroniczne i pakowanie ich w pudełka; Wypełnianie dokumentacji; Praca na stojąco. 1. Montaż podzespołów: Pracownik otrzymuje 2-4 części płytki elektronicznej; Montaż części",
+"ru": "Работа в производстве электронных компонентов. Обязанности зависят от должности. Важно: Необходимо умение паять. Подойдет даже опыт, полученный самостоятельно в домашних условиях. Должности и обязанности: 1. Установка компонентов на электронные платы: Работник получает 3–4 компонента: транзисторы, конденсаторы, полупроводники, резисторы; Установка компонентов в соответствующие места согласно схеме; Заполнение документации; Сортировка компонентов; Работа на производственной линии; Работа стоя. 1. Тестирование электронных плат: Работник получает подготовленные электронные платы; Установка платы в тестовую машину; Если на экране отображается зеленое сообщение, это означает, что плата подготовлена ​​правильно; Наклеивание этикеток на электронные платы и упаковка в коробки; Заполнение документации; Работа стоя. 1. Монтаж компонентов: Работник получает 2–4 детали электронной платы; Монтаж деталей"
 },
 "Робота на виробництві електронних компонентів. Обов’язки залежать від посади. Важливо: Необхідне вміння паяти. Підійде навіть досвід, отриманий самостійно в домашніх умовах. Посади та обов’язки: 1. Встановлення компонентів на електронні плати: Працівник отримує 3–4 компоненти: транзистори, конденсатори, напівпровідники, резистори; Встановлення компонентів у відповідні місця згідно зі схемою; Заповнення документації; Сортування компонентів; Робота на виробничій лінії; Робота стоячи. 1. Тестування електронних плат: Працівник отримує підготовлені електронні плати; Встановлює плату в тестову машину; Якщо на екрані з’являється зелене повідомлення, це означає, що плата підготовлена правильно; Наклеювання етикеток на електронні плати та пакування їх у коробки; Заповнення документації; Робота стоячи. 1. Монтаж компонентів: Працівник отримує 2–4 деталі електронної плати; Монтаж деталей відповідно до схеми за допомогою дриля; Робота сидячи; Піднімати вантажі не потрібно.": {
 "en": "Work in the production of electronic components. Duties depend on the position. Important: The ability to solder is required. Even experience gained independently at home will do. Positions and duties: 1. Installation of components on electronic boards: the employee receives 3-4 components: transistors, capacitors, semiconductors, resistors; Installation of components in the appropriate places according to the scheme; Filling out documentation; Sorting components; Work on the production line; Standing work. 1. Testing of electronic boards: The employee receives prepared electronic boards; Installs the board in the test machine; If a green message appears on the screen, it means that the board is prepared correctly; Sticking labels on electronic boards and packing them in boxes; Filling out documentation; Standing work. 1. Assembly of components: The employee receives 2-4 parts of the electronic board; Assembly of parts according to the scheme using a drill; Sitting work; No need to lift loads.",
@@ -8818,6 +8898,11 @@
 "pl": "Zupa jest bezpłatna. Pełny posiłek (zupa + danie główne) można wykupić za…",
 "ru": "Суп бесплатный.Полный обед (суп + основное блюдо) можно приобрести…"
 },
+"Сучасна прядильна фабрика в Лодзі, що виробляє високоякісну чесану вовняну пряжу, зокрема з вовни мериносів.": {
+"en": "A modern spinning mill in Łódź, producing high-quality worsted wool yarn, in particular from merino wool.",
+"pl": "Nowoczesna przędzalnia w Łodzi, produkująca wysokiej jakości przędzę czesankową, w szczególności z wełny merynosów.",
+"ru": "Современная прядильная фабрика в Лодзи, производящая высококачественную чесанную шерстяную пряжу, в том числе из мериносов."
+},
 "Сучасна прядильна фабрика в Лодзі, що з 1990-х виробляє чесану вовняну пряжу, зокрема з мериносу.": {
 "en": "A modern spinning mill in Łódź that has been producing worsted woolen yarn, particularly merino, since the 1990s.",
 "pl": "Nowoczesna przędzalnia w Łodzi, która od lat 90-tych zajmuje się produkcją przędzy wełnianej czesankowej, zwłaszcza merynosów.",
@@ -8847,6 +8932,11 @@
 "en": "Modernly equipped premises (rest area, spacious dining room, vending machines with food and coffee, ergonomic mats at the workplace). A mobile food truck \"Bisas ant ratų\" operates on the premises of the company, offering fresh and hot food - a convenient solution for a worry-free lunch. A caterer works in the company canteen, which provides the opportunity to purchase hot food during work. Work clothes, their washing and all the necessary tools for work.... Bonus accrual based on work results.",
 "pl": "Nowocześnie wyposażony lokal (strefa odpoczynku, przestronna jadalnia, automaty z jedzeniem i kawą, ergonomiczne maty w miejscu pracy). Na terenie firmy działa mobilny food truck „Bisas ant ratų”, oferujący świeże i gorące jedzenie – wygodne rozwiązanie na bezproblemowy lunch. W zakładowej stołówce pracuje firma cateringowa, która zapewnia możliwość zakupu ciepłego posiłku w trakcie pracy. Odzież robocza, jej pranie oraz wszystkie narzędzia niezbędne do pracy.... Naliczanie premii w oparciu o wyniki pracy.",
 "ru": "Современно оборудованные помещения (зона отдыха, просторная столовая, автоматы с едой и кофе, эргономичные коврики на рабочем месте). На территории компании работает мобильный фудтрак «Bisas ant ratų», предлагающий свежую и горячую еду – удобное решение для обеда без лишних забот. В столовой компании работает поставщик питания, обеспечивающий возможность приобрести горячую еду во время работы. Рабочая одежда, ее стирка и все необходимые средства для… Начисление премии по результатам работы."
+},
+"Сучасно обладнані приміщення (зона відпочинку, простора їдальня, апарати для їжі та кави, ергономічні килимки на робочому місці). На території компанії працює мобільний фудтрак «Bisas ant ratų», що пропонує свіжу і гарячу їжу. В їдальні компанії працює постачальник харчування, що забезпечує можливість придбати гарячу їжу під час роботи. Робочий одяг, його прання та всі необхідні засоби для роботи. Організація днів з фруктами та різними частуваннями. Можливість участі в діючих програмах лояльності. Стабільна і довгострокова робота в міжнародній компанії. Можливості професійного та особистісного розвитку, навчання та підвищення кваліфікації. У компанії діє колективний договір з додатковими перевагами для співробітників. На виробництві впроваджена культура LEAN. Турбота про фізичне та емоційне здоров'я співробітників (профілактичні аналізи крові, вакцинація, консультації психолога).": {
+"en": "Modernly equipped premises (rest area, spacious dining room, machines for food and coffee, ergonomic mats at the workplace). A mobile food truck \"Bisas ant ratų\" operates on the company's territory, offering fresh and hot food. The company canteen has a caterer, which provides the opportunity to purchase hot food during work. Work clothes, their washing and all necessary tools for work. Organization of days with fruits and various treats. Possibility of participation in existing loyalty programs. Stable and long-term work in an international company. Opportunities for professional and personal development, training and professional development. The company has a collective agreement with additional benefits for employees. LEAN culture is implemented in production. Caring for the physical and emotional health of employees (preventive blood tests, vaccinations, psychologist consultations).",
+"pl": "Nowocześnie wyposażony lokal (strefa odpoczynku, przestronna jadalnia, automaty do jedzenia i kawy, ergonomiczne maty w miejscu pracy). Na terenie firmy działa mobilny food truck „Bisas ant ratų”, oferujący świeże i gorące jedzenie. W stołówce zakładowej znajduje się catering, który zapewnia możliwość zakupu ciepłego posiłku w trakcie pracy. Odzież robocza, jej pranie oraz wszystkie niezbędne narzędzia do pracy. Organizacja dni z owocami i różnymi smakołykami. Możliwość uczestnictwa w istniejących programach lojalnościowych. Stabilną i długoterminową pracę w międzynarodowej firmie. Możliwość rozwoju zawodowego i osobistego, szkoleń i rozwoju zawodowego. W spółce obowiązuje układ zbiorowy pracy przewidujący dodatkowe świadczenia dla pracowników. W produkcji wdrażana jest kultura LEAN. Dbałość o zdrowie fizyczne i emocjonalne pracowników (profilaktyczne badania krwi, szczepienia, konsultacje psychologiczne).",
+"ru": "Современно оборудованные помещения (зона отдыха, просторная столовая, аппараты для еды и кофе, эргономичные коврики на рабочем месте). На территории компании работает мобильный фудтрак «Bisas ant ratų», предлагающий свежую и горячую еду. В столовой компании работает поставщик питания, обеспечивающий возможность приобрести горячую еду во время работы. Рабочая одежда, ее стирка и все необходимые средства для работы. Организация дней с фруктами и разными угощениями. Возможность участия в действующих программах лояльности. Стабильная и долговременная работа в международной компании. Возможности профессионального и личностного развития, обучения и повышения квалификации. У компании действует коллективный договор с дополнительными преимуществами для сотрудников. На производстве внедрена культура LEAN. Забота о физическом и эмоциональном здоровье сотрудников (профилактические анализы крови, вакцинация, консультации психолога)."
 },
 "Сучасно обладнані приміщення (зона відпочинку, простора їдальня, апарати для їжі та кави, ергономічні килимки на робочому місці). На території компанії працює мобільний фудтрак «Bisas ant ratų», що пропонує свіжу і гарячу їжу. В їдальні компанії працює постачальник харчування, що забезпечує можливість придбати гарячу їжу під час роботи. Робочий одяг, його прання та всі необхідні засоби для роботи. Організація днів з фруктами та різними частуваннями. Можливість участі в діючих програмах лояльності. Стабільна і довгострокова робота в міжнародній компанії. Можливості професійного та особистісного розвитку, навчання та підвищення кваліфікації. У компанії діє колективний договір з додатковими перевагами для співробітників. На виробництві впроваджена культура LEAN. Турбота про фізичне та емоційне здоров'я співробітників (профілактичні аналізи крові, вакцинація, консультації психолога). Медичний пункт на території компанії з лікарем, сімейним лікарем, акушером і масажистом.": {
 "en": "Modernly equipped premises (rest area, spacious dining room, machines for food and coffee, ergonomic mats at the workplace). A mobile food truck \"Bisas ant ratų\" operates on the company's territory, offering fresh and hot food. The company canteen has a caterer, which provides the opportunity to purchase hot food during work. Work clothes, their washing and all necessary tools for work. Organization of days with fruits and various treats. Possibility of participation in existing loyalty programs. Stable and long-term work in an international company. Opportunities for professional and personal development, training and professional development. The company has a collective agreement with additional benefits for employees. LEAN culture is implemented in production. Caring for the physical and emotional health of employees (preventive blood tests, vaccinations, psychologist consultations). Medical center on the territory of the company with a doctor, a family doctor, an obstetrician and a massage therapist.",
@@ -8913,6 +9003,11 @@
 "pl": "Temperatura wynosi 14 stopni",
 "ru": "Температура 14 градусов"
 },
+"Температура близько +5°С +7°С, Заборонені нарощені вії, лак на ногтях, біжутерія, Є їдальня для працівників, роздягальня, душові кабіни, Перерва на зміну 8 годин - 30 хвилин, якщо працюють більше годин є додаткмова перерва": {
+"en": "The temperature is about +5°С +7°С, Eyelash extensions, nail polish, jewelry are prohibited. There is a canteen for employees, a changing room, showers.",
+"pl": "Temperatura wynosi około +5°С +7°С. Zabrania się przedłużania rzęs, lakierowania paznokci i biżuterii. Dla pracowników dostępna jest stołówka, przebieralnia, prysznice.",
+"ru": "Температура около +5°С +7°С, Запрещенные наращенные ресницы, лак на ногтях, бижутерия, Есть столовая для работников, раздевалка, душевые кабины, Перерыв на смену 8 часов - 30 минут, если работают больше часов есть дополнительный перерыв"
+},
 "Температура в приміщенні +5+8°C, Безкоштовне харчування 2 рази за зміну, Є їдальня, мікрохвильовка, холодильник та роздягальня, Два перерви по 15 хвилин": {
 "en": "The temperature in the room is +5+8°C, Free meals 2 times per shift, There is a dining room, a microwave, a refrigerator and a changing room, Two breaks of 15 minutes each",
 "pl": "Temperatura w pomieszczeniu +5+8°C, Bezpłatne posiłki 2 razy na zmianę, Na terenie obiektu znajduje się jadalnia, kuchenka mikrofalowa, lodówka i przebieralnia, Dwie przerwy po 15 minut każda",
@@ -8947,6 +9042,11 @@
 "en": "Accuracy and physical endurance. Experience as a carpenter or ship joiner would be an added advantage. Ability to read technical drawings. Manual…",
 "pl": "Dokładność i wytrzymałość fizyczna. Doświadczenie na stanowisku stolarza lub stolarza okrętowego będzie dodatkowym atutem. Umiejętność czytania rysunków technicznych. Podręcznik…",
 "ru": "Точность и физическая выносливость. Опыт работы столяром или корабельным столяром будет дополнительным преимуществом. Умение читать технические чертежи. Ручной..."
+},
+"Точність і фізична витривалість. Досвід роботи зі шліфуванням або ламінуванням. Відсутність алергії на хімічні речовини та епоксидну смолу. Знання української або російської мови. Уміння користуватися електроінструментами. Знання польської мови буде перевагою та дасть можливість отримати вищу ставку.": {
+"en": "Accuracy and physical endurance. Experience with sanding or laminating. No allergy to chemicals and epoxy resin. Knowledge of the Ukrainian or Russian language. Ability to use power tools. Knowledge of the Polish language will be an advantage and will give you the opportunity to get a higher rate.",
+"pl": "Dokładność i wytrzymałość fizyczna. Doświadczenie w szlifowaniu lub laminowaniu. Brak alergii na chemikalia i żywicę epoksydową. Znajomość języka ukraińskiego lub rosyjskiego. Umiejętność posługiwania się elektronarzędziami. Znajomość języka polskiego będzie dodatkowym atutem i umożliwi uzyskanie wyższej stawki.",
+"ru": "Точность и физическая выносливость. Опыт работы со шлифовкой или ламинированием. Отсутствие аллергии на химические вещества и эпоксидную смолу. Знание украинского или русского языка. Умение использовать электроинструменты. Знание польского языка будет преимуществом и позволит получить более высокую ставку."
 },
 "Точність і фізична витривалість. Досвід роботи зі шліфуванням або ламінуванням. Відсутність алергії на хімічні речовини та епоксидну смолу. Знання…": {
 "en": "Accuracy and physical endurance. Experience with sanding or laminating. No allergy to chemicals and epoxy resin. Knowledge…",
@@ -9357,6 +9457,11 @@
 "pl": "Dobry wzrok; Umiejętności manualne; dobra kondycja fizyczna; Po wstępnym badaniu wzroku w dziale przyjęć projekt jest testowany w kilku etapach: 1. kontrola na miejscu (umiejętność czytania drobnego druku na kablach i obudowach) 2. kontrola na miejscu (umiejętność czytania drobnego druku na kablach i obudowach) Jeśli kandydat nosi okulary - prosimy o natychmiastowe zabranie ich ze sobą! Jeżeli kandydat nie przejdzie badania wzroku – nie może rozpocząć pracy.",
 "ru": "Хорошее зрение; Навыки работы руками; Хорошая физическая форма; После первичной проверки зрения в отделе прибытия, на проекте проводится проверка зрения на нескольких этапах: 1. проверка на месте (способность читать мелкие надписи на кабелях и крышках) 2. проверка на месте (способность читать мелкие надписи на кабелях и крышках) Если кандидат носит очки - пожалуйста, возьми он не может приступить к работе."
 },
+"Хороший зір; Навички роботи руками;Х ороша фізична форма; Після первинної перевірки зору у відділі прибуття, на проекті проводиться перевірка зору на декількох етапах: 1.перевірка у відділі прибуття (здатність читати дрібні написи на кабелях і кришках) 2.перевірка на місці (здатність читати дрібні написи на кабелях і кришках)Якщо кандидат носить окуляри - будь ласка, візьміть їх з собою відразу!Якщо кандидат не пройшов перевірку зору - він не може приступити до роботи.": {
+"en": "Good eyesight; Manual skills; good physical condition; After the initial vision test in the arrival department, the project is tested in several stages: 1. check in the arrival department (ability to read fine print on cables and covers) 2. on-site check (ability to read fine print on cables and covers) If the candidate wears glasses - please take them with you immediately! If the candidate does not pass the eye test - he cannot start work.",
+"pl": "Dobry wzrok; Umiejętności manualne; dobra kondycja fizyczna; Po wstępnym badaniu wzroku w dziale przylotów projekt jest testowany w kilku etapach: 1. odprawa w dziale przyjęć (umiejętność czytania drobnego druku na kablach i osłonach) 2. kontrola na miejscu (umiejętność czytania drobnego druku na kablach i osłonach) Jeżeli kandydat nosi okulary - prosimy o natychmiastowe zabranie ich ze sobą! Jeżeli kandydat nie przejdzie badania wzroku – nie może rozpocząć pracy.",
+"ru": "Хорошее зрение; Навыки работы руками; Хорошая физическая форма; После первичной проверки зрения в отделе прибытия, на проекте проводится проверка зрения на нескольких этапах: 1.проверка в отделе прибытия (способность читать мелкие надписи на кабелях и крышках) 2.проверка на месте (способность читать мелкие надписи на кабелях и крышках)Если кандидат носит с очками! проверку зрения – он не может приступить к работе."
+},
 "Хороший зір; Ручна спритність; Хороша фізична форма;": {
 "en": "Good eyesight; Manual dexterity; Good physical shape;",
 "pl": "Dobry wzrok; Zręczność manualna; Dobra kondycja fizyczna;",
@@ -9431,6 +9536,11 @@
 "en": "Processing shop, Mon–Sat, alternately, 1 shift: 6:00–14:00 (18:00), Confectionery shop, Mon–Sat. alternately, 1st shift: 6:00-14:00 (18:00), 2nd shift: 14:00-22:00 (00:00)",
 "pl": "Przetwórnia, pon.–sob., na przemian, 1 zmiana: 6:00–14:00 (18:00), Cukiernia, pon.–sob. na przemian I zmiana: 6:00-14:00 (18:00), II zmiana: 14:00-22:00 (00:00)",
 "ru": "Цех обработки, Пн–Сб, посменно, 1 смена: 6:00–14:00 (18:00), Цех конфекции, Пн-Сб. посменно, 1 изменение: 6:00-14:00 (18:00), 2 изменение: 14:00-22:00 (00:00)"
+},
+"Цех укладання: работа на лінії, укладати слайси лосося на тацки та зважувати. (250 тацек/час), Пн-Сб., позмінно.(в сезон можлива работа в неділю), 1 зміна: 05:00 - 15:00, 2 зміна: 15:00 - 01:00, Цех філітування, Приймати рибу, вивантажувати в басейн з водою для розморожування, діставати з басейну, викладати на лінію для розрізання, Складати філе на решітки": {
+"en": "Stacking shop: working on the line, stacking salmon slices on trays and weighing. (250 trays/hour), Mon-Sat., shifts. (work on Sundays is possible during the season), 1st shift: 05:00 - 15:00, 2nd shift: 15:00 - 01:00, Filleting workshop, Receive fish, unload into the pool with water for defrosting, take out from the pool, put on the cutting line, Stack the fillets on grids",
+"pl": "Układarka: praca na linii, układanie plasterków łososia na tacach i ważenie. (250 tac/godz.), pon.-sob., zmiany. (w sezonie możliwa jest praca w niedzielę), I zmiana: 05:00 - 15:00, II zmiana: 15:00 - 01:00, Warsztat filetowania, Odbiór ryb, wyładunek do basenu z wodą do rozmrożenia, Wyjęcie z basenu, Ułożenie na linii cięcia, Układanie filetów na kratkach",
+"ru": "Цех заключения: работа на линии, укладывать слайсы лосося на тацки и взвешивать. (250 тацек/час), Пн-Сб., посм. разрезание, Складывать филе на решетки"
 },
 "Ч, Упаковка готової продукції (упаковка профілів та готових склопакетів), Підготовка склопакета до транспортування (стрейчування плівкою та картоном), Допомога у виробництві вікон ПВХ, Допомога у збиранні комплектуючих деталей у склопакеті (установка кріплень, замків, ущільнюючого матеріалу), Комплектація замовлень на складі готової продукції": {
 "en": "Ch, Packaging of finished products (packing of profiles and ready-made double-glazed units), Preparation of double-glazed units for transportation (stretching with film and cardboard), Assistance in the production of PVC windows, Assistance in the assembly of component parts in double-glazed units (installation of fasteners, locks, sealing material), Completion of orders in the warehouse of finished products",
@@ -9546,6 +9656,11 @@
 "en": "Wide network of stops (convenient access).",
 "pl": "Szeroka sieć przystanków (wygodny dojazd).",
 "ru": "Широкая сеть остановок (удобный доезд)."
+},
+"Шпаклювальник - шліфувальник": {
+"en": "Putty - grinder",
+"pl": "Szpachlówka - szlifierka",
+"ru": "Шпаклевщик - шлифовщик"
 },
 "Шпаклівник-шліфувальник": {
 "en": "Grinder putty",
@@ -9861,6 +9976,11 @@
 "en": "to candidates: Absence of contraindications to physical work. Knowledge of one of the languages: Lithuanian, Russian or English. Responsibility, efficiency, accuracy, motivation and desire to work. Working conditions: Work indoors. Training is conducted directly at the enterprise. All necessary work clothes and personal protective equipment are provided. During work, you need to climb in and out of forms, as well as work on your knees. Such work can be physically demanding for people of large stature.",
 "pl": "dla kandydatów: Brak przeciwwskazań do pracy fizycznej. Znajomość jednego z języków: litewskiego, rosyjskiego lub angielskiego. Odpowiedzialność, efektywność, dokładność, motywacja i chęć do pracy. Warunki pracy: Praca w pomieszczeniach zamkniętych. Szkolenia odbywają się bezpośrednio w przedsiębiorstwie. Zapewniamy całą niezbędną odzież roboczą i środki ochrony osobistej. Podczas pracy musisz wchodzić i wychodzić z form, a także pracować na kolanach. Taka praca może być wymagająca fizycznie dla osób dużego wzrostu.",
 "ru": "к кандидатам: Отсутствие противопоказаний к физическому труду. Знание одного из языков: литовского, русского или английского. Ответственность, оперативность, аккуратность, мотивация и желание работать. Условия работы: Работа в помещении. Обучение проводится непосредственно на предприятии. Предоставляется вся необходимая рабочая одежда и средства индивидуальной защиты. Во время работы нужно забираться в формы и вылезать из них, а также работать на коленях. Для людей большого телосложения такая работа может быть физически сложной."
+},
+"до кандидатів: Хороша фізична підготовка. Готовність працювати позмінно. Уміння працювати в команді. Уважність, ретельність та бажання навчатися. Умови роботи на підприємстві: Температура в приміщенні підтримується на рівні 20–25 °C. Куріння дозволено лише у спеціально відведених місцях за межами будівлі. Обов’язкове дотримання інструкцій з охорони праці та техніки безпеки. Необхідно знати правила дій у разі нещасних випадків. На території підприємства ведеться відеоспостереження. Заборонено приносити записувальні пристрої. Важливі обмеження: На робочому місці заборонено мати при собі: Мобільні телефони та навушники. Сигарети, зокрема електронні. Їжу та напої. Будь-які сторонні предмети в": {
+"en": "to candidates: Good physical fitness. Willingness to work in shifts. The ability to work in a team. Attention, thoroughness and desire to learn. Working conditions at the enterprise: The temperature in the room is maintained at the level of 20–25 °C. Smoking is permitted only in designated areas outside the building. Mandatory compliance with occupational health and safety regulations. It is necessary to know the rules of action in case of accidents. Video surveillance is conducted on the territory of the enterprise. It is forbidden to bring recording devices. Important restrictions: In the workplace it is forbidden to carry: Mobile phones and headphones. Cigarettes, including electronic cigarettes. Food and drinks. Any foreign objects in",
+"pl": "dla kandydatów: Dobra sprawność fizyczna. Chęć pracy w systemie zmianowym. Umiejętność pracy w zespole. Uwaga, dokładność i chęć nauki. Warunki pracy w przedsiębiorstwie: Temperatura w pomieszczeniu utrzymuje się na poziomie 20–25°C. Palenie dozwolone jest wyłącznie w wyznaczonych miejscach na zewnątrz budynku. Obowiązkowe przestrzeganie przepisów bezpieczeństwa i higieny pracy. Konieczna jest znajomość zasad postępowania w razie wypadku. Na terenie przedsiębiorstwa prowadzony jest monitoring wizyjny. Zabrania się wnoszenia urządzeń nagrywających. Ważne ograniczenia: W miejscu pracy zabrania się noszenia: Telefonów komórkowych i słuchawek. Papierosy, w tym papierosy elektroniczne. Jedzenie i napoje. Wszelkie ciała obce w",
+"ru": "к кандидатам: Хорошая физическая подготовка. Готовность работать посменно. Умение работать в команде. Внимательность, усердие и желание учиться. Условия работы на предприятии Температура в помещении поддерживается на уровне 20–25 °C. Курение разрешено только в специально отведенных местах за пределами здания. Обязательно соблюдение инструкций по охране труда и технике безопасности. Необходимо знать правила действий в случае несчастных случаев. На территории предприятия ведется видеонаблюдение. Запрещается приносить записывающие устройства. Важные ограничения: На рабочем месте запрещено: Мобильные телефоны и наушники. Сигареты, в том числе электронные. Еду и напитки. Любые посторонние предметы в"
 },
 "до кандидатів: Хороша фізична підготовка. Готовність працювати позмінно. Уміння працювати в команді. Уважність, ретельність та бажання навчатися. Умови роботи на підприємстві: Температура в приміщенні підтримується на рівні 20–25 °C. Куріння дозволено лише у спеціально відведених місцях за межами будівлі. Обов’язкове дотримання інструкцій з охорони праці та техніки безпеки. Необхідно знати правила дій у разі нещасних випадків. На території підприємства ведеться відеоспостереження. Заборонено приносити записувальні пристрої. Важливі обмеження: На робочому місці заборонено мати при собі: Мобільні телефони та навушники. Сигарети, зокрема електронні. Їжу та напої. Будь-які сторонні предмети в кишенях. Прикраси: персні, годинники, сережки, намиста тощо. Зовнішній та прихований пірсинг, зокрема в пупку, язику та вухах. Усі особисті речі необхідно залишати вдома або в шафці.": {
 "en": "to candidates: Good physical fitness. Willingness to work in shifts. The ability to work in a team. Attention, thoroughness and desire to learn. Working conditions at the enterprise: The temperature in the room is maintained at the level of 20–25 °C. Smoking is permitted only in designated areas outside the building. Mandatory compliance with occupational health and safety regulations. It is necessary to know the rules of action in case of accidents. Video surveillance is conducted on the territory of the enterprise. It is forbidden to bring recording devices. Important restrictions: In the workplace it is forbidden to carry: Mobile phones and headphones. Cigarettes, including electronic cigarettes. Food and drinks. Any foreign objects in the pockets. Jewelry: rings, watches, earrings, necklaces, etc. External and hidden piercings, in particular in the navel, tongue and ears. All personal belongings must be left at home or in a locker.",
