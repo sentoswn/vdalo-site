@@ -22,6 +22,7 @@ const AD_VAC: Record<string, [string, string]> = {
   "top-arvato": ["218", "ARVATO — комплектувальник одягу, Stryków"],
   "top-martom": ["72", "Mar-Tom — виробництво вікон і дверей, Jędrzejów"],
   "top-kurka": ["2018823", "Курячий завод, Solec Kujawski"],
+  "dec-kurka": ["2018823", "Курячий завод, Solec Kujawski"],
   "top-oetker": ["380", "Dr. Oetker — виробничий працівник, Łebcz"],
   "top-jeronimo": ["242", "Jeronimo Martins (Biedronka) — склад, Lubin"],
   "top-morozyvo": ["333", "Grycan — виробництво морозива, Majdan"],
