@@ -2044,7 +2044,7 @@ window.VdaloTrack = window.VdaloTrack || (function(){
     var sel=$("f-vac"), opt=sel.options[sel.selectedIndex], mode=segVal("mode"), channel=mode==="Переписка"?segVal("channel"):"";
     var vacTitle=sel.value?opt.textContent:"";
     var vObj=sel.value?items.filter(function(x){ return String(x.id)===String(sel.value); })[0]:null;
-    var opTag=vObj?(vObj.src==="planfix"?"Planfix (Gremi)":"Trello (EWL)")+" №"+vObj.id:"";
+    var opTag=vObj?(vObj.src==="planfix"?"Planfix (Gremi)":vObj.src==="airtable"?"Airtable (Job Impuls)":"Trello (EWL)")+" №"+vObj.id:"";
     leadMsg="Заявка з сайту «Вдало»\nІм'я: "+name+"\nТелефон: "+phone+
       "\nВакансія: "+(sel.value?vacTitle+" (№"+sel.value+")":"порадьте мені")+
       "\nХто їде: "+segVal("who")+"\nКоли: "+segVal("when")+
