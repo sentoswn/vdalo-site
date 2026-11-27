@@ -37,6 +37,17 @@ const AD_VAC: Record<string, [string, string]> = {
   "shein-katy-1": ["1893927", "SHEIN — склад, Kąty Wrocławskie (акція)"],
   "shein-katy-2": ["1893927", "SHEIN — склад, Kąty Wrocławskie (акція)"],
   "shein-katy-3": ["1893927", "SHEIN — склад, Kąty Wrocławskie (акція)"],
+  // грудень: вигідні вакансії EWL (27.11)
+  "dec-rhenus": ["106", "Rhenus — склад одягу, Swarzędz"],
+  "dec-sheinwro": ["456", "SHEIN — склад, Вроцлав"],
+  "dec-arvato": ["218", "ARVATO — комплектувальник, Stryków"],
+  "dec-lg": ["92", "LG Energy — акумулятори, Biskupice Podgórne"],
+  "dec-sokolow": ["52", "Sokołów — м'ясне виробництво, Robakowo"],
+  "dec-pkc": ["183", "PKC — автокабелі, Starachowice"],
+  "dec-aurora": ["189", "AURORA — склад, Вроцлав"],
+  "dec-malbox": ["131", "Malbox — виробництво, Osiek"],
+  "dec-eobuwie": ["385", "eobuwie.pl — склад взуття, Zielona Góra"],
+  "dec-kooperol": ["244", "Kooperol — пакування риби, Zduny"],
   "promo-sinsay": ["1893715", "SINSAY — склад, Jasionka/Rzeszów (акція)"],
 };
 function adVacancy(adName?: string): { id: string; title: string } | null {
