@@ -754,6 +754,16 @@
 "pl": "2 dni — zmiana dzienna; 2 dni — zmiana nocna; 4 dni to weekendy. Po odbyciu szkolenia istnieje możliwość pracy w nadgodzinach. Konserwacja:",
 "ru": "2 дня – дневная смена; 2 дня – ночная смена; 4 дня – выходные. После прохождения обучения есть возможность работать сверхурочно. Содержание:"
 },
+"2 зміни по 10–12 годин: 6:00–16:45 і 16:45–3:30, місяць денні зміни — місяць нічні. Вихідні плаваючі за графіком. Оплачувані перерви 30 + 15 хв. Можливі додаткові години.": {
+"en": "2 shifts of 10–12 hours each: 6:00–16:45 and 16:45–3:30, a month of day shifts — a month of night shifts. Weekend floating according to the schedule. Paid breaks of 30 + 15 min. Additional hours are possible.",
+"pl": "2 zmiany po 10–12 godzin każda: 6:00–16:45 i 16:45–3:30, miesiąc zmian dziennych – miesiąc zmian nocnych. Weekendowy pływak zgodnie z harmonogramem. Płatne przerwy 30 + 15 min. Istnieje możliwość dodatkowych godzin.",
+"ru": "2 смены по 10–12 часов: 6:00–16:45 и 16:45–3:30, месяц дневные смены — месяц ночные. Выходные плавающие по графику. Оплачиваемые перерывы 30+15 мин. Возможны дополнительные часы."
+},
+"2 зміни по 12 годин, 5 днів на тиждень: 6:00–18:00, 18:00–6:00. Оплачувана перерва 20 хв і дві п'ятихвилинки.": {
+"en": "2 shifts of 12 hours, 5 days a week: 6:00-18:00, 18:00-6:00. A paid break is 20 minutes and two five-minute breaks.",
+"pl": "2 zmiany po 12 godzin, 5 dni w tygodniu: 6:00-18:00, 18:00-6:00. Płatna przerwa wynosi 20 minut i dwie pięciominutowe przerwy.",
+"ru": "2 смены по 12 часов, 5 дней в неделю: 6:00–18:00, 18:00–6:00. Оплачиваемый перерыв 20 мин и две пятиминутки."
+},
 "2 зміни по 8–12 годин; робота 5 днів на тиждень; можливі суботи та неділі; найбільше годин у сезон розпродажів;": {
 "en": "2 shifts of 8–12 hours; work 5 days a week; possible Saturdays and Sundays; the most hours during the sales season;",
 "pl": "2 zmiany po 8–12 godzin; praca 5 dni w tygodniu; możliwe soboty i niedziele; najwięcej godzin w sezonie sprzedażowym;",
@@ -778,6 +788,11 @@
 "en": "200–250 Preferred citizenship:…",
 "pl": "200–250 Preferowane obywatelstwo:…",
 "ru": "200–250 Желательное гражданство:…"
+},
+"21–23 зл. нетто/година (на руки)": {
+"en": "PLN 21–23 net/hour (on hand)",
+"pl": "21–23 zł netto/godz. (od ręki)",
+"ru": "21–23 зл. нетто/час (на руки)"
 },
 "25 днів відпустки на календарний рік; додаткові оплачувані вихідні: 1 день після першого року роботи, 2 дні — на 2–3-му році, 3 дні — починаючи з 4-го року. можливість кар’єрного зростання. Доплати згідно Трудового Кодексу Чехії: робота в нічний час — 30%; робота в суботу та неділю — 30%; робота у святкові дні — 100%; доплата за понаднормову роботу-25%; доплата за понаднормову роботу в суботу та неділю-25%; за понаднормову роботу надається доплата або компенсаційний вихідний відповідно до чинного законодавства та внутрішніх правил компанії.": {
 "en": "25 days of vacation per calendar year; additional paid weekend: 1 day after the first year of work, 2 days — in the 2nd-3rd year, 3 days — starting from the 4th year. the possibility of career growth. Supplements according to the Labor Code of the Czech Republic: night work — 30%; work on Saturday and Sunday — 30%; work on holidays - 100%; surcharge for overtime work - 25%; surcharge for overtime work on Saturday and Sunday - 25%; additional pay or compensatory leave is provided for overtime work in accordance with current legislation and internal rules of the company.",
@@ -808,6 +823,11 @@
 "en": "Rooms for 2-4 people, equipped with: a bed, a wardrobe, a bedside table, a table and bed linen. Kitchen, bathroom and washing machine are for common use.",
 "pl": "Pokoje 2-4 osobowe, wyposażone w: łóżko, szafę, stolik nocny, stolik oraz pościel. Kuchnia, łazienka i pralka są do wspólnego użytku.",
 "ru": "2-4-местные номера, оборудованные кроватью, шкафом, тумбочкой, столом и постельным бельем. Кухня, ванная комната и стиральная машина."
+},
+"3 зміни по 8 годин, пн–пт: 6:00–14:00, 14:00–22:00, 22:00–6:00. Бувають робочі суботи. Перерва 20 хв (входить у робочий час).": {
+"en": "3 shifts of 8 hours, Mon–Fri: 6:00–14:00, 14:00–22:00, 22:00–6:00. There are working Saturdays. A 20-minute break (included in working hours).",
+"pl": "3 zmiany po 8 godzin, pon.–pt.: 6:00–14:00, 14:00–22:00, 22:00–6:00. Są pracujące soboty. Przerwa 20-minutowa (wliczona w godziny pracy).",
+"ru": "3 смены по 8 часов, пн–пт: 6:00–14:00, 14:00–22:00, 22:00–6:00. Бывают рабочие субботы. Перерыв 20 мин (входит в рабочее время)."
 },
 "3 зміни по 8 годин; перерва 20 хвилин; додаткова перерва 10 хвилин при 12-годинній зміні. Додаткові послуги (утримання): відрахування за санітарний огляд — 150 PLN відрахування за житло — 470 PLN вартість робочого одягу — 180 PLN (якщо працівник звільняється до завершення першого місяця роботи)": {
 "en": "3 shifts of 8 hours each; a break of 20 minutes; an additional break of 10 minutes for a 12-hour shift. Additional services (maintenance): deduction for sanitary inspection — 150 PLN deduction for housing — 470 PLN cost of work clothes — 180 PLN (if the employee is dismissed before the end of the first month of work)",
@@ -1394,6 +1414,11 @@
 "pl": "Na terenie obiektu znajduje się jadalnia (nowy lokal), lodówka, kuchenka mikrofalowa, szatnie z szafkami, toaleta, komfortowa temperatura do pracy",
 "ru": "Есть столовая (новое помещение), холодильник, микроволновка, Раздевалки со шкафчиками, туалет, Комфортная температура для работы"
 },
+"Є їдальня з гарячими обідами.": {
+"en": "There is a dining room with hot lunches.",
+"pl": "Do dyspozycji Gości jest jadalnia z gorącymi obiadami.",
+"ru": "Есть столовая с горячими обедами."
+},
 "Є їдальня, Перед виходом на роботу перевіряють на алкотестер": {
 "en": "There is a canteen. Before leaving for work, they are tested on a breathalyzer",
 "pl": "Jest stołówka. Przed wyjściem do pracy poddawani są badaniu alkomatem",
@@ -1629,6 +1654,11 @@
 "pl": "Podstawowa znajomość języka polskiego, Brak przeciwwskazań do pracy fizycznej, Gotowość do pracy zmianowej, Uwaga i chęć nauki.",
 "ru": "Базовое знание польского языка, Отсутствие противопоказаний к физической работе, Готовность к сменной работе, Внимательность и желание учиться."
 },
+"Базове знання польської мови. Готовність працювати позмінно. Мотивація до фізичної роботи. Досвід роботи на складі буде перевагою.": {
+"en": "Basic knowledge of the Polish language. Willingness to work in shifts. Motivation for physical work. Warehouse experience would be an advantage.",
+"pl": "Podstawowa znajomość języka polskiego. Chęć pracy w systemie zmianowym. Motywacja do pracy fizycznej. Doświadczenie na magazynie będzie dodatkowym atutem.",
+"ru": "Базовое знание польского языка. Готовность работать посменно. Мотивация к физической работе. Опыт работы на складе будет преимуществом."
+},
 "Базовий рівень володіння польською мовою; Вміння користуватися комп’ютером та смартфоном; Знання латинських літер (на планшеті немає російської мови); Хороший зір; Ручна спритність; Вміння паяти (може бути досвід, набутий вдома, самостійно)": {
 "en": "Basic level of knowledge of the Polish language; Ability to use a computer and smartphone; Knowledge of Latin letters (there is no Russian language on the tablet); Good eyesight; Manual dexterity; The ability to solder (can be experience acquired at home, independently)",
 "pl": "Podstawowy poziom znajomości języka polskiego; Umiejętność obsługi komputera i smartfona; Znajomość liter łacińskich (na tablecie nie ma języka rosyjskiego); Dobry wzrok; Zręczność manualna; Umiejętność lutowania (można zdobyć doświadczenie w domu, samodzielnie)",
@@ -1688,6 +1718,11 @@
 "en": "Free accommodation (rooms for 2-5 people, fully furnished, Wi-Fi, washing machines, kitchen, household appliances). Shops nearby — 750 m–2.7 km (Biedronka, grocery).",
 "pl": "Bezpłatne zakwaterowanie (pokoje 2-5 osobowe, w pełni umeblowane, Wi-Fi, pralki, kuchnia, sprzęt AGD). W pobliżu sklepy — 750 m–2,7 km (Biedronka, sklep spożywczy).",
 "ru": "Бесплатное жилье (комнаты на 2-5 человек, полностью обустроены, Wi-Fi, стиральные машины, кухня, бытовая техника). Магазины рядом - 750 м-2,7 км (Biedronka, продуктовые)."
+},
+"Безкоштовне житло: із зарплати утримується лише податок (близько трьохсот злотих на місяць). Хостели й квартири в пішій доступності від зупинок робочого автобуса, кімнати на 2–3 особи, пари — окремо. Є ліжка, шафи, подушки й ковдри, повністю обладнана кухня, санвузол, пральна машина, інтернет.": {
+"en": "Free housing: only tax is withheld from the salary (about three hundred zlotys per month). Hostels and apartments within walking distance of bus stops, rooms for 2–3 people, couples — separately. There are beds, wardrobes, pillows and blankets, fully equipped kitchen, bathroom, washing machine, internet.",
+"pl": "Mieszkanie bezpłatne: od wynagrodzenia potrącany jest jedynie podatek (około trzysta złotych miesięcznie). Hostele i apartamenty w niewielkiej odległości od przystanków autobusowych, pokoje 2–3 osobowe, pary – osobno. Są łóżka, szafy, poduszki i koce, w pełni wyposażona kuchnia, łazienka, pralka, internet.",
+"ru": "Бесплатное жилье: с зарплаты удерживается только налог (около трехсот злотых в месяц). Хостелы и квартиры в пешей доступности от остановок рабочего автобуса, комнаты на 2-3 человека, пара отдельно. Есть кровати, шкафы, подушки и одеяла, полностью оборудованная кухня, санузел, стиральная машина, интернет."
 },
 "Безкоштовне проживання та транспорт.": {
 "en": "Free accommodation and transport.",
@@ -1783,6 +1818,11 @@
 "en": "Free access from Grudziądz from several stops",
 "pl": "Bezpłatny dojazd z Grudziądza z kilku przystanków",
 "ru": "Бесплатный доезд из г. Grudziądz с нескольких остановок"
+},
+"Безкоштовний доїзд на зміну з Żary, Żagań, Żarska Wieś, Iłowa, Nowa Sól. Кандидатів зустрічають на вокзалі в Żary і проводять до житла та складу.": {
+"en": "Free commute from Żary, Żagań, Żarska Wieś, Iłowa, Nowa Sól. Candidates are met at the train station in Żary and taken to their accommodation and warehouse.",
+"pl": "Dojazd bezpłatny z Żar, Żagania, Żarskiej Wsi, Iłowej, Nowej Soli. Kandydaci odbierani są na dworcu kolejowym w Żarach i zabierani do miejsca zakwaterowania oraz magazynu.",
+"ru": "Бесплатный доезд на смену из Żary, Żagań, Żarska Wieś, Iłowa, Nowa Sól. Кандидатов встречают на вокзале в Żary и проводят в жилье и состав."
 },
 "Безкоштовний доїзд по Solec Kujawski": {
 "en": "Free access to Solec Kujawski",
@@ -2309,6 +2349,11 @@
 "pl": "Produkcja okien",
 "ru": "Производство окон"
 },
+"Виробництво гумових ущільнювачів, прокладок і приводних ременів для автомобілів та контроль якості продукції (ділянки екструзії й оздоблення). Проста ручна робота: натиснути кнопку на машині, забрати деталі, скласти. Приміщення комфортне, без різких запахів і шуму.": {
+"en": "Production of rubber seals, gaskets and drive belts for cars and product quality control (extrusion and finishing areas). Simple manual work: press the button on the machine, pick up the parts, assemble. The room is comfortable, without harsh smells and noise.",
+"pl": "Produkcja uszczelek gumowych, uszczelek i pasków napędowych do samochodów oraz kontrola jakości wyrobów (obszary wytłaczania i wykańczania). Prosta praca ręczna: naciśnij przycisk na maszynie, podnieś części, zmontuj. Pokój jest wygodny, bez nieprzyjemnych zapachów i hałasu.",
+"ru": "Производство резиновых уплотнителей, прокладок и приводных ремней для автомобилей и контроль качества продукции (участки экструзии и отделки). Простая ручная работа: нажать кнопку на машине, убрать детали, сложить. Помещение комфортно, без резких запахов и шума."
+},
 "Виробництво дерев'яних підлог": {
 "en": "Production of wooden floors",
 "pl": "Produkcja podłóg drewnianych",
@@ -2544,6 +2589,11 @@
 "pl": "Odpowiedzialne podejście do pracy Szybkie tempo pracy Wytrzymałość fizyczna Zabrania się noszenia przedłużanych paznokci, rzęs, kolczyków na twarzy, wychodzenia na zmianę...",
 "ru": "Ответственное отношение к работе Быстрый темп работы Физическая выносливость Запрещено наращивать ногти, ресницы, пирсинг на лице, выходить в смену…"
 },
+"Відрядна оплата: 190 зл. брутто за великий контейнер, 100 зл. — за малий": {
+"en": "Unit payment: PLN 190. gross for a large container, PLN 100. - too small",
+"pl": "Opłata jednostkowa: 190 zł brutto za duży pojemnik 100 zł - za mały",
+"ru": "Командировочная оплата: 190 зл. брутто за крупный контейнер, 100 злотых. - за малый"
+},
 "Відстань від житла до місця роботи 15-20 хв": {
 "en": "The distance from the house to the place of work is 15-20 minutes",
 "pl": "Odległość z domu do miejsca pracy wynosi 15-20 minut",
@@ -2703,6 +2753,11 @@
 "en": "Flexible (day shifts only)",
 "pl": "Elastyczny (tylko zmiany dzienne)",
 "ru": "Гибкая (только дневные изменения)"
+},
+"Готовність до довгострокової співпраці. Хороша фізична форма (робота стоячи). Відповідальність. Досвід роботи на складі буде перевагою.": {
+"en": "Readiness for long-term cooperation. Good physical condition (work standing). Responsibility. Warehouse experience would be an advantage.",
+"pl": "Gotowość do długoterminowej współpracy. Dobra kondycja fizyczna (praca na stojąco). Odpowiedzialność. Doświadczenie na magazynie będzie dodatkowym atutem.",
+"ru": "Готовность к долгосрочному сотрудничеству. Хорошая физическая форма (работа стоя). Ответственность. Опыт работы на складе будет преимуществом."
 },
 "Готовність до позмінної роботи (часто 3 зміни) Вміння керувати навантажувачем (UDT – бажано) Базові знання ПК та сканерів Відповідальність і акуратність Досвід роботи на складі": {
 "en": "Willingness to work shifts (often 3 shifts) Ability to operate a forklift (UDT - preferred) Basic knowledge of PCs and scanners Responsibility and accuracy Warehouse experience",
@@ -3249,6 +3304,11 @@
 "pl": "Dopłata za mieszkanie. 2 zł brutto za każdą przepracowaną godzinę. NIE",
 "ru": "Доплата за квартиру. 2 зл брутто, за каждый отработанный час. Нет"
 },
+"Доплата на обіди 12 зл. на день (привозять кейтеринг).": {
+"en": "Supplement for lunches PLN 12. per day (they bring catering).",
+"pl": "Dopłata do obiadów 12 zł dziennie (przywożą catering).",
+"ru": "Доплата за обеды 12 зл. в день (привозят кейтеринг)."
+},
 "Доплата на харчування 80 Kč за кожен відпрацьований день (якщо зміна триває більше 4 годин), долічується до заробітної плати в кінці місяця (в 1-й рік роботи — до 1 600 Kč/місяць). Також на складі є їдальня з автоматами, де можна купити багети та готові страви.": {
 "en": "Meal supplement of 80 Kč for each day worked (if the shift lasts more than 4 hours), added to the salary at the end of the month (up to 1,600 Kč/month in the 1st year of work). The warehouse also has a canteen with vending machines where you can buy baguettes and ready meals.",
 "pl": "Dodatek do wyżywienia w wysokości 80 Kč za każdy przepracowany dzień (jeśli zmiana trwa dłużej niż 4 godziny), doliczany do wynagrodzenia na koniec miesiąca (do 1600 Kč/miesiąc w pierwszym roku pracy). W magazynie znajduje się także stołówka z automatami, w których można kupić bagietki i dania gotowe.",
@@ -3539,6 +3599,16 @@
 "pl": "Mieszkanie zapewniane jest bezpłatnie. Pościel należy zabrać ze sobą. Pranie i suszenie są płatne, 1–2 EUR. Detergenty dostarczane są bezpłatnie.",
 "ru": "Жилье предоставляется бесплатно. Постельное белье нужно иметь с собой. Стирка и сушка – платные, 1–2 EUR. Моющие средства предоставляются бесплатно."
 },
+"Житло надається, умови проживання уточнить менеджер.": {
+"en": "Housing is provided, the manager will clarify the conditions of living.",
+"pl": "Mieszkanie jest zapewnione, menadżer wyjaśni warunki życia.",
+"ru": "Жилье предоставляется, условия проживания уточнит менеджер."
+},
+"Житло надається: за перший місяць потрібно сплатити 800 зл., далі роботодавець щомісяця повертає 300 зл. (доплата до житла).": {
+"en": "Housing is provided: PLN 800 must be paid for the first month, then the employer returns PLN 300 every month. (surcharge for housing).",
+"pl": "Mieszkanie jest zapewnione: za pierwszy miesiąc należy zapłacić 800 zł, następnie pracodawca zwraca co miesiąc 300 zł. (dopłata za mieszkanie).",
+"ru": "Жилье предоставляется: за первый месяц нужно уплатить 800 злотых, далее работодатель ежемесячно возвращает 300 злотых. (доплата к жилью)."
+},
 "Житло розташоване в пішій доступності. З міста План курсує автобус (вартість проїзду туди й назад — 120 Kč).": {
 "en": "Housing is located within walking distance. There is a bus from the city of Plan (the cost of a round trip is 120 Kč).",
 "pl": "Osiedle znajduje się w odległości spaceru. Z miasta Plan kursuje autobus (koszt podróży w obie strony to 120 Kč).",
@@ -3553,6 +3623,11 @@
 "en": "Housing is houses or apartments in Yelenya Hura. Rooms for 2-4 people (standard beds). Each accommodation has blankets, pillows and bed linen. All kitchens with basic equipment and utensils. Washing machines are available, laundry is free everywhere. Each apartment has free WI-FI access. The nearest shops within 100 m - 1.7 km (grocery stores, Lidl, Bedronka).",
 "pl": "Obudowa to domy lub mieszkania w Yelenya Hura. Pokoje 2-4 osobowe (łóżka standardowe). W każdym apartamencie znajdują się koce, poduszki i pościel. Wszystkie kuchnie z podstawowym wyposażeniem i przyborami kuchennymi. Pralki są dostępne, pranie jest wszędzie bezpłatne. W każdym apartamencie dostępny jest bezpłatny dostęp do Wi-Fi. Najbliższe sklepy w promieniu 100 m - 1,7 km (sklepy spożywcze, Lidl, Bedronka).",
 "ru": "Жилье это дома или квартиры в городе Еленья Гура. Комнаты 2-4-местные (стандартные кровати). На каждом из них есть одеяла, подушки и постельное белье. Все кухни с основным оборудованием и посудой. Стиральные машины – есть, стирка бесплатная везде. На каждом жилье есть бесплатный Wi-Fi доступ. Ближайшие магазины в пределах 100 м – 1,7 км (продуктовые магазины, Лидл, Бедронка)."
+},
+"Жінки та пари, до 55 р.": {
+"en": "Women and couples, up to 55 years old.",
+"pl": "Kobiety i pary do 55 roku życia.",
+"ru": "Женщины и пары, до 55 лет."
 },
 "Жінки та чоловіки, до 40 р.": {
 "en": "Women and men, up to 40 years old.",
@@ -3593,6 +3668,11 @@
 "en": "Women and men, up to 60 years old.",
 "pl": "Kobiety i mężczyźni do 60. roku życia.",
 "ru": "Женщины и мужчины, до 60 лет."
+},
+"Жінки та чоловіки, пари, до 70 р.": {
+"en": "Women and men, couples, up to 70 years old.",
+"pl": "Kobiety i mężczyźni, pary, do 70. roku życia.",
+"ru": "Женщины и мужчины, пары, до 70 лет."
 },
 "Жінки, до 50 р.": {
 "en": "Women, up to 50",
@@ -4399,6 +4479,11 @@
 "pl": "Komunikatywny język polski. Doświadczenie na stanowisku operatora maszyn. Obecność książeczki sanitarnej (Sanepid) – wskazane jest posiadanie jej przed rozmową kwalifikacyjną lub wydanie w...",
 "ru": "Коммуникативный польский язык. Опыт работы оператором машин. Наличие санитарной книги (Sanepid) — желательно иметь собеседование или оформить в…"
 },
+"Комунікативна польська мова. Санітарна книжка (допомагають оформити). Хороший зір і фізична підготовка (робота стоячи). Готовність до 2-змінної роботи. Посвідчення UDT і досвід — перевага.": {
+"en": "Communicative Polish language. Sanitary book (they help to issue it). Good eyesight and physical fitness (standing work). Willingness for 2-shift work. UDT certification and experience preferred.",
+"pl": "Komunikatywny język polski. Książeczka sanitarna (pomagają ją wydać). Dobry wzrok i sprawność fizyczna (praca stojąca). Chęć pracy na 2 zmiany. Mile widziane uprawnienia UDT i doświadczenie.",
+"ru": "Коммуникативный польский язык. Санитарная книга (помогают оформить). Хорошее зрение и физическая подготовка (работа стоя). Готовность к 2-сменной работе. Удостоверение UDT и опыт – преимущество."
+},
 "Комунікативне знання польської мови (робота зі сканером), Досвід роботи не обов’язковий, Надсилаючи резюме або відгукуючись на це оголошення, ви надаєте згоду на обробку ваших персональних даних компанією APT Connection для цілей рекрутингу відповідно до Регламенту GDPR (RODO).Klikając przycisk „Aplikuj” lub wysyłając zgłoszenie, wyrażasz zgodę na przetwarzanie Twoich danych osobowych przez APT Connection w celu prowadzenia rekrutacji na wskazane stanowisko": {
 "en": "Communicative knowledge of the Polish language (work with a scanner), Work experience is not required, By sending a resume or responding to this ad, you consent to the processing of your personal data by APT Connection for recruiting purposes in accordance with the GDPR Regulation (RODO).",
 "pl": "Komunikatywna znajomość języka polskiego (praca ze skanerem), Nie jest wymagane doświadczenie zawodowe, Wysyłając CV lub odpowiadając na to ogłoszenie wyrażasz zgodę na przetwarzanie swoich danych osobowych przez APT Connection w celach rekrutacyjnych zgodnie z Rozporządzeniem RODO (RODO).",
@@ -4659,6 +4744,11 @@
 "pl": "Magazyn logistyczny obsługujący zamówienia dużego sklepu internetowego z odzieżą, obuwiem i kosmetykami.",
 "ru": "Логистический склад, обслуживающий заказ крупного интернет-магазина одежды, обуви и косметики."
 },
+"Логістичний центр великої європейської мережі дискаунтерів одягу й товарів для дому.": {
+"en": "Logistics center of a large European network of clothing and household goods discounters.",
+"pl": "Centrum logistyczne dużej europejskiej sieci dyskontów odzieżowych i AGD.",
+"ru": "Логистический центр крупной европейской сети дискаунтеров одежды и товаров для дома."
+},
 "Логістичний центр, що обслуговує замовлення великого інтернет-магазину одягу, взуття та косметики.": {
 "en": "A logistics center serving the orders of a large online store of clothes, shoes and cosmetics.",
 "pl": "Centrum logistyczne obsługujące zamówienia dużego sklepu internetowego z odzieżą, obuwiem i kosmetykami.",
@@ -4899,6 +4989,11 @@
 "pl": "Międzynarodowa firma zajmująca się montażem PCBA z wykorzystaniem technologii SMT.",
 "ru": "Международная компания по сборке электронных плат PCBA по технологии SMT."
 },
+"Міжнародна компанія — виробник харчових добавок і вітамінів.": {
+"en": "The international company is a manufacturer of nutritional supplements and vitamins.",
+"pl": "Międzynarodowa firma jest producentem suplementów diety i witamin.",
+"ru": "Международная компания – производитель пищевых добавок и витаминов."
+},
 "Міжнародна компанія, власник мережі магазинів Biedronka; розподільний склад у Модлніці.": {
 "en": "International company, owner of the Biedronka chain of stores; distribution warehouse in Modlnitsa.",
 "pl": "Międzynarodowa firma, właściciel sieci sklepów Biedronka; magazyn dystrybucyjny w Modlnicy.",
@@ -4918,6 +5013,11 @@
 "en": "International logistics company: warehouses, transport, distribution.",
 "pl": "Międzynarodowa firma logistyczna: magazyny, transport, dystrybucja.",
 "ru": "Международная логистическая компания: склады, транспорт, дистрибуция."
+},
+"Міжнародний виробник гумових ущільнювачів і деталей для автомобілів.": {
+"en": "International manufacturer of rubber seals and parts for cars.",
+"pl": "Międzynarodowy producent uszczelek gumowych i części do samochodów.",
+"ru": "Международный изготовитель резиновых уплотнителей и деталей для автомобилей."
 },
 "Міжнародний виробник обладнання й електроінструментів для сільського господарства та садівництва з понад 50-річною історією.": {
 "en": "International manufacturer of equipment and power tools for agriculture and horticulture with more than 50 years of history.",
@@ -4948,6 +5048,11 @@
 "en": "City transport",
 "pl": "Transport miejski",
 "ru": "Городской транспорт"
+},
+"Міським транспортом": {
+"en": "By city transport",
+"pl": "Komunikacją miejską",
+"ru": "Городским транспортом"
 },
 "Міським транспортом, проїзний на місяць - близько 90 zł": {
 "en": "By public transport, a monthly pass is about 90 zł",
@@ -5394,6 +5499,16 @@
 "pl": "Konieczne posiadanie uprawnień VZV (wózek widłowy) Co najmniej roczne doświadczenie na wózku widłowym Znajomość języka słowackiego na poziomie wystarczającym do płynnej komunikacji Tymczasowa ochrona Słowacji",
 "ru": "Необходимо иметь удостоверение на VZV (вилочный погрузчик) Не менее одного года опыта работы на погрузчике Знание словацкого языка на уровне, достаточном для свободного общения Временная защита Словакии"
 },
+"Новий сучасний склад одного з найбільших логістичних операторів Європи.": {
+"en": "New modern warehouse of one of the largest logistics operators in Europe.",
+"pl": "Nowy nowoczesny magazyn jednego z największych operatorów logistycznych w Europie.",
+"ru": "Новый современный состав одного из самых крупных логистических операторов Европы."
+},
+"Новий сучасний склад: лише легкі товари — одяг, взуття, аксесуари, біжутерія. Завантаження, розвантаження й переміщення товарів, робота зі сканером і комп'ютером, пакування й сортування. На склад не можна проносити телефони й металеві речі — для них є шафки під ключ.": {
+"en": "New modern warehouse: only light goods - clothes, shoes, accessories, jewelry. Loading, unloading and moving goods, working with a scanner and a computer, packing and sorting. Phones and metal items cannot be brought into the warehouse - there are lockable lockers for them.",
+"pl": "Nowy nowoczesny magazyn: tylko towary lekkie - ubrania, buty, akcesoria, biżuteria. Załadunek, rozładunek i przenoszenie towaru, praca ze skanerem i komputerem, pakowanie i sortowanie. Do magazynu nie można wnosić telefonów i przedmiotów metalowych – są na nie zamykane szafki.",
+"ru": "Новый современный состав: только легкие товары – одежда, обувь, аксессуары, бижутерия. Погрузка, разгрузка и перемещение товаров, работа со сканером и компьютером, упаковка и сортировка. На склад нельзя проносить телефоны и металлические вещи – для них есть шкафчики под ключ."
+},
 "Номери по 4 особи 4-5-місні кімнати зі стандартними ліжками У кімнатах: ковдри, подушки На поверсі: туалети, душові На квартирі: обладнана кухня (холодильник, плита, чайник, посуд) Пральні машини (безкоштовне прання) Безкоштовний Wi-Fi": {
 "en": "Rooms for 4 persons 4-5-person rooms with standard beds In the rooms: blankets, pillows On the floor: toilets, showers In the apartment: equipped kitchen (fridge, stove, kettle, dishes) Washing machines (free laundry) Free Wi-Fi",
 "pl": "Pokoje 4 osobowe Pokoje 4-5 osobowe ze standardowymi łóżkami W pokojach: koce, poduszki Na piętrze: toalety, prysznice W apartamencie: wyposażona kuchnia (lodówka, kuchenka, czajnik, naczynia) Pralki (bezpłatna pralnia) Bezpłatne Wi-Fi",
@@ -5633,6 +5748,11 @@
 "en": "Forklift operator with UDT",
 "pl": "Operator wózka widłowego z uprawnieniami UDT",
 "ru": "Оператор вилочного погрузчика с UDT"
+},
+"Оператор виробництва автомобільних ущільнювачів": {
+"en": "The operator of the production of automobile seals",
+"pl": "Operator produkcji uszczelek samochodowych",
+"ru": "Оператор производства автомобильных уплотнителей"
 },
 "Оператор внутрішнього транспорту": {
 "en": "Domestic transport operator",
@@ -6689,6 +6809,11 @@
 "pl": "Poniedziałek - Sobota, Praca rozpoczyna się o godzinie 6:00, Zmiana 10-12 godzin dziennie",
 "ru": "Понедельник - суббота, Работа начинается с 6:00, Смена по 10-12 часов в день."
 },
+"Понеділок–п'ятниця, зміни 6:00–14:00, 14:00–22:00, 22:00–6:00. Субота — вихідний, нічна зміна починається з неділі. Перерва — у зручний час між операціями.": {
+"en": "Monday - Friday, shifts 6:00 - 14:00, 14:00 - 22:00, 22:00 - 6:00. Saturday is a day off, the night shift starts on Sunday. A break is at a convenient time between operations.",
+"pl": "Poniedziałek - piątek, zmiany 6:00 - 14:00, 14:00 - 22:00, 22:00 - 6:00. Sobota jest dniem wolnym, zmiana nocna rozpoczyna się w niedzielę. Przerwa przypada na dogodny moment pomiędzy operacjami.",
+"ru": "Понедельник – пятница, изменения 6:00–14:00, 14:00–22:00, 22:00–6:00. Суббота – выходной, ночная смена начинается с воскресенья. Перерыв — в удобное время между операциями."
+},
 "Понеділок–п’ятниця Початковий графік: одна зміна, 06:00–14:00 На початковому етапі — 168 годин на місяць Після проходження адаптації можливі понаднормові години та перехід на двозмінний графік Після 8 годин роботи передбачена перерва тривалістю 15 хвилин Нічних змін немає Додаткові утримання:": {
 "en": "Monday–Friday Initial schedule: one shift, 06:00–14:00 At the initial stage — 168 hours per month After adaptation, overtime hours and transition to a two-shift schedule are possible After 8 hours of work, a 15-minute break is provided No night shifts Additional deductions:",
 "pl": "poniedziałek–piątek Wstępny grafik: jedna zmiana, 06:00–14:00 Na początkowym etapie — 168 godzin miesięcznie Po adaptacji możliwe są nadgodziny i przejście na pracę dwuzmianową. Po 8 godzinach pracy zapewniona jest 15-minutowa przerwa. Brak zmian nocnych. Dodatkowe potrącenia:",
@@ -7083,6 +7208,11 @@
 "pl": "Pracownik magazynu produktów mrożonych",
 "ru": "Работник склада замороженной продукции"
 },
+"Працівник складу одягу та взуття": {
+"en": "Employee of a clothing and footwear warehouse",
+"pl": "Pracownik hurtowni odzieży i obuwia",
+"ru": "Работник склада одежды и обуви"
+},
 "Працівник служби прибирання.": {
 "en": "Cleaning service worker.",
 "pl": "Pracownik serwisu sprzątającego.",
@@ -7223,15 +7353,30 @@
 "pl": "Pracownicy są zabierani do pracy i przywożony z powrotem.",
 "ru": "Работников увозят на работу и привозят обратно."
 },
+"Премія +50 зл. брутто за розвантаження 4 контейнерів за день. Робочий одяг з першого дня. Безкоштовна допомога з документами для легального перебування й роботи. Карта Multisport Plus, групове страхування, кава й чай у зоні відпочинку.": {
+"en": "Bonus + PLN 50. gross for unloading 4 containers per day. Work clothes from day one. Free help with documents for legal stay and work. Multisport Plus card, group insurance, coffee and tea in the lounge area.",
+"pl": "Premia + 50 zł brutto za rozładunek 4 kontenerów dziennie. Odzież robocza od pierwszego dnia. Bezpłatna pomoc w załatwieniu dokumentów umożliwiających legalny pobyt i pracę. Karta Multisport Plus, ubezpieczenie grupowe, kawa i herbata w strefie lounge.",
+"ru": "Премия 50 зл. брутто за разгрузку 4 контейнеров в день. Рабочая одежда с первого дня. Бесплатное пособие с документами для легального пребывания и работы. Карта Multisport Plus, групповое страхование, кофе и чай в зоне отдыха."
+},
 "Премія 0–3500 чеських крон на місяць Відпускні виплачуються відповідно до чеського трудового кодексу (25 днів оплачуваної відпустки). Надбавка за роботу у вихідні (субота та неділя): +10% Надбавка за понаднормову роботу: +40 % у вихідні, +25 % у робочі дні Надбавка за нічну роботу (з 22:00 до 6:00): +10% Надбавка за роботу у святкові дні: +100% Оплачувана відпустка — 25 днів на рік.": {
 "en": "Bonus 0-3500 Czech crowns per month Vacation is paid in accordance with the Czech Labor Code (25 days of paid vacation). Bonus for work on weekends (Saturday and Sunday): +10% Bonus for overtime: +40% on weekends, +25% on weekdays Bonus for night work (from 22:00 to 6:00): +10% Bonus for work on public holidays: +100% Paid vacation - 25 days per year.",
 "pl": "Premia 0-3500 koron czeskich miesięcznie Urlop jest płatny zgodnie z czeskim Kodeksem pracy (25 dni płatnego urlopu). Premia za pracę w weekendy (sobota i niedziela): +10% Premia za pracę w godzinach nadliczbowych: +40% w weekendy, +25% w dni powszednie Premia za pracę w nocy (od 22:00 do 6:00): +10% Premia za pracę w święta: +100% Płatny urlop - 25 dni w roku.",
 "ru": "Премия 0–3500 чешских крон в месяц Отпускные выплачиваются в соответствии с чешским трудовым кодексом (25 дней оплачиваемого отпуска). Надбавка за работу в выходные (суббота и воскресенье): +10% Надбавка за сверхурочную работу: +40% в выходные, +25% в рабочие дни Надбавка за ночную работу (с 22:00 до 6:00): +10% Надбавка за работу в праздничные дни: +100% Оплачиваемый отпуск."
 },
+"Премія 200 зл. за якість і 300 зл. за відвідуваність. Нічні зміни +20% від мінімальної ставки (близько 5 зл. брутто/год), понаднормові +50% (вдень) / +100% (вночі). Аванси: 300 зл. після 3 днів, 600 зл. після 10 днів, 1000 зл. після 15 днів. Робочий одяг, медогляд і навчання з безпеки — безкоштовно. Безкоштовна допомога з документами на карту тимчасового перебування. Multisport, групове страхування, фізіотерапевт.": {
+"en": "Prize 200 PLN. for quality and 300 zlotys. for attendance. Night shifts +20% of the minimum rate (about PLN 5 gross/hour), overtime +50% (daytime) / +100% (nighttime). Advances: PLN 300. after 3 days, 600 PLN. after 10 days, PLN 1,000. after 15 days. Work clothes, medical examination and safety training are free. Free assistance with documents for a temporary residence card. Multisport, group insurance, physiotherapist.",
+"pl": "Nagroda 200 zł. za jakość i 300 zł. za obecność. Zmiany nocne +20% stawki minimalnej (ok. 5 zł brutto/godz.), nadgodziny +50% (dzienna) / +100% (nocna). Zaliczka: 300 zł. po 3 dniach 600 zł. po 10 dniach 1000 zł. po 15 dniach. Odzież robocza, badania lekarskie i szkolenie BHP są bezpłatne. Bezpłatna pomoc w załatwieniu dokumentów do karty pobytu czasowego. Multisport, ubezpieczenie grupowe, fizjoterapeuta.",
+"ru": "Премия 200 польских злотых. за качество и 300 злотых. за посещаемость. Ночные изменения +20% от минимальной ставки (около 5 зл. брутто/час), сверхурочные +50% (днем) / +100% (ночью). Авансы: 300 зл. после 3 дней, 600 злотых. после 10 дней, 1000 злотых. после 15 дней. Рабочая одежда, медосмотр и обучение по безопасности - бесплатно. Бесплатная помощь с документами на карту временного пребывания. Multisport, групповое страхование, физиотерапевт."
+},
 "Премія до 6% на місяць Доплата за проїзд (для осіб, які проживають за межами Лодзі) Надгодини: +50% або +100% відповідно до законодавства Доплата за нічні зміни згідно із законодавством": {
 "en": "Bonus up to 6% per month Travel allowance (for people living outside Łódź) Overtime: +50% or +100% according to the law Night shift supplement according to the law",
 "pl": "Premia do 6% miesięcznie Dieta dojazdowa (dla osób mieszkających poza Łodzią) Nadgodziny: +50% lub +100% zgodnie z prawem Dodatek za pracę nocną zgodnie z prawem",
 "ru": "Премия до 6% в месяц Доплата за проезд (для лиц, проживающих за пределами Лодзи) Сроки: +50% или +100% в соответствии с законодательством Доплата за ночные изменения в соответствии с законодательством"
+},
+"Премія за відвідуваність 650 зл. брутто + премія за якість. Для студентів ставка брутто = нетто. Безкоштовне робоче взуття й одяг. Обов'язкове онлайн-навчання з безпеки праці перед виходом. Безкоштовна допомога з документами на легальне перебування. Multisport Plus, групове страхування.": {
+"en": "Premium for attendance PLN 650. gross + premium for quality. For students, the rate is gross = net. Free work shoes and clothes. Mandatory online training on occupational safety before leaving. Free help with documents for legal stay. Multisport Plus, group insurance.",
+"pl": "Premia za frekwencję 650 zł brutto + premia za jakość. Dla studentów stawka brutto = netto. Bezpłatne obuwie robocze i odzież. Obowiązkowe szkolenie online z zakresu bezpieczeństwa pracy przed wyjazdem. Bezpłatna pomoc w załatwieniu dokumentów na legalny pobyt. Multisport Plus, ubezpieczenie grupowe.",
+"ru": "Премия за посещаемость 650 польских злотых. брутто+премия за качество. Для студентов ставка брутто = нетто. Бесплатная рабочая обувь и одежда. Обязательно онлайн-обучение по безопасности труда перед выходом. Бесплатное пособие с документами на легальное пребывание. Multisport Plus, групповое страхование."
 },
 "Премія за відвідуваність: додатково 2,40 PLN брутто/год за умови відпрацювання щонайменше 200 годин на місяць; Сезонна премія: додатково 1,50 PLN брутто/год (попередньо діє до кінця грудня 2026 року). Загальна сума надбавок — 3,90 PLN брутто/год за виконання умов.": {
 "en": "Attendance bonus: additional PLN 2.40 gross/hour, subject to working at least 200 hours per month; Season premium: additional PLN 1.50 gross/hour (provisionally valid until the end of December 2026). The total amount of allowances is PLN 3.90 gross/hour for fulfilling the conditions.",
@@ -8458,6 +8603,11 @@
 "pl": "Rozbiór produktów mięsnych różnego rodzaju: kości, uszy, ogony itp. (wieprzowina, wołowina, królik itp.), Krojenie i odtłuszczanie poszczególnych porcji, Przygotowanie do...",
 "ru": "Разбор мясной продукции разного вида: кости, уши, хвосты и т.п. (свинина, говядина, крольчатина и т.п.), Нарезка и очистка от жира отдельных порций"
 },
+"Розвантаження контейнерів у логістичному центрі: коробки з контейнера потрібно розкласти на палети за кодами товару, обмотати палету стретч-плівкою й перевезти ручним візком (рохлею) у вказане місце. Над одним контейнером працюють двоє; за день розвантажують 3–4 контейнери (у 40-футовому контейнері — близько 1485 коробок). Склад опалюваний, робота біля рампи.": {
+"en": "Unloading of containers in the logistics center: the boxes from the container must be placed on pallets according to product codes, wrapped with stretch film and transported by handcart (roller) to the specified place. Two people work on one container; 3-4 containers are unloaded per day (about 1,485 boxes in a 40-foot container). The warehouse is heated, work near the ramp.",
+"pl": "Rozładunek kontenerów w centrum logistycznym: pudła z kontenera należy ułożyć na paletach zgodnie z kodami produktów, owinąć folią stretch i przetransportować wózkiem ręcznym (rolką) we wskazane miejsce. Na jednym kontenerze pracują dwie osoby; Dziennie rozładowywane są 3-4 kontenery (około 1485 pudeł w 40-stopowym kontenerze). Magazyn jest ogrzewany, praca przy rampie.",
+"ru": "Разгрузка контейнеров в логистическом центре: коробки из контейнера нужно разложить на паллеты по кодам товара, обмотать паллету стретч-пленкой и перевезти ручной тележкой (рохлей) в указанное место. Над одним контейнером работают двое; в день разгружают 3–4 контейнера (в 40-футовом контейнере — около 1485 коробок). Состав отапливаемый, работа у рампы."
+},
 "Розвантаження посилок, Завантаження посилок, Перевірка правильності призначення кур’єрського напрямку для посилок, Внутрішньоскладське транспортування рол-контейнерів, Підтримання порядку на робочому місці": {
 "en": "Unloading of parcels, Loading of parcels, Checking the correctness of the assignment of the courier direction for parcels, Intra-warehouse transportation of roll containers, Maintaining order at the workplace",
 "pl": "Rozładunek przesyłek, Załadunek przesyłek, Sprawdzenie poprawności nadania kierunku kurierskiego dla przesyłek, Transport wewnątrzmagazynowy kontenerów rolkowych, Utrzymanie porządku na stanowisku pracy",
@@ -8497,6 +8647,11 @@
 "en": "Unload vehicles/receive goods/inspect products for damage, Stack goods in assigned work areas by codes, Collect and assemble orders in the warehouse using a scanner, which receives information about the goods to be collected, Pack collected orders for further transportation, Prepare collected orders for dispatch",
 "pl": "Rozładunek pojazdów/odbiór towaru/sprawdzenie produktów pod kątem uszkodzeń, Układanie towarów w wyznaczonych miejscach pracy według kodów, Odbieranie i składanie zamówień w magazynie za pomocą skanera, który otrzymuje informację o towarze do odbioru, Pakowanie zebranych zamówień do dalszego transportu, Przygotowywanie zebranych zamówień do wysyłki",
 "ru": "Разгружать транспортные средства/принимать товар/осматривать продукцию на повреждения, Составлять товары в отведенных рабочих зонах по кодам, Собирать и комплектовать заказы на складе с помощью сканера, куда поступает информация о товаре, который нужно собрать, Упаковывать собранные заказы для дальнейшей транспортировки, Готовить собранные заказы к отправке"
+},
+"Розвантажувач контейнерів на складі": {
+"en": "Unloader of containers in the warehouse",
+"pl": "Rozładunek kontenerów w magazynie",
+"ru": "Разгрузчик контейнеров на складе"
 },
 "Розгалужена мережа зупинок громадського транспорту.": {
 "en": "An extensive network of public transport stops.",
@@ -8723,6 +8878,11 @@
 "pl": "Pracownik magazynu z certyfikatem UDT.",
 "ru": "Складской работник с сертификатом UDT."
 },
+"Складський працівник на виробництві харчових добавок": {
+"en": "Warehouse worker in the production of food additives",
+"pl": "Pracownik magazynu przy produkcji dodatków do żywności",
+"ru": "Складской работник на производстве пищевых добавок"
+},
 "Складський працівник – комплектування замовлень": {
 "en": "Warehouse worker - picking orders",
 "pl": "Pracownik magazynu - zbieranie zamówień",
@@ -8733,10 +8893,20 @@
 "pl": "Pracownik magazynu/spedytor",
 "ru": "Складской работник/экспедитор"
 },
+"Складські роботи на підприємстві, що виробляє харчові добавки й вітаміни: завантаження, розвантаження, перенесення й переміщення товару складом.": {
+"en": "Warehouse work at an enterprise that produces nutritional supplements and vitamins: loading, unloading, transferring and moving goods through the warehouse.",
+"pl": "Praca na magazynie w przedsiębiorstwie produkującym odżywki i witaminy: załadunek, rozładunek, przenoszenie i przemieszczanie towaru po magazynie.",
+"ru": "Складские работы на предприятии, производящем пищевые добавки и витамины: загрузка, разгрузка, перенос и перемещение товара по составу."
+},
 "Службовий автобус — 200 злотих (нетто). До автобусної зупинки працівники добираються пішки або на міському транспорті. Розклад руху автобусної лінії": {
 "en": "Service bus - PLN 200 (net). Employees get to the bus stop on foot or by public transport. Bus schedule",
 "pl": "Autobus serwisowy – 200 zł (netto). Pracownicy docierają na przystanek autobusowy pieszo lub komunikacją miejską. Rozkład jazdy autobusów",
 "ru": "Служебный автобус - 200 злотых (нетто). До автобусной остановки работники добираются пешком или на городском транспорте. Расписание автобусной линии"
+},
+"Службовий бус з околиць Познані під зміни (оплачується окремо).": {
+"en": "Service bus from the vicinity of Poznań for shifts (paid separately).",
+"pl": "Dojazd busem z okolic Poznania na zmiany (płatne osobno).",
+"ru": "Служебный автобус из окрестностей Познаны под изменения (оплачивается отдельно)."
 },
 "Сортувальник": {
 "en": "Sorter",
@@ -8872,6 +9042,11 @@
 "en": "The rate is PLN 31.40 gross",
 "pl": "Stawka wynosi 31,40 zł brutto",
 "ru": "Ставка 31,40 злотых брутто"
+},
+"Ставка: 21 зл. нетто/год перші 3 місяці, 22 зл. — після 3 місяців, 23 зл. — після 6 місяців. Премія до 1200 зл. брутто на місяць. Аванси після 3 днів роботи. Робочий одяг, взуття, медогляд і навчання з безпеки — безкоштовно. Безкоштовна допомога з документами на карту тимчасового перебування. Multisport Plus, групове страхування.": {
+"en": "Rate: PLN 21. net/hour the first 3 months, PLN 22. — after 3 months, 23 PLN. — after 6 months. Bonus up to PLN 1,200. gross per month. Advances after 3 days of work. Work clothes, shoes, medical examination and safety training are free. Free assistance with documents for a temporary residence card. Multisport Plus, group insurance.",
+"pl": "Stawka: 21 zł netto/godz. przez pierwsze 3 miesiące 22 zł — po 3 miesiącach 23 zł. — po 6 miesiącach. Premia do 1200 zł. brutto miesięcznie. Zaliczki po 3 dniach pracy. Odzież robocza, obuwie, badania lekarskie i szkolenie BHP są bezpłatne. Bezpłatna pomoc w załatwieniu dokumentów do karty pobytu czasowego. Multisport Plus, ubezpieczenie grupowe.",
+"ru": "Ставка: 21 зл. нетто/час первые 3 месяца, 22 зл. – после 3 месяцев, 23 зл. - после 6 месяцев. Премия до 1200 польских злотых. брутто в месяц. Авансы после 3 дней работы. Рабочая одежда, обувь, медосмотр и обучение по безопасности - бесплатно. Бесплатная помощь с документами на карту временного пребывания. Multisport Plus, групповое страхование."
 },
 "Стать: жінки, чоловіки, пари; Вік: до 40 років; Громадянство: Україна; Досвід роботи: не обов'язковий; Рівень володіння польською мовою: базовий.": {
 "en": "Gender: women, men, couples; Age: up to 40 years; Citizenship: Ukraine; Work experience: not required; Level of knowledge of the Polish language: basic.",
@@ -9421,6 +9596,11 @@
 "en": "Good physical shape, It is possible without experience and knowledge of the Polish language, Women are not allowed to wear gel nail polish, eyelash extensions, make-up, watches and any jewelry. It is also not allowed to use perfume before and during work, Reception and accounting department, minimal knowledge of the Polish language, responsibility, attentiveness",
 "pl": "Dobra kondycja fizyczna, Jest to możliwe bez doświadczenia i znajomości języka polskiego, Kobietom nie wolno nosić lakieru żelowego do paznokci, przedłużania rzęs, makijażu, zegarków ani żadnej biżuterii. Zabrania się również używania perfum przed i w trakcie pracy, Recepcja i księgowość, minimalna znajomość języka polskiego, odpowiedzialność, uważność",
 "ru": "Хорошая физическая форма, Можно без опыта и знания польского языка, Женщинам запрещены гелевое покрытие на ногтях, ресницы, макияж, часы и любая бижутерия. Также нельзя использовать духи до и во время работы, Отдел приема и учета, минимальное знание польского языка, ответственность, внимательность"
+},
+"Хороший зір (обов'язково). Готовність до фізичної та позмінної роботи. Націленість на довгострокову співпрацю.": {
+"en": "Good eyesight (required). Willingness for physical and shift work. Focus on long-term cooperation.",
+"pl": "Dobry wzrok (wymagane). Gotowość do pracy fizycznej i zmianowej. Nastaw się na długoterminową współpracę.",
+"ru": "Хорошее зрение (обязательно). Готовность к физической и посменной работе. Нацеленность на долгосрочное сотрудничество."
 },
 "Хороший зір Навички роботи руками Хороша фізична форма": {
 "en": "Good eyesight Hand skills Good physical condition",
