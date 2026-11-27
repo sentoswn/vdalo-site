@@ -618,8 +618,8 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
   function mgrsOf(l){ var a = (l.managers && l.managers.length) ? l.managers.slice() : []; if (l.manager_id && a.indexOf(l.manager_id) < 0) a.unshift(l.manager_id); return a; }
   function hasMgr(l, id){ return mgrsOf(l).indexOf(id) >= 0; }
   function opOf(l){ if (!l || !l.vacancy_id) return null; var v = (S.vac || []).filter(function(x){ return String(x.id) === String(l.vacancy_id); })[0];
-    var src = v ? v.src : (/Planfix/.test(l.vacancy_title || "") ? "planfix" : (/Trello/.test(l.vacancy_title || "") ? "trello" : (/^\d{6,}$/.test(String(l.vacancy_id)) ? "planfix" : "trello")));
-    return src === "planfix" ? {name: "Planfix (Gremi)", url: "https://gremi.planfix.com/task/" + encodeURIComponent(l.vacancy_id)} : {name: "Trello (EWL)", url: "https://trello.com/b/ZFO3CX12"}; }
+    var src = v ? v.src : (/Planfix/.test(l.vacancy_title || "") ? "planfix" : (/Airtable/.test(l.vacancy_title || "") || /^a\d+$/.test(String(l.vacancy_id)) ? "airtable" : (/Trello/.test(l.vacancy_title || "") ? "trello" : (/^\d{6,}$/.test(String(l.vacancy_id)) ? "planfix" : "trello"))));
+    return src === "planfix" ? {name: "Planfix (Gremi)", url: "https://gremi.planfix.com/task/" + encodeURIComponent(l.vacancy_id)} : src === "airtable" ? {name: "Airtable (Job Impuls)", url: "https://airtable.com/apppPRkm823aUVQCv/shr2m2g0K2zcZLpo0/tblFIwc2PUVAREP3Q"} : {name: "Trello (EWL)", url: "https://trello.com/b/ZFO3CX12"}; }
   function opBadge(l, link){ var o = opOf(l); if (!o) return ""; return '<small class="op">Оператор: ' + (link ? '<a href="' + o.url + '" target="_blank" rel="noopener">' + E(o.name) + ' №' + E(l.vacancy_id) + '</a>' : E(o.name)) + '</small>'; }
   S.vac = []; fetch("/vacancies.json", {cache: "no-store"}).then(function(r){ return r.json(); }).then(function(j){ S.vac = j.items || j.vacancies || j || []; }).catch(function(){});
   function companies(){
@@ -1612,7 +1612,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
         (rows.length ? rows.map(function(x, i){ var v = x.v, pf = v.src === "planfix";
           return '<tr class="row" data-pid="' + E(v.id) + '"><td class="hide-m">' + (i + 1) + '</td><td><b>' + E(v.title) + '</b>' + (v.hot ? ' <span class="st st-new">Гаряча</span>' : '') +
             '<small>' + E([v.company, v.city, v.country].filter(Boolean).join(" · ")) + '</small></td>' +
-            '<td class="hide-m">' + (pf ? "Planfix (Gremi)" : "Trello (EWL)") + '<small>№' + E(v.id) + '</small></td><td class="hide-m">' + (x.n || "—") + '</td>' +
+            '<td class="hide-m">' + (pf ? "Planfix (Gremi)" : v.src === "airtable" ? "Airtable (Job Impuls)" : "Trello (EWL)") + '<small>№' + E(v.id) + '</small></td><td class="hide-m">' + (x.n || "—") + '</td>' +
             '<td style="text-align:right;white-space:nowrap"><b>' + (x.pay == null ? '—' : x.pay.toLocaleString("uk-UA") + ' zł') + '</b>' + (x.p.bonus_note ? ' <button type="button" class="binfo" title="' + E(x.p.bonus_note) + '" data-binfo>i</button><div class="bnote" hidden>' + E(x.p.bonus_note) + '</div>' : '') + (x.promo ? '<small style="color:var(--red)">акція' + (x.promo.until ? ' до ' + E(dd2(x.promo.until)) : '') + '</small>' : '') + (x.manual ? '<small>вручну</small>' : '') + (x.p.note ? '<small>' + E(x.p.note) + '</small>' : '') + '</td></tr>';
         }).join("") : '<tr><td colspan="5" class="empty">Нічого не знайдено</td></tr>') + '</tbody></table></div>';
       var pq = document.getElementById("pq"); if (S.payPos != null) { pq.focus(); pq.setSelectionRange(S.payPos, S.payPos); S.payPos = null; }
@@ -1638,7 +1638,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
         '<div class="card"><table class="tbl"><thead><tr><th>Пріоритет</th><th>Вакансія</th><th>Оператор</th><th style="text-align:right">Ваш бонус</th></tr></thead><tbody>' +
         (rows.length ? rows.map(function(v, i){
           return '<tr class="row" data-vurl="/vakansii/' + E(v.id) + '/"><td>' + (rk[v.id] ? (i + 1) : "—") + '</td><td><b>' + E(v.title) + '</b>' + (v.hot ? ' <span class="st st-new">Гаряча</span>' : '') +
-            '<small>' + E([v.company, v.city, v.country].filter(Boolean).join(" · ")) + '</small></td><td class="hide-m">' + (v.src === "planfix" ? "Planfix (Gremi)" : "Trello (EWL)") + '<small>№' + E(v.id) + '</small></td><td style="text-align:right;white-space:nowrap"><b>' + (bn[v.id] ? bn[v.id].toLocaleString("uk-UA") + ' zł' : '—') + '</b></td></tr>';
+            '<small>' + E([v.company, v.city, v.country].filter(Boolean).join(" · ")) + '</small></td><td class="hide-m">' + (v.src === "planfix" ? "Planfix (Gremi)" : v.src === "airtable" ? "Airtable (Job Impuls)" : "Trello (EWL)") + '<small>№' + E(v.id) + '</small></td><td style="text-align:right;white-space:nowrap"><b>' + (bn[v.id] ? bn[v.id].toLocaleString("uk-UA") + ' zł' : '—') + '</b></td></tr>';
         }).join("") : '<tr><td colspan="4" class="empty">Нічого не знайдено</td></tr>') + '</tbody></table></div>';
       var pq = document.getElementById("pq"); if (S.payPos != null) { pq.focus(); pq.setSelectionRange(S.payPos, S.payPos); S.payPos = null; }
       pq.oninput = function(){ S.payq = pq.value; S.payPos = pq.selectionStart; rPayMgr(); };
@@ -1649,7 +1649,7 @@ tr.row:hover .ntx,.ntx:placeholder-shown{border-color:var(--line)}
   function openPay(x){
     if (!x) return; var v = x.v;
     openDrawer('<div class="dh"><h2>' + E(v.title) + '</h2><button class="btn ghost sm" data-x>✕</button></div><div class="db">' +
-      '<dl class="kv"><dt>Оператор</dt><dd>' + (v.src === "planfix" ? '<a href="https://gremi.planfix.com/task/' + E(v.id) + '" target="_blank" rel="noopener">Planfix (Gremi) №' + E(v.id) + '</a>' : 'Trello (EWL) №' + E(v.id)) + '</dd>' +
+      '<dl class="kv"><dt>Оператор</dt><dd>' + (v.src === "planfix" ? '<a href="https://gremi.planfix.com/task/' + E(v.id) + '" target="_blank" rel="noopener">Planfix (Gremi) №' + E(v.id) + '</a>' : v.src === "airtable" ? '<a href="https://airtable.com/apppPRkm823aUVQCv/shr2m2g0K2zcZLpo0/tblFIwc2PUVAREP3Q" target="_blank" rel="noopener">Airtable (Job Impuls) №' + E(v.id) + '</a>' : 'Trello (EWL) №' + E(v.id)) + '</dd>' +
       '<dt>Компанія</dt><dd>' + E(v.company || "—") + '</dd><dt>Де</dt><dd>' + E([v.city, v.country].filter(Boolean).join(", ") || "—") + '</dd>' +
       (x.p.bonus_note ? '<dt>Дод. бонуси</dt><dd>' + E(x.p.bonus_note) + '</dd>' : '') + '<dt>Автоматично</dt><dd>' + (x.p.pay_auto != null ? E(x.p.pay_auto) + ' zł' : '—') + '</dd><dt>Сторінка</dt><dd><a href="/vakansii/' + E(v.id) + '/" target="_blank">відкрити на сайті</a></dd></dl>' +
       '<div class="fld"><label>Сума за кандидата вручну, zł (порожньо — брати автоматичну)</label><input id="pay-m" type="number" min="0" step="50" value="' + (x.p.pay_manual != null ? E(x.p.pay_manual) : "") + '"></div>' +
